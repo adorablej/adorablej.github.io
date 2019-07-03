@@ -1,12 +1,16 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 *{
 font-family: 'Noto Sans KR', sans-serif;}
-body { margin: 0; }
-
+body { margin: 0;  }
+#wrapper{width: 100vw;
+    height: 100vh;}
 .main_text{font-family: 'Noto Sans KR', sans-serif;
   font-size: 1em;
   font-weight: 700;
     letter-spacing: -0.01em;}
-.bar{    width: 100%;
+.bar{    width: 100vw;
     height: 7px;
     background: #000;}
+
+#top{height: 50vh;
+    width: 100vw;}
