@@ -3,5 +3,10 @@
 font-family: 'Noto Sans KR', sans-serif;}
 body { margin: 0; }
 
-.main_text{font-family: 'Noto Sans KR', sans-serif;}
-.bar{}
+.main_text{font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1em;
+  font-weight: 700;
+    letter-spacing: -0.01em;}
+.bar{    width: 100%;
+    height: 7px;
+    background: #000;}
