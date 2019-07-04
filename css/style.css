@@ -1,4 +1,5 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url('https://rsms.me/inter/inter.css');
 *{
 font-family: 'Noto Sans KR', sans-serif;
 }
@@ -13,6 +14,7 @@ header{position: absolute;
 #site_nav ul li {
   position: relative;
   z-index: 1;
+     font-family: 'Inter', sans-serif; 
 }
 
 #site_nav ul li::before {
@@ -37,7 +39,7 @@ header{position: absolute;
 
 
 
-.main_text{font-family: 'Noto Sans KR', sans-serif;
+.main_text{ font-family: 'Inter', sans-serif; 
   font-size: 1em;
   font-weight: 700;
     letter-spacing: -0.01em;}
