@@ -1,6 +1,7 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 *{
-font-family: 'Noto Sans KR', sans-serif;}
+font-family: 'Noto Sans KR', sans-serif;
+font-smoothing: antialiased;}
 body { margin: 0;  }
 #wrapper{width: 100vw;
     height: 100vh;}
