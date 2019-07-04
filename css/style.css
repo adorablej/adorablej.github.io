@@ -10,11 +10,16 @@ header{position: absolute;
     width: 100%;
     z-index: 9999;
     top: 0;}
+#site_header{    padding-top: 40px;}
+#site_nav ul{    float: right;}
 
 #site_nav ul li {
   position: relative;
   z-index: 1;
      font-family: 'Inter', sans-serif; 
+    float: left;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 #site_nav ul li::before {
@@ -42,7 +47,7 @@ header{position: absolute;
 .main_text{ font-family: 'Inter', sans-serif; 
   font-size: 1em;
   font-weight: 700;
-    letter-spacing: -0.01em;}
+    letter-spacing: -0.01em;top: 40vh;position: absolute;}
 .bar{    width: 100vw;
     height: 7px;
     background: #000;}
