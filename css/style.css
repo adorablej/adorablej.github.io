@@ -5,6 +5,10 @@ font-family: 'Noto Sans KR', sans-serif;
 body { margin: 0;  }
 #wrapper{width: 100vw;
     height: 100vh;}
+header{position: absolute;
+    width: 100%;
+    z-index: 9999;
+    top: 0;}
 
 #site_nav ul li {
   position: relative;
