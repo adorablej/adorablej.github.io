@@ -79,7 +79,7 @@ body{touch-action: pan-y;height:100vh;height:-webkit-fill-available;color:#333;f
     body{min-height: -webkit-fill-available}
   }
 
-.img_g{display:block;width:100%}
+.img_g{display:block;width:100%; height: 600px;}
 .tit_g{display:block;font-weight:normal;font-size:5.128vw;line-height:6.153vw;color:#FF2020;text-align:center;font-family:'Bolkit-Rayek', serif}
 
 
