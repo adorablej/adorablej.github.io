@@ -1,502 +1,270 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+    vertical-align: baseline;
+    text-decoration:none;
+    font-style:normal
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a:link, a:visited, a:hover, a:active{color:#333}
+body{-webkit-text-size-adjust:none;text-size-adjust:none;}
+
+
+
+@charset "utf-8";
+
 @font-face {
-  font-family: 'GmarketSans';
-  font-weight: 500;
-  font-style: normal;
-  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.eot');
-  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.eot?#iefix') format('embedded-opentype'),
-       url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff') format('woff'),
-       url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.ttf') format("truetype");
-  font-display: swap;
-} 
+    font-family: 'Bolkit-Rayek';
+    font-weight: 400; 
+    font-style: normal; 
+    src: local(Bolkit-Rayek),
+    local(Bolkit-Rayek),
+    url(../font/Bolkit-Rayek.woff) format('woff'),
+    url(../font/Bolkit-Rayek.woff2) format('woff2');
+}
 @font-face {
-  font-family: 'GmarketSans';
-  font-weight: 700;
-  font-style: normal;
-  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.eot');
-  src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.eot?#iefix') format('embedded-opentype'),
-       url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.woff') format('woff'),
-       url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansBold.ttf') format("truetype");
-  font-display: swap;
-} 
-
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
-/*! destyle.css v4.0.0 | MIT License | https://github.com/nicolas-cusan/destyle.css */
-
-/* Reset box-model and set borders */
-/* ============================================ */
-
-*,
-::before,
-::after {
-  box-sizing: border-box;
-  border-style: solid;
-  border-width: 0;
+    font-family: 'Welcomweb-Regular';
+    font-weight: 400; 
+    font-style: normal; 
+    src: local(Welcomeweb-Regular),
+    local(Bolkit-Rayek),
+    url(../font/Welcomeweb-Regular.woff) format('woff'),
+    url(../font/Welcomeweb-Regular.woff2) format('woff2');
 }
 
-/* Document */
-/* ============================================ */
 
-/**
- * 1. Correct the line height in all browsers.
- * 2. Prevent adjustments of font size after orientation changes in iOS.
- * 3. Remove gray overlay on links for iOS.
- */
 
 html {
-  line-height: 1.15; /* 1 */
-  -webkit-text-size-adjust: 100%; /* 2 */
-  -webkit-tap-highlight-color: transparent; /* 3*/
+    height: 100vh; /* set viewport constraint */
+    min-height: 100%; /* enforce height */
 }
-
-/* Sections */
-/* ============================================ */
-
-/**
- * Remove the margin in all browsers.
- */
-
-body {
-  margin: 0;
-}
-
-/**
- * Render the `main` element consistently in IE.
- */
-
-main {
-  display: block;
-}
-
-/* Vertical rhythm */
-/* ============================================ */
-
-p,
-table,
-blockquote,
-address,
-pre,
-iframe,
-form,
-figure,
-dl {
-  margin: 0;
-}
-
-/* Headings */
-/* ============================================ */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
-  margin: 0;
-}
-
-/* Lists (enumeration) */
-/* ============================================ */
-
-ul,
-ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* Lists (definition) */
-/* ============================================ */
-
-dt {
-  font-weight: bold;
-}
-
-dd {
-  margin-left: 0;
-}
-
-/* Grouping content */
-/* ============================================ */
-
-/**
- * 1. Add the correct box sizing in Firefox.
- * 2. Show the overflow in Edge and IE.
- */
-
-hr {
-  box-sizing: content-box; /* 1 */
-  height: 0; /* 1 */
-  overflow: visible; /* 2 */
-  border-top-width: 1px;
-  margin: 0;
-  clear: both;
-  color: inherit;
-}
-
-/**
- * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2. Correct the odd `em` font sizing in all browsers.
- */
-
-pre {
-  font-family: monospace, monospace; /* 1 */
-  font-size: inherit; /* 2 */
-}
-
-address {
-  font-style: inherit;
-}
-
-/* Text-level semantics */
-/* ============================================ */
-
-/**
- * Remove the gray background on active links in IE 10.
- */
-
-a {
-  background-color: transparent;
-  text-decoration: none;
-  color: inherit;
-}
-
-/**
- * 1. Remove the bottom border in Chrome 57-
- * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
- */
-
-abbr[title] {
-  text-decoration: underline dotted; /* 2 */
-}
-
-/**
- * Add the correct font weight in Chrome, Edge, and Safari.
- */
-
-b,
-strong {
-  font-weight: bolder;
-}
-
-/**
- * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2. Correct the odd `em` font sizing in all browsers.
- */
-
-code,
-kbd,
-samp {
-  font-family: monospace, monospace; /* 1 */
-  font-size: inherit; /* 2 */
-}
-
-/**
- * Add the correct font size in all browsers.
- */
-
-small {
-  font-size: 80%;
-}
-
-/**
- * Prevent `sub` and `sup` elements from affecting the line height in
- * all browsers.
- */
-
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-sub {
-  bottom: -0.25em;
-}
-
-sup {
-  top: -0.5em;
-}
-
-/* Replaced content */
-/* ============================================ */
-
-/**
- * Prevent vertical alignment issues.
- */
-
-svg,
-img,
-embed,
-object,
-iframe {
-  vertical-align: bottom;
-}
-
-/* Forms */
-/* ============================================ */
-
-/**
- * Reset form fields to make them styleable.
- * 1. Make form elements stylable across systems iOS especially.
- * 2. Inherit text-transform from parent.
- */
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  -webkit-appearance: none; /* 1 */
-  appearance: none;
-  vertical-align: middle;
-  color: inherit;
-  font: inherit;
-  background: transparent;
-  padding: 0;
-  margin: 0;
-  border-radius: 0;
-  text-align: inherit;
-  text-transform: inherit; /* 2 */
-}
-
-/**
- * Correct cursors for clickable elements.
- */
-
-button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  cursor: pointer;
-}
-
-button:disabled,
-[type="button"]:disabled,
-[type="reset"]:disabled,
-[type="submit"]:disabled {
-  cursor: default;
-}
-
-/**
- * Improve outlines for Firefox and unify style with input elements & buttons.
- */
-
-:-moz-focusring {
-  outline: auto;
-}
-
-select:disabled {
-  opacity: inherit;
-}
-
-/**
- * Remove padding
- */
-
-option {
-  padding: 0;
-}
-
-/**
- * Reset to invisible
- */
-
-fieldset {
-  margin: 0;
-  padding: 0;
-  min-width: 0;
-}
-
-legend {
-  padding: 0;
-}
-
-/**
- * Add the correct vertical alignment in Chrome, Firefox, and Opera.
- */
-
-progress {
-  vertical-align: baseline;
-}
-
-/**
- * Remove the default vertical scrollbar in IE 10+.
- */
-
-textarea {
-  overflow: auto;
-}
-
-/**
- * Correct the cursor style of increment and decrement buttons in Chrome.
- */
-
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-
-/**
- * Correct the outline style in Safari.
- */
-
-[type="search"] {
-  outline-offset: -2px; /* 1 */
-}
-
-/**
- * Remove the inner padding in Chrome and Safari on macOS.
- */
-
-[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-/**
- * 1. Correct the inability to style clickable types in iOS and Safari.
- * 2. Fix font inheritance.
- */
-
-::-webkit-file-upload-button {
-  -webkit-appearance: button; /* 1 */
-  font: inherit; /* 2 */
-}
-
-/**
- * Fix appearance for Firefox
- */
-[type="number"] {
-  -moz-appearance: textfield;
-}
-
-/**
- * Clickable labels
- */
-
-label[for] {
-  cursor: pointer;
-}
-
-/* Interactive */
-/* ============================================ */
-
-/*
- * Add the correct display in Edge, IE 10+, and Firefox.
- */
-
-details {
-  display: block;
-}
-
-/*
- * Add the correct display in all browsers.
- */
-
-summary {
-  display: list-item;
-}
-
-/*
- * Remove outline for editable content.
- */
-
-[contenteditable]:focus {
-  outline: auto;
-}
-
-/* Tables */
-/* ============================================ */
-
-/**
-1. Correct table border color inheritance in all Chrome and Safari.
-*/
-
-table {
-  border-color: inherit; /* 1 */
-  border-collapse: collapse;
-}
-
-caption {
-  text-align: left;
-}
-
-td,
-th {
-  vertical-align: top;
-  padding: 0;
-}
-
-th {
-  text-align: left;
-  font-weight: bold;
-}
-
-
-
-
-*{font-family: 'Noto Sans KR', sans-serif;}
-.wrap{ position:relative; width:100%;}
-.box600{max-width: 600px; margin: auto; min-width: 320px;}
-.main_box{background: linear-gradient(180deg, #030303 0%, #030E25 23.18%, #092022 46.36%);}
-.description_box{background: #092022; padding: 70px 0;}
-.description_box p{color: #DBDBDB; text-align: center; font-size: 25px;    font-weight: 500; margin-bottom: 35px; font-family: 'Spoqa Han Sans Neo';}
-.description_box ul{padding: 0px 30px;}
-.description_box ul li{color: #AAAAAA; font-size: 20px; font-weight: 400; line-height: 34px; letter-spacing: -0.03em; position: relative;     margin-left: 15px; margin-right: 15px; font-family: 'Spoqa Han Sans Neo'; }
-.description_box ul li::before{width: 4px; height: 4px; background: #AAAAAA; margin-left: -15px; content: ""; display: inline-block; position: absolute; top: 15px; }
-.box600 img{max-width: 600px; width: 100%;}
-.dpnone{display: none;}
-.entry_box{max-width: 600px; margin: 40px 15px; display: flex; flex-direction: column; align-items: center;}
-.input_box{box-sizing: border-box; margin-bottom: 14px; width: 100%; font-weight: 600; background: #FFFFFF; border: 1px solid #ADADAD; border-radius: 15px; height: 70px; font-size: 22px; padding: 20px;}
-.input_box::placeholder { color: A7A7A7;}
-.check_wrap {    display: flex; justify-content: space-between; width: 100%; margin-bottom: 30px; }
-input#check_btn{  display:none;}
-input#check_btn + label{  cursor:pointer; }
-input#check_btn + label > span{ vertical-align: middle; color: #272727;font-weight: 600; font-size: 25px;letter-spacing: -0.04em; }
-input#check_btn + label:before{ content:""; display:inline-block; width: 37px;height: 37px; background: #FFFFFF;border: 2px solid #005834;border-radius: 12px; vertical-align:middle; margin-right: 10px; }
-input#check_btn:checked + label:before{content:' '; background-image: url('./img/ico_check.svg'); background-size: 80%; background-repeat: no-repeat; background-position: center; font-size: 25px; text-align: center; color:#fff;  background-color:#005834; border-color:#005834; }
-.detail_bt{color: #005834; font-size: 22px; font-weight: 600; letter-spacing: -0.05em;}
-.arrow{ position: relative; float:right; width:15px; height:15px; margin-left:10px;}
-.arrow::after { position: absolute; top: 50%; content: ''; width: 10px; height: 10px; border-top: 2px solid #005834; border-right: 2px solid #005834; transform: rotate(45deg); }
-.pop_wrap { position: fixed; left: 0; right: 0; top: 0; bottom: 0; text-align: center; background-color: rgba(0, 0, 0, 0.5);z-index:9999;}
-.pop_wrap:before { content: "";display: inline-block; height: 100%; vertical-align: middle; margin-right: -.25em;}
-.pop_layer { display: inline-block;  position:relative; vertical-align: middle; max-width: 500px; background-color: #fff; z-index: 10;     width: 90%;}
-.pop_layer .title{background: #005834; color:#fff; height: 80px; font-weight: 600; font-size: 30px; line-height: 80px;}
-.btn_confirm{background: #005834; font-weight: 600; border-radius: 10px; color:#fff;  font-size: 30px; width: 100%; height: 65px;}
-.pop_content_box{padding:40px; padding-top: 0;}
-.pop_content_box p{font-size: 24px; font-weight: 600; height: 70px; line-height: 70px;}
-.pop_content{max-height: 360px; border: 1px solid #D8D8D8; margin-bottom: 25px; border-radius: 10px;overflow-y: auto; padding: 10px; text-align: left; font-size: 20px; line-height: 1.2;}
-.pop_content em{font-size: 1.2em; text-decoration: underline; font-style: normal;}
-.pop_content::-webkit-scrollbar {width: 8px; }
-.pop_content::-webkit-scrollbar-thumb {height: 10%; background: #D9D9D9; border-radius: 10px;}
-.pop_content::-webkit-scrollbar-track {background: transparent; }
-button.entry_bt { background: #005834;  border-radius: 10px; font-family: 'GmarketSans';  font-weight: 500; color: #fff ; font-size: 25px; text-align: center; height: 70px;     line-height: 75px; width: 300px;}
-
-@media (max-width: 600px) {
-    .arrow { position: relative; float: right; width: 10px; height: 12px; margin-left: 5px; }
-    .arrow::after { position: absolute; top: 50%; content: ''; width: 8px; height: 8px; border-top: 2px solid #005834; border-right: 2px solid #005834; transform: rotate(45deg); }
-    .check_wrap { display: flex; justify-content: space-between; width: 100%; margin-bottom: 20px; }
-    input#check_btn + label > span{font-size: 16px;}
-    input#check_btn + label:before { content: ""; display: inline-block; width: 24px; height: 24px; background: #FFFFFF; border: 1px solid #005834; border-radius: 7px; vertical-align: middle; margin-right: 5px; }
-    input#check_btn:checked + label:before{content:' ';  font-size: 18px; text-align: center; color:#fff;  background-color:#005834; border-color:#005834;}
-    .detail_bt{font-size: 16px;}
-    .input_box{box-sizing: border-box; margin-bottom: 12px; width: 100%; font-weight: 600; background: #FFFFFF; border: 1px solid #ADADAD; border-radius: 8px; height: 50px; font-size: 16px; padding: 10px;}
-    button.entry_bt { width: 70%; margin-top: 10px;}
-
-    .pop_layer .title { background: #005834; color: #fff; height: 52px; font-weight: 600; font-size: 20px; line-height: 52px; }
-    .pop_content_box p { font-size: 14px; font-weight: 600; height: 45px; line-height: 45px; }
-    .pop_content_box { padding: 20px; padding-top: 0; }
-    .pop_content { max-height: 230px; border: 1px solid #D8D8D8; margin-bottom: 16px; border-radius: 5px; overflow-y: auto; padding: 10px; text-align: left; font-size: 14px; line-height: 1.2; }
-    .btn_confirm { background: #005834; font-weight: 600; border-radius: 4px; color: #fff; font-size: 20px; width: 100%; height: 42px; }
-    .description_box{ padding: 50px 0;}
-    .description_box ul { padding: 0px 20px; }
-    .description_box p{font-size: 20px; margin-bottom: 20px;}
-    .description_box ul li { color: #AAAAAA; font-size: 15px; font-weight: 400; line-height: 25px;margin-right: 0; letter-spacing: -0.03em; position: relative; margin-left: 10px; font-family: 'Spoqa Han Sans Neo'; }
-    .description_box ul li::before{width: 2px; height: 2px; background: #AAAAAA; margin-left: -10px; content: ""; display: inline-block; position: absolute; top: 15px;}
-
+body{touch-action: pan-y;height:100vh;height:-webkit-fill-available;color:#333;font-family:'Noto Serif KR',-apple-system, '맑은 고딕', 'malgun gothic', 'AppleGothicNeoSD', 'Apple SD 산돌고딕 Neo',serif,sans-serif;background-color:#fff}
+@supports (-webkit-touch-callout: none) {
+    body{min-height: -webkit-fill-available}
+  }
+
+.img_g{display:block;width:100%}
+.tit_g{display:block;font-weight:normal;font-size:5.128vw;line-height:6.153vw;color:#FF2020;text-align:center;font-family:'Bolkit-Rayek', serif}
+
+
+.wrap_visual{display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:11.538vw}
+.txt_visual{font-size:11.538vw;line-height:13vw;color:#ff2020;font-family:'Bolkit-Rayek', serif}
+.area_intro .thumb_visual{position:relative;width:61.538vw;margin-top:10.256vw}
+.area_intro .thumb_visual:before{position:absolute;top:0;right:0;bottom:0;left:0;background-color:rgba(0,0,0,0.18);content:''}
+.area_intro .txt_intro{padding-top:7.692vw;font-size:3.33vw;line-height:4.871vw;color:#111;letter-spacing:-0.03em;font-family:'Welcomweb-Regular',serif}
+.area_intro .inner_intro{display:block;padding-top:1vw;text-align:center}
+
+
+.area_invite{display:block;margin:0 6.410vw;padding-top:10.256vw;font-size:3.33vw;line-height:5.128vw;color:#111;letter-spacing:-0.03em;text-align:center}
+.area_invite .emph_date{display:block;padding-top:4.102vw;margin-bottom:9.23vw;font-weight:500;font-size:4.102vw;line-height:5.897vw;color:#121212;text-align:center}
+.area_invite .txt_invite{margin:0 4.615vw;font-size:3.589vw;line-height:6.153vw;color:#000;letter-spacing:-0.04em;text-align:center}
+.area_invite .txt_invite + .txt_invite{padding-top:4.102vw}
+.area_name{margin:10.256vw 17.948vw 0;padding:4.358vw 0;text-align:center;;border-top:1px solid rgba(0,0,0,0.1);border-bottom:1px solid rgba(0,0,0,0.1)}
+.area_name [class*="name_"]{display:block;font-size:3.33vw;line-height:4.871vw;color:#111;letter-spacing:-0.03em}
+.area_name .name_bride{padding-top:3.076vw}
+.area_name .txt_relation{display:inline-block;font-size:3.076vw;line-height:4.358vw;margin:0.256vw 0 0 0;min-width:8.2vw;text-align:center;vertical-align:top}
+.txt_small{display:inline-block;font-size:2.4vw;line-height:4.871vw;vertical-align:top}
+.area_photo{position:relative;padding-top:30.769vw}
+.area_photo .wrap_photo{position:relative;padding-top:13.33vw}
+.area_photo .txt_photo{padding-top:8.66vw;font-size:3.61vw;line-height:5.55vw;text-align:center}
+.slide_photo .photo_wedding{display:flex;position:relative;align-items:center;justify-content:center;overflow:hidden;width:80vw;height:110vw;margin-right:3.589vw}
+
+.area_calendar{padding-top:30.769vw;text-align:center;font-family:'Noto Serif KR', serif}
+.area_calendar .txt_month{display:inline-block;margin-top:13.33vw;font-weight:500;font-size:4.44vw;line-height:6.66vw;color:#222;vertical-align:top}
+.area_calendar .wrap_calendar{padding:3.33vw 7.692vw 0}
+.tbl_month{table-layout:fixed;width:100%;margin:0 auto}
+.tbl_month tr th{font-size:3.589vw;padding:6.11vw 1.94vw;font-weight:400}
+.tbl_month tr td{font-size:3.589vw;padding:2.5vw 1.94vw;font-family:'Noto Serif KR', serif;font-weight:400;color:#2d2206}
+.tbl_month .emph_sun{color:#ff6262}
+.tbl_month .emph_day{position:relative}
+.tbl_month .emph_day:before{position:absolute;z-index:-1;top:50%;left:50%;width:24px;height:24px;border-radius:50%;border:1px solid #ff2020;transform:translate(-50%, -50%);content:''}
+.area_calendar .info_day{margin:35px 45px 0;padding:17px 0;font-weight:500;font-family:'Noto Serif KR',serif;font-size:3.89vw;line-height:1.5;text-align:center;border-top:1px solid rgba(0,0,0,0.1);border-bottom:1px solid rgba(0,0,0,0.1)}
+.area_calendar .txt_date{display:block;font-weight:500}
+.area_calendar .emph_time{display:block;padding-top:6px}
+
+.area_location{padding-top:30.769vw}
+.area_location .box_map{margin-top:13.33vw;height:270px;font-size:3.076vw;line-height:4.615vw;background-color:#F2BF80;text-align:center}
+.box_map .root_daum_roughmap_landing{width:100%!important}
+.box_map .root_daum_roughmap .wrap_controllers{box-sizing:border-box}
+
+.info_address{padding-top:6.92vw;text-align:center}
+.info_address .txt_address{font-size:3.33vw;line-height:4.87vw;color:#121212}
+.info_address .txt_call{padding-top:2.05vw;font-size:3.07vw;line-height:4.61vw;color:#121212}
+
+.list_location{padding:9.11vw 4.615vw 0;font-family:'Noto Serif KR',serif}
+.list_location > li{overflow:hidden}
+.list_location > li + li{padding-top:3.846vw}
+.list_location .tit_info{float:left;position:relative;min-width:11.11vw;padding-right:2.5vw;font-weight:400;font-size:3.89vw;font-weight:500;line-height:5.8vw;color:#333}
+.list_location .tit_info:before{position:absolute;right:0;top:1.0256vw;width:1px;height:3.61vw;line-height:4.2vw;background-color:#333;content:''}
+.list_location .wrap_txt{overflow:hidden;padding-left:2.77vw;font-weight:400;font-size:3.61vw}
+.list_location .desc_info{display:block;font-size:3.6vw;line-height:5.8vw;word-break:keep-all;word-wrap:normal}
+.list_location > li .desc_info + .desc_info{padding-top:1.11vw}
+.list_location .list_bus{margin-top:-1px}
+.list_location .list_bus li + li{padding-top:3.05vw}
+.list_location .list_bus .desc_info + .desc_info{padding-top:0.55vw}
+
+
+.area_location{padding-top:30.769vw}
+
+.area_heart{margin:0 6.410vw;padding-top:30.769vw}
+.area_heart .tit_g{line-height:7.692vw}
+.area_heart .tit_g svg{display:inline-block;vertical-align:top}
+.area_heart .info_call{margin-bottom:13.33vw;padding:13.33vw 0;border-bottom:1px solid rgba(0,0,0,0.06)}
+
+.list_call li + li{margin-top:7.692vw}
+.list_call .tit_call{display:block;margin-bottom:3.33vw;font-size:3.589vw;line-height:5.384vw;letter-spacing:-0.02em}
+.list_call .desc_call{font-size:0}
+.list_call .wrap_call{display:inline-block;width:50%;font-size:3.589vw;line-height:6.66vw;letter-spacing:-0.02em;vertical-align:top}
+.list_call .wrap_call .mark_g{display:inline-block;width:6.66vw;height:6.66vw;margin-right:6px;font-size:3.589vw;text-align:center;border-radius:50%;background-color:#f4f4f4;vertical-align:top}
+.list_call .txt_name{display:inline-block;font-size:3.589vw;line-height:6.66vw;vertical-align:top}
+.list_call .link_call{display:inline-block;padding-left:2.564vw;line-height:6.66vw;color:#333;vertical-align:top}
+.list_call .txt_call{display:inline-block;font-size:3.33vw;text-decoration:underline;vertical-align:top}
+
+.info_bank .group_bank{margin-bottom:6.410vw}
+.info_bank .head_bank{display:block;height:10.256vw;padding:0 4.615vw;font-weight:normal;font-size:3.589vw;line-height:10.256vw;background-color:#f4f4f4;border-radius:5px}
+.info_bank .box_bank{padding:5.128vw 4.615vw;border-radius:0 0 5px 5px;background-color:#fff}
+.info_bank .box_bank .txt_bank{display:block;position:relative;margin-bottom:2.82vw;font-size:3.589vw;line-height:4.871vw;letter-spacing:-0.02em}
+.info_bank .box_bank .num_bank{display:inline-block;margin:0 6px 0 4px;vertical-align:top}
+.info_bank .link_copy{position:absolute;right:0;top:0;font-size:3.33vw;color:#333;line-height:4.871vw;text-decoration:underline;vertical-align:top}
+
+.wrap_footer{padding:9.72vw 6.94vw 5.55vw;font-family:-apple-system, '맑은 고딕', 'malgun gothic', 'AppleGothicNeoSD', 'Apple SD 산돌고딕 Neo',serif,sans-serif;background-color:#E8E5E3;border-top:1px solid rgba(0,0,0,0.01)}
+.info_square{display:block;padding-top:3.89vw;color:#767270;font-size:3.05vw;line-height:5.55vw;text-align:center}
+.info_square .txt_name{display:inline-block;line-height:5.55vw;vertical-align:top}
+.list_share{font-size:0}
+.list_share li + li{margin-top:2.22vw}
+.list_share li{width:41.05vw;margin:0 auto}
+.list_share .link_share{display:inline-block;font-size:0;vertical-align:top}
+.list_share .link_share svg{display:inline-block;width:4.8vw;margin-top:0.55vw;vertical-align:top}
+.list_share .txt_share{display:inline-block;padding-left:0.83vw;font-size:3.33vw;line-height:5.83vw;vertical-align:top}
+
+.link_smallsquare{display:block;text-decoration:underline}
+
+.order_flower{margin:3vw 6.41vw 0;padding:10vw 0 17vw;font-family:'Noto Serif KR',serif;border-top:1px solid rgba(0,0,0,0.06)}
+.order_flower .wrap_tit{text-align:center}
+.order_flower .tit_flower{display:inline-block;font-weight:normal;color:#000;font-size:3.73vw;line-height:1.5em;vertical-align:top;letter-spacing:0.02em}
+.order_flower .txt_flower{padding-top:6vw;font-size:3.67vw;color:#444;line-height:1.6em;text-align:center}
+.order_flower .wrap_btn{display:block;padding-top:4vw;text-align:center}
+.order_flower .wrap_btn .link_flower{display:inline-block;padding:3vw 0 0;font-size:3.66vw;color:#2d2206;border-bottom:1px solid #2d2206;vertical-align:top}
+
+
+@media screen and (min-width:640px){
+    .tit_g{font-size:33px;line-height:39px}
+    .wrap_visual{padding-top:10px}
+    .wrap_main, .wrap_footer{width:640px;margin:0 auto;box-sizing:border-box}
+    .area_intro{width:640px;padding-top:74px}
+    
+    .txt_visual{font-size:70px;line-height:83px}
+    .area_intro .thumb_visual{width:394px;margin-top:65px}
+    .area_intro .txt_intro{padding-top:49px;font-size:21px;line-height:49px}
+    .area_intro .inner_intro{display:block;padding-top:1vw}
+
+    .area_invite{margin:0 41px;padding-top:65px;font-size:21px;line-height:33px}
+    .area_invite .emph_date{padding-top:26px;margin-bottom:59px;font-size:26px;line-height:37px}
+    .area_invite .txt_invite{margin:0 29px;font-size:23px;line-height:39px}
+    .area_invite .txt_invite + .txt_invite{padding-top:26px}
+    .area_name{margin:65px 114px 0;padding:28px 0}
+    .area_name [class*="name_"]{font-size:21px;line-height:31px}
+    .area_name .name_bride{padding-top:19px}
+    .area_name .txt_relation{font-size:19px;line-height:27px;margin:2px 0 0 0;min-width:52px}
+    .txt_small{font-size:15px;line-height:31px}
+    .area_photo{padding-top:197px}
+    .area_photo .wrap_photo{padding-top:85px}
+    .area_photo .txt_photo{padding-top:55px;font-size:23px;line-height:35px}
+    .slide_photo .photo_wedding{width:512px;height:704px;margin-right:23px}
+
+    .list_location{padding:71px 41px 53px}
+    .list_location .tit_info{min-width:71px;padding-right:26px;line-height:37px;font-size:25px}
+    .list_location .tit_info:before{height:38px}
+    .list_location .wrap_txt{padding-left:17px;font-size:25px;line-height:37px}
+    .list_location .desc_info{font-size:24px;line-height:37px}
+    .list_location .list_bus li + li{padding-top:19px}
+    .list_location .list_bus .desc_info + .desc_info{padding-top:3px}
+   
+    .area_calendar{padding-top:173px}
+    .area_calendar .txt_month{font-size:28px;line-height:43px}
+    .area_calendar .wrap_calendar{padding:21px 39px 0}
+    .tbl_month tr th{font-size:23px;padding:39px 12px}
+    .tbl_month tr td{font-size:23px;padding:16px 12px}
+    .tbl_month .emph_day:before{width:42px;height:42px}
+    .area_calendar .info_day{padding:28px 0;font-size:25px}
+
+    .area_location{padding-top:196px}
+    .area_location .box_map{height:270px;font-size:12px;line-height:30px;background-color:#F2BF80;text-align:center}
+    .box_map .root_daum_roughmap_landing{width:100%!important}
+    .box_map .root_daum_roughmap .wrap_controllers{box-sizing:border-box}
+    .info_address{padding-top:44px}
+    .info_address .txt_address{font-size:21px;line-height:31px}
+    .info_address .txt_call{padding-top:13px;font-size:19px;line-height:29px}
+
+    .area_heart{margin:0 41px;padding-top:196px}
+    .area_heart .tit_g{line-height:49px}
+    .area_heart .tit_g svg{width:50px;height:50px}
+    .area_heart .info_call{margin-bottom:85px;padding:85px 0}
+
+    .list_call li + li{margin-top:49px}
+    .list_call .tit_call{margin-bottom:21px;font-size:23px;line-height:21px}
+    .list_call .wrap_call{font-size:23px;line-height:42px}
+    .list_call .wrap_call .mark_g{width:42px;height:42px;margin-right:6px;font-size:23px}
+    .list_call .txt_name{font-size:23px;line-height:42px;vertical-align:top}
+    .list_call .link_call{padding-left:16px;line-height:42px}
+    .list_call .txt_call{font-size:21px}
+
+    .info_bank .group_bank{margin-bottom:41px}
+    .info_bank .head_bank{height:65px;padding:0 30px;font-weight:normal;font-size:23px;line-height:65px}
+    .info_bank .box_bank{padding:33px 30px}
+    .info_bank .box_bank .txt_bank{margin-bottom:18px;font-size:23px;line-height:32px}
+    .info_bank .link_copy{font-size:21px;line-height:32px}
+    .info_bank .box_bank .num_bank{margin:0 12px 0 8px}
+
+    .wrap_footer{padding:62px 44px 35px}
+    .list_share .link_share svg{width:30px;margin-top:3px}
+    .list_share .txt_share{padding-left:5px;font-size:19px;line-height:37px}
+    .list_share .link_share{font-size:21px}
+    .list_share li{width:243px}
+    .list_share li + li{margin-top:14px}
+    .info_square{padding-top:25px;font-size:19px;line-height:35px}
+    .info_square .txt_name{line-height:35px}
+    .txt_g{font-size:22px}
+
+    .order_flower{margin:19px 41px 0;padding:64px 0 108px}
+    .order_flower .tit_flower{font-size:24px}
+    .order_flower .txt_flower{padding-top:38px;font-size:23px}
+    .order_flower .wrap_btn{padding-top:25px}
+    .order_flower .wrap_btn .link_flower{padding:19px 0 0;font-size:23px}
 }
