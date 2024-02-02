@@ -49,27 +49,6 @@ body{-webkit-text-size-adjust:none;text-size-adjust:none;}
 
 @charset "utf-8";
 
-@font-face {
-    font-family: 'Bolkit-Rayek';
-    font-weight: 400; 
-    font-style: normal; 
-    src: local(Bolkit-Rayek),
-    local(Bolkit-Rayek),
-    url(../font/Bolkit-Rayek.woff) format('woff'),
-    url(../font/Bolkit-Rayek.woff2) format('woff2');
-}
-@font-face {
-    font-family: 'Welcomweb-Regular';
-    font-weight: 400; 
-    font-style: normal; 
-    src: local(Welcomeweb-Regular),
-    local(Bolkit-Rayek),
-    url(../font/Welcomeweb-Regular.woff) format('woff'),
-    url(../font/Welcomeweb-Regular.woff2) format('woff2');
-}
-
-
-
 html {
     height: 100vh; /* set viewport constraint */
     min-height: 100%; /* enforce height */
