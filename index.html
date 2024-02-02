@@ -6,7 +6,7 @@
     <title>김태우 ♥︎ 이승주 결혼합니다.</title>
     <meta property="og:title" content="김태우 ♥︎ 이승주 결혼합니다.">
     <meta property="og:type" content="website">
-    <meta property="og:description" content="4월 13일, 토요일 오후 12시, 인천 원인재">
+    <meta property="og:description" content="4월 13일, 토요일 오후 12시 30분, 인천 원인재">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -194,22 +194,39 @@
         <div class="info_call">
             <ul class="list_call">
                 <li>
-                    <span class="tit_call">신부측 혼주</span>
+                    <strong class="head_bank">연락하기</strong>
                     <div class="desc_call">
                         <div class="wrap_call">
-                            <span class="mark_g">부</span><span class="txt_name">이성수</span>
+                            <span class="mark_g">신랑</span><span class="txt_name">김태우</span>
                             <a href="tel:010-0000-0000" class="link_call">                      
                                 <span class="txt_call">전화걸기</span>
                             </a>
                         </div>
                         <div class="wrap_call">
-                            <span class="mark_g">모</span><span class="txt_name">최은영</span>
+                            <span class="mark_g">신부</span><span class="txt_name">이승주</span>
                             <a href="tel:010-0000-0000" class="link_call">
                                 <span class="txt_call">전화걸기</span>
                             </a>
                         </div>
                     </div>
                 </li>
+                <!-- <li>
+                    <span class="tit_call">신부측 혼주</span>
+                    <div class="desc_call">
+                        <div class="wrap_call">
+                            <span class="mark_g">부</span><span class="txt_name">이성수</span>
+                            <a href="tel:010-2109-5396" class="link_call">                      
+                                <span class="txt_call">전화걸기</span>
+                            </a>
+                        </div>
+                        <div class="wrap_call">
+                            <span class="mark_g">모</span><span class="txt_name">최은영</span>
+                            <a href="tel:010-5354-8985" class="link_call">
+                                <span class="txt_call">전화걸기</span>
+                            </a>
+                        </div>
+                    </div>
+                </li> -->
             </ul>
         </div>
         <div class="info_bank">
@@ -239,7 +256,7 @@
     <footer class="wrap_footer">
         <ul class="list_share">
             <li>
-                <a href="#none" class="link_share link_kakao" onclick="javascript:shareKakaotalk();">
+                <a href="#none" class="link_share link_kakao" onclick="javascript:kakaoShare();">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 208 191.94"><g><polygon class="cls-1" points="76.01 89.49 87.99 89.49 87.99 89.49 82 72.47 76.01 89.49"/><path class="cls-1" d="M104,0C46.56,0,0,36.71,0,82c0,29.28,19.47,55,48.75,69.48-1.59,5.49-10.24,35.34-10.58,37.69,0,0-.21,1.76.93,2.43a3.14,3.14,0,0,0,2.48.15c3.28-.46,38-24.81,44-29A131.56,131.56,0,0,0,104,164c57.44,0,104-36.71,104-82S161.44,0,104,0ZM52.53,69.27c-.13,11.6.1,23.8-.09,35.22-.06,3.65-2.16,4.74-5,5.78a1.88,1.88,0,0,1-1,.07c-3.25-.64-5.84-1.8-5.92-5.84-.23-11.41.07-23.63-.09-35.23-2.75-.11-6.67.11-9.22,0-3.54-.23-6-2.48-5.85-5.83s1.94-5.76,5.91-5.82c9.38-.14,21-.14,30.38,0,4,.06,5.78,2.48,5.9,5.82s-2.3,5.6-5.83,5.83C59.2,69.38,55.29,69.16,52.53,69.27Zm50.4,40.45a9.24,9.24,0,0,1-3.82.83c-2.5,0-4.41-1-5-2.65l-3-7.78H72.85l-3,7.78c-.58,1.63-2.49,2.65-5,2.65a9.16,9.16,0,0,1-3.81-.83c-1.66-.76-3.25-2.86-1.43-8.52L74,63.42a9,9,0,0,1,8-5.92,9.07,9.07,0,0,1,8,5.93l14.34,37.76C106.17,106.86,104.58,109,102.93,109.72Zm30.32,0H114a5.64,5.64,0,0,1-5.75-5.5V63.5a6.13,6.13,0,0,1,12.25,0V98.75h12.75a5.51,5.51,0,1,1,0,11Zm47-4.52A6,6,0,0,1,169.49,108L155.42,89.37l-2.08,2.08v13.09a6,6,0,0,1-12,0v-41a6,6,0,0,1,12,0V76.4l16.74-16.74a4.64,4.64,0,0,1,3.33-1.34,6.08,6.08,0,0,1,5.9,5.58A4.7,4.7,0,0,1,178,67.55L164.3,81.22l14.77,19.57A6,6,0,0,1,180.22,105.23Z"/></g></svg>
                     <span class="txt_share">카카오톡으로 공유하기</span>
                 </a>
@@ -305,3 +322,40 @@
         });
     });
     </script>
+
+    <!-- kakao sdk 호출 -->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+<script type="text/javascript">
+  // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+  Kakao.init('79a3cb970902b399a9d71c31d88652f7');
+
+  // SDK 초기화 여부를 판단합니다.
+  console.log(Kakao.isInitialized());
+
+  function kakaoShare() {
+    Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '김태우 ♥︎ 이승주 결혼합니다.',
+        description: '4월 13일(토) 오후 12시 30분, 인천 원인재',
+        imageUrl: 'https://adorablej.github.io/img/img01.jpg',
+        link: {
+          mobileWebUrl: 'https://adorablej.github.io/',
+          webUrl: 'https://adorablej.github.io/',
+        },
+      },
+      buttons: [
+        {
+          title: '모바일청첩장확인',
+          link: {
+            mobileWebUrl: 'https://adorablej.github.io/',
+            webUrl: 'https://adorablej.github.io/',
+          },
+        },
+      ],
+      // 카카오톡 미설치 시 카카오톡 설치 경로이동
+      installTalk: true,
+    })
+  }
+</script>
