@@ -66,11 +66,11 @@ body{touch-action: pan-y;
 
   .wrap_main{background: #fff;}
 .img_g{display:block;width:100%;background: #eee;}
-.tit_g{display:block;font-weight:normal;font-size:5.128vw;line-height:6.153vw;color:#FF2020;text-align:center;font-family:'Bolkit-Rayek', serif}
+.tit_g{display:block;font-weight:normal;font-size:5.128vw;line-height:6.153vw;color:#FF2020;text-align:center;}
 
 
 .wrap_visual{display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:11.538vw}
-.txt_visual{font-size:11.538vw;line-height:13vw;color:#ff2020;font-family:'Bolkit-Rayek', serif}
+.txt_visual{font-size:11.538vw;line-height:13vw;color:#ff2020;}
 .area_intro .thumb_visual{position:relative;width:61.538vw;margin-top:10.256vw}
 .area_intro .thumb_visual:before{position:absolute;top:0;right:0;bottom:0;left:0;background-color:rgba(0,0,0,0.18);content:''}
 .area_intro .txt_intro{padding-top:7.692vw;font-size:3.33vw;line-height:4.871vw;color:#111;letter-spacing:-0.03em;font-family:'Welcomweb-Regular',serif}
