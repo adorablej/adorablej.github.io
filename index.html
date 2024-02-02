@@ -293,9 +293,9 @@
     const copyContent = async () => {
       try {
         await navigator.clipboard.writeText(text);
-        console.log('계좌번호를 복사하였습니다.');
+        alert('계좌번호를 복사하였습니다.');
       } catch (err) {
-        console.error('Failed to copy: ', err);
+        alert('Failed to copy: ', err);
       }
     }
   </script>
