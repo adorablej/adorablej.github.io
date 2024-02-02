@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
-    <title>김태우 ♡ 이승주 결혼합니다.</title>
-    <meta property="og:title" content="김태우 ♡ 이승주 결혼합니다.">
+    <title>김태우 ♥︎ 이승주 결혼합니다.</title>
+    <meta property="og:title" content="김태우 ♥︎ 이승주 결혼합니다.">
     <meta property="og:type" content="website">
     <meta property="og:description" content="4월 13일, 토요일 오후 12시, 인천 원인재">
     <link rel="stylesheet" href="style.css">
@@ -12,20 +12,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500&family=Prata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
     <main class="wrap_main">
         <div class="area_intro">
     <div class="wrap_visual">
-        <div class="txt_intro">
+        <div class="txt_intro"  data-aos="fade-up" data-aos-duration="1500">
             김태우 &amp; 이승주<br>
             <span class="inner_intro">
                 save the date<br>
                 2024.04.13
             </span>
         </div>
-        <div class="thumb_visual">
-            <img src="images/photo_main.jpg" class="img_g" alt="메인사진">
+        <div class="thumb_visual"  data-aos="fade-up" data-aos-duration="1500">
+            <img src="img/img01.jpg" class="img_g" alt="메인사진">
         </div>
         
     </div>
@@ -39,41 +41,35 @@
             함께 축복해주세요.
         </p>
     </div>
-            <div class="area_name">
-        <span class="name_groom">
-            故김영귀 · 故김미숙의<span class="txt_relation">아들</span>태우
-        </span>
+    <div class="area_name">
         <span class="name_bride">
             이성수 · 최은영의<span class="txt_relation">딸</span>승주
         </span>
+        <span class="name_groom">
+            故김영귀 · 故김미숙의<span class="txt_relation">아들</span>태우
+        </span>
     </div>
-            <div class="area_photo">
+    <div class="area_photo" data-aos="fade-up" data-aos-duration="1500">
         <strong class="tit_g">(PHOTO)</strong>
-        <div class="wrap_photo">
-            <!-- Viewport element -->
-            <div class="flicking-viewport slide_photo">
-                <!-- Camera element -->
-                <div class="flicking-camera">
-                <!-- photo_weddings, class names are your choice -->
-                    <div class="photo_wedding">
-                        <div class="wrap_img">
-                            <img src="images/photo_list1.jpg" class="img_g" alt="사진1">
-                        </div>
-                    </div>
-                    <div class="photo_wedding">
-                        <div class="wrap_img">
-                            <img src="images/photo_list6.jpg" class="img_g" alt="사진6">
-                        </div>
-                    </div>
-                </div>
+        <!-- Swiper -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="img/img01.jpg"></div>
+            <div class="swiper-slide"><img src="img/img04.jpg"></div>
+            <div class="swiper-slide"><img src="img/img05.jpg"></div>
+            <div class="swiper-slide"><img src="img/img01.jpg"></div>
+            <div class="swiper-slide"><img src="img/img01.jpg"></div>
+            <div class="swiper-slide"><img src="img/img01.jpg"></div>
             </div>
+            <div class="swiper-pagination"></div>
         </div>
+        <div>옆으로 넘기시면 더 많은 사진을 보실 수 있습니다.</div>
     </div>
             <div class="area_calendar">
         <strong class="tit_g">(OUR DAY)</strong>
         <span class="txt_month">4월</span>
         <div class="wrap_calendar">
-            <table class="tbl_month">
+            <table class="month">
                 <thead>
                     <tr>
                         <th scope="col" class="emph_sun">일</th>
@@ -142,28 +138,29 @@
     </div>
             <div class="area_location">
         <strong class="tit_g">(LOCATION)</strong>
-        <div class="box_map">
-            지도영역
-        </div>
+        <section class="section">
+            <div id="map" style="width: 90%; height: 300px; margin:auto"></div>
+            <code id="snippet" class="snippet"></code>
+        </section>
         <div class="info_address">
             <p class="txt_address">
-               주소
+                인천광역시 연수구 경원대로 322
             </p>
             <p class="txt_call">전화번호?</p>
         </div>
-        <!-- 오시는길 설명
+
         <ul class="list_location">
             <li>
                 <strong class="tit_info">주차장</strong>
                 <div class="wrap_txt">
-                    <span class="desc_info">중소기업 중앙회관 지하주차장 이용</span>
+                    <span class="desc_info">연수3동 공영주차장(인천 연수구 연수동 532-2) 주차 후
+                        셔틀버스 이용시 주차쿠폰 제공</span>
                 </div>
             </li>
             <li>
                 <strong class="tit_info">지하철</strong>
                 <div class="wrap_txt">
-                    <span class="desc_info">5호선 여의나루역 1번 출구 셔틀버스 수시 운행</span>
-                    <div class="desc_info">9호선 국회의사당역 3번 출구(도보 5분)</div>
+                    <span class="desc_info"><span class="sub">수인분당</span><span class="sub">인천1</span> 원인재역 1번 출구 도보3분</span>
                 </div>
             </li>
             <li>
@@ -171,17 +168,25 @@
                 <div class="wrap_txt">
                     <ul class="list_bus">
                         <li>
-                            <span class="desc_info">기계회관 정류장</span>
-                            <span class="desc_info">일반[20], 마을[영등포 10]</span>
-                        </li>
-                        <li>
-                            <span class="desc_info">산업은행본점 정류장</span>
-                            <span class="desc_info">일반[10], 마을[영등포 10], 간선[436]</span>
+                            <span class="desc_info">원인재역(1번출구)</span>
+                            <span class="desc_info">일반[304, 522] 급행[99]</span>
                         </li>
                     </ul>
                 </div>
             </li>
-        </ul>-->
+            <li>
+                <strong class="tit_info">당부의 말씀</strong>
+                <div class="wrap_txt">
+                    <ul class="list_bus">
+                        <li>
+                            "원인재"는 문화재로 주차장이 별도로 마련되어 있지 않습니다.
+번거로우시더라도 대중교통을 이용하여 주시고,
+주차를 원하시는 분들은 인근 주차장을 이용하여 주시기 바랍니다.
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
     </div>
         <div class="area_heart">
         <div class="info_call">
@@ -209,7 +214,7 @@
             <div class="group_bank">
                 <strong class="head_bank">신랑측 계좌번호</strong>
                 <div class="box_bank">
-                    <span class="txt_bank">신랑 김태우<span class="num_bank">000-00-0000</span>은행명<a href="#none" class="link_copy">복사하기</a></span>
+                    <span class="txt_bank">신랑 김태우<span class="num_bank01">102-979443-14930</span>은행명<a class="btn" data-clipboard-target=".num_bank01">복사하기</a></span>
                 </div>
             </div>
             <div class="group_bank">
@@ -223,10 +228,7 @@
         </div>
     </div>
     <div class="">
-        <h2 class="title">축하화환은 정중히 사양하겠습니다.</h2>
-        <div class="">
-            <div class="message">환경보호 동참을 위해<br>화환은 정중히 사양합니다.<br>많은 양해 부탁드립니다.</div>
-        </div>
+        <h2 class="title">화환은 정중히 사양합니다.<br>좋은 마음만 감사히 받겠습니다.</h2>
     </div>
     </main>
     <footer class="wrap_footer">
@@ -248,3 +250,52 @@
     </footer>
 </body>
 </html>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1.2,
+    centeredSlides: true,
+    spaceBetween: 20,
+    grabCursor: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+</script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=71rkeuyd16"></script>
+<script id="code">
+    var map = new naver.maps.Map('map', {
+        center: new naver.maps.LatLng(37.4144106, 126.6911696), //지도의 초기 중심 좌표
+        zoom: 15, //지도의 초기 줌 레벨
+        minZoom: 8, //지도의 최소 줌 레벨
+        zoomControl: true, //줌 컨트롤의 표시 여부
+        zoomControlOptions: { //줌 컨트롤의 옵션
+            position: naver.maps.Position.TOP_RIGHT
+    }});
+    var marker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(37.4144106, 126.6911696),
+        map: map
+    });
+</script>
+<script>
+    AOS.init();
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
+
+  <!-- 라이브러리 실행 -->
+  <script>
+      var clipboard = new ClipboardJS('.btn');
+    
+      clipboard.on('success', function(e) {
+          console.log(e);
+      });
+    
+      clipboard.on('error', function(e) {
+          console.log(e);
+      });
+  </script>
