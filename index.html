@@ -212,11 +212,14 @@
         </div>
         <div class="info_bank">
             <div class="group_bank">
-                <strong class="head_bank">신랑측 계좌번호</strong>
+                <strong class="head_bank">마음보내는곳</strong>
                 <div class="box_bank">
-                    <span class="txt_bank">신랑 김태우<span class="num_bank01">102-979443-14930</span>은행명<a class="btn" data-clipboard-target=".num_bank01">복사하기</a></span>
+                    <span class="txt_bank">신랑 김태우/신부 이승주
+                        <span id="num_bank01">102-979443-14930</span>
+                        하나은행 <button class="btn" onclick="copyContent()">복사하기</button></span>
                 </div>
             </div>
+            <!--
             <div class="group_bank">
                 <strong class="head_bank">신부측 계좌번호</strong>
                 <div class="box_bank">
@@ -224,7 +227,7 @@
                     <span class="txt_bank">[부] 이성수<span class="num_bank">000-00-0000</span>은행명<a href="#none" class="link_copy">복사하기</a></span>
                     <span class="txt_bank">[모] 최은영<span class="num_bank">000-00-0000</span>은행명<a href="#none" class="link_copy">복사하기</a></span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="">
@@ -285,17 +288,14 @@
 <script>
     AOS.init();
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
-
-  <!-- 라이브러리 실행 -->
-  <script>
-      var clipboard = new ClipboardJS('.btn');
-    
-      clipboard.on('success', function(e) {
-          console.log(e);
-      });
-    
-      clipboard.on('error', function(e) {
-          console.log(e);
-      });
+<script>
+    let text = document.getElementById('num_bank01').innerHTML;
+    const copyContent = async () => {
+      try {
+        await navigator.clipboard.writeText(text);
+        console.log('계좌번호를 복사하였습니다.');
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+      }
+    }
   </script>
