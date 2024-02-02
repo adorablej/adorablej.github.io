@@ -73,13 +73,20 @@ body{-webkit-text-size-adjust:none;text-size-adjust:none;}
 html {
     height: 100vh; /* set viewport constraint */
     min-height: 100%; /* enforce height */
+    
 }
-body{touch-action: pan-y;height:100vh;height:-webkit-fill-available;color:#333;font-family:'Noto Serif KR',-apple-system, '맑은 고딕', 'malgun gothic', 'AppleGothicNeoSD', 'Apple SD 산돌고딕 Neo',serif,sans-serif;background-color:#fff}
+body{touch-action: pan-y;
+    height:100vh;
+    height:-webkit-fill-available;
+    color:#333;
+    font-family:'Noto Serif KR',-apple-system, '맑은 고딕', 'malgun gothic', 'AppleGothicNeoSD', 'Apple SD 산돌고딕 Neo',serif,sans-serif;
+    background-color:#eee;}
 @supports (-webkit-touch-callout: none) {
     body{min-height: -webkit-fill-available}
   }
 
-.img_g{display:block;width:100%; height: 600px; background: #eee;}
+  .wrap_main{background: #fff;}
+.img_g{display:block;width:100%;background: #eee;}
 .tit_g{display:block;font-weight:normal;font-size:5.128vw;line-height:6.153vw;color:#FF2020;text-align:center;font-family:'Bolkit-Rayek', serif}
 
 
@@ -108,12 +115,12 @@ body{touch-action: pan-y;height:100vh;height:-webkit-fill-available;color:#333;f
 .area_calendar{padding-top:30.769vw;text-align:center;font-family:'Noto Serif KR', serif}
 .area_calendar .txt_month{display:inline-block;margin-top:13.33vw;font-weight:500;font-size:4.44vw;line-height:6.66vw;color:#222;vertical-align:top}
 .area_calendar .wrap_calendar{padding:3.33vw 7.692vw 0}
-.tbl_month{table-layout:fixed;width:100%;margin:0 auto}
-.tbl_month tr th{font-size:3.589vw;padding:6.11vw 1.94vw;font-weight:400}
-.tbl_month tr td{font-size:3.589vw;padding:2.5vw 1.94vw;font-family:'Noto Serif KR', serif;font-weight:400;color:#2d2206}
-.tbl_month .emph_sun{color:#ff6262}
-.tbl_month .emph_day{position:relative}
-.tbl_month .emph_day:before{position:absolute;z-index:-1;top:50%;left:50%;width:24px;height:24px;border-radius:50%;border:1px solid #ff2020;transform:translate(-50%, -50%);content:''}
+.month{table-layout:fixed;width:100%;margin:0 auto}
+.month tr th{font-size:3.589vw;padding:6.11vw 1.94vw;font-weight:400}
+.month tr td{font-size:3.589vw;padding:2.5vw 1.94vw;font-family:'Noto Serif KR', serif;font-weight:400;color:#2d2206}
+.month .emph_sun{color:#ff6262}
+.month .emph_day{position:relative}
+.month .emph_day:before{position:absolute;top:50%;left:50%;width:24px;height:24px;border-radius:50%;border:1px solid #ff2020;transform:translate(-50%, -50%);content:''}
 .area_calendar .info_day{margin:35px 45px 0;padding:17px 0;font-weight:500;font-family:'Noto Serif KR',serif;font-size:3.89vw;line-height:1.5;text-align:center;border-top:1px solid rgba(0,0,0,0.1);border-bottom:1px solid rgba(0,0,0,0.1)}
 .area_calendar .txt_date{display:block;font-weight:500}
 .area_calendar .emph_time{display:block;padding-top:6px}
@@ -219,9 +226,9 @@ body{touch-action: pan-y;height:100vh;height:-webkit-fill-available;color:#333;f
     .area_calendar{padding-top:173px}
     .area_calendar .txt_month{font-size:28px;line-height:43px}
     .area_calendar .wrap_calendar{padding:21px 39px 0}
-    .tbl_month tr th{font-size:23px;padding:39px 12px}
-    .tbl_month tr td{font-size:23px;padding:16px 12px}
-    .tbl_month .emph_day:before{width:42px;height:42px}
+    .month tr th{font-size:23px;padding:39px 12px}
+    .month tr td{font-size:23px;padding:16px 12px}
+    .month .emph_day:before{width:42px;height:42px}
     .area_calendar .info_day{padding:28px 0;font-size:25px}
 
     .area_location{padding-top:196px}
@@ -268,3 +275,24 @@ body{touch-action: pan-y;height:100vh;height:-webkit-fill-available;color:#333;f
     .order_flower .wrap_btn{padding-top:25px}
     .order_flower .wrap_btn .link_flower{padding:19px 0 0;font-size:23px}
 }
+
+
+.swiper {
+    width: 100%;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
