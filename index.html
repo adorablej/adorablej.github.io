@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400;500&family=Prata&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
 </head>
 <body>
     <main class="wrap_main">
@@ -216,7 +218,7 @@
                 <div class="box_bank">
                     <span class="txt_bank">신랑 김태우/신부 이승주
                         <span id="num_bank01">102-979443-14930</span>
-                        하나은행 <button class="btn" onclick="copyContent()">복사하기</button></span>
+                        하나은행 <button id="copy_text" type="button" data-clipboard-text="10297944314930">복사하기</button></span>
                 </div>
             </div>
             <!--
@@ -288,14 +290,18 @@
 <script>
     AOS.init();
   </script>
+
 <script>
-    let text = document.getElementById('num_bank01').innerHTML;
-    const copyContent = async () => {
-      try {
-        await navigator.clipboard.writeText(text);
-        alert('계좌번호를 복사하였습니다.');
-      } catch (err) {
-        alert('Failed to copy: ', err);
-      }
-    }
-  </script>
+    $(function(){
+        var clipboard = new ClipboardJS('#copy_text');
+        
+        clipboard.on('success', function(e) {
+          console.info('Text:', e.text);
+          alert("텍스트가 복사되었습니다.");
+        });
+    
+        clipboard.on('error', function(e) {
+          alert("복사실패");
+        });
+    });
+    </script>
