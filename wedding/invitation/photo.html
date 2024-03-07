@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <title>김태우 ♥︎ 이승주 결혼합니다.</title>
+    <meta property="og:title" content="김태우 ♥︎ 이승주 결혼합니다.">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="4월 13일, 토요일 오후 12시 30분, 인천 원인재">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+        
+</head>
+<body>
+    <header class="top_header">
+        <a href="javascript:window.history.back();" class="back">뒤로가기</a>
+        사진첩
+    </header>
+    <div class="invitation">
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="calendar.html">예식일자</a></li>
+                <li><a href="map.html">장소안내</a></li>
+                <li><a href="photo.html">사진첩</a></li>
+                <li><a href="introduce.html">신랑신부</a></li>
+            </ul>
+        </nav> 
+
+        <!-- photo -->
+        <!-- Swiper -->
+        <div class="photo_box">
+            <div class="box_title">     
+                <div class="subtitle_en">GALLERY</div>
+                <div class="title_kr">웨딩 갤러리</div>
+            </div>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="img/img1.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img2.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img3.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img4.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img5.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img6.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img7.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img8.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img9.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img10.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img11.jpg"></div>
+                </div>
+            </div>
+            <p>옆으로 넘기시면 더 많은 사진을 보실 수 있습니다.</p>
+        </div>
+        <!-- //photo -->
+
+
+
+    </div>
+    <footer class="footer">
+        <ul class="">
+            <li>
+                <div class="btn_box">
+                    <a href="javascript:shareMessage()">
+                            <span>카카오톡 공유</span>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <a href="#none" class="link_share link_url">
+                    <span class="txt_share">청첩장 링크 복사하기</span>
+                </a>
+            </li>
+        </ul>
+        <span class="info_copyright">copyright &copy; leeseungju. All rights reserved.</span>
+    </footer>
+</body>
+</html>
+
+<!-- 사진첩 스크립트 -->
+ <!-- Swiper JS -->
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+ <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+ <!-- Initialize Swiper -->
+ <script>
+   var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1.2,
+    centeredSlides: true,
+    spaceBetween: 20,
+    grabCursor: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+ </script>
+
+
