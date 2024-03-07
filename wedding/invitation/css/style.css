@@ -1,0 +1,439 @@
+
+@font-face {
+  font-family: 'GowunBatang-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GowunBatang-Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,body {
+      position: relative;
+      height: 100vh;
+      background-color: #F9F9F9;
+    }
+
+    body {
+      text-align: center;
+      font-family: "Noto Sans KR", sans-serif;
+      color: #1f1f1f;
+    }
+    /*top 메뉴바*/
+    .top_header{      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      background-color: #fff;
+      z-index: 998;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    font-size: 18px;}
+      .wrap{     margin-top: 56px;
+        height: calc(100vh - 136px);
+        position: relative;
+        margin-bottom: 80px;
+      }
+      .back{    width: 50px;
+        height: 50px;
+        font-size: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 0;}
+        .back::after{    content: '';
+          border-bottom: 1px solid #000;
+          border-right: 1px solid #000;
+          width: 12px;
+          height: 12px;
+          transform: rotate(135deg);
+          font-size: 0;
+          display: block;}
+
+
+
+/*하단메뉴바*/
+.nav{    width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 1000;
+  border-top: 1px solid #ddd;}
+.nav ul{    display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 80px;
+  justify-content: space-around;}
+.nav ul li{ }
+.nav ul li a{    width: 20%;  height: 80px; line-height: 40px;}
+
+
+/*공통*/
+.box_title{ margin-bottom: 40px;
+  margin-top: 50px;}
+.title_kr{    margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 28px; line-height: 1.8;
+text-align: left;}
+
+/*달력*/
+.calendar_box{padding: 40px 0;}
+.weeks_container{ text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;}
+.weeks_box{}
+.week{ display: flex;
+  width: 100%;}
+.week .header{}
+.week .day{  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;}
+.week .day span{}
+.week .highlight{}
+.week .selected {}
+.week .selected .span{}
+.disabled{}
+.day.selected::after {
+  content: "";
+  position: absolute;
+  font-size: 40px;
+  background: #9f80d6;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+.week .selected span {
+  color: #fff;
+  z-index: 1;
+}
+.calendar_list{}
+.calendar_list ul{}
+.calendar_list ul li{    border-radius: 8px;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 20px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  height: 80px;
+  box-shadow: 0 3px 5px #0000001a;}
+.calendar_list ul li .day{    font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+  height: 100%;
+  border-right: 3px solid #9f80d6;
+  justify-content: center;
+  background: #9f80d6;
+  border-radius: 8px 0 0 8px;
+  color: #fff;
+  margin-right: 10px;}
+.calendar_list ul li .day em{font-size: 14px;
+margin-top: 5px;}
+.day_info{     text-align: left;
+  font-size: 20px;
+  line-height: 1.5;}
+.day_info p{    font-size: 14px;}
+
+
+
+
+
+.img{width: 90%;
+  border-radius: 10px;}
+
+
+    /*사진첩 스타일*/
+  .photo_box{padding: 40px 0;}
+    .swiper {
+      width: 100%;
+    }
+  
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+
+    /*메인안내*/
+    .invitation_box{  background: #fcf3f3; padding: 40px 0;}
+    .invitation_txt{line-height: 1.8;}
+    
+    /*오시는길*/
+    .location_box{    background: #fcf3f3; padding: 40px 0;}
+    .location_box .location{}
+    .list_location{}
+    .list_location > li{border-top: 1px solid #ecdddd;
+      margin: 20px;
+      padding-top: 20px;}
+
+    .location_title{text-align: left;
+      font-size: 16px;
+      padding-bottom: 15px;
+      font-family: 'GowunBatang-Bold';}
+    .location_txt{text-align: left;
+      font-size: 14px;
+      line-height: 1.8;
+      font-family: "Noto Sans KR", sans-serif;}
+      .info_address{width: 90%;
+        margin: auto;
+        height: 40px;
+        line-height: 40px;
+        border-top: 1px solid #ecdddd;
+        border-bottom: 1px solid #ecdddd;
+        margin-bottom: 10px;}
+      .map_navi{    text-align: left;
+        display: flex;
+        color: #000;
+        font-size: 13px;
+        width: 92%;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        font-family: "Noto Sans KR", sans-serif;}
+      .map_navi .navi{  margin: auto;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 5px;
+        padding: 10px;
+        width: 26%;
+        background: #fff;
+        box-shadow: 0px 3px 8px #00000014;}
+      .map_navi .navi img{position: relative;
+        top: -1px;
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+        margin-right: 4px;
+        border-radius: 16%;}
+      .map_navi .navi span{}
+      
+
+    /*마음전하는곳*/
+    .bank_box{    margin: 50px 0;}
+    .group_bank{}
+    .bank_info{}
+    .bank_txt{}
+    .bank_num{}
+    .copyBtn{}
+
+    /* 아코디언 메뉴 */
+    .accordion-list {border: 1px solid;
+      border-radius: 5px;
+      width: 90%;
+      margin: auto;}
+    .accordion-list .accordion-item {border-bottom: 1px solid #ddd;}
+    .accordion-list .accordion-item .accordion-link {display: block; position: relative; padding: 25px 20px; border-bottom: 1px solid #ddd; transition: all 0.3s;}
+    .accordion-list .accordion-item.active .accordion-link {background-color: #fff;}
+    .accordion-list .accordion-name {position: relative; width: calc(100% - 50px); padding-left: 40px; font-size: 17px; font-weight: bold;}
+    .accordion-list .accordion-item .accordion-desc {display: none; padding: 30px 40px; background-color: #f9f9f9; color: #777;}
+
+/*슬라이드*/
+.swiper_tab{    display: flex;
+  background: #eee;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  width: 90%;
+  margin: auto;}
+.swiper_tab .tab{    padding: 8px;
+  margin: 0 0 -1px -1px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  cursor: pointer;
+  width: 100%;}
+.swiper_tab .tab.active{    position: relative;
+  background: #fff;
+  border-color: #eee;}
+.real_swiper{}
+
+
+
+
+
+
+
+
+
+
+
+/*별도 페이지 제작*/
+.map_page{  width: 100%;}
+.map_page .info_address{
+  border-radius: 50px;
+  position: absolute;
+top: 30px;
+  left: 0;
+  right: 0;
+  width: 90%;
+  background: #fff;
+  z-index: 999;
+  text-align: left;
+  padding-left: 20px;
+  box-shadow: 0 2px 7px #0000002b;
+  border: 1px solid #eee;}
+.map_page .map_info{}
+.map_page .list_location > li{    border-top: 1px solid #e9e9e9;}
+.sub1{    background: #EBA900;
+  display: inline-block;
+  vertical-align: top;
+  min-width: 18px;
+  height: 18px;
+  margin: 1px 4px 0 0;
+  padding: 0 5px;
+  border-radius: 9px;
+  box-sizing: border-box;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 18px;
+  text-align: center;}
+.sub2{    background: #6f99d0;
+  display: inline-block;
+  vertical-align: top;
+  min-width: 18px;
+  height: 18px;
+  margin: 1px 4px 0 0;
+  padding: 0 5px;
+  border-radius: 9px;
+  box-sizing: border-box;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 18px;
+  text-align: center;}
+body {
+
+}
+.show-modal {
+  
+}
+.bottom-sheet {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  opacity: 1;
+  pointer-events: none;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: 0.1s linear;
+  z-index: 999;
+}
+.bottom-sheet.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.bottom-sheet .sheet-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background: #000;
+}
+.bottom-sheet.show .sheet-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  background: #000;
+}
+.bottom-sheet.fullscreen .sheet-overlay {
+pointer-events: none;
+}
+.bottom-sheet .content {
+  width: 100%;
+  position: relative;
+  background: #fff;
+  max-height: 100vh;
+  max-width: 1150px;
+  padding: 25px 0;
+  transform: translateY(00%);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+  transition: 0.3s ease;
+  pointer-events: all;
+  bottom: 80px;
+  height: 20vh;
+}
+.bottom-sheet.show .content{
+  transform: translateY(0%);
+}
+.bottom-sheet.dragging .content {
+  transition: none;
+}
+
+.bottom-sheet.fullscreen .content {
+  overflow-y: hidden;
+}
+.bottom-sheet .header {
+  display: flex;
+  justify-content: center;
+}
+.header .drag-icon {
+  cursor: grab;
+  user-select: none;
+  padding: 15px;
+  margin-top: -15px;
+}
+.header .drag-icon span {
+  height: 4px;
+  width: 40px;
+  display: block;
+  background: #C7D0E1;
+  border-radius: 50px;
+}
+.bottom-sheet .body {
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.bottom-sheet .body::-webkit-scrollbar {
+  width: 0;
+}
+.bottom-sheet .body h2 {
+  font-size: 1.8rem;
+}
+.bottom-sheet .body p {
+  margin-top: 20px;
+  font-size: 1.05rem;
+}
