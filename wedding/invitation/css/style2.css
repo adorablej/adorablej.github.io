@@ -22,6 +22,7 @@ html,body {
       height: 100vh;
 height: -webkit-fill-available;
 height: fill-available;
+-ms-touch-action:pan-y; touch-action:pan-y;
     }
 
     body {
