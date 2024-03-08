@@ -11,7 +11,7 @@
   font-weight: normal;
   font-style: normal;
 }
-a{    text-decoration: none;}
+a{    text-decoration: none;   color: #1f1f1f;}
 .txt{color: #D49A9C; line-height: 1.8;}        
 .txt_s{font-size: 0.8em;}
 .txt_m{font-size: 1em;}
@@ -24,7 +24,6 @@ height: 100%;
     }
 
     body {
-      background-color: #D49A9C;
       text-align: center;
       font-family: 'GowunBatang-Regular';
       color: #1f1f1f;
@@ -59,7 +58,7 @@ height: 100%;
 
 /*공통*/
 .box_title{ margin-bottom: 40px;
-  margin-top: 20px;}
+  margin-top: 40px;}
 .title_kr{    margin-top: 5px;
   margin-bottom: 10px;
   font-size: 20px; line-height: 1.8;}
@@ -81,8 +80,8 @@ margin-bottom: 40px;}
 .week{ display: flex;
   width: 100%;}
 .week .header{}
-.week .day{  width: 50px;
-  height: 50px;
+.week .day{  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;}
@@ -95,8 +94,8 @@ margin-bottom: 40px;}
   content: '';
   position: absolute;
   background: #d49a9c;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50px;
 }
 .week .selected span {
@@ -104,7 +103,7 @@ margin-bottom: 40px;}
   z-index: 1;
 }
 
-.img{width: 90%;
+.img{width: 80%;
   border-radius: 10px;}
 
 
