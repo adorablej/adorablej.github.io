@@ -236,15 +236,18 @@ margin-bottom: 40px;}
     .accordion-list .accordion-item {border-bottom: 1px solid #ddd;}
     .accordion-list .accordion-item .accordion-link {display: block; position: relative; padding: 25px 20px; border-bottom: 1px solid #ddd; transition: all 0.3s;}
     .accordion-list .accordion-item.active .accordion-link {background-color: #fff;}
-    .accordion-list .accordion-name {position: relative; width: calc(100% - 50px); padding-left: 40px; font-size: 17px; font-weight: bold;}
+    .accordion-list .accordion-name {
+      position: relative; 
+      font-size: 17px;
+      font-weight: bold;}
     .accordion-list .accordion-item .accordion-desc {display: none; padding: 30px 40px; background-color: #f9f9f9; color: #777;}
 
 /*슬라이드*/
 .swiper_tab{    display: flex;
-  background: #eee;
+  background: #dcc7c7;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  width: 90%;
+  width: 80%;
   margin: auto;}
 .swiper_tab .tab{    padding: 8px;
   margin: 0 0 -1px -1px;
@@ -259,8 +262,22 @@ margin-bottom: 40px;}
   width: 100%;}
 .swiper_tab .tab.active{    position: relative;
   background: #fff;
-  border-color: #eee;}
-.real_swiper{overflow: hidden;}
+  border-color: #d49a9c;}
+.real_swiper{    overflow: hidden;
+  width: 80%;
+  margin: auto;
+  border: 1px solid #d49a9c;}
 
 /*info_box*/
 .info_box{padding: 40px 0;}
+
+
+
+/*footer*/
+.footer{    background: #f6f6f6;
+  padding: 40px 0;}
+.footer ul{margin-bottom: 20px;}
+.footer ul li{    margin-bottom: 20px;}
+.footer ul li i{     opacity: 0.5;
+  margin-left: 6px;}
+.info_copyright{opacity: 0.5;}
