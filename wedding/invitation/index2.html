@@ -220,7 +220,7 @@
                 <button type="button" class="copyBtn" id="인천광역시 연수구 경원대로 322"><i class="fa-regular fa-copy"></i>복사 </button>
         </div>
             <div class="location"><!-- 지도 -->
-                <div id="map" style="width: 80%; height: 270px; margin:auto"></div>
+                <div id="map" style="width: 90%; height: 270px; margin:auto"></div>
                 <code id="snippet" class="snippet"></code>
             </div>
             
@@ -302,14 +302,12 @@
             <div class="real_swiper swiper-container">
                 <ul class="swiper-wrapper">
                     <li class="swiper-slide" >예식안내
-                        <li>
                             <div class="location_title">당부의 말씀</div>
                             <div class="location_txt">
                                         "원인재"는 문화재로 주차장이 별도로 마련되어 있지 않습니다.<br>
                                         번거로우시더라도 대중교통을 이용하여 주시고,<br>
                                         주차를 원하시는 분들은 인근 주차장을 이용하여 주시기 바랍니다.
                             </div>
-                        </li>
                     </li>
                     <li class="swiper-slide" >포토부스</li>
                 </ul>
@@ -335,24 +333,28 @@
                     <div class="swiper-slide"><img src="img/img12.jpg"></div>
                 </div>
             </div>
-            <p class="photo_txt">사진 더 보기 <i class="fa-solid fa-angle-right"></i></p>
         </div>
         <!-- //photo -->
         <!-- 마음전하실곳 -->
         <div class="bank_box">
+            <div class="box_title">     
+                <div class="title_kr">마음전하실곳</div>
+                <div class="subtitle_en">참석이 어려우신 분들을 위해<br>
+                    계좌번호를 기재하였습니다.<br>
+                    축하해주셔서 진심으로 감사합니다.</div>
+                
+            </div>
             <ul class="accordion-list">
                 <li class="accordion-item">
                   <a href="#" class="accordion-link">
                     <div class="accordion-name">
-                        마음전하실곳
+                        신랑 김태우 ♥︎ 신부 이승주
                     </div>
                   </a>
                   <div class="accordion-desc">
-                    비대면으로 축하를 전하려는 분들을 위해 계좌번호를 남깁니다.<br>
-                    축하해주셔서 진심으로 감사합니다.
                     <div class="bank_info">
-                        <div class="bank_txt">신랑 김태우 ♥︎ 신부 이승주</div>
-                            <div id="bank_num">하나은행 김태우 102-979443-14937</div>
+                        <div class="bank_txt">하나은행 김태우</div>
+                            <div id="bank_num">102-979443-14937</div>
                             <button type="button" class="copyBtn" id="10297944314937">복사하기</button>
                     </div>
 
@@ -367,14 +369,12 @@
             <li>
                 <div class="btn_box">
                     <a href="javascript:shareMessage()">
-                            <span>카카오톡 공유</span>
+                            카카오톡 공유<i class="fa-solid fa-comment"></i>
                     </a>
                 </div>
             </li>
             <li>
-                <a href="#none" class="link_share link_url">
-                    <span class="txt_share">청첩장 링크 복사하기</span>
-                </a>
+                <a href="#" onclick="clip(); return false;">청첩장 링크 복사하기<i class="fa-solid fa-link"></i></a>
             </li>
         </ul>
         <span class="info_copyright">copyright &copy; leeseungju. All rights reserved.</span>
@@ -517,3 +517,20 @@ $(function(){
     	swiper2.slideTo(v);
     }
 </script>
+
+<script type="text/javascript">
+
+    function clip(){
+    
+        var url = '';
+        var textarea = document.createElement("textarea");
+        document.body.appendChild(textarea);
+        url = window.document.location.href;
+        textarea.value = url;
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        alert("URL이 복사되었습니다.")
+    }
+    
+    </script>

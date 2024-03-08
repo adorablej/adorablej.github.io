@@ -12,6 +12,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://kit.fontawesome.com/85b1106dca.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -27,11 +28,11 @@
     </header>
     <nav class="nav">
         <ul>
-            <li><a href="index.html">홈</a></li>
-            <li><a href="calendar.html">예식일자</a></li>
-            <li><a href="map.html">장소안내</a></li>
-            <li><a href="photo.html">사진첩</a></li>
-            <li><a href="introduce.html">신랑신부</a></li>
+            <li><a href="index.html"><i class="fa-solid fa-house"></i>홈</a></li>
+            <li><a href="calendar.html"><i class="fa-solid fa-calendar-days"></i>예식일자</a></li>
+            <li class="in"><a href="map.html"><i class="fa-solid fa-location-dot"></i>장소안내</a></li>
+            <li><a href="photo.html"><i class="fa-solid fa-camera"></i>사진첩</a></li>
+            <li><a href="introduce.html"><i class="fa-solid fa-heart"></i>신랑신부</a></li>
         </ul>
     </nav> 
 <div class="wrap map_page">
@@ -46,7 +47,7 @@
     <div class="bottom-sheet">
         <div class="sheet-overlay"></div>
         <div class="content">
-            <div class="header show-modal">
+            <div class="header">
                 <div class="drag-icon"><span></span></div>
             </div>
             <div class="body">
@@ -55,18 +56,24 @@
                         <p>인천광역시 연수구 경원대로 322</p>
                     </div>
                     <div class="map_navi">
-                        <div class="navi">
-                            <img src="img/navermap.jpg">
-                            <span>네이버 지도</span>
-                        </div>
-                        <div class="navi">
-                            <img src="img/kakaomap.png">
-                            <span>카카오 내비</span>
-                        </div>
-                        <div class="navi">
-                            <img src="img/tmap.png">
-                            <span>티맵</span>
-                        </div>
+                        <a href="https://naver.me/GedKGFBh"  class="navi">
+                            <div>
+                                <img src="img/navermap.jpg">
+                                <span>네이버지도</span>
+                            </div>
+                        </a>
+                        <a href="https://kko.to/hNOjymxlNa"  class="navi">
+                            <div>
+                                <img src="img/kakaomap.png">
+                                <span>카카오맵</span>
+                            </div>
+                        </a>
+                        <a href="https://tmap.life/1009d349"  class="navi">
+                            <div>
+                                <img src="img/tmap.png">
+                                <span>티맵</span>
+                            </div>
+                        </a>
                     </div>
                     
                     <ul class="list_location">
@@ -127,65 +134,91 @@
 
  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-<!--  지도 스크립트 -->
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=71rkeuyd16"></script>
-<!-- <script id="code">
-    var map = new naver.maps.Map('map', {
-        center: new naver.maps.LatLng(37.4144106, 126.6911696), //지도의 초기 중심 좌표
-        zoom: 15, //지도의 초기 줌 레벨
-        minZoom: 8, //지도의 최소 줌 레벨
-        zoomControl: true, //줌 컨트롤의 표시 여부
-        zoomControlOptions: { //줌 컨트롤의 옵션
-            position: naver.maps.Position.TOP_RIGHT
-    }});
-    var marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(37.4144106, 126.6911696),
-        map: map
-    });
-</script> -->
+ <!-- 100vh 높이값-->
 <script>
-    AOS.init(); /* 자동 애니메니션 효과 */
-    
-    /* var position = new naver.maps.LatLng(37.4144106, 126.6911696);
-  
-    var map = new naver.maps.Map('map', {
-      center: position,
-      zoom: 17
-    });
-  
-    var markerOptions = {
-      position: position.destinationPoint(0, 20),
-      map: map,
-      icon: {
-        url: 'https://adorablej.github.io/wedding/invitation/img/logo.png',
-        size: new naver.maps.Size(50, 52),
-        origin: new naver.maps.Point(0, 0),
-        anchor: new naver.maps.Point(25, 26)
-      }
-    };
-  
-    var marker = new naver.maps.Marker(markerOptions);*/
-    var map = new naver.maps.Map('map', {
-        center: new naver.maps.LatLng(37.4144106, 126.6911696), //지도의 초기 중심 좌표
-        zoom: 15, //지도의 초기 줌 레벨
-        minZoom: 8, //지도의 최소 줌 레벨
-        zoomControl: false, //줌 컨트롤의 표시 여부
-        zoomControlOptions: { //줌 컨트롤의 옵션
-            position: naver.maps.Position.TOP_RIGHT
-    }});
-    var marker = new naver.maps.Marker({
-        position: new naver.maps.LatLng(37.4144106, 126.6911696),
-        map: map
+    window.addEventListener("DOMContentLoaded", function (ev) {
+      const { innerHeight } = window;
+      document.documentElement.style.setProperty("--app-height",`${innerHeight}px`);
     });
   </script>
+
+<!--  지도 스크립트 -->
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=71rkeuyd16"></script>
+
+<script>
+
+var map = new naver.maps.Map('map', {
+    center: new naver.maps.LatLng(37.415534, 126.693178),
+    zoom: 15
+});
+
+
+// 2. HTML 마커
+var markerContent = [
+        '<div style="position: absolute;cursor: pointer;filter: drop-shadow(0px 3px 2px #00000057);">',
+            '<div class="infowindow show-modal" style="position: absolute;width: 100px;height: 50px;top: -20px;left: -50px;background-color: white;z-index: 1;margin: 0px;padding: 0px;border-radius: 10px;display: flex;flex-direction: column;justify-content: center;align-items: center;">',
+                '<p style="margin: 0;"><img src="img/logo.png" style=" height: 30px;"></p>',
+                '<p style="font-size: 0.8rem; margin: 0;">원인재</p>',
+                '<div style="margin: 0px;padding: 0px;width: 0px;height: 0px;position: absolute;border-width: 18px 10px 0px;border-style: solid;border-color: rgb(255, 255, 255) transparent;border-image: initial;pointer-events: none;box-sizing: content-box !important;transform-origin: right bottom 0px;transform: skewX(0deg);bottom: -18px;left: 0;right: 0;margin: auto;"></div>',
+            '</div>',
+    ].join(''),
+    htmlMarker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(37.4144106, 126.6911696),
+        map: map,
+        icon: {
+            content: markerContent,
+            size: new naver.maps.Size(22, 30),
+            anchor: new naver.maps.Point(11, 30)
+        }
+    }),
+    elHtmlMarker = htmlMarker.getElement();
+
+
+$(elHtmlMarker).on('click', 'img', function(e) {
+    $(elHtmlMarker).find('.infowindow').show();
+});
+
+
+// 2. HTML 마커2
+var markerContent2 = [
+        '<div style="position:absolute;">',
+            '<div class="infowindow" style="display:none;position:absolute;width:220px;height:20px;top:-46px;left:-100px;background-color:white;z-index:1;border:1px solid black;margin:0;padding:0;">',
+                '<div>주차장.</div>',
+                '<div style="margin: 0px; padding: 0px; width: 0px; height: 0px; position: absolute; border-width: 24px 10px 0px; border-style: solid; border-color: rgb(51, 51, 51) transparent; border-image: initial; pointer-events: none; box-sizing: content-box !important; transform-origin: right bottom 0px; transform: skewX(0deg); bottom: -25px; left: 100px;"></div>',
+                '<div style="margin: 0px; padding: 0px; width: 0px; height: 0px; position: absolute; border-width: 24px 10px 0px; border-style: solid; border-color: rgb(255, 255, 255) transparent; border-image: initial; pointer-events: none; box-sizing: content-box !important; transform-origin: right bottom 0px; transform: skewX(0deg); bottom: -22px; left: 100px;"></div>',
+            '</div>',
+            '<div class="pin_s" style="cursor: pointer; width: 22px; height: 30px;">',
+                '<img src="https://ssl.pstatic.net/static/maps/img/icons/pin_s_3.png" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 22px; height: 30px; left: 0px; top: 0px;">',
+            '</div>',
+        '</div>'
+    ].join(''),
+    htmlMarker2 = new naver.maps.Marker({
+        position: new naver.maps.LatLng(37.421619, 126.696823),
+        map: map,
+        icon: {
+            content: markerContent2,
+            size: new naver.maps.Size(22, 30),
+            anchor: new naver.maps.Point(11, 30)
+        }
+    }),
+    elHtmlMarker2 = htmlMarker2.getElement();
+
+$(elHtmlMarker2).find('.infowindow').show();
+    </script>
+
+
+
+
+
   <script>
     $(".copyBtn").on("click", function(e) {
     let account = e.target.id;
     window.navigator.clipboard.writeText(account).then(() => {
-      alert("계좌번호가 복사되었습니다.");
+      alert("주소가 복사되었습니다.");
     });
   })
   </script>
+ 
   <script>
 // Select DOM elements
 const showModalBtn = document.querySelector(".show-modal");
@@ -199,12 +232,12 @@ let isDragging = false, startY, startHeight;
 const showBottomSheet = () => {
     bottomSheet.classList.add("show");
     document.body.style.overflowY = "hidden";
-    updateSheetHeight(70);
+    updateSheetHeight(50);
 }
 const updateSheetHeight = (height) => {
     sheetContent.style.height = `${height}vh`; //updates the height of the sheet content
     // Toggles the fullscreen class to bottomSheet if the height is equal to 100
-    bottomSheet.classList.toggle("fullscreen", height === 70);
+    bottomSheet.classList.toggle("fullscreen", height === 100);
 }
 // Hide the bottom sheet and show body vertical scrollbar
 const hideBottomSheet = () => {
@@ -231,7 +264,7 @@ const dragStop = () => {
     isDragging = false;
     bottomSheet.classList.remove("dragging");
     const sheetHeight = parseInt(sheetContent.style.height);
-    sheetHeight < 25 ? hideBottomSheet() : sheetHeight > 75 ? updateSheetHeight(70) : updateSheetHeight(20);
+    sheetHeight < 25 ? hideBottomSheet() : sheetHeight > 75 ? updateSheetHeight(100) : updateSheetHeight(50);
 }
 dragIcon.addEventListener("mousedown", dragStart);
 document.addEventListener("mousemove", dragging);

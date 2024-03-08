@@ -12,6 +12,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://kit.fontawesome.com/85b1106dca.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -28,21 +29,16 @@
     <div class="invitation">
         <nav class="nav">
             <ul>
-                <li><a href="index.html">홈</a></li>
-                <li><a href="calendar.html">예식일자</a></li>
-                <li><a href="map.html">장소안내</a></li>
-                <li><a href="photo.html">사진첩</a></li>
-                <li><a href="introduce.html">신랑신부</a></li>
+                <li><a href="index.html"><i class="fa-solid fa-house"></i>홈</a></li>
+                <li><a href="calendar.html"><i class="fa-solid fa-calendar-days"></i>예식일자</a></li>
+                <li><a href="map.html"><i class="fa-solid fa-location-dot"></i>장소안내</a></li>
+                <li class="in"><a href="photo.html"><i class="fa-solid fa-camera"></i>사진첩</a></li>
+                <li><a href="introduce.html"><i class="fa-solid fa-heart"></i>신랑신부</a></li>
             </ul>
-        </nav> 
-
+        </nav>
         <!-- photo -->
         <!-- Swiper -->
         <div class="photo_box">
-            <div class="box_title">     
-                <div class="subtitle_en">GALLERY</div>
-                <div class="title_kr">웨딩 갤러리</div>
-            </div>
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide"><img src="img/img1.jpg"></div>
@@ -104,3 +100,10 @@
  </script>
 
 
+
+
+
+
+
+
+css -ms-touch-action:pan-y; touch-action:pan-y; 추가하기
