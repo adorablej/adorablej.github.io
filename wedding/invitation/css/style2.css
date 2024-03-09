@@ -11,63 +11,64 @@
   font-weight: normal;
   font-style: normal;
 }
-a{    text-decoration: none;   color: #1f1f1f;}
-.txt{color: #D49A9C; line-height: 1.8;}        
-.txt_vw{font-size: 20px}
+a{ text-decoration: none; color: #1f1f1f;}
+   
 html,body {
-      position: relative;
--ms-touch-action:pan-y; touch-action:pan-y;
-height: 100%;
-    }
+  position: relative;
+  -ms-touch-action:pan-y; touch-action:pan-y;
+  height: 100%;
+}
 
-    body {
-      text-align: center;
-      font-family: 'GowunBatang-Regular';
-      color: #1f1f1f;
-      background: #eee;
-    }
-    .invitation{max-width: 500px;
-    background: #fff;
-    margin: auto;}
-
-    /*main*/
-    .main{ 
-      display: flex;
-      justify-content: center;
-      height: 100vh;
-      flex-direction: column;
-      align-items: center;
-      width: 400px;
-      margin: auto;
-      }
-      .married{    width: 50%;}
-    .namebg{   width: 70%; margin: 20px 0;}
-    .namebg .main_name{}
-    .thumb_visual{     position: relative;
-      width: 280px;
-      margin: 0 0 20px 0;}
-    .thumb_visual img{width: 100%;
-      border-radius: 50em 50em 0 0;
-      border: 4px solid #D49A9C;
-     }
-
-     .name_box{margin: 50px 0;}
-     .name_list{font-size: 20px; margin-bottom: 15px;}
-     .txt_relation{font-size: 16px;}
-     .name_box .name_list em{font-size: 14px; opacity: 0.5;}
-
+body {
+  text-align: center;
+  font-family: 'GowunBatang-Regular';
+  color: #1f1f1f;
+  background: #eee;
+}
+.invitation{
+  max-width: 500px;
+  background: #fff;
+  margin: auto;
+}
 /*공통*/
 .box_title{ margin-bottom: 40px;
   margin-top: 40px;}
 .title_kr{    margin-top: 5px;
   margin-bottom: 10px;
-  font-size: 20px; line-height: 1.8;}
+  font-size: 20px; line-height: 1.5;}
 .subtitle_en{  text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.1em;
   color: #d49a9c;
   font-size: 14px;
   line-height: 1.5;}
+
+/*main*/
+.main{ 
+display: flex;
+justify-content: center;
+height: 100vh;
+flex-direction: column;
+align-items: center;
+max-width: 400px;
+margin: auto;
+}
+.married{    width: 50%;}
+.namebg{   width: 70%; margin: 20px 0;}
+.namebg .main_name{}
+.thumb_visual{     position: relative;
+width: 280px;
+margin: 0 0 20px 0;}
+.thumb_visual img{width: 100%;
+border-radius: 50em 50em 0 0;
+border: 4px solid #D49A9C;
+}
+.name_box{margin: 50px 0;}
+.name_list{font-size: 20px; margin-bottom: 15px;}
+.txt_relation{font-size: 16px;}
+.name_box .name_list em{font-size: 14px; opacity: 0.5;}
+.main_txt{font-size: 20px; color: #D49A9C; line-height: 1.8;}
+
 /*달력*/
 .calendar_box{padding: 40px 0;}
 .weeks_container{ text-align: center;
@@ -297,33 +298,29 @@ margin-bottom: 40px;}
 
 
 
-@media screen and (max-width: 767px){
-	
-    
-    /*main*/
-    .main{ 
-      padding: 0 3em;
+@media screen and (max-width: 767px){    
+  .main{ 
+    padding: 0 3em;
     display: flex;
     justify-content: center;
     height: var(--app-height);
     flex-direction: column;
     align-items: center;
-      }
-      .married{    width: 50%;}
-    .namebg{   width: 80%; margin: 20px 0;}
-    .namebg .main_name{}
-    .thumb_visual{    width: 80%;
-      position: relative;
-      width: 80%;
-      margin: 0 0 20px 0;}
-    .thumb_visual img{width: 100%;
-      border-radius: 50em 50em 0 0;
-      border: 4px solid #D49A9C;
-     }
-
-     .name_box{margin: 50px 0;}
-     .name_list{font-size: 20px; margin-bottom: 15px;}
-     .txt_relation{font-size: 16px;}
-     .name_box .name_list em{font-size: 14px; opacity: 0.5;}
-
+    }
+  .married{width: 50%;}
+  .namebg{width: 80%; margin: 20px 0;}
+  .namebg .main_name{}
+  .thumb_visual{    width: 80%;
+    position: relative;
+    width: 80%;
+    margin: 0 0 20px 0;}
+  .thumb_visual img{width: 100%;
+    border-radius: 50em 50em 0 0;
+    border: 4px solid #D49A9C;
+    }
+    .name_box{margin: 50px 0;}
+    .name_list{font-size: 20px; margin-bottom: 15px;}
+    .txt_relation{font-size: 16px;}
+    .name_box .name_list em{font-size: 14px; opacity: 0.5;}
+    .main_txt{font-size: 17px; color: #D49A9C; line-height: 1.8;}
 }
