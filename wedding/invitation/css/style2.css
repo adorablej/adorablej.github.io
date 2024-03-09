@@ -13,10 +13,7 @@
 }
 a{    text-decoration: none;   color: #1f1f1f;}
 .txt{color: #D49A9C; line-height: 1.8;}        
-.txt_s{font-size: 0.8em;}
-.txt_m{font-size: 1em;}
-.txt_l{font-size: 1.5em;}
-.txt_vw{font-size: 4.8vw;}
+.txt_vw{font-size: 20px}
 html,body {
       position: relative;
 -ms-touch-action:pan-y; touch-action:pan-y;
@@ -27,25 +24,28 @@ height: 100%;
       text-align: center;
       font-family: 'GowunBatang-Regular';
       color: #1f1f1f;
+      background: #eee;
     }
-    .invitation{max-width: 600px;
+    .invitation{max-width: 500px;
     background: #fff;
     margin: auto;}
+
     /*main*/
     .main{ 
-      padding: 0 2em;
       display: flex;
-      justify-content: space-evenly;
-      height: var(--app-height);
+      justify-content: center;
+      height: 100vh;
       flex-direction: column;
       align-items: center;
+      width: 400px;
+      margin: auto;
       }
       .married{    width: 50%;}
-    .namebg{   width: 80%;}
+    .namebg{   width: 70%; margin: 20px 0;}
     .namebg .main_name{}
-    .thumb_visual{    width: 80%;
-      position: relative;
-      width: 80%;}
+    .thumb_visual{     position: relative;
+      width: 280px;
+      margin: 0 0 20px 0;}
     .thumb_visual img{width: 100%;
       border-radius: 50em 50em 0 0;
       border: 4px solid #D49A9C;
@@ -66,7 +66,8 @@ height: 100%;
   text-align: center;
   letter-spacing: 0.1em;
   color: #d49a9c;
-  font-size: 14px;}
+  font-size: 14px;
+  line-height: 1.5;}
 /*달력*/
 .calendar_box{padding: 40px 0;}
 .weeks_container{ text-align: center;
@@ -155,10 +156,8 @@ margin-bottom: 40px;}
       font-family: "Noto Sans KR", sans-serif;}
       .info_address{width: 90%;
         margin: auto;
-        height: 40px;
-        line-height: 40px;
-        border-top: 1px solid #ecdddd;
-        border-bottom: 1px solid #ecdddd;
+        height: 30px;
+        line-height: 30px;
         margin-bottom: 10px;
         display: flex;
         justify-content: space-between;}
@@ -193,7 +192,7 @@ margin-bottom: 40px;}
         vertical-align: top;
         min-width: 18px;
         height: 18px;
-        margin: 1px 4px 0 0;
+        margin: 4px 4px 0 0;
         padding: 0 5px;
         border-radius: 9px;
         box-sizing: border-box;
@@ -209,7 +208,7 @@ margin-bottom: 40px;}
     vertical-align: top;
     min-width: 18px;
     height: 18px;
-    margin: 1px 4px 0 0;
+    margin: 4px 4px 0 0;
     padding: 0 5px;
     border-radius: 9px;
     box-sizing: border-box;
@@ -220,36 +219,53 @@ margin-bottom: 40px;}
     text-align: center;
     }
     /*마음전하는곳*/
-    .bank_box{    margin: 50px 0;}
+
+    .bank_box{    padding: 50px 0;}
     .group_bank{}
-    .bank_info{}
+    .bank_info{    line-height: 1.8;}
     .bank_txt{}
-    .bank_num{}
-    .copyBtn{    background: transparent;
-      border: none;}
+    .bank_num{display: flex;
+      align-items: center;
+      justify-content: center; }
+    .copyBtn{     background: #fff;
+      border: 1px solid #cecece;
+      border-radius: 5px;
+      padding: 3px 10px;
+      margin-left: 10px;
+      height: 30px;}
 
     /* 아코디언 메뉴 */
-    .accordion-list {border: 1px solid;
+    .accordion-list {border: 1px solid #ecdddd;
       border-radius: 5px;
-      width: 90%;
+      width: 80%;
       margin: auto;}
-    .accordion-list .accordion-item {border-bottom: 1px solid #ddd;}
-    .accordion-list .accordion-item .accordion-link {display: block; position: relative; padding: 25px 20px; border-bottom: 1px solid #ddd; transition: all 0.3s;}
+    .accordion-list .accordion-item .accordion-link {display: block;
+      position: relative;
+      padding: 20px 0;
+      transition: all 0.3s;}
     .accordion-list .accordion-item.active .accordion-link {background-color: #fff;}
     .accordion-list .accordion-name {
       position: relative; 
       font-size: 17px;
       font-weight: bold;}
-    .accordion-list .accordion-item .accordion-desc {display: none; padding: 30px 40px; background-color: #f9f9f9; color: #777;}
+    .accordion-list .accordion-item .accordion-desc {  display: none;  padding: 30px 0;
+      background-color: #fff9f9;
+      color: #1f1f1f;
+      font-family: "Noto Sans KR", sans-serif;
+  }
 
-/*슬라이드*/
+
+/*info_box*/
+.info_box{padding: 40px 0;    background: #f7ebeb; }
+.info_wrap{    padding: 20px;}
+.tab_box{background: #fff;
+  border-radius: 8px; width: 80%;  margin: auto;}
 .swiper_tab{    display: flex;
-  background: #dcc7c7;
+  background: #efdad8;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  width: 80%;
-  margin: auto;}
-.swiper_tab .tab{    padding: 8px;
+ }
+.swiper_tab .tab{    padding: 14px 0;
   margin: 0 0 -1px -1px;
   border: 1px solid transparent;
   border-bottom: 0;
@@ -262,14 +278,11 @@ margin-bottom: 40px;}
   width: 100%;}
 .swiper_tab .tab.active{    position: relative;
   background: #fff;
-  border-color: #d49a9c;}
+  border-color: #fff9f9;}
 .real_swiper{    overflow: hidden;
-  width: 80%;
   margin: auto;
-  border: 1px solid #d49a9c;}
-
-/*info_box*/
-.info_box{padding: 40px 0;}
+  border: 1px solid #fff9f9;
+  border-radius: 0 0 8px 8px;}
 
 
 
@@ -281,3 +294,36 @@ margin-bottom: 40px;}
 .footer ul li i{     opacity: 0.5;
   margin-left: 6px;}
 .info_copyright{opacity: 0.5;}
+
+
+
+@media screen and (max-width: 767px){
+	
+    
+    /*main*/
+    .main{ 
+      padding: 0 3em;
+    display: flex;
+    justify-content: center;
+    height: var(--app-height);
+    flex-direction: column;
+    align-items: center;
+      }
+      .married{    width: 50%;}
+    .namebg{   width: 80%; margin: 20px 0;}
+    .namebg .main_name{}
+    .thumb_visual{    width: 80%;
+      position: relative;
+      width: 80%;
+      margin: 0 0 20px 0;}
+    .thumb_visual img{width: 100%;
+      border-radius: 50em 50em 0 0;
+      border: 4px solid #D49A9C;
+     }
+
+     .name_box{margin: 50px 0;}
+     .name_list{font-size: 20px; margin-bottom: 15px;}
+     .txt_relation{font-size: 16px;}
+     .name_box .name_list em{font-size: 14px; opacity: 0.5;}
+
+}
