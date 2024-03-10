@@ -1,0 +1,372 @@
+
+@font-face {
+  font-family: 'GowunBatang-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GowunBatang-Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+a{ text-decoration: none; color: #1f1f1f;}
+   
+html,body {
+  position: relative;
+  -ms-touch-action:pan-y; touch-action:pan-y;
+  height: 100%;
+}
+
+body {
+  text-align: center;
+  font-family: 'GowunBatang-Regular';
+  color: #1f1f1f;
+  background: #eee;
+}
+.invitation{
+  max-width: 500px;
+  background: #fff;
+  margin: auto;
+}
+/*공통*/
+.box_title{ 
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+.title_kr{    margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 20px; line-height: 1.5;}
+.subtitle_en{  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.1em;
+  color: #a9a9a9;
+  font-size: 14px;
+  line-height: 1.5;}
+.bg{  background: #fafafa;}
+.img{width: 90%;
+ }
+
+/*main*/
+.main{ 
+  display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    background: #f0eceb;
+  }
+.married{font-size: 28px;
+  margin: 60px 0 20px;}
+.namebg{      position: absolute;
+  bottom: 50px;
+  color: #fff;
+  font-size: 18px;
+  left: 0;
+  right: 0;}
+  .namebg em{font-size: 14px;
+    font-style: normal;}
+.namebg .main_name{}
+.thumb_visual{    width: 100%;
+  position: relative;}
+.thumb_visual img{width: 100%;
+  }
+  .name_box{margin: 50px 0;}
+  .name_list{font-size: 20px; margin-bottom: 15px;}
+  .txt_relation{font-size: 16px;}
+  .name_box .name_list em{font-size: 14px; opacity: 0.5;}
+  .main_txt{font-size: 17px;  line-height: 1.8;}
+/*달력*/
+.calendar_box{padding: 40px 0;}
+.weeks_container{ text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+margin-bottom: 40px;}
+.weeks_box{}
+.week{ display: flex;
+  width: 100%;}
+.week .header{}
+.week .day{  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;}
+.week .day span{}
+.week .highlight{color:#d49a9c;}
+.week .selected {}
+.week .selected .span{}
+.disabled{}
+.day.selected::after {
+  content: '';
+  position: absolute;
+  background: #343434;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+}
+.week .selected span {
+  color: #fff;
+  z-index: 1;
+}
+.location_bt{    display: block;
+    position: relative;
+    padding: 20px 0;
+    transition: all 0.3s;
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 20px;
+    background: #fff;   
+    font-family: 'GowunBatang-Bold';}
+    .location_bt em{    font-weight: 400;
+      font-style: normal;
+      font-family: 'GowunBatang-Regular';}
+
+
+
+    /*사진첩 스타일*/
+  .photo_box{padding: 40px 0;}
+    .swiper {
+      width: 100%;
+    }
+  
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo_txt{    font-size: 14px;
+      margin: 15px 0 0;
+      opacity: 0.5;}
+
+    /*메인안내*/
+    .invitation_box{   padding: 40px 0;}
+    .invitation_txt{line-height: 1.8;}
+    
+    /*오시는길*/
+    .location_box{  padding: 40px 0;}
+    .location_box .location{}
+    .list_location{}
+    .list_location > li{border-top: 1px solid #ebebeb;
+      margin: 20px;
+      padding-top: 20px;}
+
+    .location_title{text-align: left;
+      font-size: 16px;
+      padding-bottom: 15px;
+      font-family: 'GowunBatang-Bold';}
+    .location_txt{text-align: left;
+      font-size: 14px;
+      line-height: 1.5;
+      font-family: "Noto Sans KR", sans-serif;}
+      .location_txt ul{padding-inline-start: 15px;
+        padding-top: 14px;}
+      .location_txt ul li{
+        list-style-type: disc;
+        line-height: 1.6;
+           margin-right: 5px;
+           word-break: keep-all;
+          margin-bottom: 10px;
+          letter-spacing: -0.5px;}
+      .info_address{width: 90%;
+        margin: auto;
+        height: 30px;
+        line-height: 30px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;}
+      .map_navi{    text-align: left;
+        display: flex;
+        color: #000;
+        font-size: 13px;
+        width: 92%;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        font-family: "Noto Sans KR", sans-serif;}
+      .map_navi .navi{  margin: auto;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 5px;
+        padding: 10px;
+        width: 26%;
+        background: #fff;
+        /*box-shadow: 0px 3px 8px #00000014;*/
+        border: 1px solid #cecece;
+      }
+      .map_navi .navi img{position: relative;
+        top: -1px;
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+        margin-right: 4px;
+        border-radius: 16%;}
+      .map_navi .navi span{}
+      .sub1 {
+        background: #EBA900;
+        display: inline-block;
+        vertical-align: top;
+        min-width: 18px;
+        height: 18px;
+        margin: 4px 4px 0 0;
+        padding: 0 5px;
+        border-radius: 9px;
+        box-sizing: border-box;
+        font-size: 11px;
+        font-weight: 600;
+        color: #fff;
+        line-height: 18px;
+        text-align: center;
+    }
+    .sub2 {
+    background: #6f99d0;
+    display: inline-block;
+    vertical-align: top;
+    min-width: 18px;
+    height: 18px;
+    margin: 4px 4px 0 0;
+    padding: 0 5px;
+    border-radius: 9px;
+    box-sizing: border-box;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 18px;
+    text-align: center;
+    }
+    /*마음전하는곳*/
+
+    .bank_box{    padding: 50px 0;}
+    .group_bank{}
+    .bank_sub{    line-height: 1.5;
+      padding-top: 40px;
+      border-top: 1px solid #eee;
+      width: 90%;
+      margin: 0px auto 40px;
+  }
+    .bank_info{     line-height: 1.8;
+      border-bottom: dashed 1px #eee;
+      padding:16px 10px;
+      text-align: left;
+      font-size: 14px;}
+    .bank_txt{    font-weight: 700;}
+    .bank_txt em{    font-weight: 400; 
+      font-style: normal;}
+    .bank_num{    display: flex;
+      align-items: center;
+      justify-content: space-between; }
+    .copyBtn{     background: #fff;
+      border: 1px solid #cecece;
+      border-radius: 5px;
+      padding: 3px 10px;
+      margin-left: 10px;
+      height: 30px;}
+
+    /* 아코디언 메뉴 */
+    .accordion-list {border: 1px solid #dfdfdf;
+      border-radius: 5px;
+      width: 90%;
+      margin: auto;
+      margin-bottom: 20px;}
+    .accordion-list .accordion-item .accordion-link {
+      background: #fff;
+      display: block;
+      position: relative;
+      padding: 20px 0;
+      transition: all 0.3s;
+      border-radius: 8px ;}
+    .accordion-list .accordion-item.active .accordion-link {
+      background-color: #fff;
+      border-radius: 8px 8px 0 0 ;
+   }
+    .accordion-list .accordion-name {
+      position: relative; 
+      font-size: 17px;
+      font-weight: bold;}
+    .accordion-list .accordion-item .accordion-desc { 
+      background-color: #fafafa;
+      color: #1f1f1f;
+      font-family: "Noto Sans KR", sans-serif;
+  }
+
+
+/*info_box*/
+.info_box{padding: 40px 0 60px; }
+.info_wrap{    padding:5%;}
+.tab_box{background: #fff;
+  border-radius: 8px; width: 95%;  margin: auto;}
+.swiper_tab{    display: flex;
+  background: #efefef;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+ }
+.swiper_tab .tab{    padding: 14px 0;
+  margin: 0 0 -1px -1px;
+  border: 1px solid transparent;
+  border-bottom: 0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  cursor: pointer;
+  width: 100%;}
+.swiper_tab .tab.active{    position: relative;
+  background: #fff;
+  border-color: #eeeeee;}
+.real_swiper{    overflow: hidden;
+  margin: auto;
+  border: 1px solid #eeeeee;
+  border-radius: 0 0 8px 8px;}
+
+
+
+/*footer*/
+.footer{    background: #f6f6f6;
+  padding: 40px 0;}
+.footer ul{margin-bottom: 20px;}
+.footer ul li{    margin-bottom: 20px;}
+.footer ul li i{     opacity: 0.5;
+  margin-left: 6px;}
+.info_copyright{opacity: 0.5;}
+
+
+
+@media screen and (max-width: 767px){    
+  
+}
+
+
+/*전화걸가*/
+.phone_box{padding: 40px 0 60px;}
+.couplelist{}
+
+.familylist{}
+.familylist div{    display: block;
+  position: relative;
+  padding: 20px 0;
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 20px;}
+.familylist div p{font-family: 'GowunBatang-Bold';}
+.familylist div p em{    font-weight: 400;
+  font-style: normal;
+  font-family: 'GowunBatang-Regular';}
+.familylist div p i{}
