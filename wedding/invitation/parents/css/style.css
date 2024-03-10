@@ -275,7 +275,8 @@ margin-bottom: 40px;}
       border-radius: 5px;
       padding: 3px 10px;
       margin-left: 10px;
-      height: 30px;}
+      height: 30px;
+    color: #1f1f1f;}
 
     /* 아코디언 메뉴 */
     .accordion-list {border: 1px solid #dfdfdf;
