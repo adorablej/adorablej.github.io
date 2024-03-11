@@ -42,7 +42,23 @@ body {
   color: #d49a9c;
   font-size: 14px;
   line-height: 1.5;}
+.location_bt{    display: block;
+  position: relative;
+  padding: 20px 0;
+  transition: all 0.3s;
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 20px;
+  background: #fff;   
+  font-family: 'GowunBatang-Bold';}
+.location_bt em{    font-weight: 400;
+font-style: normal;
+font-family: 'GowunBatang-Regular';}
 
+.bg{    background: #fffbfb;}
+button {color:#1f1f1f} 
 /*main*/
 .main{ 
 display: flex;
@@ -136,14 +152,14 @@ margin-bottom: 40px;}
       opacity: 0.5;}
 
     /*메인안내*/
-    .invitation_box{  background: #fcf3f3; padding: 40px 0;}
+    .invitation_box{  padding: 40px 0;}
     .invitation_txt{line-height: 1.8;}
     
     /*오시는길*/
-    .location_box{    background: #fcf3f3; padding: 40px 0;}
+    .location_box{  padding: 40px 0;}
     .location_box .location{}
     .list_location{}
-    .list_location > li{border-top: 1px solid #ecdddd;
+    .list_location > li{border-top: 1px solid #ebebeb;
       margin: 20px;
       padding-top: 20px;}
 
@@ -153,8 +169,17 @@ margin-bottom: 40px;}
       font-family: 'GowunBatang-Bold';}
     .location_txt{text-align: left;
       font-size: 14px;
-      line-height: 1.8;
+      line-height: 1.5;
       font-family: "Noto Sans KR", sans-serif;}
+      .location_txt ul{padding-inline-start: 15px;
+        padding-top: 14px;}
+      .location_txt ul li{
+        list-style-type: disc;
+        line-height: 1.6;
+           margin-right: 5px;
+           word-break: keep-all;
+          margin-bottom: 10px;
+          letter-spacing: -0.5px;}
       .info_address{width: 90%;
         margin: auto;
         height: 30px;
@@ -178,7 +203,9 @@ margin-bottom: 40px;}
         padding: 10px;
         width: 26%;
         background: #fff;
-        box-shadow: 0px 3px 8px #00000014;}
+        /*box-shadow: 0px 3px 8px #00000014;*/
+        border: 1px solid #cecece;
+      }
       .map_navi .navi img{position: relative;
         top: -1px;
         width: 16px;
@@ -219,50 +246,70 @@ margin-bottom: 40px;}
     line-height: 18px;
     text-align: center;
     }
-    /*마음전하는곳*/
+      /*마음전하는곳*/
 
-    .bank_box{    padding: 50px 0;}
-    .group_bank{}
-    .bank_info{    line-height: 1.8;}
-    .bank_txt{}
-    .bank_num{display: flex;
-      align-items: center;
-      justify-content: center; }
-    .copyBtn{     background: #fff;
-      border: 1px solid #cecece;
-      border-radius: 5px;
-      padding: 3px 10px;
-      margin-left: 10px;
-      height: 30px;}
+      .bank_box{    padding: 50px 0;}
+      .group_bank{}
+      .bank_sub{    line-height: 1.5;
+        
+        width: 90%;
+        margin: 0px auto 40px;
+    }
+      .bank_info{     line-height: 1.8;
+        border-bottom: dashed 1px #eee;
+        padding:16px 10px;
+        text-align: left;
+        font-size: 14px;}
+      .bank_txt{    font-weight: 700;}
+      .bank_txt em{    font-weight: 400; 
+        font-style: normal;}
+      .bank_num{    display: flex;
+        align-items: center;
+        justify-content: space-between; }
+      .copyBtn{     background: #fff;
+        border: 1px solid #cecece;
+        border-radius: 5px;
+        padding: 3px 10px;
+        margin-left: 10px;
+        height: 30px;
+      color: #1f1f1f;}
+      button {color:#1f1f1f} 
 
-    /* 아코디언 메뉴 */
-    .accordion-list {border: 1px solid #ecdddd;
-      border-radius: 5px;
-      width: 80%;
-      margin: auto;}
-    .accordion-list .accordion-item .accordion-link {display: block;
-      position: relative;
-      padding: 20px 0;
-      transition: all 0.3s;}
-    .accordion-list .accordion-item.active .accordion-link {background-color: #fff;}
-    .accordion-list .accordion-name {
-      position: relative; 
-      font-size: 17px;
-      font-weight: bold;}
-    .accordion-list .accordion-item .accordion-desc {  display: none;  padding: 30px 0;
-      background-color: #fff9f9;
-      color: #1f1f1f;
-      font-family: "Noto Sans KR", sans-serif;
-  }
+        /* 아코디언 메뉴 */
+        .accordion-list {border: 1px solid #dfdfdf;
+          border-radius: 5px;
+          width: 90%;
+          margin: auto;
+          margin-bottom: 20px;}
+        .accordion-list .accordion-item .accordion-link {
+          background: #fff;
+          display: block;
+          position: relative;
+          padding: 20px 0;
+          transition: all 0.3s;
+          border-radius: 8px ;}
+        .accordion-list .accordion-item.active .accordion-link {
+          background-color: #fff;
+          border-radius: 8px 8px 0 0 ;
+       }
+        .accordion-list .accordion-name {
+          position: relative; 
+          font-size: 17px;
+          font-weight: bold;}
+        .accordion-list .accordion-item .accordion-desc { 
+          background-color: #fafafa;
+          color: #1f1f1f;
+          font-family: "Noto Sans KR", sans-serif;
+      }
 
 
 /*info_box*/
-.info_box{padding: 40px 0;    background: #f7ebeb; }
-.info_wrap{    padding: 20px;}
+.info_box{padding: 40px 0 60px; }
+.info_wrap{    padding:5%;}
 .tab_box{background: #fff;
-  border-radius: 8px; width: 80%;  margin: auto;}
+  border-radius: 8px; width: 95%;  margin: auto;}
 .swiper_tab{    display: flex;
-  background: #efdad8;
+  background: #f6e8e8;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
  }
@@ -279,11 +326,12 @@ margin-bottom: 40px;}
   width: 100%;}
 .swiper_tab .tab.active{    position: relative;
   background: #fff;
-  border-color: #fff9f9;}
+  border-color: #eeeeee;}
 .real_swiper{    overflow: hidden;
   margin: auto;
-  border: 1px solid #fff9f9;
+  border: 1px solid #eeeeee;
   border-radius: 0 0 8px 8px;}
+
 
 
 
@@ -295,6 +343,27 @@ margin-bottom: 40px;}
 .footer ul li i{     opacity: 0.5;
   margin-left: 6px;}
 .info_copyright{opacity: 0.5;}
+
+/*전화걸가*/
+.phone_box{padding: 40px 0 60px;}
+.couplelist{}
+
+.familylist{    display: flex;
+  flex-direction: row;
+  width: 80%;
+  margin: auto;
+  justify-content: space-around;}
+.familylist div{       display: block;
+  position: relative;
+  padding: 15px;
+  border: 1px solid #e7d9d9;
+  border-radius: 5px;
+  margin: auto;}
+.familylist div p{font-family: 'GowunBatang-Bold';}
+.familylist div p em{    font-weight: 400;
+  font-style: normal;
+  font-family: 'GowunBatang-Regular';}
+.familylist div p i{}
 
 
 
