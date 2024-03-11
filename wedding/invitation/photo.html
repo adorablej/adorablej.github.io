@@ -26,58 +26,32 @@
         <a href="javascript:window.history.back();" class="back">뒤로가기</a>
         사진첩
     </header>
-    <div class="invitation">
-        <nav class="nav">
-            <ul>
-                <li><a href="index.html"><i class="fa-solid fa-house"></i>홈</a></li>
-                <li><a href="calendar.html"><i class="fa-solid fa-calendar-days"></i>예식일자</a></li>
-                <li><a href="map.html"><i class="fa-solid fa-location-dot"></i>장소안내</a></li>
-                <li class="in"><a href="photo.html"><i class="fa-solid fa-camera"></i>사진첩</a></li>
-                <li><a href="introduce.html"><i class="fa-solid fa-heart"></i>신랑신부</a></li>
-            </ul>
-        </nav>
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html"><i class="fa-solid fa-house"></i>홈</a></li>
+            <li><a href="calendar.html"><i class="fa-solid fa-calendar-days"></i>예식일자</a></li>
+            <li><a href="map.html"><i class="fa-solid fa-location-dot"></i>장소안내</a></li>
+            <li class="in"><a href="photo.html"><i class="fa-solid fa-camera"></i>사진첩</a></li>
+            <li><a href="introduce.html"><i class="fa-solid fa-heart"></i>신랑신부</a></li>
+        </ul>
+    </nav>
         <!-- photo -->
         <!-- Swiper -->
         <div class="photo_box">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="img/img1.jpg"></div>
-                    <div class="swiper-slide"><img src="img/img2.jpg"></div>
-                    <div class="swiper-slide"><img src="img/img3.jpg"></div>
                     <div class="swiper-slide"><img src="img/img4.jpg"></div>
-                    <div class="swiper-slide"><img src="img/img5.jpg"></div>
-                    <div class="swiper-slide"><img src="img/img6.jpg"></div>
-                    <div class="swiper-slide"><img src="img/img7.jpg"></div>
-                    <div class="swiper-slide"><img src="img/img8.jpg"></div>
-                    <div class="swiper-slide"><img src="img/img9.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img3.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img2.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img1.jpg"></div>
                     <div class="swiper-slide"><img src="img/img10.jpg"></div>
                     <div class="swiper-slide"><img src="img/img11.jpg"></div>
+                    <div class="swiper-slide"><img src="img/img12.jpg"></div>
                 </div>
             </div>
-            <p>옆으로 넘기시면 더 많은 사진을 보실 수 있습니다.</p>
         </div>
         <!-- //photo -->
 
-
-
-    </div>
-    <footer class="footer">
-        <ul class="">
-            <li>
-                <div class="btn_box">
-                    <a href="javascript:shareMessage()">
-                            <span>카카오톡 공유</span>
-                    </a>
-                </div>
-            </li>
-            <li>
-                <a href="#none" class="link_share link_url">
-                    <span class="txt_share">청첩장 링크 복사하기</span>
-                </a>
-            </li>
-        </ul>
-        <span class="info_copyright">copyright &copy; leeseungju. All rights reserved.</span>
-    </footer>
 </body>
 </html>
 
@@ -88,9 +62,9 @@
  <!-- Initialize Swiper -->
  <script>
    var swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1.2,
+    slidesPerView: 1.1,
     centeredSlides: true,
-    spaceBetween: 20,
+    spaceBetween: 10,
     grabCursor: true,
     pagination: {
       el: ".swiper-pagination",
@@ -105,5 +79,3 @@
 
 
 
-
-css -ms-touch-action:pan-y; touch-action:pan-y; 추가하기

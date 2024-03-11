@@ -100,8 +100,11 @@
                         <li>
                             <div class="location_title">주차장</div>
                             <div class="location_txt">
-                                연수3동 공영주차장(인천 연수구 연수동 532-2) 주차 후<br>
-                                    셔틀버스 이용시 주차쿠폰 제공
+                                • 원인재역 공영주차장 - 연수동 585-1<br>
+                        • 삼성디지털프라자 환승주차장 - 인천 연수구 경원대로 294<br>
+                        - 삼성디지털프라자 환승주차장 (B1)은 지하에만 주차 가능합니다. - 지상주차 불가<br>
+                        • 연수3동 공영주차장 (셔틀운영)- 연수동 532-2<br>
+                            주차를 위해 연수3동 공영주차장을 이용하신 분들은 주차쿠폰을 받으실 수 있습니다.
                             </div>
                         </li>
                         <li>
@@ -148,7 +151,7 @@
 <script>
 
 var map = new naver.maps.Map('map', {
-    center: new naver.maps.LatLng(37.415534, 126.693178),
+    center: new naver.maps.LatLng(37.416532, 126.694889),
     zoom: 15
 });
 
@@ -156,7 +159,7 @@ var map = new naver.maps.Map('map', {
 // 2. HTML 마커
 var markerContent = [
         '<div style="position: absolute;cursor: pointer;filter: drop-shadow(0px 3px 2px #00000057);">',
-            '<div class="infowindow show-modal" style="position: absolute;width: 100px;height: 50px;top: -20px;left: -50px;background-color: white;z-index: 1;margin: 0px;padding: 0px;border-radius: 10px;display: flex;flex-direction: column;justify-content: center;align-items: center;">',
+            '<div class="marker_box show-modal" style="position: absolute;width: 100px;height: 50px;top: -20px;left: -50px;background-color: white;z-index: 1;margin: 0px;padding: 0px;border-radius: 10px;display: flex;flex-direction: column;justify-content: center;align-items: center;">',
                 '<p style="margin: 0;"><img src="img/logo.png" style=" height: 30px;"></p>',
                 '<p style="font-size: 0.8rem; margin: 0;">원인재</p>',
                 '<div style="margin: 0px;padding: 0px;width: 0px;height: 0px;position: absolute;border-width: 18px 10px 0px;border-style: solid;border-color: rgb(255, 255, 255) transparent;border-image: initial;pointer-events: none;box-sizing: content-box !important;transform-origin: right bottom 0px;transform: skewX(0deg);bottom: -18px;left: 0;right: 0;margin: auto;"></div>',
@@ -175,35 +178,33 @@ var markerContent = [
 
 
 $(elHtmlMarker).on('click', 'img', function(e) {
-    $(elHtmlMarker).find('.infowindow').show();
+    $(elHtmlMarker).find('.marker_box').show();
 });
 
 
-// 2. HTML 마커2
-var markerContent2 = [
-        '<div style="position:absolute;">',
-            '<div class="infowindow" style="display:none;position:absolute;width:220px;height:20px;top:-46px;left:-100px;background-color:white;z-index:1;border:1px solid black;margin:0;padding:0;">',
-                '<div>주차장.</div>',
-                '<div style="margin: 0px; padding: 0px; width: 0px; height: 0px; position: absolute; border-width: 24px 10px 0px; border-style: solid; border-color: rgb(51, 51, 51) transparent; border-image: initial; pointer-events: none; box-sizing: content-box !important; transform-origin: right bottom 0px; transform: skewX(0deg); bottom: -25px; left: 100px;"></div>',
-                '<div style="margin: 0px; padding: 0px; width: 0px; height: 0px; position: absolute; border-width: 24px 10px 0px; border-style: solid; border-color: rgb(255, 255, 255) transparent; border-image: initial; pointer-events: none; box-sizing: content-box !important; transform-origin: right bottom 0px; transform: skewX(0deg); bottom: -22px; left: 100px;"></div>',
-            '</div>',
-            '<div class="pin_s" style="cursor: pointer; width: 22px; height: 30px;">',
-                '<img src="https://ssl.pstatic.net/static/maps/img/icons/pin_s_3.png" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 22px; height: 30px; left: 0px; top: 0px;">',
+// 2. HTML  = 연수3동 공영주차장
+var parking_content01 = [
+    '<div class="marker_box">',
+        '<div class="marker">',
+            '<img src="img/parking.svg" class="icon_img">',
+            '<div class="icon_txt">연수3동 공영주차장</div>',
+            '<span class="dummy"></span>',
             '</div>',
         '</div>'
     ].join(''),
-    htmlMarker2 = new naver.maps.Marker({
+    parking01 = new naver.maps.Marker({
         position: new naver.maps.LatLng(37.421619, 126.696823),
         map: map,
         icon: {
-            content: markerContent2,
+            content: parking_content01,
             size: new naver.maps.Size(22, 30),
             anchor: new naver.maps.Point(11, 30)
         }
     }),
-    elHtmlMarker2 = htmlMarker2.getElement();
+    elparking01 = parking01.getElement();
 
-$(elHtmlMarker2).find('.infowindow').show();
+$(elparking01).find('.marker_box').show();
+
     </script>
 
 
