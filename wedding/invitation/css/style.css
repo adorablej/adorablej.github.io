@@ -23,7 +23,7 @@ body {
   text-align: center;
   font-family: 'GowunBatang-Regular';
   color: #1f1f1f;
-  background: #eee;
+  background: #fff;
 }
 .invitation{
   max-width: 500px;
@@ -52,13 +52,13 @@ body {
   margin-bottom: 20px;
   background: #fff;   
   font-family: 'GowunBatang-Bold';
-  border: 1px solid #eee;}
+  border: 1px solid #eee;
+  color: #3d3d3d;}
 .location_bt em{    font-weight: 400;
 font-style: normal;
 font-family: 'GowunBatang-Regular';}
 
-.bg{    background: #fffbfb;}
-.bg2{     background: #fcf8f8;}
+.bg{    background: #fffafa;}
 button {color:#1f1f1f} 
 /*main*/
 .main{ 
@@ -161,7 +161,7 @@ margin-bottom: 40px;}
     }
     .location_box .location{}
     .list_location{}
-    .list_location > li{border-top: 1px solid #ede3e3;
+    .list_location > li{border-top: 1px solid #eee;
       margin: 20px;
       padding-top: 20px;}
 
@@ -189,7 +189,7 @@ margin-bottom: 40px;}
         margin-bottom: 10px;
         display: flex;
         justify-content: space-between;
-        border-top: 1px solid #ede3e3;
+        border-top: 1px solid #eee;
         padding-top: 10px;}
         #map{width: 90%;
           height: 270px;
@@ -335,7 +335,7 @@ margin-bottom: 40px;}
         align-items: center;
         justify-content: space-between; }
       .copyBtn{     background: #fff;
-        border: 1px solid #cecece;
+        border: 1px solid #dfdfdf;
         border-radius: 5px;
         padding: 3px 10px;
         margin-left: 10px;
@@ -371,6 +371,7 @@ margin-bottom: 40px;}
             font-size: 14px;
           }
         .accordion-list .accordion-item .accordion-desc { 
+          display: none;
           background-color: #fafafa;
           color: #1f1f1f;
           font-family: "Noto Sans KR", sans-serif;
@@ -422,30 +423,38 @@ margin-bottom: 40px;}
 .phone_box{padding: 40px 0 60px;}
 .couplelist{}
 
-.familylist{     display: flex;
+.familylist {
+  display: flex;
   flex-direction: row;
   width: 100%;
   margin: auto;
-  justify-content: space-evenly;}
-.familylist a{width: 40%; }
-.familylist div{     display: block;
+  justify-content: center;
+}
+  .familylist a {
+    padding: 0 10px;
+}
+.familylist div {
+  display: block;
   position: relative;
   padding: 10px 15px;
-  border: 1px solid #e8e7e7;
+  border: 1px solid #ddcfcf;
   background: #ffffff;
   margin: auto;
-  border-radius: 50px; }
-.familylist div p{
-  font-family: "Noto Sans KR", sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  opacity: 0.8;
+  border-radius: 50px;
+  font-size: 14px;
+  color: #d6bcbd;
+}
+  .familylist div p {
+    font-family: "Noto Sans KR", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 .familylist div p em{    font-weight: 300;
   font-style: normal;
-  font-family: "Noto Sans KR", sans-serif;}
-.familylist div p i{font-size: 14px;}
+  font-family: "Noto Sans KR", sans-serif;
+  margin-right: 5px;}
+.familylist div p i{font-size: 14px;margin-left: 5px;}
 
 
 
