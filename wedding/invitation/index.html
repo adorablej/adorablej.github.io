@@ -27,14 +27,14 @@
         <!-- main -->
         <div class="main">
                 <img src="img/married.svg" class="married" data-aos="fade-down" data-aos-duration="800">
-            <div class="thumb_visual"  data-aos="fade-up" data-aos-duration="1000">
+            <div class="thumb_visual"  data-aos="fade-up" data-aos-duration="1000" data-aos-anchor=".married" >
                 <img src="img/img4.jpg" class="main_img" alt="메인사진">
             </div>
             <div class="namebg">
-                <img src="img/taewoo.svg" class="main_name"   data-aos="fade-left" data-aos-duration="1200">
-                <img src="img/seungju.svg" class="main_name"   data-aos="fade-right" data-aos-duration="1200">
+                <img src="img/taewoo.svg" class="main_name"  data-aos-anchor=".married"  data-aos="fade-left" data-aos-duration="1200">
+                <img src="img/seungju.svg" class="main_name"  data-aos-anchor=".married"  data-aos="fade-right" data-aos-duration="1200">
             </div>
-            <p class="main_txt" data-aos="fade-up" data-aos-duration="1200">
+            <p class="main_txt" data-aos="fade-up" data-aos-anchor=".married" data-aos-duration="1200">
                 2024.04.13 토요일 오후12:30<br>
                 인천 원인재</p>
         </div>
@@ -449,7 +449,9 @@
     });
 
     //자동애니메이션
-    AOS.init(); 
+    AOS.init({
+        once: true
+    })
 
 
     //지도
