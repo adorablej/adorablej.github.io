@@ -56,6 +56,13 @@ body {
     align-items: center;
     background: #f0eceb;
   }
+.main2{ 
+  display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(90deg, #ebe9ea, #e3e1e2, #dadada);
+  }
 .married{font-size: 28px;
   margin: 60px 0 20px;}
 .namebg{      position: absolute;
@@ -70,7 +77,7 @@ body {
 .thumb_visual{    width: 100%;
   position: relative;}
 .thumb_visual img{width: 100%;
-  margin-top: -50px;
+      margin-top: -50px;
   }
   .name_box{margin: 50px 0;}
   .name_list{font-size: 20px; margin-bottom: 15px;}
@@ -250,6 +257,65 @@ margin-bottom: 40px;}
     line-height: 18px;
     text-align: center;
     }
+     /**/
+.marker_box{    position: absolute;
+  z-index: 10;}
+.marker{display: table;
+  table-layout: auto;
+  padding: 4px;
+  border-radius: 23px;
+  border: 1px solid rgb(4, 117, 244);
+  background: rgb(255, 255, 255);}
+.icon_img{    width: 25px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  border-radius: 50%;
+  display: table-cell;
+  vertical-align: middle;}
+.icon_txt{font-size: 14px;
+  letter-spacing: -0.4px;
+  font-weight: 600;
+  max-width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0px 9px 0px 5px;
+  display: table-cell;
+  vertical-align: middle;}
+ .dummy {
+    position: absolute;
+    bottom: -5px;
+    left: 15px;
+    width: 0px;
+    height: 0px;
+    border-width: 6px 4px 0px;
+    border-style: solid;
+    border-color: #0475f4 transparent transparent;
+    pointer-events: none;}
+     .dummy::before {
+      opacity: 0.1;
+      position: absolute;
+      bottom: -2px;
+      left: -5px;
+      width: 10px;
+      height: 3px;
+      background-color: rgb(0, 0, 0);
+      filter: blur(1px);
+      content: "";
+  }
+    .dummy::after {
+      width: 0px;
+      height: 0px;
+      border-width: 9px 6px 0px;
+      border-style: solid;
+      border-color: rgb(255, 255, 255) transparent transparent;
+      position: absolute;
+      top: -11px;
+      left: -6px;
+      content: "";
+  }
+
+
     /*마음전하는곳*/
 
     .bank_box{    padding: 50px 0;}
@@ -348,12 +414,6 @@ margin-bottom: 40px;}
 .info_copyright{opacity: 0.5;}
 
 
-
-@media screen and (max-width: 767px){    
-  
-}
-
-
 /*전화걸가*/
 .phone_box{padding: 40px 0 60px;}
 .couplelist{}
@@ -372,3 +432,48 @@ margin-bottom: 40px;}
   font-style: normal;
   font-family: 'GowunBatang-Regular';}
 .familylist div p i{}
+
+/*피로언연내팝업*/
+#popup01{
+  display: none;
+  }
+  #popup01{
+    width: 90%;
+    height: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -50% 0 0 -45%;
+    background-color: #fff;
+    z-index: 2;
+    border-radius: 8px;
+  }
+  .backon{
+    display: none;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #00000054;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  }
+  .close{
+    position:absolute;
+    top:-25px;
+    right: 0;
+    cursor:pointer;
+  }
+  .openPopup{
+    cursor:pointer;
+  }
+  .popup_box{padding: 20px;
+    line-height: 1.6;
+  }
+  .popup_box p{    font-size: 24px;
+    font-family: 'GowunBatang-Bold';
+    margin-bottom: 30px;
+    margin-top: 10px;}
+  .popup_txt{margin-bottom: 20px;}
+ 
