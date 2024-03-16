@@ -448,29 +448,7 @@
         </div>
         <!-- //location -->
         
-        <!-- 피로연안내 팝업-->
-        <div id="popup01"  data-aos="fade-up" data-aos-delay="600" data-aos-duration="1800">
-            <div class="close">close</div>
-            <div class="popup_box">
-                <p>피로연 안내</p>
-                <div class="popup_txt">거리가 멀어 본식에 참석하지<br>
-                    못하시는 분들을 위해<br>
-                    작은 피로연 자리를 마련하였습니다.<br>
-                    오셔서 두 사람의 앞날을<br>
-                    축복하여 주시면 감사하겠습니다.</div>
-                    <div  class="popup_txt">
-                        혼주  이성수 · 최은영<br>
-                        신부 이승주 · 신랑 김태우
-                    </div>
-                    <div class="popup_txt">
-                        2024년 4월 6일 토요일 오전11시<br>
-서포농협농산물유통센터
-                    </div>
-                    <div>피로연 안내 바로가기</div>
-            </div>
-        </div>
-        <div class="backon" data-aos="fade-in" data-aos-delay="600" data-aos-duration="1800"></div>
-
+       
         <footer class="footer">
             <ul class="">
                 <li>
@@ -651,20 +629,6 @@ $(elparking01).find('.marker_box').show();
         document.body.removeChild(textarea);
         alert("URL이 복사되었습니다.")
     }
-
-    $(document).ready(function( $ ){     
-    $("#popup01").show();   
-    $(".backon").show();   
-
-    $("body").on("click", function(event) { 
-        console.log('a');
-        if(event.target.className == 'close' || event.target.className == 'backon'){
-            $("#popup01").hide();
-            $(".backon").hide();
-        }
-      });
- 
-  });
 
 
 </script>
