@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hunter Engineering Company KOREA</title>
+
+    <meta name="description" content="헌터코리아는 휠얼라인먼트, 타이어 장비, 리프트 및 자동화 정비솔루션을 제공합니다." />
+    <meta name="keywords" content="헌터코리아, 헌터장비, 휠얼라인먼트, 밸런서, 타이어 장비, 타이어리프트, 리프트, 차량정비, 정비장비" />
+
+    <link rel="SHORTCUT ICON" href="/promotion/_assets/images/favicon.ico" type="image/x-icon" />
+    <link rel="canonical" href="https://hunterkorea.com" />
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="No-Cache" />
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Poppins:wght@500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css" />
+	<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
+	<link href="https://hunterkorea.com/promotion/_assets/style/style.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+
+
+
+
+<style>
+body { margin:0; }
+
+/* 섹션1 */
+.sec1 {
+  height:1080px;
+  background:#111;
+}
+
+/* 섹션2 */
+.sec2 {
+  height:2600px;
+  position:relative;
+}
+
+.sec2 .bg {
+  position:sticky;
+  top:0;
+  height:100vh;
+  background:url("promotion/_assets/images/year_section_bg.png") center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* 슬롯 */
+#slot {
+  display:flex;
+  gap:20px;
+}
+
+/* 숫자 */
+.num {
+  width:220px;
+  height:380px;
+  overflow:hidden;
+  position:relative;
+  font-size:380px;
+  color:#DF192A;
+  font-family: "Russo One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.track {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+}
+
+.track div {
+  height:380px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* 이미지 */
+.photo {
+  width:600px;
+  height:380px;
+  background:url("promotion/_assets/images/year_img.png") center/cover no-repeat;
+  border-radius:20px;
+  transform-origin:center;
+  z-index: 1;
+}
+
+/* 섹션3 */
+.sec3 {
+  height:1080px;
+  background:#222;
+}
+</style>
+</head>
+
+<body>
+
+<section class="sec1"></section>
+
+<section class="sec2">
+  <div class="bg">
+    <div id="slot">
+      <div class="num"></div>
+      <div class="num"></div>
+      <div class="photo"></div>
+      <div class="num"></div>
+      <div class="num"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec3"></section>
+
+<script>
+const startValue = [1,9,8,5];
+const endValue = [2,0,2,6];
+
+const digitHeight = 380;
+
+let tracks = [];
+let photo;
+let section;
+
+function init(){
+  section = document.querySelector(".sec2");
+  photo = document.querySelector(".photo");
+
+  document.querySelectorAll(".num").forEach(el=>{
+    const track = document.createElement("div");
+    track.className="track";
+
+    for(let i=0;i<20;i++){ 
+      const d=document.createElement("div");
+      d.innerText=i % 10;
+      track.appendChild(d);
+    }
+
+    el.appendChild(track);
+    tracks.push(track);
+  });
+}
+
+function update(){
+  const rect = section.getBoundingClientRect();
+  const h = window.innerHeight;
+
+  let progress = (h - rect.top) / rect.height;
+  progress = Math.max(0, Math.min(progress, 1));
+
+  const holdStart = 0.30;
+  const holdEnd   = 0.42;
+  const endPoint  = 0.80;
+
+  tracks.forEach((track,i)=>{
+
+    const start = startValue[i];
+    const end = endValue[i];
+
+    // 최소 이동
+    const diff = (end - start + 10) % 10;
+
+    // 시작 고정
+    if(progress < holdStart){
+      track.style.transform =
+        `translateY(-${start * digitHeight}px)`;
+      return;
+    }
+
+    // 멈춤
+    if(progress < holdEnd){
+      track.style.transform =
+        `translateY(-${start * digitHeight}px)`;
+      return;
+    }
+
+    // 오른쪽 > 왼쪽 순차 증가
+    let baseP = (progress - holdEnd) / (endPoint - holdEnd);
+
+    const delay = (tracks.length - 1 - i) * 0.15;
+
+    let p = (baseP - delay) / (1 - delay);
+    p = Math.max(0, Math.min(p, 1));
+
+    const eased = 1 - Math.pow(1 - p, 3);
+
+    const step = diff * eased;
+
+    track.style.transform =
+      `translateY(-${(start + step) * digitHeight}px)`;
+
+    // 완료 고정
+    if(progress >= endPoint){
+      track.style.transform =
+        `translateY(-${end * digitHeight}px)`;
+    }
+  });
+
+  // 이미지 확대
+  let imgP = (progress - 0.88)/0.12;
+  imgP = Math.max(0, Math.min(imgP,1));
+
+  photo.style.transform = `scale(${1 + imgP*3})`;
+
+  requestAnimationFrame(update);
+}
+
+window.onload = ()=>{
+  init();
+  update();
+};
+</script>
+
+</body>
+</html>
