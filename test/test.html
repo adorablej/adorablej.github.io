@@ -30,197 +30,347 @@
 
 
 
-<style>
-body { margin:0; }
 
-/* 섹션1 */
-.sec1 {
-  height:1080px;
-  background:#111;
-}
 
-/* 섹션2 */
-.sec2 {
-  height:2600px;
-  position:relative;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.sec2 .bg {
-  position:sticky;
-  top:0;
-  height:100vh;
-  background:url("promotion/_assets/images/year_section_bg.png") center/cover no-repeat;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+    }
 
-/* 슬롯 */
-#slot {
-  display:flex;
-  gap:20px;
-}
+    section{font-size: 50px; color: #fff;text-align: center;}
 
-/* 숫자 */
-.num {
-  width:220px;
-  height:380px;
-  overflow:hidden;
-  position:relative;
-  font-size:380px;
-  color:#DF192A;
-  font-family: "Russo One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
+    body {
+      background: #111;
+    }
 
-.track {
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-}
+    .sec1 {
+      height: 1080px;
+      background: #111;
+    }
 
-.track div {
-  height:380px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+    .sec2 {
+      height: 1080px;
+      position: relative;
+    }
 
-/* 이미지 */
-.photo {
-  width:600px;
-  height:380px;
-  background:url("promotion/_assets/images/year_img.png") center/cover no-repeat;
-  border-radius:20px;
-  transform-origin:center;
-  z-index: 1;
-}
+    .sec2 .bg {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: url("promotion/_assets/images/year_section_bg.png") center / cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
-/* 섹션3 */
-.sec3 {
-  height:1080px;
-  background:#222;
-}
-</style>
+    #slot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .digit {
+      width: 220px;
+      height: 380px;
+      overflow: hidden;
+      position: relative;
+      font-size: 380px;
+      line-height: 1;
+      color: #DF192A;
+      font-family: "Russo One", sans-serif;
+      font-weight: 400;
+      flex: 0 0 220px;
+    }
+
+    .digit-track {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .digit-item {
+      width: 100%;
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo {
+      width: 600px;
+      height: 380px;
+      background: url("promotion/_assets/images/year_img.png") center / cover no-repeat;
+      border-radius: 20px;
+      flex: 0 0 600px;
+    }
+
+    .sec3 {
+      height: 1080px;
+      background: #525252;
+    }
+    .sec4 {
+      height: 1080px;
+      background: #222;
+    }
+    .sec5 {
+      height: 1080px;
+      background: #525252;
+    }
+    .sec6 {
+      height: 1080px;
+      background: #1f1f1f;
+    }
+
+
+    @media (max-width: 1200px) {
+      #slot {
+        gap: 12px;
+        transform: scale(0.8);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .sec2 {
+        height: 2000px;
+      }
+
+      #slot {
+        gap: 8px;
+        transform: scale(0.48);
+      }
+
+      .photo {
+        border-radius: 12px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<section class="sec1"></section>
+<section class="sec1">페이지01</section>
 
 <section class="sec2">
   <div class="bg">
     <div id="slot">
-      <div class="num"></div>
-      <div class="num"></div>
+      <div class="digit"></div>
+      <div class="digit"></div>
       <div class="photo"></div>
-      <div class="num"></div>
-      <div class="num"></div>
+      <div class="digit"></div>
+      <div class="digit"></div>
     </div>
   </div>
 </section>
 
-<section class="sec3"></section>
-
+<section class="sec3">페이지03</section>
+<section class="sec4">페이지04</section>
+<section class="sec5">페이지05</section>
+<section class="sec6">페이지06</section>
 <script>
-const startValue = [1,9,8,5];
-const endValue = [2,0,2,6];
+  const DIGIT_HEIGHT = 380;
+  const START_YEAR = "1985";
+  const END_YEAR = "2026";
 
-const digitHeight = 380;
+  let section;
+  let slot;
+  let hasPlayed = false;
+  let isPlaying = false;
+  let rafId = null;
+  let playTimer = null;
 
-let tracks = [];
-let photo;
-let section;
+  const digitStates = [];
 
-function init(){
-  section = document.querySelector(".sec2");
-  photo = document.querySelector(".photo");
+  function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
 
-  document.querySelectorAll(".num").forEach(el=>{
+  function clamp(v, min, max) {
+    return Math.max(min, Math.min(v, max));
+  }
+
+  function buildPath(start, end, extraLoops) {
+    const path = [start];
+    let current = start;
+
+    for (let loop = 0; loop < extraLoops; loop++) {
+      for (let i = 0; i < 10; i++) {
+        current = (current + 1) % 10;
+        path.push(current);
+      }
+    }
+
+    while (current !== end) {
+      current = (current + 1) % 10;
+      path.push(current);
+    }
+
+    return path;
+  }
+
+  function createTrack(el, path) {
     const track = document.createElement("div");
-    track.className="track";
+    track.className = "digit-track";
 
-    for(let i=0;i<20;i++){ 
-      const d=document.createElement("div");
-      d.innerText=i % 10;
-      track.appendChild(d);
-    }
+    path.forEach((num) => {
+      const item = document.createElement("div");
+      item.className = "digit-item";
+      item.textContent = num;
+      track.appendChild(item);
+    });
 
+    el.innerHTML = "";
     el.appendChild(track);
-    tracks.push(track);
+
+    return track;
+  }
+
+  function init() {
+    section = document.querySelector(".sec2");
+    slot = document.querySelector("#slot");
+    digitStates.length = 0;
+
+    const configs = [
+      {
+        start: Number(START_YEAR[0]),
+        end: Number(END_YEAR[0]),
+        extraLoops: 0,
+        delay: 0.62,
+        duration: 0.38
+      },
+      {
+        start: Number(START_YEAR[1]),
+        end: Number(END_YEAR[1]),
+        extraLoops: 0,
+        delay: 0.42,
+        duration: 0.42
+      },
+      {
+        start: Number(START_YEAR[2]),
+        end: Number(END_YEAR[2]),
+        extraLoops: 1,
+        delay: 0.18,
+        duration: 0.58
+      },
+      {
+        start: Number(START_YEAR[3]),
+        end: Number(END_YEAR[3]),
+        extraLoops: 1,
+        delay: 0.00,
+        duration: 0.72
+      }
+    ];
+
+    document.querySelectorAll(".digit").forEach((el, index) => {
+      const cfg = configs[index];
+      const path = buildPath(cfg.start, cfg.end, cfg.extraLoops);
+      const track = createTrack(el, path);
+
+      digitStates.push({
+        el,
+        track,
+        path,
+        delay: cfg.delay,
+        duration: cfg.duration,
+        maxOffset: (path.length - 1) * DIGIT_HEIGHT
+      });
+    });
+
+    digitStates.forEach((state) => {
+      state.track.style.transform = "translate3d(0, 0, 0)";
+    });
+
+    hasPlayed = false;
+    isPlaying = false;
+
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+
+    if (playTimer) {
+      clearTimeout(playTimer);
+      playTimer = null;
+    }
+  }
+
+  function render(progress) {
+    digitStates.forEach((state) => {
+      const local = clamp((progress - state.delay) / state.duration, 0, 1);
+      const eased = easeOutCubic(local);
+      const y = state.maxOffset * eased;
+      state.track.style.transform = `translate3d(0, -${y}px, 0)`;
+    });
+  }
+
+  function playSequence() {
+    if (isPlaying || hasPlayed) return;
+
+    isPlaying = true;
+    playTimer = null;
+
+    const totalDuration = 2000;
+    const startTime = performance.now();
+
+    function tick(now) {
+      const elapsed = now - startTime;
+      const progress = clamp(elapsed / totalDuration, 0, 1);
+
+      render(progress);
+
+      if (progress < 1) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        render(1);
+        isPlaying = false;
+        hasPlayed = true;
+        rafId = null;
+      }
+    }
+
+    rafId = requestAnimationFrame(tick);
+  }
+
+  function tryStartCount() {
+    if (isPlaying || hasPlayed) return;
+
+    const rect = slot.getBoundingClientRect();
+    const slotCenter = rect.top + rect.height / 2;
+    const viewportCenter = window.innerHeight / 2;
+
+    const triggerRange = window.innerHeight * 0.08;
+
+    if (Math.abs(slotCenter - viewportCenter) <= triggerRange) {
+      if (!playTimer) {
+        playTimer = setTimeout(() => {
+          playSequence();
+        }, 500);
+      }
+    } else {
+      if (playTimer) {
+        clearTimeout(playTimer);
+        playTimer = null;
+      }
+    }
+  }
+
+  window.addEventListener("load", () => {
+    init();
+    tryStartCount();
   });
-}
 
-function update(){
-  const rect = section.getBoundingClientRect();
-  const h = window.innerHeight;
-
-  let progress = (h - rect.top) / rect.height;
-  progress = Math.max(0, Math.min(progress, 1));
-
-  const holdStart = 0.30;
-  const holdEnd   = 0.42;
-  const endPoint  = 0.80;
-
-  tracks.forEach((track,i)=>{
-
-    const start = startValue[i];
-    const end = endValue[i];
-
-    // 최소 이동
-    const diff = (end - start + 10) % 10;
-
-    // 시작 고정
-    if(progress < holdStart){
-      track.style.transform =
-        `translateY(-${start * digitHeight}px)`;
-      return;
-    }
-
-    // 멈춤
-    if(progress < holdEnd){
-      track.style.transform =
-        `translateY(-${start * digitHeight}px)`;
-      return;
-    }
-
-    // 오른쪽 > 왼쪽 순차 증가
-    let baseP = (progress - holdEnd) / (endPoint - holdEnd);
-
-    const delay = (tracks.length - 1 - i) * 0.15;
-
-    let p = (baseP - delay) / (1 - delay);
-    p = Math.max(0, Math.min(p, 1));
-
-    const eased = 1 - Math.pow(1 - p, 3);
-
-    const step = diff * eased;
-
-    track.style.transform =
-      `translateY(-${(start + step) * digitHeight}px)`;
-
-    // 완료 고정
-    if(progress >= endPoint){
-      track.style.transform =
-        `translateY(-${end * digitHeight}px)`;
-    }
-  });
-
-  // 이미지 확대
-  let imgP = (progress - 0.88)/0.12;
-  imgP = Math.max(0, Math.min(imgP,1));
-
-  photo.style.transform = `scale(${1 + imgP*3})`;
-
-  requestAnimationFrame(update);
-}
-
-window.onload = ()=>{
-  init();
-  update();
-};
+  window.addEventListener("scroll", tryStartCount, { passive: true });
+  window.addEventListener("resize", tryStartCount);
 </script>
 
 </body>
