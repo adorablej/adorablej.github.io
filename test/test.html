@@ -1,377 +1,737 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hunter Engineering Company KOREA</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Section 2 / 3 Motion Test</title>
 
-    <meta name="description" content="헌터코리아는 휠얼라인먼트, 타이어 장비, 리프트 및 자동화 정비솔루션을 제공합니다." />
-    <meta name="keywords" content="헌터코리아, 헌터장비, 휠얼라인먼트, 밸런서, 타이어 장비, 타이어리프트, 리프트, 차량정비, 정비장비" />
-
-    <link rel="SHORTCUT ICON" href="/promotion/_assets/images/favicon.ico" type="image/x-icon" />
-    <link rel="canonical" href="https://hunterkorea.com" />
-
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Expires" content="-1" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Cache-Control" content="No-Cache" />
-
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Poppins:wght@500&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css" />
-	<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css" rel="stylesheet">
-	<link href="https://hunterkorea.com/promotion/_assets/style/style.css" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
+<style>
+  :root{
+    --bg:#000;
+    --red:#DF192A;
+
+    --card-w: 600px;
+    --card-h: 380px;
+    --card-radius: 20px;
+
+    --card-left: 50%;
+    --card-top: 50%;
+  }
+
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
+
+  html, body{
+    width:100%;
+  }
+
+  body{
+    background:#111;
+    color:#fff;
+  }
+
+  .sec1,
+  .sec4{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:48px;
+    background:#111;
+  }
+
+  .sec2{
+  height: 300vh;
+  position: relative;
+}
+
+.sec2 .bg{
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  opacity: 1;
+  transform: translateY(0);
+  will-change: transform, opacity;
+}
+
+#slot{
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  opacity: 0;
+  transform: translateY(60px);
+  will-change: transform, opacity;
+}
+
+  .digit{
+    width:220px;
+    height:380px;
+    overflow:hidden;
+    position:relative;
+    flex:0 0 220px;
+    font-size:380px;
+    line-height:1;
+    color:var(--red);
+    font-family:"Russo One", sans-serif;
+    font-weight:400;
+  }
+
+  .digit-track{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    will-change:transform;
+    transform:translate3d(0,0,0);
+  }
+
+  .digit-item{
+    width:100%;
+    height:380px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .card-stack{
+    position:relative;
+    width:var(--card-w);
+    height:var(--card-h);
+    flex:0 0 var(--card-w);
+    z-index:6;
+  }
+
+  .stack-card{
+  position:absolute;
+  inset:0;
+  border-radius:20px;
+  background-size:cover;
+  background-position:center;
+  will-change:transform, opacity;
+}
+
+/* 일단 테스트용 동일 이미지 */
+.stack-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  will-change: transform, opacity;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.22);
+}
+.stack-card::after{
+  content: attr(data-index);
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  font-size:80px;
+  font-weight:700;
+  color:rgba(255,255,255,0.6);
+}
 
 
+/* 카드별 색상 */
+.stack-card:nth-child(1){
+  background: #FF5F6D;
+}
+
+.stack-card:nth-child(2){
+  background: #5B86E5;
+}
+
+.stack-card:nth-child(3){
+  background: #C471F5;
+}
+
+.stack-card:nth-child(4){
+  background:#38F9D7;
+}
+
+.stack-card:nth-child(5){
+  background: #F7971E;
+}
+
+.stack-card:nth-child(6){
+  background: #30CFD0;
+}
 
 
+  .sec3{
+    height:3200px;
+    position:relative;
+    background:var(--bg);
+  }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+  .sec3 .bg{
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow:hidden;
+    background:#30CFD0;
+  }
+
+  .sec3-image{
+    position:absolute;
+    left:var(--card-left);
+    top:var(--card-top);
+    width:var(--card-w);
+    height:var(--card-h);
+    border-radius:var(--card-radius);
+    background:url("promotion/_assets/images/year_img.png") center / cover no-repeat;
+    transform:translate(-50%, -50%) scale(1);
+    transform-origin:center center;
+    will-change:transform, border-radius;
+    z-index:2;
+  }
+
+  .sec3-copy{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px;
+    z-index:5;
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity .35s ease, transform .35s ease;
+    pointer-events:none;
+  }
+
+  .sec3-copy-inner{
+    max-width:960px;
+  }
+
+  .sec3-copy h2{
+    font-size:56px;
+    line-height:1.2;
+    margin-bottom:20px;
+    font-weight:800;
+  }
+
+  .sec3-copy p{
+    font-size:22px;
+    line-height:1.7;
+    color:rgba(255,255,255,.9);
+  }
+
+  .sec4{
+    background:#222;
+  }
+
+  @media (max-width: 1200px){
+    #slot{
+      gap:12px;
+      transform:scale(.8);
     }
 
-    html, body {
-      width: 100%;
-      overflow-x: hidden;
+    .sec3-copy h2{
+      font-size:40px;
     }
 
-    section{font-size: 50px; color: #fff;text-align: center;}
+    .sec3-copy p{
+      font-size:18px;
+    }
+  }
 
-    body {
-      background: #111;
+  @media (max-width: 768px){
+    :root{
+      --card-w: 320px;
+      --card-h: 200px;
+      --card-radius: 12px;
     }
 
-    .sec1 {
-      height: 1080px;
-      background: #111;
+    .sec2{
+      height:1400px;
     }
 
-    .sec2 {
-      height: 1080px;
-      position: relative;
+    .sec3{
+      height:2400px;
     }
 
-    .sec2 .bg {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      background: url("promotion/_assets/images/year_section_bg.png") center / cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+    #slot{
+      gap:8px;
+      transform:scale(.48);
     }
 
-    #slot {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
+    .sec3-copy{
+      padding:24px;
     }
 
-    .digit {
-      width: 220px;
-      height: 380px;
-      overflow: hidden;
-      position: relative;
-      font-size: 380px;
-      line-height: 1;
-      color: #DF192A;
-      font-family: "Russo One", sans-serif;
-      font-weight: 400;
-      flex: 0 0 220px;
+    .sec3-copy h2{
+      font-size:30px;
     }
 
-    .digit-track {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      will-change: transform;
-      transform: translate3d(0, 0, 0);
+    .sec3-copy p{
+      font-size:16px;
     }
-
-    .digit-item {
-      width: 100%;
-      height: 380px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .photo {
-      width: 600px;
-      height: 380px;
-      background: url("promotion/_assets/images/year_img.png") center / cover no-repeat;
-      border-radius: 20px;
-      flex: 0 0 600px;
-    }
-
-    .sec3 {
-      height: 1080px;
-      background: #525252;
-    }
-    .sec4 {
-      height: 1080px;
-      background: #222;
-    }
-    .sec5 {
-      height: 1080px;
-      background: #525252;
-    }
-    .sec6 {
-      height: 1080px;
-      background: #1f1f1f;
-    }
+  }
 
 
-    @media (max-width: 1200px) {
-      #slot {
-        gap: 12px;
-        transform: scale(0.8);
-      }
-    }
+  #zoomOverlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:600px;
+  height:380px;
+  border-radius:20px;
+  background-size:cover;
+  background-position:center;
+  transform-origin:center;
+  z-index:9999;
 
-    @media (max-width: 768px) {
-      .sec2 {
-        height: 2000px;
-      }
+  opacity:0;
+  pointer-events:none;
+}
 
-      #slot {
-        gap: 8px;
-        transform: scale(0.48);
-      }
 
-      .photo {
-        border-radius: 12px;
-      }
-    }
-  </style>
+</style>
 </head>
 <body>
 
-<section class="sec1">페이지01</section>
+<section class="sec1">PAGE 01</section>
 
 <section class="sec2">
   <div class="bg">
-    <div id="slot">
-      <div class="digit"></div>
-      <div class="digit"></div>
-      <div class="photo"></div>
-      <div class="digit"></div>
-      <div class="digit"></div>
+    <div class="scene">
+      <div id="slot">
+        <div class="digit"></div>
+        <div class="digit"></div>
+
+        <div class="card-stack" id="cardStack">
+            <div class="stack-card" data-index="1"></div>
+            <div class="stack-card" data-index="2"></div>
+            <div class="stack-card" data-index="3"></div>
+            <div class="stack-card" data-index="4"></div>
+            <div class="stack-card" data-index="5"></div>
+            <div class="stack-card" data-index="6"></div>
+          </div>
+
+        <div class="digit"></div>
+        <div class="digit"></div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="sec3">페이지03</section>
-<section class="sec4">페이지04</section>
-<section class="sec5">페이지05</section>
-<section class="sec6">페이지06</section>
+<section class="sec3">
+  <div class="bg">
+    page 3
+    <!-- <div class="sec3-copy" id="sec3Copy">
+      <div class="sec3-copy-inner">
+        <h2>정비의 기준을 다시 정의합니다</h2>
+        <p>
+          헌터코리아의 기술은 정밀한 장비 경험을 통해 더 높은 정확도와 효율을 만들어냅니다.
+          데이터 기반의 진단과 안정적인 장비 성능은 정비 현장의 흐름을 더욱 선명하게 바꿉니다.
+        </p>
+      </div>-->
+    </div>
+  </div>
+</section>
+
+<section class="sec4">PAGE 04</section>
+
+
 <script>
-  const DIGIT_HEIGHT = 380;
-  const START_YEAR = "1985";
-  const END_YEAR = "2026";
-
-  let section;
-  let slot;
-  let hasPlayed = false;
-  let isPlaying = false;
-  let rafId = null;
-  let playTimer = null;
-
-  const digitStates = [];
-
-  function easeOutCubic(t) {
-    return 1 - Math.pow(1 - t, 3);
-  }
-
-  function clamp(v, min, max) {
-    return Math.max(min, Math.min(v, max));
-  }
-
-  function buildPath(start, end, extraLoops) {
-    const path = [start];
-    let current = start;
-
-    for (let loop = 0; loop < extraLoops; loop++) {
-      for (let i = 0; i < 10; i++) {
+    const DIGIT_HEIGHT = 380;
+    const START_YEAR = "1936";
+    const END_YEAR = "2026";
+    
+    let sec1;
+    let sec2;
+    let sec3;
+    let sec2Bg;
+    let slot;
+    let stackCards = [];
+    
+    let hasPlayedNumber = false;
+    let isPlayingNumber = false;
+    let isZoomPhase = false;
+    let isSceneEnd = false;
+    
+    let rafId = null;
+    let playTimer = null;
+    let touchStartY = 0;
+    let zoomProgress = 0;
+    
+    const digitStates = [];
+    
+    function clamp(v, min, max) {
+      return Math.max(min, Math.min(v, max));
+    }
+    
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+    
+    function easeInOutCubic(t) {
+      return t < 0.5
+        ? 4 * t * t * t
+        : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+    
+    function buildPath(start, end, extraLoops) {
+      const path = [start];
+      let current = start;
+    
+      for (let loop = 0; loop < extraLoops; loop++) {
+        for (let i = 0; i < 10; i++) {
+          current = (current + 1) % 10;
+          path.push(current);
+        }
+      }
+    
+      while (current !== end) {
         current = (current + 1) % 10;
         path.push(current);
       }
+    
+      return path;
     }
-
-    while (current !== end) {
-      current = (current + 1) % 10;
-      path.push(current);
-    }
-
-    return path;
-  }
-
-  function createTrack(el, path) {
-    const track = document.createElement("div");
-    track.className = "digit-track";
-
-    path.forEach((num) => {
-      const item = document.createElement("div");
-      item.className = "digit-item";
-      item.textContent = num;
-      track.appendChild(item);
-    });
-
-    el.innerHTML = "";
-    el.appendChild(track);
-
-    return track;
-  }
-
-  function init() {
-    section = document.querySelector(".sec2");
-    slot = document.querySelector("#slot");
-    digitStates.length = 0;
-
-    const configs = [
-      {
-        start: Number(START_YEAR[0]),
-        end: Number(END_YEAR[0]),
-        extraLoops: 0,
-        delay: 0.62,
-        duration: 0.38
-      },
-      {
-        start: Number(START_YEAR[1]),
-        end: Number(END_YEAR[1]),
-        extraLoops: 0,
-        delay: 0.42,
-        duration: 0.42
-      },
-      {
-        start: Number(START_YEAR[2]),
-        end: Number(END_YEAR[2]),
-        extraLoops: 1,
-        delay: 0.18,
-        duration: 0.58
-      },
-      {
-        start: Number(START_YEAR[3]),
-        end: Number(END_YEAR[3]),
-        extraLoops: 1,
-        delay: 0.00,
-        duration: 0.72
-      }
-    ];
-
-    document.querySelectorAll(".digit").forEach((el, index) => {
-      const cfg = configs[index];
-      const path = buildPath(cfg.start, cfg.end, cfg.extraLoops);
-      const track = createTrack(el, path);
-
-      digitStates.push({
-        el,
-        track,
-        path,
-        delay: cfg.delay,
-        duration: cfg.duration,
-        maxOffset: (path.length - 1) * DIGIT_HEIGHT
+    
+    function createTrack(el, path) {
+      const track = document.createElement("div");
+      track.className = "digit-track";
+    
+      path.forEach((num) => {
+        const item = document.createElement("div");
+        item.className = "digit-item";
+        item.textContent = num;
+        track.appendChild(item);
       });
-    });
-
-    digitStates.forEach((state) => {
-      state.track.style.transform = "translate3d(0, 0, 0)";
-    });
-
-    hasPlayed = false;
-    isPlaying = false;
-
-    if (rafId) {
-      cancelAnimationFrame(rafId);
-      rafId = null;
+    
+      el.innerHTML = "";
+      el.appendChild(track);
+    
+      return track;
     }
-
-    if (playTimer) {
-      clearTimeout(playTimer);
-      playTimer = null;
+    
+    function initDigits() {
+      digitStates.length = 0;
+    
+      const configs = [
+        { start: Number(START_YEAR[0]), end: Number(END_YEAR[0]), extraLoops: 0, delay: 0.62, duration: 0.38 },
+        { start: Number(START_YEAR[1]), end: Number(END_YEAR[1]), extraLoops: 0, delay: 0.42, duration: 0.42 },
+        { start: Number(START_YEAR[2]), end: Number(END_YEAR[2]), extraLoops: 1, delay: 0.18, duration: 0.58 },
+        { start: Number(START_YEAR[3]), end: Number(END_YEAR[3]), extraLoops: 1, delay: 0.00, duration: 0.72 }
+      ];
+    
+      document.querySelectorAll(".digit").forEach((el, index) => {
+        const cfg = configs[index];
+        const path = buildPath(cfg.start, cfg.end, cfg.extraLoops);
+        const track = createTrack(el, path);
+    
+        digitStates.push({
+          track,
+          delay: cfg.delay,
+          duration: cfg.duration,
+          maxOffset: (path.length - 1) * DIGIT_HEIGHT
+        });
+      });
+    
+      digitStates.forEach((state) => {
+        state.track.style.transform = "translate3d(0, 0, 0)";
+      });
     }
-  }
-
-  function render(progress) {
-    digitStates.forEach((state) => {
-      const local = clamp((progress - state.delay) / state.duration, 0, 1);
-      const eased = easeOutCubic(local);
-      const y = state.maxOffset * eased;
-      state.track.style.transform = `translate3d(0, -${y}px, 0)`;
-    });
-  }
-
-  function playSequence() {
-    if (isPlaying || hasPlayed) return;
-
-    isPlaying = true;
-    playTimer = null;
-
-    const totalDuration = 2000;
-    const startTime = performance.now();
-
-    function tick(now) {
-      const elapsed = now - startTime;
-      const progress = clamp(elapsed / totalDuration, 0, 1);
-
-      render(progress);
-
-      if (progress < 1) {
-        rafId = requestAnimationFrame(tick);
+    
+    function resetCards() {
+      stackCards.forEach((card, index) => {
+        if (index === 0) {
+          card.style.opacity = "1";
+          card.style.transform = "translate3d(0, 0px, 0) scale(1)";
+          card.style.zIndex = "1";
+          card.style.borderRadius = "20px";
+        } else {
+          card.style.opacity = "0";
+          card.style.transform = "translate3d(0, 120px, 0) scale(0.95)";
+          card.style.zIndex = "0";
+          card.style.borderRadius = "20px";
+        }
+      });
+    }
+    
+    function renderCardStack(progress) {
+      const total = stackCards.length;
+    
+      stackCards.forEach((card, index) => {
+        if (index === 0) {
+          card.style.transform = "translate3d(0, 0px, 0) scale(1)";
+          card.style.opacity = "1";
+          card.style.zIndex = "1";
+          return;
+        }
+    
+        const start = (index - 1) / (total - 1);
+        const end = start + (1 / (total - 1));
+    
+        let local = (progress - start) / (end - start);
+        local = clamp(local, 0, 1);
+    
+        if (progress < start) {
+          card.style.opacity = "0";
+          card.style.transform = "translate3d(0, 120px, 0) scale(0.95)";
+          card.style.zIndex = "0";
+          return;
+        }
+    
+        const power = 2 + index * 1.2;
+        const eased = 1 - Math.pow(1 - local, power);
+    
+        const y = 120 - (120 * eased);
+        const scale = 0.95 + (0.05 * eased);
+    
+        card.style.transform = `translate3d(0, ${y}px, 0) scale(${scale})`;
+        card.style.opacity = `${eased}`;
+        card.style.zIndex = `${index + 1}`;
+      });
+    }
+    
+    function renderDigits(progress) {
+      digitStates.forEach((state) => {
+        const local = clamp((progress - state.delay) / state.duration, 0, 1);
+        const eased = easeOutCubic(local);
+        const y = state.maxOffset * eased;
+        state.track.style.transform = `translate3d(0, -${y}px, 0)`;
+      });
+    }
+    
+    function renderZoomPhase(progress) {
+      const p = clamp(progress, 0, 1);
+      const eased = easeInOutCubic(p);
+      const lastCard = stackCards[stackCards.length - 1];
+    
+      if (!lastCard) return;
+    
+        const maxScale = window.innerWidth / lastCard.offsetWidth;
+        const scale = 1 + eased * (maxScale - 1);
+        const radius = 20 - eased * 20;
+    
+      lastCard.style.transform = `translate3d(0, 0px, 0) scale(${scale})`;
+      lastCard.style.borderRadius = `${Math.max(0, radius)}px`;
+      lastCard.style.zIndex = `${stackCards.length + 10}`;
+    
+      for (let i = 0; i < stackCards.length - 1; i++) {
+        const fade = 1 - clamp((p - 0.05) / 0.2, 0, 1);
+        stackCards[i].style.opacity = `${fade}`;
+      }
+    }
+    
+    function updateSec2Intro() {
+      if (hasPlayedNumber) return;
+    
+      const rect = sec2.getBoundingClientRect();
+      const vh = window.innerHeight;
+    
+      const progress = clamp((vh - rect.top) / vh, 0, 1);
+      const eased = easeOutCubic(progress);
+    
+      const bgY = 20 - eased * 20;
+      const slotY = 60 - eased * 60;
+      const slotOpacity = eased;
+    
+      sec2Bg.style.transform = `translateY(${bgY}px)`;
+      slot.style.transform = `translateY(${slotY}px)`;
+      slot.style.opacity = `${slotOpacity}`;
+    }
+    
+    function playNumberSequence() {
+      if (isPlayingNumber || hasPlayedNumber) return;
+    
+      isPlayingNumber = true;
+    
+      const totalDuration = 2000;
+      const startTime = performance.now();
+    
+      function tick(now) {
+        const elapsed = now - startTime;
+        const progress = clamp(elapsed / totalDuration, 0, 1);
+    
+        renderDigits(progress);
+        renderCardStack(progress);
+    
+        if (progress < 1) {
+          rafId = requestAnimationFrame(tick);
+        } else {
+          renderDigits(1);
+          renderCardStack(1);
+    
+          isPlayingNumber = false;
+          hasPlayedNumber = true;
+          isZoomPhase = true;
+          zoomProgress = 0;
+    
+          rafId = null;
+        }
+      }
+    
+      rafId = requestAnimationFrame(tick);
+    }
+    
+    function tryStartNumber() {
+      if (hasPlayedNumber || isPlayingNumber) return;
+    
+      const rect = sec2.getBoundingClientRect();
+    
+      if (rect.top <= 0 && rect.bottom > window.innerHeight) {
+        if (!playTimer) {
+          playTimer = setTimeout(() => {
+            playNumberSequence();
+            playTimer = null;
+          }, 300);
+        }
       } else {
-        render(1);
-        isPlaying = false;
-        hasPlayed = true;
-        rafId = null;
+        if (playTimer) {
+          clearTimeout(playTimer);
+          playTimer = null;
+        }
       }
     }
+    
+    function updateZoomByDelta(deltaY) {
+      if (!isZoomPhase || isSceneEnd) return;
+    
+      zoomProgress += deltaY * 0.0012;
+      zoomProgress = clamp(zoomProgress, 0, 1);
+    
+      renderZoomPhase(zoomProgress);
+    
+      if (zoomProgress >= 1 && !isSceneEnd) {
 
-    rafId = requestAnimationFrame(tick);
-  }
+        zoomProgress = 1;
 
-  function tryStartCount() {
-    if (isPlaying || hasPlayed) return;
+        setTimeout(() => {
+        finishScene();
+        }, 120);
 
-    const rect = slot.getBoundingClientRect();
-    const slotCenter = rect.top + rect.height / 2;
-    const viewportCenter = window.innerHeight / 2;
-
-    const triggerRange = window.innerHeight * 0.08;
-
-    if (Math.abs(slotCenter - viewportCenter) <= triggerRange) {
-      if (!playTimer) {
-        playTimer = setTimeout(() => {
-          playSequence();
-        }, 500);
+        }
+    }
+    
+    function finishScene() {
+      if (isSceneEnd) return;
+    
+      isSceneEnd = true;
+      isZoomPhase = false;
+    
+      window.scrollTo({
+        top: sec3.offsetTop,
+        behavior: "auto"
+      });
+    
+      requestAnimationFrame(() => {
+        sec2Bg.style.transition = "opacity 0.6s ease";
+        sec2Bg.style.opacity = "0";
+    
+        setTimeout(() => {
+          sec2.style.display = "none";
+        }, 600);
+      });
+    }
+    
+    function onWheel(e) {
+      if (isPlayingNumber) {
+        e.preventDefault();
+        return;
       }
-    } else {
+    
+      if (isZoomPhase && !isSceneEnd) {
+        e.preventDefault();
+        updateZoomByDelta(e.deltaY);
+        return;
+      }
+    
+      updateSec2Intro();
+      tryStartNumber();
+    }
+    
+    function onTouchStart(e) {
+      touchStartY = e.touches[0].clientY;
+    }
+    
+    function onTouchMove(e) {
+      if (isPlayingNumber) {
+        e.preventDefault();
+        return;
+      }
+    
+      if (isZoomPhase && !isSceneEnd) {
+        const currentY = e.touches[0].clientY;
+        const deltaY = touchStartY - currentY;
+        touchStartY = currentY;
+    
+        e.preventDefault();
+        updateZoomByDelta(deltaY);
+      }
+    }
+    
+    function onScroll() {
+      if (!isPlayingNumber && !isZoomPhase && !isSceneEnd) {
+        updateSec2Intro();
+        tryStartNumber();
+      }
+    }
+    
+    function init() {
+      sec1 = document.querySelector(".sec1");
+      sec2 = document.querySelector(".sec2");
+      sec3 = document.querySelector(".sec3");
+      sec2Bg = document.querySelector(".sec2 .bg");
+      slot = document.querySelector("#slot");
+      stackCards = Array.from(document.querySelectorAll(".stack-card"));
+    
+      hasPlayedNumber = false;
+      isPlayingNumber = false;
+      isZoomPhase = false;
+      isSceneEnd = false;
+      zoomProgress = 0;
+    
       if (playTimer) {
         clearTimeout(playTimer);
         playTimer = null;
       }
+    
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    
+      sec2.style.opacity = "1";
+      sec2.style.display = "";
+      sec2Bg.style.opacity = "1";
+      sec2Bg.style.transform = "translateY(20px)";
+      sec2Bg.style.transition = "";
+      slot.style.opacity = "0";
+      slot.style.transform = "translateY(60px)";
+    
+      initDigits();
+      resetCards();
     }
-  }
-
-  window.addEventListener("load", () => {
-    init();
-    tryStartCount();
-  });
-
-  window.addEventListener("scroll", tryStartCount, { passive: true });
-  window.addEventListener("resize", tryStartCount);
-</script>
+    
+    window.addEventListener("load", () => {
+      init();
+      onScroll();
+    });
+    
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    </script>
 
 </body>
 </html>
