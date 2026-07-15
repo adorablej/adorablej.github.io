@@ -1,0 +1,405 @@
+
+:root {
+    --red : #C00C00;
+}
+
+
+/* ========================================
+Header
+======================================== */
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:1000;
+    width:100%;
+    height:100px;
+    color:#111;
+    transform:translateY(0);
+    transition:
+    transform .55s cubic-bezier(.22,1,.36,1),
+    color .3s ease,
+    background-color .3s ease;
+}
+
+.header.is-hidden {
+    transform:translateY(-110%);
+}
+
+.header.theme-light {
+    color: #fff;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.header.theme-dark{
+    color:#000;
+}
+
+.header.theme-dark .logo img{
+    filter:brightness(0);
+}
+
+.header.theme-dark .header-r i{
+    filter:brightness(0);
+}
+
+.header.theme-light{
+    color:#fff;
+}
+
+.header.theme-light .logo img{
+    filter:none;
+}
+
+.header.theme-light .header-r i{
+    filter:none;
+}
+
+
+.depth1>li>a{
+    position:relative;
+}
+
+.depth1>li>a.is-active{
+    color:var(--red);
+}
+
+
+.header-r {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header-r button {
+    color: currentColor;
+}
+
+.header-r i {
+    color: currentColor;
+}
+
+.header .logo img {
+    filter: none;
+    transition: filter 0.3s ease;
+}
+
+.header.theme-dark .logo img {
+    filter: brightness(0);
+}
+
+
+.header.theme-light .logo img {
+    filter: none;
+}
+
+.header .inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    max-width:1920px;
+    height:100%;
+
+    margin:0 auto;
+    padding:0 60px;
+}
+
+.header-l{
+    display:flex;
+    align-items:center;
+    gap:80px;
+}
+
+.logo{
+    flex-shrink:0;
+}
+
+.logo img{
+    display:block;
+    height:40px;
+    transition: filter .3s ease;
+}
+
+.gnb{
+    height:100%;
+}
+
+.depth1{
+    display:flex;
+    align-items:center;
+    height:100%;
+
+    gap:70px;
+}
+
+.depth1>li{
+    height:100%;
+}
+
+.depth1>li>a{
+    display:flex;
+    align-items:center;
+    height:100%;
+    color:currentColor;
+    font-size:18px;
+    transition:.3s;
+    font-family: "Pretendard";
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.depth1>li>a:hover{
+    color: var(--red);
+}
+
+.header-r{
+    display:flex;
+    align-items:center;
+    gap:50px;
+}
+.header-r button{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:none;
+    background:none;
+    cursor:pointer;
+}
+
+.header-r i{
+    font-size:22px;
+    color:#fff;
+    width: 30px;
+    height: 30px;
+}
+.header-r .ic-search{    background: url(../images/ic_search.svg);}
+.header-r .ic-alarm{    background: url(../images/ic_bell.svg);}
+.header-r .ic-menu{    background: url(../images/ic_menu.svg);}
+.header-r i {
+    display: block;
+    transition: filter 0.3s ease;
+
+}
+
+.header.theme-light .header-r i {
+
+    filter: none;
+
+}
+
+.header.theme-dark .header-r i {
+
+    filter: brightness(0);
+
+}
+
+.btn-login{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding: 8px 30px;
+    background-color: var(--red);
+    border-radius:50px;
+    color:#fff;
+    font-size: 1.4rem;
+    line-height: 32px;
+    letter-spacing: 0.4rem;
+    font-weight:500;
+    transition:.3s;
+}
+
+
+/* ========================================
+Footer
+======================================== */
+.footer-section {
+
+    position: relative;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    scroll-snap-align: start;
+
+    scroll-snap-stop: always;
+
+}
+
+/* fetch로 불러온 실제 footer */
+
+.footer-section .footer {
+
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+}
+
+.footer {
+    background-color: #F4F4F4;
+    border-bottom: 10px solid var(--red);
+    width: 100%;
+    min-height: auto;
+    scroll-snap-align: start;
+}
+
+.footer_inner {
+    position: relative;
+    max-width: 1300px;
+    height: 100%;
+    margin: 0 auto;
+    padding-top: 100px;
+}
+
+.footer_top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 0;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.footer_logo {
+    display: block;
+}
+
+.footer_logo img {
+    display: block;
+
+    width: 143px;
+    height: auto;
+}
+
+
+.footer_sns {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.footer_sns a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    overflow: hidden;
+}
+
+.footer_sns img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.footer_content {
+    position: relative;
+    padding-top: 30px;
+    margin-bottom: 100px;
+}
+
+.footer_address {
+    margin: 0;
+    color: #B3B3B3;
+    font-size: 1.5rem; 
+    font-style: normal;
+    line-height: 1.65;
+}
+
+.footer_address p {
+    margin: 0;
+}
+
+.footer_divider {
+    display: inline-block;
+
+    margin: 0 7px;
+}
+
+.footer_copyright {
+    margin: 0;
+    color: #B3B3B3;
+    font-size: 1.5rem;
+    line-height: 1.65;
+}
+
+.footer_menu {
+    display: flex;
+    align-items: center;
+
+    margin: 30px 0 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.footer_menu li {
+    display: flex;
+    align-items: center;
+}
+
+.footer_menu li:not(:last-child)::after {
+    content: "";
+
+    width: 1px;
+    height: 12px;
+
+    margin: 0 8px;
+    color: #7A7A7A;
+}
+
+.footer_menu a {
+    color: #7A7A7A;
+    font-size: 1.5rem;
+}
+
+
+.footer_watermark {
+}
+
+.footer_watermark img {
+width: 100%;
+}
+
+/* ========================================
+   Smooth Scroll / Footer fix
+======================================== */
+.footer-section {
+    position: relative;
+    width: 100%;
+    min-height: 0;
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+}
+
+.footer-section .footer {
+    display: block;
+    align-items: initial;
+    width: 100%;
+    min-height: 0;
+}
+
+
+
+
+.page{width: 100%;
+height: 100vh;
+background: #B3B3B3;
+font-size: 20rem;
+text-align: center;
+line-height: 5;}

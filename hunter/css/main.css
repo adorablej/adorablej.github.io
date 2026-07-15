@@ -1,0 +1,1212 @@
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+}
+
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.page-scroll,
+.main-scroll,
+main {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.main-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+}
+
+.footer-section {
+    position: relative;
+    width: 100%;
+}
+
+/* ========================================
+Common Section 
+======================================== */
+
+.section-heading{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+}
+
+
+.section-title{
+    font-family: "Russo One", sans-serif;
+    color:#111;
+    font-size:6.4rem;
+    font-weight:800;
+}
+
+.section-title span{
+
+    color:var(--red);
+}
+
+.section-description{
+    margin-top:24px;
+    color:#222;
+    font-size:2.4rem;
+    font-weight:600;
+}
+
+.btn-more{
+
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    padding:14px 50px;
+    border-radius:100px;
+    background:var(--red);
+    color:#fff;
+    font-size:1.5rem;
+    font-weight:500;
+    letter-spacing:.25rem;
+    text-transform:lowercase;
+    text-decoration:none;
+    transition:.3s;
+    line-height: 3.2rem;
+}
+
+/* ========================================
+Section Navigator
+======================================== */
+
+.section-nav{
+    position:fixed;
+    top:50%;
+    right:40px;
+    z-index:900;
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translateY(-50%);
+    transition:opacity .3s ease, visibility .3s ease;
+}
+
+.section-nav.is-visible{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+
+.section-nav-item{
+    width:10px;
+    height:10px;
+    padding:0;
+    border:0;
+    border-radius:50%;
+    background:#D9D9D9;
+    cursor:pointer;
+    transition:height .3s ease, background-color .3s ease;
+}
+
+.section-nav-item:hover{
+    background:#fff;
+}
+
+.section-nav-item.is-active{
+    height:30px;
+    border-radius:999px;
+    background:var(--red);
+}
+
+/* ========================================
+Section 01 : Main Visual
+======================================== */
+
+.main-visual {
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+    min-height: 760px;
+
+    overflow: hidden;
+
+    background-color: #000;
+}
+
+.main-visual-swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.main-visual-slide {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+}
+
+.main-visual-bg {
+    position: absolute;
+    inset: 0;
+}
+
+.main-visual-bg img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+.main-visual-dim {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.22) 0%,
+            rgba(0, 0, 0, 0.18) 45%,
+            rgba(0, 0, 0, 0.58) 100%
+        );
+}
+
+.main-visual-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.main-visual-title {
+    margin: 0;
+
+    color: #fff;
+
+    font-family: "Pretendard", sans-serif;
+    font-size: 8.4rem;
+    font-weight: 700;
+    line-height: 104px;
+    letter-spacing: -0.1rem;
+
+    word-break: keep-all;
+}
+
+.main-visual-title em {
+    color: var(--red);
+
+    font-style: normal;
+}
+
+
+.main-visual-control {
+    position: absolute;
+    right: 0;
+    bottom: 54px;
+    left: 0;
+    z-index: 5;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    width: calc(100% - 120px);
+    max-width: 1360px;
+
+    margin: 0 auto;
+}
+
+
+.main-visual-pagination {
+    position: static !important;
+
+    display: flex;
+    align-items: flex-start;
+
+    width: calc(100% - 160px) !important;
+}
+
+.main-visual-pagination .swiper-pagination-bullet {
+    position: relative;
+
+    flex: 1;
+
+    width: auto;
+    height: auto;
+
+    margin: 0 !important;
+
+    color: rgba(255, 255, 255, 0.22);
+
+    border-radius: 0;
+    background: none;
+
+    opacity: 1;
+}
+
+.main-visual-pagination .swiper-pagination-bullet::before {
+    content: attr(data-number);
+
+    display: block;
+
+    margin-bottom: 14px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.main-visual-pagination .swiper-pagination-bullet::after {
+    content: "";
+
+    display: block;
+
+    width: 100%;
+    height: 2px;
+
+    background-color: rgba(255, 255, 255, 0.16);
+}
+
+.main-visual-pagination .swiper-pagination-bullet-active {
+    color: var(--red);
+}
+
+.main-visual-pagination .swiper-pagination-bullet-active::after {
+    background-color: var(--red);
+}
+
+.main-visual-nav{
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    padding-bottom:3px;
+}
+
+.main-visual-nav button{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    width:54px;
+    height:54px;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(255,255,255,.12);
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.main-visual-nav button:hover{
+
+    background:var(--red);
+}
+
+.main-visual-nav button span{
+
+    color:#fff;
+
+    font-size:3rem;
+    line-height:1;
+}
+
+
+/* ========================================
+Section 02 : Motion
+======================================== */
+
+.brand-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 100vh;
+
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.brand-inner {
+    width: 100%;
+}
+
+.brand-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    margin: 0;
+
+    color: var(--red);
+
+    font-size: clamp(7rem, 9vw, 14rem);
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.brand-title .word {
+    display: flex;
+    align-items: center;
+    font-family: "Russo One";
+}
+
+.brand-title .word + .word {
+    margin-left: 6vw;
+}
+
+.brand-title .char {
+    display: inline-block;
+    font-family: "Russo One";
+    margin: 0 1.8vw;
+
+    will-change: transform, opacity;
+}
+/* ========================================
+Section 03 : History 
+======================================== */
+.history-section {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+.history-bg {
+    position: absolute;
+    inset: 0;
+    background: url("/images/main_bg_s3.png");
+    background-size: cover;
+}
+
+.history-bg img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(1);
+}
+
+.history-dim {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.45) 0%,
+            rgba(0, 0, 0, 0.58) 100%
+        );
+}
+
+.history-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    color: #fff;
+    text-align: center;
+}
+
+.history-logo img {
+    display: block;
+    width: 386px;
+    height: auto;
+}
+
+.history-title {
+    margin-top: 60px;
+    font-size: 7.0rem;
+    font-weight: 700;
+    line-height: 84px;
+    letter-spacing: -0.2rem;
+
+    word-break: keep-all;
+}
+
+.history-description {
+    margin-top: 60px;
+    margin-bottom: 100px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 2.0rem;
+    line-height: 34px;
+    word-break: keep-all;
+    font-weight: 400;
+}
+
+.history-more {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 126px;
+    height: 48px;
+
+    margin-top: 34px;
+    padding: 0 28px;
+
+    color: #fff;
+
+    border-radius: 999px;
+    background: var(--red);
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.35rem;
+}
+
+/* ========================================
+Section 04 : Products
+======================================== */
+
+.products-section .section-title{color:#fff;}
+.products-section .section-description{color:#fff;}
+.products-section{
+    position:relative;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    background:#f7f7f7;
+    background: url("/images/main_bg_s4.png") center / cover no-repeat;;
+}
+
+.products-inner{
+
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    max-width:1600px;
+    height:100%;
+    margin:0 auto;
+    padding:110px 0;
+}
+
+.products-content{
+    display:grid;
+    grid-template-columns:300px minmax(0, 1fr) 430px;
+    align-items:center;
+    column-gap:40px;
+    width:100%;
+    flex:1;
+}
+
+.products-menu{
+    position:relative;
+    z-index:2;
+}
+
+.products-category{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.products-category li{
+
+}
+
+.products-category button{
+    display:flex;
+    align-items:center;
+    width:100%;
+    min-height:52px;
+    padding:0 22px;
+    border:0;
+    background:none;
+    color:#000;
+    font-size:1.9rem;
+    letter-spacing: 1px;
+    font-weight:400;
+    text-align:left;
+    cursor:pointer;
+    transition:
+        color .25s ease,
+        background-color .25s ease;
+}
+
+.products-category button span{
+    font-family: "Russo One", sans-serif;}
+.products-category li.is-active button{
+
+    background:var(--red);
+    font-weight:600;
+    color:#fff;
+}
+.products-category li:not(.is-active) button:hover{
+    background:var(--red);
+    font-weight:600;
+    color:#fff;
+
+}
+
+.products-visual{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
+    height:100%;
+}
+
+.products-image{
+
+    position:relative;
+
+    z-index:2;
+}
+
+.products-image img{
+
+    display:block;
+
+    max-width:100%;
+}
+
+
+.products-info{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+
+    width:100%;
+    max-width:430px;
+    gap:40px;
+}
+
+.products-info-item{
+
+    display:none;
+}
+
+.products-info-item.is-active{
+
+    display:block;
+}
+
+.products-info-item h3{
+    margin:0 0 24px;
+
+    color:#000;
+
+    font-family:"Russo One", sans-serif;
+    font-size:4.0rem;
+    line-height:42px;
+}
+
+.products-info-item h3 sup{
+    font-size:.45em;
+    vertical-align:top;
+}
+.products-info-item p{
+    margin:0;
+
+    color:#000;
+
+    font-size:1.8rem;
+    font-weight:300;
+    line-height:30px;
+    letter-spacing: -1px;
+    word-break:keep-all;
+}
+.products-control{
+    display:flex;
+    gap:14px;
+}
+
+.products-control button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:54px;
+    height:54px;
+
+    padding:0;
+
+    color:#000;
+
+    border:1px solid rgba(255, 255, 255, 0.5);
+    border-radius:50%;
+    background:rgba(255, 255, 255, 0.5);
+
+    cursor:pointer;
+
+    transition:
+        background-color .25s ease,
+        border-color .25s ease;
+}
+
+.products-control button:hover{
+    background:var(--red);
+}
+.products-control button:hover span{
+    color: #Fff;
+}
+.products-control button span{
+    font-size:2.8rem;
+    line-height:1;
+    color: var(--red);
+}
+
+.products-indicator{
+
+    position:absolute;
+
+    top:50%;
+    right:60px;
+
+    transform:translateY(-50%);
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+}
+
+.products-indicator-dot{
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#ddd;
+}
+
+.products-indicator-bar{
+
+    width:6px;
+    height:60px;
+
+    border-radius:10px;
+
+    background:var(--red);
+}
+
+
+/* ========================================
+Section 05 : Support
+======================================== */
+
+.support-section {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    background:
+        #f4f4f4
+        url("../images/main_bg_s5.png")
+        center / cover
+        no-repeat;
+}
+
+.support-inner {
+    position: relative;
+
+    width: 100%;
+    max-width: 1500px;
+    min-height: 100vh;
+
+    margin: 0 auto;
+    padding: 110px 0; 
+
+    box-sizing: border-box;
+}
+
+.support-visual {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+
+    z-index: 1;
+
+    width: 900px;
+
+    transform: translateX(-50%);
+}
+
+.support-visual img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+}
+
+.support-cards {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    z-index: 2;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+
+    gap: 80px;
+
+    width: max-content;
+
+    transform: translate(-50%, -50%);
+}
+
+.support-card {
+    position: relative;
+    flex: 0 0 380px;
+    width: 380px;
+    padding: 50px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+.support-card-training {
+    transform: translateY(130px);
+}
+
+
+.support-card-guide {
+    transform: translateY(65px);
+}
+
+
+.support-card-specification {
+    transform: translateY(0);
+}
+
+/* 기존 위치값 유지 + hover 시 10px 위로 */
+
+.support-card-training:hover{
+    transform:translateY(120px);
+    box-shadow:0 30px 60px rgba(0,0,0,.12);
+}
+
+.support-card-guide:hover{
+    transform:translateY(55px);
+    box-shadow:0 30px 60px rgba(0,0,0,.12);
+}
+
+.support-card-specification:hover{
+    transform:translateY(-10px);
+    box-shadow:0 30px 60px rgba(0,0,0,.12);
+}
+
+
+
+.support-card-label {
+    margin-bottom: 10px;
+
+    color: #636363;
+
+    font-size: 1.6rem;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+}
+
+.support-card-title {
+    color: #000;
+
+    font-family: "Russo One", sans-serif;
+
+    font-size: 3rem;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+}
+
+.support-card-line {
+    width: 100%;
+    height: 1px;
+
+    margin: 30px 0;
+
+    background: var(--red);
+}
+
+.support-card-text {
+    margin-bottom: 30px;
+
+    color: #000;
+
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1.8;
+    letter-spacing: -0.04rem;
+
+    word-break: keep-all;
+}
+
+.support-card .btn-more {
+    margin-top: 0;
+}
+
+/* ========================================
+Section 06 : Media
+======================================== */
+
+.media-section .section-heading{
+    margin-bottom:96px;
+}
+
+.media-section{
+    position:relative;
+    width:100%;
+    min-height:100vh;
+    overflow:hidden;
+    background:#efefef;
+}
+
+.media-inner{
+    max-width:1400px;
+    margin:0 auto;
+    padding:110px 0;
+}
+
+
+.media-content{
+    display:grid;
+    grid-template-columns:620px minmax(0,720px);
+    gap:30px;
+    align-items:stretch;
+    justify-content:center;
+}
+
+
+.media-featured{
+    overflow:hidden;
+    border-radius:20px;
+    background:#fff;
+    transition:.35s;
+}
+
+.media-featured-image{
+    height:360px;
+    overflow:hidden;
+}
+
+.media-featured-image img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.5s;
+}
+
+.media-featured:hover img{
+    transform:scale(1.05);
+}
+
+.media-featured-content{
+    padding:40px 34px;
+}
+.media-list{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-rows:repeat(2,320px);
+    gap:30px;
+    min-width:0;
+}
+
+.media-item{
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+    padding:40px 34px;
+    border-radius:20px;
+    background:#fff;
+    cursor:pointer;
+    box-sizing:border-box;
+    transition:.35s;
+}
+
+
+.media-item:hover{
+    transform:translateY(-10px);
+    box-shadow:0 30px 60px rgba(0,0,0,.12);
+}
+
+.media-item.is-active{
+    background:var(--red);
+}
+
+/* =========================
+    Category
+========================= */
+
+.media-card-category{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    align-self:flex-start;
+    padding:10px 24px;
+    border-radius:60px;
+    background:var(--red);
+    color:#fff;
+    font-size:1.8rem;
+    line-height:3.2rem;
+    font-weight:600;
+}
+
+.media-item.is-active .media-card-category{
+    background:#fff;
+    color:var(--red);
+}
+
+.media-card-title{
+    display:-webkit-box;
+    width:100%;
+    min-width:0;
+    margin-top:30px;
+    overflow:hidden;
+    color:rgba(0,0,0,.88);
+    font-size:2.4rem;
+    font-weight:600;
+    line-height:3rem;
+    letter-spacing:-0.04rem;
+    white-space:normal;
+    word-break:keep-all;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:1;
+}
+
+.media-item.is-active .media-card-title{
+    color:#fff;
+}
+
+.media-card-text{
+    margin-top:20px;
+    color:rgba(0,0,0,.88);
+    font-size:1.8rem;
+    font-weight:400;
+    line-height:2.6rem;
+
+    display:-webkit-box;
+    overflow:hidden;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:3;
+}
+
+.media-item.is-active .media-card-text{
+    color:rgba(255,255,255,.85);
+}
+
+
+/* ========================================
+Section 07 : Business
+======================================== */
+
+.business-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    background: url("/images/main_bg_s7.png")center / cover no-repeat;
+}
+
+.business-visual {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 190px);
+    overflow: hidden;
+}
+
+.business-bg {
+    position: absolute;
+    inset: 0;
+}
+
+.business-bg img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+.business-dim {
+    position: absolute;
+    inset: 0;
+    background: url("/images/main_bg_s7_dim.png")center / cover no-repeat;
+}
+
+/* Content */
+
+.business-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.business-title {
+    margin: 0;
+    font-size: 7.0rem;
+    font-weight: 700;
+    line-height: 90px;
+    letter-spacing: -0.01rem;
+    word-break: keep-all;
+}
+
+.business-title em {
+    color: var(--red);
+
+    font-style: normal;
+}
+
+.business-description {
+    margin: 25px 0;
+    color: rgba(255, 255, 255, 0.60);
+    font-size: 2.0rem;
+    line-height: 30px;
+    letter-spacing: -1px;
+    word-break: keep-all;
+}
+
+.business-more {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 126px;
+    height: 48px;
+
+    margin-top: 30px;
+    padding: 0 28px;
+
+    color: #fff;
+
+    border-radius: 999px;
+    background: var(--red);
+
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.35rem;
+}
+
+/* Quick Menu */
+
+.business-quick {
+    width: 100%;
+    height: 200px;
+
+    background: var(--red);
+}
+
+.business-quick-inner {
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+
+    margin: 0 auto;
+    padding: 0 60px;
+}
+
+.business-quick-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    width: 100%;
+    height: 100%;
+}
+
+.business-quick-list li {
+    height: 100%;
+}
+
+.business-quick-list a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+}
+
+.business-quick-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.business-quick-icon img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.business-quick-text {
+    margin-top: 30px;
+    letter-spacing: -1px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-size: 1.8rem;
+}
