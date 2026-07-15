@@ -9,7 +9,7 @@
     function initCommon() {
         initCurrentGnb();
         initHeaderTheme();
-        initHeaderTransition();
+        //initHeaderTransition();
     }
 
     /**

@@ -11,6 +11,7 @@
         initMainVisual();
         initMediaSection();
         initSectionNavigator();
+        initSectionScroller();
     }
 
     /**
@@ -310,4 +311,167 @@
        );
    }
     
+   /**
+ * Main Section Scroller
+ *
+ * - 기존 window 스크롤 구조 유지
+ * - 휠을 일정량 움직이면 한 섹션씩 이동
+ * - 트랙패드의 잔여 휠 입력 방지
+ * - Footer도 마지막 섹션처럼 이동
+ * - Motion 진입 후 History로 자동 이동
+ */
+   function initSectionScroller() {
+
+    const sections = [...document.querySelectorAll(".main-section")];
+
+    if (!sections.length) return;
+
+    let currentIndex = 0;
+    let isAnimating = false;
+    let lastWheelTime = 0;
+
+    const LOCK_TIME = 800;
+
+    function getCurrentSection() {
+
+        const center = window.scrollY + window.innerHeight / 2;
+
+        let index = 0;
+
+        sections.forEach((section, i) => {
+
+            if (center >= section.offsetTop) {
+                index = i;
+            }
+
+        });
+
+        return index;
+
+    }
+
+    function scrollToSection(index) {
+
+        index = Math.max(
+            0,
+            Math.min(index, sections.length - 1)
+        );
+
+        isAnimating = true;
+
+        currentIndex = index;
+
+        window.scrollTo({
+            top: sections[index].offsetTop,
+            behavior: "smooth"
+        });
+
+        setTimeout(() => {
+
+            isAnimating = false;
+
+        }, LOCK_TIME);
+
+    }
+
+    function handleWheel(e) {
+
+        if (window.innerWidth <= 768) return;
+
+        const business = sections[sections.length - 1];
+
+        const businessTop = business.offsetTop;
+
+        const businessBottom =
+            business.offsetTop + business.offsetHeight;
+
+        /**
+         * Footer에서는 일반 스크롤
+         */
+        if (window.scrollY >= businessBottom - 10) {
+
+            return;
+
+        }
+
+        /**
+         * Business에서 아래는 Footer로
+         */
+        if (
+            currentIndex === sections.length - 1 &&
+            e.deltaY > 0
+        ) {
+
+            return;
+
+        }
+
+        e.preventDefault();
+
+        if (isAnimating) return;
+
+        const now = Date.now();
+
+        if (now - lastWheelTime < LOCK_TIME) {
+
+            return;
+
+        }
+
+        lastWheelTime = now;
+
+        currentIndex = getCurrentSection();
+
+        if (e.deltaY > 0) {
+
+            scrollToSection(currentIndex + 1);
+
+        } else {
+
+            /**
+             * Footer에서 막 올라왔으면
+             * Business로 먼저 이동
+             */
+            if (
+                window.scrollY > businessTop &&
+                window.scrollY < businessBottom
+            ) {
+
+                scrollToSection(sections.length - 1);
+
+                return;
+
+            }
+
+            scrollToSection(currentIndex - 1);
+
+        }
+
+    }
+
+    window.addEventListener(
+        "wheel",
+        handleWheel,
+        {
+            passive: false
+        }
+    );
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            if (!isAnimating) {
+
+                currentIndex = getCurrentSection();
+
+            }
+
+        },
+        {
+            passive: true
+        }
+    );
+
+}
 })();
