@@ -75,7 +75,6 @@ Common Section
 }
 
 .btn-more{
-
     display:inline-flex;
     justify-content:center;
     align-items:center;
@@ -144,13 +143,10 @@ Section 01 : Main Visual
 
 .main-visual {
     position: relative;
-
     width: 100%;
     height: 100vh;
     min-height: 760px;
-
     overflow: hidden;
-
     background-color: #000;
 }
 
@@ -161,7 +157,6 @@ Section 01 : Main Visual
 
 .main-visual-slide {
     position: relative;
-
     width: 100%;
     height: 100%;
 }
@@ -173,10 +168,8 @@ Section 01 : Main Visual
 
 .main-visual-bg img {
     display: block;
-
     width: 100%;
     height: 100%;
-
     object-fit: cover;
     object-position: center;
 }
@@ -207,9 +200,7 @@ Section 01 : Main Visual
 
 .main-visual-title {
     margin: 0;
-
     color: #fff;
-
     font-family: "Pretendard", sans-serif;
     font-size: 8.4rem;
     font-weight: 700;
@@ -221,7 +212,6 @@ Section 01 : Main Visual
 
 .main-visual-title em {
     color: var(--red);
-
     font-style: normal;
 }
 
@@ -232,50 +222,37 @@ Section 01 : Main Visual
     bottom: 54px;
     left: 0;
     z-index: 5;
-
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-
     width: calc(100% - 120px);
     max-width: 1360px;
-
     margin: 0 auto;
 }
 
 
 .main-visual-pagination {
     position: static !important;
-
     display: flex;
     align-items: flex-start;
-
     width: calc(100% - 160px) !important;
 }
 
 .main-visual-pagination .swiper-pagination-bullet {
     position: relative;
-
     flex: 1;
-
     width: auto;
     height: auto;
-
     margin: 0 !important;
-
     color: rgba(255, 255, 255, 0.22);
-
     border-radius: 0;
     background: none;
-
     opacity: 1;
 }
 
 .main-visual-pagination .swiper-pagination-bullet::before {
     content: attr(data-number);
-
     display: block;
-
     margin-bottom: 14px;
     text-align: left;
     font-size: 15px;
@@ -285,12 +262,9 @@ Section 01 : Main Visual
 
 .main-visual-pagination .swiper-pagination-bullet::after {
     content: "";
-
     display: block;
-
     width: 100%;
     height: 2px;
-
     background-color: rgba(255, 255, 255, 0.16);
 }
 
@@ -303,31 +277,22 @@ Section 01 : Main Visual
 }
 
 .main-visual-nav{
-
     display:flex;
     align-items:center;
-
     gap:12px;
-
     padding-bottom:3px;
 }
 
 .main-visual-nav button{
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     width:54px;
     height:54px;
-
     border:none;
     border-radius:50%;
-
     background:rgba(255,255,255,.12);
-
     cursor:pointer;
-
     transition:.3s;
 }
 
@@ -515,7 +480,7 @@ Section 04 : Products
     height:100vh;
     overflow:hidden;
     background:#f7f7f7;
-    background: url("./images/main_bg_s4.png") center / cover no-repeat;;
+    background: url("../images/main_bg_s4.png") center / cover no-repeat;;
 }
 
 .products-inner{
@@ -666,20 +631,14 @@ Section 04 : Products
     display:flex;
     align-items:center;
     justify-content:center;
-
     width:54px;
     height:54px;
-
     padding:0;
-
     color:#000;
-
     border:1px solid rgba(255, 255, 255, 0.5);
     border-radius:50%;
     background:rgba(255, 255, 255, 0.5);
-
     cursor:pointer;
-
     transition:
         background-color .25s ease,
         border-color .25s ease;
@@ -698,14 +657,10 @@ Section 04 : Products
 }
 
 .products-indicator{
-
     position:absolute;
-
     top:50%;
     right:60px;
-
     transform:translateY(-50%);
-
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -713,22 +668,16 @@ Section 04 : Products
 }
 
 .products-indicator-dot{
-
     width:8px;
     height:8px;
-
     border-radius:50%;
-
     background:#ddd;
 }
 
 .products-indicator-bar{
-
     width:6px;
     height:60px;
-
     border-radius:10px;
-
     background:var(--red);
 }
 
@@ -739,12 +688,9 @@ Section 05 : Support
 
 .support-section {
     position: relative;
-
     width: 100%;
     min-height: 100vh;
-
     overflow: hidden;
-
     background:
         #f4f4f4
         url("../images/main_bg_s5.png")
@@ -754,14 +700,11 @@ Section 05 : Support
 
 .support-inner {
     position: relative;
-
     width: 100%;
     max-width: 1500px;
     min-height: 100vh;
-
     margin: 0 auto;
     padding: 110px 0; 
-
     box-sizing: border-box;
 }
 
@@ -769,17 +712,13 @@ Section 05 : Support
     position: absolute;
     left: 50%;
     bottom: 0;
-
     z-index: 1;
-
     width: 900px;
-
     transform: translateX(-50%);
 }
 
 .support-visual img {
     display: block;
-
     width: 100%;
     height: auto;
 }
@@ -788,17 +727,12 @@ Section 05 : Support
     position: absolute;
     top: 50%;
     left: 50%;
-
     z-index: 2;
-
     display: flex;
     align-items: flex-start;
     justify-content: center;
-
     gap: 80px;
-
     width: max-content;
-
     transform: translate(-50%, -50%);
 }
 
@@ -1035,7 +969,6 @@ Section 06 : Media
     font-size:1.8rem;
     font-weight:400;
     line-height:2.6rem;
-
     display:-webkit-box;
     overflow:hidden;
     -webkit-box-orient:vertical;
@@ -1056,7 +989,7 @@ Section 07 : Business
     width: 100%;
     min-height: 100vh;
     overflow: hidden;
-    background: url("/images/main_bg_s7.png")center / cover no-repeat;
+    background: url("../images/main_bg_s7.png")center / cover no-repeat;
 }
 
 .business-visual {
@@ -1084,7 +1017,7 @@ Section 07 : Business
 .business-dim {
     position: absolute;
     inset: 0;
-    background: url("/images/main_bg_s7_dim.png")center / cover no-repeat;
+    background: url("../images/main_bg_s7_dim.png")center / cover no-repeat;
 }
 
 /* Content */
