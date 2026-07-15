@@ -416,7 +416,7 @@ Section 03 : History
 .history-bg {
     position: absolute;
     inset: 0;
-    background: url("/images/main_bg_s3.png");
+    background: url("../images/main_bg_s3.png");
     background-size: cover;
 }
 
