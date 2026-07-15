@@ -515,7 +515,7 @@ Section 04 : Products
     height:100vh;
     overflow:hidden;
     background:#f7f7f7;
-    background: url("/images/main_bg_s4.png") center / cover no-repeat;;
+    background: url("./images/main_bg_s4.png") center / cover no-repeat;;
 }
 
 .products-inner{
