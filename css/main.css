@@ -1186,8 +1186,8 @@ body.main-page {
 /* 기존 Business 높이값을 메인 풀페이지 구조에 맞춤 */
 .main-page .business-section,
 .main-page .business-visual {
-    height:100vh;
-    min-height:100vh;
+    height:calc(100vh - 200px);
+    min-height:calc(100vh - 200px);
 }
 
 /* 마지막 섹션 다음에는 푸터 시작점에 맞춰 정렬 */
