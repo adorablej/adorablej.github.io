@@ -1,4 +1,8 @@
 :root {
+    --vw: calc(100vw / 1920);
+}
+
+:root {
     --red: #C00C00;
 }
 
@@ -29,7 +33,7 @@ Header
     z-index: 1500;
 
     width: 100%;
-    height: 100px;
+    height: calc(100 * var(--vw));
 
     color: #111;
 
@@ -63,13 +67,13 @@ Header
     height:100%;
 
     margin:0 auto;
-    padding:0 60px;
+    padding:0 calc(60 * var(--vw));
 }
 
 .header-l{
     display:flex;
     align-items:center;
-    gap:80px;
+    gap:calc(80 * var(--vw));
 }
 
 
@@ -85,8 +89,8 @@ Logo
     position:relative;
     display:block;
 
-    width:220px;
-    height:40px;
+    width:calc(220 * var(--vw));
+    height:calc(40 * var(--vw));
 }
 
 .header-logo-image{
@@ -95,7 +99,7 @@ Logo
     left:0;
 
     display:block;
-    height:40px;
+    height:calc(40 * var(--vw));
     width:auto;
 
     transform:translateY(-50%);
@@ -169,7 +173,7 @@ GNB
     display:flex;
     align-items:center;
     height:100%;
-    gap:70px;
+    gap:calc(70 * var(--vw));
 }
 
 .depth1>li{
@@ -187,7 +191,7 @@ GNB
     color:currentColor;
 
     font-family:"Pretendard",sans-serif;
-    font-size:18px;
+    font-size:calc(18 * var(--vw));
     font-weight:500;
     text-decoration:none;
 
@@ -207,7 +211,7 @@ Header Right
 .header-r{
     display:flex;
     align-items:center;
-    gap:50px;
+    gap:calc(50 * var(--vw));
 }
 
 .header-r button{
@@ -228,8 +232,8 @@ Header Right
 .header-r i{
     display:block;
 
-    width:30px;
-    height:30px;
+    width:calc(30 * var(--vw));
+    height:calc(30 * var(--vw));
 
     background-repeat:no-repeat;
     background-position:center;
@@ -249,8 +253,8 @@ Header Right
 .header-r .ic-menu {
     position: relative;
 
-    width: 30px;
-    height: 30px;
+    width: calc(30 * var(--vw));
+    height: calc(30 * var(--vw));
 
     background-image: none;
 }
@@ -261,8 +265,8 @@ Header Right
     top: 50%;
     left: 50%;
 
-    width: 26px;
-    height: 2px;
+    width: calc(26 * var(--vw));
+    height: calc(2 * var(--vw));
 
     background: currentColor;
 
@@ -274,12 +278,12 @@ Header Right
 }
 
 .header-r .ic-menu::before {
-    transform: translate(-50%, -7px);
-    box-shadow: 0 7px 0 currentColor;
+    transform: translate(-50%, calc(-7 * var(--vw)));
+    box-shadow: 0 calc(7 * var(--vw)) 0 currentColor;
 }
 
 .header-r .ic-menu::after {
-    transform: translate(-50%, 7px);
+    transform: translate(-50%, calc(7 * var(--vw)));
 }
 
 .header.is-menu-open .ic-menu::before {
@@ -309,17 +313,17 @@ Login
     justify-content:center;
     align-items:center;
 
-    padding:8px 30px;
+    padding:calc(8 * var(--vw)) calc(30 * var(--vw));
 
-    border-radius:50px;
+    border-radius:calc(50 * var(--vw));
     background:var(--red);
 
     color:#fff;
 
-    font-size:1.4rem;
+    font-size:calc(14 * var(--vw));
     font-weight:500;
-    line-height:32px;
-    letter-spacing:.4rem;
+    line-height:calc(32 * var(--vw));
+    letter-spacing:calc(4 * var(--vw));
 
     transition:.3s;
 }
@@ -358,7 +362,7 @@ Footer
 
 .footer {
     background-color: #F4F4F4;
-    border-bottom: 10px solid var(--red);
+    border-bottom: calc(10 * var(--vw)) solid var(--red);
     width: 100%;
     min-height: auto;
     scroll-snap-align: start;
@@ -371,14 +375,14 @@ Footer
     max-width: 1300px;
     height: 100%;
     margin: 0 auto;
-    padding-top: 100px;
+    padding-top: calc(100 * var(--vw));
 }
 
 .footer_top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 30px 0;
+    padding: calc(30 * var(--vw)) 0;
     border-bottom: 1px solid #d8d8d8;
 }
 
@@ -389,7 +393,7 @@ Footer
 .footer_logo img {
     display: block;
 
-    width: 143px;
+    width: calc(143 * var(--vw));
     height: auto;
 }
 
@@ -398,7 +402,7 @@ Footer
     display: flex;
     align-items: center;
 
-    gap: 8px;
+    gap: calc(8 * var(--vw));
 
     margin: 0;
     padding: 0;
@@ -410,8 +414,8 @@ Footer
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 46px;
-    height: 46px;
+    width: calc(46 * var(--vw));
+    height: calc(46 * var(--vw));
     overflow: hidden;
 }
 
@@ -424,14 +428,14 @@ Footer
 
 .footer_content {
     position: relative;
-    padding-top: 30px;
-    margin-bottom: 100px;
+    padding-top: calc(30 * var(--vw));
+    margin-bottom: calc(100 * var(--vw));
 }
 
 .footer_address {
     margin: 0;
     color: #B3B3B3;
-    font-size: 1.5rem; 
+    font-size: calc(15 * var(--vw)); 
     font-style: normal;
     line-height: 1.65;
 }
@@ -443,13 +447,13 @@ Footer
 .footer_divider {
     display: inline-block;
 
-    margin: 0 7px;
+    margin: 0 calc(7 * var(--vw));
 }
 
 .footer_copyright {
     margin: 0;
     color: #B3B3B3;
-    font-size: 1.5rem;
+    font-size: calc(15 * var(--vw));
     line-height: 1.65;
 }
 
@@ -457,7 +461,7 @@ Footer
     display: flex;
     align-items: center;
 
-    margin: 30px 0 0;
+    margin: calc(30 * var(--vw)) 0 0;
     padding: 0;
 
     list-style: none;
@@ -472,15 +476,15 @@ Footer
     content: "";
 
     width: 1px;
-    height: 12px;
+    height: calc(12 * var(--vw));
 
-    margin: 0 8px;
+    margin: 0 calc(8 * var(--vw));
     color: #7A7A7A;
 }
 
 .footer_menu a {
     color: #7A7A7A;
-    font-size: 1.5rem;
+    font-size: calc(15 * var(--vw));
 }
 
 
@@ -515,7 +519,7 @@ width: 100%;
 .page{width: 100%;
 height: 100vh;
 background: #B3B3B3;
-font-size: 20rem;
+font-size: calc(200 * var(--vw));
 text-align: center;
 line-height: 5;}
 
@@ -525,7 +529,7 @@ line-height: 5;}
 
 .business-quick {
     width: 100%;
-    height: 200px;
+    height: calc(200 * var(--vw));
 
     background: var(--red);
 }
@@ -536,7 +540,7 @@ line-height: 5;}
     height: 100%;
 
     margin: 0 auto;
-    padding: 0 60px;
+    padding: 0 calc(60 * var(--vw));
 }
 
 .business-quick-list {
@@ -566,8 +570,8 @@ line-height: 5;}
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: calc(40 * var(--vw));
+    height: calc(40 * var(--vw));
 }
 
 .business-quick-icon img {
@@ -577,11 +581,11 @@ line-height: 5;}
 }
 
 .business-quick-text {
-    margin-top: 30px;
+    margin-top: calc(30 * var(--vw));
     letter-spacing: -1px;
-    font-size: 1.5rem;
+    font-size: calc(15 * var(--vw));
     font-weight: 500;
-    font-size: 1.8rem;
+    font-size: calc(18 * var(--vw));
 }
 
 
@@ -606,12 +610,12 @@ Drag Cursor
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 18px;
+    gap: calc(18 * var(--vw));
 
-    width: 180px;
-    height: 56px;
+    width: calc(180 * var(--vw));
+    height: calc(56 * var(--vw));
 
-    border-radius: 999px;
+    border-radius: calc(999 * var(--vw));
     background: #C00C00;
 
     color: #fff;
@@ -640,13 +644,13 @@ Drag Cursor
 }
 
 .drag-cursor strong {
-    font-size: 14px;
+    font-size: calc(14 * var(--vw));
     font-weight: 500;
     letter-spacing: .28em;
 }
 
 .drag-cursor span {
-    font-size: 20px;
+    font-size: calc(20 * var(--vw));
     font-weight: 300;
 }
 /* ========================================
@@ -693,9 +697,9 @@ All Menu
     display: flex;
     flex-direction: column;
 
-    width: min(570px, 100%);
+    width: min(calc(570 * var(--vw)), 100%);
     height: 100%;
-    padding-top: 200px;
+    padding-top: calc(200 * var(--vw));
 
     overflow-y: auto;
 
@@ -717,11 +721,11 @@ All Menu Navigation
 ======================================== */
 
 .all-menu-nav {
-    padding: 0 60px 70px;
+    padding: 0 calc(60 * var(--vw)) calc(70 * var(--vw));
 }
 
 .all-menu-item + .all-menu-item {
-    margin-top: 30px;
+    margin-top: calc(30 * var(--vw));
 }
 
 .all-menu-toggle {
@@ -742,7 +746,7 @@ All Menu Navigation
 
 .all-menu-toggle span {
     font-family: "Russo One", sans-serif;
-    font-size: 3.0rem;
+    font-size: calc(30 * var(--vw));
     font-weight: 400;
     text-align: left;
     letter-spacing: 1%;
@@ -753,8 +757,8 @@ All Menu Navigation
 
     flex-shrink: 0;
 
-    width: 24px;
-    height: 24px;
+    width: calc(24 * var(--vw));
+    height: calc(24 * var(--vw));
 }
 
 .all-menu-toggle i::before,
@@ -763,8 +767,8 @@ All Menu Navigation
     top: 50%;
     left: 50%;
 
-    width: 20px;
-    height: 2px;
+    width: calc(20 * var(--vw));
+    height: calc(2 * var(--vw));
 
     background: #fff;
 
@@ -800,16 +804,16 @@ All Menu Navigation
 .all-menu-depth-inner {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: calc(18 * var(--vw));
 
-    padding: 30px 0 0 40px;
+    padding: calc(30 * var(--vw)) 0 0 calc(40 * var(--vw));
 }
 
 .all-menu-depth a {
     align-self: flex-start;
     color: rgba(255, 255, 255, .50);
     font-family: "Russo One", sans-serif;
-    font-size: 2.2rem;
+    font-size: calc(22 * var(--vw));
     text-decoration: none;
     transition: color .25s ease;
 }
@@ -826,7 +830,7 @@ All Menu Member
 ======================================== */
 
 .all-menu-member {
-    padding: 70px 60px;
+    padding: calc(70 * var(--vw)) calc(60 * var(--vw));
 
     border-top: 1px solid rgba(255, 255, 255, .10);
     border-bottom: 1px solid rgba(255, 255, 255, .10);
@@ -857,8 +861,8 @@ All Menu Member
 
     color: #fff;
 
-    font-size: 2.6rem;
-    line-height: 4.0rem;
+    font-size: calc(26 * var(--vw));
+    line-height: calc(40 * var(--vw));
 }
 
 .all-menu-member-content {
@@ -871,8 +875,8 @@ All Menu Member
 .all-menu-member-name {
     margin:0;
     color:inherit;
-    font-size:2.6rem;
-    line-height:4rem;
+    font-size:calc(26 * var(--vw));
+    line-height:calc(40 * var(--vw));
 }
 
 .all-menu-member-name {
@@ -889,13 +893,13 @@ All Menu Member
     display:inline-flex;
     justify-content:center;
     align-items:center;
-    height:46px;
-    margin-top:30px;
-    padding:0 30px;
-    border-radius:999px;
+    height:calc(46 * var(--vw));
+    margin-top:calc(30 * var(--vw));
+    padding:0 calc(30 * var(--vw));
+    border-radius:calc(999 * var(--vw));
     background:var(--red);
     color:#fff;
-    font-size:1.6rem;
+    font-size:calc(16 * var(--vw));
     font-weight:600;
     line-height:1;
     text-decoration:none;
@@ -909,8 +913,8 @@ All Menu SNS
 .all-menu-sns {
     display: flex;
     align-items: center;
-    gap: 7.5px;
-    padding: 50px;
+    gap: calc(7.5 * var(--vw));
+    padding: calc(50 * var(--vw));
 }
 
 .all-menu-sns a {
@@ -918,8 +922,8 @@ All Menu SNS
     justify-content: center;
     align-items: center;
 
-    width: 45px;
-    height: 45px;
+    width: calc(45 * var(--vw));
+    height: calc(45 * var(--vw));
 
     border-radius: 50%;
 

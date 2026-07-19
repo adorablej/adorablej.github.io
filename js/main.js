@@ -415,39 +415,6 @@ function initSectionSplashes() {
     Splash Section Entry
     ======================================== */
 
-    function waitForSplashSection(
-        section,
-        playSplash
-    ) {
-        window.cancelAnimationFrame(
-            splashMoveRaf
-        );
-
-        function checkPosition() {
-            const distance =
-                Math.abs(
-                    scrollContainer.scrollTop -
-                    section.offsetTop
-                );
-
-            if (distance <= SECTION_TOLERANCE) {
-                isSplashPending = false;
-                playSplash();
-                return;
-            }
-
-            splashMoveRaf =
-                window.requestAnimationFrame(
-                    checkPosition
-                );
-        }
-
-        splashMoveRaf =
-            window.requestAnimationFrame(
-                checkPosition
-            );
-    }
-
     function moveToSplashSection(
         section,
         playSplash
@@ -458,20 +425,91 @@ function initSectionSplashes() {
         ) {
             return;
         }
-
+    
         isSplashPending = true;
-
-        scrollContainer.scrollTo({
-            top: section.offsetTop,
-            behavior: "smooth"
-        });
-
-        waitForSplashSection(
-            section,
-            playSplash
+    
+        window.cancelAnimationFrame(
+            splashMoveRaf
         );
+    
+        const startTop =
+            scrollContainer.scrollTop;
+    
+        const targetTop =
+            section.offsetTop;
+    
+        const distance =
+            targetTop - startTop;
+    
+        const duration = 850;
+        const startTime =
+            performance.now();
+    
+        /*
+         * Safari에서 scroll-snap이 이동 애니메이션을
+         * 중간에 잡아당기지 않도록 잠시 해제
+         */
+        const previousSnapType =
+            scrollContainer.style.scrollSnapType;
+    
+        scrollContainer.style.scrollSnapType =
+            "none";
+    
+        function easeInOutCubic(progress) {
+            return progress < 0.5
+                ? 4 * progress * progress * progress
+                : 1 -
+                    Math.pow(
+                        -2 * progress + 2,
+                        3
+                    ) / 2;
+        }
+    
+        function move(currentTime) {
+            const elapsed =
+                currentTime - startTime;
+    
+            const progress =
+                Math.min(
+                    elapsed / duration,
+                    1
+                );
+    
+            const easedProgress =
+                easeInOutCubic(progress);
+    
+            scrollContainer.scrollTop =
+                startTop +
+                distance * easedProgress;
+    
+            if (progress < 1) {
+                splashMoveRaf =
+                    window.requestAnimationFrame(
+                        move
+                    );
+    
+                return;
+            }
+    
+            scrollContainer.scrollTop =
+                targetTop;
+    
+            /*
+             * 원래 scroll-snap 복구
+             */
+            scrollContainer.style.scrollSnapType =
+                previousSnapType;
+    
+            isSplashPending = false;
+    
+            playSplash();
+        }
+    
+        splashMoveRaf =
+            window.requestAnimationFrame(
+                move
+            );
     }
-
     function handleSplashWheel(event) {
         if (
             isSplashPending ||

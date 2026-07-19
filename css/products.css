@@ -1,3 +1,7 @@
+:root {
+    --vw: calc(100vw / 1920);
+}
+
 
 /* ========================================
 sub page 공통
@@ -6,14 +10,14 @@ sub page 공통
 
 .page-heading {
     width: 100%;
-    padding: 150px 0 66px;
+    padding: calc(150 * var(--vw)) 0 calc(66 * var(--vw));
     background: #fff;
     border-bottom: 1px solid #ddd;
-    margin-bottom: 80px;
+    margin-bottom: calc(80 * var(--vw));
 }
 
 .page-heading .inner {
-    width: 1300px;
+    width: calc(1300 * var(--vw));
     max-width: calc(100% - 80px);
     margin: 0 auto;
 }
@@ -21,9 +25,9 @@ sub page 공통
 .breadcrumb {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: 50px;
-    font-size: 16px;
+    gap: calc(14 * var(--vw));
+    margin-bottom: calc(50 * var(--vw));
+    font-size: calc(16 * var(--vw));
     font-weight: 500;
     color: #555;
     
@@ -31,8 +35,8 @@ sub page 공통
 
 .breadcrumb-home {
     display: block;
-    width: 19px;
-    height: 19px;
+    width: calc(19 * var(--vw));
+    height: calc(19 * var(--vw));
     background: #d10a00;
     clip-path: polygon(
         50% 0,
@@ -44,12 +48,12 @@ sub page 공통
 }
 
 .page-title {
-    font-size: 64px;
+    font-size: calc(64 * var(--vw));
     font-weight: 800;
     line-height: 1;
     color: #000;
     font-family: "Russo One", sans-serif;
-    line-height: 80px;
+    line-height: calc(80 * var(--vw));
 }
 
 .breadcrumb li {
@@ -62,7 +66,7 @@ sub page 공통
 .breadcrumb li + li::before {
     content: "/";
 
-    margin: 0 14px;
+    margin: 0 calc(14 * var(--vw));
     color: #d7d7d7;
     font-weight: 300;
 }
@@ -84,7 +88,7 @@ Sub Visual
     position: relative;
 
     width: 100%;
-    height: 600px;
+    height: calc(600 * var(--vw));
 
     overflow: hidden;
 }
@@ -128,7 +132,7 @@ Sub Visual
 .sub-visual-content p {
     color: #fff;
 
-    font-size: 58px;
+    font-size: calc(58 * var(--vw));
     font-weight: 700;
     line-height: 1.35;
     letter-spacing: -0.04em;
@@ -139,7 +143,7 @@ Sub Product Category
 ======================================== */
 
 .sub-product-category {
-    padding: 120px 0;
+    padding: calc(120 * var(--vw)) 0;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -150,15 +154,15 @@ Sub Product Category
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 60px;
-    width: 1300px;
+    margin-bottom: calc(60 * var(--vw));
+    width: calc(1300 * var(--vw));
 }
 
 .sub-section-title {
     margin: 0;
     color: #000;
     font-family: "Russo One", sans-serif;
-    font-size: 64px;
+    font-size: calc(64 * var(--vw));
     font-weight: 400;
     line-height: 1;
 }
@@ -172,13 +176,13 @@ Sub Product Category
 
 .sub-slider-controls {
     display: flex;
-    gap: 16px;
+    gap: calc(16 * var(--vw));
 }
 
 .sub-slider-button {
     position: relative;
-    width: 64px;
-    height: 64px;
+    width: calc(64 * var(--vw));
+    height: calc(64 * var(--vw));
     border: 1px solid #ddd;
     border-radius: 50%;
     background: #fff;
@@ -194,10 +198,10 @@ Sub Product Category
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 11px;
-    height: 11px;
-    border-top: 2px solid #888;
-    border-right: 2px solid #888;
+    width: calc(11 * var(--vw));
+    height: calc(11 * var(--vw));
+    border-top: calc(2 * var(--vw)) solid #888;
+    border-right: calc(2 * var(--vw)) solid #888;
 }
 
 .sub-slider-prev::before {
@@ -233,8 +237,8 @@ Sub Category Slider
 }
 
 .sub-category-slider .swiper-slide {
-    width: 480px !important;
-    flex: 0 0 480px;
+    width: calc(480 * var(--vw)) !important;
+    flex: 0 0 calc(480 * var(--vw));
     height: auto;
 }
 /* Category Card */
@@ -243,23 +247,23 @@ Sub Category Slider
     position: relative;
     display: block;
     width: 100%;
-    height: 510px;
+    height: calc(510 * var(--vw));
     overflow: hidden;
-    border-radius: 24px;
+    border-radius: calc(24 * var(--vw));
     background: #f7f7f7;
 }
 
 .sub-category-card-content {
     position: relative;
     z-index: 2;
-    padding: 78px 58px;
+    padding: calc(78 * var(--vw)) calc(58 * var(--vw));
 }
 
 .sub-category-card-content h3 {
-    margin: 0 0 40px;
+    margin: 0 0 calc(40 * var(--vw));
     color: #000;
     font-family: "Russo One", sans-serif;
-    font-size: 38px;
+    font-size: calc(38 * var(--vw));
     font-weight: 400;
     line-height: 1.15;
     letter-spacing: -.03em;
@@ -269,13 +273,13 @@ Sub Category Slider
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    min-width: 120px;
-    height: 52px;
-    padding: 0 28px;
+    min-width: calc(120 * var(--vw));
+    height: calc(52 * var(--vw));
+    padding: 0 calc(28 * var(--vw));
     border: 1px solid #d10a00;
-    border-radius: 999px;
+    border-radius: calc(999 * var(--vw));
     color: #d10a00;
-    font-size: 18px;
+    font-size: calc(18 * var(--vw));
     font-weight: 600;
     letter-spacing: .2em;
     text-transform: lowercase;
@@ -315,9 +319,9 @@ Sub Category Slider
 
 .sub-category-slider .swiper-slide {
 
-    width: 480px !important;
+    width: calc(480 * var(--vw)) !important;
 
-    flex: 0 0 480px;
+    flex: 0 0 calc(480 * var(--vw));
 
 }
 
@@ -333,18 +337,18 @@ Sub Pride Dealer
 ======================================== */
 
 .sub-pride-dealer {
-    padding: 120px 0;
+    padding: calc(120 * var(--vw)) 0;
     overflow: hidden;
     background: #fff;
 }
 
 .sub-pride-dealer .inner{
-    width: 1300px;
+    width: calc(1300 * var(--vw));
     margin: auto;
 }
 
 .sub-pride-dealer .sub-section-title {
-    margin-bottom: 60px;
+    margin-bottom: calc(60 * var(--vw));
 }
 
 
@@ -353,9 +357,9 @@ Sub Pride Dealer
 .sub-dealer-main {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 460px;
+    min-height: calc(460 * var(--vw));
     overflow: hidden;
-    border-radius: 24px;
+    border-radius: calc(24 * var(--vw));
     background: #f4f5f9;
 }
 
@@ -375,26 +379,26 @@ Sub Pride Dealer
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 70px 58px;
+    padding: calc(70 * var(--vw)) calc(58 * var(--vw));
 }
 
 .sub-dealer-area {
     align-self: flex-start;
-    margin-bottom: 26px;
-    padding: 10px 22px;
-    border-radius: 999px;
+    margin-bottom: calc(26 * var(--vw));
+    padding: calc(10 * var(--vw)) calc(22 * var(--vw));
+    border-radius: calc(999 * var(--vw));
     background: #d10a00;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: calc(15 * var(--vw));
     font-weight: 700;
 }
 
 .sub-dealer-name {
-    margin: 0 0 34px;
-    padding-bottom: 34px;
+    margin: 0 0 calc(34 * var(--vw));
+    padding-bottom: calc(34 * var(--vw));
     border-bottom: 1px solid #d4d5da;
     color: #111;
-    font-size: 3.2rem;
+    font-size: calc(32 * var(--vw));
     font-weight: 700;
     line-height: 1.3;
     letter-spacing: -.04em;
@@ -403,20 +407,20 @@ Sub Pride Dealer
 .sub-dealer-info-list {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    margin: 0 0 54px;
+    gap: calc(14 * var(--vw));
+    margin: 0 0 calc(54 * var(--vw));
 }
 
 .sub-dealer-info-list div {
     display: grid;
-    grid-template-columns: 74px 1fr;
+    grid-template-columns: calc(74 * var(--vw)) 1fr;
     gap: 0;
 }
 
 .sub-dealer-info-list dt,
 .sub-dealer-info-list dd {
     margin: 0;
-    font-size: 1.6rem;
+    font-size: calc(16 * var(--vw));
     line-height: 1.6;
 }
 
@@ -434,20 +438,20 @@ Sub Pride Dealer
     display: inline-flex;
     align-items: center;
     align-self: flex-start;
-    gap: 6px;
-    padding-bottom: 6px;
+    gap: calc(6 * var(--vw));
+    padding-bottom: calc(6 * var(--vw));
     border-bottom: 1px solid #111;
     color: #111;
-    font-size: 1.8rem;
+    font-size: calc(18 * var(--vw));
     font-weight: 700;
-    line-height: 2.6rem;
+    line-height: calc(26 * var(--vw));
 }
 
 .sub-dealer-map-icon {
     position: relative;
     display: block;
-    width: 24px;
-    height: 24px;
+    width: calc(24 * var(--vw));
+    height: calc(24 * var(--vw));
     background: url("/images/ic_map.png")center / cover no-repeat;
     
 }
@@ -457,7 +461,7 @@ Sub Pride Dealer
 
 .sub-dealer-slider-wrap {
     position: relative;
-    margin-top: 50px;
+    margin-top: calc(50 * var(--vw));
 }
 
 .sub-dealer-slider {
@@ -475,10 +479,10 @@ Sub Pride Dealer
 .sub-dealer-thumb {
     display: block;
     width: 100%;
-    height: 305px;
+    height: calc(305 * var(--vw));
     overflow: hidden;
     border: 0;
-    border-radius: 20px;
+    border-radius: calc(20 * var(--vw));
     background: none;
     padding: 0;
 }
@@ -503,8 +507,8 @@ Sub Pride Dealer
     position: absolute;
     top: 50%;
     z-index: 3;
-    width: 66px;
-    height: 66px;
+    width: calc(66 * var(--vw));
+    height: calc(66 * var(--vw));
     border: 1px solid #d5d5d5;
     border-radius: 50%;
     background: #fff;
@@ -512,11 +516,11 @@ Sub Pride Dealer
 }
 
 .sub-dealer-prev {
-    left: -106px;
+    left: calc(-106 * var(--vw));
 }
 
 .sub-dealer-next {
-    right: -106px;
+    right: calc(-106 * var(--vw));
 }
 
 .sub-dealer-slider-button::before {
@@ -524,10 +528,10 @@ Sub Pride Dealer
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 11px;
-    height: 11px;
-    border-top: 2px solid #aaa;
-    border-right: 2px solid #aaa;
+    width: calc(11 * var(--vw));
+    height: calc(11 * var(--vw));
+    border-top: calc(2 * var(--vw)) solid #aaa;
+    border-right: calc(2 * var(--vw)) solid #aaa;
 }
 
 .sub-dealer-prev::before {
@@ -549,28 +553,28 @@ Sub Pride Interview
 ======================================== */
 
 .sub-pride-interview {
-    padding: 120px 0;
+    padding: calc(120 * var(--vw)) 0;
     overflow: hidden;
     background: #f5f6fa;
     display: flex;
     justify-content: center;
 }
 .sub-pride-interview .inner{
-    width: 1300px;
+    width: calc(1300 * var(--vw));
 }
 
 .sub-pride-heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 60px;
+    margin-bottom: calc(60 * var(--vw));
 }
 
 .sub-pride-title {
     margin: 0;
     color: #222;
     font-family: "Russo One", sans-serif;
-    font-size: 64px;
+    font-size: calc(64 * var(--vw));
     font-weight: 400;
     line-height: 1;
     letter-spacing: -.02em;
@@ -585,13 +589,13 @@ Sub Pride Interview
 
 .sub-pride-controls {
     display: flex;
-    gap: 16px;
+    gap: calc(16 * var(--vw));
 }
 
 .sub-pride-button {
     position: relative;
-    width: 64px;
-    height: 64px;
+    width: calc(64 * var(--vw));
+    height: calc(64 * var(--vw));
     border: 1px solid #cfcfcf;
     border-radius: 50%;
     background: transparent;
@@ -609,10 +613,10 @@ Sub Pride Interview
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 12px;
-    height: 12px;
-    border-top: 2px solid #aaa;
-    border-right: 2px solid #aaa;
+    width: calc(12 * var(--vw));
+    height: calc(12 * var(--vw));
+    border-top: calc(2 * var(--vw)) solid #aaa;
+    border-right: calc(2 * var(--vw)) solid #aaa;
 }
 
 .sub-pride-prev::before {
@@ -648,7 +652,7 @@ Sub Pride Interview
     display: block;
     height: 100%;
     overflow: hidden;
-    border-radius: 24px;
+    border-radius: calc(24 * var(--vw));
     background: #fff;
 }
 
@@ -657,7 +661,7 @@ Sub Pride Interview
 
 .sub-pride-image {
     width: 100%;
-    height: 250px;
+    height: calc(250 * var(--vw));
     overflow: hidden;
 }
 
@@ -674,24 +678,24 @@ Sub Pride Interview
 /* Content */
 
 .sub-pride-content {
-    height: 260px;
+    height: calc(260 * var(--vw));
 }
 
 .sub-pride-content h3 {
-    padding: 50px 50px 20px;
+    padding: calc(50 * var(--vw)) calc(50 * var(--vw)) calc(20 * var(--vw));
     color: #111;
-    font-size: 2.4rem;
+    font-size: calc(24 * var(--vw));
     font-weight: 600;
-    letter-spacing: -0.01rem;
+    letter-spacing: -0.1px;
 }
 
 .sub-pride-content p {
-    padding: 0 50px 50px;
+    padding: 0 calc(50 * var(--vw)) calc(50 * var(--vw));
     color: #666;
-    font-size: 1.8rem;
+    font-size: calc(18 * var(--vw));
     font-weight: 400;
-    line-height: 2.6rem;
-    letter-spacing: -0.01rem;
+    line-height: calc(26 * var(--vw));
+    letter-spacing: -0.1px;
 }
 
 .sub-pride-card:hover .sub-pride-image img {
@@ -706,7 +710,7 @@ Sub Products Banner
 .sub-products-banner {
     position: relative;
     width: 100%;
-    height: 600px;
+    height: calc(600 * var(--vw));
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -743,22 +747,22 @@ Sub Products Banner
     justify-content: center;
     align-items: flex-start;
     height: 100%;
-    width: 1200px;
+    width: calc(1200 * var(--vw));
 }
 
 .sub-products-banner-content h2 {
-    margin: 0 0 28px;
+    margin: 0 0 calc(28 * var(--vw));
     color: #fff;
-    font-size: 46px;
+    font-size: calc(46 * var(--vw));
     font-weight: 700;
     line-height: 1.35;
     letter-spacing: -.04em;
 }
 
 .sub-products-banner-content p {
-    margin: 0 0 28px;
+    margin: 0 0 calc(28 * var(--vw));
     color: rgba(255, 255, 255, .78);
-    font-size: 17px;
+    font-size: calc(17 * var(--vw));
     font-weight: 400;
     line-height: 1.65;
     letter-spacing: -.03em;
@@ -768,13 +772,13 @@ Sub Products Banner
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    min-width: 240px;
-    height: 52px;
-    padding: 0 32px;
-    border-radius: 999px;
+    min-width: calc(240 * var(--vw));
+    height: calc(52 * var(--vw));
+    padding: 0 calc(32 * var(--vw));
+    border-radius: calc(999 * var(--vw));
     background: #e3170a;
     color: #fff;
-    font-size: 16px;
+    font-size: calc(16 * var(--vw));
     font-weight: 700;
     transition:
         background-color .3s,
@@ -783,7 +787,7 @@ Sub Products Banner
 
 .sub-products-banner-button:hover {
     background: #c91208;
-    transform: translateY(-2px);
+    transform: translateY(calc(-2 * var(--vw)));
 }
 
 /* ========================================
@@ -800,7 +804,7 @@ Sub Products Banner - Solution
 }
 
 .sub-products-banner-solution .sub-products-banner-button {
-    margin-top: 8px;
+    margin-top: calc(8 * var(--vw));
 }
 
 
@@ -840,8 +844,8 @@ Sub Product Item
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1300px;
-    min-height: 820px;
+    width: calc(1300 * var(--vw));
+    min-height: calc(820 * var(--vw));
 }
 
 .sub-product-item-image {
@@ -864,19 +868,19 @@ Sub Product Item
 
 .sub-product-item-category {
     display: inline-block;
-    margin-bottom: 24px;
+    margin-bottom: calc(24 * var(--vw));
     color: #d10a00;
     font-family: "Russo One", sans-serif;
-    font-size: 3.0rem;
+    font-size: calc(30 * var(--vw));
     font-weight: 400;
-    line-height: 42px;
+    line-height: calc(42 * var(--vw));
 }
 
 .sub-product-item-title {
-    margin-bottom: 30px;
+    margin-bottom: calc(30 * var(--vw));
     color: #000;
     font-family: "Russo One", sans-serif;
-    font-size: 5.6rem;
+    font-size: calc(56 * var(--vw));
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
@@ -891,12 +895,12 @@ Sub Product Item
 
 .sub-product-item-desc {
     max-width: 526px;
-    margin-bottom: 80px;
+    margin-bottom: calc(80 * var(--vw));
     color: #222;
-    font-size: 1.8rem;
+    font-size: calc(18 * var(--vw));
     font-weight: 400;
-    line-height: 30px;
-    letter-spacing: -0.1rem;
+    line-height: calc(30 * var(--vw));
+    letter-spacing: -1px;
 }
 
 .sub-product-item-button {
@@ -904,16 +908,16 @@ Sub Product Item
     justify-content: center;
     align-items: center;
 
-    width: 180px;
-    height: 72px;
+    width: calc(180 * var(--vw));
+    height: calc(72 * var(--vw));
 
-    border-radius: 999px;
+    border-radius: calc(999 * var(--vw));
 
     background: #d10a00;
 
     color: #fff;
 
-    font-size: 22px;
+    font-size: calc(22 * var(--vw));
     font-weight: 600;
     letter-spacing: .15em;
     text-transform: lowercase;
@@ -950,14 +954,14 @@ Section Title 공통
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 60px;
-    width: 1300px;
+    margin-bottom: calc(60 * var(--vw));
+    width: calc(1300 * var(--vw));
 }
 
 .detail-section-title {
     margin: 0;
     font-family: "Russo One", sans-serif;
-    font-size: 6.0rem;
+    font-size: calc(60 * var(--vw));
     font-weight: 400;
     line-height: 1;
     letter-spacing: 1px;
@@ -983,7 +987,7 @@ Detail Visual
 .detail-visual .inner {
     position: relative;
     z-index: 2;
-    width: 1400px;
+    width: calc(1400 * var(--vw));
     margin: auto;
 }
 
@@ -991,19 +995,19 @@ Detail Visual
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 1080px;
+    min-height: calc(1080 * var(--vw));
 }
 
 .detail-visual-content {
-    flex: 0 0 560px;
+    flex: 0 0 calc(560 * var(--vw));
 }
 
 .detail-visual-title {
-    margin: 0 0 28px;
+    margin: 0 0 calc(28 * var(--vw));
     font-family: "Russo One", sans-serif;
-    font-size: 6.6rem;
+    font-size: calc(66 * var(--vw));
     font-weight: 400;
-    line-height: 7.6rem;
+    line-height: calc(76 * var(--vw));
     letter-spacing: -.03em;
 }
 
@@ -1030,16 +1034,16 @@ Detail Visual
 
 .detail-visual-desc {
     max-width: 560px;
-    margin: 0 0 60px;
+    margin: 0 0 calc(60 * var(--vw));
     color: rgb(0 0 0 / 60%);
-    font-size: 2.0rem;
-    line-height: 3.6rem;
-    letter-spacing: -.1rem;
+    font-size: calc(20 * var(--vw));
+    line-height: calc(36 * var(--vw));
+    letter-spacing: -1px;
 }
 
 .detail-product-slider {
-    flex: 0 0 752px;
-    height: 910px;
+    flex: 0 0 calc(752 * var(--vw));
+    height: calc(910 * var(--vw));
     overflow: hidden;
 }
 
@@ -1054,7 +1058,7 @@ Detail Visual
     align-items: flex-end;
     width: 100%;
     height: 100%;
-    margin-left: 50px;
+    margin-left: calc(50 * var(--vw));
 }
 
 .detail-product-image img {
@@ -1071,15 +1075,15 @@ Detail Visual Controls
 
 .detail-visual-controls {
     display: flex;
-    gap: 14px;
-    margin-top: 60px;
+    gap: calc(14 * var(--vw));
+    margin-top: calc(60 * var(--vw));
 }
 
 .detail-visual-button {
     position: relative;
 
-    width: 58px;
-    height: 58px;
+    width: calc(58 * var(--vw));
+    height: calc(58 * var(--vw));
 
     border: 1px solid #ddd;
     border-radius: 50%;
@@ -1099,11 +1103,11 @@ Detail Visual Controls
     top: 50%;
     left: 50%;
 
-    width: 11px;
-    height: 11px;
+    width: calc(11 * var(--vw));
+    height: calc(11 * var(--vw));
 
-    border-top: 2px solid #999;
-    border-right: 2px solid #999;
+    border-top: calc(2 * var(--vw)) solid #999;
+    border-right: calc(2 * var(--vw)) solid #999;
 
     transition: .3s;
 }
@@ -1138,7 +1142,7 @@ Detail Main Features
 ======================================== */
 
 .detail-features {
-    padding: 120px 0;
+    padding: calc(120 * var(--vw)) 0;
     overflow: hidden;
     background: #fff;
     display: flex;
@@ -1150,8 +1154,8 @@ Detail Main Features
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 68px;
-    width: 1300px;
+    margin-bottom: calc(68 * var(--vw));
+    width: calc(1300 * var(--vw));
 }
 
 
@@ -1159,13 +1163,13 @@ Detail Main Features
 
 .detail-features-controls {
     display: flex;
-    gap: 16px;
+    gap: calc(16 * var(--vw));
 }
 
 .detail-features-button {
     position: relative;
-    width: 64px;
-    height: 64px;
+    width: calc(64 * var(--vw));
+    height: calc(64 * var(--vw));
     border: 1px solid #d2d2d2;
     border-radius: 50%;
     background: #fff;
@@ -1181,10 +1185,10 @@ Detail Main Features
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 12px;
-    height: 12px;
-    border-top: 2px solid #aaa;
-    border-right: 2px solid #aaa;
+    width: calc(12 * var(--vw));
+    height: calc(12 * var(--vw));
+    border-top: calc(2 * var(--vw)) solid #aaa;
+    border-right: calc(2 * var(--vw)) solid #aaa;
 }
 
 .detail-features-prev::before {
@@ -1206,7 +1210,7 @@ Detail Main Features
 ======================================== */
 
 .detail-features {
-    padding: 120px 0;
+    padding: calc(120 * var(--vw)) 0;
     overflow: hidden;
     background: #fff;
 }
@@ -1215,14 +1219,14 @@ Detail Main Features
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 60px;
+    margin-bottom: calc(60 * var(--vw));
 }
 
 .detail-features-title {
     margin: 0;
     color: #111;
     font-family: "Russo One", sans-serif;
-    font-size: 6.4rem;
+    font-size: calc(64 * var(--vw));
     font-weight: 400;
     line-height: 1;
 }
@@ -1236,13 +1240,13 @@ Detail Main Features
 
 .detail-features-controls {
     display: flex;
-    gap: 16px;
+    gap: calc(16 * var(--vw));
 }
 
 .detail-features-button {
     position: relative;
-    width: 64px;
-    height: 64px;
+    width: calc(64 * var(--vw));
+    height: calc(64 * var(--vw));
     border: 1px solid #ddd;
     border-radius: 50%;
     background: #fff;
@@ -1258,10 +1262,10 @@ Detail Main Features
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 12px;
-    height: 12px;
-    border-top: 2px solid #888;
-    border-right: 2px solid #888;
+    width: calc(12 * var(--vw));
+    height: calc(12 * var(--vw));
+    border-top: calc(2 * var(--vw)) solid #888;
+    border-right: calc(2 * var(--vw)) solid #888;
 }
 
 .detail-features-prev::before {
@@ -1296,8 +1300,8 @@ Detail Main Features
 }
 
 .detail-features-slider .swiper-slide {
-    width: 400px !important;
-    flex: 0 0 400px;
+    width: calc(400 * var(--vw)) !important;
+    flex: 0 0 calc(400 * var(--vw));
     height: auto;
 }
 
@@ -1305,16 +1309,16 @@ Detail Main Features
 /* Card */
 
 .detail-features-card {
-    height: 520px;
+    height: calc(520 * var(--vw));
     overflow: hidden;
     border: 1px solid #ddd;
-    border-radius: 22px;
+    border-radius: calc(22 * var(--vw));
     background: #fff;
 }
 
 .detail-features-image {
     width: 100%;
-    height: 200px;
+    height: calc(200 * var(--vw));
     overflow: hidden;
 }
 
@@ -1326,24 +1330,24 @@ Detail Main Features
 }
 
 .detail-features-content {
-    min-height: 320px;
+    min-height: calc(320 * var(--vw));
 }
 
 .detail-features-content h3 {
-    margin: 50px 40px 20px;
+    margin: calc(50 * var(--vw)) calc(40 * var(--vw)) calc(20 * var(--vw));
     color: #111;
-    font-size: 2.4rem;
+    font-size: calc(24 * var(--vw));
     font-weight: 700;
     line-height: 1.35;
     letter-spacing: -.04em;
 }
 
 .detail-features-content p {
-    margin: 0 40px;
+    margin: 0 calc(40 * var(--vw));
     color: #777;
-    font-size: 2.0rem;
-    line-height: 3.0rem;
-    letter-spacing: -.1rem;
+    font-size: calc(20 * var(--vw));
+    line-height: calc(30 * var(--vw));
+    letter-spacing: -1px;
 }
 
 
@@ -1352,20 +1356,20 @@ Detail Spec
 ======================================== */
 
 .detail-spec {
-    padding: 120px 0;
+    padding: calc(120 * var(--vw)) 0;
     background: #FAFAFA;
     display: flex;
     justify-content: center;
 }
 .detail-spec .inner {
-    width: 1300px;
+    width: calc(1300 * var(--vw));
 }
 
 .detail-spec-title {
-    margin: 0 0 68px;
+    margin: 0 0 calc(68 * var(--vw));
     color: #000;
     font-family: "Russo One", sans-serif;
-    font-size: 6.4rem;
+    font-size: calc(64 * var(--vw));
     font-weight: 400;
     line-height: 1;
     letter-spacing: -.03em;
@@ -1382,7 +1386,7 @@ Detail Spec
 }
 
 .detail-spec-content {
-    flex: 0 0 620px;
+    flex: 0 0 calc(620 * var(--vw));
 }
 
 .detail-spec-list {
@@ -1393,9 +1397,9 @@ Detail Spec
 
 .detail-spec-row {
     display: grid;
-    grid-template-columns: 190px 1fr;
+    grid-template-columns: calc(190 * var(--vw)) 1fr;
     align-items: center;
-    min-height: 72px;
+    min-height: calc(72 * var(--vw));
     border-bottom: 1px solid #ccc;
 }
 
@@ -1406,14 +1410,14 @@ Detail Spec
 
 .detail-spec-row dt {
     color: #222;
-    font-size: 1.8rem;
+    font-size: calc(18 * var(--vw));
     font-weight: 700;
     line-height: 1.5;
 }
 
 .detail-spec-row dd {
     color: #222;
-    font-size: 1.8rem;
+    font-size: calc(18 * var(--vw));
     font-weight: 400;
     line-height: 1.55;
     letter-spacing: -.04em;
@@ -1421,22 +1425,22 @@ Detail Spec
 
 .detail-spec-buttons {
     display: flex;
-    gap: 16px;
-    margin-top: 48px;
+    gap: calc(16 * var(--vw));
+    margin-top: calc(48 * var(--vw));
 }
 
 .detail-spec-button {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    gap: 12px;
-    min-width: 260px;
-    height: 58px;
-    padding: 0 28px;
-    border-radius: 999px;
+    gap: calc(12 * var(--vw));
+    min-width: calc(260 * var(--vw));
+    height: calc(58 * var(--vw));
+    padding: 0 calc(28 * var(--vw));
+    border-radius: calc(999 * var(--vw));
     background: #d10a00;
     color: #fff;
-    font-size: 1.6rem;
+    font-size: calc(16 * var(--vw));
     font-weight: 600;
     letter-spacing: .04em;
     transition:
@@ -1446,15 +1450,15 @@ Detail Spec
 
 .detail-spec-button:hover {
     background: #b90800;
-    transform: translateY(-2px);
+    transform: translateY(calc(-2 * var(--vw)));
 }
 
 .detail-spec-button-icon {
     position: relative;
     display: block;
     flex: 0 0 auto;
-    width: 24px;
-    height: 24px;
+    width: calc(24 * var(--vw));
+    height: calc(24 * var(--vw));
 }
 
 
@@ -1478,14 +1482,14 @@ Detail Spec
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 0 0 520px;
-    min-height: 600px;
+    flex: 0 0 calc(520 * var(--vw));
+    min-height: calc(600 * var(--vw));
 }
 
 .detail-spec-image img {
     display: block;
     max-width: 100%;
-    max-height: 590px;
+    max-height: calc(590 * var(--vw));
     width: auto;
     height: auto;
     object-fit: contain;
@@ -1497,18 +1501,18 @@ Detail FAQ
 ======================================== */
 
 .detail-faq {
-    padding: 120px 0;
+    padding: calc(120 * var(--vw)) 0;
     background: #fff;
     display: flex;justify-content: center;
 }
 .detail-faq .inner {
-    width: 1300px;
+    width: calc(1300 * var(--vw));
 }
 .detail-faq-title {
-    margin: 0 0 68px;
+    margin: 0 0 calc(68 * var(--vw));
     color: #000;
     font-family: "Russo One", sans-serif;
-    font-size: 6.4rem;
+    font-size: calc(64 * var(--vw));
     font-weight: 400;
     line-height: 1;
     letter-spacing: -.03em;
@@ -1528,12 +1532,12 @@ Detail FAQ
 
 .detail-faq-question {
     display: grid;
-    grid-template-columns: 50px 1fr 40px;
+    grid-template-columns: calc(50 * var(--vw)) 1fr calc(40 * var(--vw));
     align-items: center;
     gap: 0;
 
     width: 100%;
-    min-height: 116px;
+    min-height: calc(116 * var(--vw));
     padding: 0;
     border: none;
     color: #111;
@@ -1544,13 +1548,13 @@ Detail FAQ
 .detail-faq-number {
     color: #d10a00;
     font-family: "Russo One", sans-serif;
-    font-size: 2.4rem;
+    font-size: calc(24 * var(--vw));
     line-height: 1;
 }
 
 .detail-faq-question-text {
-    padding: 0 20px 0 0;
-    font-size: 2.4rem;
+    padding: 0 calc(20 * var(--vw)) 0 0;
+    font-size: calc(24 * var(--vw));
     font-weight: 700;
     letter-spacing: -2%;
 }
@@ -1558,8 +1562,8 @@ Detail FAQ
 .detail-faq-icon {
     position: relative;
     display: block;
-    width: 28px;
-    height: 28px;
+    width: calc(28 * var(--vw));
+    height: calc(28 * var(--vw));
     justify-self: end;
 }
 
@@ -1575,13 +1579,13 @@ Detail FAQ
 }
 
 .detail-faq-icon::before {
-    width: 26px;
-    height: 2px;
+    width: calc(26 * var(--vw));
+    height: calc(2 * var(--vw));
 }
 
 .detail-faq-icon::after {
-    width: 2px;
-    height: 26px;
+    width: calc(2 * var(--vw));
+    height: calc(26 * var(--vw));
 }
 
 .detail-faq-item.is-active .detail-faq-icon::after {
@@ -1599,14 +1603,14 @@ Detail FAQ
 }
 
 .detail-faq-answer-inner {
-    padding: 30px 60px;
+    padding: calc(30 * var(--vw)) calc(60 * var(--vw));
 }
 
 .detail-faq-answer p {
     margin: 0;
     color: #555;
-    font-size: 1.8rem;
+    font-size: calc(18 * var(--vw));
     font-weight: 400;
-    line-height: 3.0rem;
+    line-height: calc(30 * var(--vw));
     letter-spacing: -2%;
 }
