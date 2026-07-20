@@ -268,107 +268,147 @@
     }
 
     /**
-     * Drag Cursor
-     *
-     * drag-cursor-area 영역에서
-     * 커스텀 드래그 커서 표시
-     */
-    function initDragCursor() {
-        const dragCursor =
-            document.querySelector(
-                ".drag-cursor"
-            );
-
-        if (!dragCursor) return;
-
-        let currentArea = null;
-
-        document.addEventListener(
-            "pointerover",
-            (event) => {
-                const area =
-                    event.target.closest(
-                        ".drag-cursor-area"
-                    );
-
-                if (!area) return;
-
-                currentArea = area;
-
-                dragCursor.classList.add(
-                    "is-visible"
-                );
-            }
+ * Drag Cursor
+ *
+ * drag-cursor-area 영역에서
+ * 커스텀 드래그 커서 표시
+ */
+function initDragCursor() {
+    const dragCursor =
+        document.querySelector(
+            ".drag-cursor"
         );
 
-        document.addEventListener(
-            "pointerout",
-            (event) => {
-                if (!currentArea) return;
+    if (!dragCursor) return;
 
-                const area =
-                    event.target.closest(
-                        ".drag-cursor-area"
-                    );
+    let currentArea = null;
+    let pointerX = 0;
+    let pointerY = 0;
+    let rafId = null;
 
-                if (!area) return;
-
-                if (
-                    area.contains(
-                        event.relatedTarget
-                    )
-                ) {
-                    return;
-                }
-
-                currentArea = null;
-
-                dragCursor.classList.remove(
-                    "is-visible",
-                    "is-dragging"
-                );
-            }
+    function updateCursorPosition() {
+        dragCursor.style.setProperty(
+            "--cursor-x",
+            `${pointerX}px`
         );
 
-        document.addEventListener(
-            "pointermove",
-            (event) => {
-                if (!currentArea) return;
-
-                dragCursor.style.transform =
-                    `translate3d(${event.clientX}px, ${event.clientY - 35}px, 0)`;
-            }
+        dragCursor.style.setProperty(
+            "--cursor-y",
+            `${pointerY - 35}px`
         );
 
-        document.addEventListener(
-            "pointerdown",
-            () => {
-                if (!currentArea) return;
-
-                dragCursor.classList.add(
-                    "is-dragging"
-                );
-            }
-        );
-
-        document.addEventListener(
-            "pointerup",
-            () => {
-                dragCursor.classList.remove(
-                    "is-dragging"
-                );
-            }
-        );
-
-        document.addEventListener(
-            "pointercancel",
-            () => {
-                dragCursor.classList.remove(
-                    "is-dragging"
-                );
-            }
-        );
+        rafId = null;
     }
+
+    function requestCursorUpdate() {
+        if (rafId) return;
+
+        rafId =
+            window.requestAnimationFrame(
+                updateCursorPosition
+            );
+    }
+
+    document.addEventListener(
+        "pointerover",
+        (event) => {
+            const area =
+                event.target.closest(
+                    ".drag-cursor-area"
+                );
+
+            if (!area) return;
+
+            currentArea = area;
+
+            /*
+             * 커서가 처음 나타날 때
+             * 이전 위치에서 튀지 않도록 현재 위치 적용
+             */
+            pointerX = event.clientX;
+            pointerY = event.clientY;
+
+            updateCursorPosition();
+
+            dragCursor.classList.add(
+                "is-visible"
+            );
+        }
+    );
+
+    document.addEventListener(
+        "pointerout",
+        (event) => {
+            if (!currentArea) return;
+
+            const area =
+                event.target.closest(
+                    ".drag-cursor-area"
+                );
+
+            if (!area) return;
+
+            if (
+                area.contains(
+                    event.relatedTarget
+                )
+            ) {
+                return;
+            }
+
+            currentArea = null;
+
+            dragCursor.classList.remove(
+                "is-visible",
+                "is-dragging"
+            );
+        }
+    );
+
+    document.addEventListener(
+        "pointermove",
+        (event) => {
+            if (!currentArea) return;
+
+            pointerX = event.clientX;
+            pointerY = event.clientY;
+
+            requestCursorUpdate();
+        },
+        {
+            passive: true
+        }
+    );
+
+    document.addEventListener(
+        "pointerdown",
+        () => {
+            if (!currentArea) return;
+
+            dragCursor.classList.add(
+                "is-dragging"
+            );
+        }
+    );
+
+    document.addEventListener(
+        "pointerup",
+        () => {
+            dragCursor.classList.remove(
+                "is-dragging"
+            );
+        }
+    );
+
+    document.addEventListener(
+        "pointercancel",
+        () => {
+            dragCursor.classList.remove(
+                "is-dragging"
+            );
+        }
+    );
+}
 
     /**
  * All Menu

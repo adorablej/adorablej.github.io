@@ -1,8 +1,10 @@
+/* products.html , Category. */
+
 const categoryOffset = Math.max(40, (window.innerWidth - 1300) / 2);
 
 const categorySwiper = new Swiper(".sub-category-slider", {
     slidesPerView: "auto",
-    spaceBetween: 30,
+    spaceBetween: 25,
     speed: 700,
     grabCursor: true,
 
@@ -36,6 +38,8 @@ const categorySwiper = new Swiper(".sub-category-slider", {
 });
 
 
+/* products.html , Hunter Pride Dealer. */
+
 const dealerSwiper = new Swiper(".sub-dealer-slider", {
     slidesPerView: 3,
     spaceBetween: 30,
@@ -66,6 +70,8 @@ const dealerSwiper = new Swiper(".sub-dealer-slider", {
     },
 });
 
+
+/* products.html , Hunter Pride Dealer. */
 
 const dealerThumbs = document.querySelectorAll(".sub-dealer-thumb");
 
@@ -102,7 +108,7 @@ dealerThumbs.forEach((thumb) => {
 });
 
 
-
+/* products.html , Hunter Pride Interview. */
 const prideSwiper = new Swiper(".sub-pride-slider", {
     slidesPerView: 3,
     spaceBetween: 38,
@@ -133,20 +139,8 @@ const prideSwiper = new Swiper(".sub-pride-slider", {
     },
 });
 
-const detailProductSwiper = new Swiper(".detail-product-slider", {
-    slidesPerView: 1,
-    speed: 600,
-    effect: "fade",
-    fadeEffect: {
-        crossFade: true,
-    },
 
-    navigation: {
-        prevEl: ".detail-visual-prev",
-        nextEl: ".detail-visual-next",
-    },
-});
-
+/* product-detail.html , Main Features. */
 const featuresOffset = Math.max(40, (window.innerWidth - 1300) / 2);
 
 const featuresSwiper = new Swiper(".detail-features-slider", {
@@ -185,6 +179,23 @@ const featuresSwiper = new Swiper(".detail-features-slider", {
 });
 
 
+/* product-detail.html , Detail Visual. */
+const detailProductSwiper = new Swiper(".detail-product-slider", {
+    slidesPerView: 1,
+    speed: 600,
+    effect: "fade",
+    fadeEffect: {
+        crossFade: true,
+    },
+
+    navigation: {
+        prevEl: ".detail-visual-prev",
+        nextEl: ".detail-visual-next",
+    },
+});
+
+
+/* product-detail.html , FAQ. */
 const faqItems = document.querySelectorAll(".detail-faq-item");
 
 faqItems.forEach((item) => {

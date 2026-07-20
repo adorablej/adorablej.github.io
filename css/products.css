@@ -1022,8 +1022,15 @@ Detail Visual
     color: #111;
 }
 
-.detail-visual-title .green {
-    color: #19c629;
+.detail-visual-title .greenX {
+    background: url(../images/p_X.png);
+    display: inline-block;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: 0;
+    width: calc(100vw * 66 / 1920);
+    height: calc(100vw * 76 / 1920);
 }
 
 .detail-visual-title sup {
@@ -1285,13 +1292,13 @@ Detail Main Features
 /* Slider */
 
 .detail-features-slider-wrap {
-    width: 100%;
-    overflow: hidden;
+    width:100%;
+    overflow:hidden;
 }
 
 .detail-features-slider {
-    width: 100%;
-    overflow: visible;
+    width:100%;
+    overflow:visible;
 }
 
 .detail-features-slider .swiper-wrapper {

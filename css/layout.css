@@ -594,65 +594,83 @@ Drag Cursor
 ======================================== */
 
 .drag-cursor-area {
-    cursor: grab;
+    cursor:grab;
 }
 
 .drag-cursor-area:active {
-    cursor: grabbing;
+    cursor:grabbing;
 }
 
 .drag-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999;
+    --cursor-x:-200px;
+    --cursor-y:-200px;
+    --cursor-scale:.9;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: calc(18 * var(--vw));
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:9999;
 
-    width: calc(180 * var(--vw));
-    height: calc(56 * var(--vw));
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:calc(18 * var(--vw));
 
-    border-radius: calc(999 * var(--vw));
-    background: #C00C00;
+    width:calc(180 * var(--vw));
+    height:calc(56 * var(--vw));
 
-    color: #fff;
+    border-radius:calc(999 * var(--vw));
+    background:#C00C00;
+    color:#fff;
 
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
 
-    transform: translate(-50%, -50%) scale(.9);
+    transform:
+        translate3d(
+            var(--cursor-x),
+            var(--cursor-y),
+            0
+        )
+        translate(-50%, -50%)
+        scale(var(--cursor-scale));
 
-    /* left, top에는 transition을 적용하지 않음 */
+    /*
+     * transform에는 transition을 주지 않음
+     * pointermove마다 transition이 재실행되는 버벅임 방지
+     */
     transition:
         opacity .15s ease,
-        visibility .15s ease,
-        transform .15s ease;
+        visibility .15s ease;
+
+    will-change:transform;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
 }
 
 .drag-cursor.is-visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
+    --cursor-scale:1;
+
+    opacity:1;
+    visibility:visible;
 }
 
 .drag-cursor.is-dragging {
-    transform: translate(-50%, -50%) scale(.94);
+    --cursor-scale:.94;
 }
 
 .drag-cursor strong {
-    font-size: calc(14 * var(--vw));
-    font-weight: 500;
-    letter-spacing: .28em;
+    font-size:calc(14 * var(--vw));
+    font-weight:500;
+    letter-spacing:.28em;
 }
 
 .drag-cursor span {
-    font-size: calc(20 * var(--vw));
-    font-weight: 300;
+    font-size:calc(20 * var(--vw));
+    font-weight:300;
 }
+
 /* ========================================
 Header Menu Open
 ======================================== */
