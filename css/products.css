@@ -49,8 +49,6 @@ sub page 공통
 
 .page-title {
     font-size: calc(64 * var(--vw));
-    font-weight: 800;
-    line-height: 1;
     color: #000;
     font-family: "Russo One", sans-serif;
     line-height: calc(80 * var(--vw));
@@ -169,6 +167,7 @@ Sub Product Category
 
 .sub-section-title span {
     color: #d10a00;
+    font-family: "Russo One", sans-serif;
 }
 
 
@@ -513,6 +512,7 @@ Sub Pride Dealer
     border-radius: 50%;
     background: #fff;
     transform: translateY(-50%);
+
 }
 
 .sub-dealer-prev {
@@ -604,8 +604,10 @@ Sub Pride Interview
         opacity .3s;
 }
 
+
 .sub-pride-button:hover {
-    border-color: #d10a00;
+    border-color: var(--red);
+    color: var(--red);
 }
 
 .sub-pride-button::before {
@@ -617,6 +619,10 @@ Sub Pride Interview
     height: calc(12 * var(--vw));
     border-top: calc(2 * var(--vw)) solid #aaa;
     border-right: calc(2 * var(--vw)) solid #aaa;
+}
+
+.sub-pride-button::before:hover {
+    border-color: var(--red);
 }
 
 .sub-pride-prev::before {
@@ -719,15 +725,11 @@ Sub Products Banner
 .sub-products-banner-bg {
     position: absolute;
     inset: 0;
+    background: url(/images/sub_p_bbg02.png);
+    background-size: cover;
+    background-position: center;
 }
 
-.sub-products-banner-bg img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
 
 .sub-products-banner-dim {
     position: absolute;
@@ -745,7 +747,8 @@ Sub Products Banner
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: flex-end;
+    text-align: right;
     height: 100%;
     width: calc(1200 * var(--vw));
 }
@@ -794,9 +797,14 @@ Sub Products Banner
 Sub Products Banner - Solution
 ======================================== */
 
+.sub-products-banner-solution .sub-products-banner-bg{ 
+    background: url(/images/sub_p_bbg01.png);
+    background-size: cover;
+    background-position: center;
+}
 .sub-products-banner-solution .sub-products-banner-content {
-    align-items: flex-end;
-    text-align: right;
+    align-items: flex-start;
+    text-align: left;
 }
 
 .sub-products-banner-solution .sub-products-banner-content h2 span {
@@ -1621,3 +1629,45 @@ Detail FAQ
     line-height: calc(30 * var(--vw));
     letter-spacing: -2%;
 }
+
+/* products.html , Slider Prev / Next Buttons. */
+
+.sub-slider-button,
+.sub-dealer-slider-button,
+.sub-pride-button {
+    border-color: #b5b5b5;
+    transition:
+        border-color .25s ease,
+        opacity .25s ease;
+}
+
+.sub-slider-button::before,
+.sub-dealer-slider-button::before,
+.sub-pride-button::before {
+    width: calc(14 * var(--vw));
+    height: calc(14 * var(--vw));
+    border-top-width: calc(3 * var(--vw));
+    border-right-width: calc(3 * var(--vw));
+    border-color: #b5b5b5;
+    transition: border-color .25s ease;
+}
+
+.sub-slider-button:hover,
+.sub-dealer-slider-button:hover,
+.sub-pride-button:hover {
+    border-color: var(--red);
+}
+
+.sub-slider-button:hover::before,
+.sub-dealer-slider-button:hover::before,
+.sub-pride-button:hover::before {
+    border-color: var(--red);
+}
+
+.sub-slider-button.swiper-button-disabled,
+.sub-dealer-slider-button.swiper-button-disabled,
+.sub-pride-button.swiper-button-disabled {
+    opacity: .35;
+    pointer-events: none;
+}
+
