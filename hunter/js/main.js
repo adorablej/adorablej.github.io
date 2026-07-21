@@ -11,7 +11,7 @@
         initMainVisual();
         initMediaSection();
         initSectionNavigator();
-        initSectionScroller();
+        initSectionSplashes();
     }
 
     /**
@@ -183,295 +183,629 @@
         });
     }
 
-    /* Section Navigator
-    *
-    * - 네비 클릭 시 해당 섹션으로 이동
-    * - 현재 보이는 섹션에 맞춰 is-active 변경
-    * - Section 1, 2에서는 네비 숨김
-    * - Section 3 History부터 Section 7 Business까지 표시
-    */
-   function initSectionNavigator() {
-       const navigator = document.querySelector(".section-nav");
-   
-       if (!navigator) return;
-   
-       const navItems = [
-           ...navigator.querySelectorAll(".section-nav-item")
-       ];
-   
-       const sections = navItems
-           .map((item) => {
-               return document.getElementById(
-                   item.dataset.target
-               );
-           })
-           .filter(Boolean);
-   
-       if (!navItems.length || !sections.length) return;
-   
-       const firstSection = sections[0];
-       const lastSection = sections[sections.length - 1];
-   
-       /**
-        * 현재 섹션에 해당하는 버튼 활성화
-        */
-       function setActiveItem(sectionId) {
-           navItems.forEach((item) => {
-               item.classList.toggle(
-                   "is-active",
-                   item.dataset.target === sectionId
-               );
-           });
-       }
-   
-       /**
-        * 현재 스크롤 위치에 따라
-        * 네비게이터 표시 여부와 활성 버튼 변경
-        */
-       function updateNavigator() {
-           const scrollY = window.scrollY;
-           const checkPoint = scrollY + window.innerHeight / 2;
-   
-           const firstSectionTop = firstSection.offsetTop;
-           const lastSectionBottom =
-               lastSection.offsetTop + lastSection.offsetHeight;
-   
-           /*
-            * History 진입 전에는 숨김
-            * Business를 벗어난 뒤에도 숨김
-            */
-           const isVisible =
-               checkPoint >= firstSectionTop &&
-               checkPoint < lastSectionBottom;
-   
-           navigator.classList.toggle(
-               "is-visible",
-               isVisible
-           );
-   
-           if (!isVisible) return;
-   
-           const activeSection = sections.find((section) => {
-               const sectionTop = section.offsetTop;
-               const sectionBottom =
-                   sectionTop + section.offsetHeight;
-   
-               return (
-                   checkPoint >= sectionTop &&
-                   checkPoint < sectionBottom
-               );
-           });
-   
-           if (activeSection) {
-               setActiveItem(activeSection.id);
-           }
-       }
-   
-       /**
-        * 네비 버튼 클릭 시 해당 섹션으로 이동
-        */
-       navItems.forEach((item) => {
-           item.addEventListener("click", () => {
-               const targetSection =
-                   document.getElementById(
-                       item.dataset.target
-                   );
-   
-               if (!targetSection) return;
-   
-               setActiveItem(targetSection.id);
-   
-               targetSection.scrollIntoView({
-                   behavior: "smooth",
-                   block: "start"
-               });
-           });
-       });
-   
-       /*
-        * 최초 실행
-        */
-       updateNavigator();
-   
-       /*
-        * 스크롤 시 위치 확인
-        */
-       window.addEventListener(
-           "scroll",
-           updateNavigator,
-           { passive: true }
-       );
-   
-       /*
-        * 화면 크기 변경 시 위치 다시 계산
-        */
-       window.addEventListener(
-           "resize",
-           updateNavigator
-       );
-   }
-    
-   /**
- * Main Section Scroller
+/**
+ * Section Navigator
  *
- * - 기존 window 스크롤 구조 유지
- * - 휠을 일정량 움직이면 한 섹션씩 이동
- * - 트랙패드의 잔여 휠 입력 방지
- * - Footer도 마지막 섹션처럼 이동
- * - Motion 진입 후 History로 자동 이동
+ * - 네비 클릭 시 해당 섹션으로 이동
+ * - 현재 보이는 섹션에 맞춰 is-active 변경
+ * - History부터 Business까지 네비 표시
  */
-   function initSectionScroller() {
+function initSectionNavigator() {
+    const navigator = document.querySelector(".section-nav");
+    const scrollContainer = document.querySelector(".page-scroll");
 
-    const sections = [...document.querySelectorAll(".main-section")];
+    if (!navigator || !scrollContainer) return;
 
-    if (!sections.length) return;
+    const navItems = [
+        ...navigator.querySelectorAll(".section-nav-item")
+    ];
 
-    let currentIndex = 0;
-    let isAnimating = false;
-    let lastWheelTime = 0;
+    const sections = navItems
+        .map((item) => {
+            return document.getElementById(
+                item.dataset.target
+            );
+        })
+        .filter(Boolean);
 
-    const LOCK_TIME = 800;
+    if (!navItems.length || !sections.length) return;
 
-    function getCurrentSection() {
+    const firstSection = sections[0];
+    const lastSection = sections[sections.length - 1];
 
-        const center = window.scrollY + window.innerHeight / 2;
-
-        let index = 0;
-
-        sections.forEach((section, i) => {
-
-            if (center >= section.offsetTop) {
-                index = i;
-            }
-
+    function setActiveItem(sectionId) {
+        navItems.forEach((item) => {
+            item.classList.toggle(
+                "is-active",
+                item.dataset.target === sectionId
+            );
         });
-
-        return index;
-
     }
 
-    function scrollToSection(index) {
+    function updateNavigator() {
+        const checkPoint =
+            scrollContainer.scrollTop +
+            scrollContainer.clientHeight / 2;
 
-        index = Math.max(
-            0,
-            Math.min(index, sections.length - 1)
+        const firstSectionTop = firstSection.offsetTop;
+
+        const lastSectionBottom =
+            lastSection.offsetTop +
+            lastSection.offsetHeight;
+
+        const isVisible =
+            checkPoint >= firstSectionTop &&
+            checkPoint < lastSectionBottom;
+
+        navigator.classList.toggle(
+            "is-visible",
+            isVisible
         );
 
-        isAnimating = true;
+        if (!isVisible) return;
 
-        currentIndex = index;
+        const activeSection = sections.find((section) => {
+            const sectionTop = section.offsetTop;
 
-        window.scrollTo({
-            top: sections[index].offsetTop,
-            behavior: "smooth"
+            const sectionBottom =
+                sectionTop + section.offsetHeight;
+
+            return (
+                checkPoint >= sectionTop &&
+                checkPoint < sectionBottom
+            );
         });
 
-        setTimeout(() => {
-
-            isAnimating = false;
-
-        }, LOCK_TIME);
-
+        if (activeSection) {
+            setActiveItem(activeSection.id);
+        }
     }
 
-    function handleWheel(e) {
+    navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+            const targetSection =
+                document.getElementById(
+                    item.dataset.target
+                );
 
-        if (window.innerWidth <= 768) return;
+            if (!targetSection) return;
 
-        const business = sections[sections.length - 1];
+            setActiveItem(targetSection.id);
 
-        const businessTop = business.offsetTop;
+            scrollContainer.scrollTo({
+                top: targetSection.offsetTop,
+                behavior: "smooth"
+            });
+        });
+    });
 
-        const businessBottom =
-            business.offsetTop + business.offsetHeight;
+    updateNavigator();
 
-        /**
-         * Footer에서는 일반 스크롤
-         */
-        if (window.scrollY >= businessBottom - 10) {
-
-            return;
-
+    scrollContainer.addEventListener(
+        "scroll",
+        updateNavigator,
+        {
+            passive: true
         }
-
-        /**
-         * Business에서 아래는 Footer로
-         */
-        if (
-            currentIndex === sections.length - 1 &&
-            e.deltaY > 0
-        ) {
-
-            return;
-
-        }
-
-        e.preventDefault();
-
-        if (isAnimating) return;
-
-        const now = Date.now();
-
-        if (now - lastWheelTime < LOCK_TIME) {
-
-            return;
-
-        }
-
-        lastWheelTime = now;
-
-        currentIndex = getCurrentSection();
-
-        if (e.deltaY > 0) {
-
-            scrollToSection(currentIndex + 1);
-
-        } else {
-
-            /**
-             * Footer에서 막 올라왔으면
-             * Business로 먼저 이동
-             */
-            if (
-                window.scrollY > businessTop &&
-                window.scrollY < businessBottom
-            ) {
-
-                scrollToSection(sections.length - 1);
-
-                return;
-
-            }
-
-            scrollToSection(currentIndex - 1);
-
-        }
-
-    }
+    );
 
     window.addEventListener(
+        "resize",
+        updateNavigator
+    );
+}
+
+/**
+ * Section Splashes
+ *
+ * - 기존 브라우저 스크롤과 scroll-snap 유지
+ * - 섹션 진입 전에 스플래시 초기 상태 준비
+ * - 섹션이 화면 상단에 도착하면 애니메이션 실행
+ * - History: 벌어진 텍스트가 모인 뒤 사라짐
+ * - Products: 중앙 원이 커지면서 콘텐츠 노출
+ * - 각 스플래시는 최초 1회만 실행
+ */
+function initSectionSplashes() {
+    const scrollContainer =
+        document.querySelector(".page-scroll");
+
+    const historySection =
+        document.querySelector("#section-history");
+
+    const productsSection =
+        document.querySelector("#section-products");
+
+    if (
+        !scrollContainer ||
+        typeof gsap === "undefined"
+    ) {
+        return;
+    }
+
+    const historySplash =
+        historySection?.querySelector(
+            ".text-splash-section"
+        );
+
+    const productsSplash =
+        productsSection?.querySelector(
+            ".products-splash-section"
+        );
+
+    const productsSvg =
+        productsSplash?.querySelector(
+            ".products-splash-svg"
+        );
+
+    const productsCircle =
+        productsSplash?.querySelector(
+            ".products-splash-circle"
+        );
+
+    let historyPlayed = false;
+    let productsPlayed = false;
+    let isSplashPlaying = false;
+    let isSplashPending = false;
+    let splashMoveRaf = null;
+    let scrollEndTimer = null;
+
+    const SECTION_TOLERANCE = 12;
+
+    /* ========================================
+    Scroll Lock
+    ======================================== */
+
+    function preventScroll(event) {
+        if (
+            !isSplashPlaying &&
+            !isSplashPending
+        ) {
+            return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    function preventKeyScroll(event) {
+        if (
+            !isSplashPlaying &&
+            !isSplashPending
+        ) {
+            return;
+        }
+
+        const scrollKeys = [
+            "ArrowUp",
+            "ArrowDown",
+            "PageUp",
+            "PageDown",
+            "Home",
+            "End",
+            " "
+        ];
+
+        if (!scrollKeys.includes(event.key)) return;
+
+        event.preventDefault();
+    }
+
+    scrollContainer.addEventListener(
         "wheel",
-        handleWheel,
+        preventScroll,
+        {
+            passive: false
+        }
+    );
+
+    scrollContainer.addEventListener(
+        "touchmove",
+        preventScroll,
         {
             passive: false
         }
     );
 
     window.addEventListener(
-        "scroll",
-        () => {
+        "keydown",
+        preventKeyScroll
+    );
 
-            if (!isAnimating) {
+    /* ========================================
+    Splash Section Entry
+    ======================================== */
 
-                currentIndex = getCurrentSection();
-
+    function moveToSplashSection(
+        section,
+        playSplash
+    ) {
+        if (
+            isSplashPending ||
+            isSplashPlaying
+        ) {
+            return;
+        }
+    
+        isSplashPending = true;
+    
+        window.cancelAnimationFrame(
+            splashMoveRaf
+        );
+    
+        const startTop =
+            scrollContainer.scrollTop;
+    
+        const targetTop =
+            section.offsetTop;
+    
+        const distance =
+            targetTop - startTop;
+    
+        const duration = 850;
+        const startTime =
+            performance.now();
+    
+        /*
+         * Safari에서 scroll-snap이 이동 애니메이션을
+         * 중간에 잡아당기지 않도록 잠시 해제
+         */
+        const previousSnapType =
+            scrollContainer.style.scrollSnapType;
+    
+        scrollContainer.style.scrollSnapType =
+            "none";
+    
+        function easeInOutCubic(progress) {
+            return progress < 0.5
+                ? 4 * progress * progress * progress
+                : 1 -
+                    Math.pow(
+                        -2 * progress + 2,
+                        3
+                    ) / 2;
+        }
+    
+        function move(currentTime) {
+            const elapsed =
+                currentTime - startTime;
+    
+            const progress =
+                Math.min(
+                    elapsed / duration,
+                    1
+                );
+    
+            const easedProgress =
+                easeInOutCubic(progress);
+    
+            scrollContainer.scrollTop =
+                startTop +
+                distance * easedProgress;
+    
+            if (progress < 1) {
+                splashMoveRaf =
+                    window.requestAnimationFrame(
+                        move
+                    );
+    
+                return;
             }
+    
+            scrollContainer.scrollTop =
+                targetTop;
+    
+            /*
+             * 원래 scroll-snap 복구
+             */
+            scrollContainer.style.scrollSnapType =
+                previousSnapType;
+    
+            isSplashPending = false;
+    
+            playSplash();
+        }
+    
+        splashMoveRaf =
+            window.requestAnimationFrame(
+                move
+            );
+    }
+    function handleSplashWheel(event) {
+        if (
+            isSplashPending ||
+            isSplashPlaying
+        ) {
+            event.preventDefault();
+            return;
+        }
 
-        },
+        if (event.deltaY <= 0) return;
+
+        const scrollTop =
+            scrollContainer.scrollTop;
+
+        const historyDistance =
+            historySection.offsetTop -
+            scrollTop;
+
+        const productsDistance =
+            productsSection.offsetTop -
+            scrollTop;
+
+        if (
+            !historyPlayed &&
+            historyDistance > 0 &&
+            historyDistance <=
+                scrollContainer.clientHeight
+        ) {
+            event.preventDefault();
+
+            moveToSplashSection(
+                historySection,
+                playHistorySplash
+            );
+
+            return;
+        }
+
+        if (
+            historyPlayed &&
+            !productsPlayed &&
+            productsDistance > 0 &&
+            productsDistance <=
+                scrollContainer.clientHeight
+        ) {
+            event.preventDefault();
+
+            prepareProductsSplash();
+
+            moveToSplashSection(
+                productsSection,
+                playProductsSplash
+            );
+        }
+    }
+
+    scrollContainer.addEventListener(
+        "wheel",
+        handleSplashWheel,
+        {
+            passive: false
+        }
+    );
+
+    /* ========================================
+    History Text Splash
+    ======================================== */
+
+    function playHistorySplash() {
+        if (
+            historyPlayed ||
+            isSplashPlaying ||
+            !historySplash
+        ) {
+            return;
+        }
+
+        const chars =
+            historySplash.querySelectorAll(
+                ".text-splash-title .char"
+            );
+
+        const secondWord =
+            historySplash.querySelector(
+                ".text-splash-title .word:nth-child(2)"
+            );
+
+        if (
+            !chars.length ||
+            !secondWord
+        ) {
+            return;
+        }
+
+        historyPlayed = true;
+        isSplashPlaying = true;
+
+        gsap.set(historySplash, {
+            display: "flex",
+            autoAlpha: 1
+        });
+
+        gsap.set(chars, {
+            marginLeft: "1.8vw",
+            marginRight: "1.8vw"
+        });
+
+        gsap.set(secondWord, {
+            marginLeft: "7vw"
+        });
+
+        window.requestAnimationFrame(() => {
+            gsap.timeline({
+                onComplete() {
+                    gsap.set(historySplash, {
+                        display: "none"
+                    });
+
+                    isSplashPending = false;
+                    isSplashPlaying = false;
+                }
+            })
+            .to(
+                chars,
+                {
+                    marginLeft: 0,
+                    marginRight: 0,
+                    duration: 1.2,
+                    ease: "power2.inOut"
+                },
+                0
+            )
+            .to(
+                secondWord,
+                {
+                    marginLeft: "0.28em",
+                    duration: 1.2,
+                    ease: "power2.inOut"
+                },
+                0
+            )
+            .to({}, {
+                duration: 0.5
+            })
+            .to(historySplash, {
+                autoAlpha: 0,
+                duration: 0.75,
+                ease: "power1.out"
+            });
+        });
+    }
+
+    /* ========================================
+    Products Circle Splash
+    ======================================== */
+
+    function prepareProductsSplash() {
+        if (
+            productsPlayed ||
+            !productsSplash ||
+            !productsSvg ||
+            !productsCircle
+        ) {
+            return;
+        }
+
+        const width = productsSplash.clientWidth;
+        const height = productsSplash.clientHeight;
+
+        productsSvg.setAttribute(
+            "viewBox",
+            `0 0 ${width} ${height}`
+        );
+
+        gsap.set(productsSplash, {
+            display: "block",
+            autoAlpha: 1
+        });
+
+        gsap.set(productsCircle, {
+            attr: {
+                cx: width / 2,
+                cy: height / 2,
+                r: 0
+            }
+        });
+    }
+
+    function playProductsSplash() {
+        if (
+            productsPlayed ||
+            isSplashPlaying ||
+            !productsSplash ||
+            !productsCircle
+        ) {
+            return;
+        }
+
+        prepareProductsSplash();
+
+        productsPlayed = true;
+        isSplashPlaying = true;
+
+        const width = productsSplash.clientWidth;
+        const height = productsSplash.clientHeight;
+        const maxRadius = Math.hypot(width, height) / 2;
+
+        gsap.to(productsCircle, {
+            attr: {
+                r: maxRadius
+            },
+            duration: 1.6,
+            ease: "power2.inOut",
+
+            onComplete() {
+                gsap.set(productsSplash, {
+                    display: "none"
+                });
+
+                isSplashPending = false;
+                isSplashPlaying = false;
+            }
+        });
+    }
+
+    /* ========================================
+    Current Section Check
+    ======================================== */
+
+    function isSectionAtTop(section) {
+        if (!section) return false;
+
+        return (
+            Math.abs(
+                scrollContainer.scrollTop -
+                section.offsetTop
+            ) <= SECTION_TOLERANCE
+        );
+    }
+
+    function checkCurrentSection() {
+        if (isSplashPlaying) return;
+
+        if (
+            !historyPlayed &&
+            isSectionAtTop(historySection)
+        ) {
+            playHistorySplash();
+            return;
+        }
+
+        if (
+            !productsPlayed &&
+            isSectionAtTop(productsSection)
+        ) {
+            playProductsSplash();
+        }
+    }
+
+    /* ========================================
+    Scroll End
+    ======================================== */
+
+    function handleScroll() {
+        window.clearTimeout(scrollEndTimer);
+
+        scrollEndTimer = window.setTimeout(
+            checkCurrentSection,
+            80
+        );
+    }
+
+    scrollContainer.addEventListener(
+        "scroll",
+        handleScroll,
         {
             passive: true
         }
     );
 
+    if ("onscrollend" in scrollContainer) {
+        scrollContainer.addEventListener(
+            "scrollend",
+            checkCurrentSection
+        );
+    }
+
+    /* ========================================
+    Initial State
+    ======================================== */
+
+    prepareProductsSplash();
+
+    window.requestAnimationFrame(() => {
+        checkCurrentSection();
+    });
 }
+
 })();
