@@ -82,30 +82,45 @@ const dealerAddress = document.getElementById("dealerAddress");
 const dealerPhone = document.getElementById("dealerPhone");
 const dealerMap = document.getElementById("dealerMap");
 
+function changeDealer(thumb, useFade = true) {
+    if (!thumb || !dealerMainImage) return;
+
+    const updateDealer = () => {
+        dealerMainImage.src = thumb.dataset.image;
+        dealerMainImage.alt = thumb.dataset.alt;
+        dealerArea.textContent = thumb.dataset.area;
+        dealerName.textContent = thumb.dataset.name;
+        dealerAddress.textContent = thumb.dataset.address;
+        dealerPhone.textContent = thumb.dataset.phone;
+        dealerMap.href = thumb.dataset.map;
+        dealerMainImage.style.opacity = "1";
+    };
+
+    dealerThumbs.forEach((item) => {
+        item.classList.remove("is-active");
+    });
+
+    thumb.classList.add("is-active");
+
+    if (!useFade) {
+        updateDealer();
+        return;
+    }
+
+    dealerMainImage.style.opacity = "0";
+    setTimeout(updateDealer, 180);
+}
+
 dealerThumbs.forEach((thumb) => {
     thumb.addEventListener("click", () => {
-        dealerThumbs.forEach((item) => {
-            item.classList.remove("is-active");
-        });
-
-        thumb.classList.add("is-active");
-
-        dealerMainImage.style.opacity = "0";
-
-        setTimeout(() => {
-            dealerMainImage.src = thumb.dataset.image;
-            dealerMainImage.alt = thumb.dataset.alt;
-
-            dealerArea.textContent = thumb.dataset.area;
-            dealerName.textContent = thumb.dataset.name;
-            dealerAddress.textContent = thumb.dataset.address;
-            dealerPhone.textContent = thumb.dataset.phone;
-            dealerMap.href = thumb.dataset.map;
-
-            dealerMainImage.style.opacity = "1";
-        }, 180);
+        changeDealer(thumb);
     });
 });
+
+// 첫 번째 업체를 초기 선택 상태로 적용
+if (dealerThumbs.length) {
+    changeDealer(dealerThumbs[0], false);
+}
 
 
 /* products.html , Hunter Pride Interview. */

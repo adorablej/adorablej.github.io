@@ -1,0 +1,148 @@
+/* ========================================
+oem.html , Global OEMs.
+======================================== */
+
+.oem-section {
+    width: 100%;
+    padding: calc(120 * var(--vw)) 0 calc(160 * var(--vw));
+    background: #fff;
+}
+
+.oem-section .inner {
+    width: calc(1300 * var(--vw));
+    margin: 0 auto;
+}
+
+.oem-section .detail-section-heading {
+    margin-bottom: calc(100 * var(--vw));
+}
+
+.oem-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: calc(95 * var(--vw));
+    row-gap: calc(100 * var(--vw));
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.oem-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: calc(320 * var(--vw));
+    height: calc(320 * var(--vw));
+
+    margin: 0 auto;
+
+    border-radius: 50%;
+    background: #f7f7f7;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+.oem-item:hover {
+    transform: translateY(calc(-8 * var(--vw)));
+    box-shadow: 0 calc(20 * var(--vw)) calc(50 * var(--vw)) rgba(0,0,0,.08);
+}
+
+.oem-item a{
+    width: 100%;
+    height: 100%;
+}
+
+.oem-item img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+
+
+/* ========================================
+OEM-list.html , OEM Products.
+======================================== */
+
+.oem-products {
+    width: 100%;
+    padding-bottom:calc(100 * var(--vw));
+}
+
+.oem-products .inner {
+    width: calc(1300 * var(--vw));
+    margin: 0 auto;
+}
+
+.oem-product-list {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.oem-product-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.oem-product-item.reverse .oem-product-image {
+    order: 2;
+}
+
+.oem-product-item.reverse .oem-product-content {
+    order: 1;
+}
+
+.oem-product-image {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #efefef;
+}
+
+.oem-product-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.oem-product-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 0 calc(70 * var(--vw));
+}
+
+.oem-product-title {
+    margin-bottom: calc(30 * var(--vw));
+    color: #000;
+    font-family: "Russo One", sans-serif;
+    font-size: calc(40 * var(--vw));
+}
+
+.oem-product-desc {
+    margin-bottom: calc(50 * var(--vw));
+    color: #222;
+    font-size: calc(18 * var(--vw));
+    line-height: calc(30 * var(--vw));
+}
+
+.oem-product-content .sub-button-more{
+    width: fit-content;
+}
