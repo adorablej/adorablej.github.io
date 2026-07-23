@@ -738,7 +738,7 @@ Detail Visual
 .detail-visual {
     position: relative;
     overflow: hidden;
-    background: url("/images/products/p_d_v_bg.png") center / cover no-repeat;
+    background: url("/images/products/Products_D_V_bg.png") center / cover no-repeat;
 }
 
 .detail-visual .inner {
@@ -756,15 +756,15 @@ Detail Visual
 }
 
 .detail-visual-content {
-    flex: 0 0 calc(560 * var(--vw));
+    flex: 0 0 calc(700 * var(--vw));
 }
 
 .detail-visual-title {
     margin: 0 0 calc(28 * var(--vw));
     font-family: "Russo One", sans-serif;
-    font-size: calc(66 * var(--vw));
+    font-size: calc(60 * var(--vw));
     font-weight: 400;
-    line-height: calc(76 * var(--vw));
+    line-height: calc(80 * var(--vw));
     letter-spacing: -.03em;
 }
 
@@ -822,7 +822,6 @@ Detail Visual
     align-items: flex-end;
     width: 100%;
     height: 100%;
-    margin-left: calc(50 * var(--vw));
 }
 
 .detail-product-image img {
@@ -1080,7 +1079,7 @@ Detail Main Features
 .detail-features-content p {
     margin: 0 calc(40 * var(--vw));
     color: #777;
-    font-size: calc(20 * var(--vw));
+    font-size: calc(18 * var(--vw));
     line-height: calc(30 * var(--vw));
     letter-spacing: -1px;
 }
@@ -1230,6 +1229,11 @@ Detail Spec
     line-height: 1.55;
     letter-spacing: -.04em;
 }
+.detail-spec-subtxt{
+    font-size: calc(18 * var(--vw));
+    color: #777;
+    margin-top: 29px;
+}
 
 .detail-spec-buttons {
     display: flex;
@@ -1297,7 +1301,7 @@ Detail Spec
 .detail-spec-image img {
     display: block;
     max-width: 100%;
-    max-height: calc(590 * var(--vw));
+    max-height: calc(670 * var(--vw));
     width: auto;
     height: auto;
     object-fit: contain;
@@ -2459,9 +2463,10 @@ products-HunterPride-Interview.html
     width:100%;
     transition:height .35s ease;
 }
+
 .sub-pride-featured-card{
     position:absolute;
-    top:calc(40 * var(--vw));
+    top:0;
     left:50%;
     display:block;
     width:calc(700 * var(--vw));
@@ -2475,33 +2480,9 @@ products-HunterPride-Interview.html
     pointer-events:none;
     text-align:left;
     box-shadow:0 calc(18 * var(--vw)) calc(42 * var(--vw)) rgba(0,0,0,.14);
-    transform:translateX(-50%) scale(.86);
-    transition:transform .6s cubic-bezier(.22,.61,.36,1),opacity .45s ease,visibility .45s ease;
+    will-change:transform,opacity;
 }
-.sub-pride-featured-card.is-prev,
-.sub-pride-featured-card.is-active,
-.sub-pride-featured-card.is-next{
-    visibility:visible;
-}
-.sub-pride-featured-card.is-prev{
-    z-index:2;
-    opacity:.38;
-    pointer-events:auto;
-    transform:translateX(-100%) scale(.8);
-}
-.sub-pride-featured-card.is-active{
-    z-index:5;
-    top:0;
-    opacity:1;
-    pointer-events:auto;
-    transform:translateX(-50%) scale(1);
-}
-.sub-pride-featured-card.is-next{
-    z-index:2;
-    opacity:.38;
-    pointer-events:auto;
-    transform:translateX(0%) scale(.8);
-}
+
 .sub-pride-featured-image{
     position:relative;
     height:calc(394 * var(--vw));

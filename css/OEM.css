@@ -41,15 +41,14 @@ oem.html , Global OEMs.
 
     border-radius: 50%;
     background: #f7f7f7;
-
+    border: 4px solid #f7f7f7;
     transition:
         transform .35s ease,
         box-shadow .35s ease;
 }
 
 .oem-item:hover {
-    transform: translateY(calc(-8 * var(--vw)));
-    box-shadow: 0 calc(20 * var(--vw)) calc(50 * var(--vw)) rgba(0,0,0,.08);
+    border: 4px solid var(--red);
 }
 
 .oem-item a{
@@ -109,7 +108,6 @@ OEM-list.html , OEM Products.
 .oem-product-image {
     aspect-ratio: 1 / 1;
     overflow: hidden;
-    background: #efefef;
 }
 
 .oem-product-image img {

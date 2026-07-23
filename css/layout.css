@@ -1068,17 +1068,15 @@ sub page 공통
     display:inline-flex;
     justify-content:center;
     align-items:center;
-    min-width:calc(120 * var(--vw));
-    height:calc(52 * var(--vw));
-    padding:0 calc(28 * var(--vw));
+    padding:calc(10 * var(--vw)) calc(35 * var(--vw));
     border:1px solid var(--red);
     border-radius:calc(999 * var(--vw));
     background:transparent;
     color:var(--red);
     font-size:calc(18 * var(--vw));
-    font-weight:600;
-    letter-spacing:.2em;
-    text-transform:lowercase;
+    line-height: calc(32 * var(--vw));;
+    font-weight:500;
+    letter-spacing:calc(4 * var(--vw));
     transition:
         color .3s,
         background-color .3s;
@@ -1222,4 +1220,49 @@ Section Title 공통
 .detail-section-title span {
     color: var(--red);
     font-family: "Russo One", sans-serif;
+}
+
+
+/* ========================================
+Tabs 공통
+======================================== */
+
+.sub-pill-tabs {
+    display: flex;
+    align-items: center;
+    gap: calc(100vw * 12 / 1920);
+    margin-bottom: 80px;
+}
+
+.sub-pill-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: calc(100vw * 186 / 1920);
+    height: calc(100vw * 60 / 1920);
+    padding: calc(100vw * 14 / 1920) 0;
+    border: 1px solid #a8a8a8;
+    border-radius: calc(100vw * 100 / 1920);
+    background: #fff;
+    color: #a8a8a8;
+    font-size: calc(100vw * 18 / 1920);
+    font-weight: 500;
+    line-height: calc(100vw * 32 / 1920);
+    cursor: pointer;
+    margin-right: 14px;
+    transition:
+        border-color .3s,
+        background-color .3s,
+        color .3s;
+}
+
+.sub-pill-tab:hover {
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.sub-pill-tab.is-active {
+    border-color: var(--red);
+    background: var(--red);
+    color: #fff;
 }

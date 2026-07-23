@@ -688,18 +688,65 @@ function initHunterPrideInterview(){
         featuredStage.style.height=`${Math.ceil(maxHeight)}px`;
     }
 
-    function renderFeatured(){
-        featuredCards.forEach(card=>{
-            card.classList.remove("is-prev","is-active","is-next");
+    function getFeaturedOffset(index){
+        const total=featuredCards.length;
+        let offset=index-featuredIndex;
+
+        if(offset>total/2)offset-=total;
+        if(offset<-total/2)offset+=total;
+
+        return offset;
+    }
+
+    function renderFeatured(immediate=false){
+        const sideDistance=window.innerWidth*520/1920;
+
+        featuredCards.forEach((card,index)=>{
+            const offset=getFeaturedOffset(index);
+            const isActive=offset===0;
+            const isSide=Math.abs(offset)===1;
+
+            card.classList.toggle("is-active",isActive);
+            card.style.pointerEvents=isActive||isSide?"auto":"none";
+            card.style.visibility=isActive||isSide?"visible":"hidden";
+
+            const vars=isActive?{
+                xPercent:-50,
+                x:0,
+                y:0,
+                scale:1,
+                opacity:1,
+                zIndex:5
+            }:isSide?{
+                xPercent:-50,
+                x:offset*sideDistance,
+                y:window.innerWidth*40/1920,
+                scale:.8,
+                opacity:.38,
+                zIndex:2
+            }:{
+                xPercent:-50,
+                x:offset<0?-sideDistance:sideDistance,
+                y:window.innerWidth*40/1920,
+                scale:.72,
+                opacity:0,
+                zIndex:1
+            };
+
+            gsap.killTweensOf(card);
+
+            if(immediate){
+                gsap.set(card,vars);
+            }else{
+                gsap.to(card,{
+                    ...vars,
+                    duration:.65,
+                    ease:"power3.inOut",
+                    overwrite:true
+                });
+            }
         });
 
-        const total=featuredCards.length;
-        const prevIndex=(featuredIndex-1+total)%total;
-        const nextIndex=(featuredIndex+1)%total;
-
-        featuredCards[prevIndex].classList.add("is-prev");
-        featuredCards[featuredIndex].classList.add("is-active");
-        featuredCards[nextIndex].classList.add("is-next");
         requestAnimationFrame(updateFeaturedStageHeight);
     }
 
@@ -724,9 +771,12 @@ function initHunterPrideInterview(){
         });
     });
 
-    renderFeatured();
+    renderFeatured(true);
     window.addEventListener("load",updateFeaturedStageHeight);
-    window.addEventListener("resize",updateFeaturedStageHeight);
+    window.addEventListener("resize",()=>{
+        renderFeatured(true);
+        updateFeaturedStageHeight();
+    });
 
     featuredCards.forEach(card=>{
         const image=card.querySelector("img");
