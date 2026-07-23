@@ -1266,3 +1266,58 @@ Tabs 공통
     background: var(--red);
     color: #fff;
 }
+
+
+/* ========================================
+Sub Visual
+======================================== */
+
+.sub-visual {
+    position: relative;
+
+    width: 100%;
+    height: calc(700 * var(--vw));
+
+    overflow: hidden;
+}
+
+.sub-visual-bg {
+    position: absolute;
+    inset: 0;
+}
+
+.sub-visual-bg img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+.sub-visual-dim {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.sub-visual-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: calc(1300 * var(--vw));
+    height: 100%;
+    text-align: left;
+    margin: auto;
+}
+
+.sub-visual-content p {
+    color: #fff;
+    font-size: calc(68 * var(--vw));
+    font-weight: 700;
+    line-height: normal;
+}
