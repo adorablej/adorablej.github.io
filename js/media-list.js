@@ -18,7 +18,7 @@ function initMediaList() {
     }
 
     breadcrumb.textContent = config.title;
-    breadcrumb.href = `/media-list.html?type=${type}`;
+    breadcrumb.href = `/Media/media-list.html?type=${type}`;
     pageTitle.textContent = config.title;
     document.title = `${config.title} | Hunter Korea`;
 
@@ -74,7 +74,7 @@ function createMediaItem(item, config, type) {
     const placeholder = "/images/img_placeholder.png";
     const thumbnail = item.thumbnail || placeholder;
     const preview = getMediaPreview(item.content);
-    const viewUrl = `/media-view.html?type=${type}&id=${item.id}`;
+    const viewUrl = `/Media/media-view.html?type=${type}&id=${item.id}`;
 
     const downloadButton = config.download && item.file
         ? `

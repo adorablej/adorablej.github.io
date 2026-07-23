@@ -146,7 +146,7 @@
     }
 
     function getViewUrl(type, id) {
-        return `/media-view.html?type=${encodeURIComponent(type)}&id=${encodeURIComponent(id)}`;
+        return `/Media/media-view.html?type=${encodeURIComponent(type)}&id=${encodeURIComponent(id)}`;
     }
 
     function getPreview(content, limit) {

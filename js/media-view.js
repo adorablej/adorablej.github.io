@@ -36,13 +36,13 @@ function renderMediaView(type, config, list, item) {
 
     document.title = `${item.title} | Hunter Korea`;
     breadcrumb.textContent = config.title;
-    breadcrumb.href = `/media-list.html?type=${type}`;
+    breadcrumb.href = `/Media/media-list.html?type=${type}`;
     pageTitle.textContent = config.title;
     category.textContent = item.category || "";
     title.textContent = item.title || "";
     date.textContent = item.date || "";
     content.innerHTML = item.content || "";
-    listButton.href = `/media-list.html?type=${type}`;
+    listButton.href = `/Media/media-list.html?type=${type}`;
 
     setContentImageFallback(content);
 
@@ -78,7 +78,7 @@ function setNavigationItem(element, type, item) {
     }
 
     element.classList.remove("is-disabled");
-    element.href = `/media-view.html?type=${type}&id=${item.id}`;
+    element.href = `/Media/media-view.html?type=${type}&id=${item.id}`;
     element.querySelector(".sub-media-view-nav-title").textContent = item.title;
     element.querySelector(".sub-media-view-nav-date").textContent = item.date || "";
 }
@@ -105,7 +105,7 @@ function renderMediaViewEmpty(type, config) {
 
     if (breadcrumb) {
         breadcrumb.textContent = config.title;
-        breadcrumb.href = `/media-list.html?type=${type}`;
+        breadcrumb.href = `/Media/media-list.html?type=${type}`;
     }
 
     if (pageTitle) {
@@ -118,7 +118,7 @@ function renderMediaViewEmpty(type, config) {
                 등록된 게시물이 없습니다.
             </div>
             <div class="sub-media-view-list-wrap">
-                <a href="/media-list.html?type=${type}" class="sub-media-view-list-button">
+                <a href="/Media/media-list.html?type=${type}" class="sub-media-view-list-button">
                     List
                 </a>
             </div>
