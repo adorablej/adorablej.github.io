@@ -203,7 +203,7 @@ Section 06 : Media
 }
 
 .media-inner{
-    max-width:1400px;
+    max-width:1300px;
     margin:0 auto;
     padding:calc(110 * var(--vw)) 0;
 }
