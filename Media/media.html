@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        헌터페이지
+    </title>
+    <link href="/css/common.css" rel="stylesheet" />
+    <link href="/css/layout.css" rel="stylesheet" />
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/css/media.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+</head>
+
+<body>
+    <!-- header -->
+    <div data-include="/includes/header.html"></div>
+    
+    
+
+        <!-- ========================================
+        Main
+        ========================================= -->
+
+            <!-- Page title -->
+            <section class="page-heading"  data-header-theme="dark">
+                <div class="inner">
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="/" class="breadcrumb-home" aria-label="Home"></a>
+                        </li>
+                        <li>
+                            <a href="#">Media</a>
+                        </li>
+                        <!-- <li>
+                            <a href="#">depth2</a>
+                        </li>
+                        <li class="current">
+                            depth3
+                        </li> -->
+                    </ul>
+                    <h2 class="page-title">
+                        Media
+                    </h2>
+                </div>
+            </section>
+
+            <section class="sub-visual"  data-header-theme="light">
+                <div class="sub-visual-bg">
+                    <img
+                        src="/images/media/media_top_banner.png" alt="">
+                </div>
+                <div class="sub-visual-content">
+                    <p>
+                        공식 뉴스와 이벤트<br>
+프로모션까지 <br>
+한눈에 확인하세요
+                    </p>
+                </div>
+            </section>
+
+        <!-- media-archive -->
+        <section class="media-archive"  data-header-theme="dark">
+            <div class="inner">
+                <div class="media-archive-heading">
+                    <h3 class="media-archive-title">Archive<span>.</span></h3>
+                    <a href="/Media/media-list.html?type=archive" class="sub-button-more">more</a>
+                </div>
+        
+                <div class="media-archive-list" id="mediaMainArchiveList"></div>
+            </div>
+        </section>
+
+        <!-- media-news -->
+        <section class="media-news"  data-header-theme="dark">
+            <div class="inner">
+                <div class="media-news-heading">
+                    <h3 class="media-news-title">News<span>.</span></h3>
+                    <a href="/Media/media-list.html?type=news" class="sub-button-more">more</a>
+                </div>
+        
+                <div class="media-news-list" id="mediaMainNewsList"></div>
+            </div>
+        </section>
+
+
+         <!-- Section 05 : Media -->
+         <section id="section-media" class="main-section media-section" data-header-theme="dark">
+            <div class="media-inner">
+                <div class="media-page-heading">
+                    <h2 class="media-page-title">Promotion &amp; Event<span>.</span></h2>
+                    <a href="/Media/media-list.html?type=promotion" class="sub-button-more">more</a>
+                </div>
+
+                <div class="media-content">
+                    <a href="#" class="media-featured" id="mediaMainFeatured">
+                        <div class="media-featured-image">
+                            <img id="mediaMainFeaturedImage" src="/images/common/img_placeholder.jpg" alt="">
+                        </div>
+                        <div class="media-featured-content">
+                            <span class="media-card-category" id="mediaMainFeaturedCategory"></span>
+                            <h3 class="media-card-title" id="mediaMainFeaturedTitle"></h3>
+                            <p class="media-card-text" id="mediaMainFeaturedText"></p>
+                        </div>
+                    </a>
+
+                    <div class="media-list" id="mediaMainPromotionList"></div>
+                </div>
+            </div>
+        </section>
+
+    <!-- footer -->
+    <div class="footer-section" data-header-theme="dark" data-include="/includes/footer.html"></div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.8/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="/js/include.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/media-data.js"></script>
+    <script src="/js/media.js"></script>
+</body>
+
+</html>
