@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        헌터페이지
+    </title>
+    <link href="/css/common.css" rel="stylesheet" />
+    <link href="/css/layout.css" rel="stylesheet" />
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <link href="/css/support.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <!-- header -->
+    <div data-include="/includes/header.html"></div>
+
+    <!-- Page title -->
+    <section class="page-heading"  data-header-theme="dark">
+        <div class="inner">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/" class="breadcrumb-home" aria-label="Home"></a>
+                </li>
+                <li>
+                    <a href="/Support/equipment-operation-guide.html">Support</a>
+                </li>
+                <li>
+                    <a href="#">Equipment Operation Guide</a>
+                </li>
+                <!-- <li class="current">
+                    depth3
+                </li> -->
+            </ul>
+            <h2 class="page-title">
+                Equipment Operation Guide
+            </h2>
+        </div>
+    </section>
+
+    <!-- Equipment Operation Guide -->
+    <section class="sub-operation-guide"  data-header-theme="dark" >
+        <div class="inner">
+            <div class="sub-guide-tabs sub-pill-tabs" role="tablist" aria-label="Operation guide type">
+                <button type="button" class="sub-guide-tab sub-pill-tab  is-active" role="tab" aria-selected="true" data-guide-tab="manual">Manual</button>
+                <button type="button" class="sub-guide-tab sub-pill-tab " role="tab" aria-selected="false" data-guide-tab="video">Video</button>
+            </div>
+
+            <h3 class="sub-guide-heading" id="sub-guide-heading">Manual<span>.</span></h3>
+            <div id="sub-guide-content"></div>
+        </div>
+    </section>
+
+    <!-- Common Banners. -->
+    <div data-include="/includes/banner-roi.html" data-header-theme="light" ></div>
+    <div data-include="/includes/banner-solution.html"  data-header-theme="light" ></div>
+
+
+        <!-- footer -->
+        <div class="footer-section" data-header-theme="dark" data-include="/includes/footer.html"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="/js/include.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/support.js"></script>
+</body>
+
+</html>
