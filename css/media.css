@@ -197,7 +197,7 @@ Section 06 : Media
 .media-section{
     position:relative;
     width:100%;
-    min-height:100vh;
+    min-height:calc(1089 * var(--vw));
     overflow:hidden;
     background:#efefef;
 }
