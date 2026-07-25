@@ -1,245 +1,261 @@
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>
         헌터페이지
     </title>
-    <link href="/css/common.css" rel="stylesheet" />
-    <link href="/css/layout.css" rel="stylesheet" />
-    <link href="/css/main.css" rel="stylesheet" />
-    <link href="/css/products.css" rel="stylesheet" />
-    <link href="/css/responsive.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-
+<link href="/css/common.css" rel="stylesheet"/>
+<link href="/css/common-form.css" rel="stylesheet"/>
+<link href="/css/layout.css" rel="stylesheet"/>
+<link href="/css/main.css" rel="stylesheet"/>
+<link href="/css/products.css" rel="stylesheet"/>
+<link href="/css/responsive.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&amp;display=swap" rel="stylesheet"/>
 </head>
-
 <body>
-    <!-- header -->
-    <div data-include="../includes/header.html"></div>
-    
-    
-
-        <!-- ========================================
-        Main
-        ========================================= -->
-        <main id="main" class="products-page">
-
-            <!-- Page title -->
-            <section class="page-heading"  data-header-theme="dark">
-                <div class="inner">
-                    <ul class="breadcrumb">
-                        <li>
-                            <a href="/" class="breadcrumb-home" aria-label="Home"></a>
-                        </li>
-                        <li>
-                            <a href="#">Products</a>
-                        </li>
-                        <li>
-                            <a href="#">Contact</a>
-                        </li>
-                        <!--  <li class="current">
-                            depth3
-                        </li> -->
-                    </ul>
-                    <h2 class="page-title">
-                        Contact
-                    </h2>
-                </div>
-            </section>
-
-
-            <!-- Customer Information. -->
-            <section class="contact-form-section">
-
-                <div class="inner">
-
-                    <div class="contact-section-title">
-                        <h3>CS문의자 정보<span>.</span></h3>
-                    </div>
-
-                    <div class="contact-form">
-
-                        <!-- 업체명 -->
-                        <div class="contact-form-group">
-                            <label class="contact-label" for="company">
+<!-- header -->
+<div data-include="../includes/header.html"></div>
+<main class="products-page" id="main">
+<!-- Page title -->
+<section class="page-heading" data-header-theme="dark">
+<div class="inner">
+<ul class="breadcrumb">
+<li>
+<a aria-label="Home" class="breadcrumb-home" href="/"></a>
+</li>
+<li>
+<a href="#">Products</a>
+</li>
+<li>
+<a href="#">Contact</a>
+</li>
+</ul>
+<h2 class="page-title">Contact</h2>
+</div>
+</section>
+<form class="sub-form-page sub-form-page-contact" id="contact-form" data-form novalidate>
+<!-- Customer Information -->
+<section class="sub-form-section">
+<div class="inner">
+<div class="sub-form-section-title">
+<h3>CS문의자 정보<span>.</span></h3>
+</div>
+<div class="sub-form">
+<div class="sub-form-group">
+<label class="sub-form-label" for="company">
                                 업체명
                             </label>
-
-                            <input
-                                type="text"
-                                id="company"
-                                class="contact-input"
-                                placeholder="업체명을 입력해주세요."
-                            >
-                        </div>
-
-                        <!-- 성함 -->
-                        <div class="contact-form-group">
-                            <label class="contact-label" for="name">
+<div class="sub-form-control"><input autocomplete="organization" class="sub-form-input" data-message="업체명을 입력해주세요." data-required="" id="company" name="company_name" placeholder="업체명을 입력해주세요." type="text"/><span aria-hidden="true" class="sub-form-state"></span></div>
+<p class="sub-form-message">
+                                업체명을 입력해주세요.
+                            </p>
+</div>
+<div class="sub-form-group">
+<label class="sub-form-label" for="name">
                                 성함
                             </label>
-
-                            <input
-                                type="text"
-                                id="name"
-                                class="contact-input"
-                                placeholder="성함을 입력해주세요."
-                            >
-                        </div>
-
-                        <!-- 휴대폰 -->
-                        <div class="contact-form-group">
-
-                            <label class="contact-label">
+<div class="sub-form-control"><input autocomplete="name" class="sub-form-input" data-message="성함을 입력해주세요." data-required="" id="name" name="user_name" placeholder="성함을 입력해주세요." type="text"/><span aria-hidden="true" class="sub-form-state"></span></div>
+<p class="sub-form-message">
+                                성함을 입력해주세요.
+                            </p>
+</div>
+<div class="sub-form-group">
+<span class="sub-form-label">
                                 휴대폰 번호
-                            </label>
-
-                            <div class="contact-phone">
-
-                                <select class="contact-select">
-                                    <option>010</option>
-                                    <option>011</option>
-                                    <option>016</option>
-                                    <option>017</option>
-                                </select>
-
-                                <input
-                                    type="text"
-                                    class="contact-input"
-                                    placeholder="숫자만 입력해주세요."
-                                >
-
-                            </div>
-
-                        </div>
-
-                        <!-- 이메일 -->
-                        <div class="contact-form-group">
-
-                            <label class="contact-label">
+                            </span>
+<div class="sub-form-phone">
+<div class="sub-form-select" data-select="">
+<button aria-expanded="false" aria-haspopup="listbox" class="sub-form-select-trigger" type="button">
+<span class="sub-form-select-value">010</span>
+<span aria-hidden="true" class="sub-form-select-arrow"></span>
+</button>
+<ul class="sub-form-select-options" role="listbox">
+<li>
+<button class="sub-form-select-option is-selected" data-value="010" type="button">
+                                                010
+                                            </button>
+</li>
+<li>
+<button class="sub-form-select-option" data-value="011" type="button">
+                                                011
+                                            </button>
+</li>
+<li>
+<button class="sub-form-select-option" data-value="016" type="button">
+                                                016
+                                            </button>
+</li>
+<li>
+<button class="sub-form-select-option" data-value="017" type="button">
+                                                017
+                                            </button>
+</li>
+</ul>
+<input name="phone_prefix" type="hidden" value="010"/>
+</div>
+<div class="sub-form-control"><input autocomplete="tel-national" class="sub-form-input" data-message="휴대폰 번호를 확인해주세요." data-pattern="^\\d{7,8}$" data-required="" id="phone-number" inputmode="numeric" maxlength="8" name="user_phone" placeholder="숫자만 입력해주세요." type="tel"/><span aria-hidden="true" class="sub-form-state"></span></div>
+</div>
+<p class="sub-form-message">
+                                휴대폰 번호를 확인해주세요.
+                            </p>
+</div>
+<div class="sub-form-group">
+<span class="sub-form-label">
                                 이메일 주소
+                            </span>
+<div class="sub-form-email">
+<div class="sub-form-control"><input autocomplete="email" class="sub-form-input" data-message="이메일 주소를 확인해주세요." data-pattern="^[^@\\s]+$" data-required="" id="email-id" name="email_id" placeholder="입력해주세요." type="text"/><span aria-hidden="true" class="sub-form-state"></span></div>
+<span class="sub-form-email-at">@</span>
+<div class="sub-form-control"><input class="sub-form-input" data-message="이메일 주소를 확인해주세요." data-pattern="^[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$" data-required="" id="email-domain" name="email_domain" placeholder="입력해주세요." type="text"/><span aria-hidden="true" class="sub-form-state"></span></div>
+<div class="sub-form-select" data-select="" data-target="#email-domain">
+<button aria-expanded="false" aria-haspopup="listbox" class="sub-form-select-trigger" type="button">
+<span class="sub-form-select-value is-placeholder">
+                                            직접 입력
+                                        </span>
+<span aria-hidden="true" class="sub-form-select-arrow"></span>
+</button>
+<ul class="sub-form-select-options" role="listbox">
+<li>
+<button class="sub-form-select-option is-selected" data-value="" type="button">
+                                                직접 입력
+                                            </button>
+</li>
+<li>
+<button class="sub-form-select-option" data-value="naver.com" type="button">
+                                                naver.com
+                                            </button>
+</li>
+<li>
+<button class="sub-form-select-option" data-value="gmail.com" type="button">
+                                                gmail.com
+                                            </button>
+</li>
+<li>
+<button class="sub-form-select-option" data-value="daum.net" type="button">
+                                                daum.net
+                                            </button>
+</li>
+</ul>
+<input name="email_domain_select" type="hidden" value=""/>
+</div>
+</div>
+<p class="sub-form-message">
+                                이메일 주소를 확인해주세요.
+                            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Inquiry Details -->
+<section class="sub-form-section">
+<div class="inner">
+<div class="sub-form-section-title">
+<h3>CS문의 내용<span>.</span></h3>
+</div>
+<div class="sub-form">
+<div class="sub-form-group">
+<span class="sub-form-label">
+                                문의 유형
+                            </span>
+<div class="sub-form-select" data-select="">
+<button aria-expanded="false" aria-haspopup="listbox" class="sub-form-select-trigger" type="button">
+<span class="sub-form-select-value is-placeholder">
+                                        카테고리를 선택해 주세요.
+                                    </span>
+<span aria-hidden="true" class="sub-form-select-arrow"></span>
+</button>
+<ul class="sub-form-select-options" role="listbox">
+<li>
+<button class="sub-form-select-option is-selected" data-value="" type="button">
+                                            카테고리를 선택해 주세요.
+                                        </button>
+</li>
+<li>
+<button class="sub-form-select-option" data-value="product" type="button">
+                                            제품 문의
+                                        </button>
+</li>
+<li>
+<button class="sub-form-select-option" data-value="service" type="button">
+                                            서비스 문의
+                                        </button>
+</li>
+<li>
+<button class="sub-form-select-option" data-value="education" type="button">
+                                            교육 문의
+                                        </button>
+</li>
+<li>
+<button class="sub-form-select-option" data-value="etc" type="button">
+                                            기타 문의
+                                        </button>
+</li>
+</ul>
+<input data-message="문의 유형을 선택해주세요." data-required="" name="inquiry_category" type="hidden" value=""/>
+</div>
+<p class="sub-form-message">
+                                문의 유형을 선택해주세요.
+                            </p>
+</div>
+<div class="sub-form-group">
+<label class="sub-form-label" for="inquiry-title">
+                                문의 제목
                             </label>
-
-                            <div class="contact-email">
-
-                                <input
-                                    type="text"
-                                    class="contact-input"
-                                    placeholder="입력해주세요."
-                                >
-
-                                <span class="contact-email-at">@</span>
-
-                                <input
-                                    type="text"
-                                    class="contact-input"
-                                    placeholder="입력해주세요."
-                                >
-
-                                <select class="contact-select">
-                                    <option>직접 입력</option>
-                                    <option>naver.com</option>
-                                    <option>gmail.com</option>
-                                    <option>daum.net</option>
-                                </select>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- Inquiry Details. -->
-            <section class="contact-inquiry-section">
-                <div class="inner">
-                    <div class="contact-section-title">
-                        <h3>CS문의 내용<span>.</span></h3>
-                    </div>
-
-                    <div class="contact-form">
-                        <div class="contact-form-group">
-                            <label class="contact-label" for="inquiry-category">업체명</label>
-
-                            <select id="inquiry-category" class="contact-select">
-                                <option value="">카테고리를 선택해 주세요.</option>
-                                <option value="product">제품 문의</option>
-                                <option value="service">서비스 문의</option>
-                                <option value="education">교육 문의</option>
-                                <option value="etc">기타 문의</option>
-                            </select>
-                        </div>
-
-                        <div class="contact-form-group">
-                            <label class="contact-label" for="inquiry-title">문의 제목</label>
-
-                            <input
-                                type="text"
-                                id="inquiry-title"
-                                class="contact-input"
-                                maxlength="20"
-                                placeholder="제목을 입력해 주세요. (20자 이내)"
-                            >
-                        </div>
-
-                        <div class="contact-form-group">
-                            <label class="contact-label" for="inquiry-content">문의 내용</label>
-
-                            <div class="contact-textarea-wrap">
-                                <textarea
-                                    id="inquiry-content"
-                                    class="contact-textarea"
-                                    maxlength="3000"
-                                ></textarea>
-
-                                <span class="contact-text-count">
-                                    <strong>0</strong>/3000
+<div class="sub-form-control"><input class="sub-form-input" data-message="문의 제목을 입력해주세요." data-required="" id="inquiry-title" maxlength="20" name="inquiry_title" placeholder="제목을 입력해 주세요. (20자 이내)" type="text"/><span aria-hidden="true" class="sub-form-state"></span></div>
+<p class="sub-form-message">
+                                문의 제목을 입력해주세요.
+                            </p>
+</div>
+<div class="sub-form-group">
+<label class="sub-form-label" for="inquiry-content">
+                                문의 내용
+                            </label>
+<div class="sub-form-textarea-wrap">
+<div class="sub-form-control"><textarea class="sub-form-textarea" data-message="문의 내용을 입력해주세요." data-required="" id="inquiry-content" maxlength="3000" name="message" placeholder="문의 내용을 입력해 주세요."></textarea><span aria-hidden="true" class="sub-form-state"></span></div>
+<span class="sub-form-text-count">
+<strong>0</strong>/3000
                                 </span>
-                            </div>
-                        </div>
-
-                        <div class="contact-form-bottom">
-                            <label class="contact-agree">
-                                <input type="checkbox" checked>
-                                <span class="contact-agree-icon" aria-hidden="true"></span>
-                                <span class="contact-agree-text">개인정보 수집 및 이용에 동의합니다</span>
-                            </label>
-
-                            <button type="submit" class="contact-submit">
+</div>
+<p class="sub-form-message">
+                                문의 내용을 입력해주세요.
+                            </p>
+</div>
+<div class="sub-form-bottom">
+<div class="sub-form-group sub-form-agree-group">
+<label class="sub-form-checkbox">
+<input data-message="개인정보 수집 및 이용에 동의해주세요." data-required="" id="agree-check" name="agree" type="checkbox"/>
+<span aria-hidden="true" class="sub-form-checkbox-icon"></span>
+<span class="sub-form-checkbox-text">
+                                        개인정보 수집 및 이용에 동의합니다
+                                    </span>
+</label>
+<p class="sub-form-message">
+                                    개인정보 수집 및 이용에 동의해주세요.
+                                </p>
+</div>
+<button class="sub-form-submit" type="submit">
                                 문의접수
                             </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-
-
-        </main>
-
-
-    <!-- footer -->
-    <div class="footer-section" data-header-theme="dark" data-include="../includes/footer.html"></div>
-
-    
-    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.8/dist/lenis.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="/js/include.js"></script>
-    <script src="/js/common.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/products.js"></script>
+</div>
+</div>
+</div>
+</section>
+</form>
+</main>
+<!-- footer -->
+<div class="footer-section" data-header-theme="dark" data-include="../includes/footer.html"></div>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.8/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="/js/include.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/form.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/products.js"></script>
 </body>
-
 </html>

@@ -1,0 +1,459 @@
+/* ========================================
+Common Form
+======================================== */
+
+.sub-form {
+    display: flex;
+    flex-direction: column;
+    gap: calc(100vw * 50 / 1920);
+}
+
+.sub-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: calc(100vw * 18 / 1920);
+    position: relative;
+}
+
+.sub-form-label {
+    color: #111;
+    font-size: calc(100vw * 22 / 1920);
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.sub-form-input,
+.sub-form-textarea,
+.sub-form-select-trigger {
+    width: 100%;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #111;
+    font-family: inherit;
+    font-size: calc(100vw * 18 / 1920);
+    box-sizing: border-box;
+    outline: none;
+    transition:
+        border-color .25s ease,
+        background-color .25s ease,
+        color .25s ease;
+}
+
+/* Input */
+
+.sub-form-input {
+    height: calc(100vw * 82 / 1920);
+    padding: 0 calc(100vw * 26 / 1920);
+}
+
+.sub-form-input::placeholder,
+.sub-form-textarea::placeholder {
+    color: #b8b8b8;
+}
+
+/* 입력 중 */
+
+.sub-form-input:focus,
+.sub-form-textarea:focus,
+.sub-form-group.is-focus .sub-form-input,
+.sub-form-group.is-focus .sub-form-textarea {
+    border-color: var(--red);
+}
+
+/* 입력 후 */
+
+.sub-form-group.is-filled .sub-form-input,
+.sub-form-group.is-filled .sub-form-textarea {
+    color: #111;
+}
+
+/* 오류 */
+
+.sub-form-group.is-error .sub-form-input,
+.sub-form-group.is-error .sub-form-textarea,
+.sub-form-group.is-error .sub-form-select-trigger,
+.sub-form-input[aria-invalid="true"],
+.sub-form-textarea[aria-invalid="true"] {
+    border-color: var(--red);
+}
+
+/* Disabled */
+
+.sub-form-input:disabled,
+.sub-form-textarea:disabled {
+    border-color: #e5e5e5;
+    background: #f5f5f5;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.sub-form-input:disabled::placeholder,
+.sub-form-textarea:disabled::placeholder {
+    color: #c5c5c5;
+}
+
+/* Error Message */
+
+.sub-form-message {
+    display: none;
+    margin: 0;
+    color: var(--red);
+    font-size: calc(100vw * 14 / 1920);
+    line-height: calc(100vw * 22 / 1920);
+}
+
+.sub-form-group.is-error > .sub-form-message {
+    display: block;
+}
+
+/* Textarea */
+
+.sub-form-textarea-wrap {
+    position: relative;
+}
+
+.sub-form-textarea {
+    display: block;
+    height: calc(100vw * 380 / 1920);
+    padding: calc(100vw * 26 / 1920);
+    line-height: calc(100vw * 30 / 1920);
+    resize: none;
+}
+
+.sub-form-text-count {
+    position: absolute;
+    right: 0;
+    bottom: calc(100vw * -34 / 1920);
+    color: #555;
+    font-size: calc(100vw * 16 / 1920);
+    line-height: 1;
+}
+
+.sub-form-text-count strong {
+    font-weight: 400;
+}
+
+/* ========================================
+Custom Select
+======================================== */
+
+.sub-form-select {
+    position: relative;
+    width: 100%;
+}
+
+.sub-form-select-trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: calc(100vw * 82 / 1920);
+    padding: 0 calc(100vw * 72 / 1920) 0 calc(100vw * 26 / 1920);
+    text-align: left;
+    cursor: pointer;
+}
+
+.sub-form-select-value {
+    overflow: hidden;
+    color: #111;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sub-form-select-value.is-placeholder {
+    color: #b8b8b8;
+}
+
+.sub-form-select-arrow {
+    position: absolute;
+    right: calc(100vw * 30 / 1920);
+    width: calc(100vw * 11 / 1920);
+    height: calc(100vw * 11 / 1920);
+    border-right: calc(100vw * 2 / 1920) solid #000;
+    border-bottom: calc(100vw * 2 / 1920) solid #000;
+    transform: translateY(calc(100vw * -5 / 1920)) rotate(45deg);
+    transition: transform .25s ease;
+}
+
+.sub-form-select-options {
+    position: absolute;
+    top: calc(100% - 1px);
+    left: 0;
+    z-index: 20;
+    display: none;
+    width: 100%;
+    margin: 0;
+    padding: calc(100vw * 8 / 1920) 0;
+    border: 1px solid var(--red);
+    border-top: 0;
+    background: #fff;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+.sub-form-select-option {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: calc(100vw * 68 / 1920);
+    padding: calc(100vw * 12 / 1920) calc(100vw * 26 / 1920);
+    border: 0;
+    background: #fff;
+    color: #555;
+    font-family: inherit;
+    font-size: calc(100vw * 18 / 1920);
+    text-align: left;
+    cursor: pointer;
+}
+
+.sub-form-select-option:hover,
+.sub-form-select-option:focus-visible {
+    background: #f7f7f7;
+    color: #111;
+    outline: none;
+}
+
+.sub-form-select-option.is-selected {
+    color: #111;
+    font-weight: 600;
+}
+
+.sub-form-select.is-open .sub-form-select-trigger {
+    border-color: #ddd;
+    border-bottom-color: transparent;
+}
+
+.sub-form-select.is-open .sub-form-select-arrow {
+    transform: translateY(calc(100vw * 3 / 1920)) rotate(225deg);
+}
+
+.sub-form-select.is-open .sub-form-select-options {
+    display: block;
+}
+
+.sub-form-select.is-focus .sub-form-select-trigger {
+    border-color: var(--red);
+}
+
+.sub-form-select.is-disabled {
+    pointer-events: none;
+}
+
+.sub-form-select.is-disabled .sub-form-select-trigger {
+    border-color: #e5e5e5;
+    background: #f5f5f5;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.sub-form-select.is-disabled .sub-form-select-arrow {
+    border-color: #aaa;
+}
+
+/* ========================================
+Checkbox
+======================================== */
+
+.sub-form-checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(100vw * 12 / 1920);
+    cursor: pointer;
+}
+
+.sub-form-checkbox input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.sub-form-checkbox-icon {
+    display: block;
+    flex: 0 0 auto;
+    width: calc(100vw * 30 / 1920);
+    height: calc(100vw * 30 / 1920);
+    background: url("../images/icon/ic_checkbox_off.png") center / contain no-repeat;
+}
+
+.sub-form-checkbox input:checked + .sub-form-checkbox-icon {
+    background-image: url("../images/icon/ic_checkbox_on.png");
+}
+
+.sub-form-checkbox input:disabled + .sub-form-checkbox-icon {
+    opacity: .45;
+}
+
+.sub-form-checkbox input:disabled ~ .sub-form-checkbox-text {
+    color: #aaa;
+}
+
+.sub-form-checkbox-text {
+    color: #555;
+    font-size: calc(100vw * 18 / 1920);
+    line-height: calc(100vw * 28 / 1920);
+}
+
+/* ========================================
+Submit
+======================================== */
+
+.sub-form-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: calc(100vw * 164 / 1920);
+    height: calc(100vw * 62 / 1920);
+    padding: 0 calc(100vw * 32 / 1920);
+    border: 0;
+    border-radius: calc(100vw * 999 / 1920);
+    background: var(--red);
+    color: #fff;
+    font-family: inherit;
+    font-size: calc(100vw * 17 / 1920);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.sub-form-submit:disabled {
+    background: #ddd;
+    color: #999;
+    cursor: not-allowed;
+}
+
+/* ========================================
+Form Control
+======================================== */
+
+.sub-form-control {
+    position: relative;
+    width: 100%;
+}
+
+.sub-form-checkbox input:focus-visible + .sub-form-checkbox-icon {
+    outline: calc(100vw * 2 / 1920) solid rgba(207, 16, 7, .22);
+    outline-offset: calc(100vw * 3 / 1920);
+}
+
+/* ========================================
+Form Page Layout
+======================================== */
+
+.sub-form-page {
+    display: block;
+    width: calc(100vw * 1300 / 1920);
+    margin: 0 auto;
+}
+
+.sub-form-section {
+    padding-bottom: calc(100vw * 120 / 1920) 0;
+}
+
+.sub-form-section + .sub-form-section {
+    padding-top: calc(100vw * 40 / 1920);
+}
+
+.sub-form-section:last-child {
+    padding-bottom: calc(100vw * 140 / 1920);
+}
+
+.sub-form-section .inner {
+    width: calc(100vw * 1300 / 1920);
+    margin: 0 auto;
+}
+
+.sub-form-section-title {
+    margin-bottom: calc(100vw * 70 / 1920);
+}
+
+.sub-form-section-title h3 {
+    margin: 0;
+    color: #111;
+    font-size: calc(100vw * 40 / 1920);
+    font-weight: 700;
+    line-height: calc(100vw * 50 / 1920);
+    letter-spacing: -.04em;
+}
+
+.sub-form-section-title span,
+.sub-form-required {
+    color: var(--red);
+}
+
+.sub-form-required {
+    margin-left: calc(100vw * 3 / 1920);
+}
+
+.sub-form-phone {
+    display: grid;
+    grid-template-columns: calc(100vw * 290 / 1920) 1fr;
+    gap: calc(100vw * 20 / 1920);
+}
+
+.sub-form-email {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        calc(100vw * 28 / 1920)
+        minmax(0, 1fr)
+        calc(100vw * 290 / 1920);
+    align-items: center;
+    gap: calc(100vw * 20 / 1920);
+}
+
+.sub-form-email-at {
+    color: #111;
+    font-size: calc(100vw * 22 / 1920);
+    font-weight: 600;
+    text-align: center;
+}
+
+.sub-form-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(100vw * 40 / 1920);
+    margin-top: calc(100vw * 78 / 1920);
+}
+
+.sub-form-agree-group {
+    gap: calc(100vw * 10 / 1920);
+}
+
+.sub-form-bottom .sub-form-submit {
+    flex: 0 0 auto;
+}
+
+/* Vehicle Specification Request */
+
+.sub-form-page-vehicle .sub-form-section:first-child {
+    padding-top: calc(100vw * 90 / 1920);
+}
+
+.sub-form-page-vehicle .sub-form-section + .sub-form-section {
+    padding-top: 0;
+}
+
+.sub-form-page-vehicle .sub-form-section:last-child {
+    padding-bottom: calc(100vw * 150 / 1920);
+}
+
+.sub-form-page-vehicle .sub-form {
+    gap: calc(100vw * 48 / 1920);
+}
+
+.sub-form-page-vehicle .sub-form-bottom {
+    margin-top: calc(100vw * 110 / 1920);
+}
+
+.sub-form-page-vehicle .sub-form-bottom .sub-form-checkbox-text {
+    color: #777;
+    font-size: calc(100vw * 16 / 1920);
+    line-height: calc(100vw * 26 / 1920);
+    word-break: keep-all;
+}
+
+.sub-form-page-vehicle .sub-form-submit {
+    min-width: calc(100vw * 204 / 1920);
+}

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vehicle Specification Request | HUNTER KOREA</title>
+    <link href="/css/common.css" rel="stylesheet" />
+    <link href="/css/common-form.css" rel="stylesheet" />
+    <link href="/css/layout.css" rel="stylesheet" />
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <link href="/css/support.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- header -->
+    <div data-include="/includes/header.html"></div>
+
+    <main id="main" class="support-page">
+        <!-- Page title -->
+        <section class="page-heading" data-header-theme="dark">
+            <div class="inner">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="/" class="breadcrumb-home" aria-label="Home"></a>
+                    </li>
+                    <li>
+                        <a href="#">Support</a>
+                    </li>
+                    <li>
+                        <a href="#">Vehicle Specification Request</a>
+                    </li>
+                </ul>
+
+                <h2 class="page-title">Vehicle Specification Request</h2>
+            </div>
+        </section>
+
+        <!-- Vehicle Specification Request -->
+        <form id="vehicle-specification-form" class="sub-form-page sub-form-page-vehicle" data-form novalidate>
+                    <!-- Vehicle Information -->
+            <section class="sub-form-section">
+                <div class="inner">
+                    <div class="sub-form-section-title">
+                            <h3>차량정보<span>.</span></h3>
+                        </div>
+
+                    <div class="sub-form">
+                            <div class="sub-form-group">
+                                <label class="sub-form-label" for="vehicle-name">
+                                    차량정보<span class="sub-form-required">*</span>
+                                </label>
+
+                                <div class="sub-form-control"><input
+                                    type="text"
+                                    id="vehicle-name"
+                                    name="vehicle_name"
+                                    class="sub-form-input"
+                                    placeholder="예 : BMW 7 시리즈"
+                                    data-required
+                                    data-message="차량정보를 입력해주세요."
+                                ><span class="sub-form-state" aria-hidden="true"></span></div>
+
+                                <p class="sub-form-message">차량정보를 입력해주세요.</p>
+                            </div>
+
+                            <div class="sub-form-group">
+                                <label class="sub-form-label" for="vehicle-detail">
+                                    기타정보<span class="sub-form-required">*</span>
+                                </label>
+
+                                <div class="sub-form-control"><input
+                                    type="text"
+                                    id="vehicle-detail"
+                                    name="vehicle_detail"
+                                    class="sub-form-input"
+                                    placeholder="예 : 2015년식, F04"
+                                    data-required
+                                    data-message="기타정보를 입력해주세요."
+                                ><span class="sub-form-state" aria-hidden="true"></span></div>
+
+                                <p class="sub-form-message">기타정보를 입력해주세요.</p>
+                            </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Requester Information -->
+            <section class="sub-form-section">
+                <div class="inner">
+                    <div class="sub-form-section-title">
+                            <h3>요청자 정보<span>.</span></h3>
+                        </div>
+
+                    <div class="sub-form">
+                            <div class="sub-form-group">
+                                <label class="sub-form-label" for="company-name">
+                                    업체명<span class="sub-form-required">*</span>
+                                </label>
+
+                                <div class="sub-form-control"><input
+                                    type="text"
+                                    id="company-name"
+                                    name="company_name"
+                                    class="sub-form-input"
+                                    placeholder="업체명을 입력해주세요."
+                                    autocomplete="organization"
+                                    data-required
+                                    data-message="업체명을 입력해주세요."
+                                ><span class="sub-form-state" aria-hidden="true"></span></div>
+
+                                <p class="sub-form-message">업체명을 입력해주세요.</p>
+                            </div>
+
+                            <div class="sub-form-group">
+                                <label class="sub-form-label" for="requester-name">
+                                    요청자 성함<span class="sub-form-required">*</span>
+                                </label>
+
+                                <div class="sub-form-control"><input
+                                    type="text"
+                                    id="requester-name"
+                                    name="requester_name"
+                                    class="sub-form-input"
+                                    placeholder="성함을 입력해주세요."
+                                    autocomplete="name"
+                                    data-required
+                                    data-message="요청자 성함을 입력해주세요."
+                                ><span class="sub-form-state" aria-hidden="true"></span></div>
+
+                                <p class="sub-form-message">요청자 성함을 입력해주세요.</p>
+                            </div>
+
+                            <div class="sub-form-group">
+                                <span class="sub-form-label">
+                                    휴대폰 번호<span class="sub-form-required">*</span>
+                                </span>
+
+                                <div class="sub-form-phone">
+                                    <div class="sub-form-select" data-select>
+                                        <button
+                                            type="button"
+                                            class="sub-form-select-trigger"
+                                            aria-expanded="false"
+                                            aria-haspopup="listbox"
+                                        >
+                                            <span class="sub-form-select-value">010</span>
+                                            <span class="sub-form-select-arrow" aria-hidden="true"></span>
+                                        </button>
+
+                                        <ul class="sub-form-select-options" role="listbox">
+                                            <li><button type="button" class="sub-form-select-option is-selected" data-value="010">010</button></li>
+                                            <li><button type="button" class="sub-form-select-option" data-value="011">011</button></li>
+                                            <li><button type="button" class="sub-form-select-option" data-value="016">016</button></li>
+                                            <li><button type="button" class="sub-form-select-option" data-value="017">017</button></li>
+                                            <li><button type="button" class="sub-form-select-option" data-value="018">018</button></li>
+                                            <li><button type="button" class="sub-form-select-option" data-value="019">019</button></li>
+                                        </ul>
+
+                                        <input type="hidden" name="phone_prefix" value="010">
+                                    </div>
+
+                                    <div class="sub-form-control"><input
+                                        type="tel"
+                                        id="phone-number"
+                                        name="phone_number"
+                                        class="sub-form-input"
+                                        inputmode="numeric"
+                                        autocomplete="tel-national"
+                                        placeholder="숫자만 입력해주세요."
+                                        maxlength="8"
+                                        data-required
+                                        data-pattern="^[0-9]{7,8}$"
+                                        data-message="휴대폰 번호를 확인해주세요."
+                                    ><span class="sub-form-state" aria-hidden="true"></span></div>
+                                </div>
+
+                                <p class="sub-form-message">휴대폰 번호를 확인해주세요.</p>
+                            </div>
+
+                            <div class="sub-form-group">
+                                <span class="sub-form-label">이메일 주소</span>
+
+                                <div class="sub-form-email">
+                                    <div class="sub-form-control"><input
+                                        type="text"
+                                        id="email-id"
+                                        name="email_id"
+                                        class="sub-form-input"
+                                        placeholder="이메일을 입력해주세요."
+                                        autocomplete="email"
+                                    ><span class="sub-form-state" aria-hidden="true"></span></div>
+
+                                    <span class="sub-form-email-at">@</span>
+
+                                    <div class="sub-form-control"><input
+                                        type="text"
+                                        id="email-domain"
+                                        name="email_domain"
+                                        class="sub-form-input"
+                                        placeholder="입력해주세요."
+                                    ><span class="sub-form-state" aria-hidden="true"></span></div>
+
+                                    <div class="sub-form-select" data-select data-target="#email-domain">
+                                        <button
+                                            type="button"
+                                            class="sub-form-select-trigger"
+                                            aria-expanded="false"
+                                            aria-haspopup="listbox"
+                                        >
+                                            <span class="sub-form-select-value is-placeholder">직접 입력</span>
+                                            <span class="sub-form-select-arrow" aria-hidden="true"></span>
+                                        </button>
+
+                                        <ul class="sub-form-select-options" role="listbox">
+                                            <li><button type="button" class="sub-form-select-option is-selected" data-value="">직접 입력</button></li>
+                                            <li><button type="button" class="sub-form-select-option" data-value="naver.com">naver.com</button></li>
+                                            <li><button type="button" class="sub-form-select-option" data-value="gmail.com">gmail.com</button></li>
+                                            <li><button type="button" class="sub-form-select-option" data-value="daum.net">daum.net</button></li>
+                                            <li><button type="button" class="sub-form-select-option" data-value="hanmail.net">hanmail.net</button></li>
+                                        </ul>
+
+                                        <input type="hidden" name="email_domain_select" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sub-form-bottom">
+                        <label class="sub-form-checkbox">
+                            <input type="checkbox" id="marketing-agree" name="marketing_agree" checked>
+                            <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
+                            <span class="sub-form-checkbox-text">
+                                입력하신 정보는 요청하신 차량에 대한 제원 정보 업데이트시 안내 드리는 용도 및 마케팅 용도로 사용될 수 있습니다
+                            </span>
+                        </label>
+
+                        <button type="submit" class="sub-form-submit">추가 등록 요청</button>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </main>
+
+    <!-- Common Banners. -->
+    <div data-include="/includes/banner-roi.html" data-header-theme="light"></div>
+    <div data-include="/includes/banner-solution.html" data-header-theme="light"></div>
+
+    <!-- footer -->
+    <div class="footer-section" data-header-theme="dark" data-include="/includes/footer.html"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="/js/include.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/support.js"></script>
+    <script src="/js/form.js"></script>
+</body>
+
+</html>

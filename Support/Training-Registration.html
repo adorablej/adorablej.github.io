@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        헌터페이지
+    </title>
+    <link href="/css/common.css" rel="stylesheet" />
+    <link href="/css/common-form.css" rel="stylesheet" />
+    <link href="/css/layout.css" rel="stylesheet" />
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <link href="/css/support.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <!-- header -->
+    <div data-include="/includes/header.html"></div>
+
+    <!-- Page title -->
+    <section class="page-heading"  data-header-theme="dark">
+        <div class="inner">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/" class="breadcrumb-home" aria-label="Home"></a>
+                </li>
+                <li>
+                    <a href="/Support/equipment-operation-guide.html">Support</a>
+                </li>
+                <li>
+                    <a href="#">Training Registration</a>
+                </li>
+                <!-- <li class="current">
+                    depth3
+                </li> -->
+            </ul>
+            <h2 class="page-title">
+                Training Registration
+            </h2>
+        </div>
+    </section>
+
+    <!-- Training Registration -->
+    <section class="sub-training" data-header-theme="light">
+        <div class="inner">
+            <h3 class="sub-training-heading">교육 일정<span>.</span></h3>
+            <div class="sub-training-layout">
+                <div class="sub-training-calendar-wrap">
+                    <div class="sub-training-calendar-head">
+                        <button type="button" class="sub-training-month-btn sub-training-month-prev" aria-label="Previous month"></button>
+                        <h3 class="sub-training-month-title"></h3>
+                        <button type="button" class="sub-training-month-btn sub-training-month-next" aria-label="Next month"></button>
+                    </div>
+
+                    <div class="sub-training-week">
+                        <span>Mon</span>
+                        <span>Tue</span>
+                        <span>Wed</span>
+                        <span>Thu</span>
+                        <span>Fri</span>
+                        <span>Sat</span>
+                        <span>Sun</span>
+                    </div>
+
+                    <div class="sub-training-calendar" id="training-calendar"></div>
+                </div>
+
+                <aside class="sub-training-sidebar">
+                    <div class="sub-training-sidebar-head">
+                        <span class="sub-training-sidebar-date"></span>
+                        <strong class="sub-training-sidebar-count"></strong>
+                    </div>
+                    <div class="sub-training-list" id="training-list"></div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <div class="sub-training-modal" id="training-modal" aria-hidden="true">
+        <button type="button" class="sub-training-modal-dim" data-training-close aria-label="Close modal"></button>
+        <div class="sub-training-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="training-modal-title">
+            <button type="button" class="sub-training-modal-close" data-training-close aria-label="Close modal"></button>
+            <div class="sub-training-modal-content"></div>
+        </div>
+    </div>
+
+
+    <!-- Common Banners. -->
+    <div data-include="/includes/banner-roi.html" data-header-theme="light" ></div>
+    <div data-include="/includes/banner-solution.html"  data-header-theme="light" ></div>
+
+
+        <!-- footer -->
+        <div class="footer-section" data-header-theme="dark" data-include="/includes/footer.html"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="/js/include.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/support.js"></script>
+    <script src="/js/form.js"></script>
+    <script src="/js/training-data.js"></script>
+    <script src="/js/calendar.js"></script>
+</body>
+
+</html>
