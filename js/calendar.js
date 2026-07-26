@@ -3,12 +3,14 @@
 
     const trainingData = (window.TRAINING_DATA || []).map((item) => ({ ...item }));
     const appliedTrainingIds = new Set();
+    const DEFAULT_TRAINING_IMAGE = "/images/img_placeholder.png";
 
     const statusLabel = {
-        open: "Open",
-        closed: "Closed",
-        completed: "Completed",
-        cancelled: "Cancelled"
+        waiting: "접수대기",
+        open: "접수중",
+        closed: "접수마감",
+        training: "교육중",
+        completed: "교육완료"
     };
 
     const calendar = document.querySelector("#training-calendar");
@@ -31,14 +33,7 @@
         return new Date();
     }
 
-    function getRelativeDate(offset) {
-        const date = new Date();
-        date.setHours(12, 0, 0, 0);
-        date.setDate(date.getDate() + offset);
-        return formatDate(date);
-    }
-
-    function parseDate(dateString) {
+function parseDate(dateString) {
         const [year, month, day] = dateString.split("-").map(Number);
         return new Date(year, month - 1, day);
     }
@@ -138,22 +133,29 @@
         sidebarCount.textContent = `${events.length} training schedule${events.length === 1 ? "" : "s"}`;
 
         if (!events.length) {
-            trainingList.innerHTML = '<div class="sub-training-empty">No training schedule is available.</div>';
+            trainingList.innerHTML = '<div class="sub-training-empty">일정이 없어효</div>';
             return;
         }
 
         trainingList.innerHTML = events.map((event) => {
             const remaining = Math.max(event.capacity - event.currentApplicants, 0);
-            const available = event.status === "open" && event.registrationEnabled && remaining > 0;
+            const available = event.status === "open" && remaining > 0;
+            const applyLabel = available ? "교육신청" : statusLabel[event.status];
             return `
                 <button type="button" class="sub-training-card" data-training-id="${event.id}">
                     <span class="sub-training-card-top">
                         <span class="sub-training-card-time">${event.date.replaceAll("-", ".")} / ${event.startTime}</span>
                         <span class="sub-training-card-status is-${event.status}">${statusLabel[event.status]}</span>
                     </span>
-                    <strong class="sub-training-card-title">${event.courseName}</strong>
-                    <span class="sub-training-card-location">${event.location} · ${event.currentApplicants}/${event.capacity}</span>
-                    <span class="sub-training-card-apply ${available ? "" : "is-disabled"}">${available ? "교육신청" : "신청마감"}</span>
+                    <strong class="sub-training-card-title">
+                    ${event.courseName}
+                    </strong>
+                    <span class="sub-training-card-location">
+                    ${event.courseName} · ${event.currentApplicants}/${event.capacity}
+                    </span>
+                    <span class="sub-training-card-apply ${available ? "" : "is-disabled"}">
+                        ${statusLabel[event.status]}
+                    </span>
                 </button>
             `;
         }).join("");
@@ -171,35 +173,64 @@
 
         const remaining = Math.max(training.capacity - training.currentApplicants, 0);
         const isApplied = appliedTrainingIds.has(training.id);
-        const isAvailable = training.status === "open" && training.registrationEnabled && remaining > 0 && !isApplied;
+        const isAvailable = training.status === "open" && remaining > 0 && !isApplied;
         const fee = training.feeType === "free"
             ? "무료"
             : `${new Intl.NumberFormat("ko-KR").format(training.price)}원`;
 
+        const modalImage = training.imageUrl || DEFAULT_TRAINING_IMAGE;
+
         modalContent.innerHTML = `
-            <div class="sub-training-modal-visual" aria-hidden="true"></div>
+            <div
+                class="sub-training-modal-visual"
+                role="img"
+                aria-label="${training.courseName} 교육 이미지"
+                style="background-image:url('${modalImage}'); background-size:cover; background-position:center;"
+            ></div>
+
             <div class="sub-training-modal-body">
-                <span class="sub-training-modal-category">${training.categoryName}</span>
-                <h3 class="sub-training-modal-title" id="training-modal-title">${training.courseName}</h3>
-                <dl class="sub-training-modal-info">
-                    <dt>일정</dt><dd>${formatSidebarDate(training.date)}</dd>
-                    <dt>시간</dt><dd>${training.startTime} - ${training.endTime}</dd>
-                    <dt>장소</dt><dd>${training.location}</dd>
-                    <dt>강사</dt><dd>${training.instructorName}</dd>
-                    <dt>신청현황</dt><dd>${training.currentApplicants} / ${training.capacity} (${remaining}명 남음)</dd>
-                    <dt>교육비</dt><dd>${fee}</dd>
-                </dl>
-                <p class="sub-training-modal-description">${training.description}</p>
-                <label class="sub-training-modal-agree">
-                    <input type="checkbox" class="sub-training-modal-checkbox" ${isAvailable ? "" : "disabled"}>
-                    <span>교육 일정과 신청 안내를 확인했으며, 교육 신청에 동의합니다.</span>
+                <div class="sub-training-modal-summary">
+                    <strong class="sub-training-modal-datetime">
+                        ${training.date.replaceAll("-", ".")} / ${training.startTime}
+                    </strong>
+
+                    <div class="sub-training-modal-course">
+                        <span class="sub-training-modal-course-dot is-${training.status}" aria-hidden="true"></span>
+                        <span>${training.courseName} (${training.currentApplicants}/${training.capacity})</span>
+                    </div>
+                </div>
+
+                <label class="sub-form-checkbox">
+                    <input
+                        type="checkbox"
+                        class="sub-training-modal-checkbox"
+                        data-required
+                        data-message="개인정보 수집 및 이용에 동의해주세요."
+                        ${isAvailable ? "" : "disabled"}
+                    >
+                    <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
+                    <span class="sub-form-checkbox-text">
+                        신청하시는 교육 일정과 내용을 확인해주세요. 수강 신청을 위한 개인정보 제3자 제공 및 취소 규정을 확인하였으며 이에 동의합니다.
+                    </span>
                 </label>
+
                 <div class="sub-training-modal-actions">
                     <button type="button" class="sub-training-modal-cancel" data-training-close>취소</button>
-                    <button type="button" class="sub-training-modal-submit" disabled>${isApplied ? "신청완료" : isAvailable ? "신청하기" : statusLabel[training.status]}</button>
+                    <button type="button" class="sub-training-modal-submit" disabled>
+                        ${isApplied ? "신청완료" : isAvailable ? "신청하기" : statusLabel[training.status]}
+                    </button>
                 </div>
             </div>
         `;
+
+        const visual = modalContent.querySelector(".sub-training-modal-visual");
+        const fallbackImage = new Image();
+        fallbackImage.onerror = () => {
+            if (visual) {
+                visual.style.backgroundImage = `url('${DEFAULT_TRAINING_IMAGE}')`;
+            }
+        };
+        fallbackImage.src = modalImage;
 
         const checkbox = modalContent.querySelector(".sub-training-modal-checkbox");
         const submit = modalContent.querySelector(".sub-training-modal-submit");
@@ -213,7 +244,6 @@
 
             appliedTrainingIds.add(training.id);
             training.currentApplicants = Math.min(training.currentApplicants + 1, training.capacity);
-            training.registrationEnabled = false;
 
             submit.textContent = "신청완료";
             submit.disabled = true;

@@ -1371,6 +1371,10 @@ Detail FAQ
     letter-spacing: -2%;
 }
 
+.detail-faq-answer p strong{
+    font-weight: 600;
+}
+
 /* products.html , Slider Prev / Next Buttons. */
 
 .sub-slider-button,

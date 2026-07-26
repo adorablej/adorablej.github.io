@@ -1,175 +1,75 @@
 (() => {
     "use strict";
-
-    function formatDate(date) {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const day = String(date.getDate()).padStart(2, "0");
-        return `${year}-${month}-${day}`;
-    }
-
-    function getRelativeDate(offset) {
-        const date = new Date();
-        date.setHours(12, 0, 0, 0);
-        date.setDate(date.getDate() + offset);
-        return formatDate(date);
-    }
-
-    const trainingData = [
+const trainingData = [
         {
             id: 1,
-            courseName: "Wheel Alignment Basic Training",
-            categoryName: "Alignment Systems",
-            date: getRelativeDate(3),
-            startTime: "10:00",
-            endTime: "17:00",
-            location: "Hunter Korea Training Center",
-            instructorName: "Hunter Korea Technical Team",
-            capacity: 20,
-            currentApplicants: 12,
-            feeType: "free",
-            price: 0,
-            status: "open",
-            registrationEnabled: true,
-            description: "This course covers basic wheel alignment theory and hands-on equipment operation."
+            courseName: "얼라인먼트 Level 1", //교육과정명
+            categoryName: "얼라이먼트 기본 교육", //교육카테고리
+            imageUrl: "/images/support/training/training-level-1.jpg", //모달 상단 이미지
+            date: "2026-07-29",
+            startTime: "10:00", //교육시간
+            endTime: "12:00",
+            location: "서울 마포 트레이닝센터 3호실", //교육 장소
+            instructorName: "김헌터", //강사명
+            capacity: 20, //수강 신청 가능 인원
+            currentApplicants: 12, //현재 신청 인원
+            feeType: "free", //교육비용구분  free | paid
+            price: 0, //교육비용
+            status: "open", //교육진행상태 waiting :접수대기 | open : 접수중 | closed : 접수마감 | training : 교육중 | completed : 교육완료
+description: "휠얼라인먼트 기초이론과 장비운영 실습으로 구성된 입문 과정입니다." //교육상세소개
         },
         {
             id: 2,
-            courseName: "Road Force Balancer Operation",
-            categoryName: "Wheel Balancers",
-            date: getRelativeDate(3),
-            startTime: "14:00",
-            endTime: "17:00",
-            location: "Hunter Korea Training Center",
-            instructorName: "Hunter Korea Technical Team",
-            capacity: 15,
-            currentApplicants: 15,
-            feeType: "paid",
-            price: 100000,
-            status: "closed",
-            registrationEnabled: false,
-            description: "Learn the core functions and practical operation methods of the Road Force balancer."
+            courseName: "얼라인먼트 Level 2", //교육과정명
+            categoryName: "얼라이먼트 중급 교육", //교육카테고리
+            imageUrl: null, //모달 상단 이미지
+            date: "2026-07-29",
+            startTime: "13:00", //교육시간
+            endTime: "15:00",
+            location: "서울 마포 트레이닝센터 3호실", //교육 장소
+            instructorName: "김헌터", //강사명
+            capacity: 10, //수강 신청 가능 인원
+            currentApplicants: 10, //현재 신청 인원
+            feeType: "paid", //교육비용구분  free | paid
+            price: 15000, //교육비용
+            status: "closed", //교육진행상태 waiting :접수대기 | open : 접수중 | closed : 접수마감 | training : 교육중 | completed : 교육완료
+description: "휠얼라인먼트 기초이론과 장비운영 실습으로 구성된 입문 과정입니다." //교육상세소개
         },
         {
             id: 3,
-            courseName: "Tire Changer Advanced Training",
-            categoryName: "Tire Changers",
-            date: getRelativeDate(11),
-            startTime: "09:30",
-            endTime: "16:30",
-            location: "Hunter Korea Training Center",
-            instructorName: "Hunter Korea Technical Team",
-            capacity: 18,
-            currentApplicants: 7,
-            feeType: "paid",
-            price: 150000,
-            status: "open",
-            registrationEnabled: true,
-            description: "Advanced training focused on safe tire changing procedures and equipment efficiency."
-        },
-        {
-            id: 4,
-            courseName: "ADAS Calibration Seminar",
-            categoryName: "ADAS",
-            date: getRelativeDate(19),
-            startTime: "13:00",
+            courseName: "얼라인먼트 Level 3", //교육과정명
+            categoryName: "얼라이먼트 고급 교육", //교육카테고리
+            imageUrl: "/images/support/training/training-level-3.jpg", //모달 상단 이미지
+            date: "2026-08-02",
+            startTime: "10:00", //교육시간
             endTime: "17:00",
-            location: "Hunter Korea Training Center",
-            instructorName: "Hunter Korea Technical Team",
-            capacity: 30,
-            currentApplicants: 22,
-            feeType: "free",
-            price: 0,
-            status: "open",
-            registrationEnabled: true,
-            description: "A technical seminar covering ADAS calibration concepts and field applications."
+            location: "서울 마포 트레이닝센터 3호실", //교육 장소
+            instructorName: "김헌터", //강사명
+            capacity: 20, //수강 신청 가능 인원
+            currentApplicants: 12, //현재 신청 인원
+            feeType: "free", //교육비용구분  free | paid
+            price: 0, //교육비용
+            status: "waiting", //교육진행상태 waiting :접수대기 | open : 접수중 | closed : 접수마감 | training : 교육중 | completed : 교육완료
+description: "얼라인먼트 기초이론과 장비운영 실습으로 구성된 입문 과정입니다." //교육상세소개
         },
         {
             id: 5,
-            courseName: "Alignment System Maintenance",
-            categoryName: "Service Training",
-            date: getRelativeDate(27),
-            startTime: "10:00",
-            endTime: "15:00",
-            location: "Hunter Korea Training Center",
-            instructorName: "Hunter Korea Technical Team",
-            capacity: 12,
-            currentApplicants: 4,
-            feeType: "paid",
-            price: 120000,
-            status: "open",
-            registrationEnabled: true,
-            description: "Practice routine inspection and maintenance methods for alignment systems."
-        },
-        {
-            id: 6,
-            courseName: "Equipment Introduction Session",
-            categoryName: "Product Seminar",
-            date: getRelativeDate(32),
-            startTime: "15:00",
+            courseName: "휠 얼라인먼트 Level 1", //교육과정명
+            categoryName: "휠 얼라인먼트 기본 교육", //교육카테고리
+            imageUrl: null, //모달 상단 이미지
+            date: "2026-07-20",
+            startTime: "10:00", //교육시간
             endTime: "17:00",
-            location: "Online",
-            instructorName: "Hunter Korea Product Team",
-            capacity: 50,
-            currentApplicants: 18,
-            feeType: "free",
-            price: 0,
-            status: "cancelled",
-            registrationEnabled: false,
-            description: "An online product introduction session. This schedule has been cancelled."
-        }
-,
-        {
-            id: 7,
-            courseName: "HawkEye Elite X Quick Start",
-            categoryName: "Alignment Systems",
-            date: getRelativeDate(11),
-            startTime: "17:30",
-            endTime: "19:00",
-            location: "Hunter Korea Training Center",
-            instructorName: "Hunter Korea Technical Team",
-            capacity: 20,
-            currentApplicants: 14,
-            feeType: "free",
-            price: 0,
-            status: "open",
-            registrationEnabled: true,
-            description: "A short practical session covering initial setup and frequently used functions."
+            location: "서울 마포 트레이닝센터 3호실", //교육 장소
+            instructorName: "김헌터", //강사명
+            capacity: 20, //수강 신청 가능 인원
+            currentApplicants: 12, //현재 신청 인원
+            feeType: "free", //교육비용구분  free | paid
+            price: 0, //교육비용
+            status: "completed", //교육진행상태 waiting :접수대기 | open : 접수중 | closed : 접수마감 | training : 교육중 | completed : 교육완료
+description: "휠얼라인먼트 기초이론과 장비운영 실습으로 구성된 입문 과정입니다." //교육상세소개
         },
-        {
-            id: 8,
-            courseName: "Wheel Balancer Q&A Session",
-            categoryName: "Wheel Balancers",
-            date: getRelativeDate(11),
-            startTime: "19:30",
-            endTime: "20:30",
-            location: "Online",
-            instructorName: "Hunter Korea Technical Team",
-            capacity: 40,
-            currentApplicants: 40,
-            feeType: "free",
-            price: 0,
-            status: "closed",
-            registrationEnabled: false,
-            description: "An online question-and-answer session for wheel balancer operation."
-        },
-        {
-            id: 9,
-            courseName: "Past Equipment Safety Training",
-            categoryName: "Safety Training",
-            date: getRelativeDate(-4),
-            startTime: "10:00",
-            endTime: "12:00",
-            location: "Hunter Korea Training Center",
-            instructorName: "Hunter Korea Technical Team",
-            capacity: 25,
-            currentApplicants: 23,
-            feeType: "free",
-            price: 0,
-            status: "completed",
-            registrationEnabled: false,
-            description: "This training schedule has been completed."
-        }
+        
     ];
 
 
