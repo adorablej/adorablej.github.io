@@ -299,7 +299,7 @@ Sub Pride Dealer
     display: block;
     width: calc(24 * var(--vw));
     height: calc(24 * var(--vw));
-    background: url("/images/ic_map.png")center / cover no-repeat;
+    background: url("/images/icon/icon_map.png")center / cover no-repeat;
     
 }
 
@@ -589,6 +589,7 @@ Sub Product Item
 .sub-product-item .inner {
     position: relative;
     z-index: 2;
+    display: flex;
 }
 
 .sub-product-item-wrap {
@@ -603,8 +604,7 @@ Sub Product Item
     display: flex;
     justify-content: center;
     align-items: flex-end;
-
-    flex: 0 0 52%;
+    width:  calc(600 * var(--vw));
 }
 
 .sub-product-item-image img {
@@ -614,24 +614,24 @@ Sub Product Item
 }
 
 .sub-product-item-content {
-    flex: 0 0 40%;
+    width:  calc(590 * var(--vw));
+    padding-bottom:  calc(68 * var(--vw));
+    z-index: 2;
 }
 
 .sub-product-item-category {
     display: inline-block;
-    margin-bottom: calc(24 * var(--vw));
+    margin-bottom: calc(15 * var(--vw));
     color: var(--red);
     font-family: "Russo One", sans-serif;
-    font-size: calc(30 * var(--vw));
-    font-weight: 400;
-    line-height: calc(42 * var(--vw));
+    font-size: calc(26 * var(--vw));
 }
 
 .sub-product-item-title {
     margin-bottom: calc(30 * var(--vw));
     color: #000;
     font-family: "Russo One", sans-serif;
-    font-size: calc(56 * var(--vw));
+    font-size: calc(50 * var(--vw));
     font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
@@ -645,13 +645,14 @@ Sub Product Item
 
 
 .sub-product-item-desc {
-    width:100%;
-    margin-bottom: calc(80 * var(--vw));
-    color: #222;
+    width: 100%;
+    margin-bottom: calc(60 * var(--vw));
+    color: #666;
     font-size: calc(18 * var(--vw));
-    font-weight: 400;
+    font-weight: 300;
     line-height: calc(30 * var(--vw));
     letter-spacing: -1px;
+    word-break: keep-all;
 }
 
 
@@ -667,11 +668,163 @@ Sub Product Item
     text-align:left;
 }
 
+.sub-product-item-center{
+    background:url("/images/products/p_l_bg_r.png") center /cover no-repeat;
+}
+.sub-product-item-center .sub-product-item-wrap{
+    flex-direction:column;
+    justify-content: center;
+}
 
-/* ========================================
-Product-detail
-======================================== */
+.sub-product-item-center .sub-product-item-content{
+    text-align:center;
+    width: 100%;
+    padding-bottom: calc(55 * var(--vw));
+}
 
+.sub-product-item-center .sub-product-item-image{
+    height: calc(440 * var(--vw));
+    align-items: flex-start;
+}
+.sub-product-item-center .sub-product-item-image img{
+    
+}
+/* Wheel Balancers */
+.Road-Force-Walkaway .sub-product-item-image {
+    position: absolute;
+    right: 0;
+    bottom: calc(70 * var(--vw));
+    width: calc(580 * var(--vw));
+}
+.Road-Force-Elite .sub-product-item-image {
+    position: absolute;
+    left: 0;
+    bottom: calc(60 * var(--vw));
+    width: calc(530 * var(--vw));
+}
+.SmartWeight-Elite .sub-product-item-image {
+    position: absolute;
+    right: 0;
+    bottom: calc(40 * var(--vw));
+    width: calc(560 * var(--vw));
+}
+.SmartWeight-Hybrid .sub-product-item-image {
+    position: absolute;
+    left: 0;
+    bottom: calc(60 * var(--vw));
+    width: calc(530 * var(--vw));
+}
+
+/* Tire Changers */
+.TCRH-Revolution .sub-product-item-image {
+    position: absolute;
+    right: 0;
+    bottom: calc(30 * var(--vw));
+    width: calc(540 * var(--vw));
+}
+.TCMW-Maverick .sub-product-item-image {
+    position: absolute;
+    left: 0;
+    bottom: calc(30 * var(--vw));
+    width: calc(570 * var(--vw));
+}
+.TCX70 .sub-product-item-image {
+    position: absolute;
+    right: 0;
+    bottom: calc(50 * var(--vw));
+    width: calc(520 * var(--vw));
+}
+.TCX54 .sub-product-item-image {
+    position: absolute;
+    left: 0;
+    bottom:calc(50 * var(--vw));
+    width: calc(545 * var(--vw));
+}
+/* Brake Lathes */
+.AutoComp-Elite .sub-product-item-image {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: calc(560 * var(--vw));
+}
+
+.BL-Series .sub-product-item-image {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: calc(550 * var(--vw));
+}
+
+
+/* Alignment Racks */
+.Scissor-Alignment-Lifts  .sub-product-item-content{
+    padding-bottom: 0;
+}
+.Scissor-Alignment-Lifts .sub-product-item-image img {
+    width: calc(950 * var(--vw));
+}
+.Four-Post-Lifts  .sub-product-item-content{
+    padding-bottom: 0;
+}
+.Four-Post-Lifts .sub-product-item-image img{
+    width: calc(980 * var(--vw));
+    position: absolute;
+    bottom: calc(-180 * var(--vw));
+}
+
+/*Vehicle Inspection*/
+.Hunter-Quick-Check-Inspection .sub-product-item-content{
+    width: calc(570 * var(--vw));
+    padding-bottom: calc(168 * var(--vw));
+}
+
+.Hunter-Quick-Check-Inspection .sub-product-item-image {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.Hunter-Quick-Check-Inspection .sub-product-item-image img{
+width: calc(880 * var(--vw));
+}
+
+.Hunter-Quick-Check-Commercial .sub-product-item-content{
+padding-bottom: 0;
+padding-top:calc(100 * var(--vw));
+}
+.Hunter-Quick-Check-Commercial .sub-product-item-image img{
+    position: absolute;
+    bottom: calc(-180 * var(--vw));
+}
+/* Heavy Duty */
+.HawkEye-XL .sub-product-item-image {
+    position: absolute;
+    width: calc(570 * var(--vw));
+    bottom: calc(55 * var(--vw));
+    right: 0;
+}
+.HD-Elite .sub-product-item-image {
+    position: absolute;
+    width: calc(565 * var(--vw));
+    bottom: calc(0 * var(--vw));
+    left: 0;
+}
+.TCX635-PHD .sub-product-item-content{
+    width: calc(530 * var(--vw));
+}
+.TCX635-PHD .sub-product-item-image {
+    position: absolute;
+    width: calc(720 * var(--vw));
+    bottom: calc(90 * var(--vw));
+    right: 0;
+}
+.Heavy-Duty-Four-Post .sub-product-item-image {
+    position: absolute;
+    left: calc(-200 * var(--vw));
+    bottom: calc(20 * var(--vw));
+}
+.Heavy-Duty-Four-Post .sub-product-item-image img{
+width: calc(880 * var(--vw));
+}
 
 
 /* ========================================
@@ -1221,14 +1374,14 @@ Detail Spec
 /* Document Icon */
 
 .detail-spec-icon-note {
-    background:url("/images/ic_note.png")center /cover no-repeat;;
+    background:url("/images/icon/icon_note.png")center /cover no-repeat;;
 }
 
 
 /* Video Icon */
 
 .detail-spec-icon-video {
-    background:url("/images/ic_video.png")center /cover no-repeat;;
+    background:url("/images/icon/icon_video.png")center /cover no-repeat;;
 }
 
 

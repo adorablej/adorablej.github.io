@@ -415,10 +415,10 @@ Training Registration
 .sub-training-month-title {
     min-width: calc(100vw * 120 / 1920);
     margin: 0;
-    color: #18233b;
+    color: #1E293B;
     font-family: inherit;
     font-size: calc(100vw * 20 / 1920);
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1;
     text-align: center;
 }
@@ -517,9 +517,9 @@ Training Registration
     display: inline-flex;
     align-items: center;
     gap: calc(100vw * 8 / 1920);
-    color: #18233b;
-    font-size: calc(100vw * 13 / 1920);
-    font-weight: 700;
+    color: #1E293B;
+    font-size: calc(100vw * 14 / 1920);
+    font-weight: 600;
     line-height: 1;
 }
 
@@ -536,8 +536,8 @@ Training Registration
 .sub-training-day.is-today .sub-training-day-number::after {
     content: "TODAY";
     color: #c20e05;
-    font-size: calc(100vw * 11 / 1920);
-    font-weight: 800;
+    font-size: calc(100vw * 14 / 1920);
+    font-weight: 700;
 }
 
 .sub-training-event-list {
@@ -550,24 +550,22 @@ Training Registration
 .sub-training-event {
     display: block;
     overflow: hidden;
-    height: calc(100vw * 22 / 1920);
-    padding: 0 calc(100vw * 8 / 1920);
-    border-radius: calc(100vw * 5 / 1920);
-    background: #3fc9a4;
+    padding: calc(100vw * 4 / 1920) calc(100vw * 8 / 1920);
+    border-radius: calc(100vw * 6 / 1920);
+    background: #3CCBA1;
     color: #fff;
-    font-size: calc(100vw * 10 / 1920);
-    font-weight: 700;
-    line-height: calc(100vw * 22 / 1920);
+    font-size: calc(100vw * 11 / 1920);
+    font-weight: 600;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.sub-training-event.is-closed { background: #ec45ad; }
+/* .sub-training-event.is-closed { background: #E84CB3; }
 .sub-training-event.is-completed { background: #9566e9; }
-.sub-training-event.is-cancelled { background: #aeb5c4; }
-.sub-training-event:nth-child(3n) { background: #19a8e6; }
-.sub-training-event:nth-child(4n) { background: #9566e9; }
-
+.sub-training-event.is-cancelled { background: #0EA5E9; }
+.sub-training-event:nth-child(3n) { background: #eabf7a; }
+.sub-training-event:nth-child(4n) { background: #e98b66; }
+*/
 .sub-training-sidebar {
     padding: calc(100vw * 24 / 1920);
 }
@@ -763,7 +761,7 @@ Training Registration
 	border-radius:50%;
 	background:#3fc9a4;
 }
-.sub-training-modal-course-dot.is-waiting {
+/* .sub-training-modal-course-dot.is-waiting {
 	background:#19a8e6;
 }
 .sub-training-modal-course-dot.is-open {
@@ -777,7 +775,7 @@ Training Registration
 }
 .sub-training-modal-course-dot.is-completed {
 	background:#9566e9;
-}
+} */
 .sub-training-modal-agree {
 	position:relative;
 	display:flex;
