@@ -151,7 +151,7 @@ function parseDate(dateString) {
                     ${event.courseName}
                     </strong>
                     <span class="sub-training-card-location">
-                    ${event.courseName} · ${event.currentApplicants}/${event.capacity}
+                    ${event.courseName} (${event.currentApplicants}/${event.capacity})
                     </span>
                     <span class="sub-training-card-apply ${available ? "" : "is-disabled"}">
                         ${statusLabel[event.status]}
