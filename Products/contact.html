@@ -66,41 +66,10 @@
                             </p>
 </div>
 <div class="sub-form-group">
-<span class="sub-form-label">
-                                휴대폰 번호
-                            </span>
-<div class="sub-form-phone">
-<div class="sub-form-select" data-select="">
-<button aria-expanded="false" aria-haspopup="listbox" class="sub-form-select-trigger" type="button">
-<span class="sub-form-select-value">010</span>
-<span aria-hidden="true" class="sub-form-select-arrow"></span>
-</button>
-<ul class="sub-form-select-options" role="listbox">
-<li>
-<button class="sub-form-select-option is-selected" data-value="010" type="button">
-                                                010
-                                            </button>
-</li>
-<li>
-<button class="sub-form-select-option" data-value="011" type="button">
-                                                011
-                                            </button>
-</li>
-<li>
-<button class="sub-form-select-option" data-value="016" type="button">
-                                                016
-                                            </button>
-</li>
-<li>
-<button class="sub-form-select-option" data-value="017" type="button">
-                                                017
-                                            </button>
-</li>
-</ul>
-<input name="phone_prefix" type="hidden" value="010"/>
-</div>
-<div class="sub-form-control"><input autocomplete="tel-national" class="sub-form-input" data-message="휴대폰 번호를 확인해주세요." data-pattern="^\\d{7,8}$" data-required="" id="phone-number" inputmode="numeric" maxlength="8" name="user_phone" placeholder="숫자만 입력해주세요." type="tel"/><span aria-hidden="true" class="sub-form-state"></span></div>
-</div>
+<label class="sub-form-label" for="phone-number">
+                                휴대폰 번호<span class="sub-form-required">*</span>
+                            </label>
+<div class="sub-form-control"><input autocomplete="tel" class="sub-form-input" data-message="휴대폰 번호를 확인해주세요." data-pattern="^01[016789]-\d{3,4}-\d{4}$" data-phone data-required id="phone-number" inputmode="numeric" maxlength="13" name="user_phone" placeholder="휴대폰 번호를 입력해주세요." type="tel"/><span aria-hidden="true" class="sub-form-state"></span></div>
 <p class="sub-form-message">
                                 휴대폰 번호를 확인해주세요.
                             </p>
