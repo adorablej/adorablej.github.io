@@ -1334,5 +1334,90 @@ Sub Visual
 
 
 
+/* Slider Controls */
+
+.sub-slider-controls {
+    display: flex;
+    gap: calc(16 * var(--vw));
+}
+
+.sub-slider-button {
+    position: relative;
+    width: calc(64 * var(--vw));
+    height: calc(64 * var(--vw));
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    background: transparent;
+    transition: border-color .3s;
+}
+
+.sub-slider-button:hover {
+    border-color: var(--red);
+}
+
+.sub-slider-button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(11 * var(--vw));
+    height: calc(11 * var(--vw));
+    border-top: calc(2 * var(--vw)) solid #888;
+    border-right: calc(2 * var(--vw)) solid #888;
+}
+
+.sub-slider-prev::before {
+    transform: translate(-40%, -50%) rotate(-135deg);
+}
+
+.sub-slider-next::before {
+    transform: translate(-60%, -50%) rotate(45deg);
+}
+
+.sub-slider-button.swiper-button-disabled {
+    opacity: .35;
+    pointer-events: none;
+}
+
+/* products.html , Slider Prev / Next Buttons. */
+
+.sub-slider-button,
+.sub-dealer-slider-button,
+.sub-pride-button {
+    border-color: #b5b5b5;
+    transition:
+        border-color .25s ease,
+        opacity .25s ease;
+}
+
+.sub-slider-button::before,
+.sub-dealer-slider-button::before,
+.sub-pride-button::before {
+    width: calc(14 * var(--vw));
+    height: calc(14 * var(--vw));
+    border-top-width: calc(3 * var(--vw));
+    border-right-width: calc(3 * var(--vw));
+    border-color: #b5b5b5;
+    transition: border-color .25s ease;
+}
+
+.sub-slider-button:hover,
+.sub-dealer-slider-button:hover,
+.sub-pride-button:hover {
+    border-color: var(--red);
+}
+
+.sub-slider-button:hover::before,
+.sub-dealer-slider-button:hover::before,
+.sub-pride-button:hover::before {
+    border-color: var(--red);
+}
+
+.sub-slider-button.swiper-button-disabled,
+.sub-dealer-slider-button.swiper-button-disabled,
+.sub-pride-button.swiper-button-disabled {
+    opacity: .35;
+    pointer-events: none;
+}
 
 

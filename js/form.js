@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initFormComponents() {
     initInputState();
+    initPhoneInput();
     initTextareaCount();
     initCustomSelect();
 
@@ -27,6 +28,7 @@ function initInputState() {
 
         control.addEventListener("focus", () => {
             group.classList.add("is-focus");
+            group.classList.remove("is-filled");
         });
 
         control.addEventListener("blur", () => {
@@ -35,8 +37,6 @@ function initInputState() {
         });
 
         control.addEventListener("input", () => {
-            updateFilledState();
-
             if (group.classList.contains("is-error")) {
                 clearFieldState(group);
             }
@@ -47,6 +47,35 @@ function initInputState() {
         if (control.disabled) {
             group.classList.add("is-disabled");
         }
+    });
+}
+
+
+/* ========================================
+Phone Number
+======================================== */
+
+function initPhoneInput() {
+    document.querySelectorAll("[data-phone]").forEach(input => {
+        const formatPhoneNumber = value => {
+            const numbers = value.replace(/\D/g, "").slice(0, 11);
+
+            if (numbers.length <= 3) return numbers;
+            if (numbers.length <= 7) return `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
+            if (numbers.length === 10) {
+                return `${numbers.slice(0, 3)}-${numbers.slice(3, 6)}-${numbers.slice(6)}`;
+            }
+
+            return `${numbers.slice(0, 3)}-${numbers.slice(3, 7)}-${numbers.slice(7)}`;
+        };
+
+        const update = () => {
+            input.value = formatPhoneNumber(input.value);
+        };
+
+        input.addEventListener("input", update);
+        input.addEventListener("paste", () => requestAnimationFrame(update));
+        update();
     });
 }
 

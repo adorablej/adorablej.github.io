@@ -4,6 +4,28 @@
     const trainingData = (window.TRAINING_DATA || []).map((item) => ({ ...item }));
     const appliedTrainingIds = new Set();
     const DEFAULT_TRAINING_IMAGE = "/images/img_placeholder.png";
+    const TRAINING_COLOR_COUNT = 10;
+
+    const trainingColorClassById = new Map(
+        [...trainingData]
+            .sort((a, b) => {
+                const dateCompare = a.date.localeCompare(b.date);
+                if (dateCompare !== 0) return dateCompare;
+
+                const timeCompare = a.startTime.localeCompare(b.startTime);
+                if (timeCompare !== 0) return timeCompare;
+
+                return a.id - b.id;
+            })
+            .map((item, index) => [
+                item.id,
+                `training-color-${(index % TRAINING_COLOR_COUNT) + 1}`
+            ])
+    );
+
+    function getTrainingColorClass(training) {
+        return trainingColorClassById.get(training.id) || "training-color-1";
+    }
 
     const statusLabel = {
         waiting: "접수대기",
@@ -98,11 +120,11 @@ function parseDate(dateString) {
                 <span class="sub-training-day-number">${cellDate.getDate()}</span>
                 <span class="sub-training-event-list">
                     ${events.slice(0, 2).map((event) => `
-                        <span class="sub-training-event is-${event.status}">
+                        <span class="sub-training-event ${getTrainingColorClass(event)} is-${event.status}">
                             ${event.startTime}
                         </span>
                     `).join("")}
-                    ${events.length > 2 ? `<span class="sub-training-event">+${events.length - 2} more</span>` : ""}
+                    ${events.length > 2 ? `<span class="sub-training-event-more">+${events.length - 2} more</span>` : ""}
                 </span>
             `;
 
@@ -133,7 +155,7 @@ function parseDate(dateString) {
         sidebarCount.textContent = `${events.length} training schedule${events.length === 1 ? "" : "s"}`;
 
         if (!events.length) {
-            trainingList.innerHTML = '<div class="sub-training-empty">일정이 없어효</div>';
+            trainingList.innerHTML = '<div class="sub-training-empty">예정된 교육 일정이 없습니다.</div>';
             return;
         }
 
@@ -142,7 +164,7 @@ function parseDate(dateString) {
             const available = event.status === "open" && remaining > 0;
             const applyLabel = available ? "교육신청" : statusLabel[event.status];
             return `
-                <button type="button" class="sub-training-card" data-training-id="${event.id}">
+                <button type="button" class="sub-training-card ${getTrainingColorClass(event)}" data-training-id="${event.id}">
                     <span class="sub-training-card-top">
                         <span class="sub-training-card-time">${event.date.replaceAll("-", ".")} / ${event.startTime}</span>
                         <span class="sub-training-card-status is-${event.status}">${statusLabel[event.status]}</span>
@@ -194,9 +216,16 @@ function parseDate(dateString) {
                         ${training.date.replaceAll("-", ".")} / ${training.startTime}
                     </strong>
 
-                    <div class="sub-training-modal-course">
-                        <span class="sub-training-modal-course-dot is-${training.status}" aria-hidden="true"></span>
-                        <span>${training.courseName} (${training.currentApplicants}/${training.capacity})</span>
+                    <div class="sub-training-modal-course-row">
+                        <div class="sub-training-modal-course">
+                            <span class="sub-training-modal-course-dot ${getTrainingColorClass(training)} is-${training.status}" aria-hidden="true"></span>
+                            <span>${training.courseName} (${training.currentApplicants}/${training.capacity})</span>
+                        </div>
+
+                        <div class="sub-training-modal-info">
+                            <span class="sub-training-modal-instructor">강사이름 : ${training.instructorName || "-"}</span>
+                            <span class="sub-training-modal-fee">${fee}</span>
+                        </div>
                     </div>
                 </div>
 

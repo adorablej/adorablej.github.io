@@ -30,7 +30,7 @@ Common Form
     background: #fff;
     color: #111;
     font-family: inherit;
-    font-size: calc(100vw * 18 / 1920);
+    font-size: calc(100vw * 20 / 1920);
     box-sizing: border-box;
     outline: none;
     transition:
@@ -48,7 +48,7 @@ Common Form
 
 .sub-form-input::placeholder,
 .sub-form-textarea::placeholder {
-    color: #b8b8b8;
+    color: #9d9d9d;
 }
 
 /* 입력 중 */
@@ -57,14 +57,15 @@ Common Form
 .sub-form-textarea:focus,
 .sub-form-group.is-focus .sub-form-input,
 .sub-form-group.is-focus .sub-form-textarea {
-    border-color: var(--red);
+    border-color: #000;
 }
 
 /* 입력 후 */
 
 .sub-form-group.is-filled .sub-form-input,
 .sub-form-group.is-filled .sub-form-textarea {
-    color: #111;
+    color: #000;
+    border-color: #DDD;
 }
 
 /* 오류 */
@@ -76,6 +77,23 @@ Common Form
 .sub-form-textarea[aria-invalid="true"] {
     border-color: var(--red);
 }
+
+.sub-form-group.is-error .sub-form-message::before{
+    content:"¡";
+    position:absolute;
+    left:0;
+    width:calc(100vw * 14 / 1920);
+    height:calc(100vw * 14 / 1920);
+    border-radius:50%;
+    background:var(--red);
+    color:#fff;
+    font-size:calc(100vw * 10 / 1920);
+    font-weight:700;
+    line-height:calc(100vw * 10 / 1920);
+    margin-top: calc(100vw * 2 / 1920);
+    text-align:center;
+  }
+
 
 /* Disabled */
 
@@ -99,8 +117,10 @@ Common Form
     margin: 0;
     color: var(--red);
     font-size: calc(100vw * 14 / 1920);
-    line-height: calc(100vw * 22 / 1920);
+    line-height: calc(100vw * 18 / 1920);
+    margin-left: calc(100vw * 20 / 1920);
 }
+
 
 .sub-form-group.is-error > .sub-form-message {
     display: block;
@@ -274,11 +294,11 @@ Checkbox
     flex: 0 0 auto;
     width: calc(100vw * 30 / 1920);
     height: calc(100vw * 30 / 1920);
-    background: url("../images/icon/ic_checkbox_off.png") center / contain no-repeat;
+    background: url("/images/icon/icon_checkbox_off.png") center / contain no-repeat;
 }
 
 .sub-form-checkbox input:checked + .sub-form-checkbox-icon {
-    background-image: url("../images/icon/ic_checkbox_on.png");
+    background-image: url("/images/icon/icon_checkbox_on.png");
 }
 
 .sub-form-checkbox input:disabled + .sub-form-checkbox-icon {
@@ -436,6 +456,7 @@ Form Page Layout
 }
 
 .sub-form-page-vehicle .sub-form-section:last-child {
+    padding-top: calc(100vw * 100 / 1920);
     padding-bottom: calc(100vw * 150 / 1920);
 }
 

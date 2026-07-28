@@ -137,48 +137,24 @@
                             </div>
 
                             <div class="sub-form-group">
-                                <span class="sub-form-label">
+                                <label class="sub-form-label" for="phone-number">
                                     휴대폰 번호<span class="sub-form-required">*</span>
-                                </span>
+                                </label>
 
-                                <div class="sub-form-phone">
-                                    <div class="sub-form-select" data-select>
-                                        <button
-                                            type="button"
-                                            class="sub-form-select-trigger"
-                                            aria-expanded="false"
-                                            aria-haspopup="listbox"
-                                        >
-                                            <span class="sub-form-select-value">010</span>
-                                            <span class="sub-form-select-arrow" aria-hidden="true"></span>
-                                        </button>
-
-                                        <ul class="sub-form-select-options" role="listbox">
-                                            <li><button type="button" class="sub-form-select-option is-selected" data-value="010">010</button></li>
-                                            <li><button type="button" class="sub-form-select-option" data-value="011">011</button></li>
-                                            <li><button type="button" class="sub-form-select-option" data-value="016">016</button></li>
-                                            <li><button type="button" class="sub-form-select-option" data-value="017">017</button></li>
-                                            <li><button type="button" class="sub-form-select-option" data-value="018">018</button></li>
-                                            <li><button type="button" class="sub-form-select-option" data-value="019">019</button></li>
-                                        </ul>
-
-                                        <input type="hidden" name="phone_prefix" value="010">
-                                    </div>
-
-                                    <div class="sub-form-control"><input
-                                        type="tel"
-                                        id="phone-number"
-                                        name="phone_number"
-                                        class="sub-form-input"
-                                        inputmode="numeric"
-                                        autocomplete="tel-national"
-                                        placeholder="숫자만 입력해주세요."
-                                        maxlength="8"
-                                        data-required
-                                        data-pattern="^[0-9]{7,8}$"
-                                        data-message="휴대폰 번호를 확인해주세요."
-                                    ><span class="sub-form-state" aria-hidden="true"></span></div>
-                                </div>
+                                <div class="sub-form-control"><input
+                                    type="tel"
+                                    id="phone-number"
+                                    name="phone_number"
+                                    class="sub-form-input"
+                                    inputmode="numeric"
+                                    autocomplete="tel"
+                                    placeholder="휴대폰 번호를 입력해주세요."
+                                    maxlength="13"
+                                    data-phone
+                                    data-required
+                                    data-pattern="^01[016789]-\d{3,4}-\d{4}$"
+                                    data-message="휴대폰 번호를 확인해주세요."
+                                ><span class="sub-form-state" aria-hidden="true"></span></div>
 
                                 <p class="sub-form-message">휴대폰 번호를 확인해주세요.</p>
                             </div>

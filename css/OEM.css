@@ -101,6 +101,7 @@ OEM-list.html , OEM Products.
 
 .oem-product-item.reverse .oem-product-content {
     order: 1;
+    padding: 0;
 }
 
 .oem-product-image {
@@ -320,3 +321,8 @@ BMW KDS II Alignment System Detail
     line-height: calc(27 * var(--vw));
     word-break: keep-all;
 }
+.oem-detail-features .detail-features-content.txtlist p {
+    text-indent: -9px;
+    padding-left: 9px;
+}
+
