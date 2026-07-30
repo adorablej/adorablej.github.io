@@ -1,23 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>
-        헌터페이지
-    </title>
+    <title>Equipment Operation Guide | Hunter Korea</title>
     <link href="/css/common.css" rel="stylesheet" />
     <link href="/css/layout.css" rel="stylesheet" />
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/responsive.css" rel="stylesheet" />
     <link href="/css/support.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-
-
 </head>
 
 <body>
@@ -25,7 +20,7 @@
     <div data-include="/includes/header.html"></div>
 
     <!-- Page title -->
-    <section class="page-heading"  data-header-theme="dark">
+    <section class="page-heading" data-header-theme="dark">
         <div class="inner">
             <ul class="breadcrumb">
                 <li>
@@ -34,63 +29,102 @@
                 <li>
                     <a href="/Support/equipment-operation-guide.html">Support</a>
                 </li>
-                <li>
-                    <a href="#">Equipment Operation Guide</a>
-                </li>
-                <!-- <li class="current">
-                    depth3
-                </li> -->
+                <li class="current">Equipment Operation Guide</li>
             </ul>
-            <h2 class="page-title">
-                Equipment Operation Guide
-            </h2>
+            <h1 class="page-title">Equipment Operation Guide</h1>
         </div>
     </section>
 
-    <!-- Equipment Operation Guide -->
-    <section class="sub-operation-guide"  data-header-theme="dark" >
-        <div class="inner">
-            <div class="sub-guide-tabs sub-pill-tabs" role="tablist" aria-label="Operation guide type">
-                <button type="button" class="sub-guide-tab sub-pill-tab  is-active" role="tab" aria-selected="true" data-guide-tab="manual">Manual</button>
-                <button type="button" class="sub-guide-tab sub-pill-tab " role="tab" aria-selected="false" data-guide-tab="video">Video</button>
+    <!-- Equipment Operation Guide : Category -->
+    <main>
+        <section class="sub-operation-category" data-header-theme="dark">
+            <div class="inner">
+                <ul class="sub-operation-category-list">
+                    <li class="sub-operation-category-item">
+                        <a href="/Support/equipment-operation-guide-detail.html?category=alignment" class="sub-operation-category-link">
+                            <span class="sub-operation-category-content">
+                                <strong>Alignment<br>Systems</strong>
+                                <span class="sub-button-more">more</span>
+                            </span>
+                            <span class="sub-operation-category-image">
+                                <img src="/images/support/product_list_01.png" alt="Alignment Systems">
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="sub-operation-category-item">
+                        <a href="/Support/equipment-operation-guide-detail.html?category=wheel-balancers" class="sub-operation-category-link">
+                            <span class="sub-operation-category-content">
+                                <strong>Wheel<br>Balancers</strong>
+                                <span class="sub-button-more">more</span>
+                            </span>
+                            <span class="sub-operation-category-image">
+                                <img src="/images/support/product_list_02.png" alt="Wheel Balancers">
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="sub-operation-category-item">
+                        <a href="/Support/equipment-operation-guide-detail.html?category=tire-changers" class="sub-operation-category-link">
+                            <span class="sub-operation-category-content">
+                                <strong>Tire<br>Changers</strong>
+                                <span class="sub-button-more">more</span>
+                            </span>
+                            <span class="sub-operation-category-image">
+                                <img src="/images/support/product_list_03.png" alt="Tire Changers">
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="sub-operation-category-item">
+                        <a href="/Support/equipment-operation-guide-detail.html?category=brake-lathes" class="sub-operation-category-link">
+                            <span class="sub-operation-category-content">
+                                <strong>Brake<br>Lathes</strong>
+                                <span class="sub-button-more">more</span>
+                            </span>
+                            <span class="sub-operation-category-image">
+                                <img src="/images/support/product_list_04.png" alt="Brake Lathes">
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="sub-operation-category-item">
+                        <a href="/Support/equipment-operation-guide-detail.html?category=alignment-racks" class="sub-operation-category-link">
+                            <span class="sub-operation-category-content">
+                                <strong>Alignment<br>racks</strong>
+                                <span class="sub-button-more">more</span>
+                            </span>
+                            <span class="sub-operation-category-image">
+                                <img src="/images/support/product_list_05.png" alt="Alignment racks">
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="sub-operation-category-item">
+                        <a href="/Support/equipment-operation-guide-detail.html?category=vehicle-inspection" class="sub-operation-category-link">
+                            <span class="sub-operation-category-content">
+                                <strong>Vehicle<br>Inspection</strong>
+                                <span class="sub-button-more ">more</span>
+                            </span>
+                            <span class="sub-operation-category-image">
+                                <img src="/images/support/product_list_06.png" alt="Vehicle Inspection">
+                            </span>
+                        </a>
+                    </li>
+                </ul>
             </div>
+        </section>
 
-            <h3 class="sub-guide-heading" id="sub-guide-heading">Manual<span>.</span></h3>
-            <div id="sub-guide-content"></div>
-        </div>
-    </section>
+        <!-- Common Banners -->
+        <div data-include="/includes/banner-solution.html" data-header-theme="light"></div>
+    </main>
 
+    <!-- footer -->
+    <div class="footer-section" data-header-theme="dark" data-include="/includes/footer.html"></div>
 
-    <!-- Equipment Operation Guide : Youtube Modal -->
-    <div class="sub-guide-video-modal" aria-hidden="true">
-        <button type="button" class="sub-guide-video-modal-dim" aria-label="영상 닫기"></button>
-        <div class="sub-guide-video-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="sub-guide-video-modal-title">
-            <button type="button" class="sub-guide-video-modal-close" aria-label="영상 닫기"></button>
-            <div class="sub-guide-video-modal-frame">
-                <iframe title="Equipment operation guide video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <div class="sub-guide-video-modal-body">
-                <h4 id="sub-guide-video-modal-title"></h4>
-                <p></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Common Banners. -->
-    <div data-include="/includes/banner-roi.html" data-header-theme="light" ></div>
-    <div data-include="/includes/banner-solution.html"  data-header-theme="light" ></div>
-
-
-        <!-- footer -->
-        <div class="footer-section" data-header-theme="dark" data-include="/includes/footer.html"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="/js/include.js"></script>
     <script src="/js/common.js"></script>
     <script src="/js/main.js"></script>
-    <script src="/js/support-data.js"></script>
-    <script src="/js/support.js"></script>
 </body>
 
 </html>

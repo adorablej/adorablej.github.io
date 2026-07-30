@@ -25,13 +25,12 @@ function playIcon() {
 
 function initOperationGuide() {
     const guideContent = document.querySelector("#sub-guide-content");
-    const guideHeading = document.querySelector("#sub-guide-heading");
     const guideTabs = document.querySelectorAll("[data-guide-tab]");
     const modal = document.querySelector(".sub-guide-video-modal");
     let visibleVideoCount = 6;
     let destroyFeatured = null;
 
-    if (!guideContent || !guideHeading || !guideTabs.length) return;
+    if (!guideContent || !guideTabs.length) return;
 
     function renderManual() {
         destroyFeatured?.();
@@ -236,7 +235,6 @@ function initOperationGuide() {
     }
 
     function renderGuide(type) {
-        guideHeading.innerHTML = `${type === "manual" ? "Manual" : "Video"}<span>.</span>`;
         if (type === "manual") renderManual();
         else renderVideo();
     }
@@ -296,3 +294,48 @@ function initOperationGuide() {
 }
 
 document.addEventListener("DOMContentLoaded", initOperationGuide);
+
+function initTrainingProgram() {
+    const tabs = [...document.querySelectorAll("[data-training-program-tab]")];
+    const panels = [...document.querySelectorAll("[data-training-program-panel]")];
+
+    if (!tabs.length || !panels.length) return;
+
+    function activateProgram(type) {
+        tabs.forEach(tab => {
+            const active = tab.dataset.trainingProgramTab === type;
+            tab.classList.toggle("is-active", active);
+            tab.setAttribute("aria-selected", String(active));
+            tab.tabIndex = active ? 0 : -1;
+        });
+
+        panels.forEach(panel => {
+            const active = panel.dataset.trainingProgramPanel === type;
+            panel.classList.toggle("is-active", active);
+            panel.hidden = !active;
+        });
+    }
+
+    tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => activateProgram(tab.dataset.trainingProgramTab));
+
+        tab.addEventListener("keydown", event => {
+            if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+            event.preventDefault();
+
+            let nextIndex = index;
+            if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+            if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+            if (event.key === "Home") nextIndex = 0;
+            if (event.key === "End") nextIndex = tabs.length - 1;
+
+            tabs[nextIndex].focus();
+            activateProgram(tabs[nextIndex].dataset.trainingProgramTab);
+        });
+    });
+
+    const initialTab = tabs.find(tab => tab.classList.contains("is-active")) || tabs[0];
+    activateProgram(initialTab.dataset.trainingProgramTab);
+}
+
+document.addEventListener("DOMContentLoaded", initTrainingProgram);

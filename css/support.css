@@ -1,3 +1,22 @@
+/*support 공통*/
+.sub-support-s-heading {
+    margin: 0 0 calc(100vw * 60 / 1920);
+    color: #000;
+    font-size: calc(100vw * 40 / 1920);
+    font-weight: 800;
+    line-height: calc(100vw * 50 / 1920);
+    letter-spacing: -.04em;
+}
+
+.sub-support-s-heading span {
+    color: var(--red);
+    font-family: "Russo One", sans-serif;
+}
+
+
+
+/*operation page*/
+
 .sub-operation-guide {
     padding-bottom: 110px;
     background: #fff;
@@ -6,20 +25,6 @@
 .sub-operation-guide .inner {
     width: calc(100vw * 1300 / 1920);
     margin: 0 auto;
-}
-
-.sub-guide-heading {
-    margin: 0 0 calc(100vw * 80 / 1920);
-    color: #1f1f1f;
-    font-family: "Russo One", sans-serif;
-    font-size: calc(100vw * 56 / 1920);
-    font-weight: 400;
-    line-height: 1;
-}
-
-.sub-guide-heading span {
-    color: var(--red);
-    font-family: "Russo One", sans-serif;
 }
 
 .sub-guide-group + .sub-guide-group {
@@ -1103,4 +1108,594 @@ body.is-guide-video-modal-open {
 
 .training-product-content .sub-button-more {
     width: fit-content;
+}
+/* ========================================
+Training Program
+======================================== */
+.sub-training-program {
+    width: 100%;
+    background: #fff;
+}
+
+.sub-training-program .inner {
+    width: calc(1300 * var(--vw));
+    margin: 0 auto;
+}
+
+.sub-training-program-head {
+    padding: calc(10 * var(--vw)) 0 calc(70 * var(--vw));
+    background: #fff;
+}
+
+.sub-training-program-heading {
+    margin: 0 0 calc(50 * var(--vw));
+    color: #111;
+    font-size: calc(38 * var(--vw));
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -.04em;
+}
+
+.sub-training-program-heading span {
+    color: var(--red);
+}
+
+.sub-training-program-tabs.sub-pill-tabs {
+    gap: calc(14 * var(--vw));
+    margin-bottom: 0;
+}
+
+.sub-training-program-tab.sub-pill-tab {
+    min-width: calc(210 * var(--vw));
+    height: calc(58 * var(--vw));
+    margin-right: 0;
+    padding: 0 calc(24 * var(--vw));
+    border-color: #d7d7d7;
+    color: #aaa;
+    font-size: calc(17 * var(--vw));
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.sub-training-program-tab.sub-pill-tab.is-active {
+    border-color: var(--red);
+    color: #fff;
+}
+
+.sub-training-program-body {
+    padding: calc(90 * var(--vw)) 0 calc(100 * var(--vw));
+    background: #f5f6fa;
+}
+
+.sub-training-program-panel {
+    display: flex;
+    flex-direction: column;
+    gap: calc(24 * var(--vw));
+}
+
+.sub-training-program-panel[hidden] {
+    display: none;
+}
+
+.sub-training-program-card {
+    display: grid;
+    grid-template-columns: calc(400 * var(--vw)) minmax(0, 1fr);
+    min-height: calc(410 * var(--vw));
+    padding: calc(60 * var(--vw));
+    border-radius: calc(20 * var(--vw));
+    background: #fff;
+}
+
+.sub-training-program-card-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: calc(100 * var(--vw));
+}
+
+.sub-training-program-card-side h4 {
+    margin: 0;
+    color: var(--red);
+    font-size: calc(30 * var(--vw));
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -.04em;
+    word-break: keep-all;
+}
+
+.sub-training-program-icon {
+    display: block;
+    width: calc(120 * var(--vw));
+    height: calc(120 * var(--vw));
+    color: #e4e5e8;
+    background: url('/images/support/icon-product-alignment-equipment.png');
+    background-size: cover;
+}
+
+.sub-training-program-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.sub-training-program-icon svg path:first-child,
+.sub-training-program-icon svg rect,
+.sub-training-program-icon svg circle,
+.sub-training-program-icon svg ellipse {
+    fill: none;
+}
+
+.sub-training-program-card-content {
+}
+
+.sub-training-program-card-content p {
+    margin: 0;
+    color: #222;
+    font-size: calc(17 * var(--vw));
+    font-weight: 500;
+    line-height: calc(28 * var(--vw));
+    letter-spacing: -.03em;
+    word-break: keep-all;
+}
+
+.sub-training-program-card-content ul {
+    margin: calc(30 * var(--vw)) 0 0;
+    padding: calc(28 * var(--vw)) 0 0;
+    border-top: 1px solid #e7e7e7;
+    list-style: none;
+}
+
+.sub-training-program-card-content li {
+    position: relative;
+    padding-left: calc(14 * var(--vw));
+    color: #999;
+    font-size: calc(16 * var(--vw));
+    line-height: calc(28 * var(--vw));
+    letter-spacing: -.03em;
+}
+
+.sub-training-program-card-content li::before {
+    content: "-";
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* ========================================
+Equipment Operation Guide : Category List
+======================================== */
+.sub-operation-category {
+    width: 100%;
+    padding: 0 0 calc(100vw * 110 / 1920);
+    background: #fff;
+}
+
+.sub-operation-category .inner {
+    width: calc(100vw * 1300 / 1920);
+    margin: 0 auto;
+}
+
+.sub-operation-category-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(100vw * 30 / 1920);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sub-operation-category-item {
+    min-width: 0;
+}
+
+.sub-operation-category-link {
+    position: relative;
+    display: block;
+    height: calc(100vw * 500 / 1920);
+    overflow: hidden;
+    border-radius: calc(100vw * 18 / 1920);
+    background: #f5f5f5;
+    color: #111;
+}
+
+.sub-operation-category-content {
+    position: absolute;
+    top: calc(100vw * 68 / 1920);
+    left: calc(100vw * 60 / 1920);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: calc(100vw * 40 / 1920);
+}
+
+.sub-operation-category-content strong {
+    color: #000;
+    font-family: "Russo One", sans-serif;
+    font-size: calc(100vw * 42 / 1920);
+    font-weight: 400;
+    line-height: .98;
+    letter-spacing: -.035em;
+}
+
+.sub-operation-category-image {
+    position: absolute;
+    inset: 0;
+    display: block;
+}
+
+.sub-operation-category-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform .6s cubic-bezier(.22, 1, .36, 1);
+}
+/* ========================================
+Wheel Alignment Specification
+======================================== */
+.sub-specification {
+    width: 100%;
+    background: #fff;
+}
+
+.sub-specification .inner {
+    width: calc(100vw * 1300 / 1920);
+    margin: 0 auto;
+}
+
+.sub-specification-search-section {
+    padding: calc(100vw * 100 / 1920) 0 calc(100vw * 90 / 1920);
+    background: #f5f6fa;
+}
+
+.sub-specification-heading,
+.sub-specification-group-title {
+    margin: 0;
+    color: #111;
+    font-size: calc(100vw * 38 / 1920);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -.04em;
+}
+
+.sub-specification-heading span,
+.sub-specification-group-title span {
+    color: var(--red);
+}
+
+.sub-specification-search-form {
+    margin-top: calc(100vw * 38 / 1920);
+}
+
+.sub-specification-label,
+.sub-specification-field > span,
+.sub-specification-recent-row strong {
+    display: block;
+    margin-bottom: calc(100vw * 12 / 1920);
+    color: #222;
+    font-size: calc(100vw * 16 / 1920);
+    font-weight: 700;
+}
+
+.sub-specification-keyword-wrap {
+    position: relative;
+}
+
+.sub-specification-keyword-wrap input {
+    width: 100%;
+    height: calc(100vw * 64 / 1920);
+    padding: 0 calc(100vw * 24 / 1920) 0 calc(100vw * 58 / 1920);
+    border: 1px solid #e3e5eb;
+    background: #fff;
+    color: #111;
+    font-size: calc(100vw * 15 / 1920);
+    outline: none;
+}
+
+.sub-specification-keyword-wrap input:focus {
+    border-color: var(--red);
+}
+
+.sub-specification-search-icon {
+    position: absolute;
+    top: 50%;
+    left: calc(100vw * 22 / 1920);
+    width: calc(100vw * 17 / 1920);
+    height: calc(100vw * 17 / 1920);
+    border: 2px solid var(--red);
+    border-radius: 50%;
+    transform: translateY(-55%);
+}
+
+.sub-specification-search-icon::after {
+    content: "";
+    position: absolute;
+    right: calc(100vw * -6 / 1920);
+    bottom: calc(100vw * -4 / 1920);
+    width: calc(100vw * 7 / 1920);
+    height: 2px;
+    background: var(--red);
+    transform: rotate(45deg);
+}
+
+.sub-specification-recent-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: calc(100vw * 30 / 1920);
+}
+
+.sub-specification-recent-reset {
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid #aaa;
+    background: none;
+    color: #999;
+    font-size: calc(100vw * 13 / 1920);
+    cursor: pointer;
+}
+
+.sub-specification-recent-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(100vw * 10 / 1920);
+    min-height: calc(100vw * 36 / 1920);
+}
+
+.sub-specification-recent-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(100vw * 10 / 1920);
+    height: calc(100vw * 36 / 1920);
+    padding: 0 calc(100vw * 18 / 1920);
+    border: 0;
+    border-radius: 999px;
+    background: #b8c1da;
+    color: #fff;
+    font-size: calc(100vw * 14 / 1920);
+    cursor: pointer;
+}
+
+.sub-specification-recent-chip span,
+.sub-specification-chip-close {
+    position: relative;
+    width: calc(100vw * 12 / 1920);
+    height: calc(100vw * 12 / 1920);
+}
+
+.sub-specification-recent-chip span::before,
+.sub-specification-recent-chip span::after,
+.sub-specification-chip-close::before,
+.sub-specification-chip-close::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+}
+
+.sub-specification-recent-chip span::before,
+.sub-specification-chip-close::before { transform: translate(-50%, -50%) rotate(45deg); }
+.sub-specification-recent-chip span::after,
+.sub-specification-chip-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+.sub-specification-recent-empty {
+    color: #aaa;
+    font-size: calc(100vw * 14 / 1920);
+}
+
+.sub-specification-filter-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    align-items: end;
+    gap: calc(100vw * 20 / 1920);
+    margin-top: calc(100vw * 30 / 1920);
+}
+
+.sub-specification-field select {
+    width: 100%;
+    height: calc(100vw * 62 / 1920);
+    padding: 0 calc(100vw * 24 / 1920);
+    border: 1px solid #e1e3e8;
+    background: #fff;
+    color: #777;
+    font-size: calc(100vw * 15 / 1920);
+}
+
+.sub-specification-submit {
+    min-width: calc(100vw * 200 / 1920);
+    height: calc(100vw * 62 / 1920);
+    padding: 0 calc(100vw * 30 / 1920);
+    border: 0;
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+    font-size: calc(100vw * 15 / 1920);
+    cursor: pointer;
+}
+
+.sub-specification-content-section {
+    padding: calc(100vw * 85 / 1920) 0 calc(100vw * 120 / 1920);
+}
+
+.sub-specification-selected-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(100vw * 16 / 1920);
+    margin-bottom: calc(100vw * 70 / 1920);
+}
+
+.sub-specification-selected-list:empty {
+    display: none;
+}
+
+.sub-specification-selected-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(100vw * 16 / 1920);
+    min-width: calc(100vw * 260 / 1920);
+    height: calc(100vw * 72 / 1920);
+    padding: 0 calc(100vw * 24 / 1920);
+    border: 0;
+    border-radius: calc(100vw * 12 / 1920);
+    background: #f5f6fa;
+    color: #111;
+    cursor: pointer;
+}
+
+.sub-specification-selected-chip strong {
+    font-size: calc(100vw * 17 / 1920);
+}
+
+.sub-specification-selected-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100vw * 50 / 1920);
+    height: calc(100vw * 50 / 1920);
+    border-radius: 50%;
+    background: #fff;
+    color: #333;
+    font-size: calc(100vw * 9 / 1920);
+    font-weight: 800;
+}
+
+.sub-specification-selected-chip img {
+    width: calc(100vw * 62 / 1920);
+    height: calc(100vw * 44 / 1920);
+    object-fit: contain;
+}
+
+.sub-specification-chip-close {
+    margin-left: auto;
+    color: #aaa;
+}
+
+.sub-specification-group + .sub-specification-group {
+    margin-top: calc(100vw * 100 / 1920);
+}
+
+.sub-specification-group-title {
+    margin-bottom: calc(100vw * 45 / 1920);
+    font-size: calc(100vw * 30 / 1920);
+}
+
+.sub-specification-brand-grid,
+.sub-specification-model-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: calc(100vw * 44 / 1920) calc(100vw * 30 / 1920);
+}
+
+.sub-specification-brand-card,
+.sub-specification-model-card {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #111;
+    cursor: pointer;
+}
+
+.sub-specification-brand-logo,
+.sub-specification-model-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background: #fafafa;
+    transition: border-color .25s ease, transform .25s ease, background-color .25s ease;
+}
+
+.sub-specification-brand-logo {
+    padding: calc(100vw * 24 / 1920);
+    color: #222;
+    font-size: calc(100vw * 20 / 1920);
+    font-weight: 900;
+    text-align: center;
+}
+
+.sub-specification-brand-card:hover .sub-specification-brand-logo,
+.sub-specification-model-card:hover .sub-specification-model-image,
+.sub-specification-model-card.is-active .sub-specification-model-image {
+    border-color: var(--red);
+    background: #fff;
+}
+
+.sub-specification-brand-name,
+.sub-specification-model-card strong {
+    display: block;
+    margin-top: calc(100vw * 18 / 1920);
+    font-size: calc(100vw * 14 / 1920);
+    font-weight: 600;
+    text-align: center;
+}
+
+.sub-specification-model-image img {
+    width: 78%;
+    height: 58%;
+    object-fit: contain;
+}
+
+.sub-specification-table-wrap {
+    overflow-x: auto;
+    border-top: 1px solid #111;
+}
+
+.sub-specification-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.sub-specification-table th,
+.sub-specification-table td {
+    padding: calc(100vw * 25 / 1920) calc(100vw * 15 / 1920);
+    border-bottom: 1px solid #e7e7e7;
+    color: #222;
+    font-size: calc(100vw * 14 / 1920);
+    line-height: 1.45;
+    text-align: center;
+    word-break: keep-all;
+}
+
+.sub-specification-table th {
+    font-weight: 700;
+}
+
+.sub-specification-table td:first-child,
+.sub-specification-table th:first-child {
+    width: 24%;
+}
+
+.sub-specification-table td img {
+    display: block;
+    width: calc(100vw * 180 / 1920);
+    height: calc(100vw * 95 / 1920);
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.sub-specification-empty {
+    grid-column: 1 / -1;
+    padding: calc(100vw * 70 / 1920) 0;
+    color: #999;
+    font-size: calc(100vw * 16 / 1920);
+    text-align: center;
+}
+
+/* Wheel Alignment Specification : step visibility */
+.sub-specification-panel[hidden] {
+    display: none !important;
 }

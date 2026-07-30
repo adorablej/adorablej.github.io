@@ -243,11 +243,11 @@ Header Right
 }
 
 .header-r .ic-search{
-    background-image:url("../images/ic_search.svg");
+    background-image:url("/images/icon/icon_search.svg");
 }
 
 .header-r .ic-alarm{
-    background-image:url("../images/ic_bell.svg");
+    background-image:url("/images/icon/icon_bell.svg");
 }
 
 .header-r .ic-menu {
@@ -1037,6 +1037,10 @@ sub page 공통
     font-family: "Russo One", sans-serif;
     line-height: calc(80 * var(--vw));
 }
+.page-title span{
+    color: var(--red);
+    font-family: "Russo One", sans-serif;
+}
 .page-title sup{
     position: relative;
     top:calc(-30 * var(--vw));
@@ -1120,11 +1124,8 @@ Sub Products Banner
     background-position: center;
 }
 
-
-.sub-products-banner-dim {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, .48);
+.sub-products-banner-bg img{
+    width: 100%;
 }
 
 .sub-products-banner .inner {
@@ -1144,20 +1145,20 @@ Sub Products Banner
 }
 
 .sub-products-banner-content h2 {
-    margin: 0 0 calc(28 * var(--vw));
+    margin: 0 0 calc(25 * var(--vw));
     color: #fff;
-    font-size: calc(46 * var(--vw));
+    font-size: calc(60 * var(--vw));
     font-weight: 700;
-    line-height: 1.35;
+    line-height: calc(75 * var(--vw));
     letter-spacing: -.04em;
 }
 
 .sub-products-banner-content p {
-    margin: 0 0 calc(28 * var(--vw));
-    color: rgba(255, 255, 255, .78);
-    font-size: calc(17 * var(--vw));
+    margin: 0 0 calc(25 * var(--vw));
+    color: rgba(255, 255, 255, .6);
+    font-size: calc(20 * var(--vw));
     font-weight: 400;
-    line-height: 1.65;
+    line-height: calc(30 * var(--vw));
     letter-spacing: -.03em;
 }
 
@@ -1165,14 +1166,13 @@ Sub Products Banner
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    min-width: calc(240 * var(--vw));
-    height: calc(52 * var(--vw));
-    padding: 0 calc(32 * var(--vw));
+    padding: calc(14 * var(--vw)) calc(50 * var(--vw));
     border-radius: calc(999 * var(--vw));
-    background: #e3170a;
+    background: var(--red);
     color: #fff;
-    font-size: calc(16 * var(--vw));
-    font-weight: 700;
+    font-size: calc(18 * var(--vw));
+    line-height: calc(30 * var(--vw));
+    font-weight: 500;
     transition:
         background-color .3s,
         transform .3s;
