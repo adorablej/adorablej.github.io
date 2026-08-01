@@ -146,6 +146,8 @@
     text-decoration: none;
     box-sizing: border-box;
     cursor: pointer;
+    background: var(--red);
+    color: #fff;
 }
 
 
@@ -216,7 +218,7 @@
 }
 
 .sub-account-fieldset {
-    margin: 0 0 calc(100vw * 20 / 1920);
+    margin: 0 0 calc(100vw * 40 / 1920);
     padding: 0;
     border: 0;
 }
@@ -379,4 +381,23 @@
 .sub-account-file.is-dragover {
     border-color: var(--red);
     background: #fff7f6;
+}
+
+
+.sub-account-business-type{
+    display:flex;
+    align-items:center;
+    gap:calc(100vw * 50 / 1920);
+}
+
+.sub-account-business-option{
+    display:inline-flex;
+    align-items:center;
+    gap:calc(100vw * 12 / 1920);
+}
+
+.sub-account-business-text{
+    color:#111;
+    font-size:calc(100vw * 18 / 1920);
+    line-height:1;
 }

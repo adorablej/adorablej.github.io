@@ -83,17 +83,29 @@
 
                         <fieldset class="sub-form-group sub-account-fieldset">
                             <legend class="sub-account-label sub-account-required">사업자 정보</legend>
-                            <div class="sub-form-radio-row">
-                                <label class="sub-form-radio">
-                                    <input name="businessType" type="radio" value="corporation" checked />
-                                    <span class="sub-form-radio-icon" aria-hidden="true"></span>
-                                    <span class="sub-form-radio-text">법인</span>
+                            <div class="sub-account-business-type">
+
+                                <label class="sub-form-checkbox sub-account-business-option">
+                                    <input
+                                        type="radio"
+                                        name="businessType"
+                                        value="corporation"
+                                        checked
+                                    >
+                                    <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
+                                    <span class="sub-account-business-text">법인</span>
                                 </label>
-                                <label class="sub-form-radio">
-                                    <input name="businessType" type="radio" value="individual" />
-                                    <span class="sub-form-radio-icon" aria-hidden="true"></span>
-                                    <span class="sub-form-radio-text">개인</span>
+                            
+                                <label class="sub-form-checkbox sub-account-business-option">
+                                    <input
+                                        type="radio"
+                                        name="businessType"
+                                        value="individual"
+                                    >
+                                    <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
+                                    <span class="sub-account-business-text">개인</span>
                                 </label>
+                            
                             </div>
                         </fieldset>
 
