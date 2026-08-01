@@ -101,7 +101,7 @@ OEM-list.html , OEM Products.
 
 .oem-product-item.reverse .oem-product-content {
     order: 1;
-    padding: 0;
+    padding: 0 calc(80 * var(--vw)) 0 0;
 }
 
 .oem-product-image {
@@ -123,7 +123,7 @@ OEM-list.html , OEM Products.
     flex-direction: column;
     justify-content: center;
 
-    padding: 0 calc(70 * var(--vw));
+    padding: 0 calc(80 * var(--vw));
 }
 
 .oem-product-title {
@@ -132,13 +132,18 @@ OEM-list.html , OEM Products.
     font-family: "Russo One", sans-serif;
     font-size: calc(40 * var(--vw));
 }
-
+.oem-product-title sup{
+    font-size: .55em;
+    vertical-align: top;
+}
 .oem-product-desc {
-    margin-bottom: calc(50 * var(--vw));
     color: #222;
     font-size: calc(18 * var(--vw));
     line-height: calc(30 * var(--vw));
 }
+.oem-product-desc ul{}
+
+.oem-product-desc ul li{list-style: inside;}
 
 .oem-product-content .sub-button-more{
     width: fit-content;

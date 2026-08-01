@@ -11,6 +11,7 @@
         initHeaderTheme();
         initDragCursor();
         initAllMenu();
+        initHeaderSearch();
         // initHeaderTransition();
     }
 
@@ -601,4 +602,176 @@ function initDragCursor() {
     
         setMemberState();
     }
+
+    /**
+     * Header Search
+     * - 검색 패널 열기 / 닫기
+     * - 최근 검색어 저장 / 삭제
+     * - 검색 결과 페이지 이동
+     */
+    function initHeaderSearch() {
+        const header = document.querySelector(".header");
+        const search = document.querySelector(".header-search");
+        const openButtons = document.querySelectorAll(".btn-search");
+
+        if (!header || !search || !openButtons.length) return;
+
+        const form = search.querySelector(".header-search-form");
+        const input = search.querySelector(".header-search-input");
+        const dim = search.querySelector(".header-search-dim");
+        const recentSection = search.querySelector(".header-search-recent");
+        const recentList = search.querySelector(".header-search-recent-list");
+        const deleteAllButton = search.querySelector(".header-search-delete-all");
+        const storageKey = "hunterRecentSearches";
+        const maxRecentCount = 8;
+        let lastFocusedElement = null;
+
+        function getRecentSearches() {
+            try {
+                const saved = JSON.parse(localStorage.getItem(storageKey));
+                return Array.isArray(saved) ? saved : [];
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function saveRecentSearches(items) {
+            localStorage.setItem(
+                storageKey,
+                JSON.stringify(items.slice(0, maxRecentCount))
+            );
+        }
+
+        function addRecentSearch(keyword) {
+            const value = keyword.trim();
+            if (!value) return;
+
+            const items = getRecentSearches().filter(
+                (item) => item.toLowerCase() !== value.toLowerCase()
+            );
+
+            items.unshift(value);
+            saveRecentSearches(items);
+        }
+
+        function removeRecentSearch(keyword) {
+            const items = getRecentSearches().filter(
+                (item) => item !== keyword
+            );
+
+            saveRecentSearches(items);
+            renderRecentSearches();
+        }
+
+        function renderRecentSearches() {
+            if (!recentList || !recentSection) return;
+
+            const items = getRecentSearches();
+            recentList.innerHTML = "";
+            recentSection.classList.toggle("is-empty", !items.length);
+
+            items.forEach((keyword) => {
+                const item = document.createElement("div");
+                item.className = "header-search-recent-item";
+
+                const link = document.createElement("a");
+                link.className = "header-search-recent-link";
+                link.href = `/search.html?keyword=${encodeURIComponent(keyword)}`;
+                link.textContent = keyword;
+
+                const deleteButton = document.createElement("button");
+                deleteButton.type = "button";
+                deleteButton.className = "header-search-recent-delete";
+                deleteButton.setAttribute("aria-label", `${keyword} 삭제`);
+                deleteButton.addEventListener("click", () => {
+                    removeRecentSearch(keyword);
+                });
+
+                item.append(link, deleteButton);
+                recentList.append(item);
+            });
+        }
+
+        function openSearch() {
+            lastFocusedElement = document.activeElement;
+            search.classList.add("is-open");
+            search.setAttribute("aria-hidden", "false");
+            header.classList.add("is-search-open");
+            document.documentElement.classList.add("is-search-open");
+            document.body.classList.add("is-search-open");
+
+            openButtons.forEach((button) => {
+                button.setAttribute("aria-label", "검색 닫기");
+                button.setAttribute("aria-expanded", "true");
+            });
+
+            renderRecentSearches();
+
+            window.setTimeout(() => {
+                input?.focus();
+            }, 250);
+        }
+
+        function closeSearch() {
+            search.classList.remove("is-open");
+            search.setAttribute("aria-hidden", "true");
+            header.classList.remove("is-search-open");
+            document.documentElement.classList.remove("is-search-open");
+            document.body.classList.remove("is-search-open");
+
+            openButtons.forEach((button) => {
+                button.setAttribute("aria-label", "검색 열기");
+                button.setAttribute("aria-expanded", "false");
+            });
+
+            if (
+                lastFocusedElement &&
+                typeof lastFocusedElement.focus === "function"
+            ) {
+                lastFocusedElement.focus();
+            }
+        }
+
+        openButtons.forEach((button) => {
+            button.setAttribute("aria-expanded", "false");
+            button.addEventListener("click", () => {
+                if (search.classList.contains("is-open")) {
+                    closeSearch();
+                } else {
+                    openSearch();
+                }
+            });
+        });
+
+        form?.addEventListener("submit", (event) => {
+            const keyword = input?.value.trim() || "";
+
+            if (!keyword) {
+                event.preventDefault();
+                input?.focus();
+                return;
+            }
+
+            addRecentSearch(keyword);
+        });
+
+        deleteAllButton?.addEventListener("click", () => {
+            localStorage.removeItem(storageKey);
+            renderRecentSearches();
+        });
+
+        dim?.addEventListener("click", closeSearch);
+
+        window.addEventListener("keydown", (event) => {
+            if (
+                event.key === "Escape" &&
+                search.classList.contains("is-open")
+            ) {
+                closeSearch();
+            }
+        });
+
+        renderRecentSearches();
+    }
+
 })();

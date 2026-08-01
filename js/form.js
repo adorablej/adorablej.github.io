@@ -318,6 +318,12 @@ class FormValidator {
 
     validateField(field) {
         const group = field.closest(".sub-form-group");
+
+        if (field.disabled || field.closest("[hidden], .is-hidden")) {
+            clearFieldState(group);
+            return true;
+        }
+
         const message = field.dataset.message || "필수 입력입니다.";
         const value = field.type === "checkbox"
             ? field.checked

@@ -316,6 +316,83 @@ Checkbox
 }
 
 /* ========================================
+Radio
+======================================== */
+
+.sub-form-radio-row {
+    display: flex;
+    align-items: center;
+    gap: calc(100vw * 55 / 1920);
+}
+
+.sub-form-radio {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: calc(100vw * 10 / 1920);
+    cursor: pointer;
+}
+
+.sub-form-radio input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.sub-form-radio-icon {
+    position: relative;
+    display: block;
+    flex: 0 0 auto;
+    width: calc(100vw * 20 / 1920);
+    height: calc(100vw * 20 / 1920);
+    border: calc(100vw * 2 / 1920) solid #555;
+    border-radius: 50%;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.sub-form-radio-icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100vw * 10 / 1920);
+    height: calc(100vw * 10 / 1920);
+    border-radius: 50%;
+    background: transparent;
+    transform: translate(-50%, -50%);
+}
+
+.sub-form-radio input:checked + .sub-form-radio-icon {
+    border-color: var(--red);
+}
+
+.sub-form-radio input:checked + .sub-form-radio-icon::after {
+    background: var(--red);
+}
+
+.sub-form-radio input:focus-visible + .sub-form-radio-icon {
+    outline: calc(100vw * 2 / 1920) solid rgba(207, 16, 7, .22);
+    outline-offset: calc(100vw * 3 / 1920);
+}
+
+.sub-form-radio input:disabled + .sub-form-radio-icon {
+    opacity: .45;
+}
+
+.sub-form-radio input:disabled ~ .sub-form-radio-text {
+    color: #aaa;
+}
+
+.sub-form-radio-text {
+    color: #555;
+    font-size: calc(100vw * 15 / 1920);
+    line-height: 1;
+}
+
+/* ========================================
 Submit
 ======================================== */
 
@@ -332,7 +409,7 @@ Submit
     color: #fff;
     font-family: inherit;
     font-size: calc(100vw * 17 / 1920);
-    font-weight: 600;
+    font-weight: 400;
     cursor: pointer;
 }
 
