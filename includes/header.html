@@ -25,9 +25,9 @@
 
         </div>
 
-        <!-- Right : 로그인 상태 -->
+        <!-- Right : 로그인 상태 
         <div class="header-r is-login">
-            <a href="/mypage.html" class="btn-login">MY</a>
+            <a href="/Mypage/mypage.html" class="btn-login">MY</a>
 
             <button type="button" class="btn-search" aria-label="검색 열기">
                 <i class="ic-search" aria-hidden="true"></i>
@@ -40,11 +40,11 @@
             <button type="button" class="btn-menu" aria-label="전체 메뉴 열기" aria-expanded="false">
                 <i class="ic-menu" aria-hidden="true"></i>
             </button>
-        </div>
+        </div>-->
 
-        <!-- Right : 로그아웃 상태 
+        <!-- Right : 로그아웃 상태 -->
         <div class="header-r is-logout">
-            <a href="/login.html" class="btn-login">LOGIN</a>
+            <a href="/account/join.html" class="btn-login">LOGIN</a>
 
             <button type="button" class="btn-search" aria-label="검색 열기">
                 <i class="ic-search" aria-hidden="true"></i>
@@ -53,10 +53,57 @@
             <button type="button" class="btn-menu" aria-label="전체 메뉴 열기" aria-expanded="false">
                 <i class="ic-menu" aria-hidden="true"></i>
             </button>
-        </div> -->
+        </div> 
 
     </div>
 </header>
+
+
+<!-- ========================================
+Header Search
+======================================== -->
+<div class="header-search" aria-hidden="true">
+    <div class="header-search-panel" role="dialog" aria-modal="true" aria-label="통합 검색">
+        <div class="header-search-inner">
+            <form class="header-search-form" role="search" action="/search.html" method="get">
+                <div class="header-search-field">
+                    <i class="header-search-icon" aria-hidden="true"></i>
+                    <input
+                        type="search"
+                        name="keyword"
+                        class="header-search-input"
+                        placeholder="검색어를 입력하세요."
+                        aria-label="검색어"
+                        autocomplete="off"
+                    >
+                </div>
+            </form>
+
+            <div class="header-search-content">
+                <section class="header-search-recommend" aria-labelledby="header-search-recommend-title">
+                    <h2 id="header-search-recommend-title">추천 검색어</h2>
+                    <ul class="header-search-recommend-list">
+                        <li><a href="/search.html?keyword=HawkEye%20Elite%20Premium">HawkEye Elite Premium</a></li>
+                        <li><a href="/search.html?keyword=RoadForce%20Elite">RoadForce Elite</a></li>
+                        <li><a href="/search.html?keyword=TCRH%20Revolution">TCRH Revolution</a></li>
+                        <li><a href="/search.html?keyword=RX45KIS">RX45KIS</a></li>
+                        <li><a href="/search.html?keyword=WinAlign%20HD">WinAlign HD</a></li>
+                    </ul>
+                </section>
+
+                <section class="header-search-recent is-empty" aria-labelledby="header-search-recent-title">
+                    <div class="header-search-recent-heading">
+                        <h2 id="header-search-recent-title">최근 검색어</h2>
+                        <button type="button" class="header-search-delete-all">전체 삭제</button>
+                    </div>
+                    <div class="header-search-recent-list"></div>
+                    <p class="header-search-recent-empty">최근 검색어가 없습니다.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="header-search-dim" aria-label="검색 닫기"></button>
+</div>
 
 <!-- ========================================
 전체 메뉴
