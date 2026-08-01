@@ -12,7 +12,7 @@
         initDragCursor();
         initAllMenu();
         initHeaderSearch();
-        // initHeaderTransition();
+        initHeaderTransition();
     }
 
     /**
@@ -63,6 +63,13 @@
         const pageScroll = document.querySelector(".page-scroll");
 
         if (!header) return;
+
+        const isMainPage = document.body.classList.contains("main-page");
+
+        if (!isMainPage) {
+            applyHeaderTheme(header, "dark");
+            return;
+        }
 
         const themeSections = [
             ...document.querySelectorAll(
@@ -204,67 +211,48 @@
      * Header를 숨겼다가 다시 표시
      */
     function initHeaderTransition() {
-        const header =
-            document.querySelector(".header");
-
-        const pageScroll =
-            document.querySelector(".page-scroll");
-
-        const sections =
-            document.querySelectorAll(
-                ".main-section"
-            );
-
-        if (
-            !header ||
-            !sections.length
-        ) {
-            return;
+        const header = document.querySelector(".header");
+        const pageScroll = document.querySelector(".page-scroll");
+        if (!header) return;
+        const scrollTarget = pageScroll || window;
+        let lastScrollTop = pageScroll ? pageScroll.scrollTop : window.scrollY;
+        let scrollStopTimer = null;
+        let ticking = false;
+        function getScrollTop() {
+            return pageScroll ? pageScroll.scrollTop : window.scrollY;
         }
-
-        let currentSection = null;
-        let timer = null;
-
-        const observer =
-            new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (!entry.isIntersecting) {
-                            return;
-                        }
-
-                        if (
-                            currentSection ===
-                            entry.target
-                        ) {
-                            return;
-                        }
-
-                        currentSection =
-                            entry.target;
-
-                        header.classList.add(
-                            "is-hidden"
-                        );
-
-                        window.clearTimeout(timer);
-
-                        timer =
-                            window.setTimeout(() => {
-                                header.classList.remove(
-                                    "is-hidden"
-                                );
-                            }, 280);
-                    });
-                },
-                {
-                    root: pageScroll || null,
-                    threshold: 0.65
-                }
-            );
-
-        sections.forEach((section) => {
-            observer.observe(section);
+        function updateHeader() {
+            const currentScrollTop = getScrollTop();
+            const isMenuOpen = document.documentElement.classList.contains("is-menu-open");
+            const isSearchOpen = document.documentElement.classList.contains("is-search-open");
+            if (isMenuOpen || isSearchOpen) {
+                header.classList.remove("is-hidden");
+                lastScrollTop = currentScrollTop;
+                ticking = false;
+                return;
+            }
+            if (currentScrollTop <= 10) {
+                header.classList.remove("is-hidden");
+            } else if (currentScrollTop > lastScrollTop) {
+                header.classList.add("is-hidden");
+            } else if (currentScrollTop < lastScrollTop) {
+                header.classList.remove("is-hidden");
+            }
+            lastScrollTop = Math.max(currentScrollTop, 0);
+            ticking = false;
+        }
+        function handleScroll() {
+            if (!ticking) {
+                ticking = true;
+                window.requestAnimationFrame(updateHeader);
+            }
+            window.clearTimeout(scrollStopTimer);
+            scrollStopTimer = window.setTimeout(() => {
+                header.classList.remove("is-hidden");
+            }, 350);
+        }
+        scrollTarget.addEventListener("scroll", handleScroll, {
+            passive: true
         });
     }
 

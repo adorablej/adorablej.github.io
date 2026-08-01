@@ -31,32 +31,36 @@ Header
     top: 0;
     left: 0;
     z-index: 1500;
-
     width: 100%;
     height: calc(100 * var(--vw));
-
-    color: #111;
-
+    background: #fff;
+    color: #000;
     transform: translateY(0);
-
-    transition:
-        transform .55s cubic-bezier(.22,1,.36,1),
-        color .3s ease,
-        background-color .3s ease;
+    transition: transform .5s cubic-bezier(.22,1,.36,1),color .3s ease,background-color .3s ease,box-shadow .3s ease;
+    will-change: transform;
+    border-bottom: 1px solid #E9E9E9;
 }
-
-.header.is-hidden{
-    transform:translateY(-110%);
+.header.is-hidden {
+    transform: translateY(-110%);
 }
-
-.header.theme-light{
-    color:#fff;
-    background:transparent;
-    box-shadow:none;
+.main-page .header {
+    background: transparent;
+    box-shadow: none;
 }
-
-.header.theme-dark{
-    color:#111;
+.main-page .header.theme-light {
+    background: transparent;
+    box-shadow: none;
+    color: #fff;
+    border: none;
+}
+.main-page .header.theme-dark {
+    background: transparent;
+    box-shadow: none;
+    color: #000;
+    border: none;
+}
+.header.theme-dark {
+    color: #000;
 }
 
 .header .inner{
@@ -674,16 +678,32 @@ Drag Cursor
 /* ========================================
 Header Menu Open
 ======================================== */
-
 .header.is-menu-open {
-    background: transparent;
+    background:#fff;
+    color:#000;
+    border-bottom:1px solid #E9E9E9;
 }
-
+.main-page .header.is-menu-open {
+    background:transparent;
+    border-bottom:0;
+}
 .header.is-menu-open .header-r {
-    position: relative;
-    z-index: 2;
+    position:relative;
+    z-index:2;
+    color:#000;
 }
-
+.main-page .header.is-menu-open .header-r {
+    color:#fff;
+}
+.header.is-menu-open .header-r i {
+    filter:brightness(0) !important;
+}
+.main-page .header.is-menu-open .header-r i {
+    filter:none !important;
+}
+.header.is-menu-open .btn-login {
+    color:#fff;
+}
 
 /* ========================================
 All Menu
@@ -692,40 +712,32 @@ All Menu
     position: fixed;
     inset: 0;
     z-index: 1000;
-
     display: flex;
     justify-content: flex-end;
-
     visibility: hidden;
     pointer-events: none;
-
     transition: visibility 0s linear .55s;
 }
 
 .all-menu.is-open {
     visibility: visible;
     pointer-events: auto;
-
     transition-delay: 0s;
 }
 
 .all-menu-panel {
     position: relative;
-
     display: flex;
     flex-direction: column;
-
     width: min(calc(570 * var(--vw)), 100%);
     height: 100%;
     padding-top: calc(200 * var(--vw));
-
     overflow-y: auto;
-
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(20, 20, 20, .45);
+    -webkit-backdrop-filter: blur(calc(18 * var(--vw))) saturate(180%);
+    backdrop-filter: blur(calc(18 * var(--vw))) saturate(180%);
     color: #fff;
-
     box-sizing: border-box;
-
     transform: translateX(100%);
     transition: transform .55s cubic-bezier(.22, 1, .36, 1);
 }
