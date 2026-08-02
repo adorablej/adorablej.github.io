@@ -59,14 +59,18 @@
         const koreaRed = ".sub-standard-h-red-korea";
         const partnersRed = ".sub-standard-h-red-partners";
 
+        const designWidth = function () {
+            return Math.min(window.innerWidth, 1920);
+        };
+
         const vw = function (value) {
-            return window.innerWidth * value;
+            return designWidth() * value;
         };
 
         gsap.set(copyUsa, {
-            autoAlpha: 1,
+            autoAlpha: 0,
             yPercent: -50,
-            y: 0
+            y: 34
         });
 
         gsap.set(copyKorea, {
@@ -84,18 +88,18 @@
         gsap.set(usaScene, {
             xPercent: -50,
             yPercent: -50,
-            x: function () { return vw(0.245); },
+            x: 0,
             y: 0,
-            scale: 1.08,
+            scale: 1,
             autoAlpha: 1
         });
 
         gsap.set(koreaScene, {
             xPercent: -50,
             yPercent: -50,
-            x: function () { return vw(-0.74); },
-            y: function () { return vw(0.09); },
-            scale: 2.72,
+            x: function () { return vw(-0.86); },
+            y: 0,
+            scale: 3.08,
             autoAlpha: 0
         });
 
@@ -103,14 +107,19 @@
             xPercent: -50,
             yPercent: -50,
             x: 0,
-            y: function () { return window.innerHeight * 0.98; },
-            scale: 1.12,
+            y: function () { return window.innerHeight * 1.08; },
+            scale: 2.02,
             autoAlpha: 0
         });
 
-        gsap.set([usaImage, koreaImage, partnersImage], { opacity: 0 });
-        gsap.set([usaSolid, koreaSolid, partnersSolid], { opacity: 1 });
-        gsap.set([usaRed, koreaRed, partnersRed], { opacity: 1, scaleX: 1 });
+        gsap.set([usaImage, partnersImage], { opacity: 0 });
+        gsap.set(koreaImage, { opacity: 1 });
+
+        gsap.set([usaSolid, partnersSolid], { opacity: 1 });
+        gsap.set(koreaSolid, { opacity: 0 });
+
+        gsap.set([usaRed, partnersRed], { opacity: 1, scaleX: 1 });
+        gsap.set(koreaRed, { opacity: 0, scaleX: 1 });
 
         const timeline = gsap.timeline({
             defaults: { ease: "none" },
@@ -124,14 +133,14 @@
             }
         });
 
-        /* 03. 같은 장면 안에서 초기 H가 확대되며 이미지 마스크 상태로 전환 */
+        /* 03 → 04. 중앙의 H가 우측 이미지 영역까지 확대되고 USA 카피가 등장 */
         timeline
-            .to({}, { duration: 0.45 })
+            .to({}, { duration: 0.5 })
             .to(usaScene, {
-                x: function () { return vw(0.285); },
-                y: function () { return vw(0.015); },
-                scale: 2.56,
-                duration: 0.9,
+                x: function () { return vw(0.305); },
+                y: 0,
+                scale: 3.14,
+                duration: 1.08,
                 ease: "power2.inOut"
             }, "usa-open")
             .to(usaRed, {
@@ -147,7 +156,13 @@
                 opacity: 1,
                 duration: 0.3
             }, "usa-open+=0.18")
-            .to({}, { duration: 0.48 });
+            .to(copyUsa, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.3,
+                ease: "power2.out"
+            }, "usa-open+=0.58")
+            .to({}, { duration: 0.5 });
 
         /* 03 → 05. 확대된 USA H는 우측으로 빠지고, KOREA H는 좌측에서 별도로 진입 */
         timeline
@@ -158,20 +173,19 @@
             }, "korea-switch")
             .to(usaScene, {
                 x: function () { return vw(0.94); },
-                scale: 2.62,
+                scale: 3.18,
                 autoAlpha: 0,
                 duration: 0.78,
                 ease: "power2.inOut"
             }, "korea-switch+=0.02")
-            .set(koreaScene, { autoAlpha: 1 }, "korea-switch+=0.24")
-            .to(koreaSolid, { opacity: 0, duration: 0.14 }, "korea-switch+=0.24")
-            .to(koreaRed, { opacity: 0, duration: 0.14 }, "korea-switch+=0.24")
-            .to(koreaImage, { opacity: 1, duration: 0.22 }, "korea-switch+=0.25")
+            .set(koreaScene, {
+                autoAlpha: 1
+            }, "korea-switch+=0.10")
             .to(koreaScene, {
-                x: function () { return vw(-0.30); },
-                duration: 0.92,
+                x: function () { return vw(-0.34); },
+                duration: 1.02,
                 ease: "power2.inOut"
-            }, "korea-switch+=0.24")
+            }, "korea-switch+=0.12")
             .to(copyKorea, {
                 autoAlpha: 1,
                 y: 0,
@@ -208,8 +222,8 @@
             .to(partnersSolid, { opacity: 0, duration: 0.16 }, "partners-rise+=0.03")
             .to(partnersRed, { opacity: 0, scaleX: 0.78, duration: 0.16 }, "partners-rise+=0.03")
             .to(partnersScene, {
-                y: function () { return window.innerHeight * 0.18; },
-                scale: 1.2,
+                y: function () { return window.innerHeight * 0.49; },
+                scale: 2.02,
                 duration: 0.98,
                 ease: "power3.out"
             }, "partners-rise")
@@ -224,7 +238,7 @@
             }, "final-logo")
             .to(partnersScene, {
                 y: 0,
-                scale: 0.78,
+                scale: 1,
                 duration: 1,
                 ease: "power2.inOut"
             }, "final-logo+=0.04")

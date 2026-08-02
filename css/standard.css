@@ -1,6 +1,9 @@
 /* =========================================================
    The Standard
 ========================================================= */
+:root {
+    --standard-vw: min(100vw, 1920px);
+}
 .sub-standard-scroll {
     overflow: clip;
 }
@@ -37,13 +40,13 @@
     height: 105%;
     transform: translateX(-50%);
     background: radial-gradient(circle at center, rgba(190, 30, 0, .58) 0%, rgba(92, 8, 0, .3) 34%, rgba(0, 0, 0, 0) 72%);
-    filter: blur(calc(100vw * 18 / 1920));
+    filter: blur(calc(var(--standard-vw) * 18 / 1920));
 }
 
 .sub-standard-main-title {
     position: relative;
     z-index: 1;
-    width: calc(100vw * 720 / 1920);
+    width: calc(var(--standard-vw) * 800 / 1920);
     text-align: center;
 }
 
@@ -52,8 +55,8 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    width: calc(100vw * 840 / 1920);
-    height: 1px;
+    width: calc(var(--standard-vw) * 840 / 1920);
+    height: 5px;
     transform: translate(-50%, -50%);
     background: linear-gradient(90deg, transparent, #c71910 30%, #c71910 70%, transparent);
 }
@@ -63,14 +66,12 @@
     position: relative;
     z-index: 1;
     display: block;
-    font-size: calc(100vw * 50 / 1920);
-    font-weight: 800;
-    line-height: 1.12;
-    letter-spacing: -.05em;
+    font-size: calc(var(--standard-vw) * 100 / 1920);
+    font-family: "Russo One", sans-serif;
 }
 
 .sub-standard-main-title span {
-    margin-top: calc(100vw * 20 / 1920);
+    margin-top: calc(var(--standard-vw) * 20 / 1920);
 }
 
 /* 02. Intro */
@@ -96,18 +97,16 @@
 
 .sub-standard-intro-content h2 {
     margin: 0;
-    font-size: calc(100vw * 52 / 1920);
-    font-weight: 800;
-    line-height: 1.28;
-    letter-spacing: -.055em;
+    font-size: calc(var(--standard-vw) * 70 / 1920);
+    font-weight: 700;
+    line-height:calc(var(--standard-vw) * 84 / 1920);
 }
 
 .sub-standard-intro-content p {
-    margin: calc(100vw * 42 / 1920) 0 0;
-    color: rgba(255, 255, 255, .62);
-    font-size: calc(100vw * 15 / 1920);
-    line-height: 1.9;
-    letter-spacing: -.025em;
+    margin: calc(var(--standard-vw) * 60 / 1920) 0 0;
+    color: #fff;
+    font-size: calc(var(--standard-vw) * 20 / 1920);
+    line-height: calc(var(--standard-vw) * 40 / 1920);
 }
 
 /* 03~07. Sticky story */
@@ -136,67 +135,47 @@
 .sub-standard-story-copy {
     position: absolute;
     z-index: 4;
-    width: calc(100vw * 470 / 1920);
+    width: calc(var(--standard-vw) * 640 / 1920);
     opacity: 0;
     visibility: hidden;
 }
 
 .sub-standard-story-copy-usa {
-    left: calc(100vw * 302 / 1920);
-    top: 50%;
+    left: calc(var(--standard-vw) * 310 / 1920);
+    top: 52%;
 }
 
 .sub-standard-story-copy-korea {
-    right: calc(100vw * 286 / 1920);
-    top: 50%;
+    right: calc(var(--standard-vw) * 250 / 1920);
+    top: 52%;
 }
 
 .sub-standard-story-copy-partners {
     left: 50%;
-    top: calc(100vw * 118 / 1920);
-    width: calc(100vw * 920 / 1920);
+    top: calc(var(--standard-vw) * 242 / 1920);
+    width: calc(var(--standard-vw) * 920 / 1920);
     text-align: center;
-}
-
-.sub-standard-label {
-    display: block;
-    margin-bottom: calc(100vw * 10 / 1920);
-    font-size: calc(100vw * 15 / 1920);
-    font-weight: 800;
-    letter-spacing: -.025em;
 }
 
 .sub-standard-story-copy h2 {
     margin: 0;
-    font-size: calc(100vw * 30 / 1920);
-    font-weight: 800;
-    line-height: 1.28;
-    letter-spacing: -.055em;
+    font-size: calc(var(--standard-vw) * 46 / 1920);
+    font-weight: 700;
+    letter-spacing: calc(var(--standard-vw) * -1 / 1920);
+}
+
+.sub-standard-story-copy h2 span{
+    color: var(--red);
+    font-family: "Russo One", sans-serif;
 }
 
 .sub-standard-story-copy p {
-    margin: calc(100vw * 18 / 1920) 0 0;
-    color: #747474;
-    font-size: calc(100vw * 12 / 1920);
-    line-height: 1.72;
+    margin: calc(var(--standard-vw) * 30 / 1920) 0 calc(var(--standard-vw) * 60 / 1920);
+    color: #00000060;
+    font-size: calc(var(--standard-vw) * 18 / 1920);
+    line-height: calc(var(--standard-vw) * 30 / 1920);
     letter-spacing: -.025em;
     word-break: keep-all;
-}
-
-.sub-standard-more {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: calc(100vw * 86 / 1920);
-    height: calc(100vw * 30 / 1920);
-    margin-top: calc(100vw * 26 / 1920);
-    padding: 0 calc(100vw * 18 / 1920);
-    border: 1px solid #d20c05;
-    border-radius: calc(100vw * 16 / 1920);
-    color: #d20c05;
-    font-size: calc(100vw * 10 / 1920);
-    text-decoration: none;
-    box-sizing: border-box;
 }
 
 .sub-standard-h-scene {
@@ -204,8 +183,7 @@
     z-index: 2;
     left: 50%;
     top: 50%;
-    width: calc(100vw * 526 / 1920);
-    height: calc(100vw * 332 / 1920);
+    width: calc(var(--standard-vw) * 500 / 1920);
     transform-origin: 50% 50%;
     will-change: transform;
 }
@@ -228,9 +206,9 @@
 .sub-standard-h-red {
     position: absolute;
     left: 21.6%;
-    bottom: calc(100vw * -21 / 1920);
+    bottom: calc(var(--standard-vw) * -21 / 1920);
     width: 56.8%;
-    height: calc(100vw * 12 / 1920);
+    height: calc(var(--standard-vw) * 12 / 1920);
     background: #d20c05;
     transform: skewX(-14deg);
     transform-origin: center;

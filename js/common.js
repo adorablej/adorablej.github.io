@@ -213,24 +213,50 @@
     function initHeaderTransition() {
         const header = document.querySelector(".header");
         const pageScroll = document.querySelector(".page-scroll");
+    
         if (!header) return;
-        const scrollTarget = pageScroll || window;
-        let lastScrollTop = pageScroll ? pageScroll.scrollTop : window.scrollY;
+    
+        const pageScrollStyle = pageScroll
+            ? window.getComputedStyle(pageScroll)
+            : null;
+    
+        const isPageScrollContainer =
+            pageScroll &&
+            (
+                pageScrollStyle.overflowY === "auto" ||
+                pageScrollStyle.overflowY === "scroll"
+            );
+    
+        const scrollTarget = isPageScrollContainer
+            ? pageScroll
+            : window;
+    
+        let lastScrollTop = getScrollTop();
         let scrollStopTimer = null;
         let ticking = false;
+    
         function getScrollTop() {
-            return pageScroll ? pageScroll.scrollTop : window.scrollY;
+            return isPageScrollContainer
+                ? pageScroll.scrollTop
+                : window.scrollY;
         }
+    
         function updateHeader() {
             const currentScrollTop = getScrollTop();
-            const isMenuOpen = document.documentElement.classList.contains("is-menu-open");
-            const isSearchOpen = document.documentElement.classList.contains("is-search-open");
+    
+            const isMenuOpen =
+                document.documentElement.classList.contains("is-menu-open");
+    
+            const isSearchOpen =
+                document.documentElement.classList.contains("is-search-open");
+    
             if (isMenuOpen || isSearchOpen) {
                 header.classList.remove("is-hidden");
                 lastScrollTop = currentScrollTop;
                 ticking = false;
                 return;
             }
+    
             if (currentScrollTop <= 10) {
                 header.classList.remove("is-hidden");
             } else if (currentScrollTop > lastScrollTop) {
@@ -238,19 +264,24 @@
             } else if (currentScrollTop < lastScrollTop) {
                 header.classList.remove("is-hidden");
             }
+    
             lastScrollTop = Math.max(currentScrollTop, 0);
             ticking = false;
         }
+    
         function handleScroll() {
             if (!ticking) {
                 ticking = true;
                 window.requestAnimationFrame(updateHeader);
             }
+    
             window.clearTimeout(scrollStopTimer);
+    
             scrollStopTimer = window.setTimeout(() => {
                 header.classList.remove("is-hidden");
             }, 350);
         }
+    
         scrollTarget.addEventListener("scroll", handleScroll, {
             passive: true
         });

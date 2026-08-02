@@ -1,42 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>
-        헌터페이지
-    </title>
+    <title>헌터페이지</title>
     <link href="/css/common.css" rel="stylesheet" />
     <link href="/css/layout.css" rel="stylesheet" />
-    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/css/standard.css" rel="stylesheet" />
     <link href="/css/responsive.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 
-
 </head>
 
 <body>
-    <!-- header -->
-    <div data-include="/includes/header.html">
-    </div>
-    <div style="height: 100vh; text-align: center; line-height: 50vh; font-size: 100px; color: #fff; background: #eee;">
-        standard page
+    <div data-include="/includes/header.html"></div>
+
+    <div class="page-scroll sub-standard-scroll">
+        <section class="page-heading" >
+            <div class="inner">
+                <ul class="breadcrumb">
+                    <li><a href="/" class="breadcrumb-home" aria-label="Home"></a></li>
+                    <li><a href="/Standard/standard.html">The Standard</a></li>
+                </ul>
+                <h2 class="page-title">The Standard</h2>
+            </div>
+        </section>
+
+        <main class="sub-standard-page">
+            <!-- 01. Main visual -->
+            <section class="sub-standard-main-visual" >
+                <div class="sub-standard-main-title">
+                    <strong>HUNTER</strong>
+                    <span>THE STANDARD</span>
+                </div>
+            </section>
+
+            <!-- 02. Brand statement -->
+            <section class="sub-standard-intro" >
+                <div class="sub-standard-intro-glow" aria-hidden="true"></div>
+                <div class="sub-standard-intro-content">
+                    <h2>
+                        글로벌 정밀 정비의 기준이자,<br>
+                        자동차 정비 문화의 ‘표준’을 제시하는 리더
+                    </h2>
+                    <p>
+                        1946년 시작된 타협하지 않는 정밀함.   미국 헌터 엔지니어링은 오늘날 전 세계 100여 개국이 신뢰하는 ‘글로벌 스탠다드’가 되었습니다.<br>
+헌터는 단순한 장비를 넘어, 독보적인 R&D 역량으로 자동차 정비 산업의 혁신적인 미래 설계도를 제시합니다.<br>
+헌터코리아는 본사의 첨단 기술 에셋을 국내 시장에 가장 최적화된 솔루션으로 제공하며 대한민국 정비 현장과 함께 호흡해 왔습니다.<br>
+고객의 성장이 곧 우리의 자부심이라는 믿음 아래,   장비 도입부터 전문 교육, 체계적인 사후 관리까지 비즈니스의 전 과정을 책임 있게 동행합니다. <br>
+헌터를 선택한 모든 파트너가 업계 최고의 전문가로서 ‘HUNTER PRIDE’를 완성할 수 있도록,<br>
+헌터코리아는 앞으로도 가장 정직한 기술로 당신의 일터에 변하지 않는 가치를 더하겠습니다.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 03~07. Sticky H story -->
+            <section class="sub-standard-story" data-header-theme="light">
+                <div class="sub-standard-story-sticky">
+                    <div class="sub-standard-story-stage">
+                        <!-- Text stages -->
+                        <article class="sub-standard-story-copy sub-standard-story-copy-usa">
+                            <h2>HUNTER USA<br>
+                                정밀함의 기원, 기술의 정점<span>.</span></h2>
+                            <p>
+                                자동차 정비 장비의 새로운 기준을 만들어온 헌터의 기술은<br>
+                                미국 본사의 지속적인 연구개발과 현장 중심의 혁신에서 시작됩니다.
+                            </p>
+                            <a href="#" class="sub-button-more">more</a>
+                        </article>
+
+                        <article class="sub-standard-story-copy sub-standard-story-copy-korea">
+                            <h2>HUNTER KOREA<br>
+                                신뢰의 40년, 대한민국 정비의 기준<span>.</span></h2>
+                            <p>
+                                헌터코리아는 국내 정비 현장에 최적화된 장비와 기술지원,<br>
+                                교육 서비스를 통해 고객의 성장을 함께 만들어갑니다.
+                            </p>
+                            <a href="#" class="sub-button-more">more</a>
+                        </article>
+
+                        <article class="sub-standard-story-copy sub-standard-story-copy-partners">
+                            <h2>HUNTER Partners<br>
+                                자동차 산업의 리더들이 선택하는 단 하나의 선택</h2>
+                            <p>
+                                헌터는 글로벌 완성차 제조사와 타이어 브랜드, 전문 정비 네트워크의 파트너로서<br>
+                                각 브랜드의 엄격한 기준을 충족하는 장비와 솔루션을 제공합니다.
+                            </p>
+                            <a href="#" class="sub-button-more">more</a>
+                        </article>
+
+                        <!-- 03. 하나의 고정 섹션 안에서 H가 확대되고 이미지로 전환된 뒤 우측으로 퇴장 -->
+                        <div class="sub-standard-h-scene sub-standard-h-scene-usa" aria-hidden="true">
+                            <svg class="sub-standard-h-svg" viewBox="0 0 526 332" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <clipPath id="sub-standard-h-clip-usa">
+                                        <path d="M166.571 209.314H338.017L299.638 331.625H426.715L525.327 0H399.676L366.956 111.445H195.51L228.23 0H99.7899L0 331.624H131.146L166.571 209.314Z" />
+                                    </clipPath>
+                                </defs>
+                                <path class="sub-standard-h-solid sub-standard-h-solid-usa" d="M166.571 209.314H338.017L299.638 331.625H426.715L525.327 0H399.676L366.956 111.445H195.51L228.23 0H99.7899L0 331.624H131.146L166.571 209.314Z" />
+                                <g clip-path="url(#sub-standard-h-clip-usa)">
+                                    <image class="sub-standard-h-image sub-standard-h-image-usa"
+                                        href="/images/standard/standard_mask01.png"
+                                        width="526" height="332" preserveAspectRatio="xMidYMid slice" />
+                                </g>
+                            </svg>
+                            <span class="sub-standard-h-red sub-standard-h-red-usa"></span>
+                        </div>
+
+                        <!-- 05. 왼쪽에서 진입한 뒤 다시 왼쪽으로 빠지는 H -->
+                        <div class="sub-standard-h-scene sub-standard-h-scene-korea" aria-hidden="true">
+                            <svg class="sub-standard-h-svg" viewBox="0 0 526 332" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <clipPath id="sub-standard-h-clip-korea">
+                                        <path d="M166.571 209.314H338.017L299.638 331.625H426.715L525.327 0H399.676L366.956 111.445H195.51L228.23 0H99.7899L0 331.624H131.146L166.571 209.314Z" />
+                                    </clipPath>
+                                </defs>
+                                <path class="sub-standard-h-solid sub-standard-h-solid-korea" d="M166.571 209.314H338.017L299.638 331.625H426.715L525.327 0H399.676L366.956 111.445H195.51L228.23 0H99.7899L0 331.624H131.146L166.571 209.314Z" />
+                                <g clip-path="url(#sub-standard-h-clip-korea)">
+                                    <image class="sub-standard-h-image sub-standard-h-image-korea"
+                                        href="/images/standard/standard_mask02.png"
+                                        width="526" height="332" preserveAspectRatio="xMidYMid slice" />
+                                </g>
+                            </svg>
+                            <span class="sub-standard-h-red sub-standard-h-red-korea"></span>
+                        </div>
+
+                        <!-- 06~07. 카피 노출 후 화면 아래에서 새로 올라오는 작은 H -->
+                        <div class="sub-standard-h-scene sub-standard-h-scene-partners" aria-hidden="true">
+                            <svg class="sub-standard-h-svg" viewBox="0 0 526 332" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <clipPath id="sub-standard-h-clip-partners">
+                                        <path d="M166.571 209.314H338.017L299.638 331.625H426.715L525.327 0H399.676L366.956 111.445H195.51L228.23 0H99.7899L0 331.624H131.146L166.571 209.314Z" />
+                                    </clipPath>
+                                </defs>
+                                <path class="sub-standard-h-solid sub-standard-h-solid-partners" d="M166.571 209.314H338.017L299.638 331.625H426.715L525.327 0H399.676L366.956 111.445H195.51L228.23 0H99.7899L0 331.624H131.146L166.571 209.314Z" />
+                                <g clip-path="url(#sub-standard-h-clip-partners)">
+                                    <image class="sub-standard-h-image sub-standard-h-image-partners"
+                                        href="/images/standard/standard_mask03.png"
+                                        width="526" height="332" preserveAspectRatio="xMidYMid slice" />
+                                </g>
+                            </svg>
+                            <span class="sub-standard-h-red sub-standard-h-red-partners"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div class="sub-standard-banner" data-include="/includes/banner-solution.html" data-header-theme="light"></div>
+        <div class="footer-section"  data-include="/includes/footer.html"></div>
     </div>
 
-    <div class="page-scroll">
-        <!-- footer -->
-        <div class="footer-section" data-header-theme="dark" data-include="/includes/footer.html"></div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
     <script src="/js/include.js"></script>
     <script src="/js/common.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/standard.js"></script>
 </body>
 
 </html>
