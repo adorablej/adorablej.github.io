@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        헌터페이지
+    </title>
+    <link href="/css/common.css" rel="stylesheet" />
+    <link href="/css/layout.css" rel="stylesheet" />
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/css/search.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+</head>
+    <div data-include="/includes/header.html"></div>
+
+    <main class="sub-search-page" data-header-theme="dark">
+        <section class="page-heading"  data-header-theme="dark">
+            <div class="inner">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="/" class="breadcrumb-home" aria-label="Home"></a>
+                    </li>
+                    <li>
+                        <a href="/search.html">Search</a>
+                    </li>
+                </ul>
+                <h2 class="page-title">
+                    Search
+                </h2>
+            </div>
+        </section>
+
+        <section class="sub-search-query-section">
+            <div class="sub-search-inner">
+                <h2 class="sub-search-query-title">검색 결과<span>.</span></h2>
+
+                <form class="sub-search-form" role="search">
+                    <i class="sub-search-form-icon" aria-hidden="true"></i>
+                    <input type="search" name="keyword" class="sub-search-input" aria-label="검색어" autocomplete="off">
+                    <button type="button" class="sub-search-clear" aria-label="검색어 삭제"></button>
+                </form>
+            </div>
+        </section>
+
+        <section class="sub-search-result-section">
+            <div class="sub-search-inner">
+                <div class="sub-search-tabs" role="tablist" aria-label="검색 결과 분류">
+                    <button type="button" class="sub-search-tab is-active" data-category="all">전체</button>
+                    <button type="button" class="sub-search-tab" data-category="product">Product</button>
+                    <button type="button" class="sub-search-tab" data-category="oem">OEM</button>
+                    <button type="button" class="sub-search-tab" data-category="support">Support</button>
+                    <button type="button" class="sub-search-tab" data-category="media">Media</button>
+                </div>
+
+                <div class="sub-search-result" aria-live="polite"></div>
+
+                <section class="sub-search-recommend" aria-labelledby="sub-search-recommend-title">
+                    <h2 id="sub-search-recommend-title">추천 검색어</h2>
+                    <div class="sub-search-recommend-list">
+                        <a href="/search.html?keyword=HawkEye%20Elite%20Premium">HawkEye Elite Premium</a>
+                        <a href="/search.html?keyword=RoadForce%20Elite">Road Force Elite</a>
+                        <a href="/search.html?keyword=TCRH%20Revolution">TCRH Revolution</a>
+                        <a href="/search.html?keyword=RX45KIS">RX45KIS</a>
+                        <a href="/search.html?keyword=WinAlign%20HD">WinAlign HD</a>
+                    </div>
+                </section>
+
+                <section class="sub-search-products" aria-labelledby="sub-search-products-title">
+                    <div class="sub-search-products-heading">
+                        <h2 id="sub-search-products-title">HUNTER PRODUCT</h2>
+                        <div class="sub-slider-controls">
+                            <button type="button" class="sub-slider-button sub-slider-prev sub-search-product-prev" aria-label="이전 제품"></button>
+                            <button type="button" class="sub-slider-button sub-slider-next sub-search-product-next" aria-label="다음 제품"></button>
+                        </div>
+                    </div>
+
+                    <div class="sub-search-product-viewport">
+                        <div class="sub-search-product-track"></div>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <div data-include="/includes/footer.html"></div>
+
+    <script src="/js/include.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/search.js"></script>
+</body>
+</html>
