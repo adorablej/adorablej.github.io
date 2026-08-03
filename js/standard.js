@@ -70,7 +70,7 @@
         gsap.set(copyUsa, {
             autoAlpha: 0,
             yPercent: -50,
-            y: 34
+            y: 34,
         });
 
         gsap.set(copyKorea, {

@@ -365,7 +365,7 @@
 
 .sub-usa-section-heading {
     width: 100%;
-    margin: 0 0 calc(var(--usa-vw) * 70 / 1920);
+    margin: 0 0 calc(var(--usa-vw) * 100 / 1920);
     padding: 0 calc(var(--usa-vw) * 160 / 1920);
     box-sizing: border-box;
     text-align: center;
@@ -566,7 +566,7 @@
 }
 
 .sub-usa-value-awards .sub-usa-value-copy {
-    left: calc(var(--usa-vw) * 986 / 1920);
+    left:  calc(986 * var(--vw));
 }
 
 .sub-usa-value-copy h2 {
@@ -614,4 +614,159 @@
     width: 100%;
     height: auto;
     overflow: visible;
+}
+
+/* =========================================================
+   HUNTER Awards
+========================================================= */
+
+.sub-awards-page {
+    background: #fff;
+    color: #111;
+}
+
+.sub-awards-inner {
+    width: calc(var(--standard-vw) * 1300 / 1920);
+    margin: 0 auto;
+}
+
+.sub-awards-intro {
+    padding: 0 0 calc(var(--standard-vw) * 120 / 1920);
+}
+
+.sub-awards-hero {
+    width: 100%;
+    height: calc(var(--standard-vw) * 740 / 1920);
+    margin: 0;
+    overflow: hidden;
+}
+
+.sub-awards-hero img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.sub-awards-feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--standard-vw) * 40 / 1920);
+    margin-top: calc(var(--standard-vw) * 80 / 1920);
+}
+
+.sub-awards-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    min-height: calc(var(--standard-vw) * 440 / 1920);
+    overflow: hidden;
+    background: #fafafa;
+}
+
+.sub-awards-feature-reverse .sub-awards-feature-media {
+    order: 2;
+}
+
+.sub-awards-feature-reverse .sub-awards-feature-content {
+    order: 1;
+}
+
+.sub-awards-feature-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: calc(var(--standard-vw) * 60 / 1920);
+}
+
+.sub-awards-feature-media img {
+    display: block;
+    max-width: 78%;
+    max-height: calc(var(--standard-vw) * 250 / 1920);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.sub-awards-feature-content {
+    padding: calc(var(--standard-vw) * 70 / 1920);
+}
+
+.sub-awards-feature-content h3 {
+    margin: 0 0 calc(var(--standard-vw) * 30 / 1920);
+    color: #111;
+    font-size: calc(var(--standard-vw) * 40 / 1920);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -.04em;
+}
+
+.sub-awards-feature-content p {
+    margin: 0;
+    color: #666;
+    font-size: calc(var(--standard-vw) * 17 / 1920);
+    line-height: 1.8;
+    letter-spacing: -.03em;
+    word-break: keep-all;
+}
+
+.sub-awards-excellence {
+    padding: calc(var(--standard-vw) * 10 / 1920) 0 calc(var(--standard-vw) * 160 / 1920);
+}
+
+.sub-awards-excellence .detail-section-heading {
+    width: 100%;
+    margin-bottom: calc(var(--standard-vw) * 80 / 1920);
+}
+
+.sub-awards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: calc(var(--standard-vw) * 100 / 1920) calc(var(--standard-vw) * 60 / 1920);
+}
+
+.sub-awards-card {
+    text-align: center;
+}
+
+.sub-awards-card-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(var(--standard-vw) * 300 / 1920);
+    height: calc(var(--standard-vw) * 300 / 1920);
+    margin: 0 auto calc(var(--standard-vw) * 38 / 1920);
+    border-radius: 50%;
+    background: #fafafa;
+}
+
+.sub-awards-card-image img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.sub-awards-card h3 {
+    margin: 0;
+    color: #111;
+    font-size: calc(var(--standard-vw) * 20 / 1920);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -.04em;
+    word-break: keep-all;
+}
+
+.sub-awards-card p {
+    max-width: calc(var(--standard-vw) * 310 / 1920);
+    margin: calc(var(--standard-vw) * 18 / 1920) auto 0;
+    color: #888;
+    font-size: calc(var(--standard-vw) * 14 / 1920);
+    line-height: 1.65;
+    letter-spacing: -.03em;
+    word-break: keep-all;
 }
