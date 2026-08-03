@@ -248,6 +248,19 @@
             .to({}, { duration: 0.62 });
     }
 
+    function initTrackpadScrollStability() {
+        const trust = document.querySelector(".sub-usa-trust");
+        if (!trust) return;
+
+        ScrollTrigger.create({
+            trigger: trust,
+            start: "top top",
+            end: "bottom bottom",
+            invalidateOnRefresh: true,
+            anticipatePin: 1
+        });
+    }
+
     function initHeaderTheme() {
         const header = document.querySelector(".header");
         if (!header) return;
@@ -276,5 +289,340 @@
         document.addEventListener("DOMContentLoaded", initStandardPage);
     } else {
         initStandardPage();
+    }
+})();
+
+
+
+/* usa */
+(function () {
+    "use strict";
+
+    function initHunterUsaPage() {
+        if (typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") return;
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        initHeroStory();
+        initTrustAccordion();
+        initValueMotions();
+        initTrackpadScrollStability();
+        initHeaderTheme();
+    }
+
+    function initHeroStory() {
+        const hero = document.querySelector(".sub-usa-hero");
+        const media = document.querySelector(".sub-usa-hero-media");
+        const preview = document.querySelector(".sub-usa-hero-preview");
+        const video = document.querySelector(".sub-usa-hero-video");
+        const dim = document.querySelector(".sub-usa-hero-dim");
+        const copy = document.querySelector(".sub-usa-hero-copy");
+        const lines = gsap.utils.toArray(".sub-usa-hero-line");
+
+        if (!hero || !media || !preview || !dim || !copy || !lines.length) return;
+
+        gsap.set(copy, { autoAlpha: 0, y: 30 });
+        gsap.set(lines, { color: "rgba(255,255,255,.22)" });
+        if (video) gsap.set(video, { autoAlpha: 0, scale: 1.04 });
+
+        const timeline = gsap.timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: {
+                trigger: hero,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1.15,
+                invalidateOnRefresh: true,
+                anticipatePin: 1
+            }
+        });
+
+        timeline
+            .to({}, { duration: 0.35 })
+            .to(media, {
+                width: "100vw",
+                height: "100vh",
+                duration: 1.05,
+                ease: "power2.inOut"
+            }, "hero-expand")
+            .to(preview, {
+                scale: 1,
+                duration: 1.05,
+                ease: "power2.inOut"
+            }, "hero-expand");
+
+        if (video) {
+            timeline
+                .to(video, {
+                    autoAlpha: 1,
+                    scale: 1,
+                    duration: 0.5,
+                    ease: "power1.out"
+                }, "hero-expand+=0.72")
+                .to(preview, {
+                    autoAlpha: 0,
+                    duration: 0.42
+                }, "hero-expand+=0.78");
+        }
+
+        timeline
+            .to(dim, {
+                opacity: 1,
+                duration: 0.42
+            }, "hero-expand+=0.72")
+            .to(copy, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.36,
+                ease: "power2.out"
+            }, "hero-expand+=0.9");
+
+        lines.forEach(function (line, index) {
+            timeline.to(line, {
+                color: "rgba(255,255,255,1)",
+                duration: 0.48,
+                ease: "power1.out"
+            }, "line-" + index);
+
+            timeline.to({}, { duration: 0.22 });
+        });
+
+        timeline.to({}, { duration: 0.6 });
+    }
+
+    function initTrustAccordion() {
+        const items = Array.from(document.querySelectorAll(".sub-usa-trust-item"));
+        if (!items.length) return;
+
+        let activeItem = items.find(function (item) {
+            return item.classList.contains("is-active");
+        }) || items[0];
+        let hoverTimer = null;
+
+        function hideAllCopy() {
+            items.forEach(function (item) {
+                item.classList.remove("is-copy-visible");
+            });
+        }
+
+        function getPanelWidth(isActive) {
+            const designWidth = Math.min(window.innerWidth, 1920);
+            const scale = designWidth / 1920;
+            return (isActive ? 1160 : 220) * scale;
+        }
+
+        function applyState(target, immediate) {
+            if (!target) return;
+
+            activeItem = target;
+            hideAllCopy();
+
+            items.forEach(function (item) {
+                item.classList.toggle("is-active", item === target);
+            });
+
+            const sizeProps = {
+                flexBasis: function (index, item) {
+                    return getPanelWidth(item === target);
+                },
+                width: function (index, item) {
+                    return getPanelWidth(item === target);
+                }
+            };
+
+            if (immediate) {
+                gsap.set(items, sizeProps);
+                target.classList.add("is-copy-visible");
+                return;
+            }
+
+            gsap.to(items, {
+                ...sizeProps,
+                duration: 0.82,
+                ease: "power3.inOut",
+                overwrite: true,
+                onComplete: function () {
+                    if (target === activeItem) {
+                        target.classList.add("is-copy-visible");
+                    }
+                }
+            });
+        }
+
+        applyState(activeItem, true);
+
+        items.forEach(function (item) {
+            item.addEventListener("mouseenter", function () {
+                window.clearTimeout(hoverTimer);
+                hoverTimer = window.setTimeout(function () {
+                    if (item !== activeItem) applyState(item, false);
+                }, 60);
+            });
+
+            item.addEventListener("mouseleave", function () {
+                window.clearTimeout(hoverTimer);
+            });
+
+            item.addEventListener("focus", function () {
+                applyState(item, false);
+            });
+
+            item.addEventListener("click", function () {
+                applyState(item, false);
+            });
+        });
+    }
+
+    function initValueMotions() {
+        gsap.utils.toArray(".sub-usa-value").forEach(function (section) {
+            const inner = section.querySelector(".sub-usa-inner");
+            const copy = section.querySelector(".sub-usa-value-copy");
+            const mask = section.querySelector(".sub-usa-h-mask");
+            if (!inner || !copy || !mask) return;
+
+            const fromLeft = mask.classList.contains("sub-usa-h-mask-left");
+
+            gsap.set(mask, {
+                xPercent: fromLeft ? -26 : 26,
+                autoAlpha: 0
+            });
+
+            gsap.set(copy, {
+                y: 48,
+                autoAlpha: 0
+            });
+
+            const timeline = gsap.timeline({
+                defaults: { ease: "none" },
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 1,
+                    invalidateOnRefresh: true,
+                    anticipatePin: 1
+                }
+            });
+
+            timeline
+                .to({}, { duration: 0.16 })
+                .to(mask, {
+                    xPercent: 0,
+                    autoAlpha: 1,
+                    duration: 0.56,
+                    ease: "power3.out"
+                }, "value-in")
+                .to(copy, {
+                    y: 0,
+                    autoAlpha: 1,
+                    duration: 0.34,
+                    ease: "power2.out"
+                }, "value-in+=0.18")
+                .to({}, { duration: 0.42 });
+        });
+    }
+
+    function initUsaSectionSnap() {
+        const sections = Array.from(document.querySelectorAll(".sub-usa-trust, .sub-usa-value"));
+        if (!sections.length) return;
+
+        let locked = false;
+        let lockTimer = null;
+
+        function getActiveIndex() {
+            const center = window.scrollY + window.innerHeight * 0.5;
+            let index = -1;
+            let distance = Infinity;
+
+            sections.forEach(function (section, sectionIndex) {
+                const top = section.getBoundingClientRect().top + window.scrollY;
+                const sectionCenter = top + section.offsetHeight * 0.5;
+                const nextDistance = Math.abs(sectionCenter - center);
+
+                if (nextDistance < distance) {
+                    distance = nextDistance;
+                    index = sectionIndex;
+                }
+            });
+
+            return index;
+        }
+
+        function isSnapArea() {
+            const firstTop = sections[0].getBoundingClientRect().top + window.scrollY;
+            const last = sections[sections.length - 1];
+            const lastBottom = last.getBoundingClientRect().top + window.scrollY + last.offsetHeight;
+            const current = window.scrollY + window.innerHeight * 0.5;
+            return current >= firstTop && current <= lastBottom;
+        }
+
+        function goToSection(index) {
+            const target = sections[index];
+            if (!target) return;
+
+            locked = true;
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+            window.clearTimeout(lockTimer);
+            lockTimer = window.setTimeout(function () {
+                locked = false;
+            }, 900);
+        }
+
+        window.addEventListener("wheel", function (event) {
+            if (!isSnapArea() || locked || Math.abs(event.deltaY) < 12) return;
+
+            const activeIndex = getActiveIndex();
+            if (activeIndex < 0) return;
+
+            const nextIndex = event.deltaY > 0 ? activeIndex + 1 : activeIndex - 1;
+            if (nextIndex < 0 || nextIndex >= sections.length) return;
+
+            event.preventDefault();
+            goToSection(nextIndex);
+        }, { passive: false });
+    }
+
+    function initTrackpadScrollStability() {
+        const trust = document.querySelector(".sub-usa-trust");
+        if (!trust) return;
+
+        ScrollTrigger.create({
+            trigger: trust,
+            start: "top top",
+            end: "bottom bottom",
+            invalidateOnRefresh: true,
+            anticipatePin: 1
+        });
+    }
+
+    function initHeaderTheme() {
+        const header = document.querySelector(".header");
+        if (!header) return;
+
+        document.querySelectorAll("[data-header-theme]").forEach(function (target) {
+            ScrollTrigger.create({
+                trigger: target,
+                start: "top 5%",
+                end: "bottom 5%",
+                onEnter: function () {
+                    setHeaderTheme(header, target.dataset.headerTheme);
+                },
+                onEnterBack: function () {
+                    setHeaderTheme(header, target.dataset.headerTheme);
+                }
+            });
+        });
+    }
+
+    function setHeaderTheme(header, theme) {
+        header.classList.toggle("theme-dark", theme === "dark");
+        header.classList.toggle("theme-light", theme === "light");
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initHunterUsaPage);
+    } else {
+        initHunterUsaPage();
     }
 })();
