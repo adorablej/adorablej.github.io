@@ -594,7 +594,7 @@
     position: absolute;
     z-index: 1;
     top: 50%;
-    width: calc(var(--usa-vw) * 1120 / 1920);
+    width: calc(3000 * var(--vw));
     margin: 0;
     transform: translateY(-50%);
     will-change: transform, opacity;
@@ -602,11 +602,11 @@
 
 .sub-usa-value-history .sub-usa-h-mask,
 .sub-usa-value-korea .sub-usa-h-mask {
-    right: calc(var(--usa-vw) * -180 / 1920);
+    right: calc(-1900 * var(--vw));
 }
 
 .sub-usa-value-awards .sub-usa-h-mask {
-    left: calc(var(--usa-vw) * -180 / 1920);
+    left: calc(-1900 * var(--vw));
 }
 
 .sub-usa-h-mask svg {

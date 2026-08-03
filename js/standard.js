@@ -405,12 +405,6 @@
             });
         }
 
-        function getPanelWidth(isActive) {
-            const designWidth = Math.min(window.innerWidth, 1920);
-            const scale = designWidth / 1920;
-            return (isActive ? 1160 : 220) * scale;
-        }
-
         function applyState(target, immediate) {
             if (!target) return;
 
@@ -421,23 +415,20 @@
                 item.classList.toggle("is-active", item === target);
             });
 
-            const sizeProps = {
-                flexBasis: function (index, item) {
-                    return getPanelWidth(item === target);
-                },
-                width: function (index, item) {
-                    return getPanelWidth(item === target);
-                }
-            };
-
             if (immediate) {
-                gsap.set(items, sizeProps);
+                gsap.set(items, {
+                    flexBasis: function (index, item) {
+                        return item === target ? "83%" : "8.5%";
+                    }
+                });
                 target.classList.add("is-copy-visible");
                 return;
             }
 
             gsap.to(items, {
-                ...sizeProps,
+                flexBasis: function (index, item) {
+                    return item === target ? "83%" : "8.5%";
+                },
                 duration: 0.82,
                 ease: "power3.inOut",
                 overwrite: true,
@@ -475,50 +466,38 @@
 
     function initValueMotions() {
         gsap.utils.toArray(".sub-usa-value").forEach(function (section) {
-            const inner = section.querySelector(".sub-usa-inner");
             const copy = section.querySelector(".sub-usa-value-copy");
             const mask = section.querySelector(".sub-usa-h-mask");
-            if (!inner || !copy || !mask) return;
+            if (!copy || !mask) return;
 
             const fromLeft = mask.classList.contains("sub-usa-h-mask-left");
 
-            gsap.set(mask, {
-                xPercent: fromLeft ? -26 : 26,
-                autoAlpha: 0
-            });
-
+            // 문구는 페이지 진입 시부터 그대로 노출
             gsap.set(copy, {
-                y: 48,
-                autoAlpha: 0
+                y: 0,
+                autoAlpha: 1,
+                clearProps: "visibility"
             });
 
-            const timeline = gsap.timeline({
-                defaults: { ease: "none" },
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top top",
-                    end: "bottom bottom",
-                    scrub: 1,
-                    invalidateOnRefresh: true,
-                    anticipatePin: 1
+            // H는 숨김/등장 없이 현재 위치에서 좌우로만 아주 살짝 이동
+            gsap.fromTo(mask,
+                {
+                    xPercent: fromLeft ? -4 : 4,
+                    autoAlpha: 1
+                },
+                {
+                    xPercent: fromLeft ? 4 : -4,
+                    autoAlpha: 1,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1,
+                        invalidateOnRefresh: true
+                    }
                 }
-            });
-
-            timeline
-                .to({}, { duration: 0.16 })
-                .to(mask, {
-                    xPercent: 0,
-                    autoAlpha: 1,
-                    duration: 0.56,
-                    ease: "power3.out"
-                }, "value-in")
-                .to(copy, {
-                    y: 0,
-                    autoAlpha: 1,
-                    duration: 0.34,
-                    ease: "power2.out"
-                }, "value-in+=0.18")
-                .to({}, { duration: 0.42 });
+            );
         });
     }
 
