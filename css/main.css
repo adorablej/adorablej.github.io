@@ -789,13 +789,13 @@ Section 06 : Media
 .media-section{
     position:relative;
     width:100%;
-    min-height:100vh;
+    min-height:calc(1080 * var(--vw));
     overflow:hidden;
     background:#efefef;
 }
 
 .media-inner{
-    max-width:1400px;
+    max-width:calc(1300 * var(--vw));
     margin:0 auto;
     padding:calc(110 * var(--vw)) 0;
 }

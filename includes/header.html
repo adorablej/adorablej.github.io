@@ -15,19 +15,19 @@
             <!-- Navigation -->
             <nav class="gnb" aria-label="주요 메뉴">
                 <ul class="depth1">
-                    <li><a href="/standard.html" data-root-href="/standard.html">The Standard</a></li>
-                    <li><a href="/products.html" data-root-href="/products.html">Products</a></li>
-                    <li><a href="/oem.html" data-root-href="/oem.html">OEM</a></li>
-                    <li><a href="/support.html" data-root-href="/support.html">Support</a></li>
-                    <li><a href="/media.html" data-root-href="/media.html">Media</a></li>
+                    <li><a href="/Standard/standard.html" data-root-href="/standard.html">The Standard</a></li>
+                    <li><a href="/Products/products.html" data-root-href="/products.html">Products</a></li>
+                    <li><a href="/OEM/OEM.html" data-root-href="/OEM.html">OEM</a></li>
+                    <li><a href="/Support/support.html" data-root-href="/support.html">Support</a></li>
+                    <li><a href="/Media/media.html" data-root-href="/media.html">Media</a></li>
                 </ul>
             </nav>
 
         </div>
 
-        <!-- Right : 로그인 상태 -->
+        <!-- Right : 로그인 상태 
         <div class="header-r is-login">
-            <a href="/mypage.html" class="btn-login">MY</a>
+            <a href="/Mypage/mypage.html" class="btn-login">MY</a>
 
             <button type="button" class="btn-search" aria-label="검색 열기">
                 <i class="ic-search" aria-hidden="true"></i>
@@ -40,11 +40,11 @@
             <button type="button" class="btn-menu" aria-label="전체 메뉴 열기" aria-expanded="false">
                 <i class="ic-menu" aria-hidden="true"></i>
             </button>
-        </div>
+        </div>-->
 
-        <!-- Right : 로그아웃 상태 
+        <!-- Right : 로그아웃 상태 -->
         <div class="header-r is-logout">
-            <a href="/login.html" class="btn-login">LOGIN</a>
+            <a href="/account/login.html" class="btn-login">LOGIN</a>
 
             <button type="button" class="btn-search" aria-label="검색 열기">
                 <i class="ic-search" aria-hidden="true"></i>
@@ -53,10 +53,57 @@
             <button type="button" class="btn-menu" aria-label="전체 메뉴 열기" aria-expanded="false">
                 <i class="ic-menu" aria-hidden="true"></i>
             </button>
-        </div> -->
+        </div> 
 
     </div>
 </header>
+
+
+<!-- ========================================
+Header Search
+======================================== -->
+<div class="header-search" aria-hidden="true">
+    <div class="header-search-panel" role="dialog" aria-modal="true" aria-label="통합 검색">
+        <div class="header-search-inner">
+            <form class="header-search-form" role="search" action="/search.html" method="get">
+                <div class="header-search-field">
+                    <i class="header-search-icon" aria-hidden="true"></i>
+                    <input
+                        type="search"
+                        name="keyword"
+                        class="header-search-input"
+                        placeholder="검색어를 입력하세요."
+                        aria-label="검색어"
+                        autocomplete="off"
+                    >
+                </div>
+            </form>
+
+            <div class="header-search-content">
+                <section class="header-search-recommend" aria-labelledby="header-search-recommend-title">
+                    <h2 id="header-search-recommend-title">추천 검색어</h2>
+                    <ul class="header-search-recommend-list">
+                        <li><a href="/search.html?keyword=HawkEye%20Elite%20Premium">HawkEye Elite Premium</a></li>
+                        <li><a href="/search.html?keyword=RoadForce%20Elite">RoadForce Elite</a></li>
+                        <li><a href="/search.html?keyword=TCRH%20Revolution">TCRH Revolution</a></li>
+                        <li><a href="/search.html?keyword=RX45KIS">RX45KIS</a></li>
+                        <li><a href="/search.html?keyword=WinAlign%20HD">WinAlign HD</a></li>
+                    </ul>
+                </section>
+
+                <section class="header-search-recent is-empty" aria-labelledby="header-search-recent-title">
+                    <div class="header-search-recent-heading">
+                        <h2 id="header-search-recent-title">최근 검색어</h2>
+                        <button type="button" class="header-search-delete-all">전체 삭제</button>
+                    </div>
+                    <div class="header-search-recent-list"></div>
+                    <p class="header-search-recent-empty">최근 검색어가 없습니다.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="header-search-dim" aria-label="검색 닫기"></button>
+</div>
 
 <!-- ========================================
 전체 메뉴
@@ -77,9 +124,11 @@
 
                 <div class="all-menu-depth">
                     <div class="all-menu-depth-inner">
-                        <a href="#">HUNTER USA</a>
-                        <a href="#">HUNTER KOREA</a>
-                        <a href="#">HUNTER Partners</a>
+                        <a href="/Standard/USA.html">HUNTER USA</a>
+                        <a href="/Standard/KOREA.html">HUNTER KOREA</a>
+                        <a href="/Standard/History.html">HUNTER History</a>
+                        <a href="/Standard/Awards.html">HUNTER Awards</a>
+                        <a href="/Standard/Partners.html">HUNTER Partners</a>
                     </div>
                 </div>
             </div>
@@ -93,13 +142,13 @@
 
                 <div class="all-menu-depth">
                     <div class="all-menu-depth-inner">
-                        <a href="/products-list.html">Alignment Systems</a>
-                        <a href="/products-list.html">Wheel Balancers</a>
-                        <a href="/products-list.html">Tire Changers</a>
-                        <a href="/products-list.html">Brake Lathes</a>
-                        <a href="/products-list.html">Alignment Racks</a>
-                        <a href="/products-list.html">Vehicle Inspection</a>
-                        <a href="/products-list.html">Heavy-Duty</a>
+                        <a href="/Products/Alignment-Systems/list.html">Alignment Systems</a>
+                        <a href="/Products/Wheel-Balancers/list.html">Wheel Balancers</a>
+                        <a href="/Products/Tire-Changers/list.html">Tire Changers</a>
+                        <a href="/Products/Brake-Lathes/list.html">Brake Lathes</a>
+                        <a href="/Products/Alignment-Racks/list.html">Alignment Racks</a>
+                        <a href="/Products/Vehicle-Inspection/list.html">Vehicle Inspection</a>
+                        <a href="/Products/Heavy-Duty/list.html">Heavy-Duty</a>
                     </div>
                 </div>
             </div>
@@ -113,8 +162,10 @@
 
                 <div class="all-menu-depth">
                     <div class="all-menu-depth-inner">
-                        <a href="/oem.html">OEM 소메뉴</a>
-                        <a href="/oem.html">OEM 소메뉴</a>
+                        <a href="/OEM/Benz/list.html">Mercedes Benz</a>
+                        <a href="/OEM/BMW/list.html">BMW</a>
+                        <a href="/OEM/Volkswagen-Audi/list.html">Volkswagen ∙ Audi</a>
+                        <a href="/OEM/Jaguar-LandRover/list.html">Jaguar ∙ Land Rover</a>
                     </div>
                 </div>
             </div>
@@ -128,8 +179,9 @@
 
                 <div class="all-menu-depth">
                     <div class="all-menu-depth-inner">
-                        <a href="/support.html">Support 소메뉴</a>
-                        <a href="/support.html">Support 소메뉴</a>
+                        <a href="/Support/Equipment-Operation-Guide.html">Equipment Operation Guide</a>
+                        <a href="/Support/Vehicle-Specification-Request.html">Vehicle Specification Request</a>
+                        <a href="/Support/Training-Registration.html">Training Registration</a>
                     </div>
                 </div>
             </div>
@@ -143,8 +195,9 @@
 
                 <div class="all-menu-depth">
                     <div class="all-menu-depth-inner">
-                        <a href="/media.html">Media 소메뉴</a>
-                        <a href="/media.html">Media 소메뉴</a>
+                        <a href="/Media/media-list.html?type=archive">Archive</a>
+                        <a href="/Media/media-list.html?type=news">News</a>
+                        <a href="/Media/media-list.html?type=promotion">Promotion & Event</a>
                     </div>
                 </div>
             </div>
@@ -154,21 +207,21 @@
         <!-- 회원 영역 -->
         <div class="all-menu-member">
 
-            <!-- 로그인 + 확인하지 않은 알림 있음 -->
+            <!-- 로그인 + 확인하지 않은 알림 있음 
             <div class="all-menu-member-content is-login is-alarm">
                 <p class="all-menu-member-greeting">안녕하세요</p>
                 <strong class="all-menu-member-name">김헌터님</strong>
                 <p class="all-menu-member-message">확인 안하신 알림이 있어요!</p>
-                <a href="/mypage.html" class="all-menu-member-button">지금 확인하기</a>
+                <a href="/Mypage/mypage.html" class="all-menu-member-button">지금 확인하기</a>
             </div>
 
-            <!-- 로그인 + 확인하지 않은 알림 없음 
+            로그인 + 확인하지 않은 알림 없음 
             <div class="all-menu-member-content is-login is-no-alarm">
                 <p class="all-menu-member-greeting">안녕하세요</p>
                 <strong class="all-menu-member-name">김헌터님</strong>
             </div> -->
 
-            <!-- 로그아웃 
+            <!-- 로그아웃 -->
             <div class="all-menu-member-content is-logout">
                 <p class="all-menu-member-login-text">
                     로그인하고 헌터코리아의<br>
@@ -176,8 +229,8 @@
                     이용해 보세요.
                 </p>
 
-                <a href="/login.html" class="all-menu-member-button">로그인하기</a>
-            </div> -->
+                <a href="/account/login.html" class="all-menu-member-button">로그인하기</a>
+            </div> 
 
         </div>
 
@@ -187,7 +240,7 @@
                 <i aria-hidden="true"></i>
             </a>
 
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="블로그" class="all-menu-sns-blog">
+            <a href="https://blog.naver.com/hunter-korea" target="_blank" rel="noopener noreferrer" aria-label="블로그" class="all-menu-sns-blog">
                 <i aria-hidden="true"></i>
             </a>
 
@@ -195,7 +248,7 @@
                 <i aria-hidden="true"></i>
             </a>
 
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="페이스북" class="all-menu-sns-facebook">
+            <a href="https://www.facebook.com/hunterkoreacom" target="_blank" rel="noopener noreferrer" aria-label="페이스북" class="all-menu-sns-facebook">
                 <i aria-hidden="true"></i>
             </a>
         </div>

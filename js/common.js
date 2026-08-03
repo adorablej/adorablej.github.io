@@ -11,7 +11,8 @@
         initHeaderTheme();
         initDragCursor();
         initAllMenu();
-        // initHeaderTransition();
+        initHeaderSearch();
+        initHeaderTransition();
     }
 
     /**
@@ -62,6 +63,13 @@
         const pageScroll = document.querySelector(".page-scroll");
 
         if (!header) return;
+
+        const isMainPage = document.body.classList.contains("main-page");
+
+        if (!isMainPage) {
+            applyHeaderTheme(header, "dark");
+            return;
+        }
 
         const themeSections = [
             ...document.querySelectorAll(
@@ -203,67 +211,79 @@
      * Header를 숨겼다가 다시 표시
      */
     function initHeaderTransition() {
-        const header =
-            document.querySelector(".header");
-
-        const pageScroll =
-            document.querySelector(".page-scroll");
-
-        const sections =
-            document.querySelectorAll(
-                ".main-section"
+        const header = document.querySelector(".header");
+        const pageScroll = document.querySelector(".page-scroll");
+    
+        if (!header) return;
+    
+        const pageScrollStyle = pageScroll
+            ? window.getComputedStyle(pageScroll)
+            : null;
+    
+        const isPageScrollContainer =
+            pageScroll &&
+            (
+                pageScrollStyle.overflowY === "auto" ||
+                pageScrollStyle.overflowY === "scroll"
             );
-
-        if (
-            !header ||
-            !sections.length
-        ) {
-            return;
+    
+        const scrollTarget = isPageScrollContainer
+            ? pageScroll
+            : window;
+    
+        let lastScrollTop = getScrollTop();
+        let scrollStopTimer = null;
+        let ticking = false;
+    
+        function getScrollTop() {
+            return isPageScrollContainer
+                ? pageScroll.scrollTop
+                : window.scrollY;
         }
-
-        let currentSection = null;
-        let timer = null;
-
-        const observer =
-            new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (!entry.isIntersecting) {
-                            return;
-                        }
-
-                        if (
-                            currentSection ===
-                            entry.target
-                        ) {
-                            return;
-                        }
-
-                        currentSection =
-                            entry.target;
-
-                        header.classList.add(
-                            "is-hidden"
-                        );
-
-                        window.clearTimeout(timer);
-
-                        timer =
-                            window.setTimeout(() => {
-                                header.classList.remove(
-                                    "is-hidden"
-                                );
-                            }, 280);
-                    });
-                },
-                {
-                    root: pageScroll || null,
-                    threshold: 0.65
-                }
-            );
-
-        sections.forEach((section) => {
-            observer.observe(section);
+    
+        function updateHeader() {
+            const currentScrollTop = getScrollTop();
+    
+            const isMenuOpen =
+                document.documentElement.classList.contains("is-menu-open");
+    
+            const isSearchOpen =
+                document.documentElement.classList.contains("is-search-open");
+    
+            if (isMenuOpen || isSearchOpen) {
+                header.classList.remove("is-hidden");
+                lastScrollTop = currentScrollTop;
+                ticking = false;
+                return;
+            }
+    
+            if (currentScrollTop <= 10) {
+                header.classList.remove("is-hidden");
+            } else if (currentScrollTop > lastScrollTop) {
+                header.classList.add("is-hidden");
+            } else if (currentScrollTop < lastScrollTop) {
+                header.classList.remove("is-hidden");
+            }
+    
+            lastScrollTop = Math.max(currentScrollTop, 0);
+            ticking = false;
+        }
+    
+        function handleScroll() {
+            if (!ticking) {
+                ticking = true;
+                window.requestAnimationFrame(updateHeader);
+            }
+    
+            window.clearTimeout(scrollStopTimer);
+    
+            scrollStopTimer = window.setTimeout(() => {
+                header.classList.remove("is-hidden");
+            }, 350);
+        }
+    
+        scrollTarget.addEventListener("scroll", handleScroll, {
+            passive: true
         });
     }
 
@@ -601,4 +621,176 @@ function initDragCursor() {
     
         setMemberState();
     }
+
+    /**
+     * Header Search
+     * - 검색 패널 열기 / 닫기
+     * - 최근 검색어 저장 / 삭제
+     * - 검색 결과 페이지 이동
+     */
+    function initHeaderSearch() {
+        const header = document.querySelector(".header");
+        const search = document.querySelector(".header-search");
+        const openButtons = document.querySelectorAll(".btn-search");
+
+        if (!header || !search || !openButtons.length) return;
+
+        const form = search.querySelector(".header-search-form");
+        const input = search.querySelector(".header-search-input");
+        const dim = search.querySelector(".header-search-dim");
+        const recentSection = search.querySelector(".header-search-recent");
+        const recentList = search.querySelector(".header-search-recent-list");
+        const deleteAllButton = search.querySelector(".header-search-delete-all");
+        const storageKey = "hunterRecentSearches";
+        const maxRecentCount = 8;
+        let lastFocusedElement = null;
+
+        function getRecentSearches() {
+            try {
+                const saved = JSON.parse(localStorage.getItem(storageKey));
+                return Array.isArray(saved) ? saved : [];
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function saveRecentSearches(items) {
+            localStorage.setItem(
+                storageKey,
+                JSON.stringify(items.slice(0, maxRecentCount))
+            );
+        }
+
+        function addRecentSearch(keyword) {
+            const value = keyword.trim();
+            if (!value) return;
+
+            const items = getRecentSearches().filter(
+                (item) => item.toLowerCase() !== value.toLowerCase()
+            );
+
+            items.unshift(value);
+            saveRecentSearches(items);
+        }
+
+        function removeRecentSearch(keyword) {
+            const items = getRecentSearches().filter(
+                (item) => item !== keyword
+            );
+
+            saveRecentSearches(items);
+            renderRecentSearches();
+        }
+
+        function renderRecentSearches() {
+            if (!recentList || !recentSection) return;
+
+            const items = getRecentSearches();
+            recentList.innerHTML = "";
+            recentSection.classList.toggle("is-empty", !items.length);
+
+            items.forEach((keyword) => {
+                const item = document.createElement("div");
+                item.className = "header-search-recent-item";
+
+                const link = document.createElement("a");
+                link.className = "header-search-recent-link";
+                link.href = `/search.html?keyword=${encodeURIComponent(keyword)}`;
+                link.textContent = keyword;
+
+                const deleteButton = document.createElement("button");
+                deleteButton.type = "button";
+                deleteButton.className = "header-search-recent-delete";
+                deleteButton.setAttribute("aria-label", `${keyword} 삭제`);
+                deleteButton.addEventListener("click", () => {
+                    removeRecentSearch(keyword);
+                });
+
+                item.append(link, deleteButton);
+                recentList.append(item);
+            });
+        }
+
+        function openSearch() {
+            lastFocusedElement = document.activeElement;
+            search.classList.add("is-open");
+            search.setAttribute("aria-hidden", "false");
+            header.classList.add("is-search-open");
+            document.documentElement.classList.add("is-search-open");
+            document.body.classList.add("is-search-open");
+
+            openButtons.forEach((button) => {
+                button.setAttribute("aria-label", "검색 닫기");
+                button.setAttribute("aria-expanded", "true");
+            });
+
+            renderRecentSearches();
+
+            window.setTimeout(() => {
+                input?.focus();
+            }, 250);
+        }
+
+        function closeSearch() {
+            search.classList.remove("is-open");
+            search.setAttribute("aria-hidden", "true");
+            header.classList.remove("is-search-open");
+            document.documentElement.classList.remove("is-search-open");
+            document.body.classList.remove("is-search-open");
+
+            openButtons.forEach((button) => {
+                button.setAttribute("aria-label", "검색 열기");
+                button.setAttribute("aria-expanded", "false");
+            });
+
+            if (
+                lastFocusedElement &&
+                typeof lastFocusedElement.focus === "function"
+            ) {
+                lastFocusedElement.focus();
+            }
+        }
+
+        openButtons.forEach((button) => {
+            button.setAttribute("aria-expanded", "false");
+            button.addEventListener("click", () => {
+                if (search.classList.contains("is-open")) {
+                    closeSearch();
+                } else {
+                    openSearch();
+                }
+            });
+        });
+
+        form?.addEventListener("submit", (event) => {
+            const keyword = input?.value.trim() || "";
+
+            if (!keyword) {
+                event.preventDefault();
+                input?.focus();
+                return;
+            }
+
+            addRecentSearch(keyword);
+        });
+
+        deleteAllButton?.addEventListener("click", () => {
+            localStorage.removeItem(storageKey);
+            renderRecentSearches();
+        });
+
+        dim?.addEventListener("click", closeSearch);
+
+        window.addEventListener("keydown", (event) => {
+            if (
+                event.key === "Escape" &&
+                search.classList.contains("is-open")
+            ) {
+                closeSearch();
+            }
+        });
+
+        renderRecentSearches();
+    }
+
 })();

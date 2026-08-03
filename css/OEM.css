@@ -1,0 +1,333 @@
+/* ========================================
+oem.html , Global OEMs.
+======================================== */
+
+.oem-section {
+    width: 100%;
+    padding: calc(120 * var(--vw)) 0 calc(160 * var(--vw));
+    background: #fff;
+}
+
+.oem-section .inner {
+    width: calc(1300 * var(--vw));
+    margin: 0 auto;
+}
+
+.oem-section .detail-section-heading {
+    margin-bottom: calc(100 * var(--vw));
+}
+
+.oem-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: calc(95 * var(--vw));
+    row-gap: calc(100 * var(--vw));
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.oem-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: calc(320 * var(--vw));
+    height: calc(320 * var(--vw));
+
+    margin: 0 auto;
+
+    border-radius: 50%;
+    background: #f7f7f7;
+    border: 4px solid #f7f7f7;
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+.oem-item:hover {
+    border: 4px solid var(--red);
+}
+
+.oem-item a{
+    width: 100%;
+    height: 100%;
+}
+
+.oem-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+
+/* ========================================
+OEM-list.html , OEM Products.
+======================================== */
+
+.oem-products {
+    width: 100%;
+    padding-bottom:calc(100 * var(--vw));
+}
+
+.oem-products .inner {
+    width: calc(1300 * var(--vw));
+    margin: 0 auto;
+}
+
+.oem-product-list {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.oem-product-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.oem-product-item.reverse .oem-product-image {
+    order: 2;
+}
+
+.oem-product-item.reverse .oem-product-content {
+    order: 1;
+    padding: 0 calc(80 * var(--vw)) 0 0;
+}
+
+.oem-product-image {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+.oem-product-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.oem-product-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 0 calc(80 * var(--vw));
+}
+
+.oem-product-title {
+    margin-bottom: calc(30 * var(--vw));
+    color: #000;
+    font-family: "Russo One", sans-serif;
+    font-size: calc(40 * var(--vw));
+}
+.oem-product-title sup{
+    font-size: .55em;
+    vertical-align: top;
+}
+.oem-product-desc {
+    color: #222;
+    font-size: calc(18 * var(--vw));
+    line-height: calc(30 * var(--vw));
+}
+.oem-product-desc ul{}
+
+.oem-product-desc ul li{list-style: inside;}
+
+.oem-product-content .sub-button-more{
+    width: fit-content;
+}
+
+/* ========================================
+BMW KDS II Alignment System Detail
+======================================== */
+
+.oem-detail-page .page-heading .inner {
+    width: calc(1300 * var(--vw));
+    margin: 0 auto;
+}
+
+.oem-detail-page .page-title {
+    line-height: 1.08;
+}
+
+.oem-detail-visual {
+    position: relative;
+    width: 100%;
+    height: calc(1080 * var(--vw));
+    overflow: hidden;
+    background: url("/images/OEM/OEM_detail_V_bg.png") center / cover no-repeat;
+}
+
+.oem-detail-visual .inner {
+    width: calc(1300 * var(--vw));
+    height: 100%;
+    margin: 0 auto;
+}
+
+.oem-detail-visual-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+.oem-detail-visual-content {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 calc(580 * var(--vw));
+    padding-top: calc(20 * var(--vw));
+}
+
+.oem-detail-visual-title {
+    margin: 0 0 calc(54 * var(--vw));
+    color: #050505;
+    font-family: "Russo One", sans-serif;
+    font-size: calc(58 * var(--vw));
+    font-weight: 400;
+    line-height: 1.18;
+    letter-spacing: -.035em;
+}
+.oem-detail-visual-title sup {
+    position: relative;
+    top: calc(-20 * var(--vw));
+    font-size: calc(40 * var(--vw));
+}
+.oem-detail-visual-title span {
+    color: var(--red);
+    font-family: inherit;
+}
+
+.oem-detail-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: calc(14 * var(--vw));
+}
+
+.oem-detail-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(12 * var(--vw));
+    min-width: calc(300 * var(--vw));
+    height: calc(58 * var(--vw));
+    padding: 0 calc(28 * var(--vw));
+    border-radius: calc(999 * var(--vw));
+    background: var(--red);
+    color: #fff;
+    font-size: calc(16 * var(--vw));
+    font-weight: 600;
+    line-height: 1;
+    transition: background-color .25s ease, transform .25s ease;
+}
+
+.oem-detail-button:hover {
+    background: #b90800;
+    transform: translateY(calc(-2 * var(--vw)));
+}
+
+.oem-detail-button-icon {
+    display: block;
+    flex: 0 0 auto;
+    width: calc(22 * var(--vw));
+    height: calc(22 * var(--vw));
+}
+
+.oem-detail-icon-note {
+    background: url("/images/icon/icon_note.png") center / contain no-repeat;
+}
+
+.oem-detail-icon-video {
+    background: url("/images/icon/icon_video.png") center / contain no-repeat;
+}
+
+.oem-detail-visual-image {
+    position: absolute;
+    right: calc(-10 * var(--vw));
+    bottom: calc(55 * var(--vw));
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: calc(790 * var(--vw));
+    height: calc(930 * var(--vw));
+}
+
+.oem-detail-visual-image img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.oem-detail-features {
+    padding-top: calc(110 * var(--vw));
+    padding-bottom: calc(110 * var(--vw));
+}
+
+.oem-detail-features .inner {
+    width: calc(1300 * var(--vw));
+    margin: 0 auto;
+}
+
+.oem-detail-features .detail-section-heading {
+    margin-bottom: calc(58 * var(--vw));
+}
+
+.oem-detail-features .detail-features-slider .swiper-slide {
+    width: calc(390 * var(--vw)) !important;
+    flex: 0 0 calc(390 * var(--vw));
+}
+
+.oem-detail-features .detail-features-card {
+    height: calc(510 * var(--vw));
+    border-radius: calc(18 * var(--vw));
+}
+
+.oem-detail-features .detail-features-image {
+    height: calc(205 * var(--vw));
+    background: #eef0f2;
+}
+
+.oem-detail-features .detail-features-content {
+    min-height: calc(305 * var(--vw));
+}
+
+.oem-detail-features .detail-features-content h3 {
+    margin: calc(38 * var(--vw)) calc(34 * var(--vw)) calc(18 * var(--vw));
+    font-size: calc(22 * var(--vw));
+    line-height: 1.35;
+    word-break: keep-all;
+}
+
+.oem-detail-features .detail-features-content h3 sup {
+    font-size: .55em;
+    vertical-align: top;
+}
+
+.oem-detail-features .detail-features-content p {
+    margin: 0 calc(34 * var(--vw));
+    font-size: calc(16 * var(--vw));
+    line-height: calc(27 * var(--vw));
+    word-break: keep-all;
+}
+.oem-detail-features .detail-features-content.txtlist p {
+    text-indent: -9px;
+    padding-left: 9px;
+}
+

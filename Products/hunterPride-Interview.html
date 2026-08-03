@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        헌터페이지
+    </title>
+    <link href="/css/common.css" rel="stylesheet" />
+    <link href="/css/layout.css" rel="stylesheet" />
+    <link href="/css/main.css" rel="stylesheet" />
+    <link href="/css/products.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+</head>
+
+<body>
+    <!-- header -->
+    <div data-include="/includes/header.html"></div>
+    
+    
+
+        <!-- ========================================
+        Main
+        ========================================= -->
+        <main id="main" class="products-page">
+
+            <!-- Page title -->
+            <section class="page-heading">
+                <div class="inner">
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="/" class="breadcrumb-home" aria-label="Home"></a>
+                        </li>
+                        <li>
+                            <a href="/products.html">Products</a>
+                        </li>
+                        <li>
+                            <a href="#">Hunter Pride</a>
+                        </li>
+                        <!-- <li class="current">
+                            depth3
+                        </li> -->
+                    </ul>
+                    <h2 class="page-title">
+                        Hunter Pride
+                    </h2>
+                </div>
+            </section>
+            <!-- products-HunterPride-Interview.html , Interview. -->
+            <section class="sub-pride-interview-page" data-header-theme="dark">
+                <div class="inner">
+                    <div class="sub-pride-interview-head">
+                        <h2 class="sub-section-title">
+                            Hunter Pride<span>.</span>
+                        </h2>
+                        <div class="sub-pride-interview-controls sub-slider-controls">
+                            <button type="button" class="sub-pride-interview-prev sub-slider-button sub-slider-prev" aria-label="이전 인터뷰"></button>
+                            <button type="button" class="sub-pride-interview-next sub-slider-button sub-slider-next" aria-label="다음 인터뷰"></button>
+                        </div>
+                    </div>
+
+                    <div class="sub-pride-featured-slider">
+                        <div class="sub-pride-featured-stage" id="sub-pride-featured-stage"></div>
+                    </div>
+                </div>
+
+                <section class="sub-pride-interview-list-section">
+                    <div class="sub-pride-interview-list-inner">
+                        <h2 class="sub-section-title">
+                            Hunter Pride<span>.</span>
+                        </h2>
+                        <div class="sub-pride-interview-grid" id="sub-pride-interview-grid"></div>
+                        <button type="button" class="sub-pride-more-button"><span>more</span></button>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Hunter Pride Interview : Youtube Modal -->
+            <div class="sub-pride-interview-modal" aria-hidden="true">
+                <button type="button" class="sub-pride-interview-overlay" aria-label="인터뷰 영상 닫기"></button>
+                <div class="sub-pride-interview-modal-box" role="dialog" aria-modal="true" aria-labelledby="subPrideModalTitle">
+                    <button type="button" class="sub-pride-interview-close" aria-label="인터뷰 영상 닫기"></button>
+                    <div class="sub-pride-interview-video">
+                        <iframe title="Hunter Pride interview video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="sub-pride-interview-modal-content">
+                        <h4 id="subPrideModalTitle"></h4>
+                        <p></p>
+                        <time></time>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+
+    <!-- footer -->
+    <div class="footer-section" data-header-theme="dark" data-include="/includes/footer.html"></div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.8/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="/js/include.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/products.js"></script>
+    <script src="/js/interview-data.js"></script>
+    <script src="/js/interview.js"></script>
+</body>
+
+</html>

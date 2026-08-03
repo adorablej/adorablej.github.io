@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>회원가입 | 헌터코리아</title>
+    <link href="/css/common.css" rel="stylesheet" />
+    <link href="/css/layout.css" rel="stylesheet" />
+    <link href="/css/common-form.css" rel="stylesheet" />
+    <link href="/css/account.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&amp;display=swap" rel="stylesheet"/>
+
+</head>
+<body>
+    <div data-include="/includes/header.html"></div>
+
+    <main class="sub-account-page" data-header-theme="dark">
+        <section class="sub-account-section" id="join-form-section" aria-labelledby="join-title">
+            <div class="sub-account-container">
+                <h1 class="sub-account-title kr" id="join-title">회원가입<span>.</span></h1>
+
+                <form class="sub-form sub-account-form sub-account-join-form" id="join-form" data-form novalidate>
+                    <section class="sub-account-group" aria-labelledby="personal-title">
+                        <h2 class="sub-account-group-title" id="personal-title">개인 정보</h2>
+
+                        <div class="sub-form-group sub-account-field">
+                            <label class="sub-account-label sub-account-required" for="join-name">이름</label>
+                            <input class="sub-form-input sub-account-input" id="join-name" name="name" type="text" autocomplete="name" placeholder="이름을 입력해 주세요." data-required data-message="이름을 입력해 주세요." />
+                            <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                        </div>
+
+                        <div class="sub-form-group sub-account-field">
+                            <label class="sub-account-label sub-account-required" for="join-phone">휴대전화번호</label>
+                            <input class="sub-form-input sub-account-input" id="join-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="13" data-phone placeholder="(-) 제외한 숫자만 입력해 주세요." data-required data-message="휴대전화번호를 입력해 주세요." />
+                            <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                        </div>
+
+                        <div class="sub-form-group sub-account-field">
+                            <span class="sub-account-label sub-account-required">본인 인증</span>
+                            <button class="sub-account-line-button" id="phone-auth-button" type="button">휴대폰 본인 인증</button>
+                            <input id="phone-authenticated" type="hidden" value="" data-required data-message="휴대폰 본인 인증을 진행해 주세요." />
+                            <p class="sub-account-helper" id="phone-auth-status" aria-live="polite"></p>
+                            <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                        </div>
+
+                        <div class="sub-form-group sub-account-agreement-box">
+                            <span class="sub-account-label">약관동의</span>
+                            <label class="sub-form-checkbox sub-account-check-all">
+                                <input id="agree-all" type="checkbox" />
+                                <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
+                                <span class="sub-form-checkbox-text">전체 동의하기</span>
+                            </label>
+                            <div class="sub-account-agreement-list">
+                                <label class="sub-form-checkbox">
+                                    <input class="sub-account-agree-item" name="agreeTerms" type="checkbox" data-required data-message="필수 약관에 동의해 주세요." />
+                                    <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
+                                    <span class="sub-form-checkbox-text">(필수) 헌터코리아 회원 이용약관</span>
+                                    <a class="sub-account-view-link" href="#" aria-label="헌터코리아 회원 이용약관 보기">보기</a>
+                                </label>
+                                <label class="sub-form-checkbox">
+                                    <input class="sub-account-agree-item" name="agreePrivacy" type="checkbox" data-required data-message="필수 약관에 동의해 주세요." />
+                                    <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
+                                    <span class="sub-form-checkbox-text">(필수) 개인정보 수집 이용동의</span>
+                                    <a class="sub-account-view-link" href="#" aria-label="개인정보 수집 이용동의 보기">보기</a>
+                                </label>
+                                <label class="sub-form-checkbox">
+                                    <input class="sub-account-agree-item" name="agreeMarketing" type="checkbox" />
+                                    <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
+                                    <span class="sub-form-checkbox-text">(선택) 마케팅 광고 활용을 위한 수신 동의</span>
+                                    <a class="sub-account-view-link" href="#" aria-label="마케팅 광고 활용을 위한 수신 동의 보기">보기</a>
+                                </label>
+                            </div>
+                            <p class="sub-account-agreement-error sub-account-error" id="agreement-error" aria-live="polite"></p>
+                        </div>
+                    </section>
+
+                    <section class="sub-account-group sub-account-business-group" aria-labelledby="business-title">
+                        <h2 class="sub-account-group-title" id="business-title">기업/사업체 정보</h2>
+
+                        <fieldset class="sub-form-group sub-account-fieldset">
+                            <legend class="sub-account-label sub-account-required">사업자 정보</legend>
+                            <div class="sub-account-business-type">
+
+                                <label class="sub-form-checkbox sub-account-business-option">
+                                    <input
+                                        type="radio"
+                                        name="businessType"
+                                        value="corporation"
+                                        checked
+                                    >
+                                    <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
+                                    <span class="sub-account-business-text">법인</span>
+                                </label>
+                            
+                                <label class="sub-form-checkbox sub-account-business-option">
+                                    <input
+                                        type="radio"
+                                        name="businessType"
+                                        value="individual"
+                                    >
+                                    <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
+                                    <span class="sub-account-business-text">개인</span>
+                                </label>
+                            
+                            </div>
+                        </fieldset>
+
+                        <div class="sub-form-group sub-account-field sub-account-business-number-field">
+                            <label class="sub-account-label sub-account-required" for="business-number">사업자등록번호</label>
+                            <input class="sub-form-input sub-account-input" id="business-number" name="businessNumber" type="text" inputmode="numeric" maxlength="10" placeholder="(-) 제외한 숫자만 입력해 주세요." data-required data-message="사업자등록번호를 입력해 주세요." />
+                            <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                        </div>
+
+                        <div class="sub-form-group sub-account-field sub-account-corporation-number-field" id="corporation-number-field">
+                            <label class="sub-account-label sub-account-required" for="corporation-number">법인등록번호</label>
+                            <input class="sub-form-input sub-account-input" id="corporation-number" name="corporationNumber" type="text" inputmode="numeric" maxlength="13" placeholder="(-) 제외한 숫자만 입력해 주세요." data-required data-message="법인등록번호를 입력해 주세요." />
+                            <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                        </div>
+
+                        <div class="sub-form-group sub-account-field sub-account-business-name-field">
+                            <label class="sub-account-label sub-account-required" for="business-name">기업/사업체명</label>
+                            <input class="sub-form-input sub-account-input" id="business-name" name="businessName" type="text" placeholder="기업/사업체명을 입력해 주세요." data-required data-message="기업/사업체명을 입력해 주세요." />
+                            <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                        </div>
+
+                        <div class="sub-form-group sub-account-field sub-account-opening-date-field">
+                            <label class="sub-account-label sub-account-required" for="opening-date">개업년월</label>
+                            <input class="sub-form-input sub-account-input sub-account-date-input" id="opening-date" name="openingDate" type="date" data-required data-message="일자를 선택해주세요." />
+                            <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                        </div>
+
+                        <div class="sub-form-group sub-account-field sub-account-representative-field">
+                            <label class="sub-account-label sub-account-required" for="representative-name">대표자명</label>
+                            <input class="sub-form-input sub-account-input" id="representative-name" name="representativeName" type="text" placeholder="대표자명을 입력해 주세요." data-required data-message="대표자명을 입력해 주세요." />
+                            <button class="sub-account-line-button sub-account-line-button-under" id="business-auth-button" type="button">사업자 인증</button>
+                            <input id="business-authenticated" type="hidden" value="" data-required data-message="사업자 인증을 진행해 주세요." />
+                            <p class="sub-account-helper" id="business-auth-status" aria-live="polite"></p>
+                            <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                        </div>
+
+
+                        <div class="sub-form-group sub-account-field sub-account-address-field">
+                            <div class="sub-account-label-row">
+                                <label class="sub-account-label sub-account-required" for="business-address">사업장 주소</label>
+                                <button class="sub-account-text-button" id="address-search-button" type="button">우편번호</button>
+                            </div>
+                            <input class="sub-form-input sub-account-input" id="business-address" name="businessAddress" type="text" placeholder="" readonly data-required data-message="" />
+                            <input class="sub-form-input sub-account-input sub-account-input-gap" id="business-address-detail" name="businessAddressDetail" type="text" placeholder="상세 주소를 입력해 주세요." data-required data-message="상세 주소를 입력해 주세요." />
+                            <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                        </div>
+
+                        <div class="sub-form-group sub-account-field sub-account-file-field">
+                            <div class="sub-account-label-row">
+                                <span class="sub-account-label sub-account-required">사업자등록증 첨부</span>
+                                <a class="sub-account-text-button" href="#" id="file-example-link">찾아보기</a>
+                            </div>
+                            <label class="sub-account-file" for="business-file">
+                                <span id="business-file-name">파일을 첨부해주세요.</span>
+                            </label>
+                            <input class="sub-account-file-input" id="business-file" name="businessFile" type="file" accept=".jpg,.jpeg,.png,.pdf" data-required data-message="파일을 첨부해주세요." />
+                            <ul class="sub-account-file-guide" id="business-file-guide">
+                                <li>10MB 이하의 이미지파일(JPG, PNG), PDF 파일 1개만 첨부할 수 있습니다.</li>
+                                <li>사업자등록번호와 사업자등록증 내용이 일치해야 회원가입 신청이 가능합니다.</li>
+                                <li>사업자등록증, 사업자등록증명원으로 가입이 가능합니다. 고유번호증은 불가합니다.</li>
+                            </ul>
+                            <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                        </div>
+                    </section>
+
+                    <div class="sub-account-submit-wrap">
+                        <button class="sub-form-submit" type="submit">회원 가입 신청</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <div data-include="/includes/footer.html"></div>
+
+    <script src="/js/include.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/form.js"></script>
+    <script src="/js/account.js"></script>
+</body>
+</html>

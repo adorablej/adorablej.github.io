@@ -1,21 +1,11 @@
 document.addEventListener("DOMContentLoaded", async () => {
-
-    const root =
-        window.location.pathname.includes("/pages/")
-            ? "../"
-            : "./";
-
-    const targets = [
-        ...document.querySelectorAll("[data-include]")
-    ];
+    const targets = document.querySelectorAll("[data-include]");
 
     await Promise.all(
-        targets.map(async (target) => {
-
-            const path = root + target.dataset.include.replace(/^(\.\/|\.\.\/)+/, "");
+        [...targets].map(async target => {
+            const path = target.dataset.include;
 
             try {
-
                 const response = await fetch(path);
 
                 if (!response.ok) {
@@ -23,16 +13,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
                 target.innerHTML = await response.text();
-
             } catch (error) {
                 console.error(error);
             }
-
         })
     );
 
-    window.dispatchEvent(
-        new CustomEvent("includeLoaded")
-    );
-
+    window.dispatchEvent(new CustomEvent("includeLoaded"));
 });
