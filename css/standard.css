@@ -205,11 +205,11 @@
 
 .sub-standard-h-red {
     position: absolute;
-    left: 21.6%;
-    bottom: calc(var(--standard-vw) * -21 / 1920);
-    width: 56.8%;
-    height: calc(var(--standard-vw) * 12 / 1920);
-    background: #d20c05;
+    left: -2%;
+    bottom: calc(var(--standard-vw) * -60 / 1920);
+    width: calc(var(--standard-vw) * 409 / 1920);
+    height: calc(var(--standard-vw) * 35 / 1920);
+    background: var(--red);
     transform: skewX(-14deg);
     transform-origin: center;
 }
