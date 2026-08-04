@@ -1223,3 +1223,105 @@
     font-size: calc(var(--standard-detail-vw) * 16 / 1920);
     line-height: 1.45;
 }
+/* =========================================================
+   HUNTER PARTNERS
+========================================================= */
+.sub-partners-page {
+    background: #fff;
+}
+
+.sub-partners-inner {
+    width: calc(var(--standard-detail-vw) * 1300 / 1920);
+    margin: 0 auto;
+}
+
+.sub-partners-intro {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(var(--standard-detail-vw) * 760 / 1920);
+    min-height: 680px;
+    overflow: hidden;
+    background: url('/images/standard/partners_intro.png') center / cover no-repeat;
+}
+
+.sub-partners-intro-dim {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .56);
+}
+
+.sub-partners-intro-content {
+    position: relative;
+    z-index: 1;
+    width: calc(var(--standard-detail-vw) * 1100 / 1920);
+    text-align: center;
+}
+
+.sub-partners-intro-content h2 {
+    margin: 0;
+    color: #fff;
+    font-family: "Russo One", sans-serif;
+    font-size: calc(var(--standard-detail-vw) * 42 / 1920);
+    font-weight: 400;
+    line-height: 1.55;
+    letter-spacing: -.025em;
+}
+
+.sub-partners-intro-content h2 span,
+.sub-partners-group-title span {
+    color: var(--red);
+}
+
+.sub-partners-directory {
+    padding: calc(var(--standard-detail-vw) * 120 / 1920) 0 calc(var(--standard-detail-vw) * 160 / 1920);
+    background: #fff;
+}
+
+.sub-partners-group + .sub-partners-group {
+    margin-top: calc(var(--standard-detail-vw) * 180 / 1920);
+}
+
+.sub-partners-group-title {
+    margin: 0 0 calc(var(--standard-detail-vw) * 64 / 1920);
+    color: #111;
+    font-family: "Russo One", sans-serif;
+    font-size: calc(var(--standard-detail-vw) * 40 / 1920);
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* Wheel Alignment Specification의 4열 원형 브랜드 카드 구조 재사용 */
+.sub-partners-brand-grid {
+    row-gap: calc(var(--standard-detail-vw) * 62 / 1920);
+    column-gap: calc(var(--standard-detail-vw) * 60 / 1920);
+}
+
+.sub-partners-brand-card {
+    cursor: default;
+}
+
+.sub-partners-brand-logo {
+    border-width: 1px;
+    background: #fafafa;
+}
+
+.sub-partners-brand-logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sub-partners-brand-card:hover .sub-partners-brand-logo {
+    border-color: #e5e5e5;
+}
+
+
+.sub-partners-brand-card .sub-specification-brand-name {
+    color: #777;
+    font-size: calc(var(--standard-detail-vw) * 16 / 1920);
+}
