@@ -394,30 +394,39 @@
 
 
     function initKoreaVision() {
-        const panels = Array.from(document.querySelectorAll(".sub-korea-vision-panel"));
-        if (!panels.length) return;
-
         const section = document.querySelector(".sub-korea-vision");
-
-        function activate(target) {
-            if (section) section.classList.add("has-active");
+        const panels = Array.from(
+            document.querySelectorAll(".sub-korea-vision-panel")
+        );
+    
+        if (!section || !panels.length) return;
+    
+        function resetPanels() {
+            panels.forEach(function (panel) {
+                panel.classList.remove("is-active", "is-inactive");
+            });
+        }
+    
+        function activatePanel(target) {
             panels.forEach(function (panel) {
                 panel.classList.toggle("is-active", panel === target);
+                panel.classList.toggle("is-inactive", panel !== target);
             });
         }
-
+    
         panels.forEach(function (panel) {
-            panel.addEventListener("mouseenter", function () { activate(panel); });
-            panel.addEventListener("focus", function () { activate(panel); });
-            panel.addEventListener("click", function () { activate(panel); });
-        });
-
-        if (section) {
-            section.addEventListener("mouseleave", function () {
-                section.classList.remove("has-active");
-                panels.forEach(function (panel) { panel.classList.remove("is-active"); });
+            panel.addEventListener("mouseenter", function () {
+                activatePanel(panel);
             });
-        }
+    
+            panel.addEventListener("focus", function () {
+                activatePanel(panel);
+            });
+        });
+    
+        section.addEventListener("mouseleave", resetPanels);
+    
+        resetPanels();
     }
 
     function initTrustAccordion() {

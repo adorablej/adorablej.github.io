@@ -784,62 +784,76 @@
     background: #111;
 }
 
-.sub-korea-vision-bg,
-.sub-korea-vision-dim {
-    position: absolute;
-    inset: 0;
-}
-
-.sub-korea-vision-bg {
-    background: url('/images/standard/korea_sec3.png') center / cover no-repeat;
-    transform: scale(1.02);
-}
-
-.sub-korea-vision-dim {
-    z-index: 1;
-    background: rgba(0, 0, 0, .56);
-}
-
 .sub-korea-vision-panel {
     position: relative;
-    z-index: 2;
     flex: 0 0 50%;
-    min-width: 0;
+    width: 50%;
     height: 100%;
+    min-width: 0;
+    overflow: hidden;
     cursor: pointer;
-    outline: none;
-    transition: flex-basis .85s cubic-bezier(.22, 1, .36, 1);
+    transition:
+        flex-basis .85s cubic-bezier(.22, 1, .36, 1),
+        width .85s cubic-bezier(.22, 1, .36, 1);
 }
 
-.sub-korea-vision-panel::after {
-    content: '';
+.sub-korea-vision-panel.is-active {
+    flex-basis: 70%;
+    width: 70%;
+}
+
+.sub-korea-vision-panel.is-inactive {
+    flex-basis: 30%;
+    width: 30%;
+}
+
+.sub-korea-vision-media {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, .12);
-    transition: background .55s ease;
+    overflow: hidden;
 }
 
+.sub-korea-vision-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.01);
+    transition: transform .85s cubic-bezier(.22, 1, .36, 1);
+}
 
-.sub-korea-vision-panel.is-active::after {
-    background: rgba(0, 0, 0, 0);
+.sub-korea-vision-panel-vision .sub-korea-vision-media img {
+    object-position: center center;
+}
+
+.sub-korea-vision-panel-mission .sub-korea-vision-media img {
+    object-position: center center;
+}
+
+.sub-korea-vision-panel.is-active .sub-korea-vision-media img {
+    transform: scale(1.04);
+}
+
+.sub-korea-vision-dim {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .55);
+    transition: background .5s ease;
+}
+
+.sub-korea-vision-panel.is-active .sub-korea-vision-dim {
+    background: rgba(0, 0, 0, .42);
 }
 
 .sub-korea-vision-content {
     position: absolute;
     z-index: 2;
     top: 50%;
-    width: calc(var(--standard-detail-vw) * 740 / 1920);
-    transform: translateY(-50%);
+    left: 50%;
+    width: calc(var(--standard-detail-vw) * 700 / 1920);
     color: #fff;
-}
-
-.sub-korea-vision-panel-vision .sub-korea-vision-content {
-    left: calc(var(--standard-detail-vw) * 105 / 1920);
-}
-
-.sub-korea-vision-panel-mission .sub-korea-vision-content {
-    right: calc(var(--standard-detail-vw) * 105 / 1920);
     text-align: center;
+    transform: translate(-50%, -50%);
 }
 
 .sub-korea-vision-content h2 {
@@ -868,32 +882,85 @@
     overflow: hidden;
     color: rgba(255, 255, 255, .72);
     font-size: calc(var(--standard-detail-vw) * 15 / 1920);
-    line-height: 1.75;
+    line-height: 1.8;
     opacity: 0;
     transform: translateY(calc(var(--standard-detail-vw) * 20 / 1920));
-    transition: max-height .65s ease, margin .65s ease, opacity .35s ease, transform .65s cubic-bezier(.22, 1, .36, 1);
+    transition:
+        max-height .65s ease,
+        margin .65s ease,
+        opacity .35s ease,
+        transform .65s cubic-bezier(.22, 1, .36, 1);
 }
 
 .sub-korea-vision-panel.is-active .sub-korea-vision-content p {
-    max-height: calc(var(--standard-detail-vw) * 210 / 1920);
-    margin-top: calc(var(--standard-detail-vw) * 42 / 1920);
+    max-height: calc(var(--standard-detail-vw) * 220 / 1920);
+    margin-top: calc(var(--standard-detail-vw) * 38 / 1920);
     opacity: 1;
     transform: translateY(0);
 }
 
-.sub-korea-vision-panel-vision .sub-korea-vision-content p {
-    display: none;
+.sub-korea-vision-content {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    width: calc(var(--standard-detail-vw) * 760 / 1920);
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    transition: left .9s cubic-bezier(.22, 1, .36, 1), width .9s cubic-bezier(.22, 1, .36, 1);
+}
+
+.sub-korea-vision-content h2 {
+    margin: 0;
+    font-size: calc(var(--standard-detail-vw) * 54 / 1920);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -.055em;
+    word-break: keep-all;
+}
+
+.sub-korea-vision-content h2 small {
+    display: block;
+    margin-bottom: calc(var(--standard-detail-vw) * 8 / 1920);
+    font-size: calc(var(--standard-detail-vw) * 34 / 1920);
+    line-height: 1;
+}
+
+.sub-korea-vision-content h2 span {
+    color: var(--red);
+}
+
+.sub-korea-vision-content p {
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
+    color: rgba(255, 255, 255, .74);
+    font-size: calc(var(--standard-detail-vw) * 15 / 1920);
+    line-height: 1.75;
+    opacity: 0;
+    transform: translateY(calc(var(--standard-detail-vw) * 22 / 1920));
+    transition: max-height .7s ease, margin .7s ease, opacity .32s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+}
+
+.sub-korea-vision-panel.is-active .sub-korea-vision-content p {
+    max-height: calc(var(--standard-detail-vw) * 220 / 1920);
+    margin-top: calc(var(--standard-detail-vw) * 38 / 1920);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* =========================================================
    HUNTER KOREA - 03~06
 ========================================================= */
 .sub-korea-vision.has-active .sub-korea-vision-panel.is-active {
-    flex-basis: 68%;
+    flex-basis: 70%;
+    width: 70%;
 }
 
 .sub-korea-vision.has-active .sub-korea-vision-panel:not(.is-active) {
-    flex-basis: 32%;
+    flex-basis: 30%;
+    width: 30%;
 }
 
 .sub-korea-section-inner {
@@ -907,7 +974,7 @@
 
 .sub-korea-section-heading h2 {
     margin: 0;
-    color: #111;
+    color: #000;
     font-family: "Russo One", sans-serif;
     font-size: calc(var(--standard-detail-vw) * 52 / 1920);
     font-weight: 400;
@@ -1013,7 +1080,7 @@
     position: relative;
     height: calc(var(--standard-detail-vw) * 760 / 1920);
     min-height: 680px;
-    background: url('/images/standard/korea_sec5.png') center / cover no-repeat;
+    background: url('/images/standard/korea_Service_bg.png') center / cover no-repeat;
     color: #fff;
 }
 
@@ -1123,7 +1190,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: #d62d25;
+    background: #c00d00d3;
     color: #fff;
     text-align: center;
     box-sizing: border-box;
