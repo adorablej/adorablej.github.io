@@ -715,11 +715,6 @@
     padding: calc(var(--standard-vw) * 10 / 1920) 0 calc(var(--standard-vw) * 160 / 1920);
 }
 
-.sub-awards-excellence .detail-section-heading {
-    width: 100%;
-    margin-bottom: calc(var(--standard-vw) * 80 / 1920);
-}
-
 .sub-awards-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1281,7 +1276,7 @@
 }
 
 .sub-partners-group + .sub-partners-group {
-    margin-top: calc(var(--standard-detail-vw) * 180 / 1920);
+    margin-top: calc(var(--standard-detail-vw) * 250 / 1920);
 }
 
 .sub-partners-group-title {
@@ -1296,7 +1291,7 @@
 
 /* Wheel Alignment Specification의 4열 원형 브랜드 카드 구조 재사용 */
 .sub-partners-brand-grid {
-    row-gap: calc(var(--standard-detail-vw) * 62 / 1920);
+    row-gap: calc(var(--standard-detail-vw) * 100 / 1920);
     column-gap: calc(var(--standard-detail-vw) * 60 / 1920);
 }
 
@@ -1322,6 +1317,6 @@
 
 
 .sub-partners-brand-card .sub-specification-brand-name {
-    color: #777;
-    font-size: calc(var(--standard-detail-vw) * 16 / 1920);
+    color: #000;
+    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
 }

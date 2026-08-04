@@ -140,3 +140,480 @@
     .sub-mypage-nav-group { grid-column: span 1; }
     .sub-mypage-product-slider-wrap { padding: 0 50px; }
 }
+
+
+/* ========================================
+   My Page - Account
+======================================== */
+.sub-mypage-account-title {
+    margin: 0 0 calc(72 * var(--vw));
+    color: #111;
+    font-size: calc(38 * var(--vw));
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -.04em;
+}
+
+.sub-mypage-account-section + .sub-mypage-account-section {
+    margin-top: calc(74 * var(--vw));
+}
+
+.sub-mypage-account-heading {
+    margin: 0;
+    padding-bottom: calc(18 * var(--vw));
+    border-bottom: 1px solid #222;
+    color: #111;
+    font-size: calc(24 * var(--vw));
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -.03em;
+}
+
+.sub-mypage-account-list {
+    padding: calc(18 * var(--vw)) 0 calc(20 * var(--vw));
+    border-bottom: 1px solid #ddd;
+}
+
+.sub-mypage-account-row {
+    display: grid;
+    grid-template-columns: calc(240 * var(--vw)) minmax(0, 1fr);
+    align-items: center;
+    min-height: calc(58 * var(--vw));
+    box-sizing: border-box;
+}
+
+.sub-mypage-account-row dt,
+.sub-mypage-account-row dd {
+    margin: 0;
+    color: #222;
+    font-size: calc(15 * var(--vw));
+    line-height: 1.5;
+}
+
+.sub-mypage-account-row dt {
+    font-weight: 600;
+}
+
+.sub-mypage-business-type {
+    display: flex;
+    align-items: center;
+    gap: calc(68 * var(--vw));
+}
+
+.sub-mypage-business-option {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(10 * var(--vw));
+    color: #777;
+}
+
+.sub-mypage-business-option i {
+    position: relative;
+    display: block;
+    flex: 0 0 auto;
+    width: calc(24 * var(--vw));
+    height: calc(24 * var(--vw));
+    border-radius: 50%;
+    background: #ddd;
+}
+
+.sub-mypage-business-option i::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(8 * var(--vw));
+    height: calc(5 * var(--vw));
+    border-left: calc(2 * var(--vw)) solid #fff;
+    border-bottom: calc(2 * var(--vw)) solid #fff;
+    transform: translate(-50%, -60%) rotate(-45deg);
+}
+
+.sub-mypage-business-option.is-selected {
+    color: #222;
+}
+
+.sub-mypage-business-option.is-selected i {
+    background: var(--red);
+}
+
+.sub-mypage-account-file {
+    color: #6a9ed8;
+    text-decoration: underline;
+    text-underline-offset: calc(3 * var(--vw));
+}
+
+.sub-mypage-account-withdraw {
+    margin-top: calc(72 * var(--vw));
+}
+
+.sub-mypage-account-withdraw a {
+    color: #bbb;
+    font-size: calc(14 * var(--vw));
+    text-decoration: underline;
+    text-underline-offset: calc(3 * var(--vw));
+}
+
+/* ========================================
+   Common Modal
+======================================== */
+.sub-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(40 * var(--vw));
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease, visibility .25s ease;
+    box-sizing: border-box;
+}
+
+.sub-modal.is-open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sub-modal-dim {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: rgba(0, 0, 0, .58);
+    cursor: pointer;
+}
+
+.sub-modal-dialog {
+    position: relative;
+    z-index: 1;
+    width: calc(920 * var(--vw));
+    max-width: calc(100% - 40px);
+    background: #fff;
+}
+
+.sub-modal-content {
+    padding: calc(58 * var(--vw)) calc(60 * var(--vw)) calc(50 * var(--vw));
+}
+
+.sub-modal-title {
+    margin: 0;
+    color: #111;
+    font-size: calc(38 * var(--vw));
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -.04em;
+}
+
+.sub-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(14 * var(--vw));
+    margin-top: calc(34 * var(--vw));
+}
+
+.sub-modal-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: calc(190 * var(--vw));
+    height: calc(58 * var(--vw));
+    padding: 0 calc(30 * var(--vw));
+    border: 1px solid #ddd;
+    border-radius: calc(999 * var(--vw));
+    background: #fff;
+    color: #111;
+    font-family: inherit;
+    font-size: calc(16 * var(--vw));
+    font-weight: 600;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.sub-modal-button-primary {
+    border-color: var(--red);
+    background: var(--red);
+    color: #fff;
+}
+
+.sub-modal-button-primary:disabled {
+    border-color: #ddd;
+    background: #ddd;
+    color: #999;
+    cursor: not-allowed;
+}
+
+html.is-modal-open,
+body.is-modal-open {
+    overflow: hidden;
+}
+
+/* ========================================
+   Account - Withdraw Modal
+======================================== */
+.sub-mypage-account-withdraw-button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #bbb;
+    font-family: inherit;
+    font-size: calc(14 * var(--vw));
+    text-decoration: underline;
+    text-underline-offset: calc(3 * var(--vw));
+    cursor: pointer;
+}
+
+.sub-mypage-withdraw-intro {
+    margin-top: calc(50 * var(--vw));
+}
+
+.sub-mypage-withdraw-intro strong {
+    display: block;
+    color: #111;
+    font-size: calc(18 * var(--vw));
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.sub-mypage-withdraw-intro p {
+    margin: calc(18 * var(--vw)) 0 0;
+    color: #777;
+    font-size: calc(15 * var(--vw));
+    line-height: 1.55;
+}
+
+.sub-mypage-withdraw-notice {
+    margin-top: calc(34 * var(--vw));
+    padding: calc(26 * var(--vw)) calc(30 * var(--vw));
+    border-radius: calc(18 * var(--vw));
+    background: #fff1f1;
+    color: var(--red);
+    font-size: calc(15 * var(--vw));
+    font-weight: 600;
+    line-height: 1.55;
+}
+
+.sub-mypage-withdraw-agree {
+    margin-top: calc(34 * var(--vw));
+    padding-top: calc(30 * var(--vw));
+    border-top: 1px solid #eee;
+}
+
+.sub-mypage-withdraw-agree .sub-form-checkbox {
+    align-items: flex-start;
+}
+
+.sub-mypage-withdraw-agree .sub-form-checkbox-text {
+    color: #777;
+    font-size: calc(14 * var(--vw));
+    line-height: 1.55;
+}
+.sub-mypage-business-type {
+    display: flex;
+    align-items: center;
+    gap: calc(55 * var(--vw));
+}
+
+.sub-mypage-business-type .sub-form-checkbox {
+    cursor: default;
+}
+
+.sub-mypage-business-type .sub-form-checkbox-icon {
+    width: calc(20 * var(--vw));
+    height: calc(20 * var(--vw));
+}
+
+.sub-mypage-business-type .sub-form-checkbox-text {
+    color: #222;
+    font-size: calc(15 * var(--vw));
+    line-height: 1;
+}
+.sub-mypage-business-type .sub-form-checkbox input:disabled
++ .sub-form-checkbox-icon {
+    opacity: 1;
+}
+
+.sub-mypage-business-type .sub-form-checkbox input:disabled
+~ .sub-form-checkbox-text {
+    color: #222;
+}
+
+/* ========================================
+   My Page - CS Request
+======================================== */
+.sub-mypage-cs-title {
+    margin: 0 0 calc(72 * var(--vw));
+    color: #111;
+    font-size: calc(38 * var(--vw));
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -.04em;
+}
+
+.sub-mypage-cs-form {
+    gap: 0;
+}
+
+.sub-mypage-cs-section + .sub-mypage-cs-section {
+    margin-top: calc(82 * var(--vw));
+}
+
+.sub-mypage-cs-heading {
+    margin: 0 0 calc(26 * var(--vw));
+    padding-bottom: calc(18 * var(--vw));
+    border-bottom: 1px solid #222;
+    color: #111;
+    font-size: calc(22 * var(--vw));
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.sub-mypage-cs-fields {
+    display: flex;
+    flex-direction: column;
+    gap: calc(28 * var(--vw));
+}
+
+.sub-mypage-cs .sub-form-label {
+    font-size: calc(16 * var(--vw));
+}
+
+.sub-mypage-cs .sub-form-input,
+.sub-mypage-cs .sub-form-select-trigger {
+    height: calc(72 * var(--vw));
+    font-size: calc(15 * var(--vw));
+}
+
+.sub-mypage-cs .sub-form-input:disabled {
+    background: #f4f4f4;
+    color: #999;
+    opacity: 1;
+}
+
+.sub-mypage-cs .sub-form-email {
+    grid-template-columns: minmax(0, 1fr) calc(22 * var(--vw)) minmax(0, 1fr) calc(290 * var(--vw));
+    gap: calc(14 * var(--vw));
+}
+
+.sub-mypage-cs .sub-form-email-at {
+    font-size: calc(18 * var(--vw));
+}
+
+.sub-mypage-cs-category {
+    width: calc(320 * var(--vw));
+}
+
+.sub-mypage-cs .sub-form-textarea {
+    height: calc(300 * var(--vw));
+    font-size: calc(15 * var(--vw));
+    line-height: 1.6;
+}
+
+.sub-mypage-cs .sub-form-text-count {
+    bottom: calc(16 * var(--vw));
+    right: calc(18 * var(--vw));
+    font-size: calc(13 * var(--vw));
+}
+
+.sub-mypage-cs-privacy {
+    margin-top: calc(70 * var(--vw));
+    padding: calc(34 * var(--vw));
+    background: #fafafa;
+}
+
+.sub-mypage-cs-agree {
+    padding-bottom: calc(28 * var(--vw));
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.sub-mypage-cs-agree .sub-form-checkbox-text {
+    color: #333;
+    font-size: calc(15 * var(--vw));
+    font-weight: 600;
+}
+
+.sub-mypage-cs-agree .sub-form-checkbox-text strong {
+    color: var(--red);
+    font-weight: 600;
+}
+
+.sub-mypage-cs-privacy-content {
+    padding-top: calc(28 * var(--vw));
+}
+
+.sub-mypage-cs-privacy-content h5 {
+    color: #222;
+    font-size: calc(16 * var(--vw));
+    font-weight: 700;
+}
+
+.sub-mypage-cs-privacy-content > p {
+    margin-top: calc(14 * var(--vw));
+    color: #666;
+    font-size: calc(13 * var(--vw));
+    line-height: 1.55;
+}
+
+.sub-mypage-cs-privacy-content table {
+    width: 100%;
+    margin-top: calc(22 * var(--vw));
+    table-layout: fixed;
+}
+
+.sub-mypage-cs-privacy-content th,
+.sub-mypage-cs-privacy-content td {
+    height: calc(56 * var(--vw));
+    padding: calc(10 * var(--vw));
+    border: 1px solid #e2e2e2;
+    color: #666;
+    font-size: calc(12 * var(--vw));
+    line-height: 1.45;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.sub-mypage-cs-privacy-content th {
+    background: #fff;
+    color: #555;
+    font-weight: 600;
+}
+
+.sub-mypage-cs-privacy-content ul {
+    margin-top: calc(22 * var(--vw));
+}
+
+.sub-mypage-cs-privacy-content li {
+    position: relative;
+    padding-left: calc(13 * var(--vw));
+    color: #777;
+    font-size: calc(12 * var(--vw));
+    line-height: 1.65;
+}
+
+.sub-mypage-cs-privacy-content li::before {
+    position: absolute;
+    left: 0;
+    content: "-";
+}
+
+.sub-mypage-cs-privacy-content a {
+    color: #5f91c8;
+    text-decoration: underline;
+}
+
+.sub-mypage-cs-submit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: calc(52 * var(--vw));
+}
+
+.sub-mypage-cs-submit .sub-form-submit {
+    min-width: calc(150 * var(--vw));
+    height: calc(54 * var(--vw));
+    font-size: calc(15 * var(--vw));
+}

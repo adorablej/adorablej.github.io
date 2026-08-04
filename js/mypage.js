@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initMypageAccordion();
     initMypageProductSlider();
     initMypageOrderToggle();
+    initMypageWithdrawModal();
 });
 
 function initMypageAccordion() {
@@ -70,5 +71,57 @@ function initMypageOrderToggle() {
             button.setAttribute("aria-expanded", String(!collapsed));
             text.textContent = collapsed ? "총 3건 주문 펼치기" : "총 3건 주문 접기";
         });
+    });
+}
+
+
+function initMypageWithdrawModal() {
+    const modal = document.querySelector("[data-withdraw-modal]");
+    const openButton = document.querySelector("[data-withdraw-open]");
+
+    if (!modal || !openButton) return;
+
+    const closeButtons = modal.querySelectorAll("[data-withdraw-close]");
+    const agree = modal.querySelector("[data-withdraw-agree]");
+    const submit = modal.querySelector("[data-withdraw-submit]");
+    let lastFocusedElement = null;
+
+    const openModal = () => {
+        lastFocusedElement = document.activeElement;
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.documentElement.classList.add("is-modal-open");
+        document.body.classList.add("is-modal-open");
+        agree?.focus();
+    };
+
+    const closeModal = () => {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.documentElement.classList.remove("is-modal-open");
+        document.body.classList.remove("is-modal-open");
+
+        if (agree) agree.checked = false;
+        if (submit) submit.disabled = true;
+
+        lastFocusedElement?.focus?.();
+    };
+
+    openButton.addEventListener("click", openModal);
+    closeButtons.forEach(button => button.addEventListener("click", closeModal));
+
+    agree?.addEventListener("change", () => {
+        if (submit) submit.disabled = !agree.checked;
+    });
+
+    submit?.addEventListener("click", () => {
+        if (!agree?.checked) return;
+        // API 연동 시 회원탈퇴 요청 로직 연결
+    });
+
+    window.addEventListener("keydown", event => {
+        if (event.key === "Escape" && modal.classList.contains("is-open")) {
+            closeModal();
+        }
     });
 }

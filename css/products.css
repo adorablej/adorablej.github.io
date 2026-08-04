@@ -344,11 +344,10 @@ Sub Pride Interview
     padding: calc(120 * var(--vw)) 0;
     overflow: hidden;
     background: #f5f6fa;
-    display: flex;
-    justify-content: center;
 }
 .sub-pride-interview .inner{
     width: calc(1300 * var(--vw));
+    margin: auto;
 }
 
 .sub-pride-heading {
