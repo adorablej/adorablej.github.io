@@ -238,16 +238,17 @@
    HUNTER USA 
 ========================================================= */
 :root {
-    --usa-vw: min(100vw, 1920px);
+    --standard-detail-vw: min(100vw, 1920px);
+    --usa-vw: var(--standard-detail-vw);
 }
 
-.sub-usa-scroll {
+.sub-standard-detail-scroll {
     overflow: clip;
     scroll-snap-type: none;
     overscroll-behavior-y: none;
 }
 
-.sub-usa-page {
+.sub-standard-detail-page {
     overflow: visible;
     background: #fff;
     color: #111;
@@ -260,13 +261,13 @@
 }
 
 /* 01~02. Hero zoom */
-.sub-usa-hero {
+.sub-standard-detail-hero {
     position: relative;
     height: 430vh;
     background: #fff;
 }
 
-.sub-usa-hero-sticky {
+.sub-standard-detail-hero-sticky {
     position: sticky;
     top: 0;
     width: 100%;
@@ -276,7 +277,7 @@
     background: #fff;
 }
 
-.sub-usa-hero-media {
+.sub-standard-detail-hero-media {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -287,8 +288,8 @@
     will-change: width, height;
 }
 
-.sub-usa-hero-preview,
-.sub-usa-hero-video {
+.sub-standard-detail-hero-preview,
+.sub-standard-detail-hero-video {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -298,17 +299,17 @@
     will-change: transform, opacity;
 }
 
-.sub-usa-hero-preview {
+.sub-standard-detail-hero-preview {
     z-index: 1;
     opacity: 1;
 }
 
-.sub-usa-hero-video {
+.sub-standard-detail-hero-video {
     z-index: 2;
     opacity: 0;
 }
 
-.sub-usa-hero-dim {
+.sub-standard-detail-hero-dim {
     position: absolute;
     z-index: 3;
     inset: 0;
@@ -316,7 +317,7 @@
     opacity: 0;
 }
 
-.sub-usa-hero-copy {
+.sub-standard-detail-hero-copy {
     position: absolute;
     z-index: 4;
     left: 50%;
@@ -329,7 +330,7 @@
     visibility: hidden;
 }
 
-.sub-usa-hero-line {
+.sub-standard-detail-hero-line {
     margin: 0;
     color: rgba(255, 255, 255, .22);
     font-size: calc(var(--usa-vw) * 48 / 1920);
@@ -678,7 +679,6 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    padding: calc(var(--standard-vw) * 60 / 1920);
 }
 
 .sub-awards-feature-media img {
@@ -705,10 +705,9 @@
 
 .sub-awards-feature-content p {
     margin: 0;
-    color: #666;
-    font-size: calc(var(--standard-vw) * 17 / 1920);
-    line-height: 1.8;
-    letter-spacing: -.03em;
+    color: #222;
+    font-size: calc(var(--standard-vw) * 18 / 1920);
+    line-height:calc(var(--standard-vw) * 30 / 1920);
     word-break: keep-all;
 }
 
@@ -754,7 +753,7 @@
 .sub-awards-card h3 {
     margin: 0;
     color: #111;
-    font-size: calc(var(--standard-vw) * 20 / 1920);
+    font-size: calc(var(--standard-vw) * 26 / 1920);
     font-weight: 700;
     line-height: 1.35;
     letter-spacing: -.04em;
@@ -765,8 +764,395 @@
     max-width: calc(var(--standard-vw) * 310 / 1920);
     margin: calc(var(--standard-vw) * 18 / 1920) auto 0;
     color: #888;
-    font-size: calc(var(--standard-vw) * 14 / 1920);
-    line-height: 1.65;
+    font-size: calc(var(--standard-vw) * 18 / 1920);
+    line-height: calc(var(--standard-vw) * 26 / 1920);
     letter-spacing: -.03em;
     word-break: keep-all;
+}
+
+
+/* =========================================================
+   HUNTER KOREA - 03. Vision & Mission
+========================================================= */
+.sub-korea-vision {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    min-height: 680px;
+    overflow: hidden;
+    background: #111;
+}
+
+.sub-korea-vision-bg,
+.sub-korea-vision-dim {
+    position: absolute;
+    inset: 0;
+}
+
+.sub-korea-vision-bg {
+    background: url('/images/standard/korea_sec3.png') center / cover no-repeat;
+    transform: scale(1.02);
+}
+
+.sub-korea-vision-dim {
+    z-index: 1;
+    background: rgba(0, 0, 0, .56);
+}
+
+.sub-korea-vision-panel {
+    position: relative;
+    z-index: 2;
+    flex: 0 0 50%;
+    min-width: 0;
+    height: 100%;
+    cursor: pointer;
+    outline: none;
+    transition: flex-basis .85s cubic-bezier(.22, 1, .36, 1);
+}
+
+.sub-korea-vision-panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .12);
+    transition: background .55s ease;
+}
+
+
+.sub-korea-vision-panel.is-active::after {
+    background: rgba(0, 0, 0, 0);
+}
+
+.sub-korea-vision-content {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    width: calc(var(--standard-detail-vw) * 740 / 1920);
+    transform: translateY(-50%);
+    color: #fff;
+}
+
+.sub-korea-vision-panel-vision .sub-korea-vision-content {
+    left: calc(var(--standard-detail-vw) * 105 / 1920);
+}
+
+.sub-korea-vision-panel-mission .sub-korea-vision-content {
+    right: calc(var(--standard-detail-vw) * 105 / 1920);
+    text-align: center;
+}
+
+.sub-korea-vision-content h2 {
+    margin: 0;
+    font-size: calc(var(--standard-detail-vw) * 54 / 1920);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -.055em;
+    word-break: keep-all;
+}
+
+.sub-korea-vision-content h2 small {
+    display: block;
+    margin-bottom: calc(var(--standard-detail-vw) * 8 / 1920);
+    font-size: calc(var(--standard-detail-vw) * 34 / 1920);
+    line-height: 1;
+}
+
+.sub-korea-vision-content h2 span {
+    color: var(--red);
+}
+
+.sub-korea-vision-content p {
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
+    color: rgba(255, 255, 255, .72);
+    font-size: calc(var(--standard-detail-vw) * 15 / 1920);
+    line-height: 1.75;
+    opacity: 0;
+    transform: translateY(calc(var(--standard-detail-vw) * 20 / 1920));
+    transition: max-height .65s ease, margin .65s ease, opacity .35s ease, transform .65s cubic-bezier(.22, 1, .36, 1);
+}
+
+.sub-korea-vision-panel.is-active .sub-korea-vision-content p {
+    max-height: calc(var(--standard-detail-vw) * 210 / 1920);
+    margin-top: calc(var(--standard-detail-vw) * 42 / 1920);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.sub-korea-vision-panel-vision .sub-korea-vision-content p {
+    display: none;
+}
+
+/* =========================================================
+   HUNTER KOREA - 03~06
+========================================================= */
+.sub-korea-vision.has-active .sub-korea-vision-panel.is-active {
+    flex-basis: 68%;
+}
+
+.sub-korea-vision.has-active .sub-korea-vision-panel:not(.is-active) {
+    flex-basis: 32%;
+}
+
+.sub-korea-section-inner {
+    width: calc(var(--standard-detail-vw) * 1280 / 1920);
+    margin: 0 auto;
+}
+
+.sub-korea-section-heading {
+    text-align: center;
+}
+
+.sub-korea-section-heading h2 {
+    margin: 0;
+    color: #111;
+    font-family: "Russo One", sans-serif;
+    font-size: calc(var(--standard-detail-vw) * 52 / 1920);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -.035em;
+}
+
+.sub-korea-section-heading h2 span,
+.sub-korea-before-copy h2 span {
+    color: var(--red);
+}
+
+.sub-korea-section-heading p {
+    margin: calc(var(--standard-detail-vw) * 24 / 1920) 0 0;
+    color: #777;
+    font-size: calc(var(--standard-detail-vw) * 16 / 1920);
+    line-height: 1.6;
+}
+
+.sub-korea-creative {
+    padding: calc(var(--standard-detail-vw) * 112 / 1920) 0 calc(var(--standard-detail-vw) * 116 / 1920);
+    background: #fff;
+}
+
+.sub-korea-creative-principles {
+    display: grid;
+    grid-template-columns: calc(var(--standard-detail-vw) * 245 / 1920) 1fr;
+    align-items: center;
+    min-height: calc(var(--standard-detail-vw) * 200 / 1920);
+    margin-top: calc(var(--standard-detail-vw) * 100 / 1920);
+    padding: 0 calc(var(--standard-detail-vw) * 58 / 1920);
+    border-radius: calc(var(--standard-detail-vw) * 16 / 1920);
+    background: #c80b03;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.sub-korea-creative-label strong,
+.sub-korea-creative-card-item strong {
+    display: block;
+    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.sub-korea-creative-label span {
+    display: block;
+    margin-top: calc(var(--standard-detail-vw) * 12 / 1920);
+    color: rgba(255,255,255,.45);
+    font-size: calc(var(--standard-detail-vw) * 16 / 1920);
+}
+
+.sub-korea-creative-principle-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.sub-korea-creative-principle {
+    min-height: calc(var(--standard-detail-vw) * 54 / 1920);
+    padding-left: calc(var(--standard-detail-vw) * 38 / 1920);
+    border-left: 1px solid rgba(255,255,255,.22);
+    font-size: calc(var(--standard-detail-vw) * 19 / 1920);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.sub-korea-creative-card {
+    display: grid;
+    grid-template-columns: calc(var(--standard-detail-vw) * 245 / 1920) 1fr;
+    align-items: center;
+    min-height: calc(var(--standard-detail-vw) * 190 / 1920);
+    margin-top: calc(var(--standard-detail-vw) * 20 / 1920);
+    padding: 0 calc(var(--standard-detail-vw) * 58 / 1920);
+    border-radius: calc(var(--standard-detail-vw) * 16 / 1920);
+    background: #fafafa;
+    box-sizing: border-box;
+}
+
+.sub-korea-creative-card .sub-korea-creative-label span {
+    color: #d0d0d0;
+}
+
+.sub-korea-creative-card-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sub-korea-creative-card-item {
+    min-height: calc(var(--standard-detail-vw) * 100 / 1920);
+    padding: calc(var(--standard-detail-vw) * 10 / 1920) calc(var(--standard-detail-vw) * 42 / 1920);
+    border-left: 1px solid #e5e5e5;
+    box-sizing: border-box;
+}
+
+.sub-korea-creative-card-item p {
+    margin: calc(var(--standard-detail-vw) * 14 / 1920) 0 0;
+    color: #898989;
+    font-size: calc(var(--standard-detail-vw) * 15 / 1920);
+    line-height: 1.5;
+}
+
+.sub-korea-before {
+    position: relative;
+    height: calc(var(--standard-detail-vw) * 760 / 1920);
+    min-height: 680px;
+    background: url('/images/standard/korea_sec5.png') center / cover no-repeat;
+    color: #fff;
+}
+
+.sub-korea-before-dim {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.58);
+}
+
+.sub-korea-before-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: calc(var(--standard-detail-vw) * 550 / 1920) calc(var(--standard-detail-vw) * 680 / 1920);
+    justify-content: space-between;
+    align-items: center;
+    width: calc(var(--standard-detail-vw) * 1280 / 1920);
+    height: 100%;
+    margin: 0 auto;
+}
+
+.sub-korea-before-copy h2 {
+    margin: 0;
+    font-family: "Russo One", sans-serif;
+    font-size: calc(var(--standard-detail-vw) * 58 / 1920);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -.03em;
+}
+
+.sub-korea-before-copy p {
+    margin: calc(var(--standard-detail-vw) * 50 / 1920) 0 0;
+    color: rgba(255,255,255,.82);
+    font-size: calc(var(--standard-detail-vw) * 16 / 1920);
+    line-height: 1.75;
+}
+
+.sub-korea-before-list {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--standard-detail-vw) * 10 / 1920);
+}
+
+.sub-korea-before-item {
+    display: grid;
+    grid-template-columns: calc(var(--standard-detail-vw) * 145 / 1920) 1fr;
+    align-items: center;
+    min-height: calc(var(--standard-detail-vw) * 118 / 1920);
+    padding: 0 calc(var(--standard-detail-vw) * 55 / 1920);
+    border-radius: calc(var(--standard-detail-vw) * 18 / 1920);
+    background: rgba(5,5,5,.74);
+    box-sizing: border-box;
+}
+
+.sub-korea-before-item > strong {
+    color: #df1308;
+    font-family: "Russo One", sans-serif;
+    font-size: calc(var(--standard-detail-vw) * 48 / 1920);
+    font-weight: 400;
+}
+
+.sub-korea-before-item p {
+    margin: 0;
+    color: #fff;
+    font-size: calc(var(--standard-detail-vw) * 17 / 1920);
+    line-height: 1.55;
+}
+
+.sub-korea-before-item-large {
+    align-items: start;
+    min-height: calc(var(--standard-detail-vw) * 305 / 1920);
+    padding-top: calc(var(--standard-detail-vw) * 45 / 1920);
+}
+
+.sub-korea-before-item-large div p {
+    padding: calc(var(--standard-detail-vw) * 30 / 1920) 0;
+    border-bottom: 1px solid rgba(255,255,255,.15);
+}
+
+.sub-korea-before-item-large div p:first-child {
+    padding-top: 0;
+}
+
+.sub-korea-before-item-large div p:last-child {
+    border-bottom: 0;
+}
+
+.sub-korea-after {
+    padding: calc(var(--standard-detail-vw) * 118 / 1920) 0 calc(var(--standard-detail-vw) * 130 / 1920);
+    background: #fff;
+}
+
+.sub-korea-after-list {
+    display: flex;
+    justify-content: center;
+    margin-top: calc(var(--standard-detail-vw) * 105 / 1920);
+}
+
+.sub-korea-after-item {
+    position: relative;
+    display: flex;
+    flex: 0 0 calc(var(--standard-detail-vw) * 350 / 1920);
+    width: calc(var(--standard-detail-vw) * 350 / 1920);
+    height: calc(var(--standard-detail-vw) * 350 / 1920);
+    margin-left: calc(var(--standard-detail-vw) * -36 / 1920);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #d62d25;
+    color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.sub-korea-after-item:first-child {
+    margin-left: 0;
+}
+
+.sub-korea-after-item svg {
+    width: calc(var(--standard-detail-vw) * 62 / 1920);
+    height: calc(var(--standard-detail-vw) * 62 / 1920);
+    margin-bottom: calc(var(--standard-detail-vw) * 30 / 1920);
+    fill: none;
+    stroke: #fff;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.sub-korea-after-item h3 {
+    margin: 0;
+    font-size: calc(var(--standard-detail-vw) * 28 / 1920);
+    font-weight: 700;
+}
+
+.sub-korea-after-item p {
+    margin: calc(var(--standard-detail-vw) * 24 / 1920) 0 0;
+    color: rgba(255,255,255,.74);
+    font-size: calc(var(--standard-detail-vw) * 16 / 1920);
+    line-height: 1.45;
 }

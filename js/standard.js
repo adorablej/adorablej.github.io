@@ -304,6 +304,7 @@
         gsap.registerPlugin(ScrollTrigger);
 
         initHeroStory();
+        initKoreaVision();
         initTrustAccordion();
         initValueMotions();
         initTrackpadScrollStability();
@@ -311,13 +312,13 @@
     }
 
     function initHeroStory() {
-        const hero = document.querySelector(".sub-usa-hero");
-        const media = document.querySelector(".sub-usa-hero-media");
-        const preview = document.querySelector(".sub-usa-hero-preview");
-        const video = document.querySelector(".sub-usa-hero-video");
-        const dim = document.querySelector(".sub-usa-hero-dim");
-        const copy = document.querySelector(".sub-usa-hero-copy");
-        const lines = gsap.utils.toArray(".sub-usa-hero-line");
+        const hero = document.querySelector(".sub-standard-detail-hero");
+        const media = document.querySelector(".sub-standard-detail-hero-media");
+        const preview = document.querySelector(".sub-standard-detail-hero-preview");
+        const video = document.querySelector(".sub-standard-detail-hero-video");
+        const dim = document.querySelector(".sub-standard-detail-hero-dim");
+        const copy = document.querySelector(".sub-standard-detail-hero-copy");
+        const lines = gsap.utils.toArray(".sub-standard-detail-hero-line");
 
         if (!hero || !media || !preview || !dim || !copy || !lines.length) return;
 
@@ -388,6 +389,35 @@
         });
 
         timeline.to({}, { duration: 0.6 });
+    }
+
+
+
+    function initKoreaVision() {
+        const panels = Array.from(document.querySelectorAll(".sub-korea-vision-panel"));
+        if (!panels.length) return;
+
+        const section = document.querySelector(".sub-korea-vision");
+
+        function activate(target) {
+            if (section) section.classList.add("has-active");
+            panels.forEach(function (panel) {
+                panel.classList.toggle("is-active", panel === target);
+            });
+        }
+
+        panels.forEach(function (panel) {
+            panel.addEventListener("mouseenter", function () { activate(panel); });
+            panel.addEventListener("focus", function () { activate(panel); });
+            panel.addEventListener("click", function () { activate(panel); });
+        });
+
+        if (section) {
+            section.addEventListener("mouseleave", function () {
+                section.classList.remove("has-active");
+                panels.forEach(function (panel) { panel.classList.remove("is-active"); });
+            });
+        }
     }
 
     function initTrustAccordion() {
