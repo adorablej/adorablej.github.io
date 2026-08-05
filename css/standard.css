@@ -715,6 +715,11 @@
     padding: calc(var(--standard-vw) * 10 / 1920) 0 calc(var(--standard-vw) * 160 / 1920);
 }
 
+.sub-awards-excellence .detail-section-heading {
+    width: 100%;
+    margin-bottom: calc(var(--standard-vw) * 80 / 1920);
+}
+
 .sub-awards-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -959,7 +964,7 @@
 }
 
 .sub-korea-section-inner {
-    width: calc(var(--standard-detail-vw) * 1300 / 1920);
+    width: calc(var(--standard-detail-vw) * 1280 / 1920);
     margin: 0 auto;
 }
 
@@ -980,7 +985,6 @@
 .sub-korea-section-heading h2 span,
 .sub-korea-before-copy h2 span {
     color: var(--red);
-    font-family: "Russo One", sans-serif;
 }
 
 .sub-korea-section-heading p {
@@ -991,63 +995,59 @@
 }
 
 .sub-korea-creative {
-    padding: calc(var(--standard-detail-vw) * 120 / 1920) 0;
+    padding: calc(var(--standard-detail-vw) * 112 / 1920) 0 calc(var(--standard-detail-vw) * 116 / 1920);
     background: #fff;
 }
 
 .sub-korea-creative-principles {
     display: grid;
-    grid-template-columns: calc(var(--standard-detail-vw) * 200 / 1920) 1fr;
+    grid-template-columns: calc(var(--standard-detail-vw) * 245 / 1920) 1fr;
     align-items: center;
-    padding: calc(var(--standard-detail-vw) * 95 / 1920) calc(var(--standard-detail-vw) * 60 / 1920);
-    border-radius: calc(var(--standard-detail-vw) * 20 / 1920);
-    background: var(--red);
+    min-height: calc(var(--standard-detail-vw) * 200 / 1920);
+    margin-top: calc(var(--standard-detail-vw) * 100 / 1920);
+    padding: 0 calc(var(--standard-detail-vw) * 58 / 1920);
+    border-radius: calc(var(--standard-detail-vw) * 16 / 1920);
+    background: #c80b03;
     color: #fff;
     box-sizing: border-box;
 }
 
-.sub-korea-creative-label strong{
-    display: block;
-    font-size: calc(var(--standard-detail-vw) * 30 / 1920);
-    font-weight: 600;
-    line-height: calc(var(--standard-detail-vw) * 40 / 1920);
-}
+.sub-korea-creative-label strong,
 .sub-korea-creative-card-item strong {
-    font-size: calc(var(--standard-detail-vw) * 22 / 1920);
-    font-weight: 500;
-    line-height: calc(var(--standard-detail-vw) * 36 / 1920);
+    display: block;
+    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
+    font-weight: 700;
+    line-height: 1.35;
 }
-
 
 .sub-korea-creative-label span {
     display: block;
     margin-top: calc(var(--standard-detail-vw) * 12 / 1920);
-    color: rgba(255,255,255,.40);
-    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
+    color: rgba(255,255,255,.45);
+    font-size: calc(var(--standard-detail-vw) * 16 / 1920);
 }
 
 .sub-korea-creative-principle-list {
     display: grid;
-    grid-auto-flow: column;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .sub-korea-creative-principle {
     min-height: calc(var(--standard-detail-vw) * 54 / 1920);
     padding-left: calc(var(--standard-detail-vw) * 38 / 1920);
     border-left: 1px solid rgba(255,255,255,.22);
-    font-size: calc(var(--standard-detail-vw) * 22 / 1920);
-    font-weight: 400;
+    font-size: calc(var(--standard-detail-vw) * 19 / 1920);
+    font-weight: 600;
     line-height: 1.2;
 }
-.sub-korea-creative-principle:first-child{
-    border-left:none;
-}
+
 .sub-korea-creative-card {
     display: grid;
-    grid-template-columns: calc(var(--standard-detail-vw) * 200 / 1920) 1fr;
+    grid-template-columns: calc(var(--standard-detail-vw) * 245 / 1920) 1fr;
     align-items: center;
+    min-height: calc(var(--standard-detail-vw) * 190 / 1920);
     margin-top: calc(var(--standard-detail-vw) * 20 / 1920);
-    padding: calc(var(--standard-detail-vw) * 60 / 1920);
+    padding: 0 calc(var(--standard-detail-vw) * 58 / 1920);
     border-radius: calc(var(--standard-detail-vw) * 16 / 1920);
     background: #fafafa;
     box-sizing: border-box;
@@ -1059,30 +1059,29 @@
 
 .sub-korea-creative-card-list {
     display: grid;
-    grid-template-columns: 1fr 1fr calc(var(--standard-detail-vw) * 360 / 1920);;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .sub-korea-creative-card-item {
-    padding:0 0 0 calc(var(--standard-detail-vw) * 42 / 1920);
+    min-height: calc(var(--standard-detail-vw) * 100 / 1920);
+    padding: calc(var(--standard-detail-vw) * 10 / 1920) calc(var(--standard-detail-vw) * 42 / 1920);
     border-left: 1px solid #e5e5e5;
     box-sizing: border-box;
-}
-.sub-korea-creative-card-item:first-child{
-    border-left:none;
 }
 
 .sub-korea-creative-card-item p {
     margin: calc(var(--standard-detail-vw) * 14 / 1920) 0 0;
-    color: #777;
-    font-size: calc(var(--standard-detail-vw) * 17 / 1920);
-    line-height: calc(var(--standard-detail-vw) * 26 / 1920);
+    color: #898989;
+    font-size: calc(var(--standard-detail-vw) * 15 / 1920);
+    line-height: 1.5;
 }
 
 .sub-korea-before {
     position: relative;
+    height: calc(var(--standard-detail-vw) * 760 / 1920);
+    min-height: 680px;
     background: url('/images/standard/korea_Service_bg.png') center / cover no-repeat;
     color: #fff;
-    padding: calc(var(--standard-detail-vw) * 120 / 1920) 0;
 }
 
 .sub-korea-before-dim {
@@ -1097,8 +1096,8 @@
     display: grid;
     grid-template-columns: calc(var(--standard-detail-vw) * 550 / 1920) calc(var(--standard-detail-vw) * 680 / 1920);
     justify-content: space-between;
-    align-items: start;
-    width: calc(var(--standard-detail-vw) * 1300 / 1920);
+    align-items: center;
+    width: calc(var(--standard-detail-vw) * 1280 / 1920);
     height: 100%;
     margin: 0 auto;
 }
@@ -1106,14 +1105,17 @@
 .sub-korea-before-copy h2 {
     margin: 0;
     font-family: "Russo One", sans-serif;
-    font-size: calc(var(--standard-detail-vw) * 60 / 1920);
+    font-size: calc(var(--standard-detail-vw) * 58 / 1920);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -.03em;
 }
 
 .sub-korea-before-copy p {
-    margin: calc(var(--standard-detail-vw) * 40 / 1920) 0 0;
+    margin: calc(var(--standard-detail-vw) * 50 / 1920) 0 0;
     color: rgba(255,255,255,.82);
-    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
-    line-height: calc(var(--standard-detail-vw) * 30 / 1920);
+    font-size: calc(var(--standard-detail-vw) * 16 / 1920);
+    line-height: 1.75;
 }
 
 .sub-korea-before-list {
@@ -1134,21 +1136,23 @@
 }
 
 .sub-korea-before-item > strong {
-    color: var(--red);
+    color: #df1308;
     font-family: "Russo One", sans-serif;
-    font-size: calc(var(--standard-detail-vw) * 50 / 1920);
+    font-size: calc(var(--standard-detail-vw) * 48 / 1920);
     font-weight: 400;
 }
 
 .sub-korea-before-item p {
     margin: 0;
     color: #fff;
-    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
+    font-size: calc(var(--standard-detail-vw) * 17 / 1920);
+    line-height: 1.55;
 }
 
 .sub-korea-before-item-large {
     align-items: start;
-    padding: calc(var(--standard-detail-vw) * 40 / 1920) calc(var(--standard-detail-vw) * 60 / 1920);
+    min-height: calc(var(--standard-detail-vw) * 305 / 1920);
+    padding-top: calc(var(--standard-detail-vw) * 45 / 1920);
 }
 
 .sub-korea-before-item-large div p {
@@ -1162,11 +1166,10 @@
 
 .sub-korea-before-item-large div p:last-child {
     border-bottom: 0;
-    padding-bottom: 0;
 }
 
 .sub-korea-after {
-    padding: calc(var(--standard-detail-vw) * 120 / 1920) 0;
+    padding: calc(var(--standard-detail-vw) * 118 / 1920) 0 calc(var(--standard-detail-vw) * 130 / 1920);
     background: #fff;
 }
 
@@ -1187,14 +1190,10 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: #c00d00e8;
+    background: #c00d00d3;
     color: #fff;
     text-align: center;
     box-sizing: border-box;
-}
-
-.sub-korea-after-item_icon{
-    margin-bottom: calc(var(--standard-detail-vw) * 40 / 1920);
 }
 
 .sub-korea-after-item:first-child {
@@ -1224,105 +1223,593 @@
     font-size: calc(var(--standard-detail-vw) * 16 / 1920);
     line-height: 1.45;
 }
-/* =========================================================
-   HUNTER PARTNERS
-========================================================= */
-.sub-partners-page {
-    background: #fff;
+
+
+/* ========================================
+HUNTER History
+======================================== */
+.sub-history-lead,
+.sub-history-timeline,
+.sub-history-finale {
+    background-color: #fff;
+    background-image: repeating-linear-gradient(
+        to right,
+        transparent 0,
+        transparent calc(100vw * 239 / 1920),
+        rgba(198, 0, 0, .075) calc(100vw * 239 / 1920),
+        rgba(198, 0, 0, .075) calc(100vw * 240 / 1920)
+    );
 }
 
-.sub-partners-inner {
-    width: calc(var(--standard-detail-vw) * 1300 / 1920);
-    margin: 0 auto;
-}
-
-.sub-partners-intro {
+.sub-history-lead {
     position: relative;
+    padding: calc(100vw * 150 / 1920) 0 calc(100vw * 115 / 1920);
+}
+
+.sub-history-lead::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: calc(100vw * 5 / 1920);
+    height: calc(100vw * 115 / 1920);
+    background: var(--red);
+    transform: translateX(-50%);
+}
+
+.sub-history-lead-image {
+    position: relative;
+    z-index: 2;
+    width: calc(100vw * 940 / 1920);
+    height: calc(100vw * 520 / 1920);
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.sub-history-lead-image img,
+.sub-history-era-image img,
+.sub-history-finale-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sub-history-timeline {
+    position: relative;
+    height: calc(100vw * 7200 / 1920);
+}
+
+.sub-history-timeline-sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sub-history-center-line {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 50%;
+    width: calc(100vw * 5 / 1920);
+    height: 45%;
+    background: var(--red);
+    transform: translateX(-50%);
+}
+
+.sub-history-center-copy {
+    position: absolute;
+    z-index: 6;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    font-family: "Russo One", sans-serif;
+}
+
+.sub-history-center-year {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: calc(100vw * 10 / 1920) calc(100vw * 24 / 1920);
+    overflow: hidden;
+    color: var(--red);
+    font-family: "Russo One", sans-serif;
+    font-size: calc(100vw * 100 / 1920);
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.sub-history-center-year::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: calc(100vw * 18 / 1920);
+    height: calc(100vw * 46 / 1920);
+    transform: translateX(-50%);
+}
+
+.sub-history-center-content {
+    position: absolute;
+    top: calc(100vw * 105 / 1920);
+    left: calc(50% + calc(100vw * 80 / 1920));
+    width: calc(100vw * 500 / 1920);
+    padding: calc(100vw * 18 / 1920) 0;
+    text-align: left;
+}
+
+.sub-history-center-title {
+    margin: 0;
+    color: #000;
+    font-size: calc(100vw * 22 / 1920);
+    font-weight: 600;
+    line-height: calc(100vw * 30 / 1920);
+}
+
+.sub-history-center-description {
+    margin: calc(100vw * 14 / 1920) 0 0;
+    color: #777;
+    font-size: calc(100vw * 18 / 1920);
+    line-height:calc(100vw * 30 / 1920);
+    word-break: keep-all;
+}
+
+.sub-history-era-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vw * 6900 / 1920);
+    will-change: transform;
+}
+
+.sub-history-era {
+    position: relative;
+    width: 100%;
+    height: calc(100vw * 985 / 1920);
+}
+
+.sub-history-era-image {
+    position: absolute;
+    z-index: 2;
+    margin: 0;
+    overflow: hidden;
+    background: #f4f4f4;
+}
+
+/* 1940 */
+.sub-history-era-1940 { height: calc(100vw * 1160 / 1920); }
+.sub-history-era-1940 .sub-history-era-image-a {
+    top: calc(100vw * 80 / 1920);
+    left: calc(100vw * 170 / 1920);
+    width: calc(100vw * 300 / 1920);
+    height: calc(100vw * 390 / 1920);
+}
+.sub-history-era-1940 .sub-history-era-image-b {
+    top: calc(100vw * 250 / 1920);
+    right: calc(100vw * 160 / 1920);
+    width: calc(100vw * 300 / 1920);
+    height: calc(100vw * 290 / 1920);
+}
+.sub-history-era-1940 .sub-history-era-image-c {
+    top: calc(100vw * 690 / 1920);
+    left: calc(100vw * 365 / 1920);
+    width: calc(100vw * 290 / 1920);
+    height: calc(100vw * 210 / 1920);
+}
+
+/* 1950 */
+.sub-history-era-1950 .sub-history-era-image-a {
+    top: calc(100vw * 120 / 1920);
+    left: calc(100vw * 70 / 1920);
+    width: calc(100vw * 220 / 1920);
+    height: calc(100vw * 360 / 1920);
+}
+.sub-history-era-1950 .sub-history-era-image-b {
+    top: calc(100vw * 90 / 1920);
+    right: calc(100vw * 90 / 1920);
+    width: calc(100vw * 315 / 1920);
+    height: calc(100vw * 215 / 1920);
+}
+.sub-history-era-1950 .sub-history-era-image-c {
+    top: calc(100vw * 610 / 1920);
+    right: calc(100vw * 420 / 1920);
+    width: calc(100vw * 280 / 1920);
+    height: calc(100vw * 190 / 1920);
+}
+
+/* 1960 */
+.sub-history-era-1960 .sub-history-era-image-a {
+    top: calc(100vw * 90 / 1920);
+    left: calc(100vw * 330 / 1920);
+    width: calc(100vw * 270 / 1920);
+    height: calc(100vw * 180 / 1920);
+}
+.sub-history-era-1960 .sub-history-era-image-b {
+    top: calc(100vw * 160 / 1920);
+    right: calc(100vw * 75 / 1920);
+    width: calc(100vw * 390 / 1920);
+    height: calc(100vw * 250 / 1920);
+}
+.sub-history-era-1960 .sub-history-era-image-c {
+    top: calc(100vw * 590 / 1920);
+    left: calc(100vw * 80 / 1920);
+    width: calc(100vw * 350 / 1920);
+    height: calc(100vw * 220 / 1920);
+}
+
+/* 1970 */
+.sub-history-era-1970 .sub-history-era-image-a {
+    top: calc(100vw * 115 / 1920);
+    left: calc(100vw * 505 / 1920);
+    width: calc(100vw * 230 / 1920);
+    height: calc(100vw * 250 / 1920);
+}
+.sub-history-era-1970 .sub-history-era-image-b {
+    top: calc(100vw * 520 / 1920);
+    right: calc(100vw * 150 / 1920);
+    width: calc(100vw * 325 / 1920);
+    height: calc(100vw * 220 / 1920);
+}
+
+/* 1980 */
+.sub-history-era-1980 .sub-history-era-image-a {
+    top: calc(100vw * 80 / 1920);
+    left: calc(100vw * 145 / 1920);
+    width: calc(100vw * 285 / 1920);
+    height: calc(100vw * 205 / 1920);
+}
+.sub-history-era-1980 .sub-history-era-image-b {
+    top: calc(100vw * 370 / 1920);
+    right: calc(100vw * 430 / 1920);
+    width: calc(100vw * 240 / 1920);
+    height: calc(100vw * 300 / 1920);
+}
+.sub-history-era-1980 .sub-history-era-image-c {
+    top: calc(100vw * 570 / 1920);
+    right: calc(100vw * 75 / 1920);
+    width: calc(100vw * 320 / 1920);
+    height: calc(100vw * 210 / 1920);
+}
+
+/* 1990 */
+.sub-history-era-1990 .sub-history-era-image-a {
+    top: calc(100vw * 70 / 1920);
+    left: calc(100vw * 70 / 1920);
+    width: calc(100vw * 260 / 1920);
+    height: calc(100vw * 350 / 1920);
+}
+.sub-history-era-1990 .sub-history-era-image-b {
+    top: calc(100vw * 330 / 1920);
+    right: calc(100vw * 420 / 1920);
+    width: calc(100vw * 275 / 1920);
+    height: calc(100vw * 190 / 1920);
+}
+.sub-history-era-1990 .sub-history-era-image-c {
+    top: calc(100vw * 620 / 1920);
+    left: calc(100vw * 395 / 1920);
+    width: calc(100vw * 300 / 1920);
+    height: calc(100vw * 185 / 1920);
+}
+
+/* 2000 */
+.sub-history-era-2000 .sub-history-era-image-a {
+    top: calc(100vw * 90 / 1920);
+    left: calc(100vw * 115 / 1920);
+    width: calc(100vw * 280 / 1920);
+    height: calc(100vw * 365 / 1920);
+}
+.sub-history-era-2000 .sub-history-era-image-b {
+    top: calc(100vw * 230 / 1920);
+    right: calc(100vw * 85 / 1920);
+    width: calc(100vw * 300 / 1920);
+    height: calc(100vw * 300 / 1920);
+}
+.sub-history-era-2000 .sub-history-era-image-c {
+    top: calc(100vw * 630 / 1920);
+    right: calc(100vw * 380 / 1920);
+    width: calc(100vw * 390 / 1920);
+    height: calc(100vw * 220 / 1920);
+}
+
+.sub-history-steps {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.sub-history-step {
+    height: calc(100vw * 1028 / 1920);
+}
+
+.sub-history-step:first-child {
+    height: calc(100vw * 1160 / 1920);
+}
+
+.sub-history-year-digit {
+    position: relative;
+    display: inline-block;
+    width: .64em;
+    height: 1em;
+    overflow: hidden;
+    font-family: "Russo One", sans-serif;
+}
+
+.sub-history-year-digit-track {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    will-change: transform;
+}
+
+.sub-history-year-digit-value {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: calc(var(--standard-detail-vw) * 760 / 1920);
-    min-height: 680px;
-    overflow: hidden;
-    background: url('/images/standard/partners_intro.png') center / cover no-repeat;
-}
-
-.sub-partners-intro-dim {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, .56);
-}
-
-.sub-partners-intro-content {
-    position: relative;
-    z-index: 1;
-    width: calc(var(--standard-detail-vw) * 1100 / 1920);
-    text-align: center;
-}
-
-.sub-partners-intro-content h2 {
-    margin: 0;
-    color: #fff;
+    height: 1em;
+    line-height: 1;
     font-family: "Russo One", sans-serif;
-    font-size: calc(var(--standard-detail-vw) * 42 / 1920);
-    font-weight: 400;
-    line-height: 1.55;
-    letter-spacing: -.025em;
 }
 
-.sub-partners-intro-content h2 span,
-.sub-partners-group-title span {
-    color: var(--red);
+.sub-history-finale {
+    padding: 0 0 calc(100vw * 140 / 1920);
 }
 
-.sub-partners-directory {
-    padding: calc(var(--standard-detail-vw) * 120 / 1920) 0 calc(var(--standard-detail-vw) * 160 / 1920);
-    background: #fff;
-}
-
-.sub-partners-group + .sub-partners-group {
-    margin-top: calc(var(--standard-detail-vw) * 250 / 1920);
-}
-
-.sub-partners-group-title {
-    margin: 0 0 calc(var(--standard-detail-vw) * 64 / 1920);
-    color: #111;
-    font-family: "Russo One", sans-serif;
-    font-size: calc(var(--standard-detail-vw) * 40 / 1920);
-    font-weight: 400;
-    line-height: 1.2;
-    text-align: center;
-}
-
-/* Wheel Alignment Specification의 4열 원형 브랜드 카드 구조 재사용 */
-.sub-partners-brand-grid {
-    row-gap: calc(var(--standard-detail-vw) * 100 / 1920);
-    column-gap: calc(var(--standard-detail-vw) * 60 / 1920);
-}
-
-.sub-partners-brand-card {
-    cursor: default;
-}
-
-.sub-partners-brand-logo {
-    border-width: 1px;
-    background: #fafafa;
-}
-
-.sub-partners-brand-logo img {
-    display: block;
+.sub-history-finale-image {
     width: 100%;
-    height: 100%;
-    object-fit: contain;
+    height: calc(100vw * 860 / 1920);
+    margin: 0;
+    overflow: hidden;
 }
 
-.sub-partners-brand-card:hover .sub-partners-brand-logo {
-    border-color: #e5e5e5;
+.sub-history-finale-copy {
+    width: calc(100vw * 1300 / 1920);
+    margin: calc(100vw * 100 / 1920) auto 0;
+    text-align: center;
 }
 
+.sub-history-finale-copy strong {
+    display: block;
+    color: var(--red);
+    font-family: "Russo One", sans-serif;
+    font-size: calc(100vw * 100 / 1920);
+    line-height: 1;
+}
 
-.sub-partners-brand-card .sub-specification-brand-name {
+.sub-history-finale-copy h2 {
+    margin: calc(100vw * 40 / 1920) 0 0;
     color: #000;
-    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
+    font-size: calc(100vw * 50 / 1920);
+    font-weight: 800;
+}
+
+.sub-history-finale-copy h2 span { color: var(--red); }
+
+.sub-history-finale-copy p {
+    margin: calc(100vw * 20 / 1920) 0 0;
+    color: #777;
+    font-size: calc(100vw * 20 / 1920);
+    line-height: calc(100vw * 20 / 1920);
+    line-height: 1.7;
+}
+
+/* ========================================
+History 연도별 1920 시안 좌표
+======================================== */
+.sub-history-timeline {
+    height: calc(100vw * 11842 / 1920);
+}
+
+.sub-history-era-track {
+    height: calc(100vw * 11842 / 1920);
+}
+
+.sub-history-era {
+    height: auto;
+}
+
+/* 1940 : 1920 × 1670 */
+.sub-history-era-1940 {
+    height: calc(100vw * 1670 / 1920);
+}
+.sub-history-era-1940 .sub-history-era-image-a {
+    top: calc(100vw * 136 / 1920);
+    left: calc(100vw * 213 / 1920);
+    width: calc(100vw * 474 / 1920);
+    height: calc(100vw * 602 / 1920);
+}
+.sub-history-era-1940 .sub-history-era-image-b {
+    top: calc(100vw * 477 / 1920);
+    right: calc(100vw * 150 / 1920);
+    width: calc(100vw * 483 / 1920);
+    height: calc(100vw * 364 / 1920);
+}
+.sub-history-era-1940 .sub-history-era-image-c {
+    top: calc(100vw * 951 / 1920);
+    left: calc(100vw * 551 / 1920);
+    width: calc(100vw * 412 / 1920);
+    height: calc(100vw * 344 / 1920);
+}
+
+/* 1950 : 1920 × 1838 */
+.sub-history-era-1950 {
+    height: calc(100vw * 1838 / 1920);
+}
+.sub-history-era-1950 .sub-history-era-image-a {
+    top: calc(100vw * 472 / 1920);
+    left: calc(100vw * 48 / 1920);
+    width: calc(100vw * 389 / 1920);
+    height: calc(100vw * 587 / 1920);
+}
+.sub-history-era-1950 .sub-history-era-image-b {
+    top: calc(100vw * 94 / 1920);
+    right: calc(100vw * 96 / 1920);
+    width: calc(100vw * 448 / 1920);
+    height: calc(100vw * 407 / 1920);
+}
+.sub-history-era-1950 .sub-history-era-image-c {
+    top: calc(100vw * 1407 / 1920);
+    right: calc(100vw * 406 / 1920);
+    width: calc(100vw * 496 / 1920);
+    height: calc(100vw * 379 / 1920);
+}
+
+/* 1960 : 1920 × 2021 */
+.sub-history-era-1960 {
+    height: calc(100vw * 2021 / 1920);
+}
+.sub-history-era-1960 .sub-history-era-image-a {
+    top: calc(100vw * 26 / 1920);
+    left: calc(100vw * 288 / 1920);
+    width: calc(100vw * 362 / 1920);
+    height: calc(100vw * 227 / 1920);
+}
+.sub-history-era-1960 .sub-history-era-image-b {
+    top: calc(100vw * 347 / 1920);
+    right: calc(100vw * 354 / 1920);
+    width: calc(100vw * 455 / 1920);
+    height: calc(100vw * 175 / 1920);
+}
+.sub-history-era-1960 .sub-history-era-image-c {
+    top: calc(100vw * 952 / 1920);
+    left: calc(100vw * 414 / 1920);
+    width: calc(100vw * 506 / 1920);
+    height: calc(100vw * 334 / 1920);
+}
+.sub-history-era-1960 .sub-history-era-image-d {
+    top: calc(100vw * 1442 / 1920);
+    right: calc(100vw * 262 / 1920);
+    width: calc(100vw * 446 / 1920);
+    height: calc(100vw * 579 / 1920);
+}
+
+/* 1970 : 1920 × 1441 */
+.sub-history-era-1970 {
+    height: calc(100vw * 1441 / 1920);
+}
+.sub-history-era-1970 .sub-history-era-image-a {
+    top: calc(100vw * 42 / 1920);
+    left: calc(100vw * 640 / 1920);
+    width: calc(100vw * 432 / 1920);
+    height: calc(100vw * 351 / 1920);
+}
+.sub-history-era-1970 .sub-history-era-image-b {
+    top: calc(100vw * 675 / 1920);
+    right: calc(100vw * 215 / 1920);
+    width: calc(100vw * 568 / 1920);
+    height: calc(100vw * 338 / 1920);
+}
+
+/* 1980 : 1920 × 1670 */
+.sub-history-era-1980 {
+    height: calc(100vw * 1670 / 1920);
+}
+.sub-history-era-1980 .sub-history-era-image-a {
+    top: calc(100vw * 47 / 1920);
+    left: calc(100vw * 299 / 1920);
+    width: calc(100vw * 411 / 1920);
+    height: calc(100vw * 247 / 1920);
+}
+.sub-history-era-1980 .sub-history-era-image-b {
+    top: calc(100vw * 487 / 1920);
+    right: calc(100vw * 215 / 1920);
+    width: calc(100vw * 493 / 1920);
+    height: calc(100vw * 189 / 1920);
+}
+.sub-history-era-1980 .sub-history-era-image-c {
+    top: calc(100vw * 1018 / 1920);
+    left: calc(100vw * 451 / 1920);
+    width: calc(100vw * 553 / 1920);
+    height: calc(100vw * 250 / 1920);
+}
+
+/* 1990 : 1920 × 1570 */
+.sub-history-era-1990 {
+    height: calc(100vw * 1570 / 1920);
+}
+.sub-history-era-1990 .sub-history-era-image-a {
+    top: calc(100vw * 130 / 1920);
+    left: calc(100vw * 215 / 1920);
+    width: calc(100vw * 519 / 1920);
+    height: calc(100vw * 622 / 1920);
+}
+.sub-history-era-1990 .sub-history-era-image-b {
+    top: calc(100vw * 486 / 1920);
+    right: calc(100vw * 130 / 1920);
+    width: calc(100vw * 504 / 1920);
+    height: calc(100vw * 382 / 1920);
+}
+.sub-history-era-1990 .sub-history-era-image-c {
+    top: calc(100vw * 968 / 1920);
+    left: calc(100vw * 625 / 1920);
+    width: calc(100vw * 430 / 1920);
+    height: calc(100vw * 361 / 1920);
+}
+
+/* 2000 : 1920 × 1632 */
+.sub-history-era-2000 {
+    height: calc(100vw * 1632 / 1920);
+}
+.sub-history-era-2000 .sub-history-era-image-a {
+    top: calc(100vw * 163 / 1920);
+    left: calc(100vw * 272 / 1920);
+    width: calc(100vw * 413 / 1920);
+    height: calc(100vw * 509 / 1920);
+}
+.sub-history-era-2000 .sub-history-era-image-b {
+    top: calc(100vw * 454 / 1920);
+    right: calc(100vw * 124 / 1920);
+    width: calc(100vw * 462 / 1920);
+    height: calc(100vw * 372 / 1920);
+}
+.sub-history-era-2000 .sub-history-era-image-c {
+    top: calc(100vw * 1124 / 1920);
+    left: calc(100vw * 493 / 1920);
+    width: calc(100vw * 510 / 1920);
+    height: calc(100vw * 406 / 1920);
+}
+
+/* 연도별 스크롤 구간도 시안 높이와 동일 */
+.sub-history-step:nth-child(1) { height: calc(100vw * 1670 / 1920); }
+.sub-history-step:nth-child(2) { height: calc(100vw * 1838 / 1920); }
+.sub-history-step:nth-child(3) { height: calc(100vw * 2021 / 1920); }
+.sub-history-step:nth-child(4) { height: calc(100vw * 1441 / 1920); }
+.sub-history-step:nth-child(5) { height: calc(100vw * 1670 / 1920); }
+.sub-history-step:nth-child(6) { height: calc(100vw * 1570 / 1920); }
+.sub-history-step:nth-child(7) { height: calc(100vw * 1632 / 1920); }
+
+/* 시안에서 카피가 없는 연도 */
+.sub-history-center-copy[data-active-year="1950"] .sub-history-center-content,
+.sub-history-center-copy[data-active-year="1970"] .sub-history-center-content,
+.sub-history-center-copy[data-active-year="1990"] .sub-history-center-content {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* 카피가 있는 연도별 위치 */
+.sub-history-center-copy[data-active-year="1940"] .sub-history-center-content {
+    top: calc(100vw * 210 / 1920);
+    left: calc(50% + calc(100vw * 48 / 1920));
+}
+.sub-history-center-copy[data-active-year="1960"] .sub-history-center-content,
+.sub-history-center-copy[data-active-year="1980"] .sub-history-center-content,
+.sub-history-center-copy[data-active-year="2000"] .sub-history-center-content {
+    top: calc(100vw * 200 / 1920);
+    left: calc(50% + calc(100vw * 55 / 1920));
+}
+
+/* History 전용 스크롤 wrapper */
+.sub-history-scroll {
+    overflow-x: hidden;
+    overflow-y: visible;
 }

@@ -644,3 +644,199 @@
         initHunterUsaPage();
     }
 })();
+
+
+/* HUNTER History */
+(function () {
+    "use strict";
+
+    function initHistoryTimeline() {
+        const timeline = document.querySelector(".sub-history-timeline");
+        if (!timeline || typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") return;
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        const eraTrack = timeline.querySelector(".sub-history-era-track");
+        const steps = gsap.utils.toArray(".sub-history-step");
+        const copy = timeline.querySelector(".sub-history-center-copy");
+        const year = timeline.querySelector(".sub-history-center-year");
+        const content = timeline.querySelector(".sub-history-center-content");
+        const title = timeline.querySelector(".sub-history-center-title");
+        const description = timeline.querySelector(".sub-history-center-description");
+
+        if (eraTrack) {
+            gsap.fromTo(eraTrack,
+                { y: "58vh" },
+                {
+                    y: function () {
+                        return -(eraTrack.scrollHeight - window.innerHeight * .88);
+                    },
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: timeline,
+                        start: "top top",
+                        end: "bottom bottom",
+                        scrub: 1.1,
+                        invalidateOnRefresh: true
+                    }
+                }
+            );
+        }
+
+        let activeYear = year ? year.textContent.trim() : "1940";
+
+        function buildYearDigits(value) {
+            if (!year) return;
+            year.innerHTML = "";
+
+            value.split("").forEach(function (digit) {
+                const digitWrap = document.createElement("span");
+                const track = document.createElement("span");
+                const valueEl = document.createElement("span");
+
+                digitWrap.className = "sub-history-year-digit";
+                track.className = "sub-history-year-digit-track";
+                valueEl.className = "sub-history-year-digit-value";
+                valueEl.textContent = digit;
+
+                track.appendChild(valueEl);
+                digitWrap.appendChild(track);
+                year.appendChild(digitWrap);
+            });
+        }
+
+        function rollDigit(digitWrap, oldDigit, newDigit, direction, delay) {
+            if (oldDigit === newDigit) return;
+
+            const track = digitWrap.querySelector(".sub-history-year-digit-track");
+            if (!track) return;
+
+            const oldEl = document.createElement("span");
+            const newEl = document.createElement("span");
+
+            oldEl.className = "sub-history-year-digit-value";
+            newEl.className = "sub-history-year-digit-value";
+            oldEl.textContent = oldDigit;
+            newEl.textContent = newDigit;
+            track.innerHTML = "";
+
+            if (direction > 0) {
+                track.appendChild(oldEl);
+                track.appendChild(newEl);
+                gsap.set(track, { yPercent: 0 });
+                gsap.to(track, {
+                    yPercent: -50,
+                    duration: .46,
+                    delay: delay,
+                    ease: "power3.inOut",
+                    onComplete: function () {
+                        track.innerHTML = "";
+                        track.appendChild(newEl);
+                        gsap.set(track, { yPercent: 0 });
+                    }
+                });
+            } else {
+                track.appendChild(newEl);
+                track.appendChild(oldEl);
+                gsap.set(track, { yPercent: -50 });
+                gsap.to(track, {
+                    yPercent: 0,
+                    duration: .46,
+                    delay: delay,
+                    ease: "power3.inOut",
+                    onComplete: function () {
+                        track.innerHTML = "";
+                        track.appendChild(newEl);
+                        gsap.set(track, { yPercent: 0 });
+                    }
+                });
+            }
+        }
+
+        function animateYear(nextYear) {
+            if (!year || activeYear === nextYear) return;
+
+            const oldYear = activeYear.padStart(4, "0");
+            const targetYear = nextYear.padStart(4, "0");
+            const direction = Number(targetYear) > Number(oldYear) ? 1 : -1;
+            const changedIndexes = [];
+
+            for (let index = 0; index < targetYear.length; index += 1) {
+                if (oldYear[index] !== targetYear[index]) changedIndexes.push(index);
+            }
+
+            const order = changedIndexes.length > 1
+                ? changedIndexes.slice().sort(function (a, b) { return b - a; })
+                : changedIndexes;
+
+            const digitWraps = Array.from(year.querySelectorAll(".sub-history-year-digit"));
+
+            order.forEach(function (digitIndex, orderIndex) {
+                rollDigit(
+                    digitWraps[digitIndex],
+                    oldYear[digitIndex],
+                    targetYear[digitIndex],
+                    direction,
+                    orderIndex * .08
+                );
+            });
+
+            activeYear = targetYear;
+        }
+
+        function changeHistory(step) {
+            if (!step || !year || !content || !title || !description || !copy) return;
+
+            const nextYear = step.dataset.year || "";
+            if (!nextYear || activeYear === nextYear) return;
+
+            copy.dataset.activeYear = nextYear;
+            animateYear(nextYear);
+
+            gsap.killTweensOf(content);
+            gsap.to(content, {
+                autoAlpha: 0,
+                y: 12,
+                duration: .16,
+                ease: "power2.in",
+                overwrite: true,
+                onComplete: function () {
+                    title.textContent = step.dataset.title || "";
+                    description.textContent = step.dataset.description || "";
+
+                    gsap.fromTo(content,
+                        { autoAlpha: 0, y: -10 },
+                        {
+                            autoAlpha: 1,
+                            y: 0,
+                            duration: .34,
+                            ease: "power3.out",
+                            overwrite: true
+                        }
+                    );
+                }
+            });
+        }
+
+        buildYearDigits(activeYear);
+        if (copy) copy.dataset.activeYear = activeYear;
+
+        steps.forEach(function (step) {
+            ScrollTrigger.create({
+                trigger: step,
+                start: "top 58%",
+                end: "bottom 58%",
+                onEnter: function () { changeHistory(step); },
+                onEnterBack: function () { changeHistory(step); }
+            });
+        });
+
+        ScrollTrigger.refresh();
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initHistoryTimeline);
+    } else {
+        initHistoryTimeline();
+    }
+})();
