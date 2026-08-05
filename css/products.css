@@ -1430,7 +1430,7 @@ products-ROICalculator.html
 }
 
 .roi-calculator .inner{
-    width:calc(1400 * var(--vw));
+    width:calc(1300 * var(--vw));
     margin:auto;
 }
 
@@ -1510,7 +1510,7 @@ products-ROICalculator.html
 }
 
 .roi-result .inner{
-    width:calc(1400 * var(--vw));
+    width:calc(1300 * var(--vw));
     margin:auto;
 }
 
@@ -1528,14 +1528,16 @@ products-ROICalculator.html
     margin-top:calc(90 * var(--vw));
 }
 
-.roi-result-item{}
+.roi-result-item p{
+    display:block;
+    margin-bottom:calc(26 * var(--vw));
+    font-size:calc(24 * var(--vw));
+}
 
 .roi-result-item span{
-    display:block;
-
+    display:inline-block;
     margin-bottom:calc(26 * var(--vw));
-
-    font-size:calc(24 * var(--vw));
+    font-size:calc(50 * var(--vw));
 }
 
 .roi-result-item strong{
@@ -1565,6 +1567,61 @@ products-ROICalculator.html
     transform:rotate(25deg);
 }
 
+/* ROI Tooltip */
+
+.roi-tooltip{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+}
+
+.roi-tooltip-box{
+    position:absolute;
+    left:calc(90 * var(--vw));
+    bottom:calc(-100 * var(--vw));
+    transform:translateX(-50%);
+
+    width:calc(210 * var(--vw));
+    padding:calc(20 * var(--vw));
+
+    border-radius:calc(15 * var(--vw));
+    background:var(--red);
+
+    color:#fff;
+    font-size:calc(16 * var(--vw));
+    font-weight:400;
+    line-height:calc(20 * var(--vw));
+
+    white-space:normal;
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transition:.25s;
+    z-index:30;
+}
+
+.roi-tooltip-box::before{
+    content:"";
+    position:absolute;
+    left:20%;
+    top:calc(-12 * var(--vw));
+    transform:translateX(-50%);
+
+    width:0;
+    height:0;
+
+    border-left:calc(12 * var(--vw)) solid transparent;
+    border-right:calc(12 * var(--vw)) solid transparent;
+    border-bottom:calc(14 * var(--vw)) solid var(--red);
+}
+
+.roi-tooltip:hover .roi-tooltip-box,
+.roi-tooltip:focus-within .roi-tooltip-box{
+    opacity:1;
+    visibility:visible;
+}
 
 
 /* ========================================
@@ -1582,19 +1639,18 @@ products-ROICalculator.html , Products Hero
     position:absolute;
     inset:0;
     background: url(/images/products/P_Calculator_Products_bg.png);
+    background-size: cover;
 }
 
 .sub-products-visual .inner{
     position:relative;
     z-index:2;
-    width:calc(1400 * var(--vw));
+    width:calc(1300 * var(--vw));
     height:calc(1080 * var(--vw));
     margin:calc(100 * var(--vw)) auto;
 }
 
 .sub-products-heading{
-    
-    position: absolute;
 }
 
 .sub-products-heading-desc{
@@ -1606,9 +1662,9 @@ products-ROICalculator.html , Products Hero
 .sub-products-content{
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-start;
     height: calc(800 * var(--vw));
-    padding-top: calc(132 * var(--vw));
+    padding-top: calc(40 * var(--vw));
 }
 
 .sub-products-category{

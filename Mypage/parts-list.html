@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>전체 부품 목록 | HUNTER KOREA</title>
+<link href="/css/common.css" rel="stylesheet">
+<link href="/css/layout.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
+<link href="/css/mypage.css" rel="stylesheet">
+<link href="/css/common-form.css" rel="stylesheet">
+<link href="/css/responsive.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+</head>
+<body>
+<div data-include="/includes/header.html"></div>
+<main class="sub-mypage-page" data-header-theme="dark">
+<section class="page-heading" data-header-theme="dark"><div class="inner"><ul class="breadcrumb"><li><a aria-label="Home" class="breadcrumb-home" href="/"></a></li><li><a href="/Mypage/mypage.html">My page</a></li></ul><h2 class="page-title">My page</h2></div></section>
+<section class="sub-mypage-section"><div class="sub-mypage-inner">
+<aside aria-label="마이페이지 메뉴" class="sub-mypage-sidebar">
+<div class="sub-mypage-user-card"><p>안녕하세요</p><div class="sub-mypage-user-row"><strong>홍길동님</strong><a href="/logout.html">로그아웃</a></div></div>
+<nav class="sub-mypage-nav">
+<a class="sub-mypage-nav-link" href="/Mypage/mypage.html"><span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-avatar.svg"></span><span>마이페이지 홈</span></a>
+<a class="sub-mypage-nav-link" href="/Mypage/account.html"><span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-avatar-circle.svg"></span><span>계정/회원정보 관리</span></a>
+<a class="sub-mypage-nav-link" href="/Mypage/cs-request.html"><span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-headphones.svg"></span><span>CS 신청하기</span></a>
+<a class="sub-mypage-nav-link" href="/Mypage/products.html"><span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-product-alignment-equipment.svg"></span><span>나의 제품 관리</span></a>
+<div class="sub-mypage-nav-group is-open" data-mypage-accordion>
+<button aria-expanded="true" class="sub-mypage-nav-link sub-mypage-nav-toggle is-active" type="button"><span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-gear-double.svg"></span><span>부품 주문 관리</span><i aria-hidden="true" class="sub-mypage-nav-arrow"></i></button>
+<div class="sub-mypage-nav-depth"><div class="sub-mypage-nav-depth-inner"><a class="is-active" href="/Mypage/parts-list.html">전체 부품 목록</a><a href="/Mypage/cart.html">장바구니</a><a href="/Mypage/order-list.html">부품 주문 신청 내역</a></div></div>
+</div>
+<div class="sub-mypage-nav-group" data-mypage-accordion><button aria-expanded="false" class="sub-mypage-nav-link sub-mypage-nav-toggle" type="button"><span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-product-tire-changer-walkaway.svg"></span><span>트레이닝 센터</span><i aria-hidden="true" class="sub-mypage-nav-arrow"></i></button><div class="sub-mypage-nav-depth"><div class="sub-mypage-nav-depth-inner"><a href="/Mypage/training-apply.html">트레이닝 수강 신청</a><a href="/Mypage/training-history.html">트레이닝 수강 이력</a></div></div></div>
+</nav>
+</aside>
+<div class="sub-mypage-content">
+<div class="sub-mypage-products sub-mypage-parts-list-page">
+<h3 class="sub-mypage-page-title">전체 부품 목록</h3>
+<div class="sub-mypage-parts-filter sub-mypage-parts-filter-all">
+<div class="sub-form-select" data-select><button type="button" class="sub-form-select-trigger" aria-expanded="false"><span class="sub-form-select-value is-placeholder">제품 분류</span><i class="sub-form-select-arrow" aria-hidden="true"></i></button><ul class="sub-form-select-options"><li><button type="button" class="sub-form-select-option" data-value="alignment">Wheel Alignment</button></li><li><button type="button" class="sub-form-select-option" data-value="balancer">Wheel Balancer</button></li><li><button type="button" class="sub-form-select-option" data-value="changer">Tire Changer</button></li></ul><input type="hidden" name="product_category"></div>
+<div class="sub-form-select" data-select><button type="button" class="sub-form-select-trigger" aria-expanded="false"><span class="sub-form-select-value is-placeholder">부품 분류</span><i class="sub-form-select-arrow" aria-hidden="true"></i></button><ul class="sub-form-select-options"><li><button type="button" class="sub-form-select-option" data-value="plate">Plate</button></li><li><button type="button" class="sub-form-select-option" data-value="sleeves">Sleeves</button></li><li><button type="button" class="sub-form-select-option" data-value="kit">Kit</button></li></ul><input type="hidden" name="part_category"></div>
+<label class="sub-mypage-search"><i aria-hidden="true"></i><input type="search" placeholder="검색어를 입력해주세요" aria-label="부품 검색"></label>
+</div>
+<div class="sub-mypage-list-actions"><strong>총 <em>70</em>개</strong><a href="/Mypage/cart.html" class="sub-mypage-outline-button"><span class="sub-mypage-cart-icon">🛒</span>장바구니 담기</a></div>
+<div class="sub-mypage-parts-table">
+<div class="sub-mypage-parts-head"><span><label class="sub-form-checkbox sub-mypage-check-only"><input type="checkbox" data-check-all><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label></span><span>부품정보</span><span>판매가</span><span>수량</span><span>최종금액</span></div>
+<div class="sub-mypage-parts-body">
+<article class="sub-mypage-part-row">
+<div><label class="sub-form-checkbox sub-mypage-check-only"><input class="sub-mypage-part-check" type="checkbox" checked><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label></div>
+<div class="sub-mypage-part-info"><button type="button" class="sub-mypage-part-image sub-mypage-part-open" data-part-modal-open aria-label="FLANGE PLATES AND STUD KITS 상세보기"><img src="/images/mypage/part_01.png" alt="FLANGE PLATES AND STUD KITS"></button><button type="button" class="sub-mypage-part-text sub-mypage-part-open" data-part-modal-open><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></button></div>
+<div class="sub-mypage-part-price" data-price="1000000">₩1,000,000</div>
+<div><div class="sub-mypage-quantity"><button type="button" data-qty-minus aria-label="수량 감소">−</button><input type="number" value="10" min="1" max="99" aria-label="수량"><button type="button" data-qty-plus aria-label="수량 증가">＋</button></div></div>
+<div class="sub-mypage-part-total">₩0</div>
+</article>
+<article class="sub-mypage-part-row">
+<div><label class="sub-form-checkbox sub-mypage-check-only"><input class="sub-mypage-part-check" type="checkbox" checked><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label></div>
+<div class="sub-mypage-part-info"><button type="button" class="sub-mypage-part-image sub-mypage-part-open" data-part-modal-open aria-label="FLANGE PLATES AND STUD KITS 상세보기"><img src="/images/mypage/part_01.png" alt="FLANGE PLATES AND STUD KITS"></button><button type="button" class="sub-mypage-part-text sub-mypage-part-open" data-part-modal-open><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></button></div>
+<div class="sub-mypage-part-price" data-price="1000000">₩1,000,000</div>
+<div><div class="sub-mypage-quantity"><button type="button" data-qty-minus aria-label="수량 감소">−</button><input type="number" value="10" min="1" max="99" aria-label="수량"><button type="button" data-qty-plus aria-label="수량 증가">＋</button></div></div>
+<div class="sub-mypage-part-total">₩0</div>
+</article>
+<article class="sub-mypage-part-row">
+<div><label class="sub-form-checkbox sub-mypage-check-only"><input class="sub-mypage-part-check" type="checkbox"><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label></div>
+<div class="sub-mypage-part-info"><button type="button" class="sub-mypage-part-image sub-mypage-part-open" data-part-modal-open aria-label="FLANGE PLATES AND STUD KITS 상세보기"><img src="/images/mypage/part_01.png" alt="FLANGE PLATES AND STUD KITS"></button><button type="button" class="sub-mypage-part-text sub-mypage-part-open" data-part-modal-open><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></button></div>
+<div class="sub-mypage-part-price" data-price="1000000">₩1,000,000</div>
+<div><div class="sub-mypage-quantity"><button type="button" data-qty-minus aria-label="수량 감소">−</button><input type="number" value="10" min="1" max="99" aria-label="수량"><button type="button" data-qty-plus aria-label="수량 증가">＋</button></div></div>
+<div class="sub-mypage-part-total">₩0</div>
+</article>
+<article class="sub-mypage-part-row">
+<div><label class="sub-form-checkbox sub-mypage-check-only"><input class="sub-mypage-part-check" type="checkbox"><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label></div>
+<div class="sub-mypage-part-info"><button type="button" class="sub-mypage-part-image sub-mypage-part-open" data-part-modal-open aria-label="FLANGE PLATES AND STUD KITS 상세보기"><img src="/images/mypage/part_01.png" alt="FLANGE PLATES AND STUD KITS"></button><button type="button" class="sub-mypage-part-text sub-mypage-part-open" data-part-modal-open><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></button></div>
+<div class="sub-mypage-part-price" data-price="1000000">₩1,000,000</div>
+<div><div class="sub-mypage-quantity"><button type="button" data-qty-minus aria-label="수량 감소">−</button><input type="number" value="10" min="1" max="99" aria-label="수량"><button type="button" data-qty-plus aria-label="수량 증가">＋</button></div></div>
+<div class="sub-mypage-part-total">₩0</div>
+</article>
+<article class="sub-mypage-part-row">
+<div><label class="sub-form-checkbox sub-mypage-check-only"><input class="sub-mypage-part-check" type="checkbox"><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label></div>
+<div class="sub-mypage-part-info"><button type="button" class="sub-mypage-part-image sub-mypage-part-open" data-part-modal-open aria-label="FLANGE PLATES AND STUD KITS 상세보기"><img src="/images/mypage/part_01.png" alt="FLANGE PLATES AND STUD KITS"></button><button type="button" class="sub-mypage-part-text sub-mypage-part-open" data-part-modal-open><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></button></div>
+<div class="sub-mypage-part-price" data-price="1000000">₩1,000,000</div>
+<div><div class="sub-mypage-quantity"><button type="button" data-qty-minus aria-label="수량 감소">−</button><input type="number" value="10" min="1" max="99" aria-label="수량"><button type="button" data-qty-plus aria-label="수량 증가">＋</button></div></div>
+<div class="sub-mypage-part-total">₩0</div>
+</article>
+<article class="sub-mypage-part-row">
+<div><label class="sub-form-checkbox sub-mypage-check-only"><input class="sub-mypage-part-check" type="checkbox" checked><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label></div>
+<div class="sub-mypage-part-info"><button type="button" class="sub-mypage-part-image sub-mypage-part-open" data-part-modal-open aria-label="FLANGE PLATES AND STUD KITS 상세보기"><img src="/images/mypage/part_01.png" alt="FLANGE PLATES AND STUD KITS"></button><button type="button" class="sub-mypage-part-text sub-mypage-part-open" data-part-modal-open><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></button></div>
+<div class="sub-mypage-part-price" data-price="1000000">₩1,000,000</div>
+<div><div class="sub-mypage-quantity"><button type="button" data-qty-minus aria-label="수량 감소">−</button><input type="number" value="10" min="1" max="99" aria-label="수량"><button type="button" data-qty-plus aria-label="수량 증가">＋</button></div></div>
+<div class="sub-mypage-part-total">₩0</div>
+</article>
+</div></div>
+<div class="sub-mypage-pagination-row"><button type="button" class="sub-mypage-count-select">10개씩 보기<i></i></button><nav class="sub-mypage-pagination" aria-label="페이지 이동"><button type="button" class="is-prev" aria-label="이전 페이지"></button><a class="is-active" href="#">1</a><a href="#">2</a><a href="#">3</a><button type="button" class="is-next" aria-label="다음 페이지"></button></nav></div>
+</div>
+</div>
+</div></section>
+</main>
+<div class="sub-modal sub-mypage-part-modal" data-part-modal aria-hidden="true">
+<button type="button" class="sub-modal-dim" data-part-modal-close aria-label="부품 상세 닫기"></button>
+<div class="sub-modal-dialog sub-mypage-part-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="part-modal-title">
+<button type="button" class="sub-mypage-part-modal-close" data-part-modal-close aria-label="닫기"></button>
+<div class="sub-mypage-part-modal-image"><img src="/images/mypage/part_01.png" alt="FLANGE PLATES AND STUD KITS"></div>
+<div class="sub-mypage-part-modal-content"><small>Wheel Alignment</small><h3 id="part-modal-title">FLANGE PLATES AND STUD KITS</h3><strong>20-3698-1</strong><dl><div><dt>판매가</dt><dd>1,003,000원</dd></div></dl></div>
+</div>
+</div>
+<div data-include="/includes/footer.html"></div>
+<script src="/js/include.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/form.js"></script>
+<script src="/js/mypage.js"></script>
+</body>
+</html>

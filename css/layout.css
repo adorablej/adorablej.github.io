@@ -1132,6 +1132,29 @@ sub page 공통
     font-family: "Russo One", sans-serif;
 }
 
+.sub-section-sm-heading {
+    text-align: center;
+    margin-bottom: calc(100 * var(--vw));
+}
+
+.sub-section-sm-heading h2{
+    margin: 0;
+    color: #111;
+    font-family: "Russo One", sans-serif;
+    font-size: calc(50 * var(--vw));
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: calc(20 * var(--vw));
+}
+.sub-section-sm-heading h2 span{
+    color: var(--red);
+    font-family: "Russo One", sans-serif;
+}
+.sub-section-sm-heading p{
+    font-size: calc(18 * var(--vw));
+color: #555;
+}
+
 /* ========================================
 Sub Products Banner
 ======================================== */

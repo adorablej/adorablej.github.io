@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>부품 주문 신청 내역 | HUNTER KOREA</title>
+<link href="/css/common.css" rel="stylesheet">
+<link href="/css/layout.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
+<link href="/css/mypage.css" rel="stylesheet">
+<link href="/css/common-form.css" rel="stylesheet">
+<link href="/css/responsive.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+</head>
+<body>
+<div data-include="/includes/header.html"></div>
+<main class="sub-mypage-page" data-header-theme="dark">
+<section class="page-heading" data-header-theme="dark"><div class="inner"><ul class="breadcrumb"><li><a aria-label="Home" class="breadcrumb-home" href="/"></a></li><li><a href="/Mypage/mypage.html">My page</a></li></ul><h2 class="page-title">My page</h2></div></section>
+<section class="sub-mypage-section"><div class="sub-mypage-inner">
+<aside aria-label="마이페이지 메뉴" class="sub-mypage-sidebar">
+<div class="sub-mypage-user-card"><p>안녕하세요</p><div class="sub-mypage-user-row"><strong>홍길동님</strong><a href="/logout.html">로그아웃</a></div></div>
+<nav class="sub-mypage-nav">
+<a class="sub-mypage-nav-link" href="/Mypage/mypage.html"><span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-avatar.svg"></span><span>마이페이지 홈</span></a>
+<a class="sub-mypage-nav-link" href="/Mypage/account.html"><span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-avatar-circle.svg"></span><span>계정/회원정보 관리</span></a>
+<a class="sub-mypage-nav-link" href="/Mypage/cs-request.html"><span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-headphones.svg"></span><span>CS 신청하기</span></a>
+<a class="sub-mypage-nav-link" href="/Mypage/products.html"><span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-product-alignment-equipment.svg"></span><span>나의 제품 관리</span></a>
+<div class="sub-mypage-nav-group is-open" data-mypage-accordion><button aria-expanded="true" class="sub-mypage-nav-link sub-mypage-nav-toggle is-active" type="button"><span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-gear-double.svg"></span><span>부품 주문 관리</span><i aria-hidden="true" class="sub-mypage-nav-arrow"></i></button><div class="sub-mypage-nav-depth"><div class="sub-mypage-nav-depth-inner"><a href="/Mypage/parts-list.html">전체 부품 목록</a><a href="/Mypage/cart.html">장바구니</a><a class="is-active" href="/Mypage/order-list.html">부품 주문 신청 내역</a></div></div></div>
+<div class="sub-mypage-nav-group" data-mypage-accordion><button aria-expanded="false" class="sub-mypage-nav-link sub-mypage-nav-toggle" type="button"><span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-product-tire-changer-walkaway.svg"></span><span>트레이닝 센터</span><i aria-hidden="true" class="sub-mypage-nav-arrow"></i></button><div class="sub-mypage-nav-depth"><div class="sub-mypage-nav-depth-inner"><a href="/Mypage/training-apply.html">트레이닝 수강 신청</a><a href="/Mypage/training-history.html">트레이닝 수강 이력</a></div></div></div>
+</nav></aside>
+<div class="sub-mypage-content"><div class="sub-mypage-order-list-page">
+<h3 class="sub-mypage-page-title">부품 주문 신청 내역</h3>
+<div class="sub-mypage-order-search"><span class="sub-mypage-search-icon" aria-hidden="true"></span><input type="search" placeholder="검색어를 입력해주세요" aria-label="주문 내역 검색" data-order-search></div>
+<div class="sub-mypage-order-tabs" role="tablist" aria-label="주문 상태"><button class="is-active" type="button" data-order-filter="all">전체</button><button type="button" data-order-filter="request">주문 신청</button><button type="button" data-order-filter="confirm">주문 확인</button><button type="button" data-order-filter="complete">주문 완료</button><button type="button" data-order-filter="cancel">주문 취소</button></div>
+<p class="sub-mypage-order-result"><strong>70</strong>개 결과 검색</p>
+<div class="sub-mypage-order-list" data-order-list>
+<article class="sub-mypage-order-history" data-order-card data-status="request" data-keywords="부품 이름 text 주문 신청">
+<div class="sub-mypage-order-history-head"><strong>2026.06.10 / 총 2개 주문 / 총금액 <em>000,000,000원</em></strong><span class="sub-mypage-status is-request">주문 신청</span></div>
+<div class="sub-mypage-order-history-body">
+<div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/mypage/part_01.png" alt="부품"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div>
+<div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/mypage/part_01.png" alt="부품"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div>
+<div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/mypage/part_01.png" alt="부품"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div>
+</div><button type="button" class="sub-mypage-order-toggle" aria-expanded="true"><span>총 3건 주문 접기</span><i aria-hidden="true"></i></button></article>
+
+<article class="sub-mypage-order-history is-collapsed" data-order-card data-status="confirm" data-keywords="부품 이름 text 주문 확인">
+<div class="sub-mypage-order-history-head"><strong>2026.06.10 / 총 2개 주문 / 총금액 <em>000,000,000원</em></strong><span class="sub-mypage-status is-confirm">주문 확인</span></div>
+<div class="sub-mypage-order-history-body"><div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/mypage/part_01.png" alt="부품"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div></div>
+<button type="button" class="sub-mypage-order-toggle" aria-expanded="false"><span>총 3건 주문 펼치기</span><i aria-hidden="true"></i></button></article>
+
+<article class="sub-mypage-order-history is-collapsed" data-order-card data-status="complete" data-keywords="부품 이름 text 주문 완료">
+<div class="sub-mypage-order-history-head"><strong>2026.06.10 / 총 2개 주문 / 총금액 <em>000,000,000원</em></strong><span class="sub-mypage-status is-order-complete">주문 완료</span></div>
+<div class="sub-mypage-order-history-body"><div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/mypage/part_01.png" alt="부품"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div></div>
+<button type="button" class="sub-mypage-order-toggle" aria-expanded="false"><span>총 3건 주문 펼치기</span><i aria-hidden="true"></i></button></article>
+</div>
+<p class="sub-mypage-order-empty" hidden>검색 결과가 없습니다.</p>
+</div></div></div></section></main>
+<div data-include="/includes/footer.html"></div>
+<script src="/js/include.js"></script><script src="/js/common.js"></script><script src="/js/form.js"></script><script src="/js/mypage.js"></script>
+</body></html>

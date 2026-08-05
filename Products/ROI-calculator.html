@@ -39,7 +39,7 @@
                             <a href="/" class="breadcrumb-home" aria-label="Home"></a>
                         </li>
                         <li>
-                            <a href="#">Products</a>
+                            <a href="/Products/products.html">Products</a>
                         </li>
                         <li>
                             <a href="#">ROI Calculator</a>
@@ -65,71 +65,103 @@
                         지금 숫자로 확인해 보세요<span>.</span>
                     </h2>
 
-                    <div class="roi-form">
+                    <div class="roi-form" data-roi-calculator>
 
                         <div class="roi-form-item">
-                            <label>초기 장비 투자비용</label>
+                            <label for="roi-investment">초기 장비 투자비용</label>
 
                             <div class="roi-input-wrap">
                                 <input
                                     type="text"
+                                    inputmode="numeric"
                                     class="roi-input is-active"
+                                    id="roi-investment"
+                                    data-roi-input="investment"
                                     value="5,000,000"
+                                    autocomplete="off"
                                 >
                                 <span>원</span>
                             </div>
                         </div>
 
                         <div class="roi-form-item">
-                            <label>대당 작업 비용</label>
+                            <label for="roi-job-cost">대당 작업 비용</label>
 
                             <div class="roi-input-wrap">
                                 <input
                                     type="text"
+                                    inputmode="numeric"
                                     class="roi-input"
+                                    id="roi-job-cost"
+                                    data-roi-input="jobCost"
                                     placeholder="숫자를 입력하세요."
+                                    autocomplete="off"
                                 >
                                 <span>원</span>
                             </div>
                         </div>
 
                         <div class="roi-form-item">
-                            <label>
+                            <label for="roi-margin-rate">
                                 대당 마진율(%)
-                                <button class="roi-info" type="button">i</button>
+                                <span class="roi-tooltip">
+                                    <button
+                                        class="roi-info"
+                                        type="button"
+                                        aria-label="마진율 안내"
+                                    >
+                                        i
+                                    </button>
+                                    <span class="roi-tooltip-box">
+                                        인건비와 자재비를 제외한 비율을<br>
+                                        말합니다. (기본 80%)
+                                    </span>
+                                </span>
                             </label>
 
                             <div class="roi-input-wrap">
                                 <input
                                     type="text"
+                                    inputmode="decimal"
                                     class="roi-input"
+                                    id="roi-margin-rate"
+                                    data-roi-input="marginRate"
                                     placeholder="숫자를 입력하세요."
+                                    autocomplete="off"
                                 >
                                 <span>%</span>
                             </div>
                         </div>
 
                         <div class="roi-form-item">
-                            <label>하루 평균 작업 대수</label>
+                            <label for="roi-daily-jobs">하루 평균 작업 대수</label>
 
                             <div class="roi-input-wrap">
                                 <input
                                     type="text"
+                                    inputmode="numeric"
                                     class="roi-input"
+                                    id="roi-daily-jobs"
+                                    data-roi-input="dailyJobs"
                                     placeholder="숫자를 입력하세요."
+                                    autocomplete="off"
                                 >
                                 <span>개</span>
                             </div>
                         </div>
 
                         <div class="roi-form-item">
-                            <label>주당 근무일수</label>
+                            <label for="roi-work-days">주당 근무일수</label>
 
                             <div class="roi-input-wrap">
                                 <input
                                     type="text"
+                                    inputmode="numeric"
                                     class="roi-input"
+                                    id="roi-work-days"
+                                    data-roi-input="workDays"
                                     placeholder="숫자를 입력하세요."
+                                    autocomplete="off"
                                 >
                                 <span>일</span>
                             </div>
@@ -148,22 +180,22 @@
                     <div class="roi-result-top">
 
                         <div class="roi-result-item">
-                            <span>연간 총매출 마진</span>
-                            <strong>5,000,000<em>원</em></strong>
+                            <p>연간 총매출 마진</p>
+                            <strong><span data-roi-result="annualRevenue">0</span><em>원</em></strong>
                         </div>
 
                         <div class="roi-result-symbol">−</div>
 
                         <div class="roi-result-item">
-                            <span>연간 장비 감가상각비</span>
-                            <strong>1,000,000<em>원</em></strong>
+                            <p>연간 장비 감가상각비</p>
+                            <strong><span data-roi-result="annualDepreciation">500,000</span><em>원</em></strong>
                         </div>
 
                         <div class="roi-result-symbol">=</div>
 
                         <div class="roi-result-item">
-                            <span>연간 예상 순이익</span>
-                            <strong>4,000,000<em>원</em></strong>
+                            <p>연간 예상 순이익</p>
+                            <strong><span data-roi-result="annualProfit">0</span><em>원</em></strong>
                         </div>
 
                     </div>
@@ -171,16 +203,16 @@
                     <div class="roi-result-bottom">
 
                         <div class="roi-result-item">
-                            <span>장비 투자금 전액 회수 기간</span>
-                            <strong>12<em>개월</em></strong>
+                            <p>장비 투자금 전액 회수 기간</p>
+                            <strong><span data-roi-result="paybackMonths">0</span><em>개월</em></strong>
                         </div>
                         <div class="roi-result-symbol">
                             <div class="roi-divider"></div>
                         </div>
 
                         <div class="roi-result-item">
-                            <span>10년간 예상 총수익</span>
-                            <strong>70,000,000<em>원</em></strong>
+                            <p>10년간 예상 총수익</p>
+                            <strong><span data-roi-result="tenYearProfit">0</span><em>원</em></strong>
                         </div>
                         <div class="roi-result-symbol"></div>
 
@@ -201,9 +233,8 @@
                 <div class="sub-products-visual-bg">
                 </div>
                 <div class="inner">
-                    <div class="sub-products-heading">
+                    <div class="sub-products-heading align-c">
                         <h2 class="sub-section-title">Products<span>.</span></h2>
-                        <p class="sub-products-heading-desc">글로벌 정밀 정비의 기준</p>
                     </div>
                     <div class="sub-products-content">
                         <div class="sub-products-category">
@@ -506,6 +537,7 @@
     <script src="/js/common.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/products.js"></script>
+    <script src="/js/roi-calculator.js"></script>
 </body>
 
 </html>

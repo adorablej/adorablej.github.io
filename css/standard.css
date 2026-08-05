@@ -959,7 +959,7 @@
 }
 
 .sub-korea-section-inner {
-    width: calc(var(--standard-detail-vw) * 1280 / 1920);
+    width: calc(var(--standard-detail-vw) * 1300 / 1920);
     margin: 0 auto;
 }
 
@@ -980,6 +980,7 @@
 .sub-korea-section-heading h2 span,
 .sub-korea-before-copy h2 span {
     color: var(--red);
+    font-family: "Russo One", sans-serif;
 }
 
 .sub-korea-section-heading p {
@@ -990,59 +991,63 @@
 }
 
 .sub-korea-creative {
-    padding: calc(var(--standard-detail-vw) * 112 / 1920) 0 calc(var(--standard-detail-vw) * 116 / 1920);
+    padding: calc(var(--standard-detail-vw) * 120 / 1920) 0;
     background: #fff;
 }
 
 .sub-korea-creative-principles {
     display: grid;
-    grid-template-columns: calc(var(--standard-detail-vw) * 245 / 1920) 1fr;
+    grid-template-columns: calc(var(--standard-detail-vw) * 200 / 1920) 1fr;
     align-items: center;
-    min-height: calc(var(--standard-detail-vw) * 200 / 1920);
-    margin-top: calc(var(--standard-detail-vw) * 100 / 1920);
-    padding: 0 calc(var(--standard-detail-vw) * 58 / 1920);
-    border-radius: calc(var(--standard-detail-vw) * 16 / 1920);
-    background: #c80b03;
+    padding: calc(var(--standard-detail-vw) * 95 / 1920) calc(var(--standard-detail-vw) * 60 / 1920);
+    border-radius: calc(var(--standard-detail-vw) * 20 / 1920);
+    background: var(--red);
     color: #fff;
     box-sizing: border-box;
 }
 
-.sub-korea-creative-label strong,
-.sub-korea-creative-card-item strong {
+.sub-korea-creative-label strong{
     display: block;
-    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
-    font-weight: 700;
-    line-height: 1.35;
+    font-size: calc(var(--standard-detail-vw) * 30 / 1920);
+    font-weight: 600;
+    line-height: calc(var(--standard-detail-vw) * 40 / 1920);
 }
+.sub-korea-creative-card-item strong {
+    font-size: calc(var(--standard-detail-vw) * 22 / 1920);
+    font-weight: 500;
+    line-height: calc(var(--standard-detail-vw) * 36 / 1920);
+}
+
 
 .sub-korea-creative-label span {
     display: block;
     margin-top: calc(var(--standard-detail-vw) * 12 / 1920);
-    color: rgba(255,255,255,.45);
-    font-size: calc(var(--standard-detail-vw) * 16 / 1920);
+    color: rgba(255,255,255,.40);
+    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
 }
 
 .sub-korea-creative-principle-list {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-flow: column;
 }
 
 .sub-korea-creative-principle {
     min-height: calc(var(--standard-detail-vw) * 54 / 1920);
     padding-left: calc(var(--standard-detail-vw) * 38 / 1920);
     border-left: 1px solid rgba(255,255,255,.22);
-    font-size: calc(var(--standard-detail-vw) * 19 / 1920);
-    font-weight: 600;
+    font-size: calc(var(--standard-detail-vw) * 22 / 1920);
+    font-weight: 400;
     line-height: 1.2;
 }
-
+.sub-korea-creative-principle:first-child{
+    border-left:none;
+}
 .sub-korea-creative-card {
     display: grid;
-    grid-template-columns: calc(var(--standard-detail-vw) * 245 / 1920) 1fr;
+    grid-template-columns: calc(var(--standard-detail-vw) * 200 / 1920) 1fr;
     align-items: center;
-    min-height: calc(var(--standard-detail-vw) * 190 / 1920);
     margin-top: calc(var(--standard-detail-vw) * 20 / 1920);
-    padding: 0 calc(var(--standard-detail-vw) * 58 / 1920);
+    padding: calc(var(--standard-detail-vw) * 60 / 1920);
     border-radius: calc(var(--standard-detail-vw) * 16 / 1920);
     background: #fafafa;
     box-sizing: border-box;
@@ -1054,29 +1059,30 @@
 
 .sub-korea-creative-card-list {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr 1fr calc(var(--standard-detail-vw) * 360 / 1920);;
 }
 
 .sub-korea-creative-card-item {
-    min-height: calc(var(--standard-detail-vw) * 100 / 1920);
-    padding: calc(var(--standard-detail-vw) * 10 / 1920) calc(var(--standard-detail-vw) * 42 / 1920);
+    padding:0 0 0 calc(var(--standard-detail-vw) * 42 / 1920);
     border-left: 1px solid #e5e5e5;
     box-sizing: border-box;
+}
+.sub-korea-creative-card-item:first-child{
+    border-left:none;
 }
 
 .sub-korea-creative-card-item p {
     margin: calc(var(--standard-detail-vw) * 14 / 1920) 0 0;
-    color: #898989;
-    font-size: calc(var(--standard-detail-vw) * 15 / 1920);
-    line-height: 1.5;
+    color: #777;
+    font-size: calc(var(--standard-detail-vw) * 17 / 1920);
+    line-height: calc(var(--standard-detail-vw) * 26 / 1920);
 }
 
 .sub-korea-before {
     position: relative;
-    height: calc(var(--standard-detail-vw) * 760 / 1920);
-    min-height: 680px;
     background: url('/images/standard/korea_Service_bg.png') center / cover no-repeat;
     color: #fff;
+    padding: calc(var(--standard-detail-vw) * 120 / 1920) 0;
 }
 
 .sub-korea-before-dim {
@@ -1091,8 +1097,8 @@
     display: grid;
     grid-template-columns: calc(var(--standard-detail-vw) * 550 / 1920) calc(var(--standard-detail-vw) * 680 / 1920);
     justify-content: space-between;
-    align-items: center;
-    width: calc(var(--standard-detail-vw) * 1280 / 1920);
+    align-items: start;
+    width: calc(var(--standard-detail-vw) * 1300 / 1920);
     height: 100%;
     margin: 0 auto;
 }
@@ -1100,17 +1106,14 @@
 .sub-korea-before-copy h2 {
     margin: 0;
     font-family: "Russo One", sans-serif;
-    font-size: calc(var(--standard-detail-vw) * 58 / 1920);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: -.03em;
+    font-size: calc(var(--standard-detail-vw) * 60 / 1920);
 }
 
 .sub-korea-before-copy p {
-    margin: calc(var(--standard-detail-vw) * 50 / 1920) 0 0;
+    margin: calc(var(--standard-detail-vw) * 40 / 1920) 0 0;
     color: rgba(255,255,255,.82);
-    font-size: calc(var(--standard-detail-vw) * 16 / 1920);
-    line-height: 1.75;
+    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
+    line-height: calc(var(--standard-detail-vw) * 30 / 1920);
 }
 
 .sub-korea-before-list {
@@ -1131,23 +1134,21 @@
 }
 
 .sub-korea-before-item > strong {
-    color: #df1308;
+    color: var(--red);
     font-family: "Russo One", sans-serif;
-    font-size: calc(var(--standard-detail-vw) * 48 / 1920);
+    font-size: calc(var(--standard-detail-vw) * 50 / 1920);
     font-weight: 400;
 }
 
 .sub-korea-before-item p {
     margin: 0;
     color: #fff;
-    font-size: calc(var(--standard-detail-vw) * 17 / 1920);
-    line-height: 1.55;
+    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
 }
 
 .sub-korea-before-item-large {
     align-items: start;
-    min-height: calc(var(--standard-detail-vw) * 305 / 1920);
-    padding-top: calc(var(--standard-detail-vw) * 45 / 1920);
+    padding: calc(var(--standard-detail-vw) * 40 / 1920) calc(var(--standard-detail-vw) * 60 / 1920);
 }
 
 .sub-korea-before-item-large div p {
@@ -1161,10 +1162,11 @@
 
 .sub-korea-before-item-large div p:last-child {
     border-bottom: 0;
+    padding-bottom: 0;
 }
 
 .sub-korea-after {
-    padding: calc(var(--standard-detail-vw) * 118 / 1920) 0 calc(var(--standard-detail-vw) * 130 / 1920);
+    padding: calc(var(--standard-detail-vw) * 120 / 1920) 0;
     background: #fff;
 }
 
@@ -1185,10 +1187,14 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: #c00d00d3;
+    background: #c00d00e8;
     color: #fff;
     text-align: center;
     box-sizing: border-box;
+}
+
+.sub-korea-after-item_icon{
+    margin-bottom: calc(var(--standard-detail-vw) * 40 / 1920);
 }
 
 .sub-korea-after-item:first-child {
