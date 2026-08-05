@@ -480,26 +480,26 @@ function initDragCursor() {
             allMenu.classList.add("is-logout");
         }
     
+        function preventPageScroll(event) {
+            if (!allMenu.classList.contains("is-open")) return;
+            if (panel.contains(event.target)) return;
+            event.preventDefault();
+        }
+
         function lockScroll() {
-            const pageScroll = document.querySelector(".page-scroll");
-    
             document.documentElement.classList.add("is-menu-open");
             document.body.classList.add("is-menu-open");
-    
-            if (pageScroll) {
-                pageScroll.classList.add("is-menu-open");
-            }
+
+            window.addEventListener("wheel", preventPageScroll, { passive: false });
+            window.addEventListener("touchmove", preventPageScroll, { passive: false });
         }
     
         function unlockScroll() {
-            const pageScroll = document.querySelector(".page-scroll");
-    
             document.documentElement.classList.remove("is-menu-open");
             document.body.classList.remove("is-menu-open");
-    
-            if (pageScroll) {
-                pageScroll.classList.remove("is-menu-open");
-            }
+
+            window.removeEventListener("wheel", preventPageScroll);
+            window.removeEventListener("touchmove", preventPageScroll);
         }
     
         function openMenu() {

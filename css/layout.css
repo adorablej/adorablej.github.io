@@ -993,11 +993,11 @@ All Menu SNS
 
 html.is-menu-open,
 body.is-menu-open {
-    overflow: hidden;
+    overflow: visible;
 }
 
-.page-scroll.is-menu-open {
-    overflow: hidden;
+.all-menu-panel {
+    overscroll-behavior: contain;
 }
 
 /* ========================================
