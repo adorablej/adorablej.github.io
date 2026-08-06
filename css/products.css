@@ -578,7 +578,7 @@ Sub Product Item
 
 .sub-product-item-title sup{
     font-size:.5em;
-    vertical-align:top;
+    vertical-align:super;
 
 }
 
@@ -593,7 +593,10 @@ Sub Product Item
     letter-spacing: -1px;
     word-break: keep-all;
 }
-
+.sub-product-item-desc sup{
+    font-size: calc(10 * var(--vw));
+    vertical-align:super;
+}
 
 .sub-product-item-reverse{
     background:url("/images/products/p_l_bg_r.png") center /cover no-repeat;
@@ -774,7 +777,7 @@ Detail Visual
 .detail-visual {
     position: relative;
     overflow: hidden;
-    background: url("/images/products/Products_D_V_bg.png") center / cover no-repeat;
+    background: url("/images/products/Products_D_V_bg.png") bottom / cover no-repeat;
 }
 
 .detail-visual .inner {
@@ -816,7 +819,7 @@ Detail Visual
 }
 
 .detail-visual-title .greenX {
-    background: url(../images/p_X.png);
+    background: url('/images/products/p_X.png');
     display: inline-block;
     position: absolute;
     background-repeat: no-repeat;
@@ -1355,7 +1358,7 @@ Detail FAQ
 .detail-faq-question-text {
     padding: 0 calc(20 * var(--vw)) 0 0;
     font-size: calc(24 * var(--vw));
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -2%;
 }
 
@@ -2152,7 +2155,10 @@ products-HunterPride-Map.html , Store Map
     width:calc(54 * var(--vw));
     height:calc(54 * var(--vw));
     border-radius:50%;
-    background:#f0f0f0;
+    background-color:#f0f0f0;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
 }
 
 .sub-pride-store-products p,.sub-pride-store-products span{
@@ -2164,10 +2170,42 @@ products-HunterPride-Map.html , Store Map
 }
 
 .sub-pride-store-empty{
+    display:flex;
+    min-height:calc(390 * var(--vw));
     padding:calc(40 * var(--vw)) 0;
-    color:#777;
-    font-size:calc(15 * var(--vw));
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    color:#888;
+    font-size:calc(16 * var(--vw));
     text-align:center;
+}
+
+.sub-pride-store-empty-icon{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:calc(48 * var(--vw));
+    height:calc(48 * var(--vw));
+    margin-bottom:calc(24 * var(--vw));
+    border:calc(4 * var(--vw)) solid #ddd;
+    border-radius:50%;
+    color:#ccc;
+    font-size:calc(34 * var(--vw));
+    font-weight:400;
+    line-height:1;
+}
+
+.sub-pride-store-empty strong{
+    margin-bottom:calc(10 * var(--vw));
+    color:#222;
+    font-size:calc(19 * var(--vw));
+    font-weight:700;
+}
+
+.sub-pride-store-empty > span:last-child{
+    color:#888;
+    font-size:calc(16 * var(--vw));
 }
 
 

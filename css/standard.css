@@ -1,9 +1,6 @@
 /* =========================================================
    The Standard
 ========================================================= */
-:root {
-    --standard-vw: min(100vw, 1920px);
-}
 .sub-standard-scroll {
     overflow-x: clip;
 overflow-y: visible;
@@ -41,13 +38,13 @@ overflow-y: visible;
     height: 105%;
     transform: translateX(-50%);
     background: radial-gradient(circle at center, rgba(190, 30, 0, .58) 0%, rgba(92, 8, 0, .3) 34%, rgba(0, 0, 0, 0) 72%);
-    filter: blur(calc(var(--standard-vw) * 18 / 1920));
+    filter: blur(calc(18 * var(--vw)));
 }
 
 .sub-standard-main-title {
     position: relative;
     z-index: 1;
-    width: calc(var(--standard-vw) * 800 / 1920);
+    width: calc(800 * var(--vw));
     text-align: center;
 }
 
@@ -56,7 +53,7 @@ overflow-y: visible;
     position: absolute;
     left: 50%;
     top: 50%;
-    width: calc(var(--standard-vw) * 840 / 1920);
+    width: calc(840 * var(--vw));
     height: 5px;
     transform: translate(-50%, -50%);
     background: linear-gradient(90deg, transparent, #c71910 30%, #c71910 70%, transparent);
@@ -67,12 +64,12 @@ overflow-y: visible;
     position: relative;
     z-index: 1;
     display: block;
-    font-size: calc(var(--standard-vw) * 100 / 1920);
+    font-size: calc(100 * var(--vw));
     font-family: "Russo One", sans-serif;
 }
 
 .sub-standard-main-title span {
-    margin-top: calc(var(--standard-vw) * 20 / 1920);
+    margin-top: calc(20 * var(--vw));
 }
 
 /* 02. Intro */
@@ -98,16 +95,16 @@ overflow-y: visible;
 
 .sub-standard-intro-content h2 {
     margin: 0;
-    font-size: calc(var(--standard-vw) * 70 / 1920);
+    font-size: calc(70 * var(--vw));
     font-weight: 700;
-    line-height:calc(var(--standard-vw) * 84 / 1920);
+    line-height:calc(84 * var(--vw));
 }
 
 .sub-standard-intro-content p {
-    margin: calc(var(--standard-vw) * 60 / 1920) 0 0;
+    margin: calc(60 * var(--vw)) 0 0;
     color: #fff;
-    font-size: calc(var(--standard-vw) * 20 / 1920);
-    line-height: calc(var(--standard-vw) * 40 / 1920);
+    font-size: calc(20 * var(--vw));
+    line-height: calc(40 * var(--vw));
 }
 
 /* 03~07. Sticky story */
@@ -136,33 +133,33 @@ overflow-y: visible;
 .sub-standard-story-copy {
     position: absolute;
     z-index: 4;
-    width: calc(var(--standard-vw) * 640 / 1920);
+    width: calc(640 * var(--vw));
     opacity: 0;
     visibility: hidden;
 }
 
 .sub-standard-story-copy-usa {
-    left: calc(var(--standard-vw) * 310 / 1920);
+    left: calc(310 * var(--vw));
     top: 52%;
 }
 
 .sub-standard-story-copy-korea {
-    right: calc(var(--standard-vw) * 250 / 1920);
+    right: calc(250 * var(--vw));
     top: 52%;
 }
 
 .sub-standard-story-copy-partners {
     left: 50%;
-    top: calc(var(--standard-vw) * 242 / 1920);
-    width: calc(var(--standard-vw) * 920 / 1920);
+    top: calc(242 * var(--vw));
+    width: calc(920 * var(--vw));
     text-align: center;
 }
 
 .sub-standard-story-copy h2 {
     margin: 0;
-    font-size: calc(var(--standard-vw) * 46 / 1920);
+    font-size: calc(46 * var(--vw));
     font-weight: 700;
-    letter-spacing: calc(var(--standard-vw) * -1 / 1920);
+    letter-spacing: calc(-1 * var(--vw));
 }
 
 .sub-standard-story-copy h2 span{
@@ -171,10 +168,10 @@ overflow-y: visible;
 }
 
 .sub-standard-story-copy p {
-    margin: calc(var(--standard-vw) * 30 / 1920) 0 calc(var(--standard-vw) * 60 / 1920);
+    margin: calc(30 * var(--vw)) 0 calc(60 * var(--vw));
     color: #00000060;
-    font-size: calc(var(--standard-vw) * 18 / 1920);
-    line-height: calc(var(--standard-vw) * 30 / 1920);
+    font-size: calc(18 * var(--vw));
+    line-height: calc(30 * var(--vw));
     letter-spacing: -.025em;
     word-break: keep-all;
 }
@@ -184,7 +181,7 @@ overflow-y: visible;
     z-index: 2;
     left: 50%;
     top: 50%;
-    width: calc(var(--standard-vw) * 500 / 1920);
+    width: calc(500 * var(--vw));
     transform-origin: 50% 50%;
     will-change: transform;
 }
@@ -207,9 +204,9 @@ overflow-y: visible;
 .sub-standard-h-red {
     position: absolute;
     left: -2%;
-    bottom: calc(var(--standard-vw) * -60 / 1920);
-    width: calc(var(--standard-vw) * 409 / 1920);
-    height: calc(var(--standard-vw) * 35 / 1920);
+    bottom: calc(-60 * var(--vw));
+    width: calc(409 * var(--vw));
+    height: calc(35 * var(--vw));
     background: var(--red);
     transform: skewX(-14deg);
     transform-origin: center;
@@ -238,11 +235,6 @@ overflow-y: visible;
 /* =========================================================
    HUNTER USA 
 ========================================================= */
-:root {
-    --standard-detail-vw: min(100vw, 1920px);
-    --usa-vw: var(--standard-detail-vw);
-}
-
 .sub-standard-detail-scroll {
     ooverflow-x: clip;
     overflow-y: visible;
@@ -283,8 +275,8 @@ overflow-y: visible;
     position: absolute;
     left: 50%;
     top: 50%;
-    width: calc(var(--usa-vw) * 1300 / 1920);
-    height: calc(var(--usa-vw) * 840 / 1920);
+    width: calc(1300 * var(--vw));
+    height: calc(840 * var(--vw));
     transform: translate(-50%, -50%);
     overflow: hidden;
     will-change: width, height;
@@ -324,7 +316,7 @@ overflow-y: visible;
     z-index: 4;
     left: 50%;
     top: 50%;
-    width: calc(var(--usa-vw) * 1100 / 1920);
+    width: calc(1100 * var(--vw));
     transform: translate(-50%, -50%);
     text-align: center;
     pointer-events: none;
@@ -335,9 +327,9 @@ overflow-y: visible;
 .sub-standard-detail-hero-line {
     margin: 0;
     color: rgba(255, 255, 255, .22);
-    font-size: calc(var(--usa-vw) * 48 / 1920);
+    font-size: calc(60 * var(--vw));
     font-weight: 700;
-    line-height: 1.35;
+    line-height: calc(76 * var(--vw));
     letter-spacing: -.045em;
     word-break: keep-all;
 }
@@ -366,33 +358,10 @@ overflow-y: visible;
     box-sizing: border-box;
 }
 
-.sub-usa-section-heading {
-    width: 100%;
-    margin: 0 0 calc(var(--usa-vw) * 100 / 1920);
-    padding: 0 calc(var(--usa-vw) * 160 / 1920);
-    box-sizing: border-box;
-    text-align: center;
-}
-
-.sub-usa-section-heading h2 {
-    margin: 0;
-    font-size: calc(var(--usa-vw) * 48 / 1920);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -.045em;
-}
-
-.sub-usa-section-heading p {
-    margin: calc(var(--usa-vw) * 24 / 1920) 0 0;
-    color: #888;
-    font-size: calc(var(--usa-vw) * 16 / 1920);
-    line-height: 1.6;
-}
-
 .sub-usa-trust-list {
     display: flex;
-    width: calc(var(--usa-vw) * 1600 / 1920);
-    height: calc(var(--usa-vw) * 720 / 1920);
+    width: calc(1600 * var(--vw));
+    height: calc(720 * var(--vw));
     margin: 0 0 0 auto;
     overflow: hidden;
     background: #fff;
@@ -400,8 +369,8 @@ overflow-y: visible;
 
 .sub-usa-trust-item {
     position: relative;
-    flex: 0 0 calc(var(--usa-vw) * 220 / 1920);
-    width: calc(var(--usa-vw) * 220 / 1920);
+    flex: 0 0 calc(220 * var(--vw));
+    width: calc(220 * var(--vw));
     height: 100%;
     min-width: 0;
     overflow: hidden;
@@ -416,8 +385,8 @@ overflow-y: visible;
 }
 
 .sub-usa-trust-item.is-active {
-    flex-basis: calc(var(--usa-vw) * 1160 / 1920);
-    width: calc(var(--usa-vw) * 1160 / 1920);
+    flex-basis: calc(1160 * var(--vw));
+    width: calc(1160 * var(--vw));
     outline: none;
 }
 
@@ -447,10 +416,10 @@ overflow-y: visible;
 .sub-usa-trust-copy {
     position: absolute;
     z-index: 2;
-    left: calc(var(--usa-vw) * 56 / 1920);
-    right: calc(var(--usa-vw) * 42 / 1920);
-    bottom: calc(var(--usa-vw) * 48 / 1920);
-    height: calc(var(--usa-vw) * 184 / 1920);
+    left: calc(56 * var(--vw));
+    right: calc(42 * var(--vw));
+    bottom: calc(48 * var(--vw));
+    height: calc(184 * var(--vw));
     color: #fff;
     overflow: hidden;
 }
@@ -460,7 +429,7 @@ overflow-y: visible;
     left: 0;
     bottom: 0;
     margin: 0;
-    font-size: calc(var(--usa-vw) * 64 / 1920);
+    font-size: calc(64 * var(--vw));
     font-weight: 800;
     line-height: 1;
     white-space: nowrap;
@@ -470,10 +439,10 @@ overflow-y: visible;
 .sub-usa-trust-copy h3 {
     position: absolute;
     left: 0;
-    bottom: calc(var(--usa-vw) * 63 / 1920);
+    bottom: calc(63 * var(--vw));
     width: 100%;
     margin: 0;
-    font-size: calc(var(--usa-vw) * 30 / 1920);
+    font-size: calc(30 * var(--vw));
     font-weight: 700;
     line-height: 1.25;
     word-break: keep-all;
@@ -484,10 +453,10 @@ overflow-y: visible;
     left: 0;
     bottom: 0;
     width: 100%;
-    max-width: calc(var(--usa-vw) * 620 / 1920);
+    max-width: calc(620 * var(--vw));
     margin: 0;
     color: rgba(255,255,255,.72);
-    font-size: calc(var(--usa-vw) * 15 / 1920);
+    font-size: calc(15 * var(--vw));
     line-height: 1.75;
 }
 
@@ -499,7 +468,7 @@ overflow-y: visible;
 }
 
 .sub-usa-trust-item.is-active .sub-usa-trust-copy strong {
-    bottom: calc(var(--usa-vw) * 122 / 1920);
+    bottom: calc(122 * var(--vw));
 }
 
 .sub-usa-trust-item.is-copy-visible .sub-usa-trust-copy h3,
@@ -512,7 +481,7 @@ overflow-y: visible;
 .sub-usa-trust-item:not(.is-active) .sub-usa-trust-copy {
     left: 50%;
     right: auto;
-    width: calc(var(--usa-vw) * 120 / 1920);
+    width: calc(120 * var(--vw));
     transform: translateX(-50%);
     text-align: center;
 }
@@ -520,7 +489,7 @@ overflow-y: visible;
 .sub-usa-trust-item:not(.is-active) .sub-usa-trust-copy strong {
     left: 50%;
     transform: translateX(-50%);
-    font-size: calc(var(--usa-vw) * 54 / 1920);
+    font-size: calc(54 * var(--vw));
 }
 
 /* 04~06. Full-width sticky value sections */
@@ -559,13 +528,13 @@ overflow-y: visible;
     position: absolute;
     z-index: 3;
     top: 50%;
-    width: calc(var(--usa-vw) * 590 / 1920);
+    width: calc(590 * var(--vw));
     transform: translateY(-50%);
 }
 
 .sub-usa-value-history .sub-usa-value-copy,
 .sub-usa-value-korea .sub-usa-value-copy {
-    left: calc(var(--usa-vw) * 266 / 1920);
+    left: calc(266 * var(--vw));
 }
 
 .sub-usa-value-awards .sub-usa-value-copy {
@@ -574,10 +543,10 @@ overflow-y: visible;
 
 .sub-usa-value-copy h2 {
     margin: 0;
-    font-size: calc(var(--usa-vw) * 48 / 1920);
+    font-size: calc(48 * var(--vw));
     font-weight: 800;
     line-height: 1.22;
-    letter-spacing: calc(var(--usa-vw) * -2 / 1920);
+    letter-spacing: calc(-2 * var(--vw));
 }
 
 .sub-usa-value-copy h2 span {
@@ -585,10 +554,10 @@ overflow-y: visible;
 }
 
 .sub-usa-value-copy p {
-    max-width: calc(var(--usa-vw) * 590 / 1920);
-    margin: calc(var(--usa-vw) * 42 / 1920) 0 calc(var(--usa-vw) * 64 / 1920);
+    max-width: calc(590 * var(--vw));
+    margin: calc(42 * var(--vw)) 0 calc(64 * var(--vw));
     color: #777;
-    font-size: calc(var(--usa-vw) * 17 / 1920);
+    font-size: calc(17 * var(--vw));
     line-height: 1.85;
     word-break: keep-all;
 }
@@ -629,17 +598,17 @@ overflow-y: visible;
 }
 
 .sub-awards-inner {
-    width: calc(var(--standard-vw) * 1300 / 1920);
+    width: calc(1300 * var(--vw));
     margin: 0 auto;
 }
 
 .sub-awards-intro {
-    padding: 0 0 calc(var(--standard-vw) * 120 / 1920);
+    padding: 0 0 calc(120 * var(--vw));
 }
 
 .sub-awards-hero {
     width: 100%;
-    height: calc(var(--standard-vw) * 740 / 1920);
+    height: calc(740 * var(--vw));
     margin: 0;
     overflow: hidden;
 }
@@ -655,15 +624,15 @@ overflow-y: visible;
 .sub-awards-feature-list {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--standard-vw) * 40 / 1920);
-    margin-top: calc(var(--standard-vw) * 80 / 1920);
+    gap: calc(40 * var(--vw));
+    margin-top: calc(80 * var(--vw));
 }
 
 .sub-awards-feature {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: center;
-    min-height: calc(var(--standard-vw) * 440 / 1920);
+    min-height: calc(490 * var(--vw));
     overflow: hidden;
     background: #fafafa;
 }
@@ -674,6 +643,8 @@ overflow-y: visible;
 
 .sub-awards-feature-reverse .sub-awards-feature-content {
     order: 1;
+    padding-right: 0;
+    padding-left: calc(100 * var(--vw));
 }
 
 .sub-awards-feature-media {
@@ -686,41 +657,42 @@ overflow-y: visible;
 .sub-awards-feature-media img {
     display: block;
     max-width: 78%;
-    max-height: calc(var(--standard-vw) * 250 / 1920);
+    max-height: calc(250 * var(--vw));
     width: auto;
     height: auto;
     object-fit: contain;
 }
 
 .sub-awards-feature-content {
-    padding: calc(var(--standard-vw) * 70 / 1920);
+    padding: calc(100 * var(--vw));
+    padding-left: 0;
+    width: calc(540 * var(--vw));
 }
 
 .sub-awards-feature-content h3 {
-    margin: 0 0 calc(var(--standard-vw) * 30 / 1920);
-    color: #111;
-    font-size: calc(var(--standard-vw) * 40 / 1920);
+    margin: 0 0 calc(30 * var(--vw));
+    color: #000;
+    font-size: calc(40 * var(--vw));
     font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: -.04em;
 }
 
 .sub-awards-feature-content p {
     margin: 0;
     color: #222;
-    font-size: calc(var(--standard-vw) * 18 / 1920);
-    line-height:calc(var(--standard-vw) * 30 / 1920);
+    font-size: calc(18 * var(--vw));
+    line-height:calc(30 * var(--vw));
     word-break: keep-all;
+    letter-spacing: calc(-1 * var(--vw));
 }
 
 .sub-awards-excellence {
-    padding: calc(var(--standard-vw) * 10 / 1920) 0 calc(var(--standard-vw) * 160 / 1920);
+    padding: calc(10 * var(--vw)) 0 calc(160 * var(--vw));
 }
 
 .sub-awards-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: calc(var(--standard-vw) * 100 / 1920) calc(var(--standard-vw) * 60 / 1920);
+    gap: calc(100 * var(--vw)) calc(60 * var(--vw));
 }
 
 .sub-awards-card {
@@ -731,9 +703,9 @@ overflow-y: visible;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: calc(var(--standard-vw) * 300 / 1920);
-    height: calc(var(--standard-vw) * 300 / 1920);
-    margin: 0 auto calc(var(--standard-vw) * 38 / 1920);
+    width: calc(300 * var(--vw));
+    height: calc(300 * var(--vw));
+    margin: 0 auto calc(38 * var(--vw));
     border-radius: 50%;
     background: #fafafa;
 }
@@ -750,7 +722,7 @@ overflow-y: visible;
 .sub-awards-card h3 {
     margin: 0;
     color: #111;
-    font-size: calc(var(--standard-vw) * 26 / 1920);
+    font-size: calc(26 * var(--vw));
     font-weight: 700;
     line-height: 1.35;
     letter-spacing: -.04em;
@@ -758,11 +730,10 @@ overflow-y: visible;
 }
 
 .sub-awards-card p {
-    max-width: calc(var(--standard-vw) * 310 / 1920);
-    margin: calc(var(--standard-vw) * 18 / 1920) auto 0;
+    margin: calc(18 * var(--vw)) auto 0;
     color: #888;
-    font-size: calc(var(--standard-vw) * 18 / 1920);
-    line-height: calc(var(--standard-vw) * 26 / 1920);
+    font-size: calc(18 * var(--vw));
+    line-height: calc(26 * var(--vw));
     letter-spacing: -.03em;
     word-break: keep-all;
 }
@@ -847,7 +818,7 @@ overflow-y: visible;
     z-index: 2;
     top: 50%;
     left: 50%;
-    width: calc(var(--standard-detail-vw) * 700 / 1920);
+    width: calc(700 * var(--vw));
     color: #fff;
     text-align: center;
     transform: translate(-50%, -50%);
@@ -855,7 +826,7 @@ overflow-y: visible;
 
 .sub-korea-vision-content h2 {
     margin: 0;
-    font-size: calc(var(--standard-detail-vw) * 54 / 1920);
+    font-size: calc(54 * var(--vw));
     font-weight: 800;
     line-height: 1.18;
     letter-spacing: -.055em;
@@ -864,8 +835,8 @@ overflow-y: visible;
 
 .sub-korea-vision-content h2 small {
     display: block;
-    margin-bottom: calc(var(--standard-detail-vw) * 8 / 1920);
-    font-size: calc(var(--standard-detail-vw) * 34 / 1920);
+    margin-bottom: calc(8 * var(--vw));
+    font-size: calc(34 * var(--vw));
     line-height: 1;
 }
 
@@ -878,10 +849,10 @@ overflow-y: visible;
     margin: 0;
     overflow: hidden;
     color: rgba(255, 255, 255, .72);
-    font-size: calc(var(--standard-detail-vw) * 15 / 1920);
+    font-size: calc(15 * var(--vw));
     line-height: 1.8;
     opacity: 0;
-    transform: translateY(calc(var(--standard-detail-vw) * 20 / 1920));
+    transform: translateY(calc(20 * var(--vw)));
     transition:
         max-height .65s ease,
         margin .65s ease,
@@ -890,8 +861,8 @@ overflow-y: visible;
 }
 
 .sub-korea-vision-panel.is-active .sub-korea-vision-content p {
-    max-height: calc(var(--standard-detail-vw) * 220 / 1920);
-    margin-top: calc(var(--standard-detail-vw) * 38 / 1920);
+    max-height: calc(220 * var(--vw));
+    margin-top: calc(38 * var(--vw));
     opacity: 1;
     transform: translateY(0);
 }
@@ -901,7 +872,7 @@ overflow-y: visible;
     z-index: 2;
     top: 50%;
     left: 50%;
-    width: calc(var(--standard-detail-vw) * 760 / 1920);
+    width: calc(760 * var(--vw));
     transform: translate(-50%, -50%);
     color: #fff;
     text-align: center;
@@ -910,7 +881,7 @@ overflow-y: visible;
 
 .sub-korea-vision-content h2 {
     margin: 0;
-    font-size: calc(var(--standard-detail-vw) * 54 / 1920);
+    font-size: calc(54 * var(--vw));
     font-weight: 800;
     line-height: 1.18;
     letter-spacing: -.055em;
@@ -919,8 +890,8 @@ overflow-y: visible;
 
 .sub-korea-vision-content h2 small {
     display: block;
-    margin-bottom: calc(var(--standard-detail-vw) * 8 / 1920);
-    font-size: calc(var(--standard-detail-vw) * 34 / 1920);
+    margin-bottom: calc(8 * var(--vw));
+    font-size: calc(34 * var(--vw));
     line-height: 1;
 }
 
@@ -933,16 +904,16 @@ overflow-y: visible;
     margin: 0;
     overflow: hidden;
     color: rgba(255, 255, 255, .74);
-    font-size: calc(var(--standard-detail-vw) * 15 / 1920);
+    font-size: calc(15 * var(--vw));
     line-height: 1.75;
     opacity: 0;
-    transform: translateY(calc(var(--standard-detail-vw) * 22 / 1920));
+    transform: translateY(calc(22 * var(--vw)));
     transition: max-height .7s ease, margin .7s ease, opacity .32s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
 }
 
 .sub-korea-vision-panel.is-active .sub-korea-vision-content p {
-    max-height: calc(var(--standard-detail-vw) * 220 / 1920);
-    margin-top: calc(var(--standard-detail-vw) * 38 / 1920);
+    max-height: calc(220 * var(--vw));
+    margin-top: calc(38 * var(--vw));
     opacity: 1;
     transform: translateY(0);
 }
@@ -961,7 +932,7 @@ overflow-y: visible;
 }
 
 .sub-korea-section-inner {
-    width: calc(var(--standard-detail-vw) * 1300 / 1920);
+    width: calc(1300 * var(--vw));
     margin: 0 auto;
 }
 
@@ -973,7 +944,7 @@ overflow-y: visible;
     margin: 0;
     color: #000;
     font-family: "Russo One", sans-serif;
-    font-size: calc(var(--standard-detail-vw) * 52 / 1920);
+    font-size: calc(52 * var(--vw));
     font-weight: 400;
     line-height: 1;
     letter-spacing: -.035em;
@@ -986,23 +957,23 @@ overflow-y: visible;
 }
 
 .sub-korea-section-heading p {
-    margin: calc(var(--standard-detail-vw) * 24 / 1920) 0 0;
+    margin: calc(24 * var(--vw)) 0 0;
     color: #777;
-    font-size: calc(var(--standard-detail-vw) * 16 / 1920);
+    font-size: calc(16 * var(--vw));
     line-height: 1.6;
 }
 
 .sub-korea-creative {
-    padding: calc(var(--standard-detail-vw) * 120 / 1920) 0;
+    padding: calc(120 * var(--vw)) 0;
     background: #fff;
 }
 
 .sub-korea-creative-principles {
     display: grid;
-    grid-template-columns: calc(var(--standard-detail-vw) * 200 / 1920) 1fr;
+    grid-template-columns: calc(200 * var(--vw)) 1fr;
     align-items: center;
-    padding: calc(var(--standard-detail-vw) * 95 / 1920) calc(var(--standard-detail-vw) * 60 / 1920);
-    border-radius: calc(var(--standard-detail-vw) * 20 / 1920);
+    padding: calc(95 * var(--vw)) calc(60 * var(--vw));
+    border-radius: calc(20 * var(--vw));
     background: var(--red);
     color: #fff;
     box-sizing: border-box;
@@ -1010,22 +981,22 @@ overflow-y: visible;
 
 .sub-korea-creative-label strong{
     display: block;
-    font-size: calc(var(--standard-detail-vw) * 30 / 1920);
+    font-size: calc(30 * var(--vw));
     font-weight: 600;
-    line-height: calc(var(--standard-detail-vw) * 40 / 1920);
+    line-height: calc(40 * var(--vw));
 }
 .sub-korea-creative-card-item strong {
-    font-size: calc(var(--standard-detail-vw) * 22 / 1920);
+    font-size: calc(22 * var(--vw));
     font-weight: 500;
-    line-height: calc(var(--standard-detail-vw) * 36 / 1920);
+    line-height: calc(36 * var(--vw));
 }
 
 
 .sub-korea-creative-label span {
     display: block;
-    margin-top: calc(var(--standard-detail-vw) * 12 / 1920);
+    margin-top: calc(12 * var(--vw));
     color: rgba(255,255,255,.40);
-    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
+    font-size: calc(20 * var(--vw));
 }
 
 .sub-korea-creative-principle-list {
@@ -1034,10 +1005,10 @@ overflow-y: visible;
 }
 
 .sub-korea-creative-principle {
-    min-height: calc(var(--standard-detail-vw) * 54 / 1920);
-    padding-left: calc(var(--standard-detail-vw) * 38 / 1920);
+    min-height: calc(54 * var(--vw));
+    padding-left: calc(38 * var(--vw));
     border-left: 1px solid rgba(255,255,255,.22);
-    font-size: calc(var(--standard-detail-vw) * 22 / 1920);
+    font-size: calc(22 * var(--vw));
     font-weight: 400;
     line-height: 1.2;
 }
@@ -1046,11 +1017,11 @@ overflow-y: visible;
 }
 .sub-korea-creative-card {
     display: grid;
-    grid-template-columns: calc(var(--standard-detail-vw) * 200 / 1920) 1fr;
+    grid-template-columns: calc(200 * var(--vw)) 1fr;
     align-items: center;
-    margin-top: calc(var(--standard-detail-vw) * 20 / 1920);
-    padding: calc(var(--standard-detail-vw) * 60 / 1920);
-    border-radius: calc(var(--standard-detail-vw) * 16 / 1920);
+    margin-top: calc(20 * var(--vw));
+    padding: calc(60 * var(--vw));
+    border-radius: calc(16 * var(--vw));
     background: #fafafa;
     box-sizing: border-box;
 }
@@ -1061,11 +1032,11 @@ overflow-y: visible;
 
 .sub-korea-creative-card-list {
     display: grid;
-    grid-template-columns: 1fr 1fr calc(var(--standard-detail-vw) * 360 / 1920);;
+    grid-template-columns: 1fr 1fr calc(360 * var(--vw));;
 }
 
 .sub-korea-creative-card-item {
-    padding:0 0 0 calc(var(--standard-detail-vw) * 42 / 1920);
+    padding:0 0 0 calc(42 * var(--vw));
     border-left: 1px solid #e5e5e5;
     box-sizing: border-box;
 }
@@ -1074,17 +1045,17 @@ overflow-y: visible;
 }
 
 .sub-korea-creative-card-item p {
-    margin: calc(var(--standard-detail-vw) * 14 / 1920) 0 0;
+    margin: calc(14 * var(--vw)) 0 0;
     color: #777;
-    font-size: calc(var(--standard-detail-vw) * 17 / 1920);
-    line-height: calc(var(--standard-detail-vw) * 26 / 1920);
+    font-size: calc(17 * var(--vw));
+    line-height: calc(26 * var(--vw));
 }
 
 .sub-korea-before {
     position: relative;
     background: url('/images/standard/korea_Service_bg.png') center / cover no-repeat;
     color: #fff;
-    padding: calc(var(--standard-detail-vw) * 120 / 1920) 0;
+    padding: calc(120 * var(--vw)) 0;
 }
 
 .sub-korea-before-dim {
@@ -1097,10 +1068,10 @@ overflow-y: visible;
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: calc(var(--standard-detail-vw) * 550 / 1920) calc(var(--standard-detail-vw) * 680 / 1920);
+    grid-template-columns: calc(550 * var(--vw)) calc(680 * var(--vw));
     justify-content: space-between;
     align-items: start;
-    width: calc(var(--standard-detail-vw) * 1300 / 1920);
+    width: calc(1300 * var(--vw));
     height: 100%;
     margin: 0 auto;
 }
@@ -1108,29 +1079,29 @@ overflow-y: visible;
 .sub-korea-before-copy h2 {
     margin: 0;
     font-family: "Russo One", sans-serif;
-    font-size: calc(var(--standard-detail-vw) * 60 / 1920);
+    font-size: calc(60 * var(--vw));
 }
 
 .sub-korea-before-copy p {
-    margin: calc(var(--standard-detail-vw) * 40 / 1920) 0 0;
+    margin: calc(40 * var(--vw)) 0 0;
     color: rgba(255,255,255,.82);
-    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
-    line-height: calc(var(--standard-detail-vw) * 30 / 1920);
+    font-size: calc(20 * var(--vw));
+    line-height: calc(30 * var(--vw));
 }
 
 .sub-korea-before-list {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--standard-detail-vw) * 10 / 1920);
+    gap: calc(10 * var(--vw));
 }
 
 .sub-korea-before-item {
     display: grid;
-    grid-template-columns: calc(var(--standard-detail-vw) * 145 / 1920) 1fr;
+    grid-template-columns: calc(145 * var(--vw)) 1fr;
     align-items: center;
-    min-height: calc(var(--standard-detail-vw) * 118 / 1920);
-    padding: 0 calc(var(--standard-detail-vw) * 55 / 1920);
-    border-radius: calc(var(--standard-detail-vw) * 18 / 1920);
+    min-height: calc(118 * var(--vw));
+    padding: 0 calc(55 * var(--vw));
+    border-radius: calc(18 * var(--vw));
     background: rgba(5,5,5,.74);
     box-sizing: border-box;
 }
@@ -1138,23 +1109,23 @@ overflow-y: visible;
 .sub-korea-before-item > strong {
     color: var(--red);
     font-family: "Russo One", sans-serif;
-    font-size: calc(var(--standard-detail-vw) * 50 / 1920);
+    font-size: calc(50 * var(--vw));
     font-weight: 400;
 }
 
 .sub-korea-before-item p {
     margin: 0;
     color: #fff;
-    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
+    font-size: calc(20 * var(--vw));
 }
 
 .sub-korea-before-item-large {
     align-items: start;
-    padding: calc(var(--standard-detail-vw) * 40 / 1920) calc(var(--standard-detail-vw) * 60 / 1920);
+    padding: calc(40 * var(--vw)) calc(60 * var(--vw));
 }
 
 .sub-korea-before-item-large div p {
-    padding: calc(var(--standard-detail-vw) * 30 / 1920) 0;
+    padding: calc(30 * var(--vw)) 0;
     border-bottom: 1px solid rgba(255,255,255,.15);
 }
 
@@ -1168,23 +1139,23 @@ overflow-y: visible;
 }
 
 .sub-korea-after {
-    padding: calc(var(--standard-detail-vw) * 120 / 1920) 0;
+    padding: calc(120 * var(--vw)) 0;
     background: #fff;
 }
 
 .sub-korea-after-list {
     display: flex;
     justify-content: center;
-    margin-top: calc(var(--standard-detail-vw) * 105 / 1920);
+    margin-top: calc(105 * var(--vw));
 }
 
 .sub-korea-after-item {
     position: relative;
     display: flex;
-    flex: 0 0 calc(var(--standard-detail-vw) * 350 / 1920);
-    width: calc(var(--standard-detail-vw) * 350 / 1920);
-    height: calc(var(--standard-detail-vw) * 350 / 1920);
-    margin-left: calc(var(--standard-detail-vw) * -36 / 1920);
+    flex: 0 0 calc(350 * var(--vw));
+    width: calc(350 * var(--vw));
+    height: calc(350 * var(--vw));
+    margin-left: calc(-36 * var(--vw));
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -1196,7 +1167,7 @@ overflow-y: visible;
 }
 
 .sub-korea-after-item_icon{
-    margin-bottom: calc(var(--standard-detail-vw) * 40 / 1920);
+    margin-bottom: calc(40 * var(--vw));
 }
 
 .sub-korea-after-item:first-child {
@@ -1204,9 +1175,9 @@ overflow-y: visible;
 }
 
 .sub-korea-after-item svg {
-    width: calc(var(--standard-detail-vw) * 62 / 1920);
-    height: calc(var(--standard-detail-vw) * 62 / 1920);
-    margin-bottom: calc(var(--standard-detail-vw) * 30 / 1920);
+    width: calc(62 * var(--vw));
+    height: calc(62 * var(--vw));
+    margin-bottom: calc(30 * var(--vw));
     fill: none;
     stroke: #fff;
     stroke-width: 4;
@@ -1216,14 +1187,14 @@ overflow-y: visible;
 
 .sub-korea-after-item h3 {
     margin: 0;
-    font-size: calc(var(--standard-detail-vw) * 28 / 1920);
+    font-size: calc(28 * var(--vw));
     font-weight: 700;
 }
 
 .sub-korea-after-item p {
-    margin: calc(var(--standard-detail-vw) * 24 / 1920) 0 0;
+    margin: calc(24 * var(--vw)) 0 0;
     color: rgba(255,255,255,.74);
-    font-size: calc(var(--standard-detail-vw) * 16 / 1920);
+    font-size: calc(16 * var(--vw));
     line-height: 1.45;
 }
 /* =========================================================
@@ -1234,7 +1205,7 @@ overflow-y: visible;
 }
 
 .sub-partners-inner {
-    width: calc(var(--standard-detail-vw) * 1300 / 1920);
+    width: calc(1300 * var(--vw));
     margin: 0 auto;
 }
 
@@ -1244,7 +1215,7 @@ overflow-y: visible;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: calc(var(--standard-detail-vw) * 870 / 1920);
+    height: calc(870 * var(--vw));
     min-height: 680px;
     overflow: hidden;
     background: url('/images/standard/partners_intro_bg.png') center / cover no-repeat;
@@ -1253,7 +1224,7 @@ overflow-y: visible;
 .sub-partners-intro-content {
     position: relative;
     z-index: 1;
-    width: calc(var(--standard-detail-vw) * 1100 / 1920);
+    width: calc(1100 * var(--vw));
 }
 
 .sub-partners-category-nav {
@@ -1266,12 +1237,12 @@ overflow-y: visible;
 .sub-partners-category-link {
     position: relative;
     gap: 30px;
-    min-height: calc(var(--standard-detail-vw) * 110 / 1920);
+    min-height: calc(110 * var(--vw));
     color: #fff;
     font-family: "Russo One", sans-serif;
-    font-size: calc(var(--standard-detail-vw) * 60 / 1920);
+    font-size: calc(60 * var(--vw));
     font-weight: 400;
-    line-height:  calc(var(--standard-detail-vw) * 40 / 1920);
+    line-height:  calc(40 * var(--vw));
     text-decoration: none;
     transition: color .25s ease;
     opacity: 0.5;
@@ -1291,13 +1262,13 @@ overflow-y: visible;
     border-radius: 50px;
     background: #ffffff20;
     color: #fff;
-    padding: calc(var(--standard-detail-vw) * 5 / 1920) calc(var(--standard-detail-vw) * 20 / 1920);;
-    font-size: calc(var(--standard-detail-vw) * 35 / 1920);
-    line-height: calc(var(--standard-detail-vw) * 40 / 1920);
+    padding: calc(5 * var(--vw)) calc(20 * var(--vw));;
+    font-size: calc(35 * var(--vw));
+    line-height: calc(40 * var(--vw));
     letter-spacing: 0;
     position: absolute;
-    right: calc(var(--standard-detail-vw) * -60 / 1920);
-    top: calc(var(--standard-detail-vw) * -30 / 1920);
+    right: calc(-60 * var(--vw));
+    top: calc(-30 * var(--vw));
     font-family: "Russo One", sans-serif;
     transition: background-color .25s ease, color .25s ease, transform .25s ease;
     opacity: 0.5;
@@ -1350,19 +1321,19 @@ overflow-y: visible;
 }
 
 .sub-partners-directory {
-    padding: calc(var(--standard-detail-vw) * 120 / 1920) 0 calc(var(--standard-detail-vw) * 160 / 1920);
+    padding: calc(120 * var(--vw)) 0 calc(160 * var(--vw));
     background: #fff;
 }
 
 .sub-partners-group + .sub-partners-group {
-    margin-top: calc(var(--standard-detail-vw) * 250 / 1920);
+    margin-top: calc(250 * var(--vw));
 }
 
 .sub-partners-group-title {
-    margin: 0 0 calc(var(--standard-detail-vw) * 64 / 1920);
+    margin: 0 0 calc(64 * var(--vw));
     color: #111;
     font-family: "Russo One", sans-serif;
-    font-size: calc(var(--standard-detail-vw) * 40 / 1920);
+    font-size: calc(40 * var(--vw));
     font-weight: 400;
     line-height: 1.2;
     text-align: center;
@@ -1370,8 +1341,8 @@ overflow-y: visible;
 
 /* Wheel Alignment Specification의 4열 원형 브랜드 카드 구조 재사용 */
 .sub-partners-brand-grid {
-    row-gap: calc(var(--standard-detail-vw) * 100 / 1920);
-    column-gap: calc(var(--standard-detail-vw) * 60 / 1920);
+    row-gap: calc(100 * var(--vw));
+    column-gap: calc(60 * var(--vw));
 }
 
 .sub-partners-brand-card {
@@ -1397,7 +1368,7 @@ overflow-y: visible;
 
 .sub-partners-brand-card .sub-specification-brand-name {
     color: #000;
-    font-size: calc(var(--standard-detail-vw) * 20 / 1920);
+    font-size: calc(20 * var(--vw));
 }
 
 

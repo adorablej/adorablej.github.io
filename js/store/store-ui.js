@@ -18,6 +18,29 @@
         anchor: new naver.maps.Point(24, 58)
     });
 
+    const PRODUCT_ICON_PATHS = {
+        "alignment systems": "/images/icon/icon_Alignment Systems.png",
+        "휠 얼라인먼트 시스템": "/images/icon/icon_Alignment Systems.png",
+        "wheel balancers": "/images/icon/icon_Wheel Balancers.png",
+        "휠 밸런서": "/images/icon/icon_Wheel Balancers.png",
+        "tire changers": "/images/icon/icon_Tire Changers.png",
+        "타이어 체인저": "/images/icon/icon_Tire Changers.png",
+        "brake lathes": "/images/icon/icon_Brake Lathes.png",
+        "브레이크 선반": "/images/icon/icon_Brake Lathes.png",
+        "alignment racks": "/images/icon/icon_Alignment racks.png",
+        "얼라인먼트 리프트": "/images/icon/icon_Alignment racks.png",
+        "vehicle inspection": "/images/icon/icon_Vehicle Inspection.png",
+        "차량 검사": "/images/icon/icon_Vehicle Inspection.png",
+        "heavy-duty": "/images/icon/icon_Heavy-Duty.png",
+        "대형차": "/images/icon/icon_Heavy-Duty.png"
+    };
+
+    const getProductIconPath = category => {
+        const normalizedCategory = String(category || "").trim().toLowerCase();
+        return PRODUCT_ICON_PATHS[normalizedCategory]
+            || "/images/icon/icon_Alignment Systems.png";
+    };
+
     window.StoreUI = {
         section: null,
         list: null,
@@ -57,7 +80,13 @@
         renderStoreList(stores) {
             if (!this.list) return;
             if (!stores.length) {
-                this.list.innerHTML = '<p class="sub-pride-store-empty">검색 결과가 없습니다.</p>';
+                this.list.innerHTML = `
+                    <div class="sub-pride-store-empty" role="status">
+                        <span class="sub-pride-store-empty-icon" aria-hidden="true">!</span>
+                        <strong>검색 결과가 없습니다.</strong>
+                        <span>다른 매장명 또는 주소를 입력해주세요</span>
+                    </div>
+                `;
                 return;
             }
 
@@ -140,7 +169,10 @@
                 <div><dt>전화번호</dt><dd>${escapeHtml(store.phone)}</dd></div>
             `;
             this.detail.querySelector(".sub-pride-store-products ul").innerHTML = (store.products || []).map(product => `
-                <li><span class="sub-pride-product-icon"></span><p>${escapeHtml(product.category)}<strong>${escapeHtml(product.name)}</strong></p></li>
+                <li>
+                    <span class="sub-pride-product-icon" aria-hidden="true" style="background-image:url('${encodeURI(getProductIconPath(product.category))}')"></span>
+                    <p>${escapeHtml(product.category)}<strong>${escapeHtml(product.name)}</strong></p>
+                </li>
             `).join("");
             this.detail.classList.add("is-open");
             this.detail.setAttribute("aria-hidden", "false");

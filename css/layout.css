@@ -7,7 +7,9 @@
 }
 
 .pt_60{padding-top: 60px;}
-
+.detail-product-image.img-s img{
+    height: 90%;
+}
 /* ========================================
 Main Scrollbar
 ======================================== */
