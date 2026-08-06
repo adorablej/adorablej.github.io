@@ -292,6 +292,38 @@
     }
 })();
 
+(function () {
+    "use strict";
+
+    function initPartnersCategoryLinks() {
+        const links = document.querySelectorAll(".sub-partners-category-link[href^='#']");
+        if (!links.length) return;
+
+        links.forEach(function (link) {
+            link.addEventListener("click", function (event) {
+                const target = document.querySelector(link.getAttribute("href"));
+                if (!target) return;
+
+                event.preventDefault();
+                target.scrollIntoView({
+                    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+                    block: "start"
+                });
+
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, "", link.getAttribute("href"));
+                }
+            });
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initPartnersCategoryLinks);
+    } else {
+        initPartnersCategoryLinks();
+    }
+})();
+
 
 
 /* usa */

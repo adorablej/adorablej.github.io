@@ -925,3 +925,180 @@ body.is-modal-open {
 .sub-mypage-order-history .sub-mypage-order-toggle { margin:calc(24 * var(--vw)) 0 0; }
 .sub-mypage-order-history.is-collapsed .sub-mypage-order-history-body { display:none; }
 .sub-mypage-order-empty { padding:calc(90 * var(--vw)) 0; color:#999; font-size:calc(15 * var(--vw)); text-align:center; }
+
+/* ========================================
+   My Page - Training Application
+======================================== */
+.sub-mypage-training-page .sub-mypage-section { padding-top: 0; }
+.sub-mypage-training-heading {
+    margin: 0 0 calc(34 * var(--vw));
+    padding-bottom: calc(18 * var(--vw));
+    border-bottom: 1px solid #222;
+    color: #111;
+    font-size: calc(22 * var(--vw));
+    font-weight: 700;
+}
+.sub-mypage-training .sub-training-calendar-wrap {
+    min-height: 0;
+    padding: 0;
+    border-radius: 0;
+}
+.sub-mypage-training .sub-training-calendar-head {
+    justify-content: flex-start;
+    margin-bottom: calc(14 * var(--vw));
+}
+.sub-mypage-training .sub-training-month-title {
+    min-width: calc(94 * var(--vw));
+    font-size: calc(18 * var(--vw));
+}
+.sub-mypage-training .sub-training-day { min-height: calc(122 * var(--vw)); }
+.sub-mypage-training-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(14 * var(--vw));
+    margin-top: calc(44 * var(--vw));
+}
+.sub-mypage-training-list .sub-training-card { min-height: calc(90 * var(--vw)); }
+.sub-mypage-training-list .sub-training-empty {
+    grid-column: 1 / -1;
+    position: static;
+    min-height: calc(150 * var(--vw));
+    justify-content: center;
+}
+.sub-mypage-training-list .sub-training-card.is-selected {
+    box-shadow: 0 0 0 2px var(--training-color);
+}
+
+@media (max-width: 1024px) {
+    .sub-mypage-training-list { grid-template-columns: 1fr; }
+    .sub-mypage-training .sub-training-day { min-height: 100px; }
+}
+
+@media (max-width: 640px) {
+    .sub-mypage-training .sub-training-day { min-height: 72px; padding: 8px 6px; }
+    .sub-mypage-training .sub-training-event { padding: 3px 4px; font-size: 9px; }
+    .sub-mypage-training-list { margin-top: 28px; }
+}
+
+/* ========================================
+   My Page - Training History
+======================================== */
+.sub-mypage-training-history-table { border-top: 1px solid #222; }
+.sub-mypage-training-history-head,
+.sub-mypage-training-history-row {
+    display: grid;
+    grid-template-columns: 1.1fr 1.35fr 1fr calc(130 * var(--vw));
+    align-items: center;
+    min-height: calc(86 * var(--vw));
+    border-bottom: 1px solid #ddd;
+}
+.sub-mypage-training-history-head { min-height: calc(68 * var(--vw)); }
+.sub-mypage-training-history-head strong,
+.sub-mypage-training-history-row > span {
+    padding: 0 calc(18 * var(--vw));
+    color: #222;
+    font-size: calc(15 * var(--vw));
+}
+.sub-mypage-training-history-head strong { font-weight: 700; }
+.sub-mypage-training-history-row.is-cancelled > span:not(:last-child) { color: #aaa; }
+.sub-mypage-history-view {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: calc(112 * var(--vw));
+    height: calc(48 * var(--vw));
+    padding: 0 calc(20 * var(--vw));
+    border: 1px solid var(--red);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--red);
+    font-family: inherit;
+    font-size: calc(14 * var(--vw));
+    font-weight: 700;
+    letter-spacing: .28em;
+    cursor: pointer;
+}
+.sub-mypage-history-modal .sub-training-modal-visual { background: #e2e2e2; }
+.sub-mypage-history-modal .sub-training-modal-course { margin-top: calc(18 * var(--vw)); }
+.sub-mypage-history-modal .sub-training-modal-submit.is-disabled {
+    border-color: #c8ccd6;
+    background: #c8ccd6;
+    cursor: default;
+}
+
+@media (max-width: 768px) {
+    .sub-mypage-training-history-table { overflow-x: auto; }
+    .sub-mypage-training-history-head,
+    .sub-mypage-training-history-row { grid-template-columns: 130px 210px 110px 110px; min-width: 560px; }
+    .sub-mypage-history-view { min-width: 88px; height: 40px; }
+}
+
+/* ========================================
+   My Page Home - Revised
+======================================== */
+.sub-mypage-home-page .sub-mypage-block { margin-top: calc(76 * var(--vw)); }
+.sub-mypage-home-page .sub-mypage-product-card .sub-mypage-product-image { height: calc(280 * var(--vw)); }
+.sub-mypage-home-page .sub-mypage-table .sub-button-more {
+    border: 1px solid var(--red);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--red);
+    font-family: inherit;
+    letter-spacing: .22em;
+    cursor: pointer;
+}
+.sub-mypage-list-empty[hidden] { display: none !important; }
+.sub-mypage-list-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(180 * var(--vw));
+    margin: 0;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #ddd;
+    color: #888;
+    font-size: calc(16 * var(--vw));
+    text-align: center;
+}
+.sub-mypage-product-block .sub-mypage-list-empty { border-top: 0; }
+
+.sub-mypage-home-training-modal {
+    position: fixed;
+    z-index: 1100;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(64 * var(--vw));
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .25s ease, visibility .25s ease;
+}
+.sub-mypage-home-training-modal.is-open { visibility: visible; opacity: 1; }
+.sub-mypage-home-modal-dim { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: rgba(0,0,0,.62); cursor: pointer; }
+.sub-mypage-home-modal-dialog { position: relative; z-index: 1; width: calc(1000 * var(--vw)); max-width: 1000px; max-height: calc(100vh - 80px); overflow-y: auto; background: #fff; }
+.sub-mypage-home-modal-close { position: absolute; z-index: 2; top: calc(26 * var(--vw)); right: calc(26 * var(--vw)); width: calc(46 * var(--vw)); height: calc(46 * var(--vw)); border: 0; border-radius: 50%; background: #fff; cursor: pointer; }
+.sub-mypage-home-modal-close::before,
+.sub-mypage-home-modal-close::after { content: ''; position: absolute; top: 50%; left: 50%; width: 20px; height: 1px; background: #111; }
+.sub-mypage-home-modal-close::before { transform: translate(-50%,-50%) rotate(45deg); }
+.sub-mypage-home-modal-close::after { transform: translate(-50%,-50%) rotate(-45deg); }
+.sub-mypage-home-modal-visual { height: calc(560 * var(--vw)); min-height: 320px; background: #e2e2e2; }
+.sub-mypage-home-modal-body { padding: calc(46 * var(--vw)); }
+.sub-mypage-home-modal-summary { padding-bottom: calc(30 * var(--vw)); border-bottom: 1px solid #e3e3e3; }
+.sub-mypage-home-modal-summary > strong { color: #111; font-size: calc(27 * var(--vw)); font-weight: 700; }
+.sub-mypage-home-modal-summary p { display: flex; align-items: center; gap: calc(12 * var(--vw)); margin-top: calc(18 * var(--vw)); color: #555; font-size: calc(20 * var(--vw)); font-weight: 600; }
+.sub-mypage-home-modal-summary i { display: block; width: calc(18 * var(--vw)); height: calc(18 * var(--vw)); border-radius: 50%; background: var(--history-color, #3ccba1); }
+.sub-mypage-home-modal-actions { display: flex; justify-content: flex-end; gap: calc(14 * var(--vw)); margin-top: calc(40 * var(--vw)); }
+.sub-mypage-home-modal-actions button { min-width: calc(210 * var(--vw)); height: calc(64 * var(--vw)); padding: 0 calc(28 * var(--vw)); border: 1px solid #ddd; border-radius: 999px; background: #fff; color: #111; font-family: inherit; font-size: calc(18 * var(--vw)); cursor: pointer; }
+.sub-mypage-home-modal-actions .is-primary { border-color: var(--red); background: var(--red); color: #fff; }
+.sub-mypage-home-modal-actions .is-primary:disabled { border-color: #c8ccd6; background: #c8ccd6; cursor: default; }
+body.is-mypage-home-modal-open { overflow: hidden; }
+
+@media (max-width: 768px) {
+    .sub-mypage-home-training-modal { padding: 20px; }
+    .sub-mypage-home-modal-dialog { width: 100%; }
+    .sub-mypage-home-modal-visual { min-height: 220px; height: 42vw; }
+    .sub-mypage-home-modal-body { padding: 28px 22px; }
+    .sub-mypage-home-modal-actions { flex-direction: column-reverse; }
+    .sub-mypage-home-modal-actions button { width: 100%; min-width: 0; height: 52px; }
+}

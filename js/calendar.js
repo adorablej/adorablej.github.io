@@ -36,6 +36,7 @@
     };
 
     const calendar = document.querySelector("#training-calendar");
+    const isMypageView = calendar?.dataset.trainingView === "mypage";
     const monthTitle = document.querySelector(".sub-training-month-title");
     const prevButton = document.querySelector(".sub-training-month-prev");
     const nextButton = document.querySelector(".sub-training-month-next");
@@ -49,9 +50,13 @@
 
     const initialDate = getInitialDate();
     let currentDate = new Date(initialDate.getFullYear(), initialDate.getMonth(), 1);
-    let selectedDate = formatDate(initialDate);
+    let selectedDate = isMypageView ? "" : formatDate(initialDate);
 
     function getInitialDate() {
+        if (isMypageView && trainingData.length) {
+            const firstTraining = [...trainingData].sort((a, b) => a.date.localeCompare(b.date))[0];
+            return parseDate(firstTraining.date);
+        }
         return new Date();
     }
 
@@ -68,6 +73,9 @@ function parseDate(dateString) {
     }
 
     function formatMonth(date) {
+        if (isMypageView) {
+            return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, "0")}`;
+        }
         return new Intl.DateTimeFormat("en-US", {
             year: "numeric",
             month: "long"
@@ -149,10 +157,16 @@ function parseDate(dateString) {
     }
 
     function renderSidebar() {
-        const events = getEventsByDate(selectedDate);
+        const events = isMypageView && !selectedDate
+            ? trainingData.filter((item) => {
+                const itemDate = parseDate(item.date);
+                return itemDate.getFullYear() === currentDate.getFullYear()
+                    && itemDate.getMonth() === currentDate.getMonth();
+            }).sort((a, b) => a.date.localeCompare(b.date) || a.startTime.localeCompare(b.startTime))
+            : getEventsByDate(selectedDate);
 
-        sidebarDate.textContent = formatSidebarDate(selectedDate);
-        sidebarCount.textContent = `${events.length} training schedule${events.length === 1 ? "" : "s"}`;
+        if (sidebarDate) sidebarDate.textContent = selectedDate ? formatSidebarDate(selectedDate) : "";
+        if (sidebarCount) sidebarCount.textContent = `${events.length} training schedule${events.length === 1 ? "" : "s"}`;
 
         if (!events.length) {
             trainingList.innerHTML = '<div class="sub-training-empty">예정된 교육 일정이 없습니다.</div>';
@@ -164,7 +178,7 @@ function parseDate(dateString) {
             const available = event.status === "open" && remaining > 0;
             const applyLabel = available ? "교육신청" : statusLabel[event.status];
             return `
-                <button type="button" class="sub-training-card ${getTrainingColorClass(event)}" data-training-id="${event.id}">
+                <button type="button" class="sub-training-card ${getTrainingColorClass(event)} ${selectedDate === event.date ? "is-selected" : ""}" data-training-id="${event.id}">
                     <span class="sub-training-card-top">
                         <span class="sub-training-card-time">${event.date.replaceAll("-", ".")} / ${event.startTime}</span>
                         <span class="sub-training-card-status is-${event.status}">${statusLabel[event.status]}</span>
@@ -296,14 +310,14 @@ function parseDate(dateString) {
 
     prevButton.addEventListener("click", () => {
         currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
-        selectedDate = formatDate(currentDate);
+        selectedDate = isMypageView ? "" : formatDate(currentDate);
         renderCalendar();
         renderSidebar();
     });
 
     nextButton.addEventListener("click", () => {
         currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
-        selectedDate = formatDate(currentDate);
+        selectedDate = isMypageView ? "" : formatDate(currentDate);
         renderCalendar();
         renderSidebar();
     });

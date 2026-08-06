@@ -18,7 +18,7 @@
     <div data-include="/includes/header.html"></div>
 
     <div class="page-scroll sub-standard-detail-scroll">
-        <section class="page-heading" data-header-theme="light">
+        <section class="page-heading">
             <div class="inner">
                 <ul class="breadcrumb">
                     <li><a href="/" class="breadcrumb-home" aria-label="Home"></a></li>
@@ -31,7 +31,7 @@
         </section>
 
         <main class="sub-standard-detail-page sub-partners-page">
-            <section class="sub-standard-detail-hero" data-header-theme="light">
+            <section class="sub-standard-detail-hero">
                 <div class="sub-standard-detail-hero-sticky">
                     <div class="sub-standard-detail-hero-media">
                         <img class="sub-standard-detail-hero-preview" src="/images/standard/partners_main.png" alt="Hunter 글로벌 파트너스" />
@@ -48,19 +48,32 @@
                 </div>
             </section>
 
-            <section class="sub-partners-intro" data-header-theme="dark">
-                <div class="sub-partners-intro-dim" aria-hidden="true"></div>
+            <section class="sub-partners-intro">
                 <div class="sub-partners-intro-content">
-                    <h2>Automobile Manufacturers<span>.</span><br>
-                        Tire Service Providers<span>.</span><br>
-                        Vehicle Service Providers<span>.</span><br>
-                        Global OEM<span>.</span></h2>
+                    <nav class="sub-partners-category-nav" aria-label="Partners categories">
+                        <a class="sub-partners-category-link" href="#partners-automobile-manufacturers">
+                            <span class="sub-partners-category-text">Automobile Manufacturers</span>
+                            <span class="sub-partners-category-badge" aria-hidden="true">45</span>
+                        </a>
+                        <a class="sub-partners-category-link" href="#partners-tire-service-providers">
+                            <span class="sub-partners-category-text">Tire Service Providers</span>
+                            <span class="sub-partners-category-badge" aria-hidden="true">11</span>
+                        </a>
+                        <a class="sub-partners-category-link" href="#partners-vehicle-service-providers">
+                            <span class="sub-partners-category-text">Vehicle Service Providers</span>
+                            <span class="sub-partners-category-badge" aria-hidden="true">8</span>
+                        </a>
+                        <a class="sub-partners-category-link" href="#partners-global-oem">
+                            <span class="sub-partners-category-text">Global OEM</span>
+                            <span class="sub-partners-category-badge" aria-hidden="true">36</span>
+                        </a>
+                    </nav>
                 </div>
             </section>
 
-            <section class="sub-partners-directory" data-header-theme="light">
+            <section class="sub-partners-directory">
                 <div class="sub-partners-inner">
-                    <section class="sub-partners-group">
+                    <section class="sub-partners-group" id="partners-automobile-manufacturers">
                         <h2 class="sub-section-sm-title">Automobile Manufacturers<span>.</span></h2>
                         <div class="sub-specification-brand-grid sub-partners-brand-grid">
                         <article class="sub-specification-brand-card sub-partners-brand-card">
@@ -335,7 +348,7 @@
                         </article>
                         </div>
                     </section>
-                    <section class="sub-partners-group">
+                    <section class="sub-partners-group" id="partners-tire-service-providers">
                         <h2 class="sub-section-sm-title">Tire Service Providers<span>.</span></h2>
                         <div class="sub-specification-brand-grid sub-partners-brand-grid">
                         <article class="sub-specification-brand-card sub-partners-brand-card">
@@ -406,7 +419,7 @@
                         </article>
                         </div>
                     </section>
-                    <section class="sub-partners-group">
+                    <section class="sub-partners-group" id="partners-vehicle-service-providers">
                         <h2 class="sub-section-sm-title">
                             Vehicle Service Providers<span>.</span>
                         </h2>
@@ -471,7 +484,7 @@
                     
                         </div>
                     </section>
-                    <section class="sub-partners-group">
+                    <section class="sub-partners-group" id="partners-global-oem">
                         <h2 class="sub-section-sm-title">Global OEMs<span>.</span></h2>
                         <div class="sub-specification-brand-grid sub-partners-brand-grid">
                         <article class="sub-specification-brand-card sub-partners-brand-card">

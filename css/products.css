@@ -1931,7 +1931,7 @@ products-HunterPride-Map.html , Store Map
     width:calc(24 * var(--vw));
     height:calc(24 * var(--vw));
     transform:translateY(-55%);
-    background: url("/images/icon/ic-search.svg");
+    background: url("/images/icon/icon-search.svg");
 }
 
 

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>트레이닝 교육 신청 | HUNTER KOREA</title>
+    <link href="/css/common.css" rel="stylesheet">
+    <link href="/css/layout.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/common-form.css" rel="stylesheet">
+    <link href="/css/responsive.css" rel="stylesheet">
+    <link href="/css/support.css" rel="stylesheet">
+    <link href="/css/mypage.css" rel="stylesheet">
+</head>
+<body>
+    <div data-include="/includes/header.html"></div>
+
+    <main class="sub-mypage-page sub-mypage-training-page" data-header-theme="dark">
+        <section class="page-heading" data-header-theme="dark">
+            <div class="inner">
+                <ul class="breadcrumb">
+                    <li><a class="breadcrumb-home" href="/" aria-label="Home"></a></li>
+                    <li><a href="/Mypage/mypage.html">My page</a></li>
+                </ul>
+                <h2 class="page-title">My page</h2>
+            </div>
+        </section>
+
+        <section class="sub-mypage-section">
+            <div class="sub-mypage-inner">
+                <aside class="sub-mypage-sidebar" aria-label="마이페이지 메뉴">
+                    <div class="sub-mypage-user-card">
+                        <p>안녕하세요</p>
+                        <div class="sub-mypage-user-row"><strong>홍길동님</strong><a href="/logout.html">로그아웃</a></div>
+                    </div>
+                    <nav class="sub-mypage-nav">
+                        <a class="sub-mypage-nav-link" href="/Mypage/mypage.html"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-avatar.svg" alt=""></span><span>마이페이지 홈</span></a>
+                        <a class="sub-mypage-nav-link" href="/Mypage/account.html"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-avatar-circle.svg" alt=""></span><span>계정/회원정보 관리</span></a>
+                        <a class="sub-mypage-nav-link" href="/Mypage/cs-request.html"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-headphones.svg" alt=""></span><span>CS 신청하기</span></a>
+                        <a class="sub-mypage-nav-link" href="/Mypage/products.html"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-product-alignment-equipment.svg" alt=""></span><span>나의 제품 관리</span></a>
+                        <div class="sub-mypage-nav-group" data-mypage-accordion>
+                            <button class="sub-mypage-nav-link sub-mypage-nav-toggle" type="button" aria-expanded="false"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-gear-double.svg" alt=""></span><span>부품 주문 관리</span><i class="sub-mypage-nav-arrow" aria-hidden="true"></i></button>
+                            <div class="sub-mypage-nav-depth"><div class="sub-mypage-nav-depth-inner"><a href="/Mypage/parts-list.html">전체 부품 목록</a><a href="/Mypage/cart.html">장바구니</a><a href="/Mypage/order-list.html">부품 주문 신청 내역</a></div></div>
+                        </div>
+                        <div class="sub-mypage-nav-group is-open" data-mypage-accordion>
+                            <button class="sub-mypage-nav-link sub-mypage-nav-toggle is-active" type="button" aria-expanded="true"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-product-tire-changer-walkaway.svg" alt=""></span><span>트레이닝 센터</span><i class="sub-mypage-nav-arrow" aria-hidden="true"></i></button>
+                            <div class="sub-mypage-nav-depth"><div class="sub-mypage-nav-depth-inner"><a class="is-active" href="/Mypage/training-apply.html">트레이닝 수강 신청</a><a href="/Mypage/training-history.html">트레이닝 수강 이력</a></div></div>
+                        </div>
+                    </nav>
+                </aside>
+
+                <div class="sub-mypage-content sub-mypage-training">
+                    <h3 class="sub-mypage-page-title">트레이닝 교육 신청</h3>
+                    <section class="sub-mypage-training-schedule" aria-labelledby="training-schedule-title">
+                        <h4 id="training-schedule-title" class="sub-mypage-training-heading">교육일정</h4>
+                        <div class="sub-training-calendar-wrap">
+                            <div class="sub-training-calendar-head">
+                                <button type="button" class="sub-training-month-btn sub-training-month-prev" aria-label="이전 달"></button>
+                                <h3 class="sub-training-month-title"></h3>
+                                <button type="button" class="sub-training-month-btn sub-training-month-next" aria-label="다음 달"></button>
+                            </div>
+                            <div class="sub-training-week"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+                            <div class="sub-training-calendar" id="training-calendar" data-training-view="mypage"></div>
+                        </div>
+                        <div class="sub-mypage-training-list" id="training-list" aria-live="polite"></div>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="sub-training-modal" id="training-modal" aria-hidden="true">
+        <button type="button" class="sub-training-modal-dim" data-training-close aria-label="모달 닫기"></button>
+        <div class="sub-training-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="training-modal-title">
+            <button type="button" class="sub-training-modal-close" data-training-close aria-label="모달 닫기"></button>
+            <div class="sub-training-modal-content"></div>
+        </div>
+    </div>
+
+    <div data-include="/includes/banner-roi.html" data-header-theme="light"></div>
+    <div data-include="/includes/banner-solution.html" data-header-theme="light"></div>
+    <div class="footer-section" data-header-theme="dark" data-include="/includes/footer.html"></div>
+
+    <script src="/js/include.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/support.js"></script>
+    <script src="/js/form.js"></script>
+    <script src="/js/training-data.js"></script>
+    <script src="/js/calendar.js"></script>
+    <script src="/js/mypage.js"></script>
+</body>
+</html>

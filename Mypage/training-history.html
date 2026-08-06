@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>트레이닝 수강 이력 | HUNTER KOREA</title>
+    <link href="/css/common.css" rel="stylesheet">
+    <link href="/css/layout.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/common-form.css" rel="stylesheet">
+    <link href="/css/responsive.css" rel="stylesheet">
+    <link href="/css/support.css" rel="stylesheet">
+    <link href="/css/mypage.css" rel="stylesheet">
+</head>
+<body>
+    <div data-include="/includes/header.html"></div>
+
+    <main class="sub-mypage-page sub-mypage-training-history-page" data-header-theme="dark">
+        <section class="page-heading" data-header-theme="dark">
+            <div class="inner">
+                <ul class="breadcrumb"><li><a class="breadcrumb-home" href="/" aria-label="Home"></a></li><li><a href="/Mypage/mypage.html">My page</a></li></ul>
+                <h2 class="page-title">My page</h2>
+            </div>
+        </section>
+
+        <section class="sub-mypage-section">
+            <div class="sub-mypage-inner">
+                <aside class="sub-mypage-sidebar" aria-label="마이페이지 메뉴">
+                    <div class="sub-mypage-user-card"><p>안녕하세요</p><div class="sub-mypage-user-row"><strong>홍길동님</strong><a href="/logout.html">로그아웃</a></div></div>
+                    <nav class="sub-mypage-nav">
+                        <a class="sub-mypage-nav-link" href="/Mypage/mypage.html"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-avatar.svg" alt=""></span><span>마이페이지 홈</span></a>
+                        <a class="sub-mypage-nav-link" href="/Mypage/account.html"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-avatar-circle.svg" alt=""></span><span>계정/회원정보 관리</span></a>
+                        <a class="sub-mypage-nav-link" href="/Mypage/cs-request.html"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-headphones.svg" alt=""></span><span>CS 신청하기</span></a>
+                        <a class="sub-mypage-nav-link" href="/Mypage/products.html"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-product-alignment-equipment.svg" alt=""></span><span>나의 제품 관리</span></a>
+                        <div class="sub-mypage-nav-group" data-mypage-accordion>
+                            <button class="sub-mypage-nav-link sub-mypage-nav-toggle" type="button" aria-expanded="false"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-gear-double.svg" alt=""></span><span>부품 주문 관리</span><i class="sub-mypage-nav-arrow" aria-hidden="true"></i></button>
+                            <div class="sub-mypage-nav-depth"><div class="sub-mypage-nav-depth-inner"><a href="/Mypage/parts-list.html">전체 부품 목록</a><a href="/Mypage/cart.html">장바구니</a><a href="/Mypage/order-list.html">부품 주문 신청 내역</a></div></div>
+                        </div>
+                        <div class="sub-mypage-nav-group is-open" data-mypage-accordion>
+                            <button class="sub-mypage-nav-link sub-mypage-nav-toggle is-active" type="button" aria-expanded="true"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-product-tire-changer-walkaway.svg" alt=""></span><span>트레이닝 센터</span><i class="sub-mypage-nav-arrow" aria-hidden="true"></i></button>
+                            <div class="sub-mypage-nav-depth"><div class="sub-mypage-nav-depth-inner"><a href="/Mypage/training-apply.html">트레이닝 수강 신청</a><a class="is-active" href="/Mypage/training-history.html">트레이닝 수강 이력</a></div></div>
+                        </div>
+                    </nav>
+                </aside>
+
+                <div class="sub-mypage-content sub-mypage-training-history">
+                    <h3 class="sub-mypage-page-title">트레이닝 수강 이력</h3>
+                    <div class="sub-mypage-training-history-table" role="table" aria-label="트레이닝 수강 이력">
+                        <div class="sub-mypage-training-history-head" role="row">
+                            <strong role="columnheader">수강일자</strong><strong role="columnheader">수강제목</strong><strong role="columnheader">수강상태</strong><strong role="columnheader">상세</strong>
+                        </div>
+                        <div class="sub-mypage-training-history-body">
+                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.07.19" data-time="09:00" data-course="얼라인먼트 Level 1" data-count="00/00" data-status="신청완료" data-color="training-color-1">
+                                <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
+                            </div>
+                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.07.27" data-time="16:00" data-course="얼라인먼트 Level 1" data-count="00/00" data-status="신청완료" data-color="training-color-4">
+                                <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
+                            </div>
+                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.08.03" data-time="10:00" data-course="휠 얼라인먼트 Level 2" data-count="04/20" data-status="신청완료" data-color="training-color-3">
+                                <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
+                            </div>
+                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.08.10" data-time="14:00" data-course="얼라인먼트 Level 1" data-count="10/20" data-status="신청완료" data-color="training-color-2">
+                                <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
+                            </div>
+                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.08.17" data-time="09:00" data-course="얼라인먼트 Level 3" data-count="12/20" data-status="신청완료" data-color="training-color-5">
+                                <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="sub-training-modal sub-mypage-history-modal" id="training-history-modal" aria-hidden="true">
+        <button type="button" class="sub-training-modal-dim" data-training-history-close aria-label="상세 창 닫기"></button>
+        <div class="sub-training-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="training-history-modal-title">
+            <button type="button" class="sub-training-modal-close" data-training-history-close aria-label="상세 창 닫기"></button>
+            <div class="sub-training-modal-visual" aria-hidden="true"></div>
+            <div class="sub-training-modal-body">
+                <div class="sub-training-modal-summary">
+                    <strong class="sub-training-modal-datetime" id="training-history-modal-title" data-history-modal-date></strong>
+                    <div class="sub-training-modal-course"><span class="sub-training-modal-course-dot" data-history-modal-dot aria-hidden="true"></span><span data-history-modal-course></span></div>
+                </div>
+                <div class="sub-training-modal-actions"><button type="button" class="sub-training-modal-cancel" data-training-history-close>닫기</button><button type="button" class="sub-training-modal-submit" data-training-history-cancel>신청 취소하기</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div data-include="/includes/banner-roi.html" data-header-theme="light"></div>
+    <div data-include="/includes/banner-solution.html" data-header-theme="light"></div>
+    <div class="footer-section" data-header-theme="dark" data-include="/includes/footer.html"></div>
+    <script src="/js/include.js"></script><script src="/js/common.js"></script><script src="/js/main.js"></script><script src="/js/form.js"></script><script src="/js/mypage.js"></script>
+</body>
+</html>

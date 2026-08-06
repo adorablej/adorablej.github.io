@@ -323,3 +323,163 @@ if (document.readyState === 'loading') {
 } else {
     initMypageOrderListFilter();
 }
+
+function initMypageTrainingHistory() {
+    const page = document.querySelector('.sub-mypage-training-history-page');
+    const modal = document.querySelector('#training-history-modal');
+    if (!page || !modal) return;
+
+    const date = modal.querySelector('[data-history-modal-date]');
+    const course = modal.querySelector('[data-history-modal-course]');
+    const dot = modal.querySelector('[data-history-modal-dot]');
+    const cancelButton = modal.querySelector('[data-training-history-cancel]');
+    let activeRow = null;
+    let lastFocusedElement = null;
+
+    const closeModal = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('is-training-modal-open');
+        lastFocusedElement?.focus?.();
+    };
+
+    const openModal = row => {
+        activeRow = row;
+        lastFocusedElement = document.activeElement;
+        date.textContent = `${row.dataset.date} / ${row.dataset.time}`;
+        course.textContent = `${row.dataset.course} (${row.dataset.count})`;
+        dot.className = `sub-training-modal-course-dot ${row.dataset.color || 'training-color-1'}`;
+
+        const isCancelled = row.dataset.status === '신청취소';
+        cancelButton.textContent = isCancelled ? '취소 완료' : '신청 취소하기';
+        cancelButton.disabled = isCancelled;
+        cancelButton.classList.toggle('is-disabled', isCancelled);
+
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('is-training-modal-open');
+        modal.querySelector('[data-training-history-close]')?.focus();
+    };
+
+    page.querySelectorAll('[data-training-history-open]').forEach(button => {
+        button.addEventListener('click', () => {
+            const row = button.closest('[data-training-history]');
+            if (row) openModal(row);
+        });
+    });
+
+    modal.querySelectorAll('[data-training-history-close]').forEach(button => {
+        button.addEventListener('click', closeModal);
+    });
+
+    cancelButton?.addEventListener('click', () => {
+        if (!activeRow || activeRow.dataset.status === '신청취소') return;
+        activeRow.dataset.status = '신청취소';
+        activeRow.classList.add('is-cancelled');
+        const status = activeRow.querySelector('[data-history-status]');
+        if (status) status.textContent = '신청취소';
+        cancelButton.textContent = '취소 완료';
+        cancelButton.disabled = true;
+        cancelButton.classList.add('is-disabled');
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMypageTrainingHistory);
+} else {
+    initMypageTrainingHistory();
+}
+
+function initMypageHomeLists() {
+    document.querySelectorAll('[data-mypage-list]').forEach(region => {
+        const selector = region.dataset.itemSelector;
+        const empty = region.querySelector('[data-mypage-empty]');
+        if (!selector || !empty) return;
+
+        const update = () => {
+            const hasItems = region.querySelectorAll(selector).length > 0;
+            empty.hidden = hasItems;
+            region.classList.toggle('is-empty', !hasItems);
+
+            [...region.children].forEach(child => {
+                if (child === empty) return;
+                child.hidden = !hasItems;
+            });
+        };
+
+        update();
+        new MutationObserver(update).observe(region, { childList: true, subtree: true });
+    });
+}
+
+function initMypageHomeTrainingModal() {
+    const page = document.querySelector('.sub-mypage-home-page');
+    const modal = document.querySelector('#mypage-home-training-modal');
+    if (!page || !modal) return;
+
+    const date = modal.querySelector('[data-home-training-date]');
+    const course = modal.querySelector('[data-home-training-course]');
+    const dot = modal.querySelector('[data-home-training-dot]');
+    const cancelButton = modal.querySelector('[data-home-training-cancel]');
+    const colorMap = {
+        'training-color-1': '#3ccba1', 'training-color-2': '#ec45ad',
+        'training-color-3': '#19a8e6', 'training-color-4': '#9566e9',
+        'training-color-5': '#ff8d3a'
+    };
+    let activeRow = null;
+    let lastFocusedElement = null;
+
+    const close = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('is-mypage-home-modal-open');
+        lastFocusedElement?.focus?.();
+    };
+
+    page.addEventListener('click', event => {
+        const button = event.target.closest('[data-training-history-open]');
+        if (!button) return;
+
+        const row = button.closest('[data-training-history]');
+        if (!row) return;
+        activeRow = row;
+        lastFocusedElement = button;
+        date.textContent = `${row.dataset.date} / ${row.dataset.time}`;
+        course.textContent = `${row.dataset.course} (${row.dataset.count})`;
+        dot.style.setProperty('--history-color', colorMap[row.dataset.color] || colorMap['training-color-1']);
+
+        const cancelled = row.dataset.status === '신청취소';
+        cancelButton.textContent = cancelled ? '취소 완료' : '신청 취소하기';
+        cancelButton.disabled = cancelled;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('is-mypage-home-modal-open');
+        modal.querySelector('[data-home-training-close]')?.focus();
+    });
+
+    modal.querySelectorAll('[data-home-training-close]').forEach(button => button.addEventListener('click', close));
+    cancelButton?.addEventListener('click', () => {
+        if (!activeRow || activeRow.dataset.status === '신청취소') return;
+        activeRow.dataset.status = '신청취소';
+        activeRow.querySelector('[data-history-status]').textContent = '신청취소';
+        cancelButton.textContent = '취소 완료';
+        cancelButton.disabled = true;
+    });
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) close();
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        initMypageHomeLists();
+        initMypageHomeTrainingModal();
+    });
+} else {
+    initMypageHomeLists();
+    initMypageHomeTrainingModal();
+}

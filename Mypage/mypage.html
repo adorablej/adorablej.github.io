@@ -19,7 +19,7 @@
 <body>
     <div data-include="/includes/header.html"></div>
 
-    <main class="sub-mypage-page" data-header-theme="dark">
+    <main class="sub-mypage-page sub-mypage-home-page" data-header-theme="dark">
         <section class="page-heading" data-header-theme="dark">
             <div class="inner">
                 <ul class="breadcrumb">
@@ -115,6 +115,7 @@
                             <a href="/Mypage/products.html">더보기</a>
                         </div>
 
+                        <div class="sub-mypage-list-region" data-mypage-list data-item-selector=".sub-mypage-product-card">
                         <div class="sub-mypage-product-slider-wrap">
                             <button type="button" class="sub-mypage-slider-button sub-mypage-product-prev" aria-label="이전 제품"></button>
                             <div class="swiper sub-mypage-product-slider">
@@ -123,29 +124,27 @@
                                         <div class="sub-mypage-product-image"><img src="/images/mypage/product_01.png" alt="HawkEye Elite Premium"></div>
                                         <strong>Product name</strong>
                                         <span>설치일 : 2026.07.07</span>
-                                        <a href="/Mypage/product-detail.html" class="sub-button-more">view</a>
                                     </article>
                                     <article class="swiper-slide sub-mypage-product-card">
                                         <div class="sub-mypage-product-image"><img src="/images/mypage/product_02.png" alt="HawkEye Elite Premium"></div>
                                         <strong>Product name</strong>
                                         <span>설치일 : 2026.07.07</span>
-                                        <a href="/Mypage/product-detail.html" class="sub-button-more">view</a>
                                     </article>
                                     <article class="swiper-slide sub-mypage-product-card">
                                         <div class="sub-mypage-product-image"><img src="/images/mypage/product_03.png" alt="HawkEye Elite Premium"></div>
                                         <strong>Product name</strong>
                                         <span>설치일 : 2026.07.07</span>
-                                        <a href="/Mypage/product-detail.html" class="sub-button-more">view</a>
                                     </article>
                                     <article class="swiper-slide sub-mypage-product-card">
                                         <div class="sub-mypage-product-image"><img src="/images/mypage/product_04.png" alt="HawkEye Elite Premium"></div>
                                         <strong>Product name</strong>
                                         <span>설치일 : 2026.07.07</span>
-                                        <a href="/Mypage/product-detail.html" class="sub-button-more">view</a>
                                     </article>
                                 </div>
                             </div>
                             <button type="button" class="sub-mypage-slider-button sub-mypage-product-next" aria-label="다음 제품"></button>
+                        </div>
+                        <p class="sub-mypage-list-empty" data-mypage-empty hidden>보유중인 헌터 제품이 없습니다.</p>
                         </div>
                     </section>
 
@@ -155,6 +154,7 @@
                             <a href="/Mypage/order-list.html">더보기</a>
                         </div>
 
+                        <div class="sub-mypage-list-region" data-mypage-list data-item-selector=".sub-mypage-order-card">
                         <article class="sub-mypage-order-card">
                             <div class="sub-mypage-order-head">
                                 <strong>2026.06.10 / 총 2개 주문 / 총금액 <em>000,000,000원</em></strong>
@@ -197,6 +197,8 @@
                                 <span>총 3건 주문 접기</span><i aria-hidden="true"></i>
                             </button>
                         </article>
+                        <p class="sub-mypage-list-empty" data-mypage-empty hidden>부품 주문 신청 내역이 없습니다.</p>
+                        </div>
                     </section>
 
                     <section class="sub-mypage-block sub-mypage-training-block">
@@ -204,23 +206,41 @@
                             <h3>트레이닝 수강 이력</h3>
                             <a href="/Mypage/training-history.html">더보기</a>
                         </div>
+                        <div class="sub-mypage-list-region" data-mypage-list data-item-selector="tbody tr">
                         <div class="sub-mypage-table-wrap">
                             <table class="sub-mypage-table">
                                 <thead>
                                     <tr><th>수강일자</th><th>수강제목</th><th>수강상태</th><th>상세</th></tr>
                                 </thead>
                                 <tbody>
-                                    <tr><td>2026.07.30</td><td>휠 얼라인먼트_Level 1</td><td>신청완료</td><td><a href="/Mypage/training-history.html" class="sub-button-more">view</a></td></tr>
-                                    <tr><td>2026.07.30</td><td>휠 얼라인먼트_Level 1</td><td>신청완료</td><td><a href="/Mypage/training-history.html" class="sub-button-more">view</a></td></tr>
-                                    <tr><td>2026.07.30</td><td>휠 얼라인먼트_Level 1</td><td>신청완료</td><td><a href="/Mypage/training-history.html" class="sub-button-more">view</a></td></tr>
+                                    <tr data-training-history data-date="2026.07.19" data-time="09:00" data-course="얼라인먼트 Level 1" data-count="00/00" data-status="신청완료" data-color="training-color-1"><td>2026.07.30</td><td>휠 얼라인먼트_Level 1</td><td data-history-status>신청완료</td><td><button type="button" class="sub-button-more" data-training-history-open>view</button></td></tr>
+                                    <tr data-training-history data-date="2026.07.27" data-time="16:00" data-course="얼라인먼트 Level 1" data-count="00/00" data-status="신청완료" data-color="training-color-4"><td>2026.07.30</td><td>휠 얼라인먼트_Level 1</td><td data-history-status>신청완료</td><td><button type="button" class="sub-button-more" data-training-history-open>view</button></td></tr>
+                                    <tr data-training-history data-date="2026.08.03" data-time="10:00" data-course="휠 얼라인먼트 Level 2" data-count="04/20" data-status="신청완료" data-color="training-color-3"><td>2026.07.30</td><td>휠 얼라인먼트_Level 1</td><td data-history-status>신청완료</td><td><button type="button" class="sub-button-more" data-training-history-open>view</button></td></tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <p class="sub-mypage-list-empty" data-mypage-empty hidden>트레이닝 수강 이력이 없습니다.</p>
                         </div>
                     </section>
                 </div>
             </div>
         </section>
     </main>
+
+    <div class="sub-mypage-home-training-modal" id="mypage-home-training-modal" aria-hidden="true">
+        <button type="button" class="sub-mypage-home-modal-dim" data-home-training-close aria-label="상세 창 닫기"></button>
+        <div class="sub-mypage-home-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="mypage-home-training-modal-title">
+            <button type="button" class="sub-mypage-home-modal-close" data-home-training-close aria-label="상세 창 닫기"></button>
+            <div class="sub-mypage-home-modal-visual" aria-hidden="true"></div>
+            <div class="sub-mypage-home-modal-body">
+                <div class="sub-mypage-home-modal-summary">
+                    <strong id="mypage-home-training-modal-title" data-home-training-date></strong>
+                    <p><i data-home-training-dot aria-hidden="true"></i><span data-home-training-course></span></p>
+                </div>
+                <div class="sub-mypage-home-modal-actions"><button type="button" data-home-training-close>닫기</button><button type="button" class="is-primary" data-home-training-cancel>신청 취소하기</button></div>
+            </div>
+        </div>
+    </div>
 
     <div data-include="/includes/footer.html"></div>
 

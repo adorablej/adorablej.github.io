@@ -1,80 +1,238 @@
-/* products-HunterPride-Map.html , Store UI. */
+/* products-HunterPride-Map.html , Store UI + NAVER Map controller. */
 
-window.StoreUI={
-    section:null,
-    list:null,
-    count:null,
-    detail:null,
+(function () {
+    "use strict";
 
-    init(section){
-        this.section=section;
-        this.list=section.querySelector(".sub-pride-store-list");
-        this.count=section.querySelector(".sub-pride-map-count");
-        this.detail=section.querySelector(".sub-pride-store-detail");
-    },
+    const escapeHtml = (value = "") => String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
-    renderStoreList(stores){
-        if(!this.list)return;
+    const getStoreMarkerIcon = () => ({
+        url: "/images/icon/store-marker.png",
+        size: new naver.maps.Size(48, 58),
+        scaledSize: new naver.maps.Size(48, 58),
+        origin: new naver.maps.Point(0, 0),
+        anchor: new naver.maps.Point(24, 58)
+    });
 
-        if(!stores.length){
-            this.list.innerHTML='<p class="sub-pride-store-empty">검색 결과가 없습니다.</p>';
-            return;
+    window.StoreUI = {
+        section: null,
+        list: null,
+        count: null,
+        detail: null,
+        map: null,
+        markers: new Map(),
+        visibleStores: [],
+        activeStoreId: null,
+
+        init(section) {
+            this.section = section;
+            this.list = section.querySelector(".sub-pride-store-list");
+            this.count = section.querySelector(".sub-pride-map-count");
+            this.detail = section.querySelector(".sub-pride-store-detail");
+        },
+
+        initMap() {
+            const mapElement = this.section?.querySelector("#naverStoreMap");
+            const mapScript = document.querySelector('script[src*="oapi.map.naver.com/openapi/v3/maps.js"]');
+            const hasPlaceholder = mapScript?.src.includes("NAVER_MAP_CLIENT_ID_PLACEHOLDER");
+            if (!mapElement || !window.naver?.maps || hasPlaceholder) {
+                console.error("네이버 지도 API를 불러오지 못했습니다. Client ID와 Web 서비스 URL을 확인하세요.");
+                return false;
+            }
+
+            this.map = new naver.maps.Map(mapElement, {
+                center: new naver.maps.LatLng(37.4563, 126.7052),
+                zoom: 9,
+                minZoom: 6,
+                zoomControl: true,
+                zoomControlOptions: { position: naver.maps.Position.TOP_RIGHT }
+            });
+            return true;
+        },
+
+        renderStoreList(stores) {
+            if (!this.list) return;
+            if (!stores.length) {
+                this.list.innerHTML = '<p class="sub-pride-store-empty">검색 결과가 없습니다.</p>';
+                return;
+            }
+
+            this.list.innerHTML = stores.map(store => `
+                <button type="button" class="sub-pride-store-item" data-store-id="${escapeHtml(store.id)}">
+                    <span class="sub-pride-store-region">${escapeHtml(store.region)}</span>
+                    <strong>${escapeHtml(store.name)}</strong>
+                    <span class="sub-pride-store-address">${escapeHtml(store.roadAddress)}</span>
+                    <i aria-hidden="true"></i>
+                </button>
+            `).join("");
+        },
+
+        renderCount(totalCount) {
+            if (this.count) this.count.innerHTML = `총 <strong>${Number(totalCount) || 0}</strong>개의 매장이 있습니다.`;
+        },
+
+        renderMarkers(stores, onMarkerClick) {
+            this.visibleStores = stores;
+            this.markers.forEach(({ marker }) => marker.setMap(null));
+            this.markers.clear();
+            if (!this.map) return;
+
+            const bounds = new naver.maps.LatLngBounds();
+            stores.forEach(store => {
+                const position = new naver.maps.LatLng(Number(store.latitude), Number(store.longitude));
+                const marker = new naver.maps.Marker({
+                    map: this.map,
+                    position,
+                    title: store.name,
+                    icon: getStoreMarkerIcon()
+                });
+                naver.maps.Event.addListener(marker, "click", () => onMarkerClick(store));
+                this.markers.set(String(store.id), { marker, store });
+                bounds.extend(position);
+            });
+
+            if (stores.length > 1) this.map.fitBounds(bounds, { top: 80, right: 80, bottom: 80, left: 80 });
+            else if (stores.length === 1) {
+                this.map.setCenter(bounds.getCenter());
+                this.map.setZoom(15);
+            }
+        },
+
+        setActiveStore(store, options = {}) {
+            if (!store) return;
+            const id = String(store.id);
+            this.activeStoreId = id;
+
+            this.list?.querySelectorAll(".sub-pride-store-item").forEach(item => {
+                const active = item.dataset.storeId === id;
+                item.classList.toggle("is-active", active);
+                item.setAttribute("aria-pressed", String(active));
+                if (active && options.scrollList) item.scrollIntoView({ block: "nearest", behavior: "smooth" });
+            });
+
+            this.markers.forEach(({ marker }, markerId) => {
+                marker.setZIndex(markerId === id ? 100 : 1);
+                marker.setAnimation(markerId === id ? naver.maps.Animation.BOUNCE : null);
+            });
+
+            const markerEntry = this.markers.get(id);
+            if (this.map && markerEntry && options.moveMap !== false) {
+                this.map.panTo(markerEntry.marker.getPosition());
+                if (this.map.getZoom() < 14) this.map.setZoom(14);
+            }
+            this.renderDetail(store);
+        },
+
+        renderDetail(store) {
+            if (!this.detail || !store) return;
+            const photo = this.detail.querySelector(".sub-pride-store-photo");
+            photo.style.backgroundImage = store.image ? `url("${encodeURI(store.image)}")` : "";
+            photo.classList.toggle("has-image", Boolean(store.image));
+            this.detail.querySelector(".sub-pride-store-region").textContent = store.region || "";
+            this.detail.querySelector("h4").textContent = store.name || "";
+            this.detail.querySelector(".sub-pride-store-meta").innerHTML = `
+                <div><dt>도로명</dt><dd>${escapeHtml(store.roadAddress)}</dd></div>
+                <div><dt>지번</dt><dd>${escapeHtml(store.jibunAddress)}</dd></div>
+                <div><dt>전화번호</dt><dd>${escapeHtml(store.phone)}</dd></div>
+            `;
+            this.detail.querySelector(".sub-pride-store-products ul").innerHTML = (store.products || []).map(product => `
+                <li><span class="sub-pride-product-icon"></span><p>${escapeHtml(product.category)}<strong>${escapeHtml(product.name)}</strong></p></li>
+            `).join("");
+            this.detail.classList.add("is-open");
+            this.detail.setAttribute("aria-hidden", "false");
+        },
+
+        closeDetail() {
+            if (!this.detail) return;
+            this.activeStoreId = null;
+            this.detail.classList.remove("is-open");
+            this.detail.setAttribute("aria-hidden", "true");
+            this.section.querySelectorAll(".sub-pride-store-item").forEach(item => {
+                item.classList.remove("is-active");
+                item.setAttribute("aria-pressed", "false");
+            });
+            this.markers.forEach(({ marker }) => {
+                marker.setZIndex(1);
+                marker.setAnimation(null);
+            });
         }
+    };
 
-        this.list.innerHTML=stores.map(store=>`
-            <button type="button" class="sub-pride-store-item" data-store-id="${store.id}">
-                <span class="sub-pride-store-region">${store.region}</span>
-                <strong>${store.name}</strong>
-                <span class="sub-pride-store-address">${store.roadAddress}</span>
-                <i aria-hidden="true"></i>
-            </button>
-        `).join("");
-    },
+    document.addEventListener("DOMContentLoaded", () => {
+        const section = document.querySelector(".sub-pride-map");
+        if (!section || !window.StoreAPI) return;
 
-    renderCount(totalCount){
-        if(!this.count)return;
+        const keywordInput = section.querySelector(".sub-pride-map-keyword input");
+        const [regionSelect, citySelect] = section.querySelectorAll(".sub-pride-map-selects select");
+        const closeButton = section.querySelector(".sub-pride-store-close");
+        StoreUI.init(section);
+        StoreUI.initMap();
 
-        this.count.innerHTML=`총 <strong>${totalCount}</strong>개의 매장이 있습니다.`;
-    },
+        const allStores = Array.isArray(window.MOCK_STORES) ? window.MOCK_STORES : [];
+        const setRegionOptions = () => {
+            const regions = [...new Set(allStores.map(store => store.region))];
+            regionSelect.innerHTML = '<option value="">도/시 선택</option>'
+                + regions.map(region => `<option value="${escapeHtml(region)}">${escapeHtml(region)}</option>`).join("");
+        };
+        const setCityOptions = region => {
+            const cities = [...new Set(allStores.filter(store => !region || store.region === region).map(store => store.city))];
+            citySelect.innerHTML = '<option value="">시/구/군 선택</option>'
+                + cities.map(city => `<option value="${escapeHtml(city)}">${escapeHtml(city)}</option>`).join("");
+            citySelect.disabled = !region;
+        };
 
-    renderDetail(store){
-        if(!this.detail||!store)return;
+        const selectStore = async (id, options) => {
+            try {
+                const store = await StoreAPI.getStore(id);
+                if (store) StoreUI.setActiveStore(store, options);
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
-        const photo=this.detail.querySelector(".sub-pride-store-photo");
-        const region=this.detail.querySelector(".sub-pride-store-region");
-        const title=this.detail.querySelector("h4");
-        const meta=this.detail.querySelector(".sub-pride-store-meta");
-        const productList=this.detail.querySelector(".sub-pride-store-products ul");
+        const loadStores = async () => {
+            try {
+                const result = await StoreAPI.getStores({
+                    keyword: keywordInput.value,
+                    region: regionSelect.value,
+                    city: citySelect.value
+                });
+                StoreUI.closeDetail();
+                StoreUI.renderCount(result.totalCount);
+                StoreUI.renderStoreList(result.stores);
+                StoreUI.renderMarkers(result.stores, store => {
+                    StoreUI.setActiveStore(store, { scrollList: true, moveMap: true });
+                });
+            } catch (error) {
+                console.error(error);
+                StoreUI.renderCount(0);
+                StoreUI.renderStoreList([]);
+                StoreUI.renderMarkers([], () => {});
+            }
+        };
 
-        photo.style.backgroundImage=store.image?`url("${store.image}")`:"";
-        photo.classList.toggle("has-image",Boolean(store.image));
-        region.textContent=store.region;
-        title.textContent=store.name;
-
-        meta.innerHTML=`
-            <div><dt>도로명</dt><dd>${store.roadAddress}</dd></div>
-            <div><dt>지번</dt><dd>${store.jibunAddress}</dd></div>
-            <div><dt>전화번호</dt><dd>${store.phone}</dd></div>
-        `;
-
-        productList.innerHTML=store.products.map(product=>`
-            <li>
-                <span class="sub-pride-product-icon"></span>
-                <p>${product.category}<strong>${product.name}</strong></p>
-            </li>
-        `).join("");
-
-        this.detail.classList.add("is-open");
-        this.detail.setAttribute("aria-hidden","false");
-    },
-
-    closeDetail(){
-        if(!this.detail)return;
-
-        this.detail.classList.remove("is-open");
-        this.detail.setAttribute("aria-hidden","true");
-        this.section.querySelectorAll(".sub-pride-store-item").forEach(item=>{
-            item.classList.remove("is-active");
+        let searchTimer;
+        keywordInput.addEventListener("input", () => {
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(loadStores, 200);
         });
-    }
-};
+        regionSelect.addEventListener("change", () => {
+            setCityOptions(regionSelect.value);
+            loadStores();
+        });
+        citySelect.addEventListener("change", loadStores);
+        StoreUI.list.addEventListener("click", event => {
+            const item = event.target.closest(".sub-pride-store-item");
+            if (item) selectStore(item.dataset.storeId, { scrollList: false, moveMap: true });
+        });
+        closeButton?.addEventListener("click", () => StoreUI.closeDetail());
+
+        setRegionOptions();
+        setCityOptions("");
+        loadStores();
+    });
+})();
