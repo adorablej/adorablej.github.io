@@ -59,19 +59,19 @@
                                     <input class="sub-account-agree-item" name="agreeTerms" type="checkbox" data-required data-message="필수 약관에 동의해 주세요." />
                                     <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
                                     <span class="sub-form-checkbox-text">(필수) 헌터코리아 회원 이용약관</span>
-                                    <a class="sub-account-view-link" href="#" aria-label="헌터코리아 회원 이용약관 보기">보기</a>
+                                    <button class="sub-account-view-link" type="button" data-policy-open="terms" aria-label="헌터코리아 회원 이용약관 보기">보기</button>
                                 </label>
                                 <label class="sub-form-checkbox">
                                     <input class="sub-account-agree-item" name="agreePrivacy" type="checkbox" data-required data-message="필수 약관에 동의해 주세요." />
                                     <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
                                     <span class="sub-form-checkbox-text">(필수) 개인정보 수집 이용동의</span>
-                                    <a class="sub-account-view-link" href="#" aria-label="개인정보 수집 이용동의 보기">보기</a>
+                                    <button class="sub-account-view-link" type="button" data-policy-open="privacy" aria-label="개인정보 처리방침 보기">보기</button>
                                 </label>
                                 <label class="sub-form-checkbox">
                                     <input class="sub-account-agree-item" name="agreeMarketing" type="checkbox" />
                                     <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
                                     <span class="sub-form-checkbox-text">(선택) 마케팅 광고 활용을 위한 수신 동의</span>
-                                    <a class="sub-account-view-link" href="#" aria-label="마케팅 광고 활용을 위한 수신 동의 보기">보기</a>
+                                    <button class="sub-account-view-link" type="button" data-policy-open="marketing" aria-label="마케팅 및 광고 활용 동의 보기">보기</button>
                                 </label>
                             </div>
                             <p class="sub-account-agreement-error sub-account-error" id="agreement-error" aria-live="polite"></p>
@@ -180,11 +180,22 @@
 
     </main>
 
+    <div class="policy-modal" data-policy-modal aria-hidden="true">
+        <button type="button" class="policy-modal__dim" data-policy-close aria-label="약관 창 닫기"></button>
+        <div class="policy-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="policy-modal-title">
+            <header class="policy-modal__header"><h2 id="policy-modal-title" data-policy-modal-title></h2><button type="button" class="policy-modal__close" data-policy-close aria-label="닫기"></button></header>
+            <div class="policy-modal__body"><div class="policy-text" data-policy-modal-content></div></div>
+            <footer class="policy-modal__footer"><button type="button" class="policy-modal__confirm" data-policy-close>확인</button></footer>
+        </div>
+    </div>
+
     <div data-include="/includes/footer.html"></div>
 
     <script src="/js/include.js"></script>
     <script src="/js/common.js"></script>
     <script src="/js/form.js"></script>
     <script src="/js/account.js"></script>
+    <script src="/js/policy-data.js"></script>
+    <script src="/js/policy.js"></script>
 </body>
 </html>

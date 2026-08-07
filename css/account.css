@@ -401,3 +401,70 @@
     font-size:calc(100vw * 18 / 1920);
     line-height:1;
 }
+
+/* ========================================
+   Phone verification login
+======================================== */
+.sub-account-login-section { min-height:calc(100vh - calc(100 * var(--vw))); padding:calc(220 * var(--vw)) 0 calc(190 * var(--vw)); box-sizing:border-box; }
+.sub-account-phone-login { display:block; }
+.sub-account-login-step[hidden] { display:none !important; }
+.sub-account-phone-login .sub-account-field { margin-bottom:calc(20 * var(--vw)); }
+.sub-account-phone-login .sub-account-label { margin-bottom:calc(16 * var(--vw)); color:#555; font-size:calc(20 * var(--vw)); font-weight:600; }
+.sub-account-phone-login .sub-account-input { height:calc(80 * var(--vw)); font-size:calc(18 * var(--vw)); }
+.sub-account-login-check { margin-top:calc(18 * var(--vw)); color:#111; font-size:calc(17 * var(--vw)); font-weight:600; }
+.sub-account-phone-login .sub-account-actions { margin-top:calc(52 * var(--vw)); }
+.sub-account-phone-login .sub-account-button { height:calc(78 * var(--vw)); }
+.sub-account-login-join { display:block; width:max-content; margin:calc(34 * var(--vw)) auto 0; color:var(--red); font-size:calc(16 * var(--vw)); text-decoration:underline; }
+.sub-account-code-input-wrap { position:relative; }
+.sub-account-code-input-wrap .sub-account-input { padding-right:calc(92 * var(--vw)); }
+.sub-account-code-timer { position:absolute; top:50%; right:calc(22 * var(--vw)); color:#888; font-size:calc(17 * var(--vw)); transform:translateY(-50%); }
+.sub-account-code-feedback { display:flex; align-items:center; justify-content:space-between; gap:calc(20 * var(--vw)); min-height:calc(34 * var(--vw)); margin-top:calc(14 * var(--vw)); }
+.sub-account-code-resend { display:block; margin-left:auto; padding:0; border:0; background:transparent; color:#999; font-family:inherit; font-size:calc(15 * var(--vw)); text-decoration:underline; cursor:pointer; }
+.sub-account-code-status { position:relative; margin:0; padding-left:calc(28 * var(--vw)); color:#999; font-size:calc(15 * var(--vw)); }
+.sub-account-code-status::before,.sub-account-code-status::after { content:''; position:absolute; left:calc(9 * var(--vw)); top:50%; }
+.sub-account-code-status.is-success::before { content:'✓'; color:#27a844; font-size:calc(20 * var(--vw)); font-weight:700; transform:translate(-50%,-56%); }
+.sub-account-code-status.is-error::before,.sub-account-code-status.is-error::after { width:calc(18 * var(--vw)); height:calc(2 * var(--vw)); background:var(--red); }
+.sub-account-code-status.is-error::before { transform:translate(-50%,-50%) rotate(45deg); }
+.sub-account-code-status.is-error::after { transform:translate(-50%,-50%) rotate(-45deg); }
+.sub-account-code-status.is-success + .sub-account-code-resend { display:none; }
+.sub-account-login-code-actions { grid-template-columns:repeat(2,minmax(0,1fr)); gap:calc(12 * var(--vw)); }
+.sub-account-button:disabled { border-color:#efc6c3; background:#efc6c3; color:#fff; cursor:not-allowed; }
+
+@media (max-width:768px) {
+    .sub-account-login-section { min-height:auto; padding:150px 0 100px; }
+    .sub-account-container-small { width:calc(100% - 40px); }
+    .sub-account-phone-login .sub-account-label { font-size:17px; }
+    .sub-account-phone-login .sub-account-input { height:62px; font-size:16px; }
+    .sub-account-phone-login .sub-account-button { height:58px; font-size:17px; }
+    .sub-account-login-code-actions { gap:10px; }
+}
+
+/* Policy agreement modal */
+.policy-modal { position:fixed; z-index:2000; inset:0; display:flex; align-items:center; justify-content:center; padding:40px; visibility:hidden; opacity:0; transition:opacity .25s ease,visibility .25s ease; }
+.policy-modal.is-open { visibility:visible; opacity:1; }
+.policy-modal__dim { position:absolute; inset:0; width:100%; height:100%; padding:0; border:0; background:rgba(0,0,0,.6); cursor:pointer; }
+.policy-modal__dialog { position:relative; z-index:1; display:flex; flex-direction:column; width:calc(950 * var(--vw)); max-width:950px; height:calc(660 * var(--vw)); max-height:calc(100vh - 80px); overflow:hidden; background:#fff; box-shadow:0 calc(18 * var(--vw)) calc(60 * var(--vw)) rgba(0,0,0,.18); }
+.policy-modal__header { flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; min-height:calc(130 * var(--vw)); padding:calc(40 * var(--vw)) calc(56 * var(--vw)) calc(28 * var(--vw)); box-sizing:border-box; border-bottom:0; }
+.policy-modal__header h2 { margin:0; color:#111; font-size:calc(38 * var(--vw)); font-weight:700; line-height:1.2; letter-spacing:-.045em; }
+.policy-modal__close { position:relative; flex:0 0 auto; width:calc(44 * var(--vw)); height:calc(44 * var(--vw)); padding:0; border:0; background:transparent; cursor:pointer; }
+.policy-modal__close::before,.policy-modal__close::after { content:''; position:absolute; top:50%; left:50%; width:calc(30 * var(--vw)); height:calc(2 * var(--vw)); background:#111; }
+.policy-modal__close::before { transform:translate(-50%,-50%) rotate(45deg); }
+.policy-modal__close::after { transform:translate(-50%,-50%) rotate(-45deg); }
+.policy-modal__body { flex:1; min-height:0; margin:0 calc(30 * var(--vw)) calc(46 * var(--vw)) calc(56 * var(--vw)); padding:0 calc(42 * var(--vw)) 0 0; overflow-y:auto; scrollbar-width:thin; scrollbar-color:#d8d8d8 transparent; }
+.policy-modal__body::-webkit-scrollbar { width:calc(6 * var(--vw)); }
+.policy-modal__body::-webkit-scrollbar-track { background:transparent; }
+.policy-modal__body::-webkit-scrollbar-thumb { border-radius:999px; background:#d8d8d8; }
+.policy-modal__body .policy-text { color:#333; font-size:calc(14 * var(--vw)); line-height:1.75; }
+.policy-modal__footer { display:none; }
+.policy-modal__confirm { min-width:150px; height:50px; border:1px solid var(--red); border-radius:999px; background:var(--red); color:#fff; font-family:inherit; font-size:16px; cursor:pointer; }
+body.is-policy-modal-open { overflow:hidden; }
+@media (max-width:768px) {
+    .policy-modal { padding:20px; }
+    .policy-modal__dialog { width:100%; height:70vh; max-height:calc(100vh - 40px); }
+    .policy-modal__header { min-height:88px; padding:28px 24px 18px; }
+    .policy-modal__header h2 { font-size:26px; }
+    .policy-modal__close { width:36px; height:36px; }
+    .policy-modal__close::before,.policy-modal__close::after { width:24px; height:2px; }
+    .policy-modal__body { margin:0 12px 28px 24px; padding-right:18px; }
+    .policy-modal__body .policy-text { font-size:13px; line-height:1.7; }
+}

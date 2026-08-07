@@ -23,7 +23,8 @@
             <div class="sub-account-container sub-account-container-small">
                 <h1 class="sub-account-title" id="login-title">Login<span>.</span></h1>
 
-                <form class="sub-form sub-account-form" id="login-form" data-form novalidate>
+                <form class="sub-form sub-account-form sub-account-phone-login" id="login-form" novalidate>
+                    <div class="sub-account-login-step is-active" data-login-step="phone">
                     <div class="sub-form-group sub-account-field">
                         <label class="sub-account-label" for="login-phone">휴대전화번호</label>
                         <input
@@ -33,8 +34,7 @@
                             type="tel"
                             inputmode="numeric"
                             autocomplete="tel"
-                            maxlength="13"
-                            data-phone
+                            maxlength="11"
                             placeholder="(-) 제외한 숫자만 입력해 주세요."
                             data-required
                             data-message="휴대전화번호를 입력해 주세요."
@@ -48,10 +48,21 @@
                         <span class="sub-form-checkbox-text">로그인 상태 유지</span>
                     </label>
 
-                    <div class="sub-account-actions">
-                        <button class="sub-account-button sub-account-button-primary" type="submit">로그인</button>
-                        <a class="sub-account-button sub-account-button-outline" href="/account/join.html">회원가입</a>
+                    <div class="sub-account-actions"><button class="sub-account-button sub-account-button-primary" type="button" data-login-request>로그인 코드 요청하기</button></div>
                     </div>
+
+                    <div class="sub-account-login-step" data-login-step="code" hidden>
+                        <div class="sub-form-group sub-account-field sub-account-code-field">
+                            <label class="sub-account-label" for="login-code">휴대전화번호</label>
+                            <div class="sub-account-code-input-wrap"><input class="sub-form-input sub-account-input" id="login-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="인증코드 입력"><span class="sub-account-code-timer" data-login-timer>09:59</span></div>
+                            <div class="sub-account-code-feedback"><p class="sub-account-code-status" data-login-status hidden aria-live="polite"></p><button class="sub-account-code-resend" type="button" data-login-resend>코드 재전송</button></div>
+                        </div>
+
+                        <label class="sub-form-checkbox sub-account-login-check"><input id="login-keep-code" name="keepLoginCode" type="checkbox" checked><span class="sub-form-checkbox-icon" aria-hidden="true"></span><span class="sub-form-checkbox-text">로그인 상태 유지</span></label>
+                        <div class="sub-account-actions sub-account-login-code-actions"><button class="sub-account-button sub-account-button-outline" type="button" data-login-back>이전</button><button class="sub-account-button sub-account-button-primary" type="submit" data-login-submit disabled>로그인</button></div>
+                    </div>
+
+                    <a class="sub-account-login-join" href="/account/join.html">회원가입</a>
                 </form>
             </div>
         </section>
