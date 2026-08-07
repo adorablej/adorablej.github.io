@@ -62,7 +62,7 @@ function initMypageProductSlider() {
 
 function initMypageOrderToggle() {
     document.querySelectorAll(".sub-mypage-order-toggle").forEach(button => {
-        const card = button.closest(".sub-mypage-order-card");
+        const card = button.closest(".sub-mypage-order-card, .sub-mypage-order-history");
         const text = button.querySelector("span");
         if (!card || !text) return;
 
