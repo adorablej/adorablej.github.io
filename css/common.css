@@ -126,3 +126,18 @@ html {
 .russo{font-family: "Russo One", sans-serif;
     font-weight: 400;
     font-style: normal;}
+
+/* Responsive visibility */
+.mo-only {
+    display: none !important;
+}
+
+@media (max-width: 767px) {
+    .pc-only {
+        display: none !important;
+    }
+
+    .mo-only {
+        display: revert !important;
+    }
+}

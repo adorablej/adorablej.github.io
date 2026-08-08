@@ -508,6 +508,7 @@ function initDragCursor() {
             lastFocusedElement = document.activeElement;
     
             setMemberState();
+            openCurrentDepth();
     
             allMenu.classList.add("is-open");
             allMenu.setAttribute("aria-hidden", "false");
@@ -542,11 +543,13 @@ function initDragCursor() {
     
                 const button = item.querySelector(".all-menu-toggle");
                 const depth = item.querySelector(".all-menu-depth");
+                const title = item.querySelector(".all-menu-title")?.textContent.trim();
     
                 item.classList.remove("is-open");
     
                 if (button) {
                     button.setAttribute("aria-expanded", "false");
+                    button.setAttribute("aria-label", `${title} 하위 메뉴 펼치기`);
                 }
     
                 if (depth) {
@@ -554,11 +557,50 @@ function initDragCursor() {
                 }
             });
         }
+
+        function getCurrentMenuItem() {
+            const currentSection = window.location.pathname
+                .split("/")
+                .filter(Boolean)[0]
+                ?.toLowerCase();
+
+            if (!currentSection) return null;
+
+            return [...allMenu.querySelectorAll(".all-menu-item")].find((item) => {
+                const href = item.querySelector(".all-menu-title")?.getAttribute("href");
+                const menuSection = href
+                    ?.split("/")
+                    .filter(Boolean)[0]
+                    ?.toLowerCase();
+
+                return menuSection === currentSection;
+            }) || null;
+        }
+
+        function openCurrentDepth() {
+            const currentItem = getCurrentMenuItem();
+            closeAllDepths(currentItem);
+
+            if (!currentItem) return;
+
+            const button = currentItem.querySelector(".all-menu-toggle");
+            const title = currentItem.querySelector(".all-menu-title")?.textContent.trim();
+            const depth = currentItem.querySelector(".all-menu-depth");
+            const depthInner = currentItem.querySelector(".all-menu-depth-inner");
+
+            if (!button || !depth || !depthInner) return;
+
+            currentItem.classList.add("is-open");
+            button.setAttribute("aria-expanded", "true");
+            button.setAttribute("aria-label", `${title} 하위 메뉴 접기`);
+            depth.style.height = `${depthInner.scrollHeight}px`;
+        }
     
         function toggleDepth(button) {
             const item = button.closest(".all-menu-item");
             const depth = item?.querySelector(".all-menu-depth");
             const depthInner = item?.querySelector(".all-menu-depth-inner");
+            const title = item?.querySelector(".all-menu-title")?.textContent.trim();
     
             if (!item || !depth || !depthInner) return;
     
@@ -569,10 +611,12 @@ function initDragCursor() {
             if (willOpen) {
                 item.classList.add("is-open");
                 button.setAttribute("aria-expanded", "true");
+                button.setAttribute("aria-label", `${title} 하위 메뉴 접기`);
                 depth.style.height = `${depthInner.scrollHeight}px`;
             } else {
                 item.classList.remove("is-open");
                 button.setAttribute("aria-expanded", "false");
+                button.setAttribute("aria-label", `${title} 하위 메뉴 펼치기`);
                 depth.style.height = "0px";
             }
         }

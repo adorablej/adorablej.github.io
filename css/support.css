@@ -1140,26 +1140,9 @@ Training Program
     color: var(--red);
 }
 
-.sub-training-program-tabs.sub-pill-tabs {
+.sub-training-program-tabs {
     gap: calc(14 * var(--vw));
     margin-bottom: 0;
-}
-
-.sub-training-program-tab.sub-pill-tab {
-    min-width: calc(210 * var(--vw));
-    height: calc(58 * var(--vw));
-    margin-right: 0;
-    padding: 0 calc(24 * var(--vw));
-    border-color: #d7d7d7;
-    color: #aaa;
-    font-size: calc(17 * var(--vw));
-    line-height: 1;
-    white-space: nowrap;
-}
-
-.sub-training-program-tab.sub-pill-tab.is-active {
-    border-color: var(--red);
-    color: #fff;
 }
 
 .sub-training-program-body {
@@ -1804,6 +1787,128 @@ Wheel Alignment Specification
 .specification-modal-actions { padding-top: 24px; text-align: center; }
 .specification-modal-actions button { min-width: 84px; height: 38px; border: 0; border-radius: 999px; background: var(--red); color: #fff; font-weight: 700; cursor: pointer; }
 html.is-specification-modal-open, html.is-specification-modal-open body { overflow: hidden; }
+
+/* ========================================
+Training Program : Mobile
+======================================== */
+@media (max-width: 767px) {
+    .sub-training-program .inner {
+        width: auto;
+        margin: 0;
+        padding: 0 25px;
+        box-sizing: border-box;
+    }
+
+    .sub-training-program-head {
+        padding: 0 0 40px;
+        overflow: hidden;
+    }
+
+    .sub-training-program-head .inner {
+        padding: 0;
+    }
+
+    .sub-training-program .sub-support-s-heading {
+        margin: 0 0 30px;
+        padding-left: 25px;
+        font-size: 24px;
+        line-height: 30px;
+        letter-spacing: -.04em;
+    }
+
+    .sub-training-program-tabs {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        margin: 0;
+        padding: 0 25px;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        box-sizing: border-box;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .sub-training-program-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .sub-training-program-body {
+        padding: 40px 0;
+    }
+
+    .sub-training-program-panel {
+        gap: 15px;
+    }
+
+    .sub-training-program-card {
+        display: block;
+        min-height: 0;
+        padding: 40px 25px;
+        border-radius: 15px;
+        box-sizing: border-box;
+    }
+
+    .sub-training-program-card-side {
+        display: block;
+        padding: 0;
+    }
+
+    .sub-training-program-card-side h4 {
+        font-size: 20px;
+        line-height: 24px;
+        letter-spacing: -.04em;
+    }
+
+    .sub-training-program-icon {
+        width: 58px;
+        height: 58px;
+        margin-top: 40px;
+        background-color: #e4e5e8;
+        background-image: none;
+        -webkit-mask: url('/images/icon/icon-product-alignment-equipment.svg') center / contain no-repeat;
+        mask: url('/images/icon/icon-product-alignment-equipment.svg') center / contain no-repeat;
+    }
+
+    #training-panel-balance .sub-training-program-icon {
+        -webkit-mask-image: url('/images/icon/icon-product-wheel-balancer.svg');
+        mask-image: url('/images/icon/icon-product-wheel-balancer.svg');
+    }
+
+    #training-panel-tire .sub-training-program-icon {
+        -webkit-mask-image: url('/images/icon/icon-tire.svg');
+        mask-image: url('/images/icon/icon-tire.svg');
+    }
+
+    #training-panel-custom .sub-training-program-icon {
+        -webkit-mask-image: url('/images/icon/icon_guide.png');
+        mask-image: url('/images/icon/icon_guide.png');
+    }
+
+    .sub-training-program-card-content {
+        margin-top: 55px;
+    }
+
+    .sub-training-program-card-content p {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+    }
+
+    .sub-training-program-card-content ul {
+        margin-top: 24px;
+        padding-top: 24px;
+    }
+
+    .sub-training-program-card-content li {
+        padding-left: 9px;
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: 0;
+        font-weight: 300;
+        word-break: keep-all;
+    }
+}
 
 @media (max-width: 680px) {
     .specification-modal { padding: 12px; }

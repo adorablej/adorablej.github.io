@@ -7,6 +7,7 @@
         initAgreementControls();
         initBusinessType();
         initFileInput();
+        initJoinPhoneVerification();
         initAuthButtons();
         initAddressSearch();
         initPlaceholderLinks();
@@ -370,23 +371,7 @@
     }
 
     function initAuthButtons() {
-        var phoneButton = document.getElementById('phone-auth-button');
         var businessButton = document.getElementById('business-auth-button');
-
-        if (phoneButton) {
-            phoneButton.addEventListener('click', function () {
-                var phone = document.getElementById('join-phone');
-                var numbers = phone.value.replace(/\D/g, '');
-
-                if (numbers.length < 10) {
-                    setFieldError(phone.closest('.sub-form-group'), '본인 인증을 위해 휴대전화번호를 먼저 입력해 주세요.');
-                    phone.focus();
-                    return;
-                }
-
-                markAuthenticated('phone-authenticated', phoneButton, 'phone-auth-status', '휴대폰 본인 인증이 완료되었습니다.');
-            });
-        }
 
         if (businessButton) {
             businessButton.addEventListener('click', function () {
@@ -403,6 +388,131 @@
                 markAuthenticated('business-authenticated', businessButton, 'business-auth-status', '사업자 인증이 완료되었습니다.');
             });
         }
+    }
+
+    function initJoinPhoneVerification() {
+        var group = document.getElementById('join-phone-verification');
+        if (!group) return;
+
+        var phone = document.getElementById('join-phone');
+        var requestButton = document.getElementById('phone-auth-button');
+        var codeArea = document.getElementById('join-phone-code-area');
+        var code = document.getElementById('join-phone-code');
+        var timer = document.getElementById('join-phone-timer');
+        var status = document.getElementById('phone-auth-status');
+        var resend = document.getElementById('join-phone-resend');
+        var authenticated = document.getElementById('phone-authenticated');
+        var intervalId = null;
+        var remainingSeconds = 599;
+        var requestedPhone = '';
+        var TEST_CODE = '123456';
+
+        function renderTimer() {
+            var minutes = String(Math.floor(remainingSeconds / 60)).padStart(2, '0');
+            var seconds = String(remainingSeconds % 60).padStart(2, '0');
+            timer.textContent = minutes + ':' + seconds;
+        }
+
+        function stopTimer() {
+            if (intervalId) window.clearInterval(intervalId);
+            intervalId = null;
+        }
+
+        function setStatus(type, message) {
+            status.hidden = !message;
+            status.className = 'sub-account-code-status' + (type ? ' is-' + type : '');
+            status.textContent = message || '';
+            code.classList.toggle('is-error', type === 'error');
+        }
+
+        function resetVerification(hideCodeArea) {
+            stopTimer();
+            authenticated.value = '';
+            code.disabled = false;
+            code.value = '';
+            codeArea.hidden = Boolean(hideCodeArea);
+            requestButton.textContent = '코드 요청';
+            requestButton.disabled = false;
+            resend.hidden = false;
+            group.classList.remove('is-verified');
+            clearFieldState(group);
+            setStatus('', '');
+        }
+
+        function startTimer() {
+            stopTimer();
+            remainingSeconds = 599;
+            renderTimer();
+            intervalId = window.setInterval(function () {
+                remainingSeconds -= 1;
+                renderTimer();
+                if (remainingSeconds <= 0) {
+                    stopTimer();
+                    code.disabled = true;
+                    setStatus('error', '인증시간이 만료되었습니다.');
+                }
+            }, 1000);
+        }
+
+        function requestCode() {
+            var numbers = phone.value.replace(/\D/g, '');
+            if (numbers.length < 10 || numbers.length > 11) {
+                setFieldError(group, '올바른 휴대전화번호를 입력해 주세요.');
+                phone.focus();
+                return;
+            }
+
+            clearFieldState(group);
+            requestedPhone = numbers;
+            authenticated.value = '';
+            codeArea.hidden = false;
+            code.disabled = false;
+            code.value = '';
+            requestButton.textContent = '코드 재요청';
+            resend.hidden = false;
+            group.classList.remove('is-verified');
+            setStatus('', '');
+            startTimer();
+            code.focus();
+        }
+
+        function verifyCode() {
+            if (code.value.length !== 6 || remainingSeconds <= 0) return;
+
+            if (code.value !== TEST_CODE) {
+                setStatus('error', '인증번호가 틀립니다.');
+                code.focus();
+                code.select();
+                return;
+            }
+
+            stopTimer();
+            authenticated.value = 'true';
+            authenticated.dispatchEvent(new Event('change', { bubbles: true }));
+            code.disabled = true;
+            requestButton.textContent = '인증 완료';
+            requestButton.disabled = true;
+            resend.hidden = true;
+            group.classList.add('is-verified');
+            clearFieldState(group);
+            setStatus('success', '인증되었습니다.');
+        }
+
+        requestButton.addEventListener('click', requestCode);
+        resend.addEventListener('click', requestCode);
+
+        code.addEventListener('input', function () {
+            code.value = code.value.replace(/\D/g, '').slice(0, 6);
+            if (status.classList.contains('is-error')) setStatus('', '');
+            if (code.value.length === 6) verifyCode();
+        });
+
+        phone.addEventListener('input', function () {
+            var numbers = phone.value.replace(/\D/g, '');
+            if (requestedPhone && numbers !== requestedPhone) resetVerification(true);
+        });
+
+        resetVerification(true);
     }
 
     function markAuthenticated(hiddenId, button, statusId, message) {

@@ -137,7 +137,7 @@ OEM-list.html , OEM Products.
     vertical-align: top;
 }
 .oem-product-desc {
-    color: #222;
+    color: #555;
     font-size: calc(18 * var(--vw));
     line-height: calc(30 * var(--vw));
 }
@@ -467,10 +467,10 @@ Mobile: OEM List
     }
 
     .oem-product-title {
-        margin: 26px 0 16px;
-        font-size: 18px;
-        line-height: 22px;
-        letter-spacing: -.025em;
+        margin: 30px 0 15px;
+        font-size: 22px;
+        line-height: normal;
+        letter-spacing: 0;
     }
 
     .oem-product-title sup {
@@ -478,9 +478,9 @@ Mobile: OEM List
     }
 
     .oem-product-desc {
-        font-size: 11px;
-        line-height: 17px;
-        letter-spacing: -.035em;
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: -.05em;
         word-break: keep-all;
     }
 

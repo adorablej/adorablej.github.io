@@ -761,35 +761,42 @@ All Menu Navigation
     margin-top: calc(30 * var(--vw));
 }
 
-.all-menu-toggle {
+.all-menu-item-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     width: 100%;
-    padding: 0;
-
-    border: 0;
-    background: none;
-
-    color: #fff;
-
-    cursor: pointer;
 }
 
-.all-menu-toggle span {
+.all-menu-title {
+    color: #fff;
     font-family: "Russo One", sans-serif;
     font-size: calc(30 * var(--vw));
     font-weight: 400;
-    text-align: left;
+    line-height: 1.2;
     letter-spacing: 1%;
+    text-align: left;
+    text-decoration: none;
+}
+
+.all-menu-title:hover,
+.all-menu-title.is-active {
+    text-decoration: underline;
+}
+
+.all-menu-toggle {
+    position: relative;
+    flex: 0 0 calc(24 * var(--vw));
+    width: calc(24 * var(--vw));
+    height: calc(24 * var(--vw));
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
 }
 
 .all-menu-toggle i {
-    position: relative;
-
-    flex-shrink: 0;
-
+    display: block;
     width: calc(24 * var(--vw));
     height: calc(24 * var(--vw));
 }
@@ -1422,7 +1429,7 @@ Tabs 공통
     justify-content: center;
     min-width: calc(100vw * 186 / 1920);
     height: calc(100vw * 60 / 1920);
-    padding: calc(100vw * 14 / 1920) 0;
+    padding: calc(100vw * 14 / 1920) calc(100vw * 24 / 1920);
     border: 1px solid #a8a8a8;
     border-radius: calc(100vw * 100 / 1920);
     background: #fff;
@@ -1431,7 +1438,9 @@ Tabs 공통
     font-weight: 500;
     line-height: calc(100vw * 32 / 1920);
     cursor: pointer;
-    margin-right: 14px;
+    margin-right: 0;
+    box-sizing: border-box;
+    white-space: nowrap;
     transition:
         border-color .3s,
         background-color .3s,
@@ -1447,6 +1456,20 @@ Tabs 공통
     border-color: var(--red);
     background: var(--red);
     color: #fff;
+}
+
+@media (max-width: 767px) {
+    .sub-pill-tab {
+        flex: 0 0 150px;
+        min-width: 150px;
+        width: 150px;
+        height: 46px;
+        padding: 0 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 44px;
+    }
 }
 
 
@@ -2002,11 +2025,9 @@ Mobile Common Layout
         width: 100%;
         min-height: 100%;
         padding-top: 92px;
-        background:
-            radial-gradient(circle at 90% 75%, rgba(74, 0, 0, .42), transparent 42%),
-            linear-gradient(145deg, #181818 0%, #050505 55%, #120000 100%);
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
+        background: rgba(0, 0, 0, .6);
+        -webkit-backdrop-filter: blur(18px) saturate(180%);
+        backdrop-filter: blur(18px) saturate(180%);
     }
 
     .all-menu-nav {
@@ -2017,7 +2038,7 @@ Mobile Common Layout
         margin-top: 18px;
     }
 
-    .all-menu-toggle span {
+    .all-menu-title {
         font-size: 18px;
         line-height: 22px;
     }
