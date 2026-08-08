@@ -331,3 +331,160 @@ BMW KDS II Alignment System Detail
     padding-left: 9px;
 }
 
+
+/* ========================================
+Mobile: OEM List
+- Design width: 360px
+- Mobile breakpoint: 720px
+======================================== */
+@media (max-width: 720px) {
+    html.oem-index-page,
+    body.oem-index-page {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .oem-index-page .all-menu {
+        overflow: hidden;
+    }
+
+    /* OEM landing */
+    .oem-section {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 0 40px;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .oem-section .inner {
+        width: auto;
+        min-width: 0;
+        max-width: 100%;
+        margin: 0;
+        padding: 0 25px;
+        box-sizing: border-box;
+    }
+
+    .oem-section .detail-section-heading {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .oem-section .detail-section-title {
+        font-size: 26px;
+        line-height: 31px;
+        letter-spacing: -.02em;
+    }
+
+    .oem-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px 10px;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .oem-item {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        border-width: 0;
+        box-sizing: border-box;
+    }
+
+    .oem-item:hover {
+        border-width: 0;
+    }
+
+    .oem-item a,
+    .oem-item img {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .oem-section > .align-c.pt_60 {
+        padding-top: 30px;
+    }
+
+    .oem-section .sub-button-more {
+        min-width: 98px;
+        min-height: 36px;
+        padding: 0 20px;
+        border-radius: 20px;
+        font-size: 12px;
+        line-height: 34px;
+        letter-spacing: 2px;
+        box-sizing: border-box;
+    }
+
+    /* OEM product lists */
+    .oem-products {
+        padding-bottom: 50px;
+    }
+
+    .oem-products .inner {
+        width: auto;
+        margin: 0;
+        padding: 0 25px;
+        box-sizing: border-box;
+    }
+
+    .oem-product-list {
+        display: block;
+    }
+
+    .oem-product-item,
+    .oem-product-item.reverse {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .oem-product-item + .oem-product-item {
+        margin-top: 50px;
+    }
+
+    .oem-product-item.reverse .oem-product-image,
+    .oem-product-item.reverse .oem-product-content {
+        order: initial;
+    }
+
+    .oem-product-image {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+    }
+
+    .oem-product-image img {
+        object-fit: cover;
+    }
+
+    .oem-product-content,
+    .oem-product-item.reverse .oem-product-content {
+        padding: 0;
+    }
+
+    .oem-product-title {
+        margin: 26px 0 16px;
+        font-size: 18px;
+        line-height: 22px;
+        letter-spacing: -.025em;
+    }
+
+    .oem-product-title sup {
+        font-size: .55em;
+    }
+
+    .oem-product-desc {
+        font-size: 11px;
+        line-height: 17px;
+        letter-spacing: -.035em;
+        word-break: keep-all;
+    }
+
+    .oem-product-desc ul li {
+        list-style-position: inside;
+    }
+}

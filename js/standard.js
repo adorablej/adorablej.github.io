@@ -67,6 +67,10 @@
             return designWidth() * value;
         };
 
+        // USA 상세 페이지의 H 폭(3000 * --vw)과 동일한 크기.
+        // story H의 기본 폭은 500 * --vw이므로 6배가 같은 실제 폭이다.
+        const detailHScale = 6;
+
         gsap.set(copyUsa, {
             autoAlpha: 0,
             yPercent: -50,
@@ -97,9 +101,9 @@
         gsap.set(koreaScene, {
             xPercent: -50,
             yPercent: -50,
-            x: function () { return vw(-0.86); },
+            x: function () { return vw(-1.45); },
             y: 0,
-            scale: 3.08,
+            scale: detailHScale,
             autoAlpha: 0
         });
 
@@ -121,6 +125,104 @@
         gsap.set([usaRed, partnersRed], { opacity: 1, scaleX: 1 });
         gsap.set(koreaRed, { opacity: 0, scaleX: 1 });
 
+        let partnersAutoTimeline = null;
+        let partnersFinalTimeline = null;
+        let partnersAwaitingFinal = false;
+        let partnersRiseScrollY = 0;
+        let partnersLastScrollY = window.scrollY;
+
+        function playPartnersRise() {
+            const direction = timeline.scrollTrigger ? timeline.scrollTrigger.direction : 1;
+            if (partnersAutoTimeline) {
+                partnersAutoTimeline.kill();
+                partnersAutoTimeline = null;
+            }
+            if (partnersFinalTimeline) {
+                partnersFinalTimeline.kill();
+                partnersFinalTimeline = null;
+            }
+            partnersAwaitingFinal = false;
+            gsap.killTweensOf([partnersScene, partnersImage, partnersSolid, partnersRed]);
+
+            if (direction < 0) {
+                gsap.set(partnersScene, {
+                    y: function () { return window.innerHeight * 1.08; },
+                    scale: 2.02,
+                    autoAlpha: 0
+                });
+                gsap.set(partnersImage, { opacity: 0 });
+                gsap.set(partnersSolid, { opacity: 1 });
+                gsap.set(partnersRed, { opacity: 1, scaleX: 1 });
+                gsap.set(copyPartners, { autoAlpha: 1, y: 0 });
+                return;
+            }
+
+            partnersAutoTimeline = gsap.timeline({ delay: 0.65 })
+                .set(partnersScene, { autoAlpha: 1 })
+                .to(partnersImage, { opacity: 1, duration: 0.18 }, 0.02)
+                .to(partnersSolid, { opacity: 0, duration: 0.16 }, 0.03)
+                .to(partnersRed, { opacity: 0, scaleX: 0.78, duration: 0.16 }, 0.03)
+                .to(partnersScene, {
+                    y: function () { return window.innerHeight * 0.49; },
+                    scale: 2.02,
+                    duration: 0.98,
+                    ease: "power3.out"
+                }, 0)
+                .call(function () {
+                    partnersAwaitingFinal = true;
+                    partnersRiseScrollY = window.scrollY;
+                });
+        }
+
+        function playPartnersFinal() {
+            if (!partnersAwaitingFinal || partnersFinalTimeline) return;
+            partnersAwaitingFinal = false;
+
+            partnersFinalTimeline = gsap.timeline()
+                .to(copyPartners, {
+                    autoAlpha: 0,
+                    y: -25,
+                    duration: 0.2,
+                    ease: "power2.out"
+                }, "final")
+                .to(partnersScene, {
+                    y: 0,
+                    scale: 1,
+                    duration: 1,
+                    ease: "power2.inOut"
+                }, "final+=0.04")
+                .to(partnersImage, { opacity: 0, duration: 0.28 }, "final+=0.43")
+                .to(partnersSolid, { opacity: 1, duration: 0.28 }, "final+=0.46")
+                .to(partnersRed, { opacity: 1, scaleX: 1, duration: 0.3 }, "final+=0.5");
+
+            partnersFinalTimeline.eventCallback("onReverseComplete", function () {
+                partnersFinalTimeline = null;
+                partnersAwaitingFinal = true;
+                partnersRiseScrollY = window.scrollY;
+            });
+        }
+
+        window.addEventListener("scroll", function () {
+            const currentScrollY = window.scrollY;
+            const isScrollingDown = currentScrollY > partnersLastScrollY + 2;
+            const isScrollingUp = currentScrollY < partnersLastScrollY - 2;
+
+            if (partnersAwaitingFinal && currentScrollY > partnersRiseScrollY + 4) {
+                playPartnersFinal();
+            }
+
+            if (isScrollingUp && partnersFinalTimeline && partnersFinalTimeline.progress() > 0) {
+                partnersFinalTimeline.reverse();
+            } else if (isScrollingUp && partnersAwaitingFinal && partnersAutoTimeline) {
+                partnersAwaitingFinal = false;
+                partnersAutoTimeline.reverse();
+            } else if (isScrollingDown && partnersFinalTimeline && partnersFinalTimeline.reversed()) {
+                partnersFinalTimeline.play();
+            }
+
+            partnersLastScrollY = currentScrollY;
+        }, { passive: true });
+
         const timeline = gsap.timeline({
             defaults: { ease: "none" },
             scrollTrigger: {
@@ -137,9 +239,9 @@
         timeline
             .to({}, { duration: 0.5 })
             .to(usaScene, {
-                x: function () { return vw(0.305); },
+                x: function () { return vw(0.708333); },
                 y: 0,
-                scale: 3.14,
+                scale: detailHScale,
                 duration: 1.08,
                 ease: "power2.inOut"
             }, "usa-open")
@@ -162,7 +264,8 @@
                 duration: 0.3,
                 ease: "power2.out"
             }, "usa-open+=0.58")
-            .to({}, { duration: 0.5 });
+            // USA 장면 완성 상태 유지
+            .to({}, { duration: 1.4 });
 
         /* 03 → 05. 확대된 USA H는 우측으로 빠지고, KOREA H는 좌측에서 별도로 진입 */
         timeline
@@ -172,27 +275,27 @@
                 duration: 0.2
             }, "korea-switch")
             .to(usaScene, {
-                x: function () { return vw(0.94); },
-                scale: 3.18,
-                autoAlpha: 0,
+                x: function () { return vw(1.45); },
+                scale: detailHScale,
                 duration: 0.78,
                 ease: "power2.inOut"
             }, "korea-switch+=0.02")
             .set(koreaScene, {
                 autoAlpha: 1
-            }, "korea-switch+=0.10")
+            }, "korea-switch+=0.70")
             .to(koreaScene, {
-                x: function () { return vw(-0.34); },
+                x: function () { return vw(-0.708333); },
                 duration: 1.02,
                 ease: "power2.inOut"
-            }, "korea-switch+=0.12")
+            }, "korea-switch+=0.72")
             .to(copyKorea, {
                 autoAlpha: 1,
                 y: 0,
                 duration: 0.26,
                 ease: "power2.out"
-            }, "korea-switch+=0.66")
-            .to({}, { duration: 0.48 });
+            }, "korea-switch+=1.34")
+            // KOREA 장면 완성 상태 유지
+            .to({}, { duration: 1.4 });
 
         /* 05 → 06. KOREA H는 다시 좌측으로 빠지고 PARTNERS 카피가 먼저 등장 */
         timeline
@@ -202,8 +305,7 @@
                 duration: 0.18
             }, "partners-copy")
             .to(koreaScene, {
-                x: function () { return vw(-0.96); },
-                autoAlpha: 0,
+                x: function () { return vw(-1.45); },
                 duration: 0.84,
                 ease: "power2.inOut"
             }, "partners-copy+=0.01")
@@ -213,39 +315,14 @@
                 duration: 0.28,
                 ease: "power2.out"
             }, "partners-copy+=0.56")
-            .to({}, { duration: 0.55 });
+            .call(playPartnersRise, null, "partners-copy+=0.86")
+            // 자동 상승이 끝난 뒤 스크롤을 다시 받을 짧은 유지 구간
+            .to({}, { duration: 0.45 });
 
-        /* 06. 카피를 먼저 충분히 보여준 뒤 작은 H가 아래에서 새로 상승 */
+        /* 06 → 07. 다음 스크롤을 감지하는 동안 장면 유지 */
         timeline
-            .set(partnersScene, { autoAlpha: 1 }, "partners-rise")
-            .to(partnersImage, { opacity: 1, duration: 0.18 }, "partners-rise+=0.02")
-            .to(partnersSolid, { opacity: 0, duration: 0.16 }, "partners-rise+=0.03")
-            .to(partnersRed, { opacity: 0, scaleX: 0.78, duration: 0.16 }, "partners-rise+=0.03")
-            .to(partnersScene, {
-                y: function () { return window.innerHeight * 0.49; },
-                scale: 2.02,
-                duration: 0.98,
-                ease: "power3.out"
-            }, "partners-rise")
-            .to({}, { duration: 0.52 });
-
-        /* 06 → 07. 카피가 사라진 뒤 작은 H가 중앙으로 이동하며 최종 로고로 축소 */
-        timeline
-            .to(copyPartners, {
-                autoAlpha: 0,
-                y: -25,
-                duration: 0.2
-            }, "final-logo")
-            .to(partnersScene, {
-                y: 0,
-                scale: 1,
-                duration: 1,
-                ease: "power2.inOut"
-            }, "final-logo+=0.04")
-            .to(partnersImage, { opacity: 0, duration: 0.28 }, "final-logo+=0.43")
-            .to(partnersSolid, { opacity: 1, duration: 0.28 }, "final-logo+=0.46")
-            .to(partnersRed, { opacity: 1, scaleX: 1, duration: 0.3 }, "final-logo+=0.5")
-            .to({}, { duration: 0.62 });
+            // 최종 H 로고 장면 유지
+            .to({}, { duration: 2.2 });
     }
 
     function initTrackpadScrollStability() {

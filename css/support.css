@@ -1554,9 +1554,9 @@ Wheel Alignment Specification
     display: inline-flex;
     align-items: center;
     gap: calc(100vw * 16 / 1920);
-    min-width: calc(100vw * 260 / 1920);
-    height: calc(100vw * 72 / 1920);
-    padding: 0 calc(100vw * 24 / 1920);
+    min-width: calc(100vw * 400 / 1920);
+    height: calc(100vw * 150 / 1920);
+    padding: 0 calc(100vw * 32 / 1920);
     border: 0;
     border-radius: calc(100vw * 12 / 1920);
     background: #f5f6fa;
@@ -1565,25 +1565,29 @@ Wheel Alignment Specification
 }
 
 .sub-specification-selected-chip strong {
-    font-size: calc(100vw * 17 / 1920);
+    font-size: calc(100vw * 20 / 1920);
 }
 
 .sub-specification-selected-logo {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: calc(100vw * 50 / 1920);
-    height: calc(100vw * 50 / 1920);
+    width: calc(100vw * 100 / 1920);
+    height: calc(100vw * 100 / 1920);
     border-radius: 50%;
     background: #fff;
     color: #333;
-    font-size: calc(100vw * 9 / 1920);
+    font-size: calc(100vw * 13 / 1920);
     font-weight: 800;
 }
 
 .sub-specification-selected-chip img {
-    width: calc(100vw * 62 / 1920);
-    height: calc(100vw * 44 / 1920);
+    width: calc(100vw * 100 / 1920);
+    height: calc(100vw * 100 / 1920);
+    padding: calc(100vw * 10 / 1920);
+    border-radius: 50%;
+    background: #fff;
+    box-sizing: border-box;
     object-fit: contain;
 }
 
@@ -1662,41 +1666,72 @@ Wheel Alignment Specification
 }
 
 .sub-specification-table-wrap {
+    width: 100%;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     border-top: 1px solid #000;
 }
 
 .sub-specification-table {
     width: 100%;
+    min-width: 960px;
     border-collapse: collapse;
+    border-spacing: 0;
     table-layout: fixed;
 }
+
+.sub-specification-col-image { width: 22%; }
+.sub-specification-col-year { width: 13%; }
+.sub-specification-col-name { width: 14%; }
+.sub-specification-col-model { width: 14%; }
+.sub-specification-col-detail { width: 18%; }
+.sub-specification-col-note { width: 19%; }
 
 .sub-specification-table th,
 .sub-specification-table td {
     padding: calc(100vw * 25 / 1920) calc(100vw * 15 / 1920);
+    box-sizing: border-box;
     border-bottom: 1px solid #e7e7e7;
     color: #000;
     font-size: calc(100vw * 14 / 1920);
+    line-height: 1.55;
     text-align: center;
+    vertical-align: middle;
     word-break: keep-all;
+    overflow-wrap: break-word;
 }
 
 .sub-specification-table th {
     font-weight: 700;
 }
 
-.sub-specification-table td:first-child,
-.sub-specification-table th:first-child {
-    width: 24%;
+.sub-specification-table tbody tr {
+    height: calc(100vw * 210 / 1920);
 }
 
 .sub-specification-table td img {
     display: block;
-    width: calc(100vw * 180 / 1920);
-    height: calc(100vw * 95 / 1920);
+    width: calc(100vw * 250 / 1920);
+    height: calc(100vw * 190 / 1920);
+    max-width: 100%;
     margin: 0 auto;
     object-fit: contain;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .sub-specification-table {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    .sub-specification-table th,
+    .sub-specification-table td {
+        position: static;
+        float: none;
+        min-width: 0;
+        max-width: none;
+    }
 }
 
 .sub-specification-result-row {

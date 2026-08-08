@@ -107,7 +107,7 @@
         if (model) {
             html += `
                 <button type="button" class="sub-specification-selected-chip" data-remove="model">
-                    <img src="${model.image}" alt="">
+                    <img src="${model.image || "/images/car_default.png"}" alt="" onerror="this.onerror=null;this.src='/images/car_default.png'">
                     <strong>${model.name}</strong>
                     <span class="sub-specification-chip-close" aria-hidden="true"></span>
                 </button>
@@ -132,7 +132,7 @@
         elements.modelGrid.innerHTML = models.length
             ? models.map((model) => `
                 <button type="button" class="sub-specification-model-card${model.id === state.modelId ? " is-active" : ""}" data-model-id="${model.id}">
-                    <span class="sub-specification-model-image"><img src="${model.image}" alt="${model.name}"></span>
+                    <span class="sub-specification-model-image"><img src="${model.image || "/images/car_default.png"}" alt="${model.name}" onerror="this.onerror=null;this.src='/images/car_default.png'"></span>
                     <strong>${model.name}</strong>
                 </button>
             `).join("")
@@ -159,7 +159,7 @@
             return `
             <tr class="sub-specification-result-row${hasSpecification ? " has-specification" : ""}"
                 ${hasSpecification ? `data-result-index="${index}" tabindex="0" role="button" aria-label="${row.modelName} 제원 상세 보기"` : ""}>
-                <td><img src="${row.image}" alt="${row.modelName}" onerror="this.onerror=null;this.src='/images/icon/icon-vehicle-car.svg'"></td>
+                <td><img src="${row.image || "/images/car_default.png"}" alt="${row.modelName}" onerror="this.onerror=null;this.src='/images/car_default.png'"></td>
                 <td>${row.year}</td>
                 <td>${row.modelName}</td>
                 <td>${row.model}</td>
@@ -271,11 +271,11 @@
             <div><dt>연식</dt><dd>${escapeHtml(result.year)}</dd></div>
             <div><dt>비고</dt><dd>${escapeHtml(result.note || "-")}</dd></div>
         `;
-        elements.modalImage.src = result.image || model.image || "/images/icon/icon-vehicle-car.svg";
+        elements.modalImage.src = result.image || model.image || "/images/car_default.png";
         elements.modalImage.alt = result.modelName;
         elements.modalImage.onerror = function () {
             this.onerror = null;
-            this.src = "/images/icon/icon-vehicle-car.svg";
+            this.src = "/images/car_default.png";
         };
         elements.modalSpecs.innerHTML = result.specifications.map((item) => `
             <tr>
@@ -360,7 +360,7 @@
 
     elements.form.addEventListener("submit", (event) => {
         event.preventDefault();
-        if (state.brandId && state.modelId) renderStep();
+        window.location.href = "/Support/Vehicle-Specification-Request.html";
     });
 
     function restoreFromUrl() {
