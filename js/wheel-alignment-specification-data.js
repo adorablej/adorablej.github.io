@@ -82,7 +82,28 @@ window.WHEEL_ALIGNMENT_DATA = {
             { year: "2010-2015", modelName: "K5 (TF)", model: "Optima (TF)", detail: "All Models", note: "휠 사이즈별 제원 확인", image: "/images/support/car-sedan.svg" }
         ],
         "hyundai:avante": [
-            { year: "2020-2024", modelName: "아반떼 (CN7)", model: "Elantra (CN7)", detail: "All Models / N Line 포함", note: "차량 옵션별 확인 필요", image: "/images/support/car-sedan.svg" },
+            {
+                year: "2020-2024",
+                modelName: "아반떼 (CN7)",
+                model: "Elantra (CN7)",
+                detail: "All Models / N Line 포함",
+                note: "차량 옵션별 확인 필요",
+                image: "/images/support/car-sedan.svg",
+                specifications: [
+                    { section: "전륜", label: "캠버", value: "0°00'", min: "-0°30'", max: "0°30'" },
+                    { section: "전륜", label: "캐스터", value: "3°00'", min: "-0°30'", max: "0°30'" },
+                    { section: "전륜", label: "토오", value: "0°10'", min: "-0°05'", max: "0°15'" },
+                    { section: "후륜", label: "캠버", value: "-0°30'", min: "-1°00'", max: "0°00'" },
+                    { section: "후륜", label: "토오", value: "0°08'", min: "-0°05'", max: "0°10'" }
+                ],
+                extra: {
+                    SAI: "10°30'",
+                    회전각: "38°00'",
+                    스러스트각: "0°00'",
+                    "SAS 리셋": "필요",
+                    TPMS: "315/45R21 자동인식"
+                }
+            },
             { year: "2015-2020", modelName: "아반떼 (AD)", model: "Elantra (AD)", detail: "가솔린 / 디젤", note: "-", image: "/images/support/car-sedan-dark.svg" }
         ]
     }

@@ -445,6 +445,7 @@ function initDragCursor() {
         const allMenu = document.querySelector(".all-menu");
         const panel = document.querySelector(".all-menu-panel");
         const toggleButtons = document.querySelectorAll(".all-menu-toggle");
+        const subToggleButtons = document.querySelectorAll(".all-menu-subtoggle");
     
         if (
             !openButtons.length ||
@@ -575,6 +576,44 @@ function initDragCursor() {
                 depth.style.height = "0px";
             }
         }
+
+        function setSubDepthHeight(subitem) {
+            const subdepth = subitem.querySelector(".all-menu-subdepth");
+            const subdepthInner = subitem.querySelector(".all-menu-subdepth-inner");
+
+            if (!subdepth || !subdepthInner) return;
+
+            subdepth.style.height = subitem.classList.contains("is-open")
+                ? `${subdepthInner.scrollHeight}px`
+                : "0px";
+        }
+
+        function updateParentDepthHeight(subitem, heightDelta = 0) {
+            const item = subitem.closest(".all-menu-item");
+            const depth = item?.querySelector(".all-menu-depth");
+            const depthInner = item?.querySelector(".all-menu-depth-inner");
+
+            if (!item?.classList.contains("is-open") || !depth || !depthInner) return;
+            depth.style.height = `${depth.getBoundingClientRect().height + heightDelta}px`;
+        }
+
+        function toggleSubDepth(button) {
+            const subitem = button.closest(".all-menu-subitem");
+            if (!subitem) return;
+
+            const subdepth = subitem.querySelector(".all-menu-subdepth");
+            const previousHeight = subdepth?.getBoundingClientRect().height || 0;
+            const willOpen = !subitem.classList.contains("is-open");
+            subitem.classList.toggle("is-open", willOpen);
+            button.setAttribute("aria-expanded", String(willOpen));
+            button.setAttribute(
+                "aria-label",
+                `HUNTER USA 하위 메뉴 ${willOpen ? "접기" : "펼치기"}`
+            );
+            setSubDepthHeight(subitem);
+            const targetHeight = parseFloat(subdepth?.style.height || "0");
+            updateParentDepthHeight(subitem, targetHeight - previousHeight);
+        }
     
         openButtons.forEach((button) => {
           
@@ -591,6 +630,15 @@ function initDragCursor() {
         toggleButtons.forEach((button) => {
             button.addEventListener("click", () => {
                 toggleDepth(button);
+            });
+        });
+
+        subToggleButtons.forEach((button) => {
+            const subitem = button.closest(".all-menu-subitem");
+            if (subitem) setSubDepthHeight(subitem);
+
+            button.addEventListener("click", () => {
+                toggleSubDepth(button);
             });
         });
     
@@ -615,6 +663,8 @@ function initDragCursor() {
             );
     
             if (!depth || !depthInner) return;
+
+            openedItem.querySelectorAll(".all-menu-subitem").forEach(setSubDepthHeight);
     
             depth.style.height = `${depthInner.scrollHeight}px`;
         });

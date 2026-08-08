@@ -9,7 +9,7 @@
     <link href="/css/layout.css" rel="stylesheet" />
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/responsive.css" rel="stylesheet" />
-    <link href="/css/support.css" rel="stylesheet" />
+    <link href="/css/support.css?v=20260808-6" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
@@ -119,11 +119,48 @@
     <!-- footer -->
     <div class="footer-section" data-header-theme="dark" data-include="/includes/footer.html"></div>
 
+    <div class="specification-modal" id="specification-modal" hidden>
+        <button type="button" class="specification-modal-dim" data-specification-modal-close aria-label="차량 제원 팝업 닫기"></button>
+        <section class="specification-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="specification-modal-title" tabindex="-1">
+            <header class="specification-modal-header">
+                <h2 id="specification-modal-title">Wheel Alignment Specification</h2>
+                <img src="/images/hunter_logo_white.svg" alt="Hunter Engineering Company">
+                <button type="button" class="specification-modal-close" data-specification-modal-close aria-label="닫기"></button>
+            </header>
+            <div class="specification-modal-accent"></div>
+            <div class="specification-modal-body">
+                <section class="specification-modal-summary">
+                    <div class="specification-modal-brand" id="specification-modal-brand"></div>
+                    <dl class="specification-modal-meta" id="specification-modal-meta"></dl>
+                    <figure class="specification-modal-vehicle">
+                        <img id="specification-modal-image" src="" alt="">
+                    </figure>
+                </section>
+                <div class="specification-modal-links">
+                    <span>WinAlign에 사용된 차량 얼라인먼트 정보</span>
+                    <span>차량 모델 식별정보 및 추가적인 얼라인먼트 정보</span>
+                </div>
+                <table class="specification-modal-table">
+                    <thead><tr><th>구분</th><th>규격</th><th>허용범위</th></tr></thead>
+                    <tbody id="specification-modal-specs"></tbody>
+                </table>
+                <section class="specification-modal-extra" id="specification-modal-extra"></section>
+                <div class="specification-modal-notes">
+                    <p>차량의 세부 모델과 옵션에 따라 값이 달라질 수 있으므로 실제 작업 전 차량 정보를 다시 확인해 주세요.</p>
+                    <p>정확한 작업을 위해 헌터 장비의 최신 차량 데이터와 제조사 정비 지침을 함께 확인하시기 바랍니다.</p>
+                </div>
+                <div class="specification-modal-actions">
+                    <button type="button" id="specification-modal-print">출력</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <script src="/js/include.js"></script>
     <script src="/js/common.js"></script>
     <script src="/js/main.js"></script>
-    <script src="/js/wheel-alignment-specification-data.js"></script>
-    <script src="/js/wheel-alignment-specification.js"></script>
+    <script src="/js/wheel-alignment-specification-data.js?v=20260808-5"></script>
+    <script src="/js/wheel-alignment-specification.js?v=20260808-5"></script>
 </body>
 
 </html>

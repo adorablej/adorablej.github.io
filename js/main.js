@@ -5,7 +5,7 @@
      * DOM이 모두 로드된 뒤
      * 메인 페이지 기능 초기화
      */
-    document.addEventListener("DOMContentLoaded", initMain);
+    window.addEventListener("includeLoaded", initMain, { once: true });
 
     function initMain() {
         initMainVisual();
@@ -100,6 +100,9 @@
         const mediaSection = document.querySelector(".media-section");
 
         if (!mediaSection) return;
+
+        // 프로모션 공용 데이터로 렌더링되는 영역은 media.js에서 제어한다.
+        if (mediaSection.querySelector("#mediaMainPromotionList")) return;
 
         /*
          * 좌측 Featured 영역
@@ -343,7 +346,7 @@ function initSectionSplashes() {
         );
 
     let historyPlayed = false;
-    let productsPlayed = false;
+    let productsPlayed = !productsSplash;
     let isSplashPlaying = false;
     let isSplashPending = false;
     let splashMoveRaf = null;

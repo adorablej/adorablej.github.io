@@ -43,6 +43,39 @@
         var remainingSeconds = 599;
         var verified = false;
         var TEST_LOGIN_CODE = '111111';
+        var returnTarget = getLoginReturnTarget();
+
+        function getLoginReturnTarget() {
+            var params = new URLSearchParams(window.location.search);
+            var requestedTarget = params.get('returnUrl');
+            var candidate = requestedTarget || document.referrer;
+
+            if (!candidate) return '';
+
+            try {
+                var target = new URL(candidate, window.location.href);
+                var isSameOrigin = target.origin === window.location.origin;
+                var isLoginPage = /\/account\/login\.html$/i.test(target.pathname);
+
+                return isSameOrigin && !isLoginPage ? target.href : '';
+            } catch (error) {
+                return '';
+            }
+        }
+
+        function moveToPreviousPage() {
+            if (returnTarget) {
+                window.location.href = returnTarget;
+                return;
+            }
+
+            if (window.history.length > 1) {
+                window.history.back();
+                return;
+            }
+
+            window.location.href = new URL('../index.html', window.location.href).href;
+        }
 
         function showStep(step) {
             var isPhone = step === 'phone';
@@ -87,6 +120,7 @@
             status.textContent = '';
             code.disabled = false;
             codeGroup.classList.remove('is-error');
+            submitButton.textContent = '확인';
             submitButton.disabled = code.value.length !== 6 || remainingSeconds <= 0;
         });
         keepPhone.addEventListener('change', function () { keepCode.checked = keepPhone.checked; });
@@ -107,6 +141,7 @@
             status.className = 'sub-account-code-status';
             status.textContent = '';
             codeGroup.classList.remove('is-error');
+            submitButton.textContent = '확인';
             submitButton.disabled = true;
             showStep('code');
             startTimer();
@@ -119,6 +154,7 @@
             status.hidden = true;
             status.textContent = '';
             codeGroup.classList.remove('is-error');
+            submitButton.textContent = '확인';
             submitButton.disabled = true;
             startTimer();
             code.focus();
@@ -131,7 +167,20 @@
 
         form.addEventListener('submit', function (event) {
             event.preventDefault();
-            if (submitButton.disabled || code.value.length !== 6) return;
+            if (submitButton.disabled) return;
+
+            if (verified) {
+                var shouldMove = form.dispatchEvent(new CustomEvent('phoneLoginSubmit', {
+                    bubbles: true,
+                    cancelable: true,
+                    detail: { phone: phone.value, keepLogin: keepCode.checked }
+                }));
+                // API 연동 시 이벤트에서 preventDefault()한 뒤 로그인 성공 시 이동 처리합니다.
+                if (shouldMove) moveToPreviousPage();
+                return;
+            }
+
+            if (code.value.length !== 6) return;
 
             if (code.value !== TEST_LOGIN_CODE) {
                 verified = false;
@@ -150,12 +199,13 @@
             status.className = 'sub-account-code-status is-success';
             status.textContent = '인증되었습니다.';
             codeGroup.classList.remove('is-error');
+            submitButton.textContent = '로그인';
             submitButton.disabled = false;
             form.dispatchEvent(new CustomEvent('phoneLoginVerified', {
                 bubbles: true,
                 detail: { phone: phone.value, keepLogin: keepCode.checked }
             }));
-            // 실제 연동 시 phoneLoginVerified 이벤트에서 로그인 API를 호출합니다.
+            // phoneLoginVerified는 인증 성공 상태 알림용 이벤트입니다.
         });
     }
 

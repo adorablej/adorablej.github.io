@@ -10,6 +10,7 @@
     <link href="/css/common.css" rel="stylesheet" />
     <link href="/css/layout.css" rel="stylesheet" />
     <link href="/css/main.css" rel="stylesheet" />
+    <link href="/css/products.css?v=20260808-8" rel="stylesheet" />
     <link href="/css/responsive.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -196,211 +197,12 @@
 
             </section>
 
-            <!-- Section 03 : Products -->
-            <section id="section-products" class="main-section products-section products-splash-target" data-header-theme="dark">
-            
-            <!-- Circle Splash -->
-            <div class="products-splash-section" aria-hidden="true">
-                <svg class="products-splash-svg" aria-hidden="true">
-                    <defs>
-                        <mask id="products-splash-mask" maskUnits="userSpaceOnUse">
-                            <rect class="products-splash-mask-bg" x="0" y="0" width="100%" height="100%"></rect>
-                            <circle class="products-splash-circle" cx="0" cy="0" r="0"></circle>
-                        </mask>
-                    </defs>
-                    <rect class="products-splash-cover" x="0" y="0" width="100%" height="100%"></rect>
-                </svg>
+            <!-- Section 03 : Products (ROI page source) -->
+            <div id="section-products" class="main-section"
+                data-include="/Products/ROI-calculator.html"
+                data-include-selector=".sub-products-visual"
+                data-include-mode="replace">
             </div>
-            
-                <div class="products-inner">
-
-                <div class="section-heading">
-                    <h2 class="section-title">
-                        Products.
-                    </h2>
-                    <p class="section-description">
-                        글로벌 정밀 정비의 기준
-                    </p>
-                </div>
-
-                <div class="products-content">
-                    <!-- 제품 리스트 -->
-                    <nav class="products-menu" aria-label="제품 카테고리">
-                        <ul class="products-category">
-
-                            <li class="is-active">
-                                <button
-                                    type="button"
-                                    data-slide-index="0"
-                                >
-                                    <span>Alignment Systems</span>
-                                    <i aria-hidden="true"></i>
-                                </button>
-                            </li>
-
-                            <li>
-                                <button
-                                    type="button"
-                                    data-slide-index="1"
-                                >
-                                    <span>Wheel Balancers</span>
-                                </button>
-                            </li>
-
-                            <li>
-                                <button
-                                    type="button"
-                                    data-slide-index="2"
-                                >
-                                    <span>Tire Changers</span>
-                                </button>
-                            </li>
-
-                            <li>
-                                <button
-                                    type="button"
-                                    data-slide-index="3"
-                                >
-                                    <span>Brake Lathes</span>
-                                </button>
-                            </li>
-
-                            <li>
-                                <button
-                                    type="button"
-                                    data-slide-index="4"
-                                >
-                                    <span>Alignment Racks</span>
-                                </button>
-                            </li>
-
-                            <li>
-                                <button
-                                    type="button"
-                                    data-slide-index="5"
-                                >
-                                    <span>Vehicle Inspection</span>
-                                </button>
-                            </li>
-
-                            <li>
-                                <button
-                                    type="button"
-                                    data-slide-index="6"
-                                >
-                                    <span>Heavy-Duty</span>
-                                </button>
-                            </li>
-
-                        </ul>
-                    </nav>
-
-                    <!-- 가운데 제품 슬라이드 -->
-                    <div class="products-visual">
-
-                        <div class="swiper products-swiper">
-                            <div class="swiper-wrapper">
-
-                                <!-- Slide 01 -->
-                                <div class="swiper-slide products-slide">
-
-                                    <div class="products-image">
-                                        <img
-                                            src="./images/main_p_i01.png"
-                                            alt="HawkEye Elite X"
-                                        >
-                                    </div>
-                                </div>
-                                <!-- Slide 02 -->
-
-
-                                <!-- Slide 03 -->
-
-
-                                <!-- Slide 04 -->
-
-
-                                <!-- Slide 05 -->
-
-                                <!-- Slide 06 -->
-
-
-                                <!-- Slide 07 -->
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- 우측 상세 정보 -->
-                    <div class="products-info">
-
-                        <div class="products-info-item is-active" data-info-index="0">
-                            <h3>
-                                HawkEye Elite<sup>®</sup> X
-                            </h3>
-
-                            <p>
-                                휠 얼라인먼트 그 이상의 가치.
-                                ADASLink® 기본 탑재로 얼라인먼트 후
-                                스티어링 조향각 센서 초기화부터
-                                ADAS 진단까지 통합 대응합니다.
-                            </p>
-                        </div>
-
-                        <div class="products-info-item" data-info-index="1">
-                            <h3>Wheel Balancer</h3>
-                            <p>Wheel Balancer 제품 설명 영역입니다.</p>
-                        </div>
-
-                        <div class="products-info-item" data-info-index="2">
-                            <h3>Tire Changer</h3>
-                            <p>Tire Changer 제품 설명 영역입니다.</p>
-                        </div>
-
-                        <div class="products-info-item" data-info-index="3">
-                            <h3>Brake Lathes</h3>
-                            <p>Brake Lathes 제품 설명 영역입니다.</p>
-                        </div>
-
-                        <div class="products-info-item" data-info-index="4">
-                            <h3>Alignment Racks</h3>
-                            <p>Alignment Racks 제품 설명 영역입니다.</p>
-                        </div>
-
-                        <div class="products-info-item" data-info-index="5">
-                            <h3>Vehicle Inspection</h3>
-                            <p>Vehicle Inspection 제품 설명 영역입니다.</p>
-                        </div>
-
-                        <div class="products-info-item" data-info-index="6">
-                            <h3>Heavy-Duty</h3>
-                            <p>Heavy-Duty 제품 설명 영역입니다.</p>
-                        </div>
-
-                        <div class="products-control">
-                            <button
-                                type="button"
-                                class="products-prev"
-                                aria-label="이전 제품"
-                            >
-                                <span aria-hidden="true">‹</span>
-                            </button>
-
-                            <button
-                                type="button"
-                                class="products-next"
-                                aria-label="다음 제품"
-                            >
-                                <span aria-hidden="true">›</span>
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-            </section>
 
             <!-- Section 04 : Support -->
             <section id="section-support" class="main-section support-section" data-header-theme="dark">
@@ -523,121 +325,28 @@ Specification
                         <!-- ===========================
                             Active View
                         ============================ -->
-                        <div class="media-featured">
+                        <a href="#" class="media-featured" id="mediaMainFeatured">
 
                             <div class="media-featured-image">
-                                <img src="./images/main_banner.png" alt="헌터코리아 프로모션">
+                                <img id="mediaMainFeaturedImage" src="/images/common/img_placeholder.jpg" alt="">
                             </div>
 
                             <div class="media-featured-content">
 
-                                <span class="media-card-category">
-                                    Promotion
-                                </span>
+                                <span class="media-card-category" id="mediaMainFeaturedCategory"></span>
 
-                                <h3 class="media-card-title">
-                                    헌터코리아 사상 최초, 24개월 무이자 할부 특별 프로모션
-                                </h3>
+                                <h3 class="media-card-title" id="mediaMainFeaturedTitle"></h3>
 
-                                <p class="media-card-text">
-                                    비즈니스 확장, 망설이던 한계를 ‘수익의 기회’로 바꿀 시간입니다.
-                                    헌터코리아에서 제안하는 24개월 무이자 할부 혜택으로 지금 바로 시작해 보세요.
-                                </p>
+                                <p class="media-card-text" id="mediaMainFeaturedText"></p>
 
                             </div>
 
-                        </div>
+                        </a>
 
                         <!-- ===========================
                             List
                         ============================ -->
-                        <div class="media-list">
-
-                            <!-- Promotion -->
-                            <article class="media-item is-active"
-                                data-image="./images/main_banner.png"
-                                data-category="Promotion"
-                                data-title="헌터코리아 사상 최초, 24개월 무이자 할부 특별 프로모션"
-                                data-desc="비즈니스 확장, 망설이던 한계를 ‘수익의 기회’로 바꿀 시간입니다. 헌터코리아에서 제안하는 24개월 무이자 할부 혜택으로 지금 바로 시작해 보세요.">
-
-                                <span class="media-card-category">
-                                    Promotion
-                                </span>
-
-                                <h3 class="media-card-title">
-                                    헌터코리아 사상 최초, 24개월 무이자 할부 특별 프로모션
-                                </h3>
-
-                                <p class="media-card-text">
-                                    비즈니스 확장, 망설이던 한계를 ‘수익의 기회’로 바꿀 시간입니다. 헌터코리아에서 제안하는 24개월 무이자 할부 혜택으로 지금 바로 시작해 보세요.
-                                </p>
-
-                            </article>
-
-                            <!-- News 01 -->
-                            <article class="media-item"
-                                data-image="./images/main_banner.png"
-                                data-category="News"
-                                data-title="2026 휠 밸런서 Road Force"
-                                data-desc="작업자의 시간을 소중히. 한단계 더 진화한 자율형 휠 밸런서 Road Force® WalkAway™를 만나보세요.">
-
-                                <span class="media-card-category">
-                                    News
-                                </span>
-
-                                <h3 class="media-card-title">
-                                    2026 휠 밸런서 Road Force
-                                </h3>
-
-                                <p class="media-card-text">
-                                    작업자의 시간을 소중히. 한단계 더 진화한 자율형 휠 밸런서 Road Force® WalkAway™를 만나보세요.
-                                </p>
-
-                            </article>
-
-                            <!-- News 02 -->
-                            <article class="media-item"
-                                data-image="./images/main_banner.png"
-                                data-category="News"
-                                data-title="2026 휠 얼라인먼트 블라블라"
-                                data-desc="ADAS 확장형을 통한 정비 기술의 확장. 휠 얼라이먼트 HawkEye Elite® X를 만나보세요!">
-
-                                <span class="media-card-category">
-                                    News
-                                </span>
-
-                                <h3 class="media-card-title">
-                                    2026 휠 얼라인먼트 블라블라
-                                </h3>
-
-                                <p class="media-card-text">
-                                    ADAS 확장형을 통한 정비 기술의 확장. 휠 얼라이먼트 HawkEye Elite® X를 만나보세요!
-                                </p>
-
-                            </article>
-
-                            <!-- News 03 -->
-                            <article class="media-item"
-                                data-image="./images/main_banner.png"
-                                data-category="News"
-                                data-title="WinAlign® HD 사전예약 안내"
-                                data-desc="복잡한 대형차 정비를 단시간에, 압도적 정밀도로 해결하는 헌터만의 기술력이 담긴 HD 얼라인먼트를 만나보세요.">
-
-                                <span class="media-card-category">
-                                    News
-                                </span>
-
-                                <h3 class="media-card-title">
-                                    WinAlign® HD 사전예약 안내
-                                </h3>
-
-                                <p class="media-card-text">
-                                    복잡한 대형차 정비를 단시간에, 압도적 정밀도로 해결하는 헌터만의 기술력이 담긴 HD 얼라인먼트를 만나보세요.
-                                </p>
-
-                            </article>
-
-                        </div>
+                        <div class="media-list" id="mediaMainPromotionList"></div>
                         <!-- //media-list -->
 
                     </div>
@@ -706,6 +415,9 @@ Specification
     </script>
     <script src="js/main.js">
     </script>
+    <script src="/js/products.js"></script>
+    <script src="/js/media-data.js"></script>
+    <script src="/js/media.js"></script>
 </body>
 
 </html>

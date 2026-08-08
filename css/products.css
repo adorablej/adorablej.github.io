@@ -1674,8 +1674,10 @@ products-ROICalculator.html , Products Hero
 .sub-products-visual-bg{
     position:absolute;
     inset:0;
-    background: url(/images/products/P_Calculator_Products_bg.png);
-    background-size: cover;
+    background-color:#c90000;
+    background-image:url(/images/products/P_Calculator_Products_bg.png);
+    background-repeat:no-repeat;
+    background-size:100% auto;
 }
 
 .sub-products-visual .inner{
@@ -1700,7 +1702,7 @@ products-ROICalculator.html , Products Hero
     justify-content: space-between;
     align-items: flex-start;
     height: calc(800 * var(--vw));
-    padding-top: calc(40 * var(--vw));
+    padding-top: calc(85 * var(--vw));
 }
 
 .sub-products-category{
@@ -1743,11 +1745,16 @@ products-ROICalculator.html , Products Hero
     border-top:2px solid currentColor;
     border-right:2px solid currentColor;
     transform:rotate(45deg);
+    opacity:0;
 }
 
 .sub-products-category-list li.is-active .sub-products-category-button{
     background:var(--red);
     color:#fff;
+}
+
+.sub-products-category-list li.is-active .sub-products-category-button i{
+    opacity:1;
 }
 
 .sub-products-main{
@@ -1773,9 +1780,14 @@ products-ROICalculator.html , Products Hero
     pointer-events:auto;
 }
 
-.sub-products-swiper{
+.sub-products-visual .sub-products-swiper{
     width:100%;
-    overflow:hidden;
+    overflow:visible !important;
+}
+
+.sub-products-visual .sub-products-swiper .swiper-wrapper,
+.sub-products-visual .sub-products-swiper .swiper-slide{
+    overflow:visible;
 }
 
 .sub-products-swiper .swiper-wrapper{
@@ -1811,8 +1823,9 @@ products-ROICalculator.html , Products Hero
     height:auto;
     object-fit:contain;
     position: absolute;
-    bottom: 0;
+    bottom:calc(70 * var(--vw));
 }
+
 
 .sub-products-info{
     display:flex;
@@ -1823,6 +1836,8 @@ products-ROICalculator.html , Products Hero
     min-width:0;
     position: absolute;
     right: 0;
+    transform:translateY(calc(-43 * var(--vw)));
+    z-index:4;
 }
 
 .sub-products-title{
@@ -1834,6 +1849,25 @@ products-ROICalculator.html , Products Hero
     line-height:calc(42 * var(--vw));
     word-break:keep-all;
 }
+
+.sub-products-title sup,
+.sub-products-desc sup{
+    font-family:inherit;
+    font-size:.48em;
+    line-height:0;
+    vertical-align:super;
+}
+
+.sub-products-title .product-x{
+    display:inline-block;
+    margin-left:calc(8 * var(--vw));
+    color:#00b51a;
+    font-family:"Russo One",sans-serif;
+    font-size:1.05em;
+    font-style:italic;
+    transform:skew(-12deg);
+}
+
 
 .sub-products-desc{
     margin:0;
@@ -1847,7 +1881,7 @@ products-ROICalculator.html , Products Hero
     position: absolute;
     z-index: 5;
     left: calc(560 * var(--vw));
-    bottom: calc(200 * var(--vw));
+    bottom: calc(254 * var(--vw));
     display: flex;
     gap: calc(14 * var(--vw));
 }
@@ -1856,9 +1890,9 @@ products-ROICalculator.html , Products Hero
     position:relative;
     width:calc(64 * var(--vw));
     height:calc(64 * var(--vw));
-    border:1px solid #ddd;
+    border:1px solid var(--red);
     border-radius:50%;
-    background:#fff;
+    background:transparent;
     transition:.3s;
 }
 
@@ -1873,8 +1907,8 @@ products-ROICalculator.html , Products Hero
     left:50%;
     width:calc(12 * var(--vw));
     height:calc(12 * var(--vw));
-    border-top:2px solid #888;
-    border-right:2px solid #888;
+    border-top:2px solid var(--red);
+    border-right:2px solid var(--red);
 }
 
 .sub-products-prev::before{
@@ -1892,6 +1926,81 @@ products-ROICalculator.html , Products Hero
 .sub-products-control-button.swiper-button-disabled{
     opacity:.35;
     pointer-events:none;
+}
+
+
+
+/* ========================================
+Products 공통 배치
+- 세로형: 이미지 왼쪽 / 텍스트 오른쪽
+- 가로형: 텍스트 위 / 이미지 아래
+======================================== */
+
+.sub-products-slide{
+    position:relative;
+}
+
+.sub-products-slide .sub-products-image{
+    transform:none !important;
+}
+
+.sub-products-slide:not(.sub-products-slide-horizontal) .sub-products-image img{
+    top:50% !important;
+    left:33% !important;
+    right:auto !important;
+    bottom:auto !important;
+    width:auto !important;
+    height:auto !important;
+    max-width:60% !important;
+    max-height:94% !important;
+    transform:translate(-50%,-50%) !important;
+}
+
+.sub-products-slide:not(.sub-products-slide-horizontal) .sub-products-info{
+    top:50% !important;
+    left:auto !important;
+    right:0 !important;
+    width:calc(430 * var(--vw)) !important;
+    max-width:none !important;
+    text-align:left !important;
+    transform:translateY(-50%) !important;
+}
+
+.sub-products-group:has(.swiper-slide-active .sub-products-slide:not(.sub-products-slide-horizontal)) .sub-products-controls{
+    top:auto !important;
+    left:calc(560 * var(--vw)) !important;
+    right:auto !important;
+    bottom:calc(180 * var(--vw)) !important;
+}
+
+.sub-products-slide-horizontal .sub-products-image img{
+    top:auto !important;
+    left:50% !important;
+    right:auto !important;
+    bottom:0 !important;
+    width:auto !important;
+    height:auto !important;
+    max-width:96% !important;
+    max-height:calc(500 * var(--vw)) !important;
+    transform:translateX(-50%) !important;
+}
+
+.sub-products-slide-horizontal .sub-products-info{
+    top:calc(25 * var(--vw)) !important;
+    left:0 !important;
+    right:0 !important;
+    width:100% !important;
+    max-width:none !important;
+    text-align:center !important;
+    transform:none !important;
+}
+
+.sub-products-group:has(.swiper-slide-active .sub-products-slide-horizontal) .sub-products-controls{
+    top:calc(245 * var(--vw)) !important;
+    left:50% !important;
+    right:auto !important;
+    bottom:auto !important;
+    transform:translateX(-50%);
 }
 
 

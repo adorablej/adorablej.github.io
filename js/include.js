@@ -12,7 +12,30 @@ document.addEventListener("DOMContentLoaded", async () => {
                     throw new Error(`${path} 로드 실패 : ${response.status}`);
                 }
 
-                target.innerHTML = await response.text();
+                const html = await response.text();
+                const selector = target.dataset.includeSelector;
+
+                if (!selector) {
+                    target.innerHTML = html;
+                    return;
+                }
+
+                const documentFragment = new DOMParser().parseFromString(
+                    html,
+                    "text/html"
+                );
+                const source = documentFragment.querySelector(selector);
+
+                if (!source) {
+                    throw new Error(`${path}에서 ${selector}를 찾을 수 없습니다.`);
+                }
+
+                if (target.dataset.includeMode === "replace") {
+                    target.replaceWith(source);
+                    return;
+                }
+
+                target.innerHTML = source.innerHTML;
             } catch (error) {
                 console.error(error);
             }

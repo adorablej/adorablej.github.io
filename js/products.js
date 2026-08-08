@@ -244,7 +244,7 @@ faqItems.forEach((item) => {
 
 /* products-ROICalculator.html , Products Hero. */
 
-document.addEventListener("DOMContentLoaded",initProductsHero);
+window.addEventListener("includeLoaded",initProductsHero,{once:true});
 
 function initProductsHero(){
     const section=document.querySelector(".sub-products-visual");
@@ -258,7 +258,7 @@ function initProductsHero(){
         const prevButton=group.querySelector(".sub-products-prev");
         const nextButton=group.querySelector(".sub-products-next");
 
-        if(!slider)return;
+        if(!slider||typeof Swiper==="undefined")return;
 
         group.productSwiper=new Swiper(slider,{
             slidesPerView:1,
@@ -315,5 +315,3 @@ function initProductsHero(){
 
     changeCategory(activeButton?.dataset.category||"alignment");
 }
-
-

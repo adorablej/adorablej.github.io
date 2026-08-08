@@ -27,15 +27,47 @@ function initOperationGuide() {
     const guideContent = document.querySelector("#sub-guide-content");
     const guideTabs = document.querySelectorAll("[data-guide-tab]");
     const modal = document.querySelector(".sub-guide-video-modal");
+    const pageTitle = document.querySelector("[data-operation-guide-title] span");
     let visibleVideoCount = 6;
     let destroyFeatured = null;
 
     if (!guideContent || !guideTabs.length) return;
 
+    const requestedCategory = new URLSearchParams(window.location.search).get("category") || "alignment";
+    const category = operationGuideCategories[requestedCategory] ? requestedCategory : "alignment";
+    const categoryInfo = operationGuideCategories[category];
+    const visibleGuides = operationGuideData.filter(item => item.category === category && item.visible);
+    const manualGroups = Object.values(visibleGuides
+        .filter(item => item.type === "manual")
+        .reduce((groups, item) => {
+            if (!groups[item.product]) groups[item.product] = { title: item.product, items: [] };
+            groups[item.product].items.push({ title: item.title, url: item.fileUrl });
+            return groups;
+        }, {}));
+    const videos = visibleGuides
+        .filter(item => item.type === "video")
+        .map(item => ({ ...item, youtube: item.youtubeUrl }));
+    const currentGuide = { title: categoryInfo.title, manual: manualGroups, video: videos };
+
+    if (pageTitle) pageTitle.textContent = currentGuide.title;
+
+    function renderEmpty(type) {
+        guideContent.innerHTML = `
+            <section class="sub-guide-group">
+                <h4 class="sub-guide-group-title">${type === "manual" ? "Manual" : "Video"}</h4>
+                <p>등록된 ${type === "manual" ? "매뉴얼이" : "영상이"} 없습니다.</p>
+            </section>
+        `;
+    }
+
     function renderManual() {
         destroyFeatured?.();
         destroyFeatured = null;
-        guideContent.innerHTML = operationGuideData.manual.map(group => `
+        if (!currentGuide.manual.length) {
+            renderEmpty("manual");
+            return;
+        }
+        guideContent.innerHTML = currentGuide.manual.map(group => `
             <section class="sub-guide-group">
                 <h4 class="sub-guide-group-title">${group.title}</h4>
                 <ul class="sub-guide-list">
@@ -182,7 +214,12 @@ function initOperationGuide() {
 
     function renderVideo() {
         destroyFeatured?.();
-        const videos = operationGuideData.video;
+        const videos = currentGuide.video;
+        if (!videos.length) {
+            renderEmpty("video");
+            destroyFeatured = null;
+            return;
+        }
         const featured = videos.filter(video => video.featured).slice(0, 3);
         const list = videos.slice(0, visibleVideoCount);
 
@@ -274,7 +311,7 @@ function initOperationGuide() {
         const videoButton = event.target.closest("[data-video-id]");
         if (videoButton) {
             if (videoButton.classList.contains("sub-guide-video-featured-card") && !videoButton.classList.contains("is-active")) return;
-            const video = operationGuideData.video.find(item => item.id === Number(videoButton.dataset.videoId));
+            const video = currentGuide.video.find(item => item.id === Number(videoButton.dataset.videoId));
             openVideoModal(video);
             return;
         }

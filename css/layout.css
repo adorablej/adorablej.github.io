@@ -857,6 +857,71 @@ All Menu Navigation
     text-decoration: underline;
 }
 
+.all-menu-subitem {
+    width: 100%;
+}
+
+.all-menu-subitem-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.all-menu-subtoggle {
+    position: relative;
+    flex: 0 0 calc(24 * var(--vw));
+    width: calc(24 * var(--vw));
+    height: calc(24 * var(--vw));
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.all-menu-subtoggle i::before,
+.all-menu-subtoggle i::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(20 * var(--vw));
+    height: calc(2 * var(--vw));
+    background: #fff;
+    content: "";
+    transform: translate(-50%, -50%);
+    transition: transform .3s ease;
+}
+
+.all-menu-subtoggle i::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.all-menu-subitem.is-open .all-menu-subtoggle i::after {
+    transform: translate(-50%, -50%) rotate(0);
+}
+
+.all-menu-subdepth {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: height .35s cubic-bezier(.22, 1, .36, 1), opacity .25s ease;
+}
+
+.all-menu-subitem.is-open .all-menu-subdepth {
+    opacity: 1;
+}
+
+.all-menu-subdepth-inner {
+    display: flex;
+    flex-direction: column;
+    gap: calc(18 * var(--vw));
+    padding: calc(18 * var(--vw)) 0 0 calc(40 * var(--vw));
+}
+
+.all-menu-depth .all-menu-subdepth a {
+    color: rgba(255, 255, 255, .5);
+}
+
 
 /* ========================================
 All Menu Member
