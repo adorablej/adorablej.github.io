@@ -259,47 +259,43 @@ Header Right
 
 .header-r .ic-menu {
     position: relative;
-
-    width: calc(30 * var(--vw));
-    height: calc(30 * var(--vw));
-
+    width: 20px;
+    height: 16px;
     background-image: none;
 }
 
 .header-r .ic-menu::before,
 .header-r .ic-menu::after {
     position: absolute;
-    top: 50%;
-    left: 50%;
-
-    width: calc(26 * var(--vw));
-    height: calc(2 * var(--vw));
-
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 2px;
     background: currentColor;
-
     content: "";
-
     transition:
         transform .3s ease,
         box-shadow .3s ease;
 }
 
 .header-r .ic-menu::before {
-    transform: translate(-50%, calc(-7 * var(--vw)));
-    box-shadow: 0 calc(7 * var(--vw)) 0 currentColor;
+    transform: translateY(0);
+    box-shadow:
+        0 5px 0 currentColor,
+        0 10px 0 currentColor;
 }
 
 .header-r .ic-menu::after {
-    transform: translate(-50%, calc(7 * var(--vw)));
+    transform: translateY(15px);
 }
 
 .header.is-menu-open .ic-menu::before {
-    transform: translate(-50%, -50%) rotate(45deg);
+    transform: translateY(7px) rotate(45deg);
     box-shadow: 0 0 0 transparent;
 }
 
 .header.is-menu-open .ic-menu::after {
-    transform: translate(-50%, -50%) rotate(-45deg);
+    transform: translateY(7px) rotate(-45deg);
 }
 
 .header.theme-light .header-r i{
@@ -1954,29 +1950,37 @@ Mobile Common Layout
         gap: 22px;
     }
 
-    .header-r i,
-    .header-r .ic-menu {
+    .header-r i {
         width: 22px;
         height: 22px;
     }
 
-    .header-r .ic-menu::before,
-    .header-r .ic-menu::after {
+    .header-r .ic-menu {
         width: 20px;
-        height: 2px;
+        height: 16px;
     }
 
     .header-r .ic-menu::before {
-        transform: translate(-50%, -6px);
-        box-shadow: 0 6px 0 currentColor;
+        transform: translateY(0);
+        box-shadow:
+            0 5px 0 currentColor,
+            0 10px 0 currentColor;
     }
 
     .header-r .ic-menu::after {
-        transform: translate(-50%, 6px);
+        transform: translateY(15px);
+    }
+
+    .header.is-menu-open .ic-menu::before {
+        transform: translateY(7px) rotate(45deg);
+        box-shadow: 0 0 0 transparent;
+    }
+
+    .header.is-menu-open .ic-menu::after {
+        transform: translateY(7px) rotate(-45deg);
     }
 
     .header:not(.is-menu-open) .btn-login,
-    .header:not(.is-menu-open) .btn-search,
     .header:not(.is-menu-open) .btn-alarm {
         display: none;
     }
@@ -1999,6 +2003,10 @@ Mobile Common Layout
 
     .header.is-menu-open .btn-menu {
         margin-left: auto;
+    }
+
+    .header.is-menu-open .btn-search {
+        display: none;
     }
 
     .header.is-menu-open .header-r i,
@@ -2107,50 +2115,108 @@ Mobile Common Layout
 
     /* Header search */
     .header-search-panel {
-        min-height: 390px;
-        padding: 100px 25px 40px;
+        height: calc(100dvh - 64px);
+        min-height: 0;
+        padding: 0;
+        overflow-y: auto;
+        background: #fff;
         box-sizing: border-box;
+    }
+
+    .header-search.is-open .header-search-panel {
+        transform: translateY(64px);
     }
 
     .header-search-inner {
         width: 100%;
+        max-width: none;
+    }
+
+    .header-search-form {
+        padding: 27px 25px 25px;
+        background: #f5f6fa;
     }
 
     .header-search-field {
-        height: 52px;
+        height: 60px;
+        padding: 0;
+        border-color: #ddd;
     }
 
     .header-search-icon {
-        width: 21px;
-        height: 21px;
-        margin-left: 16px;
+        width: 18px;
+        height: 18px;
+        margin: 0 12px 0 18px;
     }
 
     .header-search-input {
-        padding: 0 16px;
-        font-size: 16px;
+        padding: 0 16px 0 0;
+        font-size: 14px;
     }
 
     .header-search-content {
         grid-template-columns: 1fr;
-        gap: 30px;
-        margin-top: 30px;
+        gap: 40px;
+        margin-top: 0;
+        padding: 29px 25px 40px;
     }
 
     .header-search-content h2,
     .header-search-recent-heading h2 {
-        font-size: 15px;
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .header-search-recommend {
+        padding-right: 0;
+        border-right: 0;
     }
 
     .header-search-recommend-list {
-        gap: 10px;
-        margin-top: 16px;
+        gap: 22px;
+        margin-top: 18px;
     }
 
     .header-search-recommend-list a,
     .header-search-recent-link,
     .header-search-recent-empty {
-        font-size: 13px;
+        font-size: 14px;
+    }
+
+    .header-search-recommend-list a::before {
+        margin-right: 16px;
+        font-size: 22px;
+    }
+
+    .header-search-delete-all {
+        display: none;
+    }
+
+    .header-search-recent-list {
+        gap: 8px;
+        margin-top: 18px;
+    }
+
+    .header-search-recent-item {
+        gap: 10px;
+        min-height: 36px;
+        padding: 0 17px;
+        border-radius: 18px;
+    }
+
+    .header-search-recent-delete {
+        width: 12px;
+        height: 12px;
+    }
+
+    .header-search-recent-delete::before,
+    .header-search-recent-delete::after {
+        width: 11px;
+        height: 1px;
+    }
+
+    .header-search-dim {
+        display: none;
     }
 
     /* Sub page heading */
