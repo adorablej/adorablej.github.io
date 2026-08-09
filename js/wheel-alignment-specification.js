@@ -34,6 +34,7 @@
         keyword: document.getElementById("specification-keyword"),
         recentList: document.getElementById("recent-search-list"),
         recentReset: document.getElementById("recent-reset"),
+        requestButton: document.querySelector(".sub-specification-submit"),
         brandSelect: document.getElementById("specification-brand-select"),
         modelSelect: document.getElementById("specification-model-select"),
         selectedList: document.getElementById("selected-list"),
@@ -58,6 +59,13 @@
 
     const getBrand = () => data.brands.find((brand) => brand.id === state.brandId);
     const getModel = () => (data.models[state.brandId] || []).find((model) => model.id === state.modelId);
+
+    const emptyResultMarkup = () => `
+        <div class="sub-specification-empty">
+            <strong>선택하신 제조사에<br>등록된 차종이 없습니다.</strong>
+            <p>필요한 차량 정보는 제원 찾기 요청을 통해<br>등록을 요청해 주세요.</p>
+        </div>
+    `;
 
     function renderBrandSelect() {
         elements.brandSelect.insertAdjacentHTML("beforeend", data.brands.map((brand) => (
@@ -136,7 +144,7 @@
                     <strong>${model.name}</strong>
                 </button>
             `).join("")
-            : '<p class="sub-specification-empty">등록된 차종 정보가 없습니다.</p>';
+            : emptyResultMarkup();
     }
 
     function createFallbackResults() {
@@ -213,6 +221,62 @@
         renderStep();
     }
 
+    function addRecentKeyword(keyword) {
+        if (!keyword) return;
+        state.recent = [keyword, ...state.recent.filter((item) => item !== keyword)].slice(0, 5);
+        saveRecent();
+        renderRecent();
+    }
+
+    function searchSpecification(keyword) {
+        const query = String(keyword || "").trim();
+        if (!query) return;
+
+        const normalizedQuery = query.toLocaleLowerCase("ko-KR");
+        const brand = data.brands.find((item) => [item.id, item.name, item.logoText, ...(item.keywords || [])]
+            .some((value) => String(value || "").toLocaleLowerCase("ko-KR").includes(normalizedQuery)));
+
+        let matchedModel = null;
+        let matchedBrand = null;
+        Object.entries(data.models).some(([brandId, models]) => {
+            const model = models.find((item) => [item.id, item.name]
+                .some((value) => String(value || "").toLocaleLowerCase("ko-KR").includes(normalizedQuery)));
+            if (!model) return false;
+            matchedModel = model;
+            matchedBrand = data.brands.find((item) => item.id === brandId) || null;
+            return true;
+        });
+
+        addRecentKeyword(query);
+
+        if (matchedModel && matchedBrand) {
+            state.brandId = matchedBrand.id;
+            state.modelId = matchedModel.id;
+            renderStep();
+            return;
+        }
+
+        if (brand) {
+            selectBrand(brand.id);
+            return;
+        }
+
+        state.brandId = "";
+        state.modelId = "";
+        elements.selectedList.innerHTML = "";
+        elements.brandPanel.hidden = true;
+        elements.modelPanel.hidden = false;
+        elements.resultPanel.hidden = true;
+        elements.modelPanelTitle.innerHTML = `검색 결과<span>.</span>`;
+        elements.modelGrid.innerHTML = `
+            <div class="sub-specification-empty">
+                <strong>검색하신 차량 정보를<br>찾을 수 없습니다.</strong>
+                <p>필요한 차량 정보는 제원 찾기 요청을 통해<br>등록을 요청해 주세요.</p>
+            </div>
+        `;
+        updateUrl();
+    }
+
     document.addEventListener("click", (event) => {
         const brandButton = event.target.closest("[data-brand-id]");
         const modelButton = event.target.closest("[data-model-id]");
@@ -243,6 +307,7 @@
 
         if (recentButton) {
             elements.keyword.value = recentButton.dataset.recentKeyword;
+            searchSpecification(recentButton.dataset.recentKeyword);
         }
 
         if (resultRow) openSpecificationModal(Number(resultRow.dataset.resultIndex));
@@ -386,6 +451,16 @@
 
     elements.form.addEventListener("submit", (event) => {
         event.preventDefault();
+        searchSpecification(elements.keyword.value);
+    });
+
+    elements.keyword.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter") return;
+        event.preventDefault();
+        searchSpecification(elements.keyword.value);
+    });
+
+    elements.requestButton?.addEventListener("click", () => {
         window.location.href = "/Support/Vehicle-Specification-Request.html";
     });
 

@@ -37,7 +37,11 @@ function renderMediaView(type, config, list, item) {
     document.title = `${item.title} | Hunter Korea`;
     breadcrumb.textContent = config.title;
     breadcrumb.href = `/Media/media-list.html?type=${type}`;
-    pageTitle.textContent = config.title;
+    if (type === "promotion") {
+        pageTitle.innerHTML = `Promotion &amp;<br class="mo-only"> Event`;
+    } else {
+        pageTitle.textContent = config.title;
+    }
     category.textContent = item.category || "";
     title.textContent = item.title || "";
     date.textContent = item.date || "";
@@ -95,7 +99,9 @@ function setContentImageFallback(content) {
 }
 
 function getFileName(path) {
-    return decodeURIComponent(path.split("/").pop() || "");
+    const cleanPath = String(path || "").split(/[?#]/)[0];
+    const name = cleanPath.split("/").filter(Boolean).pop();
+    return decodeURIComponent(name || "첨부파일");
 }
 
 function renderMediaViewEmpty(type, config) {
@@ -109,7 +115,11 @@ function renderMediaViewEmpty(type, config) {
     }
 
     if (pageTitle) {
-        pageTitle.textContent = config.title;
+        if (type === "promotion") {
+            pageTitle.innerHTML = `Promotion &amp;<br class="mo-only"> Event`;
+        } else {
+            pageTitle.textContent = config.title;
+        }
     }
 
     if (section) {

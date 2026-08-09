@@ -1202,6 +1202,20 @@ sub page 공통
     color:#fff;
 }
 
+.sub-section-title {
+    margin: 0;
+    color: #000;
+    font-family: "Russo One", sans-serif;
+    font-size: calc(64 * var(--vw));
+    font-weight: 400;
+    line-height: 1;
+}
+
+.sub-section-title span {
+    color: var(--red);
+    font-family: "Russo One", sans-serif;
+}
+
 .sub-section-sm-title{
     margin: 0;
     color: #111;
@@ -1905,6 +1919,11 @@ Mobile Common Layout
         font-size: 14px;
         line-height: 44px;
         box-sizing: border-box;
+    }
+
+    .sub-section-title {
+        font-size: 26px;
+        line-height: 1;
     }
 
     /* Header */

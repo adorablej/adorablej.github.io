@@ -119,7 +119,7 @@
                 resultArea.innerHTML = `
                     <div class="sub-search-empty">
                         <span class="sub-search-empty-icon" aria-hidden="true">!</span>
-                        <strong>검색하신 조건에 맞는 결과가 없습니다.</strong>
+                        <strong>검색하신 조건에 맞는<br class="mo-only">결과가 없습니다.</strong>
                         <p>아래의 핵심 서비스를 통해 원하는 정보를 빠르게 확인해 보세요.</p>
                     </div>
                 `;
@@ -135,7 +135,7 @@
             const visibleItems = results.slice(startIndex, startIndex + pageSize);
 
             resultArea.innerHTML = `
-                <p class="sub-search-count"><strong>${results.length}개</strong> 결과 검색</p>
+                <p class="sub-search-count">총 <strong>${results.length}개</strong></p>
                 <ul class="sub-search-list">
                     ${visibleItems.map((item) => createResultItem(item, keyword)).join("")}
                 </ul>
@@ -196,9 +196,10 @@
                     <p class="sub-search-item-path">${item.path}</p>
                     <div class="sub-search-item-heading">
                         <h3 class="sub-search-item-title">${highlightKeyword(item.title, keyword)}</h3>
-                        <time class="sub-search-item-date">${item.date}</time>
+                        <time class="sub-search-item-date pc-only">${item.date}</time>
                     </div>
                     <p class="sub-search-item-description">${highlightKeyword(item.description, keyword)}</p>
+                    <time class="sub-search-item-date mo-only">${item.date}</time>
                 </a>
             </li>
         `;
@@ -284,22 +285,32 @@
     }
 
     function initProductSlider() {
+        const viewport = document.querySelector(".sub-search-product-viewport");
         const track = document.querySelector(".sub-search-product-track");
         const prevButton = document.querySelector(".sub-search-product-prev");
         const nextButton = document.querySelector(".sub-search-product-next");
 
-        if (!track || !prevButton || !nextButton) return;
+        if (!viewport || !track || !prevButton || !nextButton) return;
 
         let index = 0;
-        const maxIndex = Math.max(0, productData.length - 4);
+        let isDragging = false;
+        let dragMoved = false;
+        let dragStartX = 0;
+        let dragStartScrollLeft = 0;
+        const getMaxIndex = () => Math.max(0, productData.length - (window.innerWidth <= 720 ? 2 : 4));
 
-        function updateSlider() {
+        function updateSlider(moveViewport = false) {
             const card = track.querySelector(".sub-search-product-card");
             if (!card) return;
 
             const gap = parseFloat(window.getComputedStyle(track).gap) || 0;
             const distance = card.getBoundingClientRect().width + gap;
-            track.style.transform = `translateX(${-index * distance}px)`;
+            const maxIndex = getMaxIndex();
+            index = Math.min(index, maxIndex);
+
+            track.style.transform = "none";
+            if (moveViewport) viewport.scrollTo({ left: index * distance, behavior: "smooth" });
+            else index = Math.min(maxIndex, Math.max(0, Math.round(viewport.scrollLeft / distance)));
 
             prevButton.classList.toggle("swiper-button-disabled", index === 0);
             nextButton.classList.toggle("swiper-button-disabled", index === maxIndex);
@@ -307,13 +318,50 @@
 
         prevButton.addEventListener("click", () => {
             index = Math.max(0, index - 1);
-            updateSlider();
+            updateSlider(true);
         });
 
         nextButton.addEventListener("click", () => {
-            index = Math.min(maxIndex, index + 1);
-            updateSlider();
+            index = Math.min(getMaxIndex(), index + 1);
+            updateSlider(true);
         });
+
+        viewport.addEventListener("scroll", () => {
+            updateSlider();
+        }, { passive: true });
+
+        viewport.addEventListener("pointerdown", (event) => {
+            if (event.pointerType !== "mouse") return;
+            isDragging = true;
+            dragMoved = false;
+            dragStartX = event.clientX;
+            dragStartScrollLeft = viewport.scrollLeft;
+            viewport.classList.add("is-dragging");
+            viewport.setPointerCapture(event.pointerId);
+        });
+
+        viewport.addEventListener("pointermove", (event) => {
+            if (!isDragging) return;
+            const distance = event.clientX - dragStartX;
+            if (Math.abs(distance) > 4) dragMoved = true;
+            viewport.scrollLeft = dragStartScrollLeft - distance;
+        });
+
+        const stopDragging = (event) => {
+            if (!isDragging) return;
+            isDragging = false;
+            viewport.classList.remove("is-dragging");
+            if (viewport.hasPointerCapture(event.pointerId)) viewport.releasePointerCapture(event.pointerId);
+        };
+
+        viewport.addEventListener("pointerup", stopDragging);
+        viewport.addEventListener("pointercancel", stopDragging);
+        viewport.addEventListener("click", (event) => {
+            if (!dragMoved) return;
+            event.preventDefault();
+            event.stopPropagation();
+            dragMoved = false;
+        }, true);
 
         window.addEventListener("resize", updateSlider);
         updateSlider();

@@ -23,22 +23,6 @@ Sub Product Category
     width: calc(1300 * var(--vw));
 }
 
-.sub-section-title {
-    margin: 0;
-    color: #000;
-    font-family: "Russo One", sans-serif;
-    font-size: calc(64 * var(--vw));
-    font-weight: 400;
-    line-height: 1;
-}
-
-.sub-section-title span {
-    color: var(--red);
-    font-family: "Russo One", sans-serif;
-}
-
-
-
 /* Category Card */
 
 .sub-category-card {
@@ -535,7 +519,6 @@ Sub Pride Interview
         margin-bottom: 25px;
     }
 
-    .sub-section-title,
     .sub-pride-title {
         font-size: 26px;
         line-height: 1;

@@ -28,6 +28,7 @@ function initMediaList() {
 
 function renderMediaFilter(config, data, type) {
     const filter = document.getElementById("mediaFilter");
+    const select = document.getElementById("mediaFilterSelect");
 
     filter.innerHTML = config.categories.map((category, index) => `
         <button
@@ -38,7 +39,21 @@ function renderMediaFilter(config, data, type) {
         </button>
     `).join("");
 
+    if (select) {
+        select.innerHTML = config.categories.map(category => `
+            <option value="${category}">${category}</option>
+        `).join("");
+    }
+
     const buttons = filter.querySelectorAll(".sub-media-filter-button");
+
+    const filterList = category => {
+        const filteredData = category === "전체"
+            ? data
+            : data.filter(item => item.category === category);
+
+        renderMediaList(config, filteredData, type);
+    };
 
     buttons.forEach(button => {
         button.addEventListener("click", function () {
@@ -46,12 +61,17 @@ function renderMediaFilter(config, data, type) {
             this.classList.add("is-active");
 
             const category = this.dataset.category;
-            const filteredData = category === "전체"
-                ? data
-                : data.filter(item => item.category === category);
-
-            renderMediaList(config, filteredData, type);
+            if (select) select.value = category;
+            filterList(category);
         });
+    });
+
+    select?.addEventListener("change", function () {
+        const category = this.value;
+        buttons.forEach(button => {
+            button.classList.toggle("is-active", button.dataset.category === category);
+        });
+        filterList(category);
     });
 }
 

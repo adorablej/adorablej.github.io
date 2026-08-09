@@ -1,7 +1,7 @@
 window.WHEEL_ALIGNMENT_DATA = {
     brands: [
-        { id: "hyundai", name: "Hyundai", type: "domestic", logoText: "HYUNDAI", logo: "/images/standard/Hyundai.png" },
-        { id: "kia", name: "Kia", type: "domestic", logoText: "KIA", logo: "/images/standard/KIA.png" },
+        { id: "hyundai", name: "Hyundai", type: "domestic", logoText: "HYUNDAI", logo: "/images/standard/Hyundai.png", keywords: ["현대"] },
+        { id: "kia", name: "Kia", type: "domestic", logoText: "KIA", logo: "/images/standard/KIA.png", keywords: ["기아"] },
         { id: "gm-korea", name: "GM Korea", type: "domestic", logoText: "GM", logo: "/images/standard/GM Korea.png" },
         { id: "chevrolet", name: "Chevrolet", type: "domestic", logoText: "CHEVROLET", logo: "/images/standard/Chevrolet.png" },
         { id: "renault-korea", name: "Renault Korea", type: "domestic", logoText: "RENAULT", logo: "/images/standard/Renault.png" },
