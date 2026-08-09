@@ -45,7 +45,7 @@
             title: "RoadForce Elite 장비 운용 가이드",
             description: "RoadForce Elite의 기본 측정 순서와 주요 기능을 영상으로 확인할 수 있습니다.",
             date: "2026.07.14",
-            href: "/Support/Equipment-Operation-Guide.html"
+            href: "/Support/equipment-operation-guide.html"
         },
         {
             category: "media",
