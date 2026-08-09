@@ -1802,16 +1802,18 @@ Wheel Alignment Specification
 .specification-modal-table thead th { font-weight: 700; }
 .specification-modal-table tbody th { text-align: left; font-weight: 500; }
 .specification-modal-table .specification-modal-section { width: 18%; border-right: 1px solid #e5e5e5; text-align: center; vertical-align: middle; font-weight: 700; }
+.specification-modal-mobile-section,
+.specification-modal-mobile-head { display: none; }
 .specification-modal-toe-note { margin: 18px 40px 0; color: #111; font-size: 14px; line-height: 1.6; }
 .specification-modal-toe-note::before { content: "•"; margin-right: 8px; }
 .specification-modal-extra { padding: 36px 40px 0; color: #111; }
 .specification-modal-extra:empty { display: none; }
 .specification-modal-extra h3 { margin: 0; padding: 14px 9px; border-top: 1px solid var(--red); border-bottom: 1px solid #ddd; font-size: 14px; text-align: center; }
-.specification-modal-extra dl { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; }
-.specification-modal-extra dl div { padding: 14px 12px; border-bottom: 1px solid #e5e5e5; }
-.specification-modal-extra dt { margin-bottom: 6px; color: #777; font-size: 11px; }
-.specification-modal-extra dd { margin: 0; font-size: 13px; font-weight: 600; }
-.specification-modal-notes { margin: 22px 40px 0; padding-top: 14px; border-top: 1px solid #ddd; color: #111; font-size: 14px; line-height: 1.6; }
+.specification-modal-extra dl { display: block; margin: 0; }
+.specification-modal-extra dl div { display: grid; grid-template-columns: 200px minmax(0, 1fr); align-items: center; padding: 14px 60px; border-bottom: 1px solid #e5e5e5; }
+.specification-modal-extra dt { margin: 0; color: #111; font-size: 14px; font-weight: 700; }
+.specification-modal-extra dd { margin: 0; font-size: 14px; font-weight: 400; }
+.specification-modal-notes { margin: 20px 40px 0; padding-top: 0; color: #111; font-size: 14px; line-height: 1.6; }
 .specification-modal-notes p { position: relative; margin: 2px 0; padding-left: 14px; }
 .specification-modal-notes p::before { content: "•"; position: absolute; left: 0; }
 .specification-modal-actions { padding-top: 24px; text-align: center; }
@@ -2309,6 +2311,37 @@ Training Program : Mobile
         padding: 10px 6px;
     }
 
+    .specification-modal-table > thead,
+    .specification-modal-table .specification-modal-section {
+        display: none;
+    }
+
+    .specification-modal-table .specification-modal-mobile-section,
+    .specification-modal-table .specification-modal-mobile-head {
+        display: table-row;
+    }
+
+    .specification-modal-mobile-section th {
+        padding: 24px 0 10px;
+        border-bottom: 1px solid #333;
+        font-weight: 700;
+        text-align: left;
+    }
+
+    .specification-modal-mobile-section:first-child th {
+        padding-top: 0;
+    }
+
+    .specification-modal-mobile-head th {
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .specification-modal-mobile-head th:first-child,
+    .specification-modal-table tbody tr:not(.specification-modal-mobile-section):not(.specification-modal-mobile-head) > th {
+        width: 40%;
+    }
+
     .specification-modal-toe-note {
         margin: 18px 20px 0;
         font-size: 14px;
@@ -2319,8 +2352,16 @@ Training Program : Mobile
         padding: 22px 20px 0;
     }
 
-    .specification-modal-extra dl {
-        grid-template-columns: 1fr;
+    .specification-modal-extra h3 {
+        padding-right: 0;
+        padding-left: 0;
+        border-top-color: #333;
+        text-align: left;
+    }
+
+    .specification-modal-extra dl div {
+        grid-template-columns: 40% minmax(0, 1fr);
+        padding: 12px 0;
     }
 
     .specification-modal-extra dt,
@@ -2330,13 +2371,13 @@ Training Program : Mobile
     }
 
     .specification-modal-notes {
-        margin: 22px 20px 0;
+        margin: 20px 20px 0;
         line-height: 20px;
     }
 
     .specification-modal-actions button {
-        min-width: 84px;
-        height: 40px;
+        min-width: 110px;
+        height: 50px;
         font-size: 14px;
     }
 

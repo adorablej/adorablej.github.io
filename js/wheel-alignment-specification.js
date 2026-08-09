@@ -287,11 +287,21 @@
         }, {});
         const renderedSections = new Set();
         elements.modalSpecs.innerHTML = result.specifications.map((item) => {
-            const sectionCell = renderedSections.has(item.section)
-                ? ""
-                : `<th rowspan="${sectionCounts[item.section]}" class="specification-modal-section">${escapeHtml(item.section)}</th>`;
+            const isFirstSectionRow = !renderedSections.has(item.section);
+            const mobileSectionRows = isFirstSectionRow ? `
+                <tr class="specification-modal-mobile-section">
+                    <th colspan="4">${escapeHtml(item.section)}</th>
+                </tr>
+                <tr class="specification-modal-mobile-head">
+                    <th>구분</th><th>규격</th><th>허용치</th>
+                </tr>
+            ` : "";
+            const sectionCell = isFirstSectionRow
+                ? `<th rowspan="${sectionCounts[item.section]}" class="specification-modal-section">${escapeHtml(item.section)}</th>`
+                : "";
             renderedSections.add(item.section);
             return `
+                ${mobileSectionRows}
                 <tr>
                     ${sectionCell}
                     <th>${escapeHtml(item.label)}</th>
