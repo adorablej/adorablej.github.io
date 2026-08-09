@@ -34,10 +34,14 @@ function initHunterPrideInterviewPage() {
 
     if (!page || !stage || !grid || !modal || !Array.isArray(hunterPrideInterviewData)) return;
 
-    const featured = hunterPrideInterviewData.filter(item => item.featured).slice(0, 3);
-    let visibleCount = 9;
-    let index = featured.length > 1 ? 1 : 0;
-    let animating = false;
+    const featured = hunterPrideInterviewData.filter(item => item.featured);
+    const featuredSlides = featured.length > 1 ? [...featured, ...featured, ...featured] : featured;
+    const isMobile = window.matchMedia("(max-width: 720px)").matches;
+    let visibleCount = isMobile ? 5 : 9;
+    let index = isMobile ? 0 : (featured.length > 1 ? 1 : 0);
+    let pointerFeaturedCard = null;
+    let pointerStartedOnActiveCard = false;
+    let normalizeFeaturedTimer = null;
 
     function imageMarkup(item) {
         const id = getHunterPrideYoutubeId(item.youtube);
@@ -47,8 +51,8 @@ function initHunterPrideInterviewPage() {
     }
 
     function renderFeatured() {
-        stage.innerHTML = featured.map(item => `
-            <button type="button" class="sub-pride-featured-card" data-interview-id="${item.id}">
+        stage.innerHTML = featuredSlides.map(item => `
+            <button type="button" class="sub-pride-featured-card swiper-slide" data-interview-id="${item.id}">
                 <span class="sub-pride-featured-image">
                     ${imageMarkup(item)}
                     ${hunterPridePlayIcon()}
@@ -82,132 +86,88 @@ function initHunterPrideInterviewPage() {
     }
 
     function initFeaturedMotion() {
-        const cards = [...stage.querySelectorAll(".sub-pride-featured-card")];
-        if (!cards.length) return;
+        if (typeof Swiper === "undefined" || !stage.children.length) return;
 
-        function positions() {
-            return {
-                left: (index - 1 + cards.length) % cards.length,
-                center: index,
-                right: (index + 1) % cards.length
-            };
-        }
-
-        function vars(position) {
-            const sideDistance = window.innerWidth * 370 / 1920;
-            const sideY = window.innerWidth * 40 / 1920;
-
-            if (position === "center") {
-                return { xPercent: -50, x: 0, y: 0, scale: 1, opacity: 1, zIndex: 5, visibility: "visible" };
-            }
-
-            return {
-                xPercent: -50,
-                x: position === "left" ? -sideDistance : sideDistance,
-                y: sideY,
-                scale: .8,
-                opacity: 1,
-                zIndex: 2,
-                visibility: "visible"
-            };
-        }
-
-        function updateHeight() {
-            const maxHeight = Math.max(...cards.map(card => card.offsetHeight));
-            stage.style.height = `${Math.ceil(maxHeight)}px`;
-        }
-
-        function applyState() {
-            const current = positions();
-
-            cards.forEach((card, cardIndex) => {
-                let position = "right";
-                if (cardIndex === current.left) position = "left";
-                if (cardIndex === current.center) position = "center";
-
-                card.classList.toggle("is-active", position === "center");
-                card.style.pointerEvents = "auto";
-                gsap.set(card, vars(position));
+        function setActiveCard(swiper) {
+            [...stage.children].forEach(card => {
+                card.classList.toggle("is-active", card.classList.contains("swiper-slide-active"));
             });
-
-            requestAnimationFrame(updateHeight);
         }
 
-        function move(direction) {
-            if (animating || cards.length !== 3) return;
+        function normalizePosition(swiper) {
+            setActiveCard(swiper);
+            if (featured.length < 2) return;
+            if (swiper.activeIndex < featured.length) swiper.slideTo(swiper.activeIndex + featured.length, 0, false);
+            if (swiper.activeIndex >= featured.length * 2) swiper.slideTo(swiper.activeIndex - featured.length, 0, false);
+            setActiveCard(swiper);
+            swiper.navigation?.update();
+        }
 
-            animating = true;
-            prev?.setAttribute("disabled", "");
-            next?.setAttribute("disabled", "");
+        function scheduleNormalize(swiper) {
+            setActiveCard(swiper);
+            window.clearTimeout(normalizeFeaturedTimer);
+            normalizeFeaturedTimer = window.setTimeout(() => normalizePosition(swiper), swiper.params.speed);
+        }
 
-            const current = positions();
-            const outgoingIndex = direction > 0 ? current.left : current.right;
-            const centerIndex = current.center;
-            const incomingIndex = direction > 0 ? current.right : current.left;
-            const outgoingCard = cards[outgoingIndex];
-            const centerCard = cards[centerIndex];
-            const incomingCard = cards[incomingIndex];
-            const incomingPosition = direction > 0 ? "right" : "left";
-            const outgoingPosition = direction > 0 ? "left" : "right";
-
-            cards.forEach(card => card.classList.remove("is-active"));
-            incomingCard.classList.add("is-active");
-
-            const clone = outgoingCard.cloneNode(true);
-            const sideDistance = window.innerWidth * 370 / 1920;
-            const enterDistance = window.innerWidth * 170 / 1920;
-            const cloneExitX = direction > 0 ? -sideDistance - enterDistance : sideDistance + enterDistance;
-            const incomingStartX = direction > 0 ? sideDistance + enterDistance : -sideDistance - enterDistance;
-
-            clone.removeAttribute("data-interview-id");
-            clone.setAttribute("aria-hidden", "true");
-            clone.style.pointerEvents = "none";
-            stage.appendChild(clone);
-
-            gsap.set(clone, vars(outgoingPosition));
-            gsap.set(outgoingCard, { ...vars(incomingPosition), x: incomingStartX, zIndex: 1 });
-
-            gsap.timeline({
-                defaults: { duration: .6, ease: "power3.inOut", overwrite: true },
-                onComplete: () => {
-                    index = incomingIndex;
-                    clone.remove();
-                    applyState();
-                    animating = false;
-                    prev?.removeAttribute("disabled");
-                    next?.removeAttribute("disabled");
+        function applyCarouselEffect(swiper) {
+            swiper.slides.forEach(slide => {
+                if (window.innerWidth <= 720) {
+                    slide.style.transform = "";
+                    slide.style.zIndex = "";
+                    slide.style.opacity = "";
+                    slide.style.pointerEvents = "";
+                    return;
                 }
-            })
-                .to(clone, { x: cloneExitX, opacity: 0, scale: .74, duration: .48, ease: "power2.in" }, 0)
-                .to(centerCard, vars(outgoingPosition), 0)
-                .to(incomingCard, vars("center"), 0)
-                .to(outgoingCard, vars(incomingPosition), .08);
+                const progress = slide.progress;
+                const distance = Math.abs(progress);
+                const scale = Math.max(.6, 1 - distance * .2);
+                const limitedProgress = Math.max(-1, Math.min(1, progress));
+                const angle = limitedProgress * Math.PI * 55 / 180;
+                const radius = slide.swiperSlideSize * .62;
+                const slideCenter = slide.offsetLeft + slide.swiperSlideSize / 2;
+                const targetCenter = swiper.width / 2 + Math.sin(angle) * radius;
+                const translateX = targetCenter - slideCenter;
+                slide.style.transform = `translate3d(${translateX}px, 0, 0) scale(${scale})`;
+                slide.style.zIndex = String(100 - Math.round(distance));
+                slide.style.opacity = distance > 1.01 ? "0" : "1";
+                slide.style.pointerEvents = distance > 1.01 ? "none" : "auto";
+            });
         }
 
-        prev?.addEventListener("click", () => move(-1));
-        next?.addEventListener("click", () => move(1));
-
-        cards.forEach((card, cardIndex) => {
-            card.addEventListener("click", event => {
-                if (card.classList.contains("is-active") || animating) return;
-
-                event.preventDefault();
-                event.stopPropagation();
-
-                const current = positions();
-                if (cardIndex === current.left) move(-1);
-                if (cardIndex === current.right) move(1);
+        function applyCarouselTransition(swiper, duration) {
+            swiper.slides.forEach(slide => {
+                slide.style.transitionDuration = `${duration}ms`;
             });
+        }
 
-            const image = card.querySelector("img");
-            if (image && !image.complete) image.addEventListener("load", updateHeight, { once: true });
+        const featuredSwiper = new Swiper(page.querySelector(".sub-pride-featured-slider"), {
+            slidesPerView: 1,
+            centeredSlides: true,
+            initialSlide: featured.length > 1 ? featured.length + index : index,
+            speed: 600,
+            virtualTranslate: false,
+            grabCursor: true,
+            watchSlidesProgress: true,
+            slideToClickedSlide: true,
+            breakpoints: {
+                721: {
+                    slidesPerView: 1.86,
+                    virtualTranslate: true
+                }
+            },
+            navigation: {
+                prevEl: prev,
+                nextEl: next
+            },
+            on: {
+                init: setActiveCard,
+                setTranslate: applyCarouselEffect,
+                setTransition: applyCarouselTransition,
+                slideChangeTransitionStart: scheduleNormalize
+            }
         });
 
-        window.addEventListener("resize", () => {
-            if (!animating) applyState();
-        });
-
-        applyState();
+        setActiveCard(featuredSwiper);
     }
 
     function openModal(item) {
@@ -236,11 +196,23 @@ function initHunterPrideInterviewPage() {
         document.body.classList.remove("is-modal-open");
     }
 
+    page.addEventListener("pointerdown", event => {
+        pointerFeaturedCard = event.target.closest(".sub-pride-featured-card");
+        pointerStartedOnActiveCard = pointerFeaturedCard?.classList.contains("swiper-slide-active") || false;
+    });
+
     page.addEventListener("click", event => {
         const card = event.target.closest("[data-interview-id]");
         if (!card) return;
 
-        if (card.classList.contains("sub-pride-featured-card") && !card.classList.contains("is-active")) return;
+        if (card.classList.contains("sub-pride-featured-card")) {
+            const canOpen = pointerFeaturedCard === card
+                ? pointerStartedOnActiveCard
+                : card.classList.contains("swiper-slide-active");
+            pointerFeaturedCard = null;
+            pointerStartedOnActiveCard = false;
+            if (!canOpen) return;
+        }
 
         const item = hunterPrideInterviewData.find(data => data.id === Number(card.dataset.interviewId));
         openModal(item);

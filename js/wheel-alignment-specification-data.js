@@ -1,11 +1,13 @@
 window.WHEEL_ALIGNMENT_DATA = {
     brands: [
-        { id: "hyundai", name: "Hyundai", type: "domestic", logoText: "HYUNDAI" },
-        { id: "kia", name: "Kia", type: "domestic", logoText: "KIA" },
-        { id: "gm-korea", name: "GM Korea", type: "domestic", logoText: "GM" },
-        { id: "chevrolet", name: "Chevrolet", type: "domestic", logoText: "CHEVROLET" },
-        { id: "renault-korea", name: "Renault Korea", type: "domestic", logoText: "RENAULT" },
-        { id: "kg-mobility", name: "KG Mobility", type: "domestic", logoText: "KGM" },
+        { id: "hyundai", name: "Hyundai", type: "domestic", logoText: "HYUNDAI", logo: "/images/standard/Hyundai.png" },
+        { id: "kia", name: "Kia", type: "domestic", logoText: "KIA", logo: "/images/standard/KIA.png" },
+        { id: "gm-korea", name: "GM Korea", type: "domestic", logoText: "GM", logo: "/images/standard/GM Korea.png" },
+        { id: "chevrolet", name: "Chevrolet", type: "domestic", logoText: "CHEVROLET", logo: "/images/standard/Chevrolet.png" },
+        { id: "renault-korea", name: "Renault Korea", type: "domestic", logoText: "RENAULT", logo: "/images/standard/Renault.png" },
+        { id: "renault", name: "Renault", type: "domestic", logoText: "RENAULT", logo: "/images/standard/Renault.png" },
+        { id: "kg-mobility", name: "KG Mobility (Ssangyong)", type: "domestic", logoText: "KGM" },
+        { id: "mini-ev", name: "Mini EV", type: "domestic", logoText: "MINI", logo: "/images/standard/MINI.png" },
 
         { id: "aston-martin", name: "Aston Martin", type: "import", logoText: "ASTON MARTIN" },
         { id: "audi", name: "Audi", type: "import", logoText: "AUDI" },
@@ -34,7 +36,6 @@ window.WHEEL_ALIGNMENT_DATA = {
         { id: "peugeot", name: "Peugeot", type: "import", logoText: "PEUGEOT" },
         { id: "polestar", name: "Polestar", type: "import", logoText: "POLESTAR" },
         { id: "porsche", name: "Porsche", type: "import", logoText: "PORSCHE" },
-        { id: "renault", name: "Renault", type: "import", logoText: "RENAULT" },
         { id: "rolls-royce", name: "Rolls-Royce", type: "import", logoText: "ROLLS-ROYCE" },
         { id: "saab", name: "SAAB", type: "import", logoText: "SAAB" },
         { id: "smart", name: "Smart", type: "import", logoText: "SMART" },

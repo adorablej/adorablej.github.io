@@ -53,7 +53,7 @@
     let selectedDate = isMypageView ? "" : formatDate(initialDate);
 
     function getInitialDate() {
-        if (isMypageView && trainingData.length) {
+        if (trainingData.length) {
             const firstTraining = [...trainingData].sort((a, b) => a.date.localeCompare(b.date))[0];
             return parseDate(firstTraining.date);
         }
@@ -73,13 +73,7 @@ function parseDate(dateString) {
     }
 
     function formatMonth(date) {
-        if (isMypageView) {
-            return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, "0")}`;
-        }
-        return new Intl.DateTimeFormat("en-US", {
-            year: "numeric",
-            month: "long"
-        }).format(date);
+        return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, "0")}`;
     }
 
     function formatSidebarDate(dateString) {
@@ -237,7 +231,7 @@ function parseDate(dateString) {
                         </div>
 
                         <div class="sub-training-modal-info">
-                            <span class="sub-training-modal-instructor">강사이름 : ${training.instructorName || "-"}</span>
+                            <span class="sub-training-modal-instructor">강사이름 : ${training.instructorName || "-"} / </span>
                             <span class="sub-training-modal-fee">${fee}</span>
                         </div>
                     </div>

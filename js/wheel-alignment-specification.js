@@ -9,9 +9,9 @@
     function loadRecent() {
         try {
             const saved = JSON.parse(localStorage.getItem(RECENT_STORAGE_KEY));
-            return Array.isArray(saved) ? saved.filter(Boolean).slice(0, 5) : ["아반떼", "쏘나타", "K5"];
+            return Array.isArray(saved) ? saved.filter(Boolean).slice(0, 5) : ["아반떼", "쏘나타"];
         } catch (error) {
-            return ["아반떼", "쏘나타", "K5"];
+            return ["아반떼", "쏘나타"];
         }
     }
 
@@ -70,7 +70,7 @@
             .filter((brand) => brand.type === type)
             .map((brand) => `
                 <button type="button" class="sub-specification-brand-card" data-brand-id="${brand.id}">
-                    <span class="sub-specification-brand-logo">${brand.logoText}</span>
+                    <span class="sub-specification-brand-logo">${brand.logo ? `<img src="${brand.logo}" alt="${brand.name}">` : brand.logoText}</span>
                     <span class="sub-specification-brand-name">${brand.name}</span>
                 </button>
             `).join("");
@@ -98,7 +98,7 @@
         if (brand) {
             html += `
                 <button type="button" class="sub-specification-selected-chip" data-remove="brand">
-                    <span class="sub-specification-selected-logo">${brand.logoText}</span>
+                    <span class="sub-specification-selected-logo">${brand.logo ? `<img src="${brand.logo}" alt="">` : brand.logoText}</span>
                     <strong>${brand.name}</strong>
                     <span class="sub-specification-chip-close" aria-hidden="true"></span>
                 </button>
@@ -263,13 +263,17 @@
         const result = rows[resultIndex];
         if (!brand || !model || !result || !Array.isArray(result.specifications) || !result.specifications.length) return;
 
-        elements.modalBrand.textContent = brand.logoText;
+        elements.modalBrand.innerHTML = brand.logo
+            ? `<img src="${brand.logo}" alt="${escapeHtml(brand.name)}">`
+            : escapeHtml(brand.logoText);
         elements.modalMeta.innerHTML = `
             <div><dt>제조사</dt><dd>${escapeHtml(brand.name)}</dd></div>
             <div><dt>모델명</dt><dd>${escapeHtml(result.modelName)}</dd></div>
-            <div><dt>세부명</dt><dd>${escapeHtml(result.model)}</dd></div>
-            <div><dt>연식</dt><dd>${escapeHtml(result.year)}</dd></div>
+            <div><dt>세부명</dt><dd>${escapeHtml(result.detail)}</dd></div>
             <div><dt>비고</dt><dd>${escapeHtml(result.note || "-")}</dd></div>
+            <div><dt>Maker</dt><dd>${escapeHtml(brand.name)}</dd></div>
+            <div><dt>Model</dt><dd>${escapeHtml(result.model)}</dd></div>
+            <div><dt>연식</dt><dd>${escapeHtml(result.year)}</dd></div>
         `;
         elements.modalImage.src = result.image || model.image || "/images/car_default.png";
         elements.modalImage.alt = result.modelName;
@@ -277,13 +281,25 @@
             this.onerror = null;
             this.src = "/images/car_default.png";
         };
-        elements.modalSpecs.innerHTML = result.specifications.map((item) => `
-            <tr>
-                <th><span>${escapeHtml(item.section)}</span> ${escapeHtml(item.label)}</th>
-                <td>${escapeHtml(item.value)}</td>
-                <td>${escapeHtml(item.min)} ~ ${escapeHtml(item.max)}</td>
-            </tr>
-        `).join("");
+        const sectionCounts = result.specifications.reduce((counts, item) => {
+            counts[item.section] = (counts[item.section] || 0) + 1;
+            return counts;
+        }, {});
+        const renderedSections = new Set();
+        elements.modalSpecs.innerHTML = result.specifications.map((item) => {
+            const sectionCell = renderedSections.has(item.section)
+                ? ""
+                : `<th rowspan="${sectionCounts[item.section]}" class="specification-modal-section">${escapeHtml(item.section)}</th>`;
+            renderedSections.add(item.section);
+            return `
+                <tr>
+                    ${sectionCell}
+                    <th>${escapeHtml(item.label)}</th>
+                    <td>${escapeHtml(item.value)}</td>
+                    <td>${escapeHtml(item.min)} ~ ${escapeHtml(item.max)}</td>
+                </tr>
+            `;
+        }).join("");
 
         const extraEntries = Object.entries(result.extra || {});
         elements.modalExtra.innerHTML = extraEntries.length ? `

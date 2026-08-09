@@ -18,9 +18,9 @@ const categorySwiper = new Swiper(".sub-category-slider", {
 
     breakpoints: {
         0: {
-            slidesOffsetBefore: 20,
-            slidesOffsetAfter: 20,
-            spaceBetween: 16,
+            slidesOffsetBefore: 25,
+            slidesOffsetAfter: 25,
+            spaceBetween: 20,
         },
 
         768: {
@@ -54,8 +54,8 @@ const dealerSwiper = new Swiper(".sub-dealer-slider", {
 
     breakpoints: {
         0: {
-            slidesPerView: 1.2,
-            spaceBetween: 16,
+            slidesPerView: 2,
+            spaceBetween: 8,
         },
 
         768: {
@@ -138,8 +138,10 @@ const prideSwiper = new Swiper(".sub-pride-slider", {
 
     breakpoints: {
         0: {
-            slidesPerView: 1.1,
+            slidesPerView: "auto",
             spaceBetween: 16,
+            slidesOffsetBefore: 25,
+            slidesOffsetAfter: 25,
         },
 
         768: {

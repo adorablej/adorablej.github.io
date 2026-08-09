@@ -7,10 +7,46 @@ function initFormComponents() {
     initPhoneInput();
     initTextareaCount();
     initCustomSelect();
+    initContactInquiryCategory();
 
     document.querySelectorAll("form[data-form]").forEach(form => {
         new FormValidator(form);
     });
+}
+
+/* ========================================
+Contact Inquiry Category
+======================================== */
+
+function initContactInquiryCategory() {
+    const form = document.querySelector("#contact-form");
+    const hidden = form?.querySelector('input[name="inquiry_category"]');
+    const select = hidden?.closest(".sub-form-select");
+
+    if (!select || !hidden) return;
+
+    const aliases = {
+        all: "all",
+        product: "purchase",
+        parts: "purchase",
+        purchase: "purchase",
+        service: "as",
+        as: "as",
+        installation: "transfer",
+        transfer: "transfer",
+        business: "business",
+        education: "training",
+        training: "training",
+    };
+    const params = new URLSearchParams(window.location.search);
+    const requestedCategory = (params.get("category") || params.get("type") || "all").toLowerCase();
+    const category = aliases[requestedCategory] || "all";
+    const option = [...select.querySelectorAll(".sub-form-select-option")]
+        .find(item => item.dataset.value === category);
+
+    if (option) {
+        selectOption(select, option, false);
+    }
 }
 
 /* ========================================
@@ -197,7 +233,7 @@ function closeAllSelects() {
     document.querySelectorAll(".sub-form-select.is-open").forEach(closeSelect);
 }
 
-function selectOption(select, option) {
+function selectOption(select, option, shouldFocus = true) {
     const trigger = select.querySelector(".sub-form-select-trigger");
     const value = select.querySelector(".sub-form-select-value");
     const hidden = select.querySelector('input[type="hidden"]');
@@ -233,7 +269,9 @@ function selectOption(select, option) {
     }
 
     closeSelect(select);
-    trigger?.focus();
+    if (shouldFocus) {
+        trigger?.focus();
+    }
 }
 
 /* ========================================

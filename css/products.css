@@ -495,6 +495,252 @@ Sub Pride Interview
     transform: scale(1.04);
 }
 
+@media (max-width: 720px) {
+    .page-heading:not(.page-heading--policy) {
+        margin-bottom: 0;
+    }
+
+    .sub-visual {
+        height: 160px;
+    }
+
+    .sub-visual-bg img {
+        object-position: center;
+    }
+
+    .sub-visual-content {
+        width: 100%;
+        padding: 0 25px;
+        box-sizing: border-box;
+    }
+
+    .sub-visual-content p {
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing:0;
+    }
+
+    .sub-product-category {
+        padding: 40px 0 56px;
+    }
+
+    .sub-product-category .inner {
+        width: 100%;
+        padding: 0 25px;
+        box-sizing: border-box;
+    }
+
+    .sub-section-heading {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .sub-section-title,
+    .sub-pride-title {
+        font-size: 26px;
+        line-height: 1;
+    }
+
+    .sub-pride-controls {
+        gap: 8px;
+    }
+
+    .sub-pride-button {
+        width: 34px;
+        height: 34px;
+    }
+
+    .sub-pride-button::before {
+        width: 7px;
+        height: 7px;
+        border-width: 1px;
+    }
+
+    .sub-category-slider .swiper-slide {
+        width: 280px !important;
+        flex-basis: 280px;
+    }
+
+    .sub-category-card {
+        height: 300px;
+        border-radius: 10px;
+    }
+
+    .sub-category-card-content {
+        padding: 44px 24px;
+    }
+
+    .sub-category-card-content h3 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        line-height: 1.05;
+    }
+
+    .sub-pride-dealer {
+        padding: 30px 25px 60px;
+    }
+
+    .sub-pride-dealer .inner {
+        width: 100%;
+    }
+
+    .sub-pride-dealer .sub-section-title {
+        margin-bottom: 20px;
+    }
+
+    .sub-dealer-main {
+        display: block;
+        min-height: 0;
+        border-radius: 10px;
+    }
+
+    .sub-dealer-main-image {
+        height: 270px;
+    }
+
+    .sub-dealer-main-info {
+        min-height: 300px;
+        padding: 30px 24px;
+        box-sizing: border-box;
+    }
+
+    .sub-dealer-area {
+        margin-bottom: 18px;
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+
+    .sub-dealer-name {
+        margin-bottom: 24px;
+        padding-bottom: 0;
+        border-bottom: 0;
+        font-size: 20px;
+    }
+
+    .sub-dealer-info-list {
+        gap: 16px;
+        margin-bottom: 26px;
+    }
+
+    .sub-dealer-info-list div {
+        grid-template-columns: 82px 1fr;
+    }
+
+    .sub-dealer-info-list dt,
+    .sub-dealer-info-list dd {
+        font-size: 14px;
+        line-height: 1.55;
+    }
+
+    .sub-dealer-map {
+        gap: 0;
+        padding-bottom: 4px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .sub-dealer-map-icon {
+        display: none;
+    }
+
+    .sub-dealer-slider-wrap {
+        margin-top: 24px;
+        padding: 0 42px;
+    }
+
+    .sub-dealer-thumb {
+        height: 82px;
+        border-radius: 8px;
+    }
+
+    .sub-dealer-slider-button {
+        width: 34px;
+        height: 34px;
+    }
+
+    .sub-dealer-prev {
+        left: 0;
+    }
+
+    .sub-dealer-next {
+        right: 0;
+    }
+
+    .sub-dealer-slider-button::before {
+        width: 7px;
+        height: 7px;
+        border-width: 1px;
+    }
+
+    .pt_60 {
+        padding-top: 24px;
+    }
+
+    .align-c > .sub-button-more {
+        min-width: 124px;
+        padding: 0 24px;
+        border-radius: 25px;
+        background: var(--red);
+        color: #fff;
+        font-size: 14px;
+        line-height: 48px;
+    }
+
+    .sub-pride-interview {
+        padding: 40px 0 70px;
+    }
+
+    .sub-pride-interview .inner {
+        width: 100%;
+    }
+
+    .sub-pride-heading {
+        padding: 0 25px;
+        margin-bottom: 30px;
+    }
+
+    .sub-pride-slider {
+        overflow: visible;
+    }
+
+    .sub-pride-item {
+        width: 280px !important;
+        flex: 0 0 280px;
+    }
+
+    .sub-pride-card {
+        border-radius: 10px;
+    }
+
+    .sub-pride-image {
+        height: 172px;
+    }
+
+    .sub-pride-content {
+        height: 188px;
+    }
+
+    .sub-pride-content h3 {
+        padding: 30px 24px 16px;
+        overflow: hidden;
+        font-size: 17px;
+        line-height: 1.35;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .sub-pride-content p {
+        display: -webkit-box;
+        padding: 0 24px 28px;
+        overflow: hidden;
+        color: #777;
+        font-size: 14px;
+        line-height: 1.55;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+    }
+}
+
 
 
 /* ========================================
@@ -2401,36 +2647,33 @@ products-HunterPride-Interview.html
     gap: calc(100vw * 16 / 1920);
 }
 
-.sub-pride-featured-slider {
+.sub-pride-featured-slider.swiper {
     position: relative;
     width: calc(100vw * 1300 / 1920);
     margin: 0 auto;
-    overflow: hidden;
+    overflow: visible;
     padding-bottom: calc(100vw * 110 / 1920);
 }
 
 .sub-pride-featured-stage {
-    position: relative;
     width: 100%;
-    transition: height .35s ease;
+    perspective: 1200px;
+    transform-style: preserve-3d;
 }
 
-.sub-pride-featured-card {
-    position: absolute;
-    top: 0;
-    left: 50%;
+.sub-pride-featured-slider .sub-pride-featured-card {
     display: block;
     width: calc(100vw * 700 / 1920);
+    height: auto;
     padding: 0;
     overflow: hidden;
     border: 0;
     border-radius: calc(100vw * 18 / 1920);
     background: #fff;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
     text-align: left;
-    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: transform .6s ease, opacity .3s ease, box-shadow .3s ease;
 }
 
 .sub-pride-featured-card::after {
@@ -2446,8 +2689,8 @@ products-HunterPride-Interview.html
 }
 
 .sub-pride-featured-card.is-active{
-box-shadow: 0 calc(100vw * 18 / 1920) calc(100vw * 42 / 1920) rgba(0, 0, 0, .14);
-transition:.05s;
+    z-index: 2;
+    box-shadow: 0 calc(100vw * 18 / 1920) calc(100vw * 42 / 1920) rgba(0, 0, 0, .14);
 }
 
 .sub-pride-featured-card.is-active::after {
@@ -2748,4 +2991,130 @@ transition:.05s;
 
 body.is-modal-open {
     overflow: hidden;
+}
+
+@media (max-width: 720px) {
+    .sub-pride-interview-page {
+        padding-top: 40px;
+    }
+
+    .sub-pride-interview-page > .inner,
+    .sub-pride-interview-list-inner {
+        width: 100%;
+        padding-right: 25px;
+        padding-left: 25px;
+        box-sizing: border-box;
+    }
+
+    .sub-pride-interview-head {
+        margin-bottom: 30px;
+    }
+
+    .sub-pride-interview-controls {
+        gap: 8px;
+    }
+
+    .sub-pride-featured-slider.swiper {
+        width: 100%;
+        padding-bottom: 50px;
+        overflow: hidden;
+    }
+
+    .sub-pride-featured-slider .sub-pride-featured-card {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .sub-pride-featured-card.is-active {
+        box-shadow: none;
+    }
+
+    .sub-pride-featured-image,
+    .sub-pride-interview-image {
+        height: 174px;
+    }
+
+    .sub-pride-play-button {
+        display: none;
+    }
+
+    .sub-pride-featured-content {
+        height: 150px;
+    }
+
+    .sub-pride-featured-content strong,
+    .sub-pride-interview-content strong {
+        margin-bottom: 12px;
+        padding: 24px 24px 0;
+        font-size: 20px;
+        line-height: 1.4;
+    }
+
+    .sub-pride-featured-content p,
+    .sub-pride-interview-content p {
+        padding: 0 24px 24px;
+        font-size: 14px;
+        line-height: 1.65;
+        letter-spacing: -0.04em;
+    }
+
+    .sub-pride-interview-list-section {
+        padding: 40px 0 65px;
+    }
+
+    .sub-pride-interview-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        padding-top: 30px;
+    }
+
+    .sub-pride-interview-card {
+        border-radius: 10px;
+    }
+
+    .sub-pride-interview-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .sub-pride-interview-content {
+        height: 150px;
+        padding: 0;
+    }
+
+    .sub-pride-more-button {
+        min-width: 124px;
+        height: 48px;
+        margin-top: 40px;
+        padding: 0 24px;
+        border: 0;
+        background: var(--red);
+        color: #fff;
+    }
+
+    .sub-pride-more-button span {
+        font-size: 14px;
+    }
+
+    .sub-pride-interview-modal {
+        padding: 20px;
+    }
+
+    .sub-pride-interview-modal-box {
+        width: 100%;
+        max-height: calc(100vh - 40px);
+    }
+
+    .sub-pride-interview-modal-content {
+        padding: 24px;
+    }
+
+    .sub-pride-interview-modal-content h4 {
+        font-size: 18px;
+    }
+
+    .sub-pride-interview-modal-content p,
+    .sub-pride-interview-modal-content time {
+        font-size: 14px;
+    }
 }

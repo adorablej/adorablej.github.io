@@ -34,20 +34,41 @@ const operationGuideMockYoutubeUrls = [
 
 let operationGuideMockId = 1;
 
+const operationGuideManuals = {
+    alignment: [
+        { product: "WinAlign®", title: "WinAlign® Quick Start Guide" },
+        { product: "WinAlign®", title: "WinAlign® Operations Manual" },
+        { product: "WinAlign®", title: "WinAlign® CE Operations Manual (International)" },
+        { product: "WinAlign®", title: "WinAlign® and ADASLink® Quick Start Guide" },
+        { product: "WinAlign® Heavy-Duty", title: "WinAlign® HD Operations Manual" },
+        { product: "WinAlign® Heavy-Duty", title: "WinAlign® HD CE Operations Manual (International)" },
+        { product: "ProAlign® 2", title: "ProAlign® 2 Quick Start Guide (English International)" },
+        { product: "ProAlign® 2", title: "ProAlign® 2 Operations Manual" },
+        { product: "ProAlign® 2", title: "ProAlign® 2 CE Operations Manual (International)" },
+        { product: "ProAlign® 2 Heavy-Duty", title: "ProAlign® 2 HD Operations Manual" },
+        { product: "ProAlign® 2 Heavy-Duty", title: "ProAlign® 2 HD CE Operations Manual" },
+        { product: "Other documents", title: "End User License Agreement" }
+    ]
+};
+
 // 관리자 API가 준비되면 이 배열을 API 응답으로 교체합니다.
 // 현재는 관리자에서 가이드 한 건을 등록한 것과 같은 평면 데이터 구조입니다.
 const operationGuideData = Object.entries(operationGuideCategories).flatMap(([category, categoryInfo]) => {
-    const manuals = categoryInfo.products.map((product, index) => ({
+    const manualItems = operationGuideManuals[category] || categoryInfo.products.map((product, index) => ({
+        product,
+        title: `${product} Operations Manual${index ? "" : " / Quick Start Guide"}`
+    }));
+    const manuals = manualItems.map(item => ({
         id: operationGuideMockId++,
         type: "manual",
         category,
-        product,
-        title: `${product} Operations Manual${index ? "" : " / Quick Start Guide"}`,
+        product: item.product,
+        title: item.title,
         fileUrl: "#",
         youtubeUrl: "",
         visible: true,
         featured: false,
-        description: `${product} 제품 매뉴얼 예시 데이터입니다.`
+        description: `${item.product} 제품 매뉴얼 예시 데이터입니다.`
     }));
 
     const videos = operationGuideMockYoutubeUrls.map((youtubeUrl, index) => {

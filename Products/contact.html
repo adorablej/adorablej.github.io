@@ -40,6 +40,9 @@
 </div>
 </section>
 <form class="sub-form-page sub-form-page-contact" id="contact-form" data-form novalidate>
+<div class="sub-form-contact-heading">
+<h2>CS 신청하기<span>.</span></h2>
+</div>
 <!-- Customer Information -->
 <section class="sub-form-section">
 <div class="inner">
@@ -67,9 +70,9 @@
 </div>
 <div class="sub-form-group">
 <label class="sub-form-label" for="phone-number">
-                                휴대폰 번호<span class="sub-form-required">*</span>
+                                휴대폰 번호
                             </label>
-<div class="sub-form-control"><input autocomplete="tel" class="sub-form-input" data-message="휴대폰 번호를 확인해주세요." data-pattern="^01[016789]-\d{3,4}-\d{4}$" data-phone data-required id="phone-number" inputmode="numeric" maxlength="13" name="user_phone" placeholder="휴대폰 번호를 입력해주세요." type="tel"/><span aria-hidden="true" class="sub-form-state"></span></div>
+<div class="sub-form-control"><input autocomplete="tel" class="sub-form-input" data-message="휴대폰 번호를 확인해주세요." data-pattern="^01[016789]-\d{3,4}-\d{4}$" data-phone id="phone-number" inputmode="numeric" maxlength="13" name="user_phone" placeholder="휴대폰 번호를 입력해주세요." type="tel"/><span aria-hidden="true" class="sub-form-state"></span></div>
 <p class="sub-form-message">
                                 휴대폰 번호를 확인해주세요.
                             </p>
@@ -128,48 +131,53 @@
 <h3>CS문의 내용<span>.</span></h3>
 </div>
 <div class="sub-form">
-<div class="sub-form-group">
+<div class="sub-form-group sub-form-category-group">
 <span class="sub-form-label">
-                                문의 유형
+                                문의 분류
                             </span>
 <div class="sub-form-select" data-select="">
 <button aria-expanded="false" aria-haspopup="listbox" class="sub-form-select-trigger" type="button">
-<span class="sub-form-select-value is-placeholder">
-                                        카테고리를 선택해 주세요.
+<span class="sub-form-select-value">
+                                        전체
                                     </span>
 <span aria-hidden="true" class="sub-form-select-arrow"></span>
 </button>
 <ul class="sub-form-select-options" role="listbox">
 <li>
-<button class="sub-form-select-option is-selected" data-value="" type="button">
-                                            카테고리를 선택해 주세요.
+<button class="sub-form-select-option is-selected" data-value="all" type="button">
+                                            전체
                                         </button>
 </li>
 <li>
-<button class="sub-form-select-option" data-value="product" type="button">
-                                            제품 문의
+<button class="sub-form-select-option" data-value="purchase" type="button">
+                                            제품/부품 구매
                                         </button>
 </li>
 <li>
-<button class="sub-form-select-option" data-value="service" type="button">
-                                            서비스 문의
+<button class="sub-form-select-option" data-value="as" type="button">
+                                            A/S 신청
                                         </button>
 </li>
 <li>
-<button class="sub-form-select-option" data-value="education" type="button">
-                                            교육 문의
+<button class="sub-form-select-option" data-value="transfer" type="button">
+                                            제품 이전 설치
                                         </button>
 </li>
 <li>
-<button class="sub-form-select-option" data-value="etc" type="button">
-                                            기타 문의
+<button class="sub-form-select-option" data-value="business" type="button">
+                                            업무협의
+                                        </button>
+</li>
+<li>
+<button class="sub-form-select-option" data-value="training" type="button">
+                                            교육문의(트레이닝 센터)
                                         </button>
 </li>
 </ul>
-<input data-message="문의 유형을 선택해주세요." data-required="" name="inquiry_category" type="hidden" value=""/>
+<input data-message="문의 분류를 선택해주세요." data-required="" name="inquiry_category" type="hidden" value="all"/>
 </div>
 <p class="sub-form-message">
-                                문의 유형을 선택해주세요.
+                                문의 분류를 선택해주세요.
                             </p>
 </div>
 <div class="sub-form-group">
@@ -196,6 +204,7 @@
                             </p>
 </div>
 <div class="sub-form-bottom">
+<div class="sub-form-privacy">
 <div class="sub-form-group sub-form-agree-group">
 <label class="sub-form-checkbox">
 <input data-message="개인정보 수집 및 이용에 동의해주세요." data-required="" id="agree-check" name="agree" type="checkbox"/>
@@ -206,11 +215,35 @@
 </label>
 <p class="sub-form-message">
                                     개인정보 수집 및 이용에 동의해주세요.
-                                </p>
+</p>
 </div>
+<div class="sub-form-privacy-content">
+<h4>개인정보 수집·이용에 대한 안내</h4>
+<p>㈜헌터코리아의 홈페이지는 고객의 문의를 처리하기 위해 다음과 같이 개인정보를 수집 및 이용하며, 고객의 개인정보를 안전하게 취급하는데 최선을 다하고 있습니다.</p>
+<div class="sub-form-privacy-table" role="table" aria-label="개인정보 수집 및 이용 안내">
+<div class="sub-form-privacy-row is-heading" role="row">
+<span role="columnheader">수집항목</span>
+<span role="columnheader">수집목적</span>
+<span role="columnheader">보유기간</span>
+</div>
+<div class="sub-form-privacy-row" role="row">
+<span role="cell">이메일 주소, 휴대폰 번호</span>
+<span role="cell">문의·요청·불편사항 확인 및 처리결과 회신</span>
+<span role="cell">3년간 보관 후 지체없이 파기</span>
+</div>
+</div>
+<ul>
+<li>위 동의를 거부할 권리가 있으며, 동의를 거부하실 경우 문의 처리 및 결과 회신이 제한됩니다.</li>
+<li>요구하지 않는 개인정보는 입력하지 않도록 주의해 주세요.</li>
+<li>더 자세한 내용이 대해서는 <a href="/privacy-policy.html">헌터코리아 개인정보 처리방침</a>을 참고해 주세요.</li>
+</ul>
+</div>
+</div>
+<div class="sub-form-submit-row">
 <button class="sub-form-submit" type="submit">
                                 문의접수
                             </button>
+</div>
 </div>
 </div>
 </div>

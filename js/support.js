@@ -28,8 +28,11 @@ function initOperationGuide() {
     const guideTabs = document.querySelectorAll("[data-guide-tab]");
     const modal = document.querySelector(".sub-guide-video-modal");
     const pageTitle = document.querySelector("[data-operation-guide-title] span");
-    let visibleVideoCount = 6;
+    let visibleVideoCount = window.matchMedia("(max-width: 720px)").matches ? 5 : 6;
     let destroyFeatured = null;
+    let pointerFeaturedVideo = null;
+    let pointerStartedOnActiveVideo = false;
+    let normalizeFeaturedVideoTimer = null;
 
     if (!guideContent || !guideTabs.length) return;
 
@@ -83,132 +86,100 @@ function initOperationGuide() {
     }
 
     function initFeaturedVideo() {
+        const slider = guideContent.querySelector(".sub-guide-video-featured-slider");
         const stage = guideContent.querySelector(".sub-guide-video-stage");
-        const cards = [...guideContent.querySelectorAll(".sub-guide-video-featured-card")];
         const prev = guideContent.querySelector(".sub-guide-video-prev");
         const next = guideContent.querySelector(".sub-guide-video-next");
-        if (!stage || cards.length !== 3) return () => {};
+        if (!slider || !stage || typeof Swiper === "undefined" || !stage.children.length) return () => {};
 
-        let index = 1;
-        let animating = false;
-
-        function positions() {
-            return {
-                left: (index - 1 + cards.length) % cards.length,
-                center: index,
-                right: (index + 1) % cards.length
-            };
-        }
-
-        function vars(position) {
-            const sideDistance = window.innerWidth * 370 / 1920;
-            const sideY = window.innerWidth * 40 / 1920;
-            if (position === "center") {
-                return { xPercent: -50, x: 0, y: 0, scale: 1, opacity: 1, zIndex: 5, visibility: "visible" };
-            }
-            return {
-                xPercent: -50,
-                x: position === "left" ? -sideDistance : sideDistance,
-                y: sideY,
-                scale: .8,
-                opacity: 1,
-                zIndex: 2,
-                visibility: "visible"
-            };
-        }
-
-        function updateHeight() {
-            const maxHeight = Math.max(...cards.map(card => card.offsetHeight));
-            stage.style.height = `${Math.ceil(maxHeight)}px`;
-        }
-
-        function applyState() {
-            const current = positions();
-            cards.forEach((card, cardIndex) => {
-                let position = "right";
-                if (cardIndex === current.left) position = "left";
-                if (cardIndex === current.center) position = "center";
-                card.classList.toggle("is-active", position === "center");
-                card.style.pointerEvents = "auto";
-                gsap.set(card, vars(position));
+        function setActiveCard(swiper) {
+            [...stage.children].forEach(card => {
+                card.classList.toggle("is-active", card.classList.contains("swiper-slide-active"));
             });
-            requestAnimationFrame(updateHeight);
         }
 
-        function move(direction) {
-            if (animating) return;
-            animating = true;
-            prev?.setAttribute("disabled", "");
-            next?.setAttribute("disabled", "");
 
-            const current = positions();
-            const outgoingIndex = direction > 0 ? current.left : current.right;
-            const centerIndex = current.center;
-            const incomingIndex = direction > 0 ? current.right : current.left;
-            const outgoingCard = cards[outgoingIndex];
-            const centerCard = cards[centerIndex];
-            const incomingCard = cards[incomingIndex];
-            const incomingPosition = direction > 0 ? "right" : "left";
-            const outgoingPosition = direction > 0 ? "left" : "right";
+        const featuredCount = stage.children.length > 1 ? stage.children.length / 3 : stage.children.length;
 
-            cards.forEach(card => card.classList.remove("is-active"));
-            incomingCard.classList.add("is-active");
+        function normalizePosition(swiper) {
+            setActiveCard(swiper);
+            if (featuredCount < 2) return;
+            if (swiper.activeIndex < featuredCount) swiper.slideTo(swiper.activeIndex + featuredCount, 0, false);
+            if (swiper.activeIndex >= featuredCount * 2) swiper.slideTo(swiper.activeIndex - featuredCount, 0, false);
+            setActiveCard(swiper);
+            swiper.navigation?.update();
+        }
 
-            const clone = outgoingCard.cloneNode(true);
-            const sideDistance = window.innerWidth * 370 / 1920;
-            const enterDistance = window.innerWidth * 170 / 1920;
-            const cloneExitX = direction > 0 ? -sideDistance - enterDistance : sideDistance + enterDistance;
-            const incomingStartX = direction > 0 ? sideDistance + enterDistance : -sideDistance - enterDistance;
+        function scheduleNormalize(swiper) {
+            setActiveCard(swiper);
+            window.clearTimeout(normalizeFeaturedVideoTimer);
+            normalizeFeaturedVideoTimer = window.setTimeout(() => normalizePosition(swiper), swiper.params.speed);
+        }
 
-            clone.removeAttribute("data-video-id");
-            clone.setAttribute("aria-hidden", "true");
-            clone.style.pointerEvents = "none";
-            stage.appendChild(clone);
-            gsap.set(clone, vars(outgoingPosition));
-            gsap.set(outgoingCard, { ...vars(incomingPosition), x: incomingStartX, zIndex: 1 });
-
-            gsap.timeline({
-                defaults: { duration: .6, ease: "power3.inOut", overwrite: true },
-                onComplete: () => {
-                    index = incomingIndex;
-                    clone.remove();
-                    applyState();
-                    animating = false;
-                    prev?.removeAttribute("disabled");
-                    next?.removeAttribute("disabled");
+        function applyCarouselEffect(swiper) {
+            swiper.slides.forEach(slide => {
+                if (window.innerWidth <= 720) {
+                    slide.style.transform = "";
+                    slide.style.zIndex = "";
+                    slide.style.opacity = "";
+                    slide.style.pointerEvents = "";
+                    return;
                 }
-            })
-                .to(clone, { x: cloneExitX, opacity: 0, scale: .74, duration: .48, ease: "power2.in" }, 0)
-                .to(centerCard, vars(outgoingPosition), 0)
-                .to(incomingCard, vars("center"), 0)
-                .to(outgoingCard, vars(incomingPosition), .08);
+                const progress = slide.progress;
+                const distance = Math.abs(progress);
+                const scale = Math.max(.6, 1 - distance * .2);
+                const limitedProgress = Math.max(-1, Math.min(1, progress));
+                const angle = limitedProgress * Math.PI * 55 / 180;
+                const radius = slide.swiperSlideSize * .62;
+                const slideCenter = slide.offsetLeft + slide.swiperSlideSize / 2;
+                const targetCenter = swiper.width / 2 + Math.sin(angle) * radius;
+                const translateX = targetCenter - slideCenter;
+                slide.style.transform = `translate3d(${translateX}px, 0, 0) scale(${scale})`;
+                slide.style.zIndex = String(100 - Math.round(distance));
+                slide.style.opacity = distance > 1.01 ? "0" : "1";
+                slide.style.pointerEvents = distance > 1.01 ? "none" : "auto";
+            });
         }
 
-        const onPrev = () => move(-1);
-        const onNext = () => move(1);
-        const onResize = () => { if (!animating) applyState(); };
-
-        prev?.addEventListener("click", onPrev);
-        next?.addEventListener("click", onNext);
-        cards.forEach((card, cardIndex) => {
-            card.addEventListener("click", event => {
-                if (card.classList.contains("is-active") || animating) return;
-                event.preventDefault();
-                event.stopPropagation();
-                const current = positions();
-                if (cardIndex === current.left) move(-1);
-                if (cardIndex === current.right) move(1);
+        function applyCarouselTransition(swiper, duration) {
+            swiper.slides.forEach(slide => {
+                slide.style.transitionDuration = `${duration}ms`;
             });
-            const image = card.querySelector("img");
-            if (image && !image.complete) image.addEventListener("load", updateHeight, { once: true });
-        });
-        window.addEventListener("resize", onResize);
-        applyState();
+        }
 
+        const featuredSwiper = new Swiper(slider, {
+            slidesPerView: 1,
+            centeredSlides: true,
+            initialSlide: featuredCount > 1
+                ? featuredCount + (window.matchMedia("(max-width: 720px)").matches ? 0 : Math.min(1, featuredCount - 1))
+                : 0,
+            speed: 600,
+            virtualTranslate: false,
+            grabCursor: true,
+            watchSlidesProgress: true,
+            slideToClickedSlide: true,
+            breakpoints: {
+                721: {
+                    slidesPerView: 1.86,
+                    virtualTranslate: true
+                }
+            },
+            navigation: {
+                prevEl: prev,
+                nextEl: next
+            },
+            on: {
+                init: setActiveCard,
+                setTranslate: applyCarouselEffect,
+                setTransition: applyCarouselTransition,
+                slideChangeTransitionStart: scheduleNormalize
+            }
+        });
+
+        setActiveCard(featuredSwiper);
         return () => {
-            prev?.removeEventListener("click", onPrev);
-            next?.removeEventListener("click", onNext);
-            window.removeEventListener("resize", onResize);
+            window.clearTimeout(normalizeFeaturedVideoTimer);
+            featuredSwiper.destroy(true, true);
         };
     }
 
@@ -220,7 +191,8 @@ function initOperationGuide() {
             destroyFeatured = null;
             return;
         }
-        const featured = videos.filter(video => video.featured).slice(0, 3);
+        const featured = videos.filter(video => video.featured);
+        const featuredSlides = featured.length > 1 ? [...featured, ...featured, ...featured] : featured;
         const list = videos.slice(0, visibleVideoCount);
 
         guideContent.innerHTML = `
@@ -232,10 +204,10 @@ function initOperationGuide() {
                         <button type="button" class="sub-guide-video-next sub-slider-button sub-slider-next" aria-label="다음 영상"></button>
                     </div>
                 </div>
-                <div class="sub-guide-video-featured-slider">
-                    <div class="sub-guide-video-stage">
-                        ${featured.map(video => `
-                            <button type="button" class="sub-guide-video-featured-card" data-video-id="${video.id}">
+                <div class="sub-guide-video-featured-slider swiper">
+                    <div class="sub-guide-video-stage swiper-wrapper">
+                        ${featuredSlides.map(video => `
+                            <button type="button" class="sub-guide-video-featured-card swiper-slide" data-video-id="${video.id}">
                                 <span class="sub-guide-video-featured-image">
                                     <img src="${getYoutubeThumbnail(video.youtube)}" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${getYoutubeId(video.youtube)}/hqdefault.jpg';" alt="${video.title}">
                                     ${playIcon()}
@@ -307,10 +279,22 @@ function initOperationGuide() {
         });
     });
 
+    guideContent.addEventListener("pointerdown", event => {
+        pointerFeaturedVideo = event.target.closest(".sub-guide-video-featured-card");
+        pointerStartedOnActiveVideo = pointerFeaturedVideo?.classList.contains("swiper-slide-active") || false;
+    });
+
     guideContent.addEventListener("click", event => {
         const videoButton = event.target.closest("[data-video-id]");
         if (videoButton) {
-            if (videoButton.classList.contains("sub-guide-video-featured-card") && !videoButton.classList.contains("is-active")) return;
+            if (videoButton.classList.contains("sub-guide-video-featured-card")) {
+                const canOpen = pointerFeaturedVideo === videoButton
+                    ? pointerStartedOnActiveVideo
+                    : videoButton.classList.contains("swiper-slide-active");
+                pointerFeaturedVideo = null;
+                pointerStartedOnActiveVideo = false;
+                if (!canOpen) return;
+            }
             const video = currentGuide.video.find(item => item.id === Number(videoButton.dataset.videoId));
             openVideoModal(video);
             return;
