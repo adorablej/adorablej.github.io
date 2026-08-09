@@ -23,28 +23,28 @@
         if (!scroll || !hero || !media || !images || !dim || !copy || !lines.length) return;
 
         const mobile = window.matchMedia("(max-width: 720px)").matches;
-        const mobileStartTop = mobile ? hero.getBoundingClientRect().top : 0;
-        const mobileLift = 60;
-        const mobileScale = mobile ? Math.max(window.innerWidth / hero.offsetWidth, (window.innerHeight + mobileLift * 2) / hero.offsetHeight) : 1;
-        const mobileCenterY = mobile ? window.innerHeight / 2 - (mobileStartTop + hero.offsetHeight / 2) - mobileLift : 0;
         gsap.set(copy, { xPercent: mobile ? -50 : 0, yPercent: -50, y: 30 });
+        gsap.set(lines, { color: "rgba(255, 255, 255, .35)" });
 
         const timeline = gsap.timeline({
             scrollTrigger: {
                 trigger: scroll,
-                start: mobile ? "top top+=" + mobileStartTop : "top top",
-                end: mobile ? "+=900" : "bottom bottom",
+                start: "top top",
+                end: "bottom bottom",
                 scrub: 1,
-                pin: mobile ? hero : false,
-                pinSpacing: false,
                 invalidateOnRefresh: true
             }
         });
 
         if (mobile) {
             timeline
-                .to(media, { scale: mobileScale, ease: "none" }, 0)
-                .to(hero, { y: mobileCenterY, ease: "none" }, 0);
+                .to(hero, {
+                    width: "100vw",
+                    height: "100vh",
+                    marginLeft: "-25px",
+                    ease: "none"
+                }, 0)
+                .to(images, { scale: 1.08, ease: "none" }, 0);
         } else {
             timeline
                 .to(hero, {
@@ -482,17 +482,22 @@
     function initHeroStory() {
         const hero = document.querySelector(".sub-standard-detail-hero");
         const media = document.querySelector(".sub-standard-detail-hero-media");
-        const preview = document.querySelector(".sub-standard-detail-hero-preview");
+        const preview = document.querySelectorAll(".sub-standard-detail-hero-preview");
         const video = document.querySelector(".sub-standard-detail-hero-video");
         const dim = document.querySelector(".sub-standard-detail-hero-dim");
         const copy = document.querySelector(".sub-standard-detail-hero-copy");
-        const lines = gsap.utils.toArray(".sub-standard-detail-hero-line");
+        const mobile = window.matchMedia("(max-width: 720px)").matches;
+        const lines = gsap.utils.toArray(".sub-standard-detail-hero-line").filter(function (line) {
+            return mobile
+                ? !line.classList.contains("pc-only")
+                : !line.classList.contains("mo-only");
+        });
 
-        if (!hero || !media || !preview || !dim || !copy || !lines.length) return;
+        if (!hero || !media || !preview.length || !dim || !copy || !lines.length) return;
 
         gsap.set(copy, { autoAlpha: 0, y: 30 });
         gsap.set(lines, { color: "rgba(255,255,255,.22)" });
-        if (video) gsap.set(video, { autoAlpha: 0, scale: 1.04 });
+        if (video && !mobile) gsap.set(video, { autoAlpha: 0, scale: 1.04 });
 
         const timeline = gsap.timeline({
             defaults: { ease: "none" },
@@ -511,6 +516,8 @@
             .to(media, {
                 width: "100vw",
                 height: "100vh",
+                top: "50%",
+                transform: "translate(-50%, -50%)",
                 duration: 1.05,
                 ease: "power2.inOut"
             }, "hero-expand")
@@ -520,7 +527,7 @@
                 ease: "power2.inOut"
             }, "hero-expand");
 
-        if (video) {
+        if (video && !mobile) {
             timeline
                 .to(video, {
                     autoAlpha: 1,
