@@ -1130,20 +1130,6 @@ sub page 공통
     font-size: calc(30 * var(--vw));
 }
 
-/* Policy pages */
-.page-heading--policy { padding-top:calc(250 * var(--vw)); padding-bottom:calc(70 * var(--vw)); margin-bottom:calc(70 * var(--vw)); }
-.page-heading--policy .page-title { font-family:inherit; font-size:calc(52 * var(--vw)); font-weight:700; line-height:1.25; letter-spacing:-.04em; }
-.policy-content { padding-bottom:calc(160 * var(--vw)); background:#fff; }
-.policy-content__inner { width:calc(1300 * var(--vw)); max-width:calc(100% - 80px); margin:0 auto; }
-.policy-text { color:#333; font-size:calc(15 * var(--vw)); font-weight:400; line-height:1.9; white-space:pre-wrap; word-break:keep-all; overflow-wrap:break-word; }
-@media (max-width:768px) {
-    .page-heading--policy { padding:140px 0 46px; margin-bottom:50px; }
-    .page-heading--policy .page-title { font-size:38px; }
-    .policy-content { padding-bottom:100px; }
-    .policy-content__inner { max-width:calc(100% - 40px); }
-    .policy-text { font-size:14px; line-height:1.8; word-break:break-word; }
-}
-
 .breadcrumb li {
     position: relative;
 
@@ -1289,6 +1275,45 @@ color: #555;
     white-space: pre-wrap;
     word-break: keep-all;
     overflow-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+    .page-heading--policy {
+        margin-bottom: 40px;
+        padding: 128px 0 30px;
+    }
+
+    .page-heading--policy .inner {
+        width: auto;
+        max-width: none;
+        margin: 0;
+        padding: 0 25px;
+        box-sizing: border-box;
+    }
+
+    .page-heading--policy .page-title {
+        font-size: 30px;
+        line-height: 38px;
+    }
+
+    .policy-content {
+        padding-bottom: 70px;
+    }
+
+    .policy-content__inner {
+        width: auto;
+        max-width: none;
+        margin: 0;
+        padding: 0 25px;
+        box-sizing: border-box;
+    }
+
+    .policy-text {
+        font-size: 14px;
+        line-height: 24px;
+        word-break: keep-all;
+        overflow-wrap: anywhere;
+    }
 }
 
 
@@ -2467,8 +2492,9 @@ Mobile Common Layout
 
     .footer_address,
     .footer_copyright {
-        font-size: 14px;
+        font-size: 12px;
         line-height: 20px;
+        letter-spacing: -.03em;
     }
 
     .footer_divider {
@@ -2482,10 +2508,11 @@ Mobile Common Layout
     .footer_menu li:not(:last-child)::after {
         height: 10px;
         margin: 0 4px;
+        background: #7a7a7a;
     }
 
     .footer_menu a {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .footer_watermark {

@@ -606,19 +606,61 @@ overflow-y: visible;
     padding: 0 0 calc(120 * var(--vw));
 }
 
+.sub-awards-hero-scroll {
+    position: relative;
+    height: 220vh;
+}
+
 .sub-awards-hero {
+    position: sticky;
+    top: 0;
     width: 100%;
     height: calc(740 * var(--vw));
     margin: 0;
-    overflow: hidden;
+    overflow: visible;
 }
 
-.sub-awards-hero img {
+.sub-awards-hero-media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    transform-origin: center;
+    will-change: transform;
+}
+
+.sub-awards-hero-media img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+.sub-awards-hero-dim {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    background: rgba(0, 0, 0, .52);
+    opacity: 0;
+}
+
+.sub-awards-hero-copy {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: calc(190 * var(--vw));
+    margin: 0;
+    color: rgba(255, 255, 255, .35);
+    font-size: calc(34 * var(--vw));
+    font-weight: 600;
+    line-height: 1.55;
+    letter-spacing: -.035em;
+    opacity: 0;
+}
+
+.sub-awards-hero-copy span {
+    display: block;
+    color: inherit;
 }
 
 .sub-awards-feature-list {
@@ -1968,6 +2010,11 @@ History 연도별 1920 시안 좌표
    - Mobile breakpoint: 720px
 ========================================================= */
 @media (max-width: 720px) {
+    .sub-usa-scroll > .page-heading {
+        margin-bottom: 0;
+        padding: 82px 0 18px;
+    }
+
     .sub-partners-directory {
         padding: 40px 0 60px;
     }
@@ -2028,5 +2075,128 @@ History 연도별 1920 시안 좌표
         font-size: 11px;
         line-height: 14px;
         letter-spacing: -.025em;
+    }
+
+    .sub-awards-inner {
+        width: auto;
+        margin: 0;
+        padding: 0 25px;
+        box-sizing: border-box;
+    }
+
+    .sub-awards-intro {
+        padding-bottom: 70px;
+    }
+
+    .sub-awards-hero {
+        position: relative;
+        top: auto;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 310 / 460;
+    }
+
+    .sub-awards-hero img {
+        object-position: center;
+    }
+
+    .sub-awards-hero-scroll {
+        height: calc(100vh + 900px);
+        margin-top: 30px;
+    }
+
+    .sub-awards-hero-copy {
+        left: 50%;
+        width: calc(100% - 50px);
+        font-size: 26px;
+        line-height: 38px;
+        text-align: center;
+    }
+
+    .sub-awards-feature-list {
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .sub-awards-feature,
+    .sub-awards-feature-reverse {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        border-radius: 8px;
+    }
+
+    .sub-awards-feature-reverse .sub-awards-feature-media,
+    .sub-awards-feature-reverse .sub-awards-feature-content {
+        order: initial;
+    }
+
+    .sub-awards-feature-media {
+        width: 100%;
+        height: 210px;
+    }
+
+    .sub-awards-feature-media img {
+        max-width: 76%;
+        max-height: 150px;
+    }
+
+    .sub-awards-feature-content,
+    .sub-awards-feature-reverse .sub-awards-feature-content {
+        width: 100%;
+        padding: 0 20px 30px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    .sub-awards-feature-content h3 {
+        margin-bottom: 18px;
+        font-size: 20px;
+        line-height: 25px;
+    }
+
+    .sub-awards-feature-content p {
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: -.03em;
+    }
+
+    .sub-awards-excellence {
+        padding: 0 0 70px;
+    }
+
+    .sub-awards-excellence .sub-section-sm-title {
+        margin-bottom: 40px;
+        font-size: 26px;
+        line-height: 31px;
+    }
+
+    .sub-awards-grid {
+        display: block;
+    }
+
+    .sub-awards-card + .sub-awards-card {
+        margin-top: 44px;
+    }
+
+    .sub-awards-card:nth-child(n + 7) {
+        display: none;
+    }
+
+    .sub-awards-card-image {
+        width: 200px;
+        height: 200px;
+        margin-bottom: 22px;
+    }
+
+    .sub-awards-card h3 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .sub-awards-card p {
+        margin-top: 12px;
+        font-size: 14px;
+        line-height: 20px;
     }
 }

@@ -7,7 +7,7 @@
     <link href="/css/common.css" rel="stylesheet" />
     <link href="/css/layout.css" rel="stylesheet" />
     <link href="/css/common-form.css" rel="stylesheet" />
-    <link href="/css/account.css?v=20260808-2" rel="stylesheet" />
+    <link href="/css/account.css?v=20260809-1" rel="stylesheet" />
     <link href="/css/responsive.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -40,9 +40,12 @@
                                 <button class="sub-account-phone-code-button" id="phone-auth-button" type="button">코드 요청</button>
                             </div>
                             <div class="sub-account-phone-code-area" id="join-phone-code-area" hidden>
-                                <div class="sub-account-code-input-wrap">
-                                    <input class="sub-form-input sub-account-input" id="join-phone-code" name="phoneCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="인증코드 입력" />
-                                    <span class="sub-account-code-timer" id="join-phone-timer">09:59</span>
+                                <div class="sub-account-phone-code-row">
+                                    <div class="sub-account-code-input-wrap">
+                                        <input class="sub-form-input sub-account-input" id="join-phone-code" name="phoneCode" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="인증코드 입력" />
+                                        <span class="sub-account-code-timer" id="join-phone-timer">09:59</span>
+                                    </div>
+                                    <button class="sub-account-phone-code-button" id="join-phone-confirm" type="button">확인</button>
                                 </div>
                                 <div class="sub-account-code-feedback">
                                     <p class="sub-account-code-status" id="phone-auth-status" hidden aria-live="polite"></p>
@@ -118,6 +121,9 @@
                         <div class="sub-form-group sub-account-field sub-account-business-number-field">
                             <label class="sub-account-label sub-account-required" for="business-number">사업자등록번호</label>
                             <input class="sub-form-input sub-account-input" id="business-number" name="businessNumber" type="text" inputmode="numeric" maxlength="10" placeholder="(-) 제외한 숫자만 입력해 주세요." data-required data-message="사업자등록번호를 입력해 주세요." />
+                            <button class="sub-account-line-button sub-account-line-button-under" id="business-auth-button" type="button">사업자 인증</button>
+                            <input id="business-authenticated" type="hidden" value="" data-required data-message="사업자 인증을 진행해 주세요." />
+                            <p class="sub-account-helper" id="business-auth-status" aria-live="polite"></p>
                             <p class="sub-form-message sub-account-error" aria-live="polite"></p>
                         </div>
 
@@ -142,9 +148,6 @@
                         <div class="sub-form-group sub-account-field sub-account-representative-field">
                             <label class="sub-account-label sub-account-required" for="representative-name">대표자명</label>
                             <input class="sub-form-input sub-account-input" id="representative-name" name="representativeName" type="text" placeholder="대표자명을 입력해 주세요." data-required data-message="대표자명을 입력해 주세요." />
-                            <button class="sub-account-line-button sub-account-line-button-under" id="business-auth-button" type="button">사업자 인증</button>
-                            <input id="business-authenticated" type="hidden" value="" data-required data-message="사업자 인증을 진행해 주세요." />
-                            <p class="sub-account-helper" id="business-auth-status" aria-live="polite"></p>
                             <p class="sub-form-message sub-account-error" aria-live="polite"></p>
                         </div>
 
@@ -200,7 +203,7 @@
     <script src="/js/include.js"></script>
     <script src="/js/common.js"></script>
     <script src="/js/form.js"></script>
-    <script src="/js/account.js?v=20260808-3"></script>
+    <script src="/js/account.js?v=20260809-1"></script>
     <script src="/js/policy-data.js"></script>
     <script src="/js/policy.js"></script>
 </body>

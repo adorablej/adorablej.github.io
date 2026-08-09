@@ -198,7 +198,6 @@ function initOperationGuide() {
         guideContent.innerHTML = `
             <section class="sub-guide-video-feature">
                 <div class="sub-guide-video-head">
-                    <h4 class="sub-guide-video-heading">Featured Video<span>.</span></h4>
                     <div class="sub-guide-video-controls sub-slider-controls">
                         <button type="button" class="sub-guide-video-prev sub-slider-button sub-slider-prev" aria-label="이전 영상"></button>
                         <button type="button" class="sub-guide-video-next sub-slider-button sub-slider-next" aria-label="다음 영상"></button>

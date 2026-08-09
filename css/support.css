@@ -122,22 +122,10 @@ Equipment Operation Guide : Video
     margin-bottom: calc(100vw * 52 / 1920);
 }
 
-.sub-guide-video-heading {
-    margin: 0;
-    color: #000;
-    font-family: "Russo One", sans-serif;
-    font-size: calc(100vw * 40 / 1920);
-    font-weight: 400;
-    line-height: 1;
-}
-
-.sub-guide-video-heading span {
-    color: var(--red);
-}
-
 .sub-guide-video-controls {
     display: flex;
     gap: calc(100vw * 16 / 1920);
+    margin-left: auto;
 }
 
 .sub-guide-video-featured-slider.swiper {
@@ -2821,10 +2809,6 @@ Training Program : Mobile
 
     .sub-guide-video-head {
         margin-bottom: 30px;
-    }
-
-    .sub-guide-video-heading {
-        font-size: 26px;
     }
 
     .sub-guide-video-controls {

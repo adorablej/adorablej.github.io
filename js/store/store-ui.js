@@ -10,12 +10,14 @@
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
 
+    const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
+
     const getStoreMarkerIcon = () => ({
         url: "/images/icon/store-marker.png",
-        size: new naver.maps.Size(48, 58),
-        scaledSize: new naver.maps.Size(48, 58),
+        size: new naver.maps.Size(isMobile() ? 32 : 48, isMobile() ? 39 : 58),
+        scaledSize: new naver.maps.Size(isMobile() ? 32 : 48, isMobile() ? 39 : 58),
         origin: new naver.maps.Point(0, 0),
-        anchor: new naver.maps.Point(24, 58)
+        anchor: new naver.maps.Point(isMobile() ? 16 : 24, isMobile() ? 39 : 58)
     });
 
     const PRODUCT_ICON_PATHS = {
@@ -71,7 +73,7 @@
                 center: new naver.maps.LatLng(37.4563, 126.7052),
                 zoom: 9,
                 minZoom: 6,
-                zoomControl: true,
+                zoomControl: !isMobile(),
                 zoomControlOptions: { position: naver.maps.Position.TOP_RIGHT }
             });
             return true;
@@ -171,7 +173,7 @@
             this.detail.querySelector(".sub-pride-store-products ul").innerHTML = (store.products || []).map(product => `
                 <li>
                     <span class="sub-pride-product-icon" aria-hidden="true" style="background-image:url('${encodeURI(getProductIconPath(product.category))}')"></span>
-                    <p>${escapeHtml(product.category)}<strong>${escapeHtml(product.name)}</strong></p>
+                    <p><strong>${escapeHtml(product.category)}</strong><span>${escapeHtml(product.name)}</span></p>
                 </li>
             `).join("");
             this.detail.classList.add("is-open");

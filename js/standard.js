@@ -8,7 +8,66 @@
 
         initIntroMotion();
         initStoryMotion();
+        initAwardsHero();
         initHeaderTheme();
+    }
+
+    function initAwardsHero() {
+        const scroll = document.querySelector(".sub-awards-hero-scroll");
+        const hero = scroll && scroll.querySelector(".sub-awards-hero");
+        const media = hero && hero.querySelector(".sub-awards-hero-media");
+        const images = hero && hero.querySelectorAll("img");
+        const dim = hero && hero.querySelector(".sub-awards-hero-dim");
+        const copy = hero && hero.querySelector(".sub-awards-hero-copy");
+        const lines = copy && copy.querySelectorAll("span");
+        if (!scroll || !hero || !media || !images || !dim || !copy || !lines.length) return;
+
+        const mobile = window.matchMedia("(max-width: 720px)").matches;
+        const mobileStartTop = mobile ? hero.getBoundingClientRect().top : 0;
+        const mobileLift = 60;
+        const mobileScale = mobile ? Math.max(window.innerWidth / hero.offsetWidth, (window.innerHeight + mobileLift * 2) / hero.offsetHeight) : 1;
+        const mobileCenterY = mobile ? window.innerHeight / 2 - (mobileStartTop + hero.offsetHeight / 2) - mobileLift : 0;
+        gsap.set(copy, { xPercent: mobile ? -50 : 0, yPercent: -50, y: 30 });
+
+        const timeline = gsap.timeline({
+            scrollTrigger: {
+                trigger: scroll,
+                start: mobile ? "top top+=" + mobileStartTop : "top top",
+                end: mobile ? "+=900" : "bottom bottom",
+                scrub: 1,
+                pin: mobile ? hero : false,
+                pinSpacing: false,
+                invalidateOnRefresh: true
+            }
+        });
+
+        if (mobile) {
+            timeline
+                .to(media, { scale: mobileScale, ease: "none" }, 0)
+                .to(hero, { y: mobileCenterY, ease: "none" }, 0);
+        } else {
+            timeline
+                .to(hero, {
+                    width: "100vw",
+                    height: "100vh",
+                    marginLeft: "calc(50% - 50vw)",
+                    ease: "none"
+                }, 0)
+                .to(images, { scale: 1.12, ease: "none" }, 0);
+        }
+
+        timeline
+            .to(dim, { opacity: 1, ease: "none" }, .3)
+            .to(copy, { opacity: 1, y: 0, ease: "none" }, .38);
+
+        lines.forEach(function (line, index) {
+            const position = .58 + index * .16;
+            timeline.to(line, {
+                color: "#fff",
+                duration: .12,
+                ease: "none"
+            }, position);
+        });
     }
 
     function initIntroMotion() {

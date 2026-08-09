@@ -14,9 +14,9 @@ window.MOCK_STORES = [
         longitude: 127.0286,
         image: "",
         products: [
-            { category: "휠 얼라인먼트 시스템", name: "HawkEye Elite Premium" },
-            { category: "휠 얼라인먼트 시스템", name: "HawkEye Elite Premium" },
-            { category: "휠 얼라인먼트 시스템", name: "HawkEye Elite Premium" }
+            { category: "Alignment Systems", name: "Hawkeye Elite Premium" },
+            { category: "Wheel Balancers", name: "Product name" },
+            { category: "Tire Changers", name: "Product name" }
         ]
     },
     {

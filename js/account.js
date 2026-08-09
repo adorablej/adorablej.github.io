@@ -121,6 +121,7 @@
             status.textContent = '';
             code.disabled = false;
             codeGroup.classList.remove('is-error');
+            codeGroup.classList.remove('is-verified');
             submitButton.textContent = '확인';
             submitButton.disabled = code.value.length !== 6 || remainingSeconds <= 0;
         });
@@ -142,6 +143,7 @@
             status.className = 'sub-account-code-status';
             status.textContent = '';
             codeGroup.classList.remove('is-error');
+            codeGroup.classList.remove('is-verified');
             submitButton.textContent = '확인';
             submitButton.disabled = true;
             showStep('code');
@@ -155,6 +157,7 @@
             status.hidden = true;
             status.textContent = '';
             codeGroup.classList.remove('is-error');
+            codeGroup.classList.remove('is-verified');
             submitButton.textContent = '확인';
             submitButton.disabled = true;
             startTimer();
@@ -188,6 +191,8 @@
                 status.hidden = false;
                 status.className = 'sub-account-code-status is-error';
                 status.textContent = '인증번호가 틀립니다.';
+                codeGroup.classList.add('is-error');
+                codeGroup.classList.remove('is-verified');
                 code.focus();
                 code.select();
                 return;
@@ -200,6 +205,7 @@
             status.className = 'sub-account-code-status is-success';
             status.textContent = '인증되었습니다.';
             codeGroup.classList.remove('is-error');
+            codeGroup.classList.add('is-verified');
             submitButton.textContent = '로그인';
             submitButton.disabled = false;
             form.dispatchEvent(new CustomEvent('phoneLoginVerified', {
@@ -398,6 +404,7 @@
         var requestButton = document.getElementById('phone-auth-button');
         var codeArea = document.getElementById('join-phone-code-area');
         var code = document.getElementById('join-phone-code');
+        var confirmButton = document.getElementById('join-phone-confirm');
         var timer = document.getElementById('join-phone-timer');
         var status = document.getElementById('phone-auth-status');
         var resend = document.getElementById('join-phone-resend');
@@ -430,6 +437,7 @@
             authenticated.value = '';
             code.disabled = false;
             code.value = '';
+            confirmButton.disabled = true;
             codeArea.hidden = Boolean(hideCodeArea);
             requestButton.textContent = '코드 요청';
             requestButton.disabled = false;
@@ -449,6 +457,7 @@
                 if (remainingSeconds <= 0) {
                     stopTimer();
                     code.disabled = true;
+                    confirmButton.disabled = true;
                     setStatus('error', '인증시간이 만료되었습니다.');
                 }
             }, 1000);
@@ -468,7 +477,8 @@
             codeArea.hidden = false;
             code.disabled = false;
             code.value = '';
-            requestButton.textContent = '코드 재요청';
+            confirmButton.disabled = true;
+            requestButton.textContent = '코드 요청';
             resend.hidden = false;
             group.classList.remove('is-verified');
             setStatus('', '');
@@ -490,8 +500,7 @@
             authenticated.value = 'true';
             authenticated.dispatchEvent(new Event('change', { bubbles: true }));
             code.disabled = true;
-            requestButton.textContent = '인증 완료';
-            requestButton.disabled = true;
+            confirmButton.disabled = true;
             resend.hidden = true;
             group.classList.add('is-verified');
             clearFieldState(group);
@@ -500,11 +509,12 @@
 
         requestButton.addEventListener('click', requestCode);
         resend.addEventListener('click', requestCode);
+        confirmButton.addEventListener('click', verifyCode);
 
         code.addEventListener('input', function () {
             code.value = code.value.replace(/\D/g, '').slice(0, 6);
             if (status.classList.contains('is-error')) setStatus('', '');
-            if (code.value.length === 6) verifyCode();
+            confirmButton.disabled = code.value.length !== 6 || remainingSeconds <= 0;
         });
 
         phone.addEventListener('input', function () {
