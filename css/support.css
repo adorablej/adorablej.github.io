@@ -2704,19 +2704,6 @@ Training Program : Mobile
         line-height: 22px;
     }
 
-    .page-heading:has([data-operation-guide-title]) {
-        margin-bottom: 0;
-        padding: 68px 0 14px;
-    }
-
-    .page-heading:has([data-operation-guide-title]) .page-title {
-        font-size: 26px;
-    }
-
-    .page-heading:has([data-operation-guide-title]) .page-title span {
-        color: var(--red);
-    }
-
     .sub-operation-guide {
         padding: 20px 0 70px;
     }
