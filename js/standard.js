@@ -129,6 +129,18 @@
         // USA 상세 페이지의 H 폭(3000 * --vw)과 동일한 크기.
         // story H의 기본 폭은 500 * --vw이므로 6배가 같은 실제 폭이다.
         const detailHScale = 6;
+        const storyLogoScale = function () {
+            return window.innerWidth <= 720 ? 2.02 : 1;
+        };
+        const storyDetailY = function () {
+            return window.innerWidth <= 720 ? window.innerHeight * -0.23 : 0;
+        };
+        const partnersExpandedScale = function () {
+            return window.innerWidth <= 720 ? 3.83 : 2.02;
+        };
+        const partnersExpandedY = function () {
+            return window.innerHeight * (window.innerWidth <= 720 ? 0.31 : 0.49);
+        };
 
         gsap.set(copyUsa, {
             autoAlpha: 0,
@@ -153,7 +165,7 @@
             yPercent: -50,
             x: 0,
             y: 0,
-            scale: 1,
+            scale: storyLogoScale,
             autoAlpha: 1
         });
 
@@ -161,7 +173,7 @@
             xPercent: -50,
             yPercent: -50,
             x: function () { return vw(-1.45); },
-            y: 0,
+            y: storyDetailY,
             scale: detailHScale,
             autoAlpha: 0
         });
@@ -171,7 +183,7 @@
             yPercent: -50,
             x: 0,
             y: function () { return window.innerHeight * 1.08; },
-            scale: 2.02,
+            scale: partnersExpandedScale,
             autoAlpha: 0
         });
 
@@ -206,7 +218,7 @@
             if (direction < 0) {
                 gsap.set(partnersScene, {
                     y: function () { return window.innerHeight * 1.08; },
-                    scale: 2.02,
+                    scale: partnersExpandedScale,
                     autoAlpha: 0
                 });
                 gsap.set(partnersImage, { opacity: 0 });
@@ -222,8 +234,8 @@
                 .to(partnersSolid, { opacity: 0, duration: 0.16 }, 0.03)
                 .to(partnersRed, { opacity: 0, scaleX: 0.78, duration: 0.16 }, 0.03)
                 .to(partnersScene, {
-                    y: function () { return window.innerHeight * 0.49; },
-                    scale: 2.02,
+                    y: partnersExpandedY,
+                    scale: partnersExpandedScale,
                     duration: 0.98,
                     ease: "power3.out"
                 }, 0)
@@ -246,7 +258,7 @@
                 }, "final")
                 .to(partnersScene, {
                     y: 0,
-                    scale: 1,
+                    scale: storyLogoScale,
                     duration: 1,
                     ease: "power2.inOut"
                 }, "final+=0.04")
@@ -299,7 +311,7 @@
             .to({}, { duration: 0.5 })
             .to(usaScene, {
                 x: function () { return vw(0.708333); },
-                y: 0,
+                y: storyDetailY,
                 scale: detailHScale,
                 duration: 1.08,
                 ease: "power2.inOut"
@@ -608,6 +620,34 @@
         const items = Array.from(document.querySelectorAll(".sub-usa-trust-item"));
         if (!items.length) return;
 
+        if (window.matchMedia("(max-width: 720px)").matches) {
+            items.forEach(function (item, index) {
+                item.classList.remove("is-active");
+                item.classList.add("is-copy-visible");
+                gsap.set(item, { clearProps: "flex-basis,width" });
+
+                gsap.fromTo(item,
+                    {
+                        autoAlpha: 0,
+                        y: 40
+                    },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: .7,
+                        delay: index * .06,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 86%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
+            return;
+        }
+
         let activeItem = items.find(function (item) {
             return item.classList.contains("is-active");
         }) || items[0];
@@ -679,6 +719,8 @@
     }
 
     function initValueMotions() {
+        const motionDistance = window.matchMedia("(max-width: 720px)").matches ? 7 : 4;
+
         gsap.utils.toArray(".sub-usa-value").forEach(function (section) {
             const copy = section.querySelector(".sub-usa-value-copy");
             const mask = section.querySelector(".sub-usa-h-mask");
@@ -696,11 +738,11 @@
             // H는 숨김/등장 없이 현재 위치에서 좌우로만 아주 살짝 이동
             gsap.fromTo(mask,
                 {
-                    xPercent: fromLeft ? -4 : 4,
+                    xPercent: fromLeft ? -motionDistance : motionDistance,
                     autoAlpha: 1
                 },
                 {
-                    xPercent: fromLeft ? 4 : -4,
+                    xPercent: fromLeft ? motionDistance : -motionDistance,
                     autoAlpha: 1,
                     ease: "none",
                     scrollTrigger: {

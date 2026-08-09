@@ -1375,14 +1375,6 @@ overflow-y: visible;
         box-sizing: border-box;
     }
 
-    .sub-partners-category-link:nth-child(2) {
-        opacity: 1;
-    }
-
-    .sub-partners-category-link:nth-child(2) .sub-partners-category-badge {
-        background: var(--red);
-        opacity: 1;
-    }
 }
 
 .sub-partners-directory {
@@ -2033,6 +2025,7 @@ History 연도별 1920 시안 좌표
    - Mobile breakpoint: 720px
 ========================================================= */
 @media (max-width: 720px) {
+    .sub-standard-scroll > .page-heading,
     .sub-usa-scroll > .page-heading,
     .sub-standard-detail-scroll > .page-heading {
         margin-bottom: 0;
@@ -2481,5 +2474,390 @@ History 연도별 1920 시안 좌표
         margin-top: 10px;
         font-size: 14px;
         line-height: 19px;
+    }
+
+    .sub-History-page .sub-history-center-copy {
+        z-index: 4;
+    }
+
+    .sub-History-page .sub-history-lead {
+        padding: 37px 0 78px;
+    }
+
+    .sub-History-page > .sub-standard-detail-hero {
+        height: 150vh;
+    }
+
+    .sub-History-page .sub-history-lead::after {
+        bottom: 0;
+        width: 2px;
+        height: 78px;
+    }
+
+    .sub-History-page .sub-history-lead-image {
+        width: 244px;
+        height: 137px;
+    }
+
+    .sub-History-page .sub-history-center-line {
+        display: block;
+        width: 2px;
+        height: 50%;
+    }
+
+    .sub-History-page .sub-history-center-copy {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: none;
+    }
+
+    .sub-History-page .sub-history-timeline-sticky {
+        height: 100vh;
+    }
+
+    .sub-History-page .sub-history-center-year {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 30px;
+        transform: translate(-50%, -50%);
+    }
+
+    .sub-History-page .sub-history-center-copy .sub-history-center-content {
+        top: auto;
+        bottom: 35px;
+        left: 50%;
+        width: calc(100vw - 50px);
+        padding-right: 0;
+        padding-left: 0;
+        text-align: center;
+        transform: translateX(-50%);
+    }
+
+    .sub-History-page .sub-history-center-title {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .sub-History-page .sub-history-center-description {
+        margin-top: 12px;
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .sub-History-page .sub-history-era-image {
+        z-index: 2;
+    }
+
+    .sub-History-page .sub-history-timeline-sticky::after {
+        content: "";
+        position: absolute;
+        z-index: 3;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 48%;
+        background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, .86) 52%, #fff 100%);
+        pointer-events: none;
+    }
+
+    .sub-History-page .sub-history-finale-copy {
+        width: calc(100% - 50px);
+        margin: 40px auto 0;
+    }
+
+    .sub-History-page .sub-history-finale-copy strong {
+        font-size: 30px;
+    }
+
+    .sub-History-page .sub-history-finale-copy h2 {
+        margin-top: 18px;
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .sub-History-page .sub-history-finale-copy p {
+        margin-top: 12px;
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .sub-usa-page .sub-usa-trust {
+        height: auto;
+        min-height: 0;
+        padding: 40px 25px;
+        box-sizing: border-box;
+    }
+
+    .sub-usa-page .sub-usa-trust > .sub-usa-inner {
+        position: relative;
+        top: auto;
+        display: block;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+    }
+
+    .sub-usa-page .sub-usa-trust .sub-section-sm-heading {
+        margin-bottom: 28px;
+        text-align: left;
+    }
+
+    .sub-usa-page .sub-usa-trust .sub-section-sm-heading h2 {
+        font-size: 26px;
+        line-height: 31px;
+    }
+
+    .sub-usa-page .sub-usa-trust .sub-section-sm-heading p {
+        display: none;
+    }
+
+    .sub-usa-page .sub-usa-trust-list {
+        display: block;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+    }
+
+    .sub-usa-page .sub-usa-trust-item,
+    .sub-usa-page .sub-usa-trust-item.is-active {
+        display: block;
+        width: 100% !important;
+        height: auto;
+        min-height: 0;
+        border: 0;
+        overflow: visible;
+    }
+
+    .sub-usa-page .sub-usa-trust-item + .sub-usa-trust-item {
+        margin-top: 40px;
+    }
+
+    .sub-usa-page .sub-usa-trust-item img {
+        position: relative;
+        inset: auto;
+        display: block;
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .sub-usa-page .sub-usa-trust-dim {
+        display: none;
+    }
+
+    .sub-usa-page .sub-usa-trust-copy,
+    .sub-usa-page .sub-usa-trust-item:not(.is-active) .sub-usa-trust-copy {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        width: 100%;
+        height: auto;
+        margin-top: 12px;
+        color: #111;
+        overflow: visible;
+        text-align: left;
+        transform: none;
+    }
+
+    .sub-usa-page .sub-usa-trust-item .sub-usa-trust-copy strong {
+        position: static;
+        display: block;
+        color: var(--red);
+        font-family: "Russo One", sans-serif;
+        font-size: 22px;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -.11px;
+        text-align: left;
+        transform: none;
+    }
+
+    .sub-usa-page .sub-usa-trust-copy h3,
+    .sub-usa-page .sub-usa-trust-copy p {
+        position: static;
+        width: 100%;
+        max-width: none;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .sub-usa-page .sub-usa-trust-copy h3 {
+        margin-top: 4px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .sub-usa-page .sub-usa-trust-copy p {
+        margin-top: 8px;
+        color: #777;
+        font-size: 14px;
+        line-height: 20px;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+    }
+
+    .sub-usa-page .sub-usa-value {
+        height: auto;
+        min-height: 0;
+        padding: 40px 25px;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .sub-usa-page .sub-usa-value > .sub-usa-inner,
+    .sub-usa-page .sub-usa-value-layout,
+    .sub-usa-page .sub-usa-value-layout-reverse {
+        position: relative;
+        top: auto;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        padding-top: 375px;
+        overflow: visible;
+        box-sizing: border-box;
+    }
+
+    .sub-usa-page .sub-usa-h-mask,
+    .sub-usa-page .sub-usa-value-history .sub-usa-h-mask,
+    .sub-usa-page .sub-usa-value-awards .sub-usa-h-mask,
+    .sub-usa-page .sub-usa-value-korea .sub-usa-h-mask {
+        position: absolute;
+        top: 0;
+        width: 562px;
+        margin: 0;
+        transform: none;
+    }
+
+    .sub-usa-page .sub-usa-value-history .sub-usa-h-mask,
+    .sub-usa-page .sub-usa-value-korea .sub-usa-h-mask {
+        right: -356px;
+        left: auto;
+    }
+
+    .sub-usa-page .sub-usa-value-awards .sub-usa-h-mask {
+        right: auto;
+        left: -356px;
+    }
+
+    .sub-usa-page .sub-usa-value-copy,
+    .sub-usa-page .sub-usa-value-history .sub-usa-value-copy,
+    .sub-usa-page .sub-usa-value-awards .sub-usa-value-copy,
+    .sub-usa-page .sub-usa-value-korea .sub-usa-value-copy {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        transform: none;
+    }
+
+    .sub-usa-page .sub-usa-value-copy h2 {
+        font-size: 23px;
+        line-height: 28px;
+        letter-spacing: -.03em;
+    }
+
+    .sub-usa-page .sub-usa-value-copy p {
+        max-width: none;
+        margin: 14px 0 20px;
+        font-size: 14px;
+        line-height: 20px;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+    }
+
+    .sub-standard-page .sub-standard-main-visual,
+    .sub-standard-page .sub-standard-intro {
+        height: 100vh;
+        min-height: 680px;
+    }
+
+    .sub-standard-page .sub-standard-main-title {
+        width: calc(100% - 50px);
+    }
+
+    .sub-standard-page .sub-standard-main-title::after {
+        width: 240px;
+        height: 2px;
+    }
+
+    .sub-standard-page .sub-standard-main-title strong,
+    .sub-standard-page .sub-standard-main-title span {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .sub-standard-page .sub-standard-main-title span {
+        margin-top: 10px;
+    }
+
+    .sub-standard-page .sub-standard-intro-content {
+        width: calc(100% - 50px);
+    }
+
+    .sub-standard-page .sub-standard-intro-content h2 {
+        font-size: 22px;
+        line-height: 28px;
+    }
+
+    .sub-standard-page .sub-standard-intro-content p {
+        margin-top: 30px;
+        font-size: 14px;
+        line-height: 22px;
+        word-break: keep-all;
+    }
+
+    .sub-standard-page .sub-standard-story-sticky {
+        min-height: 0;
+    }
+
+    .sub-standard-page .sub-standard-story {
+        height: 600vh;
+    }
+
+    .sub-standard-page .sub-standard-story-copy {
+        width: calc(100% - 50px);
+    }
+
+    .sub-standard-page .sub-standard-story-copy-usa,
+    .sub-standard-page .sub-standard-story-copy-korea {
+        top: 78%;
+        right: auto;
+        left: 25px;
+    }
+
+    .sub-standard-page .sub-standard-story-copy-partners {
+        top: 27%;
+        left: 50%;
+        width: calc(100% - 50px);
+    }
+
+    .sub-standard-page .sub-standard-story-copy h2 {
+        font-size: 23px;
+        line-height: 28px;
+        letter-spacing: -.03em;
+    }
+
+    .sub-standard-page .sub-standard-story-copy p {
+        margin: 14px 0 20px;
+        font-size: 14px;
+        line-height: 20px;
+        word-break: keep-all;
+    }
+
+    .sub-standard-page .sub-standard-h-scene {
+        width: 94px;
+    }
+
+    .sub-standard-page .sub-standard-h-red {
+        bottom: -12px;
+        width: 78px;
+        height: 7px;
     }
 }
