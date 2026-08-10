@@ -14,6 +14,7 @@
 
 /* Sidebar */
 .sub-mypage-sidebar { align-self: start; }
+.sub-mypage-mobile-menu { display: none; }
 .sub-mypage-user-card {
     padding: calc(24 * var(--vw)) calc(20 * var(--vw));
     border-radius: calc(8 * var(--vw));
@@ -905,6 +906,8 @@ body.is-modal-open {
 .sub-mypage-order-history-head { display:flex; align-items:center; justify-content:space-between; gap:calc(30 * var(--vw)); }
 .sub-mypage-order-history-head strong { color:#111; font-size:calc(15 * var(--vw)); font-weight:700; }
 .sub-mypage-order-history-head em { color:var(--red); font-style:normal; }
+.sub-mypage-order-meta,
+.sub-mypage-order-total { display: inline; }
 .sub-mypage-status.is-request { background:#38c99b; }
 .sub-mypage-status.is-confirm { background:var(--red); }
 .sub-mypage-status.is-order-complete { background:#d8d8d8; }
@@ -1095,10 +1098,264 @@ body.is-modal-open {
 body.is-mypage-home-modal-open { overflow: hidden; }
 
 @media (max-width: 768px) {
-    .sub-mypage-home-training-modal { padding: 20px; }
-    .sub-mypage-home-modal-dialog { width: 100%; }
-    .sub-mypage-home-modal-visual { min-height: 220px; height: 42vw; }
-    .sub-mypage-home-modal-body { padding: 28px 22px; }
-    .sub-mypage-home-modal-actions { flex-direction: column-reverse; }
-    .sub-mypage-home-modal-actions button { width: 100%; min-width: 0; height: 52px; }
+    .sub-mypage-home-training-modal { padding: 25px; }
+    .sub-mypage-home-modal-dim { background: rgba(0, 0, 0, .58); }
+    .sub-mypage-home-modal-dialog {
+        width: 310px;
+        max-width: 100%;
+        max-height: calc(100vh - 50px);
+    }
+    .sub-mypage-home-modal-close {
+        top: 15px;
+        right: 15px;
+        width: 28px;
+        height: 28px;
+        background: transparent;
+    }
+    .sub-mypage-home-modal-close::before,
+    .sub-mypage-home-modal-close::after { width: 20px; height: 1.5px; }
+    .sub-mypage-home-modal-visual {
+        min-height: 0;
+        height: 150px;
+        background: #ddd;
+    }
+    .sub-mypage-home-modal-body { padding: 25px 22px 25px; }
+    .sub-mypage-home-modal-summary { padding-bottom: 20px; }
+    .sub-mypage-home-modal-summary > strong { font-size: 16px; line-height: 1.35; }
+    .sub-mypage-home-modal-summary p {
+        gap: 7px;
+        margin-top: 8px;
+        font-size: 13px;
+        line-height: 1.35;
+    }
+    .sub-mypage-home-modal-summary i { width: 10px; height: 10px; }
+    .sub-mypage-home-modal-actions {
+        flex-direction: row;
+        gap: 10px;
+        margin-top: 25px;
+    }
+    .sub-mypage-home-modal-actions button {
+        flex: 1 1 0;
+        width: auto;
+        min-width: 0;
+        height: 44px;
+        padding: 0 10px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+}
+
+/* ========================================
+   My Page Home - Mobile
+======================================== */
+@media (max-width: 767px) {
+    html { scrollbar-gutter: auto; }
+    .sub-mypage-home-page { overflow-x: hidden; }
+    .sub-mypage-page .page-heading:not(.page-heading--policy) {
+        margin-bottom: 34px;
+        padding-top: 107px;
+    }
+    .sub-mypage-page .page-heading:not(.page-heading--policy) .page-title {
+        font-size: 30px;
+        line-height: 1.2;
+    }
+    .sub-mypage-section { padding-bottom: 72px; }
+    .sub-mypage-inner {
+        display: block;
+        width: 100vw;
+        max-width: none;
+        margin: 0;
+        padding: 0 25px;
+        box-sizing: border-box;
+    }
+    .sub-mypage-sidebar { display: block; }
+    .sub-mypage-sidebar .sub-mypage-nav { display: none; }
+    .sub-mypage-user-card {
+        min-height: 102px;
+        padding: 26px 25px;
+        border-radius: 10px;
+        background: #f5f5f5;
+        box-sizing: border-box;
+    }
+    .sub-mypage-user-card p { font-size: 16px; line-height: 1.35; }
+    .sub-mypage-user-row { margin-top: 4px; }
+    .sub-mypage-user-row strong { font-size: 18px; }
+    .sub-mypage-user-row a { font-size: 14px; }
+    .sub-mypage-mobile-menu { display: block; margin: 20px 0 46px; }
+    .sub-mypage-mobile-menu label { display: none; }
+    .sub-mypage-mobile-menu select {
+        width: 100%;
+        height: 60px;
+        padding: 0 46px 0 18px;
+        border: 1px solid #ddd;
+        border-radius: 0;
+        background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23111' stroke-width='1.4'/%3E%3C/svg%3E") calc(100% - 18px) 50% / 10px auto no-repeat;
+        color: #222;
+        font-family: inherit;
+        font-size: 16px;
+        appearance: none;
+        box-sizing: border-box;
+    }
+    .sub-mypage-content { width: 100%; }
+    .sub-mypage-info-section + .sub-mypage-info-section { margin-top: 64px; }
+    .sub-mypage-section-title,
+    .sub-mypage-block-heading h3 {
+        font-size: 20px;
+        line-height: 1.3;
+        letter-spacing: -.035em;
+    }
+    .sub-mypage-section-title { padding-bottom: 18px; border-bottom-color: #222; }
+    .sub-mypage-info-list { padding: 14px 0 15px; }
+    .sub-mypage-info-list > div {
+        grid-template-columns: 130px minmax(0, 1fr);
+        min-height: 47px;
+        padding: 7px 0;
+        box-sizing: border-box;
+    }
+    .sub-mypage-info-list dt,
+    .sub-mypage-info-list dd { font-size: 14px; line-height: 1.45; }
+    .sub-mypage-info-list dt { font-weight: 600; }
+
+    .sub-mypage-home-page .sub-mypage-block { margin-top: 54px; }
+    .sub-mypage-block-heading { padding-bottom: 13px; }
+    .sub-mypage-block-heading a { font-size: 14px; text-underline-offset: 2px; }
+
+    .sub-mypage-product-slider-wrap { padding: 0; }
+    .sub-mypage-product-slider { overflow: visible !important; }
+    .sub-mypage-product-card {
+        position: relative;
+        align-items: center;
+        width: 175px !important;
+        height: auto !important;
+        min-height: 229px !important;
+        text-align: center;
+    }
+    .sub-mypage-home-page .sub-mypage-product-card .sub-mypage-product-image {
+        flex-shrink: 0;
+        height: 175px;
+        border-radius: 10px;
+    }
+    .sub-mypage-product-image img { max-width: 82%; max-height: 82%; }
+    .sub-mypage-product-card > strong {
+        position: absolute;
+        top: 190px;
+        left: 50%;
+        flex-shrink: 0;
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.2;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
+    .sub-mypage-product-card > span {
+        position: absolute;
+        top: 213px;
+        left: 50%;
+        flex-shrink: 0;
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.2;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
+    .sub-mypage-slider-button { display: none; }
+
+    .sub-mypage-home-order-history { padding: 0 0 30px; border-top: 1px solid #222; }
+    .sub-mypage-order-history-head { align-items: center; gap: 12px; padding: 34px 0 36px; }
+    .sub-mypage-order-history-head strong { max-width: 205px; font-size: 16px; line-height: 1.5; }
+    .sub-mypage-order-meta,
+    .sub-mypage-order-total { display: block; white-space: nowrap; }
+    .sub-mypage-status { min-width: 88px; height: 35px; padding: 0 14px; font-size: 14px; box-sizing: border-box; }
+    .sub-mypage-order-history-body { margin-top: 0; }
+    .sub-mypage-order-history-item {
+        display: grid;
+        grid-template-columns: 100px minmax(0, 1fr);
+        gap: 25px;
+        min-height: 0;
+        padding: 30px 0 0;
+        border-top: 1px solid #eee;
+    }
+    .sub-mypage-order-history-item + .sub-mypage-order-history-item { margin-top: 0; }
+    .sub-mypage-order-history-image { align-self: start; height: 100px; }
+    .sub-mypage-order-history-info { display: block; padding: 28px 0 0; border-bottom: 0; }
+    .sub-mypage-order-history-info > strong { font-size: 16px; line-height: 1.35; white-space: nowrap; }
+    .sub-mypage-order-history-info > span { margin-top: 7px; font-size: 14px; white-space: nowrap; }
+    .sub-mypage-order-history-info dl {
+        grid-column: 1 / -1;
+        width: calc(100% + 125px);
+        margin: 58px 0 0 -125px;
+        padding: 13px 0;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        box-sizing: border-box;
+    }
+    .sub-mypage-order-history-info dl > div { grid-template-columns: 120px 1fr; min-height: 37px; padding: 8px 0; box-sizing: border-box; }
+    .sub-mypage-order-history-info dt,
+    .sub-mypage-order-history-info dd { font-size: 14px; }
+    .sub-mypage-order-history-info small { color: #aaa; }
+    .sub-mypage-order-history .sub-mypage-order-toggle {
+        height: 54px;
+        margin: 30px 0 0;
+        gap: 16px;
+        font-size: 16px;
+    }
+    .sub-mypage-order-history .sub-mypage-order-toggle i {
+        width: 16px;
+        height: 16px;
+    }
+    .sub-mypage-order-history .sub-mypage-order-toggle i::before {
+        top: 50%;
+        width: 8px;
+        height: 8px;
+        border-width: 0 1.5px 1.5px 0;
+    }
+    .sub-mypage-order-history.is-collapsed .sub-mypage-order-toggle i::before {
+        transform: translate(-50%, -70%) rotate(45deg);
+    }
+    .sub-mypage-order-history:not(.is-collapsed) .sub-mypage-order-toggle i::before {
+        transform: translate(-50%, -25%) rotate(225deg);
+    }
+
+    .sub-mypage-training-block { margin-top: 58px !important; }
+    .sub-mypage-table-wrap { border-top: 1px solid #222; }
+    .sub-mypage-table,
+    .sub-mypage-table tbody,
+    .sub-mypage-table tr,
+    .sub-mypage-table td { display: block; width: 100%; }
+    .sub-mypage-table thead { display: none; }
+    .sub-mypage-table tr { padding: 19px 0 20px; border-bottom: 1px solid #ddd; }
+    .sub-mypage-table td {
+        position: relative;
+        height: auto;
+        min-height: 35px;
+        padding: 7px 0 7px 130px;
+        border: 0;
+        font-size: 14px;
+        line-height: 1.45;
+        text-align: left;
+    }
+    .sub-mypage-table td::before {
+        position: absolute;
+        left: 0;
+        top: 7px;
+        color: #222;
+        font-weight: 600;
+    }
+    .sub-mypage-table td:nth-child(1)::before { content: '수강일자'; }
+    .sub-mypage-table td:nth-child(2)::before { content: '수강제목'; }
+    .sub-mypage-table td:nth-child(3)::before { content: '수강상태'; }
+    .sub-mypage-table tr {
+        min-height: 222px;
+        padding: 24px 0 30px;
+        box-sizing: border-box;
+    }
+    .sub-mypage-table td:nth-child(4) { padding: 18px 0 0; }
+    .sub-mypage-table td:nth-child(4)::before { display: none; }
+    .sub-mypage-home-page .sub-mypage-table .sub-button-more {
+        min-width: 83px;
+        height: 45px;
+        padding: 0 18px;
+        font-size: 14px;
+        line-height: 43px;
+    }
 }

@@ -95,6 +95,21 @@
                     </nav>
                 </aside>
 
+                <div class="sub-mypage-mobile-menu">
+                    <label for="mypage-mobile-menu">마이페이지 메뉴</label>
+                    <select id="mypage-mobile-menu" aria-label="마이페이지 메뉴" onchange="if (this.value) window.location.href=this.value">
+                        <option value="/Mypage/mypage.html" selected>마이페이지 홈</option>
+                        <option value="/Mypage/account.html">계정/회원정보 관리</option>
+                        <option value="/Mypage/cs-request.html">CS 신청하기</option>
+                        <option value="/Mypage/products.html">나의 제품 관리</option>
+                        <option value="/Mypage/parts-list.html">전체 부품 목록</option>
+                        <option value="/Mypage/cart.html">장바구니</option>
+                        <option value="/Mypage/order-list.html">부품 주문 신청 내역</option>
+                        <option value="/Mypage/training-apply.html">트레이닝 수강 신청</option>
+                        <option value="/Mypage/training-history.html">트레이닝 수강 이력</option>
+                    </select>
+                </div>
+
                 <div class="sub-mypage-content">
                     <section class="sub-mypage-info-section">
                         <h3 class="sub-mypage-section-title">계정/회원정보</h3>
@@ -126,24 +141,24 @@
                             <div class="swiper sub-mypage-product-slider">
                                 <div class="swiper-wrapper">
                                     <article class="swiper-slide sub-mypage-product-card">
-                                        <div class="sub-mypage-product-image"><img src="/images/mypage/product_01.png" alt="HawkEye Elite Premium"></div>
+                                        <div class="sub-mypage-product-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="HawkEye Elite Premium"></div>
                                         <strong>Product name</strong>
-                                        <span>설치일 : 2026.07.07</span>
+                                        <span>설치일 :2026.07.15</span>
                                     </article>
                                     <article class="swiper-slide sub-mypage-product-card">
-                                        <div class="sub-mypage-product-image"><img src="/images/mypage/product_02.png" alt="HawkEye Elite Premium"></div>
+                                        <div class="sub-mypage-product-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="HawkEye Elite Premium"></div>
                                         <strong>Product name</strong>
-                                        <span>설치일 : 2026.07.07</span>
+                                        <span>설치일 :2026.07.15</span>
                                     </article>
                                     <article class="swiper-slide sub-mypage-product-card">
-                                        <div class="sub-mypage-product-image"><img src="/images/mypage/product_03.png" alt="HawkEye Elite Premium"></div>
+                                        <div class="sub-mypage-product-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="HawkEye Elite Premium"></div>
                                         <strong>Product name</strong>
-                                        <span>설치일 : 2026.07.07</span>
+                                        <span>설치일 :2026.07.15</span>
                                     </article>
                                     <article class="swiper-slide sub-mypage-product-card">
-                                        <div class="sub-mypage-product-image"><img src="/images/mypage/product_04.png" alt="HawkEye Elite Premium"></div>
+                                        <div class="sub-mypage-product-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="HawkEye Elite Premium"></div>
                                         <strong>Product name</strong>
-                                        <span>설치일 : 2026.07.07</span>
+                                        <span>설치일 :2026.07.15</span>
                                     </article>
                                 </div>
                             </div>
@@ -162,13 +177,16 @@
                         <div class="sub-mypage-list-region" data-mypage-list data-item-selector=".sub-mypage-order-history">
                         <article class="sub-mypage-order-history sub-mypage-home-order-history" data-order-card>
                             <div class="sub-mypage-order-history-head">
-                                <strong>2026.06.10 / 총 2개 주문 / 총금액 <em>000,000,000원</em></strong>
+                                <strong>
+                                    <span class="sub-mypage-order-meta">2026.06.10 / 총 2개 주문</span>
+                                    <span class="sub-mypage-order-total">총금액 <em>000,000,000원</em></span>
+                                </strong>
                                 <span class="sub-mypage-status is-request">주문 신청</span>
                             </div>
                             <div class="sub-mypage-order-history-body">
-                                <div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/mypage/part_01.png" alt="부품 이름 Text text text"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div>
-                                <div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/mypage/part_01.png" alt="부품 이름 Text text text"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div>
-                                <div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/mypage/part_01.png" alt="부품 이름 Text text text"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div>
+                                <div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="부품 이름 Text text text"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div>
+                                <div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="부품 이름 Text text text"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div>
+                                <div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="부품 이름 Text text text"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div>
                             </div>
                             <button type="button" class="sub-mypage-order-toggle" aria-expanded="true">
                                 <span>총 3건 주문 접기</span><i aria-hidden="true"></i>

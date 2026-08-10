@@ -1344,6 +1344,7 @@ Detail Main Features
     font-size: calc(18 * var(--vw));
     line-height: calc(30 * var(--vw));
     letter-spacing: -1px;
+    word-break: keep-all;
 }
 
 

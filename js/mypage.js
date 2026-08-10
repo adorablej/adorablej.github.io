@@ -53,7 +53,7 @@ function initMypageProductSlider() {
             nextEl: ".sub-mypage-product-next"
         },
         breakpoints: {
-            0: { slidesPerView: 1 },
+            0: { slidesPerView: "auto", spaceBetween: 15 },
             768: { slidesPerView: 2 },
             1200: { slidesPerView: 3 }
         }
