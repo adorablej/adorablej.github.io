@@ -89,20 +89,7 @@
 </div>
 </nav>
 </aside>
-<div class="sub-mypage-mobile-menu">
-<label for="mypage-mobile-menu">마이페이지 메뉴</label>
-<select id="mypage-mobile-menu" aria-label="마이페이지 메뉴" onchange="if (this.value) window.location.href=this.value">
-<option value="/Mypage/mypage.html">마이페이지 홈</option>
-<option value="/Mypage/account.html">계정/회원정보 관리</option>
-<option value="/Mypage/cs-request.html" selected>CS 신청하기</option>
-<option value="/Mypage/products.html">나의 제품 관리</option>
-<option value="/Mypage/parts-list.html">전체 부품 목록</option>
-<option value="/Mypage/cart.html">장바구니</option>
-<option value="/Mypage/order-list.html">부품 주문 신청 내역</option>
-<option value="/Mypage/training-apply.html">트레이닝 수강 신청</option>
-<option value="/Mypage/training-history.html">트레이닝 수강 이력</option>
-</select>
-</div>
+<div data-include="/includes/mypage-mobile-menu.html" data-include-selector=".sub-mypage-mobile-menu" data-include-mode="replace"></div>
 <div class="sub-mypage-content">
 <div class="sub-mypage-cs">
 <h3 class="sub-mypage-cs-title">CS 신청하기</h3>
@@ -157,11 +144,11 @@
 <i class="sub-form-select-arrow" aria-hidden="true"></i>
 </button>
 <ul class="sub-form-select-options">
-<li><button type="button" class="sub-form-select-option" data-value="product">제품 문의</button></li>
-<li><button type="button" class="sub-form-select-option" data-value="as">A/S 문의</button></li>
-<li><button type="button" class="sub-form-select-option" data-value="parts">부품 문의</button></li>
-<li><button type="button" class="sub-form-select-option" data-value="training">트레이닝 문의</button></li>
-<li><button type="button" class="sub-form-select-option" data-value="etc">기타 문의</button></li>
+<li><button type="button" class="sub-form-select-option" data-value="purchase">제품/부품 구매</button></li>
+<li><button type="button" class="sub-form-select-option" data-value="as">A/S 신청</button></li>
+<li><button type="button" class="sub-form-select-option" data-value="transfer">제품 이전 설치</button></li>
+<li><button type="button" class="sub-form-select-option" data-value="business">업무협의</button></li>
+<li><button type="button" class="sub-form-select-option" data-value="training">교육문의(트레이닝 센터)</button></li>
 </ul>
 <input type="hidden" name="category" data-required data-message="문의 분류를 선택해주세요.">
 </div>
@@ -191,20 +178,7 @@
 </label>
 <p class="sub-form-message"></p>
 </div>
-<div class="sub-mypage-cs-privacy-content">
-<h5>개인정보 수집·이용에 대한 안내</h5>
-<p>주)헌터코리아(이하 “회사”)는 고객의 문의를 처리하기 위해 다음과 같이 개인정보를 수집 및 이용하며, 고객의 개인정보를 안전하게 취급하는데 최선을 다하고 있습니다.</p>
-<table>
-<caption class="blind">개인정보 수집·이용 항목</caption>
-<thead><tr><th>수집항목</th><th>수집목적</th><th>보유기간</th></tr></thead>
-<tbody><tr><td>이메일 주소, 휴대폰 번호</td><td>문의·요청·불편사항 확인 및 처리결과 회신</td><td>3년간 보관 후 지체없이 파기</td></tr></tbody>
-</table>
-<ul>
-<li>위 동의를 거부할 권리가 있으며, 동의를 거부하실 경우 문의 처리 및 결과 회신이 제한됩니다.</li>
-<li>요구하지 않은 개인정보는 입력하지 않도록 주의해 주세요.</li>
-<li>더 자세한 내용에 대해서는 <a href="/privacy.html">헌터코리아의 개인정보처리방침</a>을 참고해 주세요.</li>
-</ul>
-</div>
+<div class="sub-mypage-cs-privacy-content sub-form-privacy-content" data-include="/includes/privacy-inquiry.html" data-include-selector="#privacy-inquiry-content"></div>
 </div>
 <div class="sub-mypage-cs-submit">
 <button type="submit" class="sub-form-submit">문의접수</button>

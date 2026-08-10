@@ -127,12 +127,90 @@ html {
     font-weight: 400;
     font-style: normal;}
 
+/* Common pagination */
+.sub-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(28 * var(--vw));
+    margin-top: calc(70 * var(--vw));
+}
+
+.sub-pagination > a,
+.sub-pagination > button:not(.sub-pagination-arrow) {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #aaa;
+    font-size: calc(16 * var(--vw));
+    cursor: pointer;
+}
+
+.sub-pagination > a.is-active,
+.sub-pagination > button.is-active {
+    color: var(--red);
+    font-weight: 700;
+}
+
+.sub-pagination-arrow {
+    position: relative;
+    width: calc(52 * var(--vw));
+    height: calc(52 * var(--vw));
+    padding: 0;
+    border: 1px solid #b5b5b5;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    transition: border-color .25s ease;
+}
+
+.sub-pagination-arrow::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(10 * var(--vw));
+    height: calc(10 * var(--vw));
+    border-top: calc(2 * var(--vw)) solid #b5b5b5;
+    border-right: calc(2 * var(--vw)) solid #b5b5b5;
+    content: "";
+    transition: border-color .25s ease;
+}
+
+.sub-pagination-arrow.is-prev::before { transform: translate(-35%, -50%) rotate(-135deg); }
+.sub-pagination-arrow.is-next::before { transform: translate(-65%, -50%) rotate(45deg); }
+.sub-pagination-arrow:hover,
+.sub-pagination-arrow:focus-visible { border-color: var(--red); }
+.sub-pagination-arrow:hover::before,
+.sub-pagination-arrow:focus-visible::before { border-color: var(--red); }
+
 /* Responsive visibility */
 .mo-only {
     display: none !important;
 }
 
 @media (max-width: 767px) {
+    .sub-pagination {
+        gap: 18px;
+        margin-top: 40px;
+    }
+
+    .sub-pagination > a,
+    .sub-pagination > button:not(.sub-pagination-arrow) { font-size: 14px; }
+
+    .sub-pagination-arrow {
+        width: 34px;
+        height: 34px;
+    }
+
+    .sub-pagination-arrow::before {
+        width: 7px;
+        height: 7px;
+        border-width: 1px;
+    }
+
+    .sub-pagination-arrow.is-prev::before { transform: translate(-40%, -50%) rotate(-135deg); }
+    .sub-pagination-arrow.is-next::before { transform: translate(-60%, -50%) rotate(45deg); }
+
     .pc-only {
         display: none !important;
     }

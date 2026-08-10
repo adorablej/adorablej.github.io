@@ -3,7 +3,72 @@ document.addEventListener("DOMContentLoaded", () => {
     initMypageProductSlider();
     initMypageOrderToggle();
     initMypageWithdrawModal();
+    initMypageMobileMenu();
 });
+
+function initMypageMobileMenu() {
+    document.querySelectorAll("[data-mypage-mobile-menu]").forEach(menu => {
+        if (menu.dataset.initialized === "true") return;
+        const currentPath = window.location.pathname.replace(/\/+$/, "").toLowerCase();
+        const groupPaths = {
+            parts: ["/mypage/parts-list.html", "/mypage/cart.html", "/mypage/order-list.html"],
+            training: ["/mypage/training-apply.html", "/mypage/training-history.html"]
+        };
+        const activeGroup = Object.keys(groupPaths).find(group => groupPaths[group].includes(currentPath));
+        const primary = menu.querySelector("[data-mypage-primary-select]");
+
+        menu.querySelectorAll("[data-mypage-secondary]").forEach(select => {
+            select.hidden = select.dataset.mypageSecondary !== activeGroup;
+        });
+
+        const closeAll = () => menu.querySelectorAll(".sub-mypage-mobile-select").forEach(select => {
+            select.classList.remove("is-open");
+            select.querySelector(".sub-mypage-mobile-select-trigger")?.setAttribute("aria-expanded", "false");
+        });
+
+        menu.querySelectorAll(".sub-mypage-mobile-select").forEach(select => {
+            if (select.hidden) return;
+            const trigger = select.querySelector(".sub-mypage-mobile-select-trigger");
+            const value = select.querySelector(".sub-mypage-mobile-select-value");
+            const options = select.querySelector(".sub-mypage-mobile-select-options");
+            const links = options ? [...options.querySelectorAll("a")] : [];
+            if (!trigger || !value || !links.length) return;
+
+            let current;
+            if (select === primary && activeGroup) {
+                current = links.find(link => link.dataset.mypageGroup === activeGroup);
+            } else {
+                const menuPath = select === primary && currentPath === "/mypage/product-detail.html"
+                    ? "/mypage/products.html"
+                    : currentPath;
+                current = links.find(link => new URL(link.href).pathname.replace(/\/+$/, "").toLowerCase() === menuPath);
+            }
+            if (current) {
+                value.textContent = current.textContent.trim();
+                current.classList.add("is-current");
+                current.setAttribute("aria-current", "page");
+            }
+
+            trigger.addEventListener("click", () => {
+                const open = !select.classList.contains("is-open");
+                closeAll();
+                select.classList.toggle("is-open", open);
+                trigger.setAttribute("aria-expanded", String(open));
+            });
+        });
+
+        document.addEventListener("click", event => {
+            if (!menu.contains(event.target)) closeAll();
+        });
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape") closeAll();
+        });
+
+        menu.dataset.initialized = "true";
+    });
+}
+
+window.addEventListener("includeLoaded", initMypageMobileMenu);
 
 function initMypageAccordion() {
     document.querySelectorAll("[data-mypage-accordion]").forEach(group => {

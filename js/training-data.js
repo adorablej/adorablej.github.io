@@ -6,7 +6,7 @@ const trainingData = [
             courseName: "얼라인먼트 Level 1", //교육과정명
             categoryName: "얼라이먼트 기본 교육", //교육카테고리
             imageUrl: "", //모달 상단 이미지
-            date: "2026-07-01",
+            date: "2026-08-01",
             startTime: "09:00", //교육시간
             endTime: "12:00",
             location: "서울 마포 트레이닝센터 3호실", //교육 장소
@@ -23,7 +23,7 @@ description: "휠얼라인먼트 기초이론과 장비운영 실습으로 구�
             courseName: "얼라인먼트 Level 2", //교육과정명
             categoryName: "얼라이먼트 중급 교육", //교육카테고리
             imageUrl: null, //모달 상단 이미지
-            date: "2026-07-07",
+            date: "2026-08-07",
             startTime: "14:00", //교육시간
             endTime: "15:00",
             location: "서울 마포 트레이닝센터 3호실", //교육 장소
@@ -40,7 +40,7 @@ description: "휠얼라인먼트 기초이론과 장비운영 실습으로 구�
             courseName: "얼라인먼트 Level 3", //교육과정명
             categoryName: "얼라이먼트 고급 교육", //교육카테고리
             imageUrl: "", //모달 상단 이미지
-            date: "2026-07-19",
+            date: "2026-08-19",
             startTime: "10:00", //교육시간
             endTime: "17:00",
             location: "서울 마포 트레이닝센터 3호실", //교육 장소
@@ -57,7 +57,7 @@ description: "얼라인먼트 기초이론과 장비운영 실습으로 구성�
             courseName: "휠 얼라인먼트 Level 1", //교육과정명
             categoryName: "휠 얼라인먼트 기본 교육", //교육카테고리
             imageUrl: null, //모달 상단 이미지
-            date: "2026-07-27",
+            date: "2026-08-27",
             startTime: "16:00", //교육시간
             endTime: "17:00",
             location: "서울 마포 트레이닝센터 3호실", //교육 장소

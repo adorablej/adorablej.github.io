@@ -216,10 +216,10 @@
         `).join("");
 
         return `
-            <nav class="sub-search-pagination" aria-label="검색 결과 페이지">
-                <button type="button" class="sub-search-page-arrow is-prev" data-page="1" aria-label="이전 페이지"></button>
+            <nav class="sub-pagination" aria-label="검색 결과 페이지">
+                <button type="button" class="sub-pagination-arrow is-prev" data-page="1" aria-label="이전 페이지"></button>
                 ${pageButtons}
-                <button type="button" class="sub-search-page-arrow is-next" data-page="${totalPages}" aria-label="다음 페이지"></button>
+                <button type="button" class="sub-pagination-arrow is-next" data-page="${totalPages}" aria-label="다음 페이지"></button>
             </nav>
         `;
     }

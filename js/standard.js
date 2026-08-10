@@ -443,6 +443,61 @@
 (function () {
     "use strict";
 
+    function initPartnersTopButton() {
+        const button = document.querySelector(".sub-partners-top-button");
+        const directory = document.querySelector(".sub-partners-directory");
+        const intro = document.querySelector(".sub-partners-intro");
+        if (!button || !directory || !intro) return;
+
+        let directoryTop = 0;
+        let ticking = false;
+
+        function measureDirectoryTop() {
+            directoryTop = directory.getBoundingClientRect().top + window.scrollY;
+        }
+
+        function updateButtonVisibility() {
+            button.classList.toggle("is-visible", window.scrollY >= directoryTop);
+            ticking = false;
+        }
+
+        function requestVisibilityUpdate() {
+            if (ticking) return;
+            ticking = true;
+            window.requestAnimationFrame(updateButtonVisibility);
+        }
+
+        measureDirectoryTop();
+        updateButtonVisibility();
+
+        window.addEventListener("scroll", requestVisibilityUpdate, { passive: true });
+        window.addEventListener("resize", function () {
+            measureDirectoryTop();
+            requestVisibilityUpdate();
+        });
+        window.addEventListener("load", function () {
+            measureDirectoryTop();
+            requestVisibilityUpdate();
+        }, { once: true });
+
+        button.addEventListener("click", function () {
+            intro.scrollIntoView({
+                behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+                block: "start"
+            });
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initPartnersTopButton);
+    } else {
+        initPartnersTopButton();
+    }
+})();
+
+(function () {
+    "use strict";
+
     function initPartnersCategoryLinks() {
         const links = document.querySelectorAll(".sub-partners-category-link[href^='#']");
         if (!links.length) return;
@@ -507,6 +562,10 @@
 
         if (!hero || !media || !preview.length || !dim || !copy || !lines.length) return;
 
+        gsap.set(media, {
+            xPercent: -50,
+            yPercent: mobile ? 0 : -50
+        });
         gsap.set(copy, { autoAlpha: 0, y: 30 });
         gsap.set(lines, { color: "rgba(255,255,255,.22)" });
         if (video && !mobile) gsap.set(video, { autoAlpha: 0, scale: 1.04 });
@@ -529,7 +588,8 @@
                 width: "100vw",
                 height: "100vh",
                 top: "50%",
-                transform: "translate(-50%, -50%)",
+                xPercent: -50,
+                yPercent: -50,
                 duration: 1.05,
                 ease: "power2.inOut"
             }, "hero-expand")

@@ -251,65 +251,6 @@
     text-decoration: underline;
 }
 
-.sub-search-pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: calc(28 * var(--vw));
-    margin-top: calc(70 * var(--vw));
-}
-
-.sub-search-pagination button {
-    border: 0;
-    background: none;
-    color: #aaa;
-    font-size: calc(16 * var(--vw));
-    cursor: pointer;
-}
-
-.sub-search-pagination button.is-active {
-    color: var(--red);
-    font-weight: 700;
-}
-
-.sub-search-pagination .sub-search-page-arrow {
-    position: relative;
-    width: calc(52 * var(--vw));
-    height: calc(52 * var(--vw));
-    border: 1px solid #b5b5b5;
-    border-radius: 50%;
-    transition: border-color 0.25s ease;
-}
-
-.sub-search-pagination .sub-search-page-arrow::before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: calc(10 * var(--vw));
-    height: calc(10 * var(--vw));
-    border-top: calc(2 * var(--vw)) solid #b5b5b5;
-    border-right: calc(2 * var(--vw)) solid #b5b5b5;
-    content: "";
-    transition: border-color 0.25s ease;
-}
-
-.sub-search-pagination .sub-search-page-arrow.is-prev::before {
-    transform: translate(-35%, -50%) rotate(-135deg);
-}
-
-.sub-search-pagination .sub-search-page-arrow.is-next::before {
-    transform: translate(-65%, -50%) rotate(45deg);
-}
-
-.sub-search-pagination .sub-search-page-arrow:hover,
-.sub-search-pagination .sub-search-page-arrow:focus-visible {
-    border-color: var(--red);
-}
-
-.sub-search-pagination .sub-search-page-arrow:hover::before,
-.sub-search-pagination .sub-search-page-arrow:focus-visible::before {
-    border-color: var(--red);
-}
 
 .sub-search-recommend {
     margin-top: calc(80 * var(--vw));
@@ -552,34 +493,6 @@
         margin-top: 24px;
         font-size: 14px;
         line-height: 20px;
-    }
-
-    .sub-search-pagination {
-        gap: 18px;
-        margin-top: 40px;
-    }
-
-    .sub-search-pagination button {
-        font-size: 14px;
-    }
-
-    .sub-search-pagination .sub-search-page-arrow {
-        width: 34px;
-        height: 34px;
-    }
-
-    .sub-search-pagination .sub-search-page-arrow::before {
-        width: 7px;
-        height: 7px;
-        border-width: 1px;
-    }
-
-    .sub-search-pagination .sub-search-page-arrow.is-prev::before {
-        transform: translate(-40%, -50%) rotate(-135deg);
-    }
-
-    .sub-search-pagination .sub-search-page-arrow.is-next::before {
-        transform: translate(-60%, -50%) rotate(45deg);
     }
 
     .sub-search-empty {

@@ -53,10 +53,6 @@
     let selectedDate = isMypageView ? "" : formatDate(initialDate);
 
     function getInitialDate() {
-        if (trainingData.length) {
-            const firstTraining = [...trainingData].sort((a, b) => a.date.localeCompare(b.date))[0];
-            return parseDate(firstTraining.date);
-        }
         return new Date();
     }
 

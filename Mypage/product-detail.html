@@ -78,31 +78,40 @@
 </div>
 </nav>
 </aside>
+<div data-include="/includes/mypage-mobile-menu.html" data-include-selector=".sub-mypage-mobile-menu" data-include-mode="replace"></div>
 <div class="sub-mypage-content">
 <div class="sub-mypage-product-detail">
-<h3 class="sub-mypage-page-title">제품 상세</h3>
+<h3 class="sub-mypage-page-title">제품 상세<span class="sub-mypage-title-dot" aria-hidden="true">.</span></h3>
 <section class="sub-mypage-detail-section">
 <h4 class="sub-mypage-detail-heading">제품 정보</h4>
-<div class="sub-mypage-detail-product">
-<div class="sub-mypage-detail-image"><img src="/images/mypage/product_01.png" alt="HawkEye Elite Premium"></div>
+<div class="sub-mypage-detail-product pc-only">
+<div class="sub-mypage-detail-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="HawkEye Elite Premium"></div>
 <div class="sub-mypage-detail-summary">
 <span class="sub-mypage-product-status is-active">운영중</span><small>Wheel Alignment</small><strong>HawkEye® Elite Premium</strong>
 <dl><div><dt>시리얼넘버</dt><dd>abc0000</dd></div><div><dt>최초 설치일</dt><dd>2026.07.07</dd></div><div><dt>보증 만료일</dt><dd>2026.07.07</dd></div></dl>
 </div>
-<div class="sub-mypage-more-wrap sub-mypage-detail-more"><button type="button" class="sub-mypage-more-button" aria-label="제품 메뉴 열기" aria-expanded="false" data-product-more><i></i><i></i><i></i></button><div class="sub-mypage-more-menu"><a href="#">제품 이미지 등록</a><a class="is-highlight" href="/Mypage/cs-request.html?category=as&product=abc0000">A/S 신청</a><a href="/Mypage/cs-request.html?category=transfer&product=abc0000">제품 이전 신청</a></div></div>
-</div></section>
+<div class="sub-mypage-more-wrap sub-mypage-detail-more"><button type="button" class="sub-mypage-more-button" aria-label="제품 메뉴 열기" aria-expanded="false" data-product-more><i></i><i></i><i></i></button><div class="sub-mypage-more-menu"><a href="/Mypage/cs-request.html?category=as&product=abc0000">A/S 신청</a><a href="/Mypage/cs-request.html?category=transfer&product=abc0000">제품 이전 신청</a></div></div>
+</div>
+<article class="sub-mypage-product-row sub-mypage-detail-mobile-card mo-only">
+<div class="sub-mypage-product-cell">
+<div class="sub-mypage-list-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="HawkEye Elite Premium"></div>
+<div class="sub-mypage-list-product-text"><span class="sub-mypage-product-status is-active">운영중</span><small>Wheel Alignment</small><strong>HawkEye® Elite Premium</strong></div>
+</div><div>abc0000</div><div>2026.07.07</div><div>2026.07.07</div>
+<div class="sub-mypage-more-wrap"><button type="button" class="sub-mypage-more-button" aria-label="제품 메뉴 열기" aria-expanded="false" data-product-more><i></i><i></i><i></i></button><div class="sub-mypage-more-menu"><a href="/Mypage/cs-request.html?category=as&product=abc0000">A/S 신청</a><a href="/Mypage/cs-request.html?category=transfer&product=abc0000">제품 이전 신청</a></div></div>
+</article>
+</section>
 <section class="sub-mypage-detail-section" id="parts">
 <h4 class="sub-mypage-detail-heading sub-mypage-detail-parts-title">주문 가능한 부품 목록</h4>
 <div class="sub-mypage-parts-filter"><div class="sub-form-select sub-mypage-filter-select" data-select><button type="button" class="sub-form-select-trigger" aria-expanded="false"><span class="sub-form-select-value is-placeholder">카테고리를 선택해 주세요.</span><i class="sub-form-select-arrow"></i></button><ul class="sub-form-select-options"><li><button type="button" class="sub-form-select-option" data-value="sleeves">Sleeves</button></li><li><button type="button" class="sub-form-select-option" data-value="plates">Plates</button></li></ul><input type="hidden" name="part_category"></div><label class="sub-mypage-search"><i></i><input type="search" placeholder="검색어를 입력해주세요" aria-label="부품 검색"></label></div>
-<div class="sub-mypage-list-actions"><strong>총 <em>70</em>개</strong><button type="button" class="sub-mypage-outline-button" data-add-cart><span class="sub-mypage-cart-icon">🛒</span>장바구니 담기</button></div>
+<div class="sub-mypage-list-actions sub-mypage-parts-actions"><strong>총 <em>70</em>개</strong><button type="button" class="sub-mypage-outline-button" data-add-cart><span class="sub-mypage-cart-icon" aria-hidden="true"></span>장바구니 담기</button></div>
 <div class="sub-mypage-parts-table">
 <div class="sub-mypage-parts-head"><label class="sub-form-checkbox"><input type="checkbox" data-check-all><span class="sub-form-checkbox-icon"></span></label><span>부품 정보</span><span>판매가</span><span>수량</span><span>최종 금액</span></div>
 
-<div class="sub-mypage-part-row"><label class="sub-form-checkbox"><input type="checkbox" class="sub-mypage-part-check" checked><span class="sub-form-checkbox-icon"></span></label><div class="sub-mypage-part-info"><div class="sub-mypage-part-image"><img src="/images/mypage/part_01.png" alt="SPADES SLEEVES"></div><div><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></div></div><div class="sub-mypage-part-price" data-price="1000000">₩000,000</div><div class="sub-mypage-quantity"><button type="button" data-qty-minus>−</button><input type="number" value="10" min="1" max="99" readonly><button type="button" data-qty-plus>＋</button></div><div class="sub-mypage-part-total">₩0</div></div>
+<div class="sub-mypage-part-row"><label class="sub-form-checkbox"><input type="checkbox" class="sub-mypage-part-check"><span class="sub-form-checkbox-icon"></span></label><div class="sub-mypage-part-info"><div class="sub-mypage-part-image"><img src="/images/mypage/part_01.png" alt="SPADES SLEEVES"></div><div><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></div></div><div class="sub-mypage-part-price" data-price="1000000">₩000,000</div><div class="sub-mypage-quantity"><button type="button" data-qty-minus>−</button><input type="number" value="10" min="1" max="99" readonly><button type="button" data-qty-plus>＋</button></div><div class="sub-mypage-part-total">₩0</div></div>
 <div class="sub-mypage-part-row"><label class="sub-form-checkbox"><input type="checkbox" class="sub-mypage-part-check" ><span class="sub-form-checkbox-icon"></span></label><div class="sub-mypage-part-info"><div class="sub-mypage-part-image"><img src="/images/mypage/part_01.png" alt="SPADES SLEEVES"></div><div><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></div></div><div class="sub-mypage-part-price" data-price="1000000">₩000,000</div><div class="sub-mypage-quantity"><button type="button" data-qty-minus>−</button><input type="number" value="1" min="1" max="99" readonly><button type="button" data-qty-plus>＋</button></div><div class="sub-mypage-part-total">₩0</div></div>
 <div class="sub-mypage-part-row"><label class="sub-form-checkbox"><input type="checkbox" class="sub-mypage-part-check" ><span class="sub-form-checkbox-icon"></span></label><div class="sub-mypage-part-info"><div class="sub-mypage-part-image"><img src="/images/mypage/part_01.png" alt="SPADES SLEEVES"></div><div><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></div></div><div class="sub-mypage-part-price" data-price="1000000">₩000,000</div><div class="sub-mypage-quantity"><button type="button" data-qty-minus>−</button><input type="number" value="10" min="1" max="99" readonly><button type="button" data-qty-plus>＋</button></div><div class="sub-mypage-part-total">₩0</div></div>
 </div>
-<div class="sub-mypage-pagination-row"><button type="button" class="sub-mypage-count-select">10개씩 보기<i></i></button><nav class="sub-mypage-pagination"><button type="button" class="is-prev"></button><a class="is-active" href="#">1</a><a href="#">2</a><a href="#">3</a><button type="button" class="is-next"></button></nav></div>
+<div class="sub-mypage-pagination-row"><nav class="sub-pagination" aria-label="페이지 이동"><button type="button" class="sub-pagination-arrow is-prev" aria-label="이전 페이지"></button><a class="is-active" href="#">1</a><a href="#">2</a><a href="#">3</a><button type="button" class="sub-pagination-arrow is-next" aria-label="다음 페이지"></button></nav></div>
 </section></div></div>
 </div></section></main>
 <div data-include="/includes/footer.html"></div>

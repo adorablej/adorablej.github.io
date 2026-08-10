@@ -89,25 +89,12 @@
 </div>
 </nav>
 </aside>
-<div class="sub-mypage-mobile-menu">
-<label for="mypage-mobile-menu">마이페이지 메뉴</label>
-<select id="mypage-mobile-menu" aria-label="마이페이지 메뉴" onchange="if (this.value) window.location.href=this.value">
-<option value="/Mypage/mypage.html">마이페이지 홈</option>
-<option value="/Mypage/account.html" selected>계정/회원정보 관리</option>
-<option value="/Mypage/cs-request.html">CS 신청하기</option>
-<option value="/Mypage/products.html">나의 제품 관리</option>
-<option value="/Mypage/parts-list.html">전체 부품 목록</option>
-<option value="/Mypage/cart.html">장바구니</option>
-<option value="/Mypage/order-list.html">부품 주문 신청 내역</option>
-<option value="/Mypage/training-apply.html">트레이닝 수강 신청</option>
-<option value="/Mypage/training-history.html">트레이닝 수강 이력</option>
-</select>
-</div>
+<div data-include="/includes/mypage-mobile-menu.html" data-include-selector=".sub-mypage-mobile-menu" data-include-mode="replace"></div>
 <div class="sub-mypage-content">
 <div class="sub-mypage-account">
-<h3 class="sub-mypage-account-title">계정/회원 정보 관리<span aria-hidden="true">.</span></h3>
+<h3 class="sub-mypage-account-title">계정/회원 정보 관리<span class="mo-only" aria-hidden="true">.</span></h3>
 <section class="sub-mypage-account-section sub-mypage-info-section">
-<h4 class="sub-mypage-account-heading sub-mypage-section-title">계정/회원정보</h4>
+<h4 class="sub-mypage-account-heading sub-mypage-section-title"><span class="pc-only">기본정보</span><span class="mo-only">계정/회원정보</span></h4>
 <dl class="sub-mypage-account-list sub-mypage-info-list">
 <div class="sub-mypage-account-row">
 <dt>이름</dt>
@@ -117,15 +104,6 @@
 <dt>휴대폰번호</dt>
 <dd>010-1234-5678</dd>
 </div>
-</dl>
-</section>
-<section class="sub-mypage-account-section sub-mypage-info-section">
-<h4 class="sub-mypage-account-heading sub-mypage-section-title">기업/사업체 정보</h4>
-<dl class="sub-mypage-account-list sub-mypage-info-list">
-<div class="sub-mypage-account-row"><dt>이름</dt><dd>가나다 타이어전문점</dd></div>
-<div class="sub-mypage-account-row"><dt>사업자 등록번호</dt><dd>000 000 00000</dd></div>
-<div class="sub-mypage-account-row"><dt>대표자명</dt><dd>김길순</dd></div>
-<div class="sub-mypage-account-row"><dt>사업장 주소</dt><dd>서울시 마포구 마포로 가나다빌딩 102호</dd></div>
 </dl>
 </section>
 <section class="sub-mypage-account-section">
