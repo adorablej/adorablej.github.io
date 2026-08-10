@@ -214,6 +214,48 @@ Section 01 : Main Visual
     font-style: normal;
 }
 
+.main-visual-title-line{
+    display:block;
+    overflow:hidden;
+}
+
+.main-visual-title-line > span{
+    display:block;
+    opacity:0;
+    transform:translateY(115%);
+    will-change:transform,opacity;
+}
+
+.main-visual-slide.swiper-slide-active .main-visual-title-line > span{
+    animation:mainVisualTitleReveal 1.05s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.main-visual-slide.swiper-slide-active .main-visual-title-line:nth-child(2) > span{
+    animation-delay:.12s;
+}
+
+@keyframes mainVisualTitleReveal{
+    0%{
+        opacity:0;
+        transform:translateY(115%);
+    }
+    18%{
+        opacity:1;
+    }
+    100%{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .main-visual-slide.swiper-slide-active .main-visual-title-line > span{
+        animation:none;
+        opacity:1;
+        transform:none;
+    }
+}
+
 
 .main-visual-control {
     position: absolute;
