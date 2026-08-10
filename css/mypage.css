@@ -1358,4 +1358,155 @@ body.is-mypage-home-modal-open { overflow: hidden; }
         font-size: 14px;
         line-height: 43px;
     }
+
+    /* Account page */
+    .sub-mypage-account-title {
+        margin: 0 0 45px;
+        font-size: 24px;
+        line-height: 1.25;
+        letter-spacing: -.04em;
+    }
+    .sub-mypage-account-title span { color: var(--red); }
+    .sub-mypage-account-section + .sub-mypage-account-section { margin-top: 64px; }
+    .sub-mypage-account-heading {
+        padding-bottom: 18px;
+        font-size: 20px;
+        line-height: 1.3;
+    }
+    .sub-mypage-account-list { padding: 14px 0 15px; }
+    .sub-mypage-account-row {
+        grid-template-columns: 130px minmax(0, 1fr);
+        min-height: 47px;
+        padding: 7px 0;
+    }
+    .sub-mypage-account-row dt,
+    .sub-mypage-account-row dd { font-size: 14px; line-height: 1.45; }
+    .sub-mypage-account .sub-mypage-business-type { gap: 18px; }
+    .sub-mypage-business-type .sub-form-checkbox-icon { width: 20px; height: 20px; }
+    .sub-mypage-business-type .sub-form-checkbox-text { font-size: 14px; line-height: 20px; }
+    .sub-mypage-account-file { text-underline-offset: 2px; }
+    .sub-mypage-account-withdraw { margin-top: 34px; }
+    .sub-mypage-account-withdraw-button { font-size: 14px; text-underline-offset: 2px; }
+
+    /* Account withdraw modal */
+    .sub-mypage-withdraw-modal { padding: 24px 25px; }
+    .sub-mypage-withdraw-modal .sub-modal-dim { background: rgba(0, 0, 0, .58); }
+    .sub-mypage-withdraw-modal .sub-modal-dialog {
+        width: 310px;
+        max-width: 100%;
+        max-height: calc(100vh - 48px);
+        overflow-y: auto;
+    }
+    .sub-mypage-withdraw-modal .sub-modal-content { padding: 40px 25px; }
+    .sub-mypage-withdraw-modal .sub-modal-title {
+        font-size: 30px;
+        line-height: 1.2;
+        letter-spacing: -.04em;
+    }
+    .sub-mypage-withdraw-intro { margin-top: 33px; }
+    .sub-mypage-withdraw-intro strong {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    .sub-mypage-withdraw-intro p {
+        margin-top: 13px;
+        font-size: 14px;
+        line-height: 1.45;
+    }
+    .sub-mypage-withdraw-notice {
+        margin-top: 28px;
+        padding: 22px 20px;
+        border-radius: 12px;
+        font-size: 14px;
+        line-height: 1.45;
+    }
+    .sub-mypage-withdraw-agree {
+        margin-top: 26px;
+        padding-top: 26px;
+    }
+    .sub-mypage-withdraw-agree .sub-form-checkbox { gap: 8px; }
+    .sub-mypage-withdraw-agree .sub-form-checkbox-icon {
+        width: 20px;
+        height: 20px;
+    }
+    .sub-mypage-withdraw-agree .sub-form-checkbox-text {
+        font-size: 14px;
+        line-height: 1.45;
+    }
+    .sub-mypage-withdraw-modal .sub-modal-actions {
+        gap: 10px;
+        margin-top: 30px;
+    }
+    .sub-mypage-withdraw-modal .sub-modal-button {
+        flex: 1 1 0;
+        min-width: 0;
+        height: 50px;
+        padding: 0 10px;
+        font-size: 16px;
+    }
+
+    /* CS request: use the shared mobile form scale */
+    .sub-mypage-cs-title {
+        margin: 0 0 45px;
+        font-size: 24px;
+        line-height: 1.25;
+    }
+    .sub-mypage-cs-section + .sub-mypage-cs-section { margin-top: 64px; }
+    .sub-mypage-cs-heading {
+        margin: 0 0 24px;
+        padding-bottom: 18px;
+        font-size: 20px;
+        line-height: 1.3;
+    }
+    .sub-mypage-cs-fields { gap: 28px; }
+    .sub-mypage-cs .sub-form-label { font-size: 16px; line-height: 22px; }
+    .sub-mypage-cs .sub-form-input,
+    .sub-mypage-cs .sub-form-select-trigger {
+        height: 60px;
+        padding: 0 18px;
+        font-size: 14px;
+    }
+    .sub-mypage-cs .sub-form-email {
+        grid-template-columns: minmax(0, 1fr) 20px;
+        gap: 16px 10px;
+    }
+    .sub-mypage-cs .sub-form-email-at { font-size: 16px; }
+    .sub-mypage-cs .sub-form-email > .sub-form-input:nth-of-type(2),
+    .sub-mypage-cs .sub-form-email > .sub-form-select { grid-column: 1 / -1; }
+    .sub-mypage-cs-category { width: 100%; }
+    .sub-mypage-cs .sub-form-textarea {
+        height: 190px;
+        padding: 18px;
+        font-size: 14px;
+        line-height: 22px;
+    }
+    .sub-mypage-cs .sub-form-text-count {
+        right: 18px;
+        bottom: 12px;
+        font-size: 11px;
+    }
+    .sub-mypage-cs-privacy {
+        margin-top: 50px;
+        padding: 20px;
+    }
+    .sub-mypage-cs-agree { padding-bottom: 20px; }
+    .sub-mypage-cs-agree .sub-form-checkbox-text { font-size: 12px; line-height: 20px; }
+    .sub-mypage-cs-privacy-content { padding-top: 20px; }
+    .sub-mypage-cs-privacy-content h5 { font-size: 16px; }
+    .sub-mypage-cs-privacy-content > p { margin-top: 12px; font-size: 12px; }
+    .sub-mypage-cs-privacy-content table { margin-top: 18px; }
+    .sub-mypage-cs-privacy-content th,
+    .sub-mypage-cs-privacy-content td {
+        height: auto;
+        padding: 10px 6px;
+        font-size: 11px;
+    }
+    .sub-mypage-cs-privacy-content ul { margin-top: 18px; }
+    .sub-mypage-cs-privacy-content li { padding-left: 10px; font-size: 11px; }
+    .sub-mypage-cs-submit { justify-content: center; margin-top: 40px; }
+    .sub-mypage-cs-submit .sub-form-submit {
+        min-width: 140px;
+        height: 50px;
+        font-size: 14px;
+    }
 }
