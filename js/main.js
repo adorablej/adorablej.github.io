@@ -88,7 +88,7 @@
              * 자동 재생
              */
             autoplay: {
-                delay: 5000,
+                delay: 6000,
                 disableOnInteraction: false
             },
 
