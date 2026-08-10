@@ -6,10 +6,66 @@
 
         gsap.registerPlugin(ScrollTrigger);
 
-        initIntroMotion();
+        initMainVisualMotion();
         initStoryMotion();
         initAwardsHero();
         initHeaderTheme();
+    }
+
+    function initMainVisualMotion() {
+        const section = document.querySelector(".sub-standard-main-visual");
+        if (!section) return;
+
+        const titleTop = section.querySelector(".sub-standard-main-title-top");
+        const titleBottom = section.querySelector(".sub-standard-main-title-bottom");
+        const titleTopFill = titleTop && titleTop.querySelector(".sub-standard-main-title-fill");
+        const titleBottomFill = titleBottom && titleBottom.querySelector(".sub-standard-main-title-fill");
+        const reveal = section.querySelector(".sub-standard-main-reveal");
+        const frame = section.querySelector(".sub-standard-main-frame");
+        const revealImage = reveal && reveal.querySelector("img");
+        const revealCopy = section.querySelector(".sub-standard-main-reveal-copy");
+        if (!titleTop || !titleBottom || !titleTopFill || !titleBottomFill || !frame || !reveal || !revealImage || !revealCopy) return;
+
+        const revealHeight = function () {
+            const ratio = window.innerWidth <= 720 ? 1.25 : 9 / 16;
+            return Math.min(frame.clientHeight, reveal.clientWidth * ratio);
+        };
+
+        gsap.set([titleTopFill, titleBottomFill], { clipPath: "inset(0 100% 0 0)" });
+        gsap.set(reveal, {
+            scale: .92,
+            height: 2
+        });
+        gsap.set(revealImage, {
+            height: revealHeight,
+            yPercent: -50,
+            scale: 1.12
+        });
+        gsap.set(revealCopy, { autoAlpha: 0, y: 32 });
+
+        gsap.timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: {
+                trigger: section,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1,
+                invalidateOnRefresh: true
+            }
+        })
+            .to(titleTopFill, { clipPath: "inset(0 0% 0 0)", duration: .75 })
+            .to(titleBottomFill, { clipPath: "inset(0 0% 0 0)", duration: .75 })
+            .to({}, { duration: .18 })
+            .to(titleTop, { yPercent: -165, autoAlpha: 0, duration: .72 }, "open")
+            .to(titleBottom, { yPercent: 165, autoAlpha: 0, duration: .72 }, "open")
+            .to(reveal, {
+                scale: 1,
+                height: revealHeight,
+                duration: .9
+            }, "open+=.08")
+            .to(revealImage, { scale: 1, duration: 1.05 }, "open+=.08")
+            .to(revealCopy, { autoAlpha: 1, y: 0, duration: .42 }, "open+=.58")
+            .to({}, { duration: .5 });
     }
 
     function initAwardsHero() {
@@ -68,30 +124,6 @@
                 ease: "none"
             }, position);
         });
-    }
-
-    function initIntroMotion() {
-        gsap.fromTo(
-            ".sub-standard-main-title",
-            { opacity: 0, y: 50 },
-            { opacity: 1, y: 0, duration: 1.1, ease: "power3.out" }
-        );
-
-        gsap.fromTo(
-            ".sub-standard-intro-content",
-            { opacity: 0, y: 70 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: ".sub-standard-intro",
-                    start: "top 70%",
-                    toggleActions: "play none none reverse"
-                }
-            }
-        );
     }
 
     function initStoryMotion() {
@@ -548,6 +580,7 @@
 
     function initHeroStory() {
         const hero = document.querySelector(".sub-standard-detail-hero");
+        const sticky = document.querySelector(".sub-standard-detail-hero-sticky");
         const media = document.querySelector(".sub-standard-detail-hero-media");
         const preview = document.querySelectorAll(".sub-standard-detail-hero-preview");
         const video = document.querySelector(".sub-standard-detail-hero-video");
@@ -560,8 +593,20 @@
                 : !line.classList.contains("mo-only");
         });
 
-        if (!hero || !media || !preview.length || !dim || !copy || !lines.length) return;
+        if (!hero || !sticky || !media || !preview.length || !dim || !copy || !lines.length) return;
 
+        function getHeaderHeight() {
+            const header = document.querySelector(".header");
+            return header
+                ? header.getBoundingClientRect().height
+                : (mobile ? 64 : window.innerWidth * 100 / 1920);
+        }
+
+        function getHeroScrollDistance() {
+            return Math.max(window.innerHeight - getHeaderHeight(), 1) * 3.3;
+        }
+
+        gsap.set(sticky, { position: "relative" });
         gsap.set(media, {
             xPercent: -50,
             yPercent: mobile ? 0 : -50
@@ -574,8 +619,10 @@
             defaults: { ease: "none" },
             scrollTrigger: {
                 trigger: hero,
-                start: "top top",
-                end: "bottom bottom",
+                start: function () { return "top top+=" + getHeaderHeight(); },
+                end: function () { return "+=" + getHeroScrollDistance(); },
+                pin: sticky,
+                pinSpacing: true,
                 scrub: 1.15,
                 invalidateOnRefresh: true,
                 anticipatePin: 1
@@ -583,10 +630,9 @@
         });
 
         timeline
-            .to({}, { duration: 0.35 })
             .to(media, {
-                width: "100vw",
-                height: "100vh",
+                width: "100%",
+                height: "100%",
                 top: "50%",
                 xPercent: -50,
                 yPercent: -50,
@@ -597,7 +643,11 @@
                 scale: 1,
                 duration: 1.05,
                 ease: "power2.inOut"
-            }, "hero-expand");
+            }, "hero-expand")
+            .set(media, {
+                width: "100%",
+                height: "100%"
+            }, "hero-expand+=1.05");
 
         if (video && !mobile) {
             timeline
@@ -636,6 +686,14 @@
         });
 
         timeline.to({}, { duration: 0.6 });
+
+        let heroResizeFrame = 0;
+        window.addEventListener("resize", function () {
+            window.cancelAnimationFrame(heroResizeFrame);
+            heroResizeFrame = window.requestAnimationFrame(function () {
+                ScrollTrigger.refresh();
+            });
+        }, { passive: true });
     }
 
 

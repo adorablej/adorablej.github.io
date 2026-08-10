@@ -22,11 +22,38 @@ overflow-y: visible;
 
 /* 01. Main visual */
 .sub-standard-main-visual {
+    height: 480vh;
+    min-height: 0;
+    overflow: visible;
+    background-color: #050202;
+    background-image: url("/images/standard/standard_KV_bg.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
+}
+
+.sub-standard-main-sticky {
+    position: sticky;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #050202;
-    color: #fff;
+    width: 100%;
+    height: 100vh;
+    min-height: 680px;
+    overflow: hidden;
+}
+
+.sub-standard-main-frame {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 .sub-standard-main-glow,
@@ -42,34 +69,107 @@ overflow-y: visible;
 }
 
 .sub-standard-main-title {
-    position: relative;
-    z-index: 1;
-    width: calc(800 * var(--vw));
-    text-align: center;
-}
-
-.sub-standard-main-title::after {
-    content: "";
     position: absolute;
     left: 50%;
-    top: 50%;
-    width: calc(840 * var(--vw));
-    height: 5px;
-    transform: translate(-50%, -50%);
-    background: linear-gradient(90deg, transparent, #c71910 30%, #c71910 70%, transparent);
+    z-index: 3;
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
 }
 
-.sub-standard-main-title strong,
-.sub-standard-main-title span {
+.sub-standard-main-title-top {
+    top: calc(50% - calc(16 * var(--vw)));
+    transform: translate(-50%, -100%);
+}
+
+.sub-standard-main-title-bottom {
+    top: calc(50% + calc(16 * var(--vw)));
+    transform: translateX(-50%);
+}
+
+.sub-standard-main-title > strong,
+.sub-standard-main-title > span {
     position: relative;
-    z-index: 1;
-    display: block;
+    display: inline-block;
     font-size: calc(100 * var(--vw));
+    line-height: 1;
+    font-family: "Russo One", sans-serif;
+    white-space: nowrap;
+}
+
+.sub-standard-main-title-base,
+.sub-standard-main-title-fill {
+    display: block;
     font-family: "Russo One", sans-serif;
 }
 
-.sub-standard-main-title span {
-    margin-top: calc(20 * var(--vw));
+.sub-standard-main-title-base {
+    color: rgba(255, 255, 255, .15);
+}
+
+.sub-standard-main-title-fill {
+    position: absolute;
+    inset: 0;
+    color: #fff;
+    clip-path: inset(0 100% 0 0);
+}
+
+.sub-standard-main-reveal {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1600px;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: calc(28 * var(--vw));
+    transform: scale(.92);
+    box-shadow: 0 calc(24 * var(--vw)) calc(80 * var(--vw)) rgba(0, 0, 0, .45);
+}
+
+.sub-standard-main-reveal img,
+.sub-standard-main-reveal-dim {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.sub-standard-main-reveal img {
+    object-fit: cover;
+    top: 50%;
+    transform: translateY(-50%) scale(1.12);
+}
+
+.sub-standard-main-reveal-dim {
+    background: linear-gradient(180deg, rgba(0, 0, 0, .18), rgba(0, 0, 0, .48));
+}
+
+.sub-standard-main-reveal-copy {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(20 * var(--vw));
+    opacity: 0;
+    transform: translateY(32px);
+    text-align: center;
+}
+
+.sub-standard-main-reveal-copy h2 {
+    margin: 0;
+    color: #fff;
+    font-size: calc(64 * var(--vw));
+    font-weight: 700;
+    line-height: 1.22;
+    letter-spacing: -.04em;
+    word-break: keep-all;
+}
+
+.sub-standard-main-reveal-copy h2 span {
+    display: block;
 }
 
 /* 02. Intro */
@@ -236,8 +336,8 @@ overflow-y: visible;
    HUNTER USA 
 ========================================================= */
 .sub-standard-detail-scroll {
-    overflow-x: clip;
-    overflow-y: visible;
+    overflow: visible;
+    max-width: 100%;
     scroll-snap-type: none;
     overscroll-behavior-y: none;
 }
@@ -257,16 +357,17 @@ overflow-y: visible;
 /* 01~02. Hero zoom */
 .sub-standard-detail-hero {
     position: relative;
-    height: 430vh;
+    height: auto;
     background: #fff;
 }
 
 .sub-standard-detail-hero-sticky {
     position: sticky;
-    top: 0;
+    top: calc(100 * var(--vw));
     width: 100%;
-    height: 100vh;
-    min-height: 680px;
+    height: calc(100vh - calc(100 * var(--vw)));
+    height: calc(100dvh - calc(100 * var(--vw)));
+    min-height: 0;
     overflow: hidden;
     background: #fff;
 }
@@ -2262,10 +2363,13 @@ History 연도별 1920 시안 좌표
     }
 
     .sub-standard-detail-hero {
-        height: 200vh;
+        height: auto;
     }
 
     .sub-standard-detail-hero-sticky {
+        top: 64px;
+        height: calc(100vh - 64px);
+        height: calc(100dvh - 64px);
         min-height: 0;
     }
 
@@ -2529,7 +2633,7 @@ History 연도별 1920 시안 좌표
     }
 
     .sub-History-page > .sub-standard-detail-hero {
-        height: 150vh;
+        height: auto;
     }
 
     .sub-History-page .sub-history-lead::after {
@@ -2813,13 +2917,17 @@ History 연도별 1920 시안 좌표
         min-height: 680px;
     }
 
-    .sub-standard-page .sub-standard-main-title {
-        width: calc(100% - 50px);
+    .sub-standard-page .sub-standard-main-visual {
+        height: 400vh;
+        min-height: 0;
     }
 
-    .sub-standard-page .sub-standard-main-title::after {
-        width: 240px;
-        height: 2px;
+    .sub-standard-page .sub-standard-main-sticky {
+        min-height: 0;
+    }
+
+    .sub-standard-page .sub-standard-main-title {
+        width: 100%;
     }
 
     .sub-standard-page .sub-standard-main-title strong,
@@ -2829,7 +2937,30 @@ History 연도별 1920 시안 좌표
     }
 
     .sub-standard-page .sub-standard-main-title span {
-        margin-top: 10px;
+        margin-top: 0;
+    }
+
+    .sub-standard-page .sub-standard-main-title-top {
+        top: calc(50% - 10px);
+    }
+
+    .sub-standard-page .sub-standard-main-title-bottom {
+        top: calc(50% + 10px);
+    }
+
+    .sub-standard-page .sub-standard-main-reveal {
+        aspect-ratio: 4 / 5;
+        border-radius: 18px;
+    }
+
+    .sub-standard-page .sub-standard-main-reveal-copy {
+        gap: 10px;
+    }
+
+    .sub-standard-page .sub-standard-main-reveal-copy h2 {
+        width: calc(100% - 40px);
+        font-size: 25px;
+        line-height: 1.32;
     }
 
     .sub-standard-page .sub-standard-intro-content {

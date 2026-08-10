@@ -1466,7 +1466,7 @@ Tabs 공통
     padding: calc(100vw * 14 / 1920) calc(100vw * 24 / 1920);
     border: 1px solid #a8a8a8;
     border-radius: calc(100vw * 100 / 1920);
-    background: #fff;
+    background: transparent;
     color: #a8a8a8;
     font-size: calc(100vw * 18 / 1920);
     font-weight: 500;

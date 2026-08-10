@@ -74,6 +74,8 @@
 .sub-mypage-info-list dd { color: #222; font-size: calc(15 * var(--vw)); line-height: 1.5; }
 .sub-mypage-block { margin-top: calc(90 * var(--vw)); }
 .sub-mypage-block-heading { display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: calc(18 * var(--vw)); }
+.sub-mypage-block-heading .sub-mypage-section-title { padding-bottom: 0; border-bottom: 0; }
+.sub-mypage-order-block .sub-mypage-block-heading { border-bottom: 1px solid #222; }
 .sub-mypage-block-heading a { color: #aaa; font-size: calc(14 * var(--vw)); text-decoration: underline; }
 
 /* Product slider */
@@ -89,8 +91,12 @@
 .sub-mypage-slider-button::before { content: ""; position: absolute; top: 50%; left: 50%; width: calc(10 * var(--vw)); height: calc(10 * var(--vw)); border-top: calc(2 * var(--vw)) solid #999; border-right: calc(2 * var(--vw)) solid #999; }
 .sub-mypage-product-prev { left: 0; }
 .sub-mypage-product-prev::before { transform: translate(-35%, -50%) rotate(-135deg); }
-.sub-mypage-product-next { right: 0; border-color: var(--red); }
-.sub-mypage-product-next::before { border-color: var(--red); transform: translate(-65%, -50%) rotate(45deg); }
+.sub-mypage-product-next { right: 0; }
+.sub-mypage-product-next::before { transform: translate(-65%, -50%) rotate(45deg); }
+.sub-mypage-slider-button:hover,
+.sub-mypage-slider-button:focus-visible { border-color: var(--red); }
+.sub-mypage-slider-button:hover::before,
+.sub-mypage-slider-button:focus-visible::before { border-color: var(--red); }
 .sub-mypage-slider-button.swiper-button-disabled { opacity: .35; pointer-events: none; }
 
 /* Order */
@@ -1092,6 +1098,7 @@ button.sub-mypage-part-text {
 ======================================== */
 .sub-mypage-home-page .sub-mypage-block { margin-top: calc(76 * var(--vw)); }
 .sub-mypage-home-page .sub-mypage-product-card .sub-mypage-product-image { height: calc(280 * var(--vw)); }
+.sub-mypage-home-order-history { border-bottom: 1px solid #ddd; }
 .sub-mypage-home-page .sub-mypage-table .sub-button-more {
     border: 1px solid var(--red);
     border-radius: 999px;
