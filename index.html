@@ -231,11 +231,10 @@
                 <!-- //Heading -->
 
                 <!-- Cards -->
-                <div class="support-cards swiper">
-                    <div class="swiper-wrapper">
+                <div class="support-cards pc-only">
 
                     <!-- Training Center -->
-                    <article class="support-card support-card-training swiper-slide">
+                    <article class="support-card support-card-training">
                         <p class="support-card-label">
                             헌터코리아 트레이닝 센터
                         </p>
@@ -259,7 +258,7 @@ Training Center
                     </article>
 
                     <!-- Operation Guides -->
-                    <article class="support-card support-card-guide swiper-slide">
+                    <article class="support-card support-card-guide">
                         <p class="support-card-label">
                             헌터 장비 운용 가이드
                         </p>
@@ -282,7 +281,7 @@ Operation Guide
                     </article>
 
                     <!-- Specification -->
-                    <article class="support-card support-card-specification swiper-slide">
+                    <article class="support-card support-card-specification">
                         <p class="support-card-label">
                             차량 제원 검색
                         </p>
@@ -304,9 +303,34 @@ Specification
                         </a>
                     </article>
 
-                    </div>
                 </div>
                 <!-- //Cards -->
+
+                <div class="support-cards support-cards-mobile swiper mo-only">
+                    <div class="swiper-wrapper">
+                        <article class="support-card support-card-training swiper-slide">
+                            <p class="support-card-label">헌터코리아 트레이닝 센터</p>
+                            <h3 class="support-card-title">Hunter Korea<br>Training Center</h3>
+                            <div class="support-card-line"></div>
+                            <p class="support-card-text">글로벌 표준 커리큘럼 기반의 실습 교육으로 현장 전문가를 양성합니다. 교육 신청부터 이력까지 원스톱으로 관리하세요.</p>
+                            <a href="/Support/Training-program.html" class="btn-more">more</a>
+                        </article>
+                        <article class="support-card support-card-guide swiper-slide">
+                            <p class="support-card-label">헌터 장비 운용 가이드</p>
+                            <h3 class="support-card-title">Equipment<br>Operation Guide</h3>
+                            <div class="support-card-line"></div>
+                            <p class="support-card-text">공식 PDF 매뉴얼과 핵심 조작 가이드 영상을 제공합니다. 초보자부터 숙련자까지 언제 어디서나 장비를 마스터하세요.</p>
+                            <a href="/Support/equipment-operation-guide.html" class="btn-more">more</a>
+                        </article>
+                        <article class="support-card support-card-specification swiper-slide">
+                            <p class="support-card-label">차량 제원 검색</p>
+                            <h3 class="support-card-title">Wheel Alignment<br>Specification</h3>
+                            <div class="support-card-line"></div>
+                            <p class="support-card-text">국내외 최신 차종의 정밀 휠 얼라인먼트 승인 제원을 실시간으로 조회하여 오차 없는 타이어 정비의 기준을 제시합니다.</p>
+                            <a href="/Support/Wheel-Alignment-Specification.html" class="btn-more">more</a>
+                        </article>
+                    </div>
+                </div>
 
             </div>
             </section>
@@ -330,7 +354,7 @@ Specification
                     </div>
                     <!-- //Heading -->
 
-                    <div class="media-content">
+                    <div class="media-content pc-only">
 
                         <!-- ===========================
                             Active View
@@ -356,12 +380,16 @@ Specification
                         <!-- ===========================
                             List
                         ============================ -->
-                        <div class="media-list swiper" id="mediaMainPromotionList"></div>
-                        <div class="media-pagination swiper-pagination"></div>
+                        <div class="media-list" id="mediaMainPromotionList"></div>
                         <!-- //media-list -->
 
                     </div>
                     <!-- //media-content -->
+
+                    <div class="media-content media-content-mobile mo-only">
+                        <div class="media-list swiper" id="mediaMainPromotionMobileList"></div>
+                        <div class="media-pagination swiper-pagination"></div>
+                    </div>
 
                 </div>
 

@@ -67,6 +67,7 @@
 
     function renderPromotion() {
         const container = document.getElementById("mediaMainPromotionList");
+        const mobileContainer = document.getElementById("mediaMainPromotionMobileList");
         const featured = document.getElementById("mediaMainFeatured");
         if (!container || !featured) return;
 
@@ -75,35 +76,45 @@
         if (!items.length) {
             featured.hidden = true;
             container.innerHTML = "";
+            if (mobileContainer) mobileContainer.innerHTML = "";
             return;
         }
 
-        container.innerHTML = `
-            <div class="swiper-wrapper">
-            ${items.map((item, index) => `
-            <a
-                href="${getViewUrl("promotion", item.id)}"
-                class="media-item swiper-slide${index === 0 ? " is-active" : ""}"
+        container.innerHTML = items.map((item, index) => `
+            <article
+                class="media-item${index === 0 ? " is-active" : ""}"
                 data-media-index="${index}"
+                tabindex="0"
+                role="button"
                 aria-label="${escapeHtml(item.title)}">
-                <div class="media-item-image">
-                    <img src="${item.thumbnail || PLACEHOLDER}" alt="${escapeHtml(item.title)}" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
-                </div>
                 <span class="media-card-category">${escapeHtml(item.category)}</span>
                 <h3 class="media-card-title">${escapeHtml(item.title)}</h3>
-                <p class="media-card-text">${escapeHtml(getPlainPreview(item.content, 2))}</p>
-            </a>
-            `).join("")}
-            </div>
-        `;
+                <p class="media-card-text">${escapeHtml(getPlainPreview(item.content, 1))}</p>
+            </article>
+        `).join("");
+
+        if (mobileContainer) {
+            mobileContainer.innerHTML = `
+                <div class="swiper-wrapper">
+                    ${items.map(item => `
+                        <a href="${getViewUrl("promotion", item.id)}" class="media-item swiper-slide">
+                            <div class="media-item-image">
+                                <img src="${item.thumbnail || PLACEHOLDER}" alt="${escapeHtml(item.title)}" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
+                            </div>
+                            <span class="media-card-category">${escapeHtml(item.category)}</span>
+                            <h3 class="media-card-title">${escapeHtml(item.title)}</h3>
+                            <p class="media-card-text">${escapeHtml(getPlainPreview(item.content, 2))}</p>
+                        </a>
+                    `).join("")}
+                </div>
+            `;
+        }
 
         setFeatured(items[0]);
 
         container.addEventListener("click", event => {
             const itemElement = event.target.closest(".media-item");
             if (!itemElement) return;
-            if (window.matchMedia("(max-width: 767px)").matches) return;
-            event.preventDefault();
             activatePromotionItem(itemElement, items);
         });
 
@@ -111,25 +122,25 @@
             if (event.key !== "Enter" && event.key !== " ") return;
             const itemElement = event.target.closest(".media-item");
             if (!itemElement) return;
-            if (window.matchMedia("(max-width: 767px)").matches) return;
             event.preventDefault();
             activatePromotionItem(itemElement, items);
         });
 
-        new Swiper(container, {
-            slidesPerView: 1,
-            spaceBetween: 16,
-            pagination: {
-                el: ".media-pagination",
-                clickable: true
-            },
-            breakpoints: {
-                768: {
-                    enabled: false,
-                    spaceBetween: 0
+        if (mobileContainer) {
+            new Swiper(mobileContainer, {
+                slidesPerView: 1,
+                spaceBetween: 16,
+                pagination: {
+                    el: ".media-pagination",
+                    clickable: true
+                },
+                breakpoints: {
+                    768: {
+                        enabled: false
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     function activatePromotionItem(itemElement, items) {

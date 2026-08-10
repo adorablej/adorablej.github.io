@@ -995,10 +995,6 @@ Section 06 : Media
     padding:calc(40 * var(--vw)) calc(34 * var(--vw));
 }
 .media-list{
-    min-width:0;
-}
-
-.media-list .swiper-wrapper{
     display:grid;
     grid-template-columns:repeat(2,minmax(0,1fr));
     grid-template-rows:repeat(2,calc(320 * var(--vw)));
@@ -1122,6 +1118,7 @@ Section 06 : Media
     }
 
     .media-list {
+        display: block;
         width: calc(100% - 50px);
         margin: 0 auto;
         overflow: hidden;
@@ -1513,4 +1510,56 @@ body.main-page {
 .main-page .footer-section {
     scroll-snap-align:start;
     scroll-snap-stop:always;
+}
+
+@media (max-width: 767px) {
+    .main-page .business-section,
+    .main-page .business-visual {
+        height: 450px;
+        min-height: 450px;
+    }
+
+    .business-section {
+        background-image: url("../images/sub_p_bbg02_m.png");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .business-dim {
+        display: none;
+    }
+
+    .business-content {
+        align-items: flex-start;
+        justify-content: flex-start;
+        height: 100%;
+        padding: 179px 25px 0;
+        box-sizing: border-box;
+        text-align: left;
+    }
+
+    .business-title {
+        font-size: 24px;
+        line-height: 30px;
+        letter-spacing: -.045em;
+    }
+
+    .business-description {
+        margin: 14px 0 30px;
+        color: rgba(255, 255, 255, .6);
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: -.035em;
+    }
+
+    .business-content .btn-more {
+        min-width: 162px;
+        min-height: 50px;
+        padding: 0 28px;
+        border-radius: 25px;
+        box-sizing: border-box;
+        font-size: 14px;
+        line-height: 50px;
+    }
 }

@@ -734,11 +734,10 @@ Sub Product Item
 .sub-product-item {
     position: relative;
     overflow: hidden;
-    background: url(/images/products/p_l_bg_l.png) center / cover no-repeat; ;
-    display: flex;
-    justify-content: center;
+    background: none;
+    display: block;
     width: 100%;
-    height: calc(900 * var(--vw));
+    height: auto;
 }
 
 .sub-product-item-bg {
@@ -780,6 +779,31 @@ Sub Product Item
     display: block;
     width: 100%;
     height: auto;
+}
+
+.sub-product-item > .sub-product-item-image {
+    display: block;
+    width: 100%;
+}
+
+.sub-product-item > .sub-product-item-image > img.pc-only {
+    position: static;
+    width: 100%;
+    max-width: none;
+    height: auto;
+}
+
+.sub-product-item > .sub-product-item-image + .inner {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+.sub-product-item > .sub-product-item-image + .inner .sub-product-item-wrap {
+    min-height: 0;
+    height: 100%;
 }
 
 .sub-product-item-content {
@@ -841,7 +865,7 @@ Sub Product Item
 }
 
 .sub-product-item-reverse{
-    background:url("/images/products/p_l_bg_r.png") center /cover no-repeat;
+    background: none;
 }
 
 .sub-product-item-reverse .sub-product-item-wrap{
@@ -853,107 +877,25 @@ Sub Product Item
 }
 
 .sub-product-item-center{
-    background:url("/images/products/p_l_bg_r.png") center /cover no-repeat;
+    background: none;
 }
 .sub-product-item-center .sub-product-item-wrap{
     flex-direction:column;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
-.sub-product-item-center .sub-product-item-content{
+.sub-product-item.sub-product-item-center .sub-product-item-content{
     text-align:center;
     width: 100%;
-    padding-bottom: calc(55 * var(--vw));
+    padding: calc(110 * var(--vw)) 0 0;
 }
-
-.sub-product-item-center .sub-product-item-image{
-    height: calc(440 * var(--vw));
-    align-items: flex-start;
-}
-.sub-product-item-center .sub-product-item-image img{
-    
-}
-/* Wheel Balancers */
-.Road-Force-Walkaway .sub-product-item-image {
-    position: absolute;
-    right: 0;
-    bottom: calc(70 * var(--vw));
-    width: calc(580 * var(--vw));
-}
-.Road-Force-Elite .sub-product-item-image {
-    position: absolute;
-    left: 0;
-    bottom: calc(60 * var(--vw));
-    width: calc(530 * var(--vw));
-}
-.SmartWeight-Elite .sub-product-item-image {
-    position: absolute;
-    right: 0;
-    bottom: calc(40 * var(--vw));
-    width: calc(560 * var(--vw));
-}
-.SmartWeight-Hybrid .sub-product-item-image {
-    position: absolute;
-    left: 0;
-    bottom: calc(60 * var(--vw));
-    width: calc(530 * var(--vw));
-}
-
-/* Tire Changers */
-.TCRH-Revolution .sub-product-item-image {
-    position: absolute;
-    right: 0;
-    bottom: calc(30 * var(--vw));
-    width: calc(540 * var(--vw));
-}
-.TCMW-Maverick .sub-product-item-image {
-    position: absolute;
-    left: 0;
-    bottom: calc(30 * var(--vw));
-    width: calc(570 * var(--vw));
-}
-.TCX70 .sub-product-item-image {
-    position: absolute;
-    right: 0;
-    bottom: calc(50 * var(--vw));
-    width: calc(520 * var(--vw));
-}
-.TCX54 .sub-product-item-image {
-    position: absolute;
-    left: 0;
-    bottom:calc(50 * var(--vw));
-    width: calc(545 * var(--vw));
-}
-/* Brake Lathes */
-.AutoComp-Elite .sub-product-item-image {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    width: calc(560 * var(--vw));
-}
-
-.BL-Series .sub-product-item-image {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: calc(550 * var(--vw));
-}
-
 
 /* Alignment Racks */
 .Scissor-Alignment-Lifts  .sub-product-item-content{
     padding-bottom: 0;
 }
-.Scissor-Alignment-Lifts .sub-product-item-image img {
-    width: calc(950 * var(--vw));
-}
 .Four-Post-Lifts  .sub-product-item-content{
     padding-bottom: 0;
-}
-.Four-Post-Lifts .sub-product-item-image img{
-    width: calc(980 * var(--vw));
-    position: absolute;
-    bottom: calc(-180 * var(--vw));
 }
 
 /*Vehicle Inspection*/
@@ -962,53 +904,13 @@ Sub Product Item
     padding-bottom: calc(168 * var(--vw));
 }
 
-.Hunter-Quick-Check-Inspection .sub-product-item-image {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-.Hunter-Quick-Check-Inspection .sub-product-item-image img{
-width: calc(880 * var(--vw));
-}
-
 .Hunter-Quick-Check-Commercial .sub-product-item-content{
 padding-bottom: 0;
 padding-top:calc(100 * var(--vw));
 }
-.Hunter-Quick-Check-Commercial .sub-product-item-image img{
-    position: absolute;
-    bottom: calc(-180 * var(--vw));
-}
 /* Heavy Duty */
-.HawkEye-XL .sub-product-item-image {
-    position: absolute;
-    width: calc(570 * var(--vw));
-    bottom: calc(55 * var(--vw));
-    right: 0;
-}
-.HD-Elite .sub-product-item-image {
-    position: absolute;
-    width: calc(565 * var(--vw));
-    bottom: calc(0 * var(--vw));
-    left: 0;
-}
 .TCX635-PHD .sub-product-item-content{
     width: calc(530 * var(--vw));
-}
-.TCX635-PHD .sub-product-item-image {
-    position: absolute;
-    width: calc(720 * var(--vw));
-    bottom: calc(90 * var(--vw));
-    right: 0;
-}
-.Heavy-Duty-Four-Post .sub-product-item-image {
-    position: absolute;
-    left: calc(-180 * var(--vw));
-    bottom: calc(20 * var(--vw));
-    width: auto;
-}
-.Heavy-Duty-Four-Post .sub-product-item-image img{
-width: calc(880 * var(--vw));
 }
 
 @media (max-width: 720px) {
@@ -1021,6 +923,11 @@ width: calc(880 * var(--vw));
     .sub-product-item .inner {
         display: block;
         width: 100%;
+    }
+
+    .sub-product-item > .sub-product-item-image + .inner {
+        position: static;
+        height: auto;
     }
 
     .sub-product-item .sub-product-item-wrap,
@@ -1044,10 +951,17 @@ width: calc(880 * var(--vw));
         align-items: center;
     }
 
-    .sub-product-item .sub-product-item-image img {
-        width: 86%;
-        height: 86%;
-        object-fit: contain;
+    .sub-product-item > .sub-product-item-image {
+        height: auto;
+        overflow: visible;
+        background: none;
+        line-height: 0;
+    }
+
+    .sub-product-item .sub-product-item-image > img.mo-only {
+        width: 100%;
+        max-width: none;
+        height: auto;
     }
 
     .sub-product-item .sub-product-item-content {
@@ -1057,6 +971,12 @@ width: calc(880 * var(--vw));
         background: #fff;
         text-align: left;
         box-sizing: border-box;
+    }
+
+    .sub-product-item.sub-product-item-center .sub-product-item-content {
+        width: 100%;
+        padding: 38px 25px 50px;
+        text-align: left;
     }
 
     .sub-product-item-category {
@@ -1104,7 +1024,7 @@ Detail Visual
 .detail-visual {
     position: relative;
     overflow: hidden;
-    background: url("/images/products/Products_D_V_bg.png") bottom / cover no-repeat;
+    background: none;
 }
 .detail-visual.bg2 {
     position: relative;
@@ -1126,26 +1046,6 @@ Detail Visual
     height: calc(1080 * var(--vw));
 }
 
-.detail-visual-wrap.visual_column{
-    align-items: stretch;
-    flex-direction: column;
-}
-
-.detail-visual-wrap.visual_column .detail-visual-content{
-    position: absolute;
-    margin-top: calc(170 * var(--vw));
-}
-
-.detail-visual-wrap.visual_column .detail-product-slider{
-    height: calc(910 * var(--vw));
-    margin: 0;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-.detail-visual-wrap.visual_column .detail-product-image{
-    justify-content: flex-end;
-}
 .detail-visual-content {
     flex: 0 0 calc(700 * var(--vw));
 }
@@ -1197,18 +1097,6 @@ Detail Visual
     letter-spacing: -1px;
 }
 
-.detail-product-slider {
-    flex: 0 0 calc(752 * var(--vw));
-    height: calc(910 * var(--vw));
-    overflow: hidden;
-    margin-top: 100px;
-}
-
-.detail-product-slider .swiper-wrapper,
-.detail-product-slider .swiper-slide {
-    height: 100%;
-}
-
 .detail-product-image {
     display: flex;
     justify-content: center;
@@ -1224,12 +1112,36 @@ Detail Visual
     height: auto;
     object-fit: contain;
 }
-.detail-product-image.Four-Post-Lifts{
-    right: calc(-70 * var(--vw));
+
+.detail-visual > .detail-product-image {
     position: relative;
-    bottom: calc(-50 * var(--vw));
+    width: 100%;
+    height: auto;
 }
 
+.detail-visual > .detail-product-image img {
+    display: block;
+    width: 100%;
+    max-width: none;
+    max-height: none;
+    height: auto;
+}
+
+@media (min-width: 768px) {
+    .detail-visual > .detail-product-image + .inner {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+    }
+
+    .detail-visual > .detail-product-image + .inner .detail-visual-wrap {
+        height: 100%;
+    }
+
+    .detail-visual > .detail-product-image + .inner .detail-visual-content {
+        transform: translateY(calc(-45 * var(--vw)));
+    }
+}
 /* ========================================
 Detail Visual Controls
 ======================================== */
@@ -1779,6 +1691,336 @@ Detail FAQ
 
 .detail-faq-answer p strong{
     font-weight: 600;
+}
+
+@media (max-width: 767px) {
+    .detail-visual {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .detail-visual > .inner {
+        order: 1;
+    }
+
+    .detail-visual > .detail-product-image {
+        order: 2;
+    }
+
+    .detail-visual .inner,
+    .detail-features .inner,
+    .detail-spec .inner,
+    .detail-faq .inner {
+        width: 100%;
+        padding: 0 25px;
+        box-sizing: border-box;
+    }
+
+    .detail-visual-wrap {
+        position: relative;
+        display: block;
+        height: auto;
+    }
+
+    .detail-visual-content {
+        position: relative;
+        z-index: 2;
+        padding: 40px 0 25px;
+    }
+
+    .detail-visual-title {
+        margin: 0;
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: -.03em;
+    }
+
+    .detail-visual-title .black {
+        font-size: 22px;
+    }
+
+    .detail-visual-title sup {
+        top: -8px;
+        font-size: 11px;
+    }
+
+    .detail-visual-title .greenX {
+        width: 21px;
+        height: 24px;
+    }
+
+    .detail-visual > .detail-product-image {
+        height: auto;
+    }
+
+    .detail-visual > .detail-product-image img {
+        max-height: none;
+    }
+
+    .detail-product-image img {
+        max-height: 125px;
+    }
+
+    .detail-section-heading {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+
+    .detail-section-title {
+        font-size: 18px;
+        line-height: 1;
+        letter-spacing: 0;
+    }
+
+    .detail-features .detail-section-heading {
+        margin-bottom: 29px;
+    }
+
+    .detail-features .detail-section-title {
+        font-size: 26px;
+    }
+
+    .detail-features {
+        padding: 40px 0;
+        align-items: stretch;
+    }
+
+    .detail-features-controls {
+        gap: 6px;
+    }
+
+    .detail-features-controls .sub-slider-button {
+        width: 34px;
+        height: 34px;
+    }
+
+    .detail-features-slider .swiper-slide {
+        width: 240px !important;
+        flex: 0 0 240px;
+    }
+
+    .detail-features-card {
+        height: 335px;
+        box-sizing: border-box;
+        border-radius: 10px;
+    }
+
+    .detail-features-image {
+        height: 120px;
+    }
+
+    .detail-features-content {
+        min-height: 215px;
+    }
+
+    .detail-features-content h3 {
+        margin: 25px 25px 12px;
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: -.04em;
+    }
+
+    .detail-features-content p {
+        display: -webkit-box;
+        margin: 0 25px;
+        overflow: hidden;
+        color: #777;
+        font-size: 14px;
+        line-height: 23px;
+        letter-spacing: -.04em;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5;
+    }
+
+    .detail-summary {
+        padding: 40px 25px 29px;
+        box-sizing: border-box;
+    }
+
+    .detail-summary-inner {
+        width: 100%;
+    }
+
+    .detail-summary .detail-section-title {
+        font-size: 26px;
+    }
+
+    .detail-summary-list {
+        display: block;
+        margin-top: 36px;
+    }
+
+    .detail-summary-item,
+    .detail-summary-item:nth-child(odd),
+    .detail-summary-item:nth-child(even) {
+        grid-template-columns: 30px minmax(0, 1fr);
+        gap: 20px;
+        min-height: 94px;
+        padding: 0;
+    }
+
+    .detail-summary-item:empty {
+        display: none;
+    }
+
+    .detail-summary-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .detail-summary-item p {
+        min-width: 0;
+        font-size: 14px;
+        line-height: 24px;
+        letter-spacing: -.03em;
+        word-break: keep-all;
+    }
+
+    .detail-spec {
+        padding: 40px 0 46px;
+    }
+
+    .detail-spec .detail-section-heading {
+        margin-bottom: 20px;
+    }
+
+    .detail-spec .detail-section-title {
+        font-size: 26px;
+    }
+
+    .detail-spec-wrap {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .detail-spec-content {
+        flex: none;
+        width: 100%;
+    }
+
+    .detail-spec-image {
+        flex: none;
+        width: 100%;
+        min-height: 315px;
+        height: 315px;
+        margin-bottom: 20px;
+    }
+
+    .detail-spec-image img {
+        max-width: 100%;
+        max-height: 265px;
+    }
+
+    .detail-spec-row {
+        grid-template-columns: 104px 1fr;
+        min-height: 60px;
+        padding: 18px 0;
+        box-sizing: border-box;
+    }
+
+    .detail-spec-row dt,
+    .detail-spec-row dd,
+    .detail-spec-subtxt {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .detail-spec-subtxt {
+        margin-top: 18px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .detail-spec-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 13px;
+        margin-top: 31px;
+    }
+
+    .detail-spec-button {
+        width: 238px;
+        min-width: 0;
+        height: 46px;
+        padding: 0 22px;
+        box-sizing: border-box;
+        font-size: 14px;
+        letter-spacing: .14em;
+    }
+
+    .detail-spec-button-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .detail-faq {
+        padding: 40px 0;
+    }
+
+    .detail-faq .detail-section-heading {
+        margin-bottom: 35px;
+    }
+
+    .detail-faq .detail-section-title {
+        font-size: 26px;
+    }
+
+    .detail-faq-list {
+        margin-top: 0;
+    }
+
+    .detail-faq-question {
+        grid-template-columns: minmax(0, 1fr) 25px;
+        grid-template-areas:
+            "number icon"
+            "text icon";
+        min-height: 0;
+        padding: 26px 0 24px;
+    }
+
+    .detail-faq-number {
+        grid-area: number;
+        font-size: 22px;
+        line-height: 22px;
+    }
+
+    .detail-faq-question-text {
+        grid-area: text;
+        margin-top: 18px;
+        max-width: 245px;
+        padding-right: 0;
+        font-size: 14px;
+        line-height: 24px;
+        word-break: keep-all;
+    }
+
+    .detail-faq-icon {
+        grid-area: icon;
+        align-self: center;
+        width: 22px;
+        height: 22px;
+    }
+
+    .detail-faq-icon::before {
+        width: 21px;
+        height: 1px;
+    }
+
+    .detail-faq-icon::after {
+        width: 1px;
+        height: 21px;
+    }
+
+    .detail-faq-answer-inner {
+        padding: 30px 0 31px;
+        border-top: 1px solid #ddd;
+    }
+
+    .detail-faq-answer p {
+        font-size: 14px;
+        line-height: 22px;
+        word-break: keep-all;
+    }
 }
 
 

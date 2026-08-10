@@ -176,9 +176,9 @@ const featuresSwiper = new Swiper(".detail-features-slider", {
 
     breakpoints: {
         0: {
-            slidesOffsetBefore: 20,
-            slidesOffsetAfter: 20,
-            spaceBetween: 16,
+            slidesOffsetBefore: 25,
+            slidesOffsetAfter: 25,
+            spaceBetween: 15,
         },
 
         768: {
@@ -192,22 +192,6 @@ const featuresSwiper = new Swiper(".detail-features-slider", {
             slidesOffsetAfter: featuresOffset,
             spaceBetween: 24,
         },
-    },
-});
-
-
-/* product-detail.html , Detail Visual. */
-const detailProductSwiper = new Swiper(".detail-product-slider", {
-    slidesPerView: 1,
-    speed: 600,
-    effect: "fade",
-    fadeEffect: {
-        crossFade: true,
-    },
-
-    navigation: {
-        prevEl: ".detail-visual-prev",
-        nextEl: ".detail-visual-next",
     },
 });
 

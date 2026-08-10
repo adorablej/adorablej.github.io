@@ -16,7 +16,7 @@
     }
 
     function initSupportSlider() {
-        const supportCards = document.querySelector(".support-cards");
+        const supportCards = document.querySelector(".support-cards-mobile");
 
         if (!supportCards) return;
 
@@ -28,10 +28,7 @@
             watchOverflow: true,
             breakpoints: {
                 768: {
-                    enabled: false,
-                    spaceBetween: 0,
-                    slidesOffsetBefore: 0,
-                    slidesOffsetAfter: 0
+                    enabled: false
                 }
             }
         });
