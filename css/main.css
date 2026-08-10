@@ -1429,10 +1429,15 @@ Products Circle Splash
     position:absolute;
     inset:0;
     z-index:2000;
+    display:none;
     width:100%;
     height:100%;
     overflow:hidden;
     pointer-events:none;
+}
+
+.main-page .products-splash-section {
+    display:block;
 }
 
 .products-splash-svg {

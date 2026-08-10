@@ -129,6 +129,7 @@
     function initStoryMotion() {
         const story = document.querySelector(".sub-standard-story");
         if (!story) return;
+        const isMobile = window.matchMedia("(max-width: 720px)").matches;
 
         const copyUsa = ".sub-standard-story-copy-usa";
         const copyKorea = ".sub-standard-story-copy-korea";
@@ -417,15 +418,46 @@
                 y: 0,
                 duration: 0.28,
                 ease: "power2.out"
-            }, "partners-copy+=0.56")
-            .call(playPartnersRise, null, "partners-copy+=0.86")
-            // 자동 상승이 끝난 뒤 스크롤을 다시 받을 짧은 유지 구간
-            .to({}, { duration: 0.45 });
+            }, "partners-copy+=0.56");
 
-        /* 06 → 07. 다음 스크롤을 감지하는 동안 장면 유지 */
-        timeline
-            // 최종 H 로고 장면 유지
-            .to({}, { duration: 2.2 });
+        if (isMobile) {
+            /* 모바일은 관성 스크롤에서도 누락되지 않도록 마지막 H까지 스크롤 타임라인에 포함 */
+            timeline
+                .set(partnersScene, { autoAlpha: 1 }, "partners-mobile-rise")
+                .to(partnersImage, { opacity: 1, duration: 0.18 }, "partners-mobile-rise")
+                .to(partnersSolid, { opacity: 0, duration: 0.16 }, "partners-mobile-rise+=0.02")
+                .to(partnersRed, { opacity: 0, scaleX: 0.78, duration: 0.16 }, "partners-mobile-rise+=0.02")
+                .to(partnersScene, {
+                    y: partnersExpandedY,
+                    scale: partnersExpandedScale,
+                    duration: 0.9,
+                    ease: "power3.out"
+                }, "partners-mobile-rise")
+                .to({}, { duration: 0.35 })
+                .to(copyPartners, {
+                    autoAlpha: 0,
+                    y: -25,
+                    duration: 0.2,
+                    ease: "power2.out"
+                }, "partners-mobile-final")
+                .to(partnersScene, {
+                    y: 0,
+                    scale: storyLogoScale,
+                    duration: 0.95,
+                    ease: "power2.inOut"
+                }, "partners-mobile-final+=0.04")
+                .to(partnersImage, { opacity: 0, duration: 0.28 }, "partners-mobile-final+=0.4")
+                .to(partnersSolid, { opacity: 1, duration: 0.28 }, "partners-mobile-final+=0.43")
+                .to(partnersRed, { opacity: 1, scaleX: 1, duration: 0.3 }, "partners-mobile-final+=0.46")
+                .to({}, { duration: 1.2 });
+        } else {
+            timeline
+                .call(playPartnersRise, null, "partners-copy+=0.86")
+                // 자동 상승이 끝난 뒤 스크롤을 다시 받을 짧은 유지 구간
+                .to({}, { duration: 0.45 })
+                // 최종 H 로고 장면 유지
+                .to({}, { duration: 2.2 });
+        }
     }
 
     function initTrackpadScrollStability() {
