@@ -1419,11 +1419,6 @@ Sub Products Banner - Solution
     margin-top: calc(8 * var(--vw));
 }
 
-.banner-mobile-only {
-    display: none;
-}
-
-
 /* ========================================
 Section Title 공통
 ======================================== */
@@ -2378,14 +2373,6 @@ Mobile Common Layout
         font-size: 14px;
         line-height: 50px;
         box-sizing: border-box;
-    }
-
-    .banner-desktop-only {
-        display: none;
-    }
-
-    .banner-mobile-only {
-        display: inline;
     }
 
     .sub-products-banner-solution .sub-products-banner-content {

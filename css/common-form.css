@@ -883,7 +883,7 @@ Mobile Forms
 
     .sub-form-contact-heading {
         margin-bottom: 40px;
-        padding: 0 25px;
+        padding: 40px 25px 0;
     }
 
     .sub-form-contact-heading h2 {
@@ -904,6 +904,11 @@ Mobile Forms
         padding-bottom: 14px;
     }
 
+    .sub-form-page-contact .sub-form-section-title h3 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
     .sub-form-page-contact .sub-form {
         gap: 24px;
     }
@@ -922,16 +927,16 @@ Mobile Forms
         height: 60px;
         padding-right: 14px;
         padding-left: 14px;
-        font-size: 11px;
+        font-size: 14px;
     }
 
     .sub-form-page-contact .sub-form-email {
-        grid-template-columns: minmax(0, 1fr) 14px minmax(0, 1fr);
+        grid-template-columns: minmax(0, 1fr) 14px;
         gap: 10px;
     }
 
     .sub-form-page-contact .sub-form-email > .sub-form-control:nth-of-type(2) {
-        grid-column: auto;
+        grid-column: 1 / -1;
     }
 
     .sub-form-page-contact .sub-form-email > .sub-form-select {
@@ -943,10 +948,10 @@ Mobile Forms
     }
 
     .sub-form-page-contact .sub-form-textarea {
-        height: 190px;
+        height: 200px;
         padding: 14px;
-        font-size: 11px;
-        line-height: 18px;
+        font-size: 14px;
+        line-height: 22px;
     }
 
     .sub-form-page-contact .sub-form-bottom {
@@ -955,10 +960,10 @@ Mobile Forms
     }
 
     .sub-form-page-contact .sub-form-submit {
-        min-width: 110px;
-        height: 42px;
+        min-width: 132px;
+        height: 50px;
         padding: 0 22px;
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .sub-form-category-group .sub-form-select {
@@ -979,23 +984,28 @@ Mobile Forms
 
     .sub-form-privacy-content h4 {
         margin-bottom: 14px;
-        font-size: 14px;
+        font-size: 16px;
+        line-height: 22px;
     }
 
     .sub-form-privacy-content > p,
-    .sub-form-privacy-content li,
+    .sub-form-privacy-content li {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
     .sub-form-privacy-row span {
-        font-size: 11px;
-        line-height: 17px;
+        font-size: 12px;
+        line-height: 18px;
     }
 
     .sub-form-privacy-table {
-        overflow-x: auto;
+        overflow: visible;
         margin-bottom: 20px;
     }
 
     .sub-form-privacy-row {
-        min-width: 540px;
+        min-width: 0;
     }
 
     .sub-form-privacy-row span,
@@ -1005,8 +1015,10 @@ Mobile Forms
     }
 
     .sub-form-submit-row {
+        justify-content: center;
         margin-top: 28px;
-        padding-top: 28px;
+        padding-top: 0;
+        border-top: 0;
     }
 
     /* Vehicle Specification Request */

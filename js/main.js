@@ -27,6 +27,20 @@
 
         if (!visual) return;
 
+        const syncVisualVideo = swiper => {
+            swiper.slides.forEach(slide => {
+                slide.querySelectorAll("video").forEach(video => {
+                    const isVisible = window.getComputedStyle(video).display !== "none";
+
+                    if (slide.classList.contains("swiper-slide-active") && isVisible) {
+                        video.play().catch(() => {});
+                    } else {
+                        video.pause();
+                    }
+                });
+            });
+        };
+
         const visualSwiper = new Swiper(visual, {
             /*
              * 마지막 슬라이드 이후
@@ -83,6 +97,11 @@
                 enabled: true,
                 prevSlideMessage: "이전 슬라이드",
                 nextSlideMessage: "다음 슬라이드"
+            },
+
+            on: {
+                init: syncVisualVideo,
+                slideChangeTransitionStart: syncVisualVideo
             }
         });
 

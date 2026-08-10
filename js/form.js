@@ -39,8 +39,10 @@ function initContactInquiryCategory() {
         training: "training",
     };
     const params = new URLSearchParams(window.location.search);
-    const requestedCategory = (params.get("category") || params.get("type") || "all").toLowerCase();
-    const category = aliases[requestedCategory] || "all";
+    const requestedCategory = (params.get("category") || params.get("type") || "").toLowerCase();
+    if (!requestedCategory) return;
+    const category = aliases[requestedCategory];
+    if (!category) return;
     const option = [...select.querySelectorAll(".sub-form-select-option")]
         .find(item => item.dataset.value === category);
 

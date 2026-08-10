@@ -52,7 +52,7 @@
 <div class="sub-form">
 <div class="sub-form-group">
 <label class="sub-form-label" for="company">
-                                업체명
+                                업체명<span class="sub-form-required">*</span>
                             </label>
 <div class="sub-form-control"><input autocomplete="organization" class="sub-form-input" data-message="업체명을 입력해주세요." data-required="" id="company" name="company_name" placeholder="업체명을 입력해주세요." type="text"/><span aria-hidden="true" class="sub-form-state"></span></div>
 <p class="sub-form-message">
@@ -61,7 +61,7 @@
 </div>
 <div class="sub-form-group">
 <label class="sub-form-label" for="name">
-                                성함
+                                성함<span class="sub-form-required">*</span>
                             </label>
 <div class="sub-form-control"><input autocomplete="name" class="sub-form-input" data-message="성함을 입력해주세요." data-required="" id="name" name="user_name" placeholder="성함을 입력해주세요." type="text"/><span aria-hidden="true" class="sub-form-state"></span></div>
 <p class="sub-form-message">
@@ -70,9 +70,9 @@
 </div>
 <div class="sub-form-group">
 <label class="sub-form-label" for="phone-number">
-                                휴대폰 번호
+                                휴대폰 번호<span class="sub-form-required">*</span>
                             </label>
-<div class="sub-form-control"><input autocomplete="tel" class="sub-form-input" data-message="휴대폰 번호를 확인해주세요." data-pattern="^01[016789]-\d{3,4}-\d{4}$" data-phone id="phone-number" inputmode="numeric" maxlength="13" name="user_phone" placeholder="휴대폰 번호를 입력해주세요." type="tel"/><span aria-hidden="true" class="sub-form-state"></span></div>
+<div class="sub-form-control"><input autocomplete="tel" class="sub-form-input" data-message="휴대폰 번호를 확인해주세요." data-pattern="^01[016789]-\d{3,4}-\d{4}$" data-phone data-required="" id="phone-number" inputmode="numeric" maxlength="13" name="user_phone" placeholder="(-) 제외한 숫자만 입력해 주세요." type="tel"/><span aria-hidden="true" class="sub-form-state"></span></div>
 <p class="sub-form-message">
                                 휴대폰 번호를 확인해주세요.
                             </p>
@@ -82,9 +82,9 @@
                                 이메일 주소
                             </span>
 <div class="sub-form-email">
-<div class="sub-form-control"><input autocomplete="email" class="sub-form-input" data-message="이메일 주소를 확인해주세요." data-pattern="^[^@\\s]+$" data-required="" id="email-id" name="email_id" placeholder="입력해주세요." type="text"/><span aria-hidden="true" class="sub-form-state"></span></div>
+<div class="sub-form-control"><input autocomplete="email" class="sub-form-input" data-message="이메일 주소를 확인해주세요." data-pattern="^[^@\\s]+$" id="email-id" name="email_id" placeholder="이메일을 입력해주세요." type="text"/><span aria-hidden="true" class="sub-form-state"></span></div>
 <span class="sub-form-email-at">@</span>
-<div class="sub-form-control"><input class="sub-form-input" data-message="이메일 주소를 확인해주세요." data-pattern="^[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$" data-required="" id="email-domain" name="email_domain" placeholder="입력해주세요." type="text"/><span aria-hidden="true" class="sub-form-state"></span></div>
+<div class="sub-form-control"><input class="sub-form-input" data-message="이메일 주소를 확인해주세요." data-pattern="^[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$" id="email-domain" name="email_domain" placeholder="입력해주세요." type="text"/><span aria-hidden="true" class="sub-form-state"></span></div>
 <div class="sub-form-select" data-select="" data-target="#email-domain">
 <button aria-expanded="false" aria-haspopup="listbox" class="sub-form-select-trigger" type="button">
 <span class="sub-form-select-value is-placeholder">
@@ -133,21 +133,16 @@
 <div class="sub-form">
 <div class="sub-form-group sub-form-category-group">
 <span class="sub-form-label">
-                                문의 분류
+                                문의 유형<span class="sub-form-required">*</span>
                             </span>
 <div class="sub-form-select" data-select="">
 <button aria-expanded="false" aria-haspopup="listbox" class="sub-form-select-trigger" type="button">
-<span class="sub-form-select-value">
-                                        전체
+<span class="sub-form-select-value is-placeholder">
+                                        카테고리를 선택해 주세요.
                                     </span>
 <span aria-hidden="true" class="sub-form-select-arrow"></span>
 </button>
 <ul class="sub-form-select-options" role="listbox">
-<li>
-<button class="sub-form-select-option is-selected" data-value="all" type="button">
-                                            전체
-                                        </button>
-</li>
 <li>
 <button class="sub-form-select-option" data-value="purchase" type="button">
                                             제품/부품 구매
@@ -174,15 +169,15 @@
                                         </button>
 </li>
 </ul>
-<input data-message="문의 분류를 선택해주세요." data-required="" name="inquiry_category" type="hidden" value="all"/>
+<input data-message="문의 유형을 선택해주세요." data-required="" name="inquiry_category" type="hidden" value=""/>
 </div>
 <p class="sub-form-message">
-                                문의 분류를 선택해주세요.
+                                문의 유형을 선택해주세요.
                             </p>
 </div>
 <div class="sub-form-group">
 <label class="sub-form-label" for="inquiry-title">
-                                문의 제목
+                                문의 제목<span class="sub-form-required">*</span>
                             </label>
 <div class="sub-form-control"><input class="sub-form-input" data-message="문의 제목을 입력해주세요." data-required="" id="inquiry-title" maxlength="20" name="inquiry_title" placeholder="제목을 입력해 주세요. (20자 이내)" type="text"/><span aria-hidden="true" class="sub-form-state"></span></div>
 <p class="sub-form-message">
@@ -191,7 +186,7 @@
 </div>
 <div class="sub-form-group">
 <label class="sub-form-label" for="inquiry-content">
-                                문의 내용
+                                문의 내용<span class="sub-form-required">*</span>
                             </label>
 <div class="sub-form-textarea-wrap">
 <div class="sub-form-control"><textarea class="sub-form-textarea" data-message="문의 내용을 입력해주세요." data-required="" id="inquiry-content" maxlength="3000" name="message" placeholder="문의 내용을 입력해 주세요."></textarea><span aria-hidden="true" class="sub-form-state"></span></div>
@@ -210,7 +205,7 @@
 <input data-message="개인정보 수집 및 이용에 동의해주세요." data-required="" id="agree-check" name="agree" type="checkbox"/>
 <span aria-hidden="true" class="sub-form-checkbox-icon"></span>
 <span class="sub-form-checkbox-text">
-                                        개인정보 수집 및 이용에 동의합니다
+                                        (필수) 개인정보 수집·이용에 대한 안내
                                     </span>
 </label>
 <p class="sub-form-message">

@@ -2730,20 +2730,11 @@ History 연도별 1920 시안 좌표
     .sub-usa-page .sub-usa-value-korea .sub-usa-h-mask {
         position: absolute;
         top: 0;
+        right: auto;
+        left: calc(50% - 281px);
         width: 562px;
         margin: 0;
         transform: none;
-    }
-
-    .sub-usa-page .sub-usa-value-history .sub-usa-h-mask,
-    .sub-usa-page .sub-usa-value-korea .sub-usa-h-mask {
-        right: -356px;
-        left: auto;
-    }
-
-    .sub-usa-page .sub-usa-value-awards .sub-usa-h-mask {
-        right: auto;
-        left: -356px;
     }
 
     .sub-usa-page .sub-usa-value-copy,

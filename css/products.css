@@ -3134,6 +3134,7 @@ products-HunterPride-Interview.html
 }
 .sub-pride-interview-head .sub-section-title{
     font-family: 'Pretendard';
+    font-weight: 700;
 }
 
 .sub-pride-interview-title {
@@ -3336,6 +3337,10 @@ products-HunterPride-Interview.html
     font-size: calc(100vw * 24 / 1920);
     font-weight: 600;
     line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    overflow: hidden;
 }
 
 .sub-pride-interview-content p {
@@ -3348,6 +3353,8 @@ products-HunterPride-Interview.html
     word-break: keep-all;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+    display: -webkit-box;
+    overflow: hidden;
 }
 
 .sub-pride-more-button {
@@ -3363,9 +3370,6 @@ products-HunterPride-Interview.html
     background: transparent;
     color: var(--red);
     cursor: pointer;
-}
-
-.sub-pride-more-button span {
     font-family: "Russo One", sans-serif;
     font-size: calc(100vw * 15 / 1920);
     letter-spacing: .14em;
@@ -3511,30 +3515,44 @@ body.is-modal-open {
         box-sizing: border-box;
     }
 
+    .sub-pride-interview-page > .inner {
+        position: relative;
+    }
+
     .sub-pride-interview-head {
-        margin-bottom: 30px;
+        margin-bottom: 45px;
     }
 
     .sub-pride-interview-controls {
+        position: absolute;
+        right: auto;
+        bottom: 40px;
+        left: 50%;
+        z-index: 5;
         gap: 8px;
+        transform: translateX(-50%);
     }
 
     .sub-pride-featured-slider.swiper {
-        width: 100%;
-        padding-bottom: 50px;
+        width: calc(100% + 50px);
+        margin-left: -25px;
+        padding-bottom: 100px;
         overflow: hidden;
     }
 
     .sub-pride-featured-slider .sub-pride-featured-card {
         width: 100%;
-        border-radius: 10px;
+        border-radius: 0;
     }
 
     .sub-pride-featured-card.is-active {
         box-shadow: none;
     }
 
-    .sub-pride-featured-image,
+    .sub-pride-featured-image {
+        height: 200px;
+    }
+
     .sub-pride-interview-image {
         height: 174px;
     }
@@ -3543,24 +3561,49 @@ body.is-modal-open {
         display: none;
     }
 
+    .sub-pride-featured-image .sub-pride-play-button {
+        display: block;
+        width: 42px;
+        height: 42px;
+    }
+
+    .sub-pride-featured-image .sub-pride-play-button::before {
+        border-top-width: 7px;
+        border-bottom-width: 7px;
+        border-left-width: 12px;
+    }
+
     .sub-pride-featured-content {
         height: 150px;
+        text-align: center;
     }
 
     .sub-pride-featured-content strong,
     .sub-pride-interview-content strong {
-        margin-bottom: 12px;
-        padding: 24px 24px 0;
-        font-size: 20px;
-        line-height: 1.4;
+        margin-bottom: 15px;
+        padding: 35px 24px 0;
+        font-size: 22px;
+        line-height: normal;
+    }
+
+    .sub-pride-featured-content strong {
+
     }
 
     .sub-pride-featured-content p,
     .sub-pride-interview-content p {
-        padding: 0 24px 24px;
+        padding: 0 24px 30px;
         font-size: 14px;
-        line-height: 1.65;
+        line-height: 22px;
         letter-spacing: -0.04em;
+    }
+
+    .sub-pride-featured-content p {
+        max-width: 310px;
+        margin-right: auto;
+        margin-left: auto;
+        padding-right: 25px;
+        padding-left: 25px;
     }
 
     .sub-pride-interview-list-section {
@@ -3570,7 +3613,7 @@ body.is-modal-open {
     .sub-pride-interview-grid {
         grid-template-columns: 1fr;
         gap: 36px;
-        padding-top: 30px;
+        padding-top: 0;
     }
 
     .sub-pride-interview-card {
@@ -3583,7 +3626,7 @@ body.is-modal-open {
     }
 
     .sub-pride-interview-content {
-        height: 150px;
+        height: 174px;
         padding: 0;
     }
 
@@ -3595,9 +3638,6 @@ body.is-modal-open {
         border: 0;
         background: var(--red);
         color: #fff;
-    }
-
-    .sub-pride-more-button span {
         font-size: 14px;
     }
 
