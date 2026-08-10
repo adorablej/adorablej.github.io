@@ -36,10 +36,10 @@
                         <!-- Slide 01 -->
                         <div class="swiper-slide main-visual-slide">
                             <div class="main-visual-bg">
-                                <video class="pc-only" autoplay muted loop playsinline preload="metadata" poster="./images/main01.png">
+                                <video class="pc-only" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="./images/main01.png">
                                     <source src="./images/web_pc_0805.mp4" type="video/mp4">
                                 </video>
-                                <video class="mo-only" autoplay muted loop playsinline preload="metadata" poster="./images/main01.png">
+                                <video class="mo-only" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="./images/main01.png">
                                     <source src="./images/web_mo_0805.mp4" type="video/mp4">
                                 </video>
                             </div>
@@ -192,8 +192,9 @@
 
                 <p class="history-description">
                     헌터코리아의 모든 순간에는 고객님이 있었습니다.<br>
-                    쌓아온 노하우에 혁신적인 기술을 더해,
-                    가장 든든한 비즈니스 파트너로서 최상의 가이드를 약속합니다.
+                    쌓아온 노하우에 혁신적인 기술을 더해,<br class="mo-only">
+                    가장 든든한 비즈니스 파트너로서<br class="mo-only">
+                    최상의 가이드를 약속합니다.
                 </p>
 
                 <a href="#" class="btn-more">
@@ -230,10 +231,11 @@
                 <!-- //Heading -->
 
                 <!-- Cards -->
-                <div class="support-cards">
+                <div class="support-cards swiper">
+                    <div class="swiper-wrapper">
 
                     <!-- Training Center -->
-                    <article class="support-card support-card-training">
+                    <article class="support-card support-card-training swiper-slide">
                         <p class="support-card-label">
                             헌터코리아 트레이닝 센터
                         </p>
@@ -257,7 +259,7 @@ Training Center
                     </article>
 
                     <!-- Operation Guides -->
-                    <article class="support-card support-card-guide">
+                    <article class="support-card support-card-guide swiper-slide">
                         <p class="support-card-label">
                             헌터 장비 운용 가이드
                         </p>
@@ -280,7 +282,7 @@ Operation Guide
                     </article>
 
                     <!-- Specification -->
-                    <article class="support-card support-card-specification">
+                    <article class="support-card support-card-specification swiper-slide">
                         <p class="support-card-label">
                             차량 제원 검색
                         </p>
@@ -302,6 +304,7 @@ Specification
                         </a>
                     </article>
 
+                    </div>
                 </div>
                 <!-- //Cards -->
 
@@ -353,7 +356,8 @@ Specification
                         <!-- ===========================
                             List
                         ============================ -->
-                        <div class="media-list" id="mediaMainPromotionList"></div>
+                        <div class="media-list swiper" id="mediaMainPromotionList"></div>
+                        <div class="media-pagination swiper-pagination"></div>
                         <!-- //media-list -->
 
                     </div>

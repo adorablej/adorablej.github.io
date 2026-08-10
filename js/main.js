@@ -9,9 +9,32 @@
 
     function initMain() {
         initMainVisual();
+        initSupportSlider();
         initMediaSection();
         initSectionNavigator();
         initSectionSplashes();
+    }
+
+    function initSupportSlider() {
+        const supportCards = document.querySelector(".support-cards");
+
+        if (!supportCards) return;
+
+        return new Swiper(supportCards, {
+            slidesPerView: "auto",
+            spaceBetween: 16,
+            slidesOffsetBefore: 25,
+            slidesOffsetAfter: 25,
+            watchOverflow: true,
+            breakpoints: {
+                768: {
+                    enabled: false,
+                    spaceBetween: 0,
+                    slidesOffsetBefore: 0,
+                    slidesOffsetAfter: 0
+                }
+            }
+        });
     }
 
     /**
@@ -26,6 +49,17 @@
         const visual = document.querySelector(".main-visual-swiper");
 
         if (!visual) return;
+
+        const visualVideos = [...visual.querySelectorAll("video")];
+
+        visualVideos.forEach(video => {
+            video.muted = true;
+            video.defaultMuted = true;
+            video.playsInline = true;
+            video.setAttribute("muted", "");
+            video.setAttribute("playsinline", "");
+            video.setAttribute("webkit-playsinline", "");
+        });
 
         const syncVisualVideo = swiper => {
             swiper.slides.forEach(slide => {
@@ -104,6 +138,19 @@
                 slideChangeTransitionStart: syncVisualVideo
             }
         });
+
+        const retryActiveVideo = () => syncVisualVideo(visualSwiper);
+
+        visualVideos.forEach(video => {
+            video.addEventListener("loadeddata", retryActiveVideo);
+            video.addEventListener("canplay", retryActiveVideo, { once: true });
+        });
+
+        window.addEventListener("pageshow", retryActiveVideo);
+        document.addEventListener("visibilitychange", () => {
+            if (!document.hidden) retryActiveVideo();
+        });
+        document.addEventListener("pointerdown", retryActiveVideo, { once: true });
 
         return visualSwiper;
     }

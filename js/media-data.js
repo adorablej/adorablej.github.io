@@ -162,7 +162,7 @@ const MEDIA_DATA = {
         {
             id: 2,
             category: "Promotion",
-            title: "썸네일 없 내용이미지 있 프로모션 7",
+            title: "썸네일 없 내용이미지 있 프로모션 프로모션 프로모션7",
             thumbnail: "",
             date: "2026.07.15",
             content: `
@@ -170,7 +170,7 @@ const MEDIA_DATA = {
                     <img src="/images/main_banner.png">
                 </div>
                 <div class="sub-media-view-text">
-                    <p>Promotion Promotion 프로모션 Promotion Promotion 프로모션</p>
+                    <p>Promotion Promotion 프로모션 Promotion Promotion 프로모션 Promotion Promotion 프로모션 Promotion Promotion 프로모션 Promotion Promotion 프로모션 Promotion Promotion 프로모션</p>
                 </div>
             `
         },
