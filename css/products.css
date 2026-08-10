@@ -1042,12 +1042,11 @@ Detail Visual
 .detail-visual-wrap {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     height: calc(1080 * var(--vw));
 }
 
 .detail-visual-content {
-    flex: 0 0 calc(700 * var(--vw));
 }
 
 .detail-visual-title {
@@ -1139,7 +1138,8 @@ Detail Visual
     }
 
     .detail-visual > .detail-product-image + .inner .detail-visual-content {
-        transform: translateY(calc(-45 * var(--vw)));
+        margin-top:calc(180 * var(--vw));
+        
     }
 }
 /* ========================================
