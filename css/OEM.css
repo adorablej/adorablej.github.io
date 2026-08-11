@@ -198,7 +198,6 @@ BMW KDS II Alignment System Detail
     font-family: "Russo One", sans-serif;
     font-size: calc(58 * var(--vw));
     line-height: 1.18;
-    letter-spacing: -.035em;
 }
 .oem-detail-visual-title sup {
     position: relative;

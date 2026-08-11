@@ -14,7 +14,7 @@
     <link href="/css/layout.css" rel="stylesheet" />
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/responsive.css" rel="stylesheet" />
-    <link href="/css/support.css?v=20260811-15" rel="stylesheet" />
+    <link href="/css/support.css?v=20260811-16" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
@@ -57,16 +57,20 @@
                     <div class="sub-specification-filter-row">
                         <label class="sub-specification-field">
                             <span>제조사</span>
-                            <select id="specification-brand-select">
-                                <option value="">제조사를 선택해 주세요</option>
-                            </select>
+                            <span class="sub-specification-select-wrap">
+                                <select id="specification-brand-select">
+                                    <option value="">제조사를 선택해 주세요</option>
+                                </select>
+                            </span>
                         </label>
 
                         <label class="sub-specification-field">
                             <span>차종</span>
-                            <select id="specification-model-select" disabled>
-                                <option value="">차종을 선택해 주세요</option>
-                            </select>
+                            <span class="sub-specification-select-wrap">
+                                <select id="specification-model-select" disabled>
+                                    <option value="">차종을 선택해 주세요</option>
+                                </select>
+                            </span>
                         </label>
 
                         <button type="button" class="sub-specification-submit">제원 찾기 요청하기</button>

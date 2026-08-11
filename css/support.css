@@ -367,7 +367,6 @@ Equipment Operation Guide : Video
 .sub-guide-more span {
     font-family: "Russo One", sans-serif;
     font-size: calc(100vw * 15 / 1920);
-    letter-spacing: .14em;
     text-transform: lowercase;
 }
 
@@ -1362,7 +1361,7 @@ Wheel Alignment Specification
 }
 
 .sub-specification-label,
-.sub-specification-field > span,
+.sub-specification-field > span:first-child,
 .sub-specification-recent-row strong {
     display: block;
     margin-bottom: calc(100vw * 20 / 1920);
@@ -1497,14 +1496,49 @@ Wheel Alignment Specification
     margin-top: calc(100vw * 30 / 1920);
 }
 
+.sub-specification-select-wrap {
+    position: relative;
+    display: block;
+}
+
+.sub-specification-select-wrap::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: calc(100vw * 30 / 1920);
+    width: calc(100vw * 12 / 1920);
+    height: calc(100vw * 12 / 1920);
+    border-right: calc(100vw * 2 / 1920) solid #000;
+    border-bottom: calc(100vw * 2 / 1920) solid #000;
+    pointer-events: none;
+    transform: translateY(-70%) rotate(45deg);
+}
+
 .sub-specification-field select {
+    display: block;
     width: 100%;
     height: calc(100vw * 80 / 1920);
-    padding: 0 calc(100vw * 24 / 1920);
+    padding: 0 calc(100vw * 72 / 1920) 0 calc(100vw * 24 / 1920);
     border: 1px solid #e1e3e8;
     background: #fff;
     color: #777;
+    font-family: inherit;
     font-size: calc(100vw * 15 / 1920);
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.sub-specification-field select:focus {
+    border-color: var(--red);
+}
+
+.sub-specification-field select:disabled {
+    background: #fff;
+    color: #aaa;
+    cursor: not-allowed;
+    opacity: 1;
 }
 
 .sub-specification-submit {
@@ -2024,7 +2058,7 @@ Training Program : Mobile
     }
 
     .sub-specification-label,
-    .sub-specification-field > span,
+    .sub-specification-field > span:first-child,
     .sub-specification-recent-row strong {
         margin-bottom: 12px;
         font-size: 14px;
@@ -2092,7 +2126,14 @@ Training Program : Mobile
     }
 
     .sub-specification-field select {
-        padding: 0 15px;
+        padding: 0 50px 0 15px;
+    }
+
+    .sub-specification-select-wrap::after {
+        right: 22px;
+        width: 10px;
+        height: 10px;
+        border-width: 0 2px 2px 0;
     }
 
     .sub-specification-submit {

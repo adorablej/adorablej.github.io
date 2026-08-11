@@ -887,7 +887,6 @@ All Menu Navigation
     font-family: "Russo One", sans-serif;
     font-size: calc(30 * var(--vw));
     line-height: 1.2;
-    letter-spacing: 1%;
     text-align: left;
     text-decoration: none;
 }
@@ -1569,7 +1568,6 @@ Section Title 공통
     font-family: "Russo One", sans-serif;
     font-size: calc(60 * var(--vw));
     line-height: 1;
-    letter-spacing: 1px;
     color: #000;
 }
 

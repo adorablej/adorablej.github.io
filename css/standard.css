@@ -1089,7 +1089,6 @@ overflow-y: visible;
     font-family: "Russo One", sans-serif;
     font-size: calc(52 * var(--vw));
     line-height: 1;
-    letter-spacing: -.035em;
 }
 
 .sub-korea-section-heading h2 span,
@@ -1442,7 +1441,6 @@ overflow-y: visible;
     padding: calc(5 * var(--vw)) calc(20 * var(--vw));;
     font-size: calc(35 * var(--vw));
     line-height: calc(40 * var(--vw));
-    letter-spacing: 0;
     position: absolute;
     right: calc(-60 * var(--vw));
     top: calc(-30 * var(--vw));
@@ -2811,7 +2809,6 @@ History 연도별 1920 시안 좌표
         font-family: "Russo One", sans-serif;
         font-size: 22px;
         line-height: normal;
-        letter-spacing: -.11px;
         text-align: left;
         transform: none;
     }

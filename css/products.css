@@ -47,7 +47,6 @@ Sub Product Category
     font-family: "Russo One", sans-serif;
     font-size: calc(38 * var(--vw));
     line-height: 1.15;
-    letter-spacing: -.03em;
 }
 
 .sub-category-card-image {
@@ -346,7 +345,6 @@ Sub Pride Interview
     font-family: "Russo One", sans-serif;
     font-size: calc(64 * var(--vw));
     line-height: 1;
-    letter-spacing: -.02em;
 }
 
 .sub-pride-title span {
@@ -824,7 +822,6 @@ Sub Product Item
     font-family: "Russo One", sans-serif;
     font-size: calc(50 * var(--vw));
     line-height: normal;
-    letter-spacing: 0;
 }
 
 .sub-product-item-title sup{
@@ -1051,7 +1048,6 @@ Detail Visual
     font-family: "Russo One", sans-serif;
     font-size: calc(60 * var(--vw));
     line-height: calc(80 * var(--vw));
-    letter-spacing: 0;
 }
 
 .detail-visual-title .red {
@@ -1437,7 +1433,6 @@ Detail Spec
     font-family: "Russo One", sans-serif;
     font-size: calc(64 * var(--vw));
     line-height: 1;
-    letter-spacing: -.03em;
 }
 
 .detail-spec-title span {
@@ -1584,7 +1579,6 @@ Detail FAQ
     font-family: "Russo One", sans-serif;
     font-size: calc(64 * var(--vw));
     line-height: 1;
-    letter-spacing: -.03em;
 }
 
 .detail-faq-title span {
@@ -4023,7 +4017,6 @@ products-HunterPride-Interview.html
     cursor: pointer;
     font-family: "Russo One", sans-serif;
     font-size: calc(100vw * 15 / 1920);
-    letter-spacing: .14em;
     text-transform: lowercase;
 }
 
