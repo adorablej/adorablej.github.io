@@ -1,0 +1,40 @@
+(function (window) {
+    'use strict';
+
+    var client = window.HunterAPI;
+    if (!client) throw new Error('HunterAPI를 먼저 불러와야 합니다.');
+
+    window.HunterFrontAPI = Object.freeze({
+        auth: Object.freeze({
+            login: function (credentials, remember) {
+                return client.post('/api/v1/auth/login', credentials, { auth: false }).then(function (tokens) {
+                    client.auth.setTokens(tokens, remember);
+                    return tokens;
+                });
+            },
+            refresh: function () {
+                var remember = Boolean(window.localStorage.getItem(window.HunterAPIConfig.tokenKeys.refresh));
+                return client.post('/api/v1/auth/token', {
+                    refreshToken: client.auth.getRefreshToken()
+                }, { auth: false }).then(function (tokens) {
+                    client.auth.setTokens(tokens, remember);
+                    return tokens;
+                });
+            },
+            logout: function () {
+                var refreshToken = client.auth.getRefreshToken();
+                return client.post('/api/v1/auth/logout', null, {
+                    headers: refreshToken ? { 'X-Refresh-Token': refreshToken } : {}
+                }).finally(function () { client.auth.clearTokens(); });
+            }
+        }),
+        member: Object.freeze({
+            getMe: function () { return client.get('/api/v1/me'); }
+        }),
+        prideStores: Object.freeze({
+            getList: function (params) {
+                return client.get('/api/v1/pride-stores', { query: params || {}, auth: false });
+            }
+        })
+    });
+})(window);

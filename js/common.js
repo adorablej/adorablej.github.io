@@ -128,9 +128,16 @@
             }
 
             if (activeSection) {
+                const isFirstVisual = activeSection === themeSections[0];
+
+                header.classList.toggle(
+                    "is-main-solid",
+                    !isFirstVisual
+                );
+
                 applyHeaderTheme(
                     header,
-                    activeSection.dataset.headerTheme
+                    isFirstVisual ? "light" : "dark"
                 );
             }
 
@@ -213,6 +220,7 @@
     function initHeaderTransition() {
         const header = document.querySelector(".header");
         const pageScroll = document.querySelector(".page-scroll");
+        const isMainPage = document.body.classList.contains("main-page");
     
         if (!header) return;
     
@@ -243,6 +251,10 @@
     
         function updateHeader() {
             const currentScrollTop = getScrollTop();
+
+            if (!isMainPage) {
+                header.classList.toggle("is-scrolled", currentScrollTop > 1);
+            }
     
             const isMenuOpen =
                 document.documentElement.classList.contains("is-menu-open");
@@ -285,6 +297,8 @@
         scrollTarget.addEventListener("scroll", handleScroll, {
             passive: true
         });
+
+        updateHeader();
     }
 
     /**
@@ -509,7 +523,7 @@ function initDragCursor() {
     
             setMemberState();
             openCurrentDepth();
-    
+
             allMenu.classList.add("is-open");
             allMenu.setAttribute("aria-hidden", "false");
     
@@ -523,7 +537,7 @@ function initDragCursor() {
             allMenu.setAttribute("aria-hidden", "true");
     
             document.querySelector(".header")?.classList.remove("is-menu-open");
-    
+
             unlockScroll();
             closeAllDepths();
     
@@ -669,6 +683,13 @@ function initDragCursor() {
                     openMenu();
                 }
             });
+        });
+
+        allMenu.addEventListener("click", (event) => {
+            if (window.innerWidth <= 720) return;
+            if (!allMenu.classList.contains("is-open")) return;
+            if (panel.contains(event.target)) return;
+            closeMenu();
         });
     
         toggleButtons.forEach((button) => {

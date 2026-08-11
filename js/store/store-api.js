@@ -1,23 +1,23 @@
 /* products-HunterPride-Map.html , Store API. */
 
 window.StoreAPI = {
+    // 개발계 API가 준비되면 false로 변경합니다.
     useMock: true,
-    baseUrl: "/api/stores",
 
     async getStores(params = {}) {
         if (this.useMock) return this.getMockStores(params);
-
-        const query = new URLSearchParams();
-        Object.entries(params).forEach(([key, value]) => {
-            if (value !== undefined && value !== null && value !== "") query.set(key, value);
+        const data = await window.HunterFrontAPI.prideStores.getList({
+            keyword: params.keyword,
+            regionCode: params.regionCode || params.region,
+            page: params.page || 1,
+            size: params.size || 100
         });
-
-        const response = await fetch(`${this.baseUrl}?${query.toString()}`, {
-            method: "GET",
-            headers: { Accept: "application/json" }
-        });
-        if (!response.ok) throw new Error(`매장 목록을 불러오지 못했습니다. (${response.status})`);
-        return response.json();
+        const items = Array.isArray(data) ? data : (data.content || data.items || []);
+        const stores = items.map(this.normalizeStore);
+        return {
+            totalCount: data.totalCount || data.totalElements || stores.length,
+            stores
+        };
     },
 
     async getStore(id) {
@@ -25,12 +25,26 @@ window.StoreAPI = {
             return window.MOCK_STORES.find(store => String(store.id) === String(id)) || null;
         }
 
-        const response = await fetch(`${this.baseUrl}/${encodeURIComponent(id)}`, {
-            method: "GET",
-            headers: { Accept: "application/json" }
-        });
-        if (!response.ok) throw new Error(`매장 상세정보를 불러오지 못했습니다. (${response.status})`);
-        return response.json();
+        // 드래프트에는 프론트 매장 상세 API가 없어 목록 결과에서 조회합니다.
+        const result = await this.getStores({ size: 100 });
+        return result.stores.find(store => String(store.id) === String(id)) || null;
+    },
+
+    normalizeStore(store) {
+        const address = store.address || "";
+        return {
+            id: store.prideStoreId,
+            region: address.split(" ")[0] || "",
+            city: address.split(" ")[1] || "",
+            name: store.displayName || store.storeName || "",
+            roadAddress: address,
+            jibunAddress: address,
+            phone: store.phoneNumber || "",
+            latitude: store.latitude,
+            longitude: store.longitude,
+            image: store.imageUrl || "",
+            products: store.products || []
+        };
     },
 
     getMockStores(params = {}) {
