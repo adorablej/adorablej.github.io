@@ -534,8 +534,12 @@ Section 03 : History
 
     .history-content {
         box-sizing: border-box;
-        min-height: 100svh;
-        padding: 34px 20px 20px;
+        justify-content:center;
+        align-items:center;
+        width:100%;
+        height:100%;
+        min-height:0;
+        padding:40px 20px;
     }
 
     .history-logo img {
@@ -1564,71 +1568,11 @@ body {
     overflow-y: auto;
 }
 
-/* 메인 페이지에서만 body 스크롤 차단 */
-body.main-page {
-    height: 100%;
-    overflow: hidden;
-}
-
-@media (max-width:767px){
-    .text-splash-section{
-        display:none;
-    }
-}
-
-/* 메인 페이지 전용 스크롤 컨테이너 */
-.main-page .page-scroll {
-    width:100%;
-    height:100vh;
-    overflow-x:hidden;
-    overflow-y:auto;
-    scroll-snap-type:y mandatory;
-    overscroll-behavior-y:contain;
-    -webkit-overflow-scrolling:touch;
-}
-
-/* 한 번 스크롤할 때 각 섹션이 화면 시작점에 맞춰 멈춤 */
-.main-page .main-section {
-    width:100%;
-    height:100vh;
-    min-height:100vh;
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
-}
-
-/* 기존 Business 높이값을 메인 풀페이지 구조에 맞춤 */
-.main-page .business-section,
-.main-page .business-visual {
-    height:calc(100vh - calc(200 * var(--vw)));
-    min-height:calc(100vh - calc(200 * var(--vw)));
-}
-
-/* 마지막 섹션 다음에는 푸터 시작점에 맞춰 정렬 */
-.main-page .footer-section {
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
-}
-
 /* PC 메인은 섹션 단위 이동 없이 문서 전체를 자연스럽게 스크롤 */
 @media (min-width: 768px) {
-    body.main-page {
-        height:auto;
-        overflow-x:hidden;
-        overflow-y:auto;
-    }
-
-    .main-page .page-scroll {
-        height:auto;
-        overflow:visible;
-        scroll-snap-type:none;
-        overscroll-behavior-y:auto;
-    }
-
     .main-page .main-section {
         height:calc(1080 * var(--vw));
         min-height:calc(1080 * var(--vw));
-        scroll-snap-align:none;
-        scroll-snap-stop:normal;
     }
     .main-page .business-section{
         height:calc(880 * var(--vw));
@@ -1645,11 +1589,6 @@ body.main-page {
         min-height:100%;
     }
 
-    .main-page .footer-section {
-        scroll-snap-align:none;
-        scroll-snap-stop:normal;
-    }
-
     .main-page .section-nav,
     .main-page .text-splash-section,
     .main-page .products-splash-section {
@@ -1658,32 +1597,35 @@ body.main-page {
 }
 
 @media (max-width: 767px) {
-    .main-page .page-scroll.is-free-scroll{
+    body.main-page {
+        height:auto;
+        overflow-x:hidden;
+        overflow-y:auto;
+    }
+
+    .text-splash-section {
+        display:none;
+    }
+
+    .products-splash-section {
+        display:none !important;
+    }
+
+    .main-page .page-scroll {
+        width:100%;
+        height:auto;
+        overflow:visible;
         scroll-snap-type:none;
         overscroll-behavior-y:auto;
     }
 
-    .main-page #section-support,
-    .main-page #section-media,
-    .main-page #section-business,
-    .main-page .footer-section{
+    .main-page .main-section {
+        --main-mobile-scale:calc(100vw / 360);
+        width:100%;
+        height:calc(640 * var(--main-mobile-scale));
+        min-height:calc(640 * var(--main-mobile-scale));
         scroll-snap-align:none;
         scroll-snap-stop:normal;
-    }
-
-    .main-page #section-products{
-        --main-mobile-scale:calc(100vw / 360);
-        height:calc(640 * var(--main-mobile-scale));
-        min-height:calc(640 * var(--main-mobile-scale));
-        scroll-snap-align:start;
-        scroll-snap-stop:always;
-    }
-
-    .main-page #section-support,
-    .main-page #section-media{
-        --main-mobile-scale:calc(100vw / 360);
-        height:calc(640 * var(--main-mobile-scale));
-        min-height:calc(640 * var(--main-mobile-scale));
     }
 
     .main-page #section-support .support-inner{
@@ -1694,15 +1636,16 @@ body.main-page {
     }
 
     .main-page #section-media .media-inner{
+        width:100%;
+        min-width:0;
         height:100%;
         min-height:0;
         box-sizing:border-box;
     }
 
-    .main-page .business-section,
     .main-page .business-visual {
-        height: 450px;
-        min-height: 450px;
+        height:100%;
+        min-height:100%;
     }
 
     .business-section {
