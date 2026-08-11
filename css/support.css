@@ -411,7 +411,6 @@ Training Registration
 
 .sub-training-calendar-wrap,
 .sub-training-sidebar {
-    min-height: calc(100vw * 1060 / 1920);
     border-radius: calc(100vw * 20 / 1920);
     background: #fff;
 }
