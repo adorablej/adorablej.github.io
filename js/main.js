@@ -78,7 +78,6 @@
         if (visualPagination) {
             visualPagination.innerHTML = `
                 <div class="main-visual-video-progress">
-                    <span class="main-visual-video-number">01</span>
                     <button type="button" class="main-visual-video-track" aria-label="영상 재생 위치 이동">
                         <span class="main-visual-video-fill"></span>
                     </button>

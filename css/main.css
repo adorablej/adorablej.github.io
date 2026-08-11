@@ -312,14 +312,6 @@ Section 01 : Main Visual
     width:100%;
 }
 
-.main-visual-video-number{
-    margin-bottom:calc(14 * var(--vw));
-    color:var(--red);
-    font-size:calc(15 * var(--vw));
-    font-weight:700;
-    line-height:1;
-}
-
 .main-visual-video-track{
     position:relative;
     display:block;
