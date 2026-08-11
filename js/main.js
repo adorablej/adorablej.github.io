@@ -12,7 +12,32 @@
         initSupportSlider();
         initMediaSection();
         initSectionNavigator();
+        initMobileFreeScroll();
         initSectionSplashes();
+    }
+
+    function initMobileFreeScroll() {
+        const scrollContainer = document.querySelector(".page-scroll");
+        const productsSection = document.querySelector("#section-products");
+        const mobileQuery = window.matchMedia("(max-width: 767px)");
+
+        if (!scrollContainer || !productsSection || !mobileQuery.matches) return;
+
+        const updateScrollMode = () => {
+            const productsTop = productsSection.offsetTop;
+            const releasePoint = productsTop - 2;
+            const restorePoint = productsTop - window.innerHeight * .5;
+
+            if (!scrollContainer.classList.contains("is-free-scroll") && scrollContainer.scrollTop >= releasePoint) {
+                scrollContainer.classList.add("is-free-scroll");
+            } else if (scrollContainer.classList.contains("is-free-scroll") && scrollContainer.scrollTop < restorePoint) {
+                scrollContainer.classList.remove("is-free-scroll");
+            }
+        };
+
+        scrollContainer.addEventListener("scroll", updateScrollMode, { passive: true });
+        window.addEventListener("resize", updateScrollMode);
+        updateScrollMode();
     }
 
     function initSupportSlider() {
@@ -37,10 +62,9 @@
     /**
      * Section 01 : Main Visual
      *
-     * 메인 비주얼 Swiper
-     * - 자동 재생
-     * - 이전/다음 버튼
-     * - 번호형 페이지네이션
+     * 메인 비주얼 첫 번째 영상 고정 노출
+     * - 슬라이드 구조는 추후 재사용할 수 있도록 유지
+     * - 하단 진행선은 영상 재생률과 연동
      */
     function initMainVisual() {
         const visual = document.querySelector(".main-visual-swiper");
@@ -48,6 +72,22 @@
         if (!visual) return;
 
         const visualVideos = [...visual.querySelectorAll("video")];
+        const visualPagination = visual.querySelector(".main-visual-pagination");
+        let progressAnimationFrame = 0;
+
+        if (visualPagination) {
+            visualPagination.innerHTML = `
+                <div class="main-visual-video-progress">
+                    <span class="main-visual-video-number">01</span>
+                    <button type="button" class="main-visual-video-track" aria-label="영상 재생 위치 이동">
+                        <span class="main-visual-video-fill"></span>
+                    </button>
+                </div>
+            `;
+        }
+
+        const videoProgressTrack = visualPagination?.querySelector(".main-visual-video-track");
+        const videoProgressFill = visualPagination?.querySelector(".main-visual-video-fill");
 
         visualVideos.forEach(video => {
             video.muted = true;
@@ -73,53 +113,12 @@
         };
 
         const visualSwiper = new Swiper(visual, {
-            /*
-             * 마지막 슬라이드 이후
-             * 첫 번째 슬라이드로 반복
-             */
-            loop: true,
+            loop: false,
+            initialSlide: 0,
+            allowTouchMove: false,
+            simulateTouch: false,
 
-            /*
-             * 슬라이드 전환 속도
-             */
             speed: 900,
-
-            /*
-             * 자동 재생
-             */
-            autoplay: {
-                delay: 6000,
-                disableOnInteraction: false
-            },
-
-            /*
-             * 이전/다음 버튼
-             */
-            navigation: {
-                prevEl: ".main-visual-prev",
-                nextEl: ".main-visual-next"
-            },
-
-            /*
-             * 하단 번호형 페이지네이션
-             */
-            pagination: {
-                el: ".main-visual-pagination",
-                clickable: true,
-
-                renderBullet(index, className) {
-                    const number = String(index + 1).padStart(2, "0");
-
-                    return `
-                        <button
-                            type="button"
-                            class="${className}"
-                            data-number="${number}"
-                            aria-label="${number}번 슬라이드로 이동"
-                        ></button>
-                    `;
-                }
-            },
 
             /*
              * Swiper 기본 접근성 안내
@@ -136,7 +135,53 @@
             }
         });
 
-        const retryActiveVideo = () => syncVisualVideo(visualSwiper);
+        const getVisibleVideo = () => {
+            const firstSlide = visualSwiper.slides[0];
+
+            return [...(firstSlide?.querySelectorAll("video") || [])].find(video =>
+                window.getComputedStyle(video).display !== "none"
+            );
+        };
+
+        const updateVideoProgress = () => {
+            const video = getVisibleVideo();
+            const progress = video?.duration ? video.currentTime / video.duration : 0;
+
+            videoProgressFill?.style.setProperty("--video-progress", String(Math.min(Math.max(progress, 0), 1)));
+
+            if (video && !video.paused && !video.ended) {
+                progressAnimationFrame = window.requestAnimationFrame(updateVideoProgress);
+            }
+        };
+
+        const startVideoProgress = () => {
+            window.cancelAnimationFrame(progressAnimationFrame);
+            updateVideoProgress();
+        };
+
+        visualVideos.forEach(video => {
+            video.addEventListener("play", startVideoProgress);
+            video.addEventListener("loadedmetadata", updateVideoProgress);
+            video.addEventListener("seeking", updateVideoProgress);
+            video.addEventListener("ended", updateVideoProgress);
+        });
+
+        startVideoProgress();
+
+        videoProgressTrack?.addEventListener("click", event => {
+            const video = getVisibleVideo();
+            if (!video?.duration) return;
+
+            const rect = videoProgressTrack.getBoundingClientRect();
+            const progress = (event.clientX - rect.left) / rect.width;
+            video.currentTime = Math.min(Math.max(progress, 0), 1) * video.duration;
+            updateVideoProgress();
+        });
+
+        const retryActiveVideo = () => {
+            syncVisualVideo(visualSwiper);
+            startVideoProgress();
+        };
 
         visualVideos.forEach(video => {
             video.addEventListener("loadeddata", retryActiveVideo);
@@ -144,6 +189,7 @@
         });
 
         window.addEventListener("pageshow", retryActiveVideo);
+        window.addEventListener("resize", updateVideoProgress);
         document.addEventListener("visibilitychange", () => {
             if (!document.hidden) retryActiveVideo();
         });
@@ -388,8 +434,9 @@ function initSectionSplashes() {
         return;
     }
 
-    const historySplash =
-        historySection?.querySelector(
+    const historySplash = window.matchMedia("(max-width: 767px)").matches
+        ? null
+        : historySection?.querySelector(
             ".text-splash-section"
         );
 

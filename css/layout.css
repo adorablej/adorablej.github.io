@@ -1227,7 +1227,27 @@ sub page 공통
     background:var(--red);
     color:#fff;
 }
-
+.sub-button-more_kr{
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    padding:calc(10 * var(--vw)) calc(35 * var(--vw));
+    border:1px solid var(--red);
+    border-radius:calc(999 * var(--vw));
+    background:transparent;
+    color:var(--red);
+    font-size:calc(18 * var(--vw));
+    line-height: calc(32 * var(--vw));;
+    font-weight:500;
+    width: fit-content;
+    transition:
+        color .3s,
+        background-color .3s;
+}
+.sub-button-more:hover {
+    background:var(--red);
+    color:#fff;
+}
 .sub-section-title {
     margin: 0;
     color: #000;
@@ -1972,6 +1992,15 @@ Mobile Common Layout
     }
 
     .sub-button-more {
+        min-width: 90px;
+        min-height: 46px;
+        padding: 0 18px;
+        border-radius: 23px;
+        font-size: 14px;
+        line-height: 44px;
+        box-sizing: border-box;
+    }
+    .sub-button-more_kr {
         min-width: 90px;
         min-height: 46px;
         padding: 0 18px;

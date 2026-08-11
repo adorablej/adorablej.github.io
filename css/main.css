@@ -129,6 +129,12 @@ Section Navigator
     background:var(--red);
 }
 
+@media (max-width:767px){
+    .section-nav{
+        display:none;
+    }
+}
+
 /* ========================================
 Section 01 : Main Visual
 ======================================== */
@@ -223,6 +229,9 @@ Section 01 : Main Visual
     display:block;
     opacity:0;
     transform:translateY(115%);
+    text-shadow:
+        0 1px 2px rgba(0,0,0,.55),
+        0 4px 16px rgba(0,0,0,.35);
     will-change:transform,opacity;
 }
 
@@ -232,6 +241,27 @@ Section 01 : Main Visual
 
 .main-visual-slide.swiper-slide-active .main-visual-title-line:nth-child(2) > span{
     animation-delay:.12s;
+}
+
+@media (max-width:767px){
+    .main-visual-title{
+        width:320px;
+        font-size:38px;
+        line-height:48px;
+        letter-spacing:-1.5px;
+    }
+
+    .main-visual-title-line.mo-only{
+        display:block !important;
+    }
+
+    .main-visual-slide.swiper-slide-active .main-visual-title-line:nth-child(3) > span{
+        animation-delay:.12s;
+    }
+
+    .main-visual-slide.swiper-slide-active .main-visual-title-line:nth-child(4) > span{
+        animation-delay:.24s;
+    }
 }
 
 @keyframes mainVisualTitleReveal{
@@ -274,9 +304,45 @@ Section 01 : Main Visual
 
 .main-visual-pagination {
     position: static !important;
-    display: flex;
-    align-items: flex-start;
-    width: calc(100% - calc(160 * var(--vw))) !important;
+    width:100% !important;
+}
+
+.main-visual-video-progress{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+}
+
+.main-visual-video-number{
+    margin-bottom:calc(14 * var(--vw));
+    color:var(--red);
+    font-size:calc(15 * var(--vw));
+    font-weight:700;
+    line-height:1;
+}
+
+.main-visual-video-track{
+    position:relative;
+    display:block;
+    width:100%;
+    height:calc(2 * var(--vw));
+    padding:0;
+    overflow:hidden;
+    border:0;
+    border-radius:0;
+    background:rgba(255,255,255,.16);
+    cursor:pointer;
+}
+
+.main-visual-video-fill{
+    --video-progress:0;
+    position:absolute;
+    inset:0;
+    display:block;
+    background:var(--red);
+    transform:scaleX(var(--video-progress));
+    transform-origin:left center;
+    will-change:transform;
 }
 
 .main-visual-pagination .swiper-pagination-bullet {
@@ -318,7 +384,7 @@ Section 01 : Main Visual
 }
 
 .main-visual-nav{
-    display:flex;
+    display:none;
     align-items:center;
     gap:calc(12 * var(--vw));
     padding-bottom:calc(3 * var(--vw));
@@ -496,9 +562,11 @@ Section 03 : History
         margin-top: 31px;
         margin-bottom: 47px;
         color: rgba(255, 255, 255, .82);
-        font-size: 14px;
-        line-height: 1.55;
-        letter-spacing: -.45px;
+        font-family:"Pretendard",sans-serif;
+        font-size:13px;
+        font-weight:400;
+        line-height:16px;
+        letter-spacing:-.5px;
     }
 
     .history-content .btn-more {
@@ -1526,6 +1594,12 @@ body.main-page {
     overflow: hidden;
 }
 
+@media (max-width:767px){
+    .text-splash-section{
+        display:none;
+    }
+}
+
 /* 메인 페이지 전용 스크롤 컨테이너 */
 .main-page .page-scroll {
     width:100%;
@@ -1560,6 +1634,47 @@ body.main-page {
 }
 
 @media (max-width: 767px) {
+    .main-page .page-scroll.is-free-scroll{
+        scroll-snap-type:none;
+        overscroll-behavior-y:auto;
+    }
+
+    .main-page #section-support,
+    .main-page #section-media,
+    .main-page #section-business,
+    .main-page .footer-section{
+        scroll-snap-align:none;
+        scroll-snap-stop:normal;
+    }
+
+    .main-page #section-products{
+        --main-mobile-scale:calc(100vw / 360);
+        height:calc(640 * var(--main-mobile-scale));
+        min-height:calc(640 * var(--main-mobile-scale));
+        scroll-snap-align:start;
+        scroll-snap-stop:always;
+    }
+
+    .main-page #section-support,
+    .main-page #section-media{
+        --main-mobile-scale:calc(100vw / 360);
+        height:calc(640 * var(--main-mobile-scale));
+        min-height:calc(640 * var(--main-mobile-scale));
+    }
+
+    .main-page #section-support .support-inner{
+        display:block;
+        height:100%;
+        min-height:0;
+        padding:40px 0 0;
+    }
+
+    .main-page #section-media .media-inner{
+        height:100%;
+        min-height:0;
+        box-sizing:border-box;
+    }
+
     .main-page .business-section,
     .main-page .business-visual {
         height: 450px;

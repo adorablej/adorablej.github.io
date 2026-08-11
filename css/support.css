@@ -1106,6 +1106,7 @@ body.is-guide-video-modal-open {
     color: #000;
     font-size: calc(18 * var(--vw));
     line-height: calc(30 * var(--vw));
+    word-break: keep-all;
 }
 
 .training-product-content .sub-button-more {
