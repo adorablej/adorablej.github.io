@@ -1661,14 +1661,13 @@ Wheel Alignment Specification
 
 .sub-specification-table-wrap {
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
     border-top: 1px solid #000;
 }
 
 .sub-specification-table {
     width: 100%;
-    min-width: 960px;
+    min-width: 0;
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
@@ -1806,7 +1805,7 @@ Wheel Alignment Specification
 .specification-modal-close::after { transform: translate(-50%,-50%) rotate(-45deg); }
 .specification-modal-accent { height: 7px; background: var(--red); }
 .specification-modal-body { position: relative; padding-bottom: 26px; }
-.specification-modal-body::after { content: ""; position: absolute; inset: 0; z-index: 5; background: url('/images/support/Watermark.png') center top / 720px auto repeat-y; opacity: .55; pointer-events: none; }
+.specification-modal-body::after { content: ""; position: absolute; inset: 0; z-index: 5; background: url('/images/support/Watermark.png') center top / 100% auto repeat-y; opacity: .55; pointer-events: none; }
 .specification-modal-summary { display: grid; grid-template-columns: minmax(0,1fr) 342px; gap: 26px 48px; align-items: start; padding: 30px 40px 48px; }
 .specification-modal-brand { display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: #f5f5f5; color: #111; font-size: 10px; font-weight: 800; text-align: center; }
 .specification-modal-meta { grid-column: 1; margin: 0; color: #111; font-size: 14px; line-height: 1.6; }
@@ -1965,7 +1964,7 @@ Training Program : Mobile
     }
 }
 
-@media (max-width: 680px) {
+@media screen and (max-width: 680px) {
     .specification-modal { padding: 12px; }
     .specification-modal-dialog { max-height: calc(100vh - 24px); }
     .specification-modal-header { padding: 0 20px; }
@@ -1979,15 +1978,27 @@ Training Program : Mobile
     .specification-modal-extra dl { grid-template-columns: repeat(2, 1fr); }
 }
 
+@page { size: A4 portrait; margin: 10mm; }
+
 @media print {
+    html, body { width: auto; min-width: 0; margin: 0; background: #fff; }
     body > *:not(.specification-modal) { display: none !important; }
-    .specification-modal { position: static; display: block !important; padding: 0; opacity: 1; }
+    .specification-modal { position: static; display: block !important; width: 100%; padding: 0; overflow: visible; opacity: 1; background: #fff; }
     .specification-modal-dim, .specification-modal-close, .specification-modal-actions { display: none !important; }
-    .specification-modal-dialog { width: 100%; max-height: none; overflow: visible; box-shadow: none; transform: none; }
+    .specification-modal-dialog { width: 100%; max-width: 900px; max-height: none; margin: 0 auto; overflow: visible; background: #fff; box-shadow: none; transform: none; }
+    .specification-modal-dialog,
+    .specification-modal-dialog * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .specification-modal-header { background: #050505 !important; color: #fff !important; }
+    .specification-modal-accent { background: var(--red) !important; }
     .specification-modal-body::after { opacity: .55; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .specification-modal-summary,
+    .specification-modal-links,
+    .specification-modal-table tr,
+    .specification-modal-extra dl div,
+    .specification-modal-notes p { break-inside: avoid; page-break-inside: avoid; }
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 720px) {
     .page-heading:has(+ .sub-specification) {
         margin-bottom: 0;
         padding: 68px 0 14px;
