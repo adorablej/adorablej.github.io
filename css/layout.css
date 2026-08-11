@@ -61,12 +61,13 @@ Header
     background: #fff;
     color: #000;
     transform: translateY(0);
-    transition: transform .5s cubic-bezier(.22,1,.36,1),color .3s ease,background-color .3s ease,box-shadow .3s ease,border-color .3s ease;
+    transition:transform .72s cubic-bezier(.16,1,.3,1),color .35s ease,background-color .35s ease,box-shadow .35s ease,border-color .35s ease;
     will-change: transform;
     border-bottom: 1px solid #E9E9E9;
 }
 .header.is-hidden {
     transform: translateY(-110%);
+    transition:transform .4s cubic-bezier(.4,0,1,1),color .35s ease,background-color .35s ease,box-shadow .35s ease,border-color .35s ease;
 }
 
 .header-actions{
@@ -79,11 +80,12 @@ Header
     height:calc(100 * var(--vw));
     color:#000;
     transform:translateY(0);
-    transition:transform .5s cubic-bezier(.22,1,.36,1),color .3s ease;
+    transition:transform .72s cubic-bezier(.16,1,.3,1),color .35s ease;
 }
 
 .header.is-hidden + .header-actions{
     transform:translateY(-110%);
+    transition:transform .4s cubic-bezier(.4,0,1,1),color .35s ease;
 }
 
 .main-page .header.theme-light + .header-actions{
@@ -808,6 +810,35 @@ body:not(.main-page) .header.is-menu-open .header-logo-light{
     filter:none !important;
 }
 .header.is-menu-open + .header-actions .btn-login {
+    color:#fff;
+}
+
+/* 메인에서 첫 화면을 지난 뒤에는 메뉴를 열어도 흰색 헤더 유지 */
+.main-page .header.is-main-solid.is-menu-open {
+    background:#fff;
+    border-bottom:1px solid #E9E9E9;
+    color:#000;
+}
+
+.main-page .header.is-main-solid.is-menu-open .header-logo-dark {
+    opacity:1;
+    visibility:visible;
+}
+
+.main-page .header.is-main-solid.is-menu-open .header-logo-light {
+    opacity:0;
+    visibility:hidden;
+}
+
+.main-page .header.is-main-solid.is-menu-open + .header-actions {
+    color:#fff;
+}
+
+.main-page .header.is-main-solid.is-menu-open + .header-actions .header-r i {
+    filter:none !important;
+}
+
+.main-page .header.is-main-solid.is-menu-open + .header-actions .btn-login {
     color:#fff;
 }
 
@@ -2233,7 +2264,7 @@ Mobile Common Layout
     }
 
     .header.is-menu-open + .header-actions .btn-search {
-        display:flex;
+        display:none;
     }
 
     .header.is-menu-open + .header-actions .header-r i,

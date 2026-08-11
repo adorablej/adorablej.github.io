@@ -90,7 +90,20 @@
             return;
         }
 
-        const scrollTarget = pageScroll || window;
+        const pageScrollStyle = pageScroll
+            ? window.getComputedStyle(pageScroll)
+            : null;
+
+        const isPageScrollContainer =
+            pageScroll &&
+            (
+                pageScrollStyle.overflowY === "auto" ||
+                pageScrollStyle.overflowY === "scroll"
+            );
+
+        const scrollTarget = isPageScrollContainer
+            ? pageScroll
+            : window;
 
         let ticking = false;
 
