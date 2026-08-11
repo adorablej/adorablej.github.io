@@ -1609,6 +1609,51 @@ body.main-page {
     scroll-snap-stop:always;
 }
 
+/* PC 메인은 섹션 단위 이동 없이 문서 전체를 자연스럽게 스크롤 */
+@media (min-width: 768px) {
+    body.main-page {
+        height:auto;
+        overflow-x:hidden;
+        overflow-y:auto;
+    }
+
+    .main-page .page-scroll {
+        height:auto;
+        overflow:visible;
+        scroll-snap-type:none;
+        overscroll-behavior-y:auto;
+    }
+
+    .main-page .main-section {
+        height:calc(1080 * var(--vw));
+        min-height:calc(1080 * var(--vw));
+        scroll-snap-align:none;
+        scroll-snap-stop:normal;
+    }
+
+    .main-page .history-content {
+        height:calc(1080 * var(--vw));
+        min-height:calc(1080 * var(--vw));
+    }
+
+    .main-page .support-inner,
+    .main-page .business-visual {
+        height:100%;
+        min-height:100%;
+    }
+
+    .main-page .footer-section {
+        scroll-snap-align:none;
+        scroll-snap-stop:normal;
+    }
+
+    .main-page .section-nav,
+    .main-page .text-splash-section,
+    .main-page .products-splash-section {
+        display:none !important;
+    }
+}
+
 @media (max-width: 767px) {
     .main-page .page-scroll.is-free-scroll{
         scroll-snap-type:none;

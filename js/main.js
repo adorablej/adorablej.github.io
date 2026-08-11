@@ -11,9 +11,11 @@
         initMainVisual();
         initSupportSlider();
         initMediaSection();
-        initSectionNavigator();
         initMobileFreeScroll();
-        initSectionSplashes();
+
+        if (window.matchMedia("(max-width: 767px)").matches) {
+            initSectionSplashes();
+        }
     }
 
     function initMobileFreeScroll() {
