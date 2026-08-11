@@ -1333,23 +1333,6 @@ Section 06 : Media
     }
 }
 
-@media (max-width: 767px) and (min-height: 700px) {
-    .media-inner {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-height: 100svh;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        box-sizing: border-box;
-    }
-
-    .media-content {
-        width: 100%;
-    }
-}
-
-
 /* ========================================
 Section 07 : Business
 ======================================== */

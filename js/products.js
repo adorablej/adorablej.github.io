@@ -1,6 +1,15 @@
 /* products.html , Category. */
 
-const categoryOffset = Math.max(40, (window.innerWidth - 1300) / 2);
+const categoryHeading = document.querySelector(
+    ".sub-product-category .sub-section-heading"
+);
+
+function getCategoryOffset() {
+    if (!categoryHeading) return window.innerWidth <= 767 ? 25 : 40;
+    return Math.max(0, categoryHeading.getBoundingClientRect().left);
+}
+
+const categoryOffset = getCategoryOffset();
 
 const categorySwiper = new Swiper(".sub-category-slider", {
     slidesPerView: "auto",
@@ -16,22 +25,27 @@ const categorySwiper = new Swiper(".sub-category-slider", {
         nextEl: ".sub-slider-next",
     },
 
+    on: {
+        resize(swiper) {
+            const offset = getCategoryOffset();
+            swiper.params.slidesOffsetBefore = offset;
+            swiper.params.slidesOffsetAfter = offset;
+            swiper.originalParams.slidesOffsetBefore = offset;
+            swiper.originalParams.slidesOffsetAfter = offset;
+            swiper.updateSlides();
+        },
+    },
+
     breakpoints: {
         0: {
-            slidesOffsetBefore: 25,
-            slidesOffsetAfter: 25,
             spaceBetween: 20,
         },
 
         768: {
-            slidesOffsetBefore: 40,
-            slidesOffsetAfter: 40,
             spaceBetween: 20,
         },
 
         1380: {
-            slidesOffsetBefore: categoryOffset,
-            slidesOffsetAfter: categoryOffset,
             spaceBetween: 30,
         },
     },
