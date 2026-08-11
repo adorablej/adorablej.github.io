@@ -491,7 +491,7 @@ Training Registration
 
 .sub-training-day {
     position: relative;
-    min-height: calc(100vw * 180 / 1920);
+    min-height: calc(100vw * 120 / 1920);
     padding: calc(100vw * 15 / 1920) calc(100vw * 14 / 1920);
     border: 0;
     border-right: 1px solid #E2E8F0;
