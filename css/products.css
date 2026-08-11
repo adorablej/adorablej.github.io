@@ -1035,7 +1035,7 @@ Detail Visual
 .detail-visual .inner {
     position: relative;
     z-index: 2;
-    width: calc(1400 * var(--vw));
+    width: calc(1300 * var(--vw));
     margin: auto;
 }
 

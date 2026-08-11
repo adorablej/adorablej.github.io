@@ -158,7 +158,16 @@ const prideSwiper = new Swiper(".sub-pride-slider", {
 
 
 /* product-detail.html , Main Features. */
-const featuresOffset = Math.max(40, (window.innerWidth - 1300) / 2);
+const featuresHeading = document.querySelector(
+    ".detail-features .detail-section-heading"
+);
+
+function getFeaturesOffset() {
+    if (!featuresHeading) return window.innerWidth <= 767 ? 25 : 40;
+    return Math.max(0, featuresHeading.getBoundingClientRect().left);
+}
+
+const featuresOffset = getFeaturesOffset();
 
 const featuresSwiper = new Swiper(".detail-features-slider", {
     slidesPerView: "auto",
@@ -174,22 +183,27 @@ const featuresSwiper = new Swiper(".detail-features-slider", {
         nextEl: ".detail-features-next",
     },
 
+    on: {
+        resize(swiper) {
+            const offset = getFeaturesOffset();
+            swiper.params.slidesOffsetBefore = offset;
+            swiper.params.slidesOffsetAfter = offset;
+            swiper.originalParams.slidesOffsetBefore = offset;
+            swiper.originalParams.slidesOffsetAfter = offset;
+            swiper.updateSlides();
+        },
+    },
+
     breakpoints: {
         0: {
-            slidesOffsetBefore: 25,
-            slidesOffsetAfter: 25,
             spaceBetween: 15,
         },
 
         768: {
-            slidesOffsetBefore: 40,
-            slidesOffsetAfter: 40,
             spaceBetween: 20,
         },
 
         1380: {
-            slidesOffsetBefore: featuresOffset,
-            slidesOffsetAfter: featuresOffset,
             spaceBetween: 24,
         },
     },
