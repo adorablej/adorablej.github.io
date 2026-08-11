@@ -2744,6 +2744,177 @@ Products 공통 배치
     display:none;
 }
 
+/* ROI Calculator products section - desktop visual */
+@media (min-width:721px){
+    .sub-products-visual-bg{background:#c90000;}
+    .sub-products-visual-bg img{
+        object-fit:cover;
+        transform:none;
+    }
+    .sub-products-visual .inner{
+        width:calc(1300 * var(--vw));
+        height:100%;
+        margin:0 auto;
+    }
+    .sub-products-content{
+        position:relative;
+        display:block;
+        width:100%;
+        height:100%;
+        padding:0;
+    }
+    .sub-products-main{
+        position:absolute;
+        inset:0;
+        width:100%;
+        min-height:0;
+    }
+    .sub-products-group,
+    .sub-products-visual .sub-products-swiper,
+    .sub-products-swiper .swiper-wrapper,
+    .sub-products-swiper .swiper-slide,
+    .sub-products-slide{
+        width:100%;
+        height:100%;
+        min-height:0;
+    }
+    .sub-products-slide .sub-products-image{
+        position:absolute;
+        inset:0;
+        display:none;
+        width:100%;
+        height:100%;
+    }
+    .sub-products-slide .sub-products-image img,
+    .sub-products-slide:not(.sub-products-slide-horizontal) .sub-products-image img,
+    .sub-products-slide-horizontal .sub-products-image img{
+        top:calc(155 * var(--vw)) !important;
+        right:auto !important;
+        bottom:auto !important;
+        left:calc(905 * var(--vw)) !important;
+        width:auto !important;
+        height:auto !important;
+        max-width:calc(610 * var(--vw)) !important;
+        max-height:calc(720 * var(--vw)) !important;
+        transform:translateX(-50%) !important;
+    }
+    .sub-products-slide .sub-products-info,
+    .sub-products-slide:not(.sub-products-slide-horizontal) .sub-products-info,
+    .sub-products-slide-horizontal .sub-products-info,
+    .sub-products-group[data-category="heavy"] .sub-products-slide:not(.sub-products-slide-horizontal) .sub-products-info{
+        position:absolute;
+        top:calc(305 * var(--vw)) !important;
+        right:auto !important;
+        bottom:auto !important;
+        left:0 !important;
+        display:block;
+        width:calc(540 * var(--vw)) !important;
+        max-width:none !important;
+        text-align:left !important;
+        transform:none !important;
+    }
+    .sub-products-mobile-category{
+        display:block;
+        margin-bottom:calc(20 * var(--vw));
+        color:var(--red);
+        font-size:calc(24 * var(--vw));
+        font-weight:700;
+        line-height:1.2;
+    }
+    .sub-products-title{
+        margin-bottom:calc(34 * var(--vw));
+        font-size:calc(50 * var(--vw));
+        line-height:1.08;
+    }
+    .sub-products-desc{
+        color:#666;
+        font-size:calc(16 * var(--vw));
+        line-height:1.75;
+    }
+    .sub-products-mobile-more{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        min-width:calc(154 * var(--vw));
+        height:calc(62 * var(--vw));
+        margin-top:calc(42 * var(--vw));
+        padding:0 calc(34 * var(--vw));
+        border:1px solid var(--red);
+        border-radius:999px;
+        background:transparent;
+        color:var(--red);
+        font-size:calc(16 * var(--vw));
+        font-weight:600;
+        letter-spacing:.35em;
+    }
+    .sub-products-group .sub-products-controls,
+    .sub-products-group:has(.swiper-slide-active .sub-products-slide:not(.sub-products-slide-horizontal)) .sub-products-controls,
+    .sub-products-group:has(.swiper-slide-active .sub-products-slide-horizontal) .sub-products-controls,
+    .sub-products-group[data-category="heavy"]:has(.swiper-slide-active .sub-products-slide:not(.sub-products-slide-horizontal)) .sub-products-controls{
+        top:calc(180 * var(--vw)) !important;
+        right:auto !important;
+        bottom:auto !important;
+        left:0 !important;
+        gap:calc(14 * var(--vw));
+        transform:none !important;
+    }
+    .sub-products-control-button{
+        width:calc(66 * var(--vw));
+        height:calc(66 * var(--vw));
+        background:rgba(255,255,255,.15);
+    }
+    .sub-products-category{
+        position:absolute;
+        right:0;
+        bottom:0;
+        left:0;
+        z-index:10;
+        width:100%;
+        height:calc(125 * var(--vw));
+        padding:0;
+    }
+    .sub-products-category-list{
+        display:grid;
+        grid-template-columns:repeat(7,minmax(0,1fr));
+        align-items:end;
+        width:100%;
+        height:100%;
+    }
+    .sub-products-category-list li{align-self:stretch;}
+    .sub-products-category-button{
+        position:relative;
+        align-items:flex-start;
+        justify-content:flex-start;
+        height:100%;
+        padding:calc(22 * var(--vw)) 0 0;
+        color:rgba(255,255,255,.52);
+    }
+    .sub-products-category-button::after{
+        position:absolute;
+        right:0;
+        bottom:0;
+        left:0;
+        height:1px;
+        background:rgba(255,255,255,.24);
+        content:"";
+    }
+    .sub-products-category-button span{
+        max-width:calc(125 * var(--vw));
+        color:inherit;
+        font-size:calc(18 * var(--vw));
+        line-height:1.2;
+    }
+    .sub-products-category-button i{display:none;}
+    .sub-products-category-list li.is-active .sub-products-category-button{
+        background:transparent;
+        color:#fff;
+    }
+    .sub-products-category-list li.is-active .sub-products-category-button::after{
+        height:calc(2 * var(--vw));
+        background:#fff;
+    }
+}
+
 @media (max-width:720px){
     .sub-products-visual{
         --products-mo:calc(100vw / 360);
@@ -2767,6 +2938,7 @@ Products 공통 배치
 
     .sub-products-visual-bg img{
         object-fit:cover;
+        transform:none;
     }
 
     .sub-products-visual .inner{

@@ -1302,9 +1302,8 @@ Equipment Operation Guide : Category List
 .sub-operation-category-content strong {
     color: #000;
     font-family: "Russo One", sans-serif;
-    font-size: calc(100vw * 42 / 1920);
-    line-height: .98;
-    letter-spacing: -.035em;
+    font-size: calc(100vw * 35 / 1920);
+    line-height: calc(100vw * 42 / 1920);
 }
 
 .sub-operation-category-image {
@@ -2989,6 +2988,5 @@ Training Program : Mobile
     .sub-operation-category-content strong {
         font-size: 20px;
         line-height: 22px;
-        letter-spacing: -.03em;
     }
 }

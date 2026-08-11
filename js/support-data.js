@@ -36,7 +36,7 @@ let operationGuideMockId = 1;
 
 const operationGuideManuals = {
     alignment: [
-        { product: "WinAlign®", title: "WinAlign® Quick Start Guide" },
+        { product: "WinAlign®", title: "WinAlign® Quick Start Guide", fileUrl: "/images/support/IMG_5191.pdf" },
         { product: "WinAlign®", title: "WinAlign® Operations Manual" },
         { product: "WinAlign®", title: "WinAlign® CE Operations Manual (International)" },
         { product: "WinAlign®", title: "WinAlign® and ADASLink® Quick Start Guide" },
@@ -64,7 +64,7 @@ const operationGuideData = Object.entries(operationGuideCategories).flatMap(([ca
         category,
         product: item.product,
         title: item.title,
-        fileUrl: "#",
+        fileUrl: item.fileUrl || "#",
         youtubeUrl: "",
         visible: true,
         featured: false,

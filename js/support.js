@@ -76,7 +76,7 @@ function initOperationGuide() {
                 <ul class="sub-guide-list">
                     ${group.items.map(item => `
                         <li class="sub-guide-item">
-                            <span class="sub-guide-item-title">${item.title}</span>
+                            <a class="sub-guide-item-title" href="${item.url}">${item.title}</a>
                             <a class="sub-guide-view" href="${item.url}" aria-label="View ${item.title}"><span>view</span></a>
                         </li>
                     `).join("")}
