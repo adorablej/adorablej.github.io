@@ -201,22 +201,46 @@
         if (!section || !window.StoreAPI) return;
 
         const keywordInput = section.querySelector(".sub-pride-map-keyword input");
-        const [regionSelect, citySelect] = section.querySelectorAll(".sub-pride-map-selects select");
+        const regionSelect = section.querySelector('[data-store-select="region"]');
+        const citySelect = section.querySelector('[data-store-select="city"]');
+        const regionInput = regionSelect?.querySelector('input[type="hidden"]');
+        const cityInput = citySelect?.querySelector('input[type="hidden"]');
         const closeButton = section.querySelector(".sub-pride-store-close");
+        if (!keywordInput || !regionSelect || !citySelect || !regionInput || !cityInput) return;
+
         StoreUI.init(section);
         StoreUI.initMap();
 
         const allStores = Array.isArray(window.MOCK_STORES) ? window.MOCK_STORES : [];
+        const setSelectOptions = (select, placeholder, options, disabled = false) => {
+            const list = select.querySelector(".sub-form-select-options");
+            const value = select.querySelector(".sub-form-select-value");
+            const input = select.querySelector('input[type="hidden"]');
+            const trigger = select.querySelector(".sub-form-select-trigger");
+
+            list.innerHTML = `
+                <li><button type="button" class="sub-form-select-option is-selected" data-value="">${placeholder}</button></li>
+                ${options.map(option => `
+                    <li><button type="button" class="sub-form-select-option" data-value="${escapeHtml(option)}">${escapeHtml(option)}</button></li>
+                `).join("")}
+            `;
+            value.textContent = placeholder;
+            value.classList.add("is-placeholder");
+            input.value = "";
+            input.disabled = disabled;
+            trigger.disabled = disabled;
+            trigger.setAttribute("aria-expanded", "false");
+            select.classList.toggle("is-disabled", disabled);
+            select.classList.remove("is-open", "is-focus");
+        };
+
         const setRegionOptions = () => {
             const regions = [...new Set(allStores.map(store => store.region))];
-            regionSelect.innerHTML = '<option value="">도/시 선택</option>'
-                + regions.map(region => `<option value="${escapeHtml(region)}">${escapeHtml(region)}</option>`).join("");
+            setSelectOptions(regionSelect, "도/시 선택", regions);
         };
         const setCityOptions = region => {
             const cities = [...new Set(allStores.filter(store => !region || store.region === region).map(store => store.city))];
-            citySelect.innerHTML = '<option value="">시/구/군 선택</option>'
-                + cities.map(city => `<option value="${escapeHtml(city)}">${escapeHtml(city)}</option>`).join("");
-            citySelect.disabled = !region;
+            setSelectOptions(citySelect, "시/구/군 선택", cities, !region);
         };
 
         const selectStore = async (id, options) => {
@@ -232,8 +256,8 @@
             try {
                 const result = await StoreAPI.getStores({
                     keyword: keywordInput.value,
-                    region: regionSelect.value,
-                    city: citySelect.value
+                    region: regionInput.value,
+                    city: cityInput.value
                 });
                 StoreUI.closeDetail();
                 StoreUI.renderCount(result.totalCount);
@@ -254,11 +278,11 @@
             clearTimeout(searchTimer);
             searchTimer = setTimeout(loadStores, 200);
         });
-        regionSelect.addEventListener("change", () => {
-            setCityOptions(regionSelect.value);
+        regionInput.addEventListener("change", () => {
+            setCityOptions(regionInput.value);
             loadStores();
         });
-        citySelect.addEventListener("change", loadStores);
+        cityInput.addEventListener("change", loadStores);
         StoreUI.list.addEventListener("click", event => {
             const item = event.target.closest(".sub-pride-store-item");
             if (item) selectStore(item.dataset.storeId, { scrollList: false, moveMap: true });

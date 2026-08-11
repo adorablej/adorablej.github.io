@@ -12,7 +12,8 @@
     <link href="/css/common.css" rel="stylesheet" />
     <link href="/css/layout.css" rel="stylesheet" />
     <link href="/css/main.css" rel="stylesheet" />
-    <link href="/css/products.css" rel="stylesheet" />
+    <link href="/css/common-form.css" rel="stylesheet" />
+    <link href="/css/products.css?v=20260811-3" rel="stylesheet" />
     <link href="/css/responsive.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,22 +47,32 @@
                 <div class="sub-pride-map-search">
                     <h3 class="sub-pride-map-title">헌터 설치 매장 안내<span>.</span></h3>
 
-                    <label class="sub-pride-map-keyword">
+                    <label class="sub-pride-map-keyword sub-form-group">
                         <span class="sub-pride-map-search-icon" aria-hidden="true"></span>
-                        <input type="search" placeholder="매장명을 입력해주세요.">
+                        <input type="search" class="sub-form-input" placeholder="매장명을 입력해주세요.">
                     </label>
 
                     <div class="sub-pride-map-selects">
-                        <label>
-                            <select>
-                                <option value="">도/시 선택</option>
-                            </select>
-                        </label>
-                        <label>
-                            <select disabled>
-                                <option value="">시/구/군 선택</option>
-                            </select>
-                        </label>
+                        <div class="sub-form-select" data-select data-store-select="region">
+                            <button type="button" class="sub-form-select-trigger" aria-expanded="false" aria-haspopup="listbox">
+                                <span class="sub-form-select-value is-placeholder">도/시 선택</span>
+                                <span class="sub-form-select-arrow" aria-hidden="true"></span>
+                            </button>
+                            <ul class="sub-form-select-options" role="listbox">
+                                <li><button type="button" class="sub-form-select-option is-selected" data-value="">도/시 선택</button></li>
+                            </ul>
+                            <input type="hidden" value="">
+                        </div>
+                        <div class="sub-form-select is-disabled" data-select data-store-select="city">
+                            <button type="button" class="sub-form-select-trigger" aria-expanded="false" aria-haspopup="listbox" disabled>
+                                <span class="sub-form-select-value is-placeholder">시/구/군 선택</span>
+                                <span class="sub-form-select-arrow" aria-hidden="true"></span>
+                            </button>
+                            <ul class="sub-form-select-options" role="listbox">
+                                <li><button type="button" class="sub-form-select-option is-selected" data-value="">시/구/군 선택</button></li>
+                            </ul>
+                            <input type="hidden" value="" disabled>
+                        </div>
                     </div>
 
                     <p class="sub-pride-map-count">총 <strong>0</strong>개의 매장이 있습니다.</p>
@@ -99,7 +110,8 @@
     <script src="/js/api/front-api.js"></script>
     <script src="/js/store/mock-store.js"></script>
     <script src="/js/store/store-api.js"></script>
-    <script src="/js/store/store-ui.js"></script>
+    <script src="/js/store/store-ui.js?v=20260811-2"></script>
+    <script src="/js/form.js?v=20260811-2"></script>
     <script src="/js/products.js"></script>
 </body>
 

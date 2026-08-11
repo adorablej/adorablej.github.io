@@ -149,10 +149,9 @@ function initCustomSelect() {
 
         const trigger = select.querySelector(".sub-form-select-trigger");
         const value = select.querySelector(".sub-form-select-value");
-        const options = [...select.querySelectorAll(".sub-form-select-option")];
         const hidden = select.querySelector('input[type="hidden"]');
 
-        if (!trigger || !value || !hidden || !options.length) return;
+        if (!trigger || !value || !hidden || !select.querySelector(".sub-form-select-option")) return;
         select.dataset.selectInitialized = "true";
 
         trigger.addEventListener("click", event => {
@@ -172,6 +171,8 @@ function initCustomSelect() {
             event.preventDefault();
             openSelect(select);
 
+            const options = [...select.querySelectorAll(".sub-form-select-option")];
+
             const selectedIndex = Math.max(
                 0,
                 options.findIndex(option => option.classList.contains("is-selected"))
@@ -183,27 +184,32 @@ function initCustomSelect() {
             options[nextIndex]?.focus();
         });
 
-        options.forEach((option, index) => {
-            option.addEventListener("click", () => {
-                selectOption(select, option);
-            });
+        select.addEventListener("click", event => {
+            const option = event.target.closest(".sub-form-select-option");
+            if (option) selectOption(select, option);
+        });
 
-            option.addEventListener("keydown", event => {
-                if (event.key === "ArrowDown") {
-                    event.preventDefault();
-                    options[Math.min(index + 1, options.length - 1)]?.focus();
-                }
+        select.addEventListener("keydown", event => {
+            const option = event.target.closest(".sub-form-select-option");
+            if (!option) return;
 
-                if (event.key === "ArrowUp") {
-                    event.preventDefault();
-                    options[Math.max(index - 1, 0)]?.focus();
-                }
+            const options = [...select.querySelectorAll(".sub-form-select-option")];
+            const index = options.indexOf(option);
 
-                if (event.key === "Escape") {
-                    closeSelect(select);
-                    trigger.focus();
-                }
-            });
+            if (event.key === "ArrowDown") {
+                event.preventDefault();
+                options[Math.min(index + 1, options.length - 1)]?.focus();
+            }
+
+            if (event.key === "ArrowUp") {
+                event.preventDefault();
+                options[Math.max(index - 1, 0)]?.focus();
+            }
+
+            if (event.key === "Escape") {
+                closeSelect(select);
+                trigger.focus();
+            }
         });
     });
 
