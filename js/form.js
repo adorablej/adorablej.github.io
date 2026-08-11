@@ -145,12 +145,15 @@ function initCustomSelect() {
     const selects = document.querySelectorAll(".sub-form-select[data-select]");
 
     selects.forEach(select => {
+        if (select.dataset.selectInitialized === "true") return;
+
         const trigger = select.querySelector(".sub-form-select-trigger");
         const value = select.querySelector(".sub-form-select-value");
         const options = [...select.querySelectorAll(".sub-form-select-option")];
         const hidden = select.querySelector('input[type="hidden"]');
 
-        if (!trigger || !value || !hidden) return;
+        if (!trigger || !value || !hidden || !options.length) return;
+        select.dataset.selectInitialized = "true";
 
         trigger.addEventListener("click", event => {
             event.stopPropagation();

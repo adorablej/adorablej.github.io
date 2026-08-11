@@ -1,6 +1,10 @@
+let isMediaViewInitialized = false;
+
 window.addEventListener("includeLoaded", initMediaView);
 
 function initMediaView() {
+    if (isMediaViewInitialized) return;
+
     const params = new URLSearchParams(window.location.search);
     const requestedType = params.get("type") || "archive";
     const type = MEDIA_CONFIG[requestedType] ? requestedType : "archive";
@@ -10,10 +14,12 @@ function initMediaView() {
     const item = list.find(data => data.id === requestedId) || list[0];
 
     if (!item) {
+        isMediaViewInitialized = true;
         renderMediaViewEmpty(type, config);
         return;
     }
 
+    isMediaViewInitialized = true;
     renderMediaView(type, config, list, item);
 }
 
@@ -36,11 +42,9 @@ function renderMediaView(type, config, list, item) {
     const date = document.getElementById("mediaViewDate");
     const content = document.getElementById("mediaViewContent");
     const fileWrap = document.getElementById("mediaViewFile");
-    const fileName = document.getElementById("mediaViewFileName");
-    const download = document.getElementById("mediaViewDownload");
     const listButton = document.getElementById("mediaViewListButton");
 
-    if (!breadcrumb || !pageTitle || !category || !title || !date || !content || !fileWrap || !fileName || !download || !listButton) {
+    if (!breadcrumb || !pageTitle || !category || !title || !date || !content || !fileWrap || !listButton) {
         console.error("Media 상세 페이지에 필요한 HTML 요소가 없습니다.");
         return;
     }
@@ -61,11 +65,27 @@ function renderMediaView(type, config, list, item) {
 
     setContentImageFallback(content);
 
-    if (config.download && item.file) {
-        fileName.textContent = getFileName(item.file);
-        download.href = item.file;
+    const attachments = getMediaAttachments(item);
+
+    if (attachments.length) {
+        fileWrap.innerHTML = attachments.map((attachment, index) => `
+            <div class="sub-media-view-file-item">
+                <div class="sub-media-view-file-info">
+                    <span class="sub-media-view-file-label">
+                        ${attachments.length > 1 ? `첨부파일${index + 1}` : "첨부파일"}
+                    </span>
+                    <span class="sub-media-view-file-name">
+                        ${escapeHtml(attachment.name)}
+                    </span>
+                </div>
+                <a href="${escapeHtml(attachment.url)}" class="sub-media-download" download>
+                    ${attachments.length > 1 ? `download${index + 1}` : "download"}
+                </a>
+            </div>
+        `).join("");
         fileWrap.hidden = false;
     } else {
+        fileWrap.innerHTML = "";
         fileWrap.hidden = true;
     }
 
@@ -115,6 +135,38 @@ function getFileName(path) {
     return decodeURIComponent(name || "첨부파일");
 }
 
+function getMediaAttachments(item) {
+    const source = Array.isArray(item.files)
+        ? item.files
+        : Array.isArray(item.attachments)
+            ? item.attachments
+            : [item.file, item.file2];
+
+    return source
+        .map(file => {
+            if (typeof file === "string") {
+                return { url: file, name: getFileName(file) };
+            }
+
+            if (!file || typeof file !== "object") return null;
+
+            const url = file.url || file.fileUrl || file.downloadUrl || file.path || "";
+            const name = file.name || file.fileName || file.originalName || getFileName(url);
+            return { url, name };
+        })
+        .filter(file => file?.url)
+        .slice(0, 2);
+}
+
+function escapeHtml(value) {
+    return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+}
+
 function renderMediaViewEmpty(type, config) {
     const breadcrumb = document.getElementById("mediaViewBreadcrumb");
     const pageTitle = document.getElementById("mediaViewPageTitle");
@@ -145,4 +197,10 @@ function renderMediaViewEmpty(type, config) {
             </div>
         `;
     }
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMediaView, { once: true });
+} else {
+    initMediaView();
 }

@@ -40,6 +40,9 @@ function normalizeMediaDate(date) {
 function renderMediaFilter(config, data, type) {
     const filter = document.getElementById("mediaFilter");
     const select = document.getElementById("mediaFilterSelect");
+    const selectOptions = select?.querySelector(".sub-form-select-options");
+    const selectValue = select?.querySelector(".sub-form-select-value");
+    const selectHidden = select?.querySelector('input[type="hidden"]');
 
     filter.innerHTML = config.categories.map((category, index) => `
         <button
@@ -50,10 +53,21 @@ function renderMediaFilter(config, data, type) {
         </button>
     `).join("");
 
-    if (select) {
-        select.innerHTML = config.categories.map(category => `
-            <option value="${category}">${category}</option>
+    if (selectOptions) {
+        selectOptions.innerHTML = config.categories.map((category, index) => `
+            <li>
+                <button
+                    type="button"
+                    class="sub-form-select-option${index === 0 ? " is-selected" : ""}"
+                    data-value="${category}">
+                    ${category}
+                </button>
+            </li>
         `).join("");
+
+        selectValue.textContent = config.categories[0];
+        selectHidden.value = config.categories[0];
+        initCustomSelect();
     }
 
     const buttons = filter.querySelectorAll(".sub-media-filter-button");
@@ -72,12 +86,18 @@ function renderMediaFilter(config, data, type) {
             this.classList.add("is-active");
 
             const category = this.dataset.category;
-            if (select) select.value = category;
-            filterList(category);
+            const option = [...(selectOptions?.querySelectorAll(".sub-form-select-option") || [])]
+                .find(item => item.dataset.value === category);
+
+            if (select && option) {
+                selectOption(select, option, false);
+            } else {
+                filterList(category);
+            }
         });
     });
 
-    select?.addEventListener("change", function () {
+    selectHidden?.addEventListener("change", function () {
         const category = this.value;
         buttons.forEach(button => {
             button.classList.toggle("is-active", button.dataset.category === category);
@@ -106,12 +126,16 @@ function createMediaItem(item, config, type) {
     const thumbnail = item.thumbnail || placeholder;
     const preview = getMediaPreview(item.content);
     const viewUrl = `/Media/media-view.html?type=${type}&id=${item.id}`;
-
-    const downloadButton = config.download && item.file
+    const attachments = type === "archive" ? getMediaAttachments(item) : [];
+    const downloadButtons = attachments.length
         ? `
-            <a href="${item.file}" class="sub-media-download" download>
-                download
-            </a>
+            <div class="sub-media-downloads">
+                ${attachments.map((attachment, index) => `
+                    <a href="${escapeHtml(attachment.url)}" class="sub-media-download" download>
+                        ${attachments.length > 1 ? `download${index + 1}` : "download"}
+                    </a>
+                `).join("")}
+            </div>
         `
         : "";
 
@@ -131,17 +155,37 @@ function createMediaItem(item, config, type) {
                     <a href="${viewUrl}">${item.title}</a>
                 </h3>
 
-                <div class="sub-media-description">
+                <a href="${viewUrl}" class="sub-media-description">
                     ${preview}
-                </div>
+                </a>
 
                 <div class="sub-media-bottom">
                     <span class="sub-media-date">${item.date || ""}</span>
-                    ${downloadButton}
+                    ${downloadButtons}
                 </div>
             </div>
         </article>
     `;
+}
+
+function getMediaAttachments(item) {
+    const source = Array.isArray(item.files)
+        ? item.files
+        : Array.isArray(item.attachments)
+            ? item.attachments
+            : [item.file, item.file2];
+
+    return source
+        .map(file => {
+            if (typeof file === "string") return { url: file };
+            if (!file || typeof file !== "object") return null;
+
+            return {
+                url: file.url || file.fileUrl || file.downloadUrl || file.path || "",
+            };
+        })
+        .filter(file => file?.url)
+        .slice(0, 2);
 }
 
 function getMediaPreview(content) {

@@ -87,6 +87,12 @@
                 tabindex="0"
                 role="button"
                 aria-label="${escapeHtml(item.title)}">
+                <div class="media-item-image">
+                    <img
+                        src="${item.thumbnail || PLACEHOLDER}"
+                        alt="${escapeHtml(item.title)}"
+                        onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
+                </div>
                 <span class="media-card-category">${escapeHtml(item.category)}</span>
                 <h3 class="media-card-title">${escapeHtml(item.title)}</h3>
                 <p class="media-card-text">${escapeHtml(getPlainPreview(item.content, 1))}</p>

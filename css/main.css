@@ -1137,6 +1137,10 @@ Section 06 : Media
     background:var(--red);
 }
 
+.media-item-image{
+    display:none;
+}
+
 /* =========================
     Category
 ========================= */
@@ -1251,6 +1255,7 @@ Section 06 : Media
     }
 
     .media-item-image {
+        display: block;
         width: 100%;
         height: 227px;
         margin-left: 0;

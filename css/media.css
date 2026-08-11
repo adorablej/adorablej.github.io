@@ -388,6 +388,10 @@ Media.html , News
         background: #f5f6fa;
     }
 
+    .media-section .media-featured {
+        display:block;
+    }
+
     .media-content {
         display: flex;
         flex-direction: column;
@@ -500,7 +504,7 @@ Media List
     margin: 0 auto;
 }
 
-.sub-media-filter-mobile {
+.sub-media-filter > .sub-form-select {
     display: none;
 }
 
@@ -595,6 +599,12 @@ Media Item
 /* ========================================
 Download Button
 ======================================== */
+.sub-media-downloads {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
 .sub-media-download {
     display: inline-flex;
     align-items: center;
@@ -699,13 +709,24 @@ Media View
 }
 .sub-media-view-file {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
+    flex-direction: column;
+    gap: 0;
     margin-bottom: 40px;
     padding: 24px 0;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
+}
+.sub-media-view-file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    width: 100%;
+}
+.sub-media-view-file-item + .sub-media-view-file-item {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
 }
 .sub-media-view-file[hidden] {
     display: none;
@@ -831,44 +852,16 @@ Media Empty
 
     .sub-media-filter {
         margin-bottom: 0;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #333;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #ddd;
     }
 
     .sub-media-filter .sub-pill-tabs {
         display: none;
     }
 
-    .sub-media-filter-mobile {
-        position: relative;
+    .sub-media-filter > .sub-form-select {
         display: block;
-    }
-
-    .sub-media-filter-mobile::after {
-        position: absolute;
-        top: 50%;
-        right: 18px;
-        width: 7px;
-        height: 7px;
-        border-right: 1px solid #333;
-        border-bottom: 1px solid #333;
-        content: "";
-        pointer-events: none;
-        transform: translateY(-70%) rotate(45deg);
-    }
-
-    .sub-media-filter-mobile select {
-        width: 100%;
-        height: 60px;
-        padding: 0 45px 0 18px;
-        border: 1px solid #ddd;
-        border-radius: 0;
-        background: #fff;
-        color: #333;
-        font: inherit;
-        font-size: 14px;
-        appearance: none;
-        box-sizing: border-box;
     }
 
     .sub-media-list {
@@ -920,6 +913,12 @@ Media Empty
 
     .sub-media-bottom {
         gap: 24px;
+    }
+
+    .sub-media-downloads {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
 
     .sub-media-download {
@@ -996,11 +995,15 @@ Media Empty
     }
 
     .sub-media-view-file {
+        align-items: flex-start;
+        margin-bottom: 0;
+        padding: 20px 0;
+    }
+
+    .sub-media-view-file-item {
         flex-direction: column;
         align-items: flex-start;
         gap: 18px;
-        margin-bottom: 0;
-        padding: 20px 0;
     }
 
     .sub-media-view-file-info {

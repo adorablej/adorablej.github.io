@@ -17,6 +17,7 @@ const MEDIA_CONFIG = {
         categories: [
             "전체",
             "제품/기술",
+            "수상/활동",
             "공헌/환경",
             "기타/마케팅"
         ]
@@ -37,7 +38,7 @@ const MEDIA_DATA = {
         {
             id: 1,
             category: "캘린더",
-            title: "썸네일 없 내용이미지 있 캘린더",
+            title: "썸네일 없 내용이미지 있 첨부파일 두개예시",
             thumbnail: "",
             date: "2026.07.15",
             content: `
@@ -48,12 +49,15 @@ const MEDIA_DATA = {
                     <p>썸네일 없 내용이미지 있 썸네일 없 내용이미지 있 썸네일 없 내용이미지 있 썸네일 없 내용이미지 있 캘린더 썸네일 없 내용이미지 있 캘린더 썸네일 없 내용이미지 있 캘린더 썸네일 없 내용이미지 있 캘린더 썸네일 없 내용이미지 있 캘린더 썸네일 없 내용이미지 있 캘린더 썸네일 없 내용이미지 있 캘린더 썸네일 없 내용이미지 있 캘린더</p>
                 </div>
             `,
-            file: "/download/#"
+            files: [
+                { url: "/download/#", name: "캘린더_자료_01.pdf" },
+                { url: "/download/#", name: "캘린더_자료_02.pdf" }
+            ]
         },
         {
             id: 2,
             category: "종합 카탈로그",
-            title: "썸네일 없 내용이미지 없 종합 카탈로그",
+            title: "썸네일 없 내용이미지 없 첨부파일 하나",
             thumbnail: "",
             date: "2026.05.20",
             content: `
@@ -62,7 +66,9 @@ const MEDIA_DATA = {
                     <p>썸네일 없 내용이미지 없 종합 카탈로그</p>
                 </div>
             `,
-            file: "#"
+            files: [
+                { url: "/download/#", name: "캘린더_자료_01.pdf" }
+            ]
         },
         {
             id: 3,
@@ -78,7 +84,9 @@ const MEDIA_DATA = {
                     <p>썸네일 있 내용이미지 있 잡지 광고</p>
                 </div>
             `,
-            file: "#"
+            files: [
+                { url: "/download/#", name: "캘린더_자료_01.pdf" }
+            ]
         }
     ],
     news: [
@@ -109,7 +117,7 @@ const MEDIA_DATA = {
         {
             id: 3,
             category: "제품/기술",
-            title: "글쓴 순서로 3",
+            title: "media 메인에서는 media 메인에서는 media 메인에서는 media 메인에서는 media 메인에서는 media 메인에서는 media 메인에서는 7",
             thumbnail: "",
             date: "2026.03.15",
             content: `
@@ -133,14 +141,17 @@ const MEDIA_DATA = {
         {
             id: 5,
             category: "제품/기술",
-            title: "media 메인에서는 media 메인에서는 media 메인에서는 media 메인에서는 media 메인에서는 media 메인에서는 media 메인에서는 7",
+            title: "첨부파일 있는 뉴스 게시글",
             thumbnail: "",
             date: "2026.07.15",
             content: `
                 <div class="sub-media-view-text">
                     <p>뉴스 뉴스 뉴스 뉴스 스 뉴스 뉴스 스 뉴스 뉴스 뉴스 뉴스 뉴스 스 뉴스 뉴스 뉴스 뉴스 뉴스 스 뉴스 뉴스 뉴스 뉴스 뉴스 스 뉴스 뉴스 뉴스 뉴스 뉴스 스 뉴스 뉴스 뉴스 뉴스 뉴스 스 뉴스 뉴스 뉴스 뉴스 뉴스 스 뉴스</p>
                 </div>
-            `
+            `,
+            files: [
+                { url: "/download/#", name: "뉴스_첨부자료.pdf" }
+            ]
         }
     ],
     promotion: [
@@ -184,12 +195,15 @@ const MEDIA_DATA = {
                 <div class="sub-media-view-text">
                     <p>Event Event 이벤트 Event Event 이벤트</p>
                 </div>
-            `
+            `,
+            files: [
+                { url: "/download/#", name: "이벤트_첨부자료.pdf" }
+            ]
         },
         {
             id: 4,
             category: "Promotion",
-            title: "썸네일 있 내용이미지 있 프로모션 4",
+            title: "썸네일 있 내용이미지 있 프로모션 4 첨부파일도 있음",
             thumbnail: "/images/main_banner.png",
             date: "2026.07.15",
             content: `
@@ -199,7 +213,10 @@ const MEDIA_DATA = {
                 <div class="sub-media-view-text">
                     <p>Promotion Promotion 프로모션</p>
                 </div>
-            `
+            `,
+            files: [
+                { url: "/download/#", name: "프로모션_첨부자료.pdf" }
+            ]
         }
     ]
 };
