@@ -6,7 +6,7 @@ function initMediaView() {
     const type = MEDIA_CONFIG[requestedType] ? requestedType : "archive";
     const requestedId = Number(params.get("id"));
     const config = MEDIA_CONFIG[type];
-    const list = MEDIA_DATA[type] || [];
+    const list = sortMediaByLatest(MEDIA_DATA[type] || []);
     const item = list.find(data => data.id === requestedId) || list[0];
 
     if (!item) {
@@ -15,6 +15,17 @@ function initMediaView() {
     }
 
     renderMediaView(type, config, list, item);
+}
+
+function sortMediaByLatest(data) {
+    return [...data].sort((a, b) => {
+        return normalizeMediaDate(b.date) - normalizeMediaDate(a.date);
+    });
+}
+
+function normalizeMediaDate(date) {
+    const timestamp = Date.parse(String(date || "").replaceAll(".", "-"));
+    return Number.isNaN(timestamp) ? 0 : timestamp;
 }
 
 function renderMediaView(type, config, list, item) {

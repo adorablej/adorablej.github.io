@@ -46,7 +46,6 @@ Sub Product Category
     color: #000;
     font-family: "Russo One", sans-serif;
     font-size: calc(38 * var(--vw));
-    font-weight: 400;
     line-height: 1.15;
     letter-spacing: -.03em;
 }
@@ -346,7 +345,6 @@ Sub Pride Interview
     color: #222;
     font-family: "Russo One", sans-serif;
     font-size: calc(64 * var(--vw));
-    font-weight: 400;
     line-height: 1;
     letter-spacing: -.02em;
 }
@@ -825,7 +823,6 @@ Sub Product Item
     color: #000;
     font-family: "Russo One", sans-serif;
     font-size: calc(50 * var(--vw));
-    font-weight: 400;
     line-height: normal;
     letter-spacing: 0;
 }
@@ -1053,7 +1050,6 @@ Detail Visual
     margin: 0 0 calc(28 * var(--vw));
     font-family: "Russo One", sans-serif;
     font-size: calc(60 * var(--vw));
-    font-weight: 400;
     line-height: calc(80 * var(--vw));
     letter-spacing: 0;
 }
@@ -1440,7 +1436,6 @@ Detail Spec
     color: #000;
     font-family: "Russo One", sans-serif;
     font-size: calc(64 * var(--vw));
-    font-weight: 400;
     line-height: 1;
     letter-spacing: -.03em;
 }
@@ -1588,7 +1583,6 @@ Detail FAQ
     color: #000;
     font-family: "Russo One", sans-serif;
     font-size: calc(64 * var(--vw));
-    font-weight: 400;
     line-height: 1;
     letter-spacing: -.03em;
 }
@@ -2577,7 +2571,6 @@ products-ROICalculator.html , Products Hero
     color:#000;
     font-family:"Russo One",sans-serif;
     font-size:calc(40 * var(--vw));
-    font-weight:400;
     line-height:calc(42 * var(--vw));
     word-break:keep-all;
 }
@@ -3629,7 +3622,6 @@ products-HunterPride-Interview.html
     color: #111;
     font-family: "Russo One", sans-serif;
     font-size: calc(100vw * 40 / 1920);
-    font-weight: 400;
     line-height: 1;
 }
 

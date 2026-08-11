@@ -149,7 +149,7 @@ const MEDIA_DATA = {
             category: "Promotion",
             title: "썸네일 있 내용이미지 있 프로모션 5",
             thumbnail: "/images/main_banner.png",
-            date: "2026.05.15",
+            date: "2026.06.12",
             content: `
                 <div class="sub-media-view-image">
                     <img src="/images/main_banner.png">
@@ -164,7 +164,7 @@ const MEDIA_DATA = {
             category: "Promotion",
             title: "썸네일 없 내용이미지 있 프로모션 프로모션 프로모션7",
             thumbnail: "",
-            date: "2026.07.15",
+            date: "2026.04.15",
             content: `
                 <div class="sub-media-view-image">
                     <img src="/images/main_banner.png">
@@ -179,7 +179,7 @@ const MEDIA_DATA = {
             category: "Event",
             title: "썸네일 없 내용이미지 없 이벤트 6",
             thumbnail: "",
-            date: "2026.06.12",
+            date: "2026.05.15",
             content: `
                 <div class="sub-media-view-text">
                     <p>Event Event 이벤트 Event Event 이벤트</p>
@@ -191,7 +191,7 @@ const MEDIA_DATA = {
             category: "Promotion",
             title: "썸네일 있 내용이미지 있 프로모션 4",
             thumbnail: "/images/main_banner.png",
-            date: "2026.04.15",
+            date: "2026.07.15",
             content: `
                 <div class="sub-media-view-image">
                     <img src="/images/main_banner.png">

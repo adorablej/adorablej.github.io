@@ -51,7 +51,6 @@ Common Section
     font-family: "Russo One", sans-serif;
     color:#111;
     font-size:calc(64 * var(--vw));
-    font-weight:800;
 }
 
 .section-title span{
@@ -962,7 +961,7 @@ Section 05 : Support
         padding: 20px 0;
     }
 
-    .support-section .section-title {
+    .section-title {
         font-size: 30px;
         line-height: 1.2;
     }
@@ -1211,11 +1210,6 @@ Section 06 : Media
 
     .media-section .section-heading {
         margin-bottom: 31px;
-    }
-
-    .media-section .section-title {
-        font-size: 30px;
-        line-height: 1.2;
     }
 
     .media-section .section-description,
@@ -1489,7 +1483,6 @@ History Text Splash
     color: var(--red);
     font-family: "Russo One", sans-serif;
     font-size: clamp(calc(90 * var(--vw)), 9vw, calc(180 * var(--vw)));
-    font-weight: 400;
     line-height: 1;
     white-space: nowrap;
 }

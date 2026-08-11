@@ -886,7 +886,6 @@ All Menu Navigation
     color: #fff;
     font-family: "Russo One", sans-serif;
     font-size: calc(30 * var(--vw));
-    font-weight: 400;
     line-height: 1.2;
     letter-spacing: 1%;
     text-align: left;
@@ -1331,7 +1330,6 @@ sub page 공통
     color: #000;
     font-family: "Russo One", sans-serif;
     font-size: calc(64 * var(--vw));
-    font-weight: 400;
     line-height: 1;
 }
 
@@ -1345,7 +1343,6 @@ sub page 공통
     color: #111;
     font-family: "Russo One", sans-serif;
     font-size: calc(50 * var(--vw));
-    font-weight: 400;
     line-height: 1;
     margin-bottom: calc(100 * var(--vw));
 }
@@ -1364,7 +1361,6 @@ sub page 공통
     color: #111;
     font-family: "Russo One", sans-serif;
     font-size: calc(50 * var(--vw));
-    font-weight: 400;
     line-height: 1;
     margin-bottom: calc(20 * var(--vw));
 }
@@ -1572,7 +1568,6 @@ Section Title 공통
     margin: 0;
     font-family: "Russo One", sans-serif;
     font-size: calc(60 * var(--vw));
-    font-weight: 400;
     line-height: 1;
     letter-spacing: 1px;
     color: #000;

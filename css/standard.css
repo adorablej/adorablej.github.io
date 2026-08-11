@@ -1088,7 +1088,6 @@ overflow-y: visible;
     color: #000;
     font-family: "Russo One", sans-serif;
     font-size: calc(52 * var(--vw));
-    font-weight: 400;
     line-height: 1;
     letter-spacing: -.035em;
 }
@@ -1253,7 +1252,6 @@ overflow-y: visible;
     color: var(--red);
     font-family: "Russo One", sans-serif;
     font-size: calc(50 * var(--vw));
-    font-weight: 400;
 }
 
 .sub-korea-before-item p {
@@ -1421,7 +1419,6 @@ overflow-y: visible;
     color: #fff;
     font-family: "Russo One", sans-serif;
     font-size: calc(60 * var(--vw));
-    font-weight: 400;
     line-height:  calc(40 * var(--vw));
     text-decoration: none;
     transition: color .25s ease;
@@ -1529,7 +1526,6 @@ overflow-y: visible;
     color: #111;
     font-family: "Russo One", sans-serif;
     font-size: calc(40 * var(--vw));
-    font-weight: 400;
     line-height: 1.2;
     text-align: center;
 }
@@ -2818,7 +2814,6 @@ History 연도별 1920 시안 좌표
         color: var(--red);
         font-family: "Russo One", sans-serif;
         font-size: 22px;
-        font-weight: 400;
         line-height: normal;
         letter-spacing: -.11px;
         text-align: left;
