@@ -283,6 +283,12 @@ Media.html , News
         box-sizing: border-box;
     }
 
+    .media-section .media-inner {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+    }
+
     .media-archive-heading,
     .media-news-heading,
     .media-page-heading {

@@ -1630,7 +1630,10 @@ body.main-page {
         scroll-snap-align:none;
         scroll-snap-stop:normal;
     }
-
+    .main-page .business-section{
+        height:calc(880 * var(--vw));
+        min-height:calc(880 * var(--vw));
+    }
     .main-page .history-content {
         height:calc(1080 * var(--vw));
         min-height:calc(1080 * var(--vw));
