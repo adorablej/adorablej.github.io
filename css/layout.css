@@ -1,5 +1,5 @@
 :root {
-    --vw: calc(100vw / 1920);
+    --vw: min(calc(100vw / 1920), 1px);
 }
 
 /* 메인 첫 KV 이후는 서브페이지와 동일한 흰색 헤더 */
@@ -640,11 +640,9 @@ line-height: 5;}
 
 .business-quick-inner {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1300px;
     height: 100%;
-
     margin: 0 auto;
-    padding: 0 calc(60 * var(--vw));
 }
 
 .business-quick-list {
@@ -1488,7 +1486,7 @@ Sub Products Banner
     align-items: flex-end;
     text-align: right;
     height: 100%;
-    width: calc(1200 * var(--vw));
+    width: calc(1300 * var(--vw));
 }
 
 .sub-products-banner-content h2 {
@@ -1584,7 +1582,7 @@ Tabs 공통
 .sub-pill-tabs {
     display: flex;
     align-items: center;
-    gap: calc(100vw * 12 / 1920);
+    gap: calc(min(100vw, 1920px) * 12 / 1920);
     margin-bottom: 80px;
 }
 
@@ -1592,16 +1590,16 @@ Tabs 공통
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: calc(100vw * 186 / 1920);
-    height: calc(100vw * 60 / 1920);
-    padding: calc(100vw * 14 / 1920) calc(100vw * 24 / 1920);
+    min-width: calc(min(100vw, 1920px) * 186 / 1920);
+    height: calc(min(100vw, 1920px) * 60 / 1920);
+    padding: calc(min(100vw, 1920px) * 14 / 1920) calc(min(100vw, 1920px) * 24 / 1920);
     border: 1px solid #a8a8a8;
-    border-radius: calc(100vw * 100 / 1920);
+    border-radius: calc(min(100vw, 1920px) * 100 / 1920);
     background: transparent;
     color: #a8a8a8;
-    font-size: calc(100vw * 18 / 1920);
+    font-size: calc(min(100vw, 1920px) * 18 / 1920);
     font-weight: 500;
-    line-height: calc(100vw * 32 / 1920);
+    line-height: calc(min(100vw, 1920px) * 32 / 1920);
     cursor: pointer;
     margin-right: 0;
     box-sizing: border-box;

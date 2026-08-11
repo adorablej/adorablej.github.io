@@ -240,7 +240,6 @@
             : window;
     
         let lastScrollTop = getScrollTop();
-        let scrollStopTimer = null;
         let ticking = false;
     
         function getScrollTop() {
@@ -286,12 +285,6 @@
                 ticking = true;
                 window.requestAnimationFrame(updateHeader);
             }
-    
-            window.clearTimeout(scrollStopTimer);
-    
-            scrollStopTimer = window.setTimeout(() => {
-                header.classList.remove("is-hidden");
-            }, 350);
         }
     
         scrollTarget.addEventListener("scroll", handleScroll, {
