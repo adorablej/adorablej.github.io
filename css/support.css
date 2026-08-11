@@ -2026,16 +2026,6 @@ Training Program : Mobile
 }
 
 @media screen and (max-width: 720px) {
-    .page-heading:has(+ .sub-specification) {
-        margin-bottom: 0;
-        padding: 68px 0 14px;
-    }
-
-    .page-heading:has(+ .sub-specification) .page-title {
-        font-size: 24px;
-        line-height: 30px;
-    }
-
     .sub-specification .inner {
         width: auto;
         margin: 0;
