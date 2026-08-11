@@ -1638,12 +1638,6 @@ Wheel Alignment Specification
     object-fit: contain;
 }
 
-.sub-specification-brand-card:hover .sub-specification-brand-logo,
-.sub-specification-model-card:hover .sub-specification-model-image,
-.sub-specification-model-card.is-active .sub-specification-model-image {
-    border-color: var(--red);
-}
-
 .sub-specification-brand-name,
 .sub-specification-model-card strong {
     display: block;

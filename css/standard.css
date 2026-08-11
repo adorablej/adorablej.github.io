@@ -1552,10 +1552,6 @@ overflow-y: visible;
     object-fit: contain;
 }
 
-.sub-partners-brand-card:hover .sub-partners-brand-logo {
-    border-color: #e5e5e5;
-}
-
 
 .sub-partners-brand-card .sub-specification-brand-name {
     color: #000;
