@@ -181,6 +181,13 @@ html {
 .sub-pagination-arrow:focus-visible { border-color: var(--red); }
 .sub-pagination-arrow:hover::before,
 .sub-pagination-arrow:focus-visible::before { border-color: var(--red); }
+.sub-pagination-arrow:disabled {
+    opacity: .35;
+    cursor: default;
+}
+.sub-mypage-pagination-row[hidden] {
+    display: none;
+}
 
 /* Responsive visibility */
 .mo-only {

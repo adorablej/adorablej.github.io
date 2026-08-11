@@ -1049,7 +1049,7 @@ Section 06 : Media
 ======================================== */
 
 .media-section .section-heading{
-    margin-bottom:calc(96 * var(--vw));
+    margin-bottom:calc( * var(--vw));
 }
 
 .media-section{
@@ -1058,12 +1058,17 @@ Section 06 : Media
     min-height:calc(1080 * var(--vw));
     overflow:hidden;
     background:#efefef;
+    display: flex;
+    align-items: center;
 }
 
 .media-inner{
     max-width:calc(1300 * var(--vw));
     margin:0 auto;
-    padding:calc(110 * var(--vw)) 0;
+    height: calc(900 * var(--vw));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 

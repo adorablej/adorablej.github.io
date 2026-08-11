@@ -1,5 +1,9 @@
 window.addEventListener("includeLoaded", initMediaList);
 
+const MEDIA_ITEMS_PER_PAGE = 10;
+const MEDIA_MOBILE_BREAKPOINT = 767;
+let mediaListState = null;
+
 function initMediaList() {
     const params = new URLSearchParams(window.location.search);
     const requestedType = params.get("type") || "archive";
@@ -23,7 +27,14 @@ function initMediaList() {
     document.title = `${config.title} | Hunter Korea`;
 
     renderMediaFilter(config, data, type);
-    renderMediaList(config, data, type);
+
+    const requestedPage = Number(params.get("page")) || 1;
+    renderMediaList(config, data, type, requestedPage);
+
+    if (!mediaListState?.resizeBound) {
+        window.addEventListener("resize", handleMediaPaginationResize);
+        if (mediaListState) mediaListState.resizeBound = true;
+    }
 }
 
 function sortMediaByLatest(data) {
@@ -77,7 +88,11 @@ function renderMediaFilter(config, data, type) {
             ? data
             : data.filter(item => item.category === category);
 
-        renderMediaList(config, filteredData, type);
+        renderMediaList(config, filteredData, type, 1);
+
+        const url = new URL(window.location.href);
+        url.searchParams.delete("page");
+        window.history.replaceState({}, "", url);
     };
 
     buttons.forEach(button => {
@@ -106,8 +121,19 @@ function renderMediaFilter(config, data, type) {
     });
 }
 
-function renderMediaList(config, data, type) {
+function renderMediaList(config, data, type, page = 1) {
     const list = document.getElementById("mediaList");
+    const totalPages = Math.ceil(data.length / MEDIA_ITEMS_PER_PAGE);
+    const currentPage = Math.min(Math.max(1, page), Math.max(1, totalPages));
+
+    mediaListState = {
+        config,
+        data,
+        type,
+        currentPage,
+        resizeBound: mediaListState?.resizeBound || false,
+        paginationSize: getMediaPaginationSize()
+    };
 
     if (!data.length) {
         list.innerHTML = `
@@ -115,10 +141,101 @@ function renderMediaList(config, data, type) {
                 등록된 게시물이 없습니다.
             </div>
         `;
+        renderMediaPagination();
         return;
     }
 
-    list.innerHTML = data.map(item => createMediaItem(item, config, type)).join("");
+    const startIndex = (currentPage - 1) * MEDIA_ITEMS_PER_PAGE;
+    const pageItems = data.slice(startIndex, startIndex + MEDIA_ITEMS_PER_PAGE);
+
+    list.innerHTML = pageItems.map(item => createMediaItem(item, config, type)).join("");
+    renderMediaPagination();
+}
+
+function renderMediaPagination() {
+    const pagination = document.getElementById("mediaPagination");
+    if (!pagination || !mediaListState) return;
+
+    const { data, currentPage } = mediaListState;
+    const totalPages = Math.ceil(data.length / MEDIA_ITEMS_PER_PAGE);
+
+    if (totalPages <= 1) {
+        pagination.hidden = true;
+        pagination.innerHTML = "";
+        return;
+    }
+
+    const groupSize = getMediaPaginationSize();
+    const groupStart = Math.floor((currentPage - 1) / groupSize) * groupSize + 1;
+    const groupEnd = Math.min(groupStart + groupSize - 1, totalPages);
+    const pageButtons = [];
+
+    for (let page = groupStart; page <= groupEnd; page += 1) {
+        pageButtons.push(`
+            <button
+                type="button"
+                class="${page === currentPage ? "is-active" : ""}"
+                data-media-page="${page}"
+                aria-label="${page}페이지"
+                ${page === currentPage ? 'aria-current="page"' : ""}>
+                ${page}
+            </button>
+        `);
+    }
+
+    pagination.innerHTML = `
+        <button
+            type="button"
+            class="sub-pagination-arrow is-prev"
+            data-media-page="${Math.max(1, groupStart - groupSize)}"
+            aria-label="이전 페이지 묶음"
+            ${groupStart === 1 ? "disabled" : ""}></button>
+        ${pageButtons.join("")}
+        <button
+            type="button"
+            class="sub-pagination-arrow is-next"
+            data-media-page="${groupEnd + 1}"
+            aria-label="다음 페이지 묶음"
+            ${groupEnd === totalPages ? "disabled" : ""}></button>
+    `;
+    pagination.hidden = false;
+
+    pagination.querySelectorAll("[data-media-page]:not(:disabled)").forEach(button => {
+        button.addEventListener("click", () => {
+            changeMediaPage(Number(button.dataset.mediaPage));
+        });
+    });
+}
+
+function changeMediaPage(page) {
+    if (!mediaListState) return;
+
+    const { config, data, type } = mediaListState;
+    renderMediaList(config, data, type, page);
+
+    const url = new URL(window.location.href);
+    if (page === 1) url.searchParams.delete("page");
+    else url.searchParams.set("page", page);
+    window.history.replaceState({}, "", url);
+
+    document.querySelector(".sub-media-list-section")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+function getMediaPaginationSize() {
+    return window.innerWidth <= MEDIA_MOBILE_BREAKPOINT ? 3 : 10;
+}
+
+function handleMediaPaginationResize() {
+    if (!mediaListState) return;
+
+    const nextSize = getMediaPaginationSize();
+    if (nextSize === mediaListState.paginationSize) return;
+
+    mediaListState.paginationSize = nextSize;
+    renderMediaPagination();
 }
 
 function createMediaItem(item, config, type) {

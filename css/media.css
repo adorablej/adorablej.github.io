@@ -516,6 +516,13 @@ Media Item
     width: 100%;
     border-top: 1px solid #000;
 }
+.sub-media-pagination[hidden] {
+    display: none;
+}
+.sub-media-pagination .sub-pagination-arrow:disabled {
+    opacity: .35;
+    cursor: default;
+}
 .sub-media-item {
     display: grid;
     grid-template-columns: 500px minmax(0, 1fr);

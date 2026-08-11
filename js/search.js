@@ -82,7 +82,8 @@
         const initialKeyword = params.get("keyword")?.trim() || "";
         let activeCategory = "all";
         let currentPage = 1;
-        const pageSize = 4;
+        const pageSize = 10;
+        let paginationGroupSize = window.innerWidth <= 767 ? 3 : 10;
 
         input.value = initialKeyword;
         saveRecentSearch(initialKeyword);
@@ -139,7 +140,7 @@
                 <ul class="sub-search-list">
                     ${visibleItems.map((item) => createResultItem(item, keyword)).join("")}
                 </ul>
-                ${createPagination(totalPages)}
+                ${createPagination(totalPages, currentPage)}
             `;
 
             resultArea.querySelectorAll("[data-page]").forEach((button) => {
@@ -183,6 +184,13 @@
             });
         });
 
+        window.addEventListener("resize", () => {
+            const nextGroupSize = window.innerWidth <= 767 ? 3 : 10;
+            if (nextGroupSize === paginationGroupSize) return;
+            paginationGroupSize = nextGroupSize;
+            render();
+        });
+
         renderProducts();
         initProductSlider();
         render();
@@ -205,21 +213,25 @@
         `;
     }
 
-    function createPagination(totalPages) {
+    function createPagination(totalPages, currentPage) {
         if (totalPages <= 1) return "";
 
-        const pageButtons = Array.from(
-            { length: totalPages },
-            (_, index) => index + 1
-        ).map((page) => `
-            <button type="button" data-page="${page}" class="${page === 1 ? "is-active" : ""}">${page}</button>
-        `).join("");
+        const groupSize = window.innerWidth <= 767 ? 3 : 10;
+        const groupStart = Math.floor((currentPage - 1) / groupSize) * groupSize + 1;
+        const groupEnd = Math.min(groupStart + groupSize - 1, totalPages);
+        const pageButtons = [];
+
+        for (let page = groupStart; page <= groupEnd; page += 1) {
+            pageButtons.push(`
+                <button type="button" data-page="${page}" class="${page === currentPage ? "is-active" : ""}" ${page === currentPage ? 'aria-current="page"' : ""}>${page}</button>
+            `);
+        }
 
         return `
             <nav class="sub-pagination" aria-label="검색 결과 페이지">
-                <button type="button" class="sub-pagination-arrow is-prev" data-page="1" aria-label="이전 페이지"></button>
-                ${pageButtons}
-                <button type="button" class="sub-pagination-arrow is-next" data-page="${totalPages}" aria-label="다음 페이지"></button>
+                <button type="button" class="sub-pagination-arrow is-prev" data-page="${Math.max(1, groupStart - groupSize)}" aria-label="이전 페이지 묶음" ${groupStart === 1 ? "disabled" : ""}></button>
+                ${pageButtons.join("")}
+                <button type="button" class="sub-pagination-arrow is-next" data-page="${groupEnd + 1}" aria-label="다음 페이지 묶음" ${groupEnd === totalPages ? "disabled" : ""}></button>
             </nav>
         `;
     }

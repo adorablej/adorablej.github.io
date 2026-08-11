@@ -4,7 +4,92 @@ document.addEventListener("DOMContentLoaded", () => {
     initMypageOrderToggle();
     initMypageWithdrawModal();
     initMypageMobileMenu();
+    initMypagePagination();
 });
+
+function initMypagePagination() {
+    document.querySelectorAll('.sub-mypage-pagination-row').forEach(row => {
+        if (row.dataset.paginationInitialized === 'true') return;
+
+        const pagination = row.querySelector('.sub-pagination');
+        const list = row.previousElementSibling;
+        if (!pagination || !list) return;
+
+        const itemSelector = '.sub-mypage-product-row, .sub-mypage-part-row';
+        const itemsPerPage = 10;
+        const pageScope = row.closest('.sub-mypage-products, .sub-mypage-cart-page, .sub-mypage-content');
+        const totalElement = pageScope?.querySelector('.sub-mypage-list-actions strong em');
+        let currentPage = Number(new URLSearchParams(window.location.search).get('page')) || 1;
+        let currentGroupSize = window.innerWidth <= 767 ? 3 : 10;
+
+        const render = () => {
+            const items = [...list.querySelectorAll(itemSelector)];
+            const declaredTotal = Number(String(totalElement?.textContent || '').replace(/[^0-9]/g, ''));
+            const totalItems = declaredTotal > 0 ? Math.max(declaredTotal, items.length) : items.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            const hasAllItems = totalItems === items.length;
+
+            if (totalPages <= 1) {
+                items.forEach(item => { item.hidden = false; });
+                pagination.innerHTML = '';
+                row.hidden = true;
+                return;
+            }
+
+            currentPage = Math.min(Math.max(1, currentPage), totalPages);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            items.forEach((item, index) => {
+                item.hidden = hasAllItems && (index < startIndex || index >= startIndex + itemsPerPage);
+            });
+
+            const groupSize = window.innerWidth <= 767 ? 3 : 10;
+            currentGroupSize = groupSize;
+            const groupStart = Math.floor((currentPage - 1) / groupSize) * groupSize + 1;
+            const groupEnd = Math.min(groupStart + groupSize - 1, totalPages);
+            const pageButtons = [];
+
+            for (let page = groupStart; page <= groupEnd; page += 1) {
+                pageButtons.push(`<button type="button" data-page="${page}" class="${page === currentPage ? 'is-active' : ''}" ${page === currentPage ? 'aria-current="page"' : ''}>${page}</button>`);
+            }
+
+            pagination.innerHTML = `
+                <button type="button" class="sub-pagination-arrow is-prev" data-page="${Math.max(1, groupStart - groupSize)}" aria-label="이전 페이지 묶음" ${groupStart === 1 ? 'disabled' : ''}></button>
+                ${pageButtons.join('')}
+                <button type="button" class="sub-pagination-arrow is-next" data-page="${groupEnd + 1}" aria-label="다음 페이지 묶음" ${groupEnd === totalPages ? 'disabled' : ''}></button>
+            `;
+            row.hidden = false;
+
+            pagination.querySelectorAll('[data-page]:not(:disabled)').forEach(button => {
+                button.addEventListener('click', () => {
+                    currentPage = Number(button.dataset.page);
+                    render();
+
+                    const url = new URL(window.location.href);
+                    if (currentPage === 1) url.searchParams.delete('page');
+                    else url.searchParams.set('page', currentPage);
+                    window.history.replaceState({}, '', url);
+                    pagination.dispatchEvent(new CustomEvent('paginationchange', {
+                        bubbles: true,
+                        detail: { page: currentPage, itemsPerPage }
+                    }));
+                    list.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        };
+
+        window.addEventListener('resize', () => {
+            const nextGroupSize = window.innerWidth <= 767 ? 3 : 10;
+            if (nextGroupSize !== currentGroupSize) render();
+        });
+
+        new MutationObserver(mutations => {
+            if (mutations.some(mutation => mutation.type === 'childList')) render();
+        }).observe(list, { childList: true, subtree: true });
+
+        row.dataset.paginationInitialized = 'true';
+        render();
+    });
+}
 
 function initMypageMobileMenu() {
     document.querySelectorAll("[data-mypage-mobile-menu]").forEach(menu => {
