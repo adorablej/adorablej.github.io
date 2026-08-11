@@ -1390,7 +1390,6 @@ Section 07 : Business
     height: 100%;
     color: #fff;
     text-align: center;
-    padding-top: calc(100 * var(--vw));
 }
 
 .business-title {

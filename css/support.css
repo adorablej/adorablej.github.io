@@ -1403,6 +1403,7 @@ Wheel Alignment Specification
     width: calc(24 * var(--vw));
     height: calc(24 * var(--vw));
     background: url(/images/icon/icon-search.svg);
+    background-size: cover;
     margin: calc(28 * var(--vw)) calc(10 * var(--vw)) calc(28 * var(--vw)) calc(24 * var(--vw));
 }
 
@@ -1800,8 +1801,8 @@ Wheel Alignment Specification
 .specification-modal-header { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 110px; padding: 0 50px; background: #050505; color: #fff; }
 .specification-modal-header h2 { margin: 0; color: #fff; font-size: 32px; line-height: 1.2; }
 .specification-modal-header img { width: 130px; max-height: 40px; object-fit: contain; }
-.specification-modal-close { position: absolute; top: -104px; left: 50%; display: block; width: 80px; height: 80px; padding: 0; border: 0; border-radius: 50%; background: #fff; color: #000; cursor: pointer; transform: translateX(-50%); }
-.specification-modal-close::before, .specification-modal-close::after { content: ""; position: absolute; top: 50%; left: 50%; width: 32px; height: 2px; background: currentColor; }
+.specification-modal-close { position: absolute; top: -80px; right: 0; left: auto; display: block; width: 70px; height: 70px; padding: 0; border: 0; border-radius: 50%; background: #fff; color: #000; cursor: pointer; transform: none; }
+.specification-modal-close::before, .specification-modal-close::after { content: ""; position: absolute; top: 50%; left: 50%; width: 28px; height: 2px; background: currentColor; }
 .specification-modal-close::before { transform: translate(-50%,-50%) rotate(45deg); }
 .specification-modal-close::after { transform: translate(-50%,-50%) rotate(-45deg); }
 .specification-modal-accent { height: 7px; background: var(--red); }
