@@ -350,13 +350,13 @@ function initProductsHero(){
     if(mobileSlider&&typeof Swiper!=="undefined"){
         const fixedInfo=section.querySelector(".mobile-products-fixed-info");
         const mobileProducts=[
-            {title:"Alignment<br>Systems",href:"/Products/Alignment-Systems/Hawkeye-Elite-X.html"},
-            {title:"Wheel<br>Balancers",href:"/Products/Wheel-Balancers/RoadForce-Walkaway.html"},
-            {title:"Tire<br>Changers",href:"/Products/Tire-Changers/TCRH-Revolution.html"},
-            {title:"Brake<br>Lathes",href:"/Products/Brake-Lathes/BL-Series.html"},
-            {title:"Alignment<br>racks",href:"/Products/Alignment-Racks/Scissor-Alignment-Lifts.html"},
-            {title:"Vehicle<br>Inspection",href:"/Products/Vehicle-Inspection/Hunter-Quick-Check-Inspection.html"},
-            {title:"Heavy-<br>Duty",href:"/Products/Heavy-Duty/HawkEye-XL.html"}
+            {title:"Alignment<br>Systems",href:"/Products/Alignment-Systems/list.html"},
+            {title:"Wheel<br>Balancers",href:"/Products/Wheel-Balancers/list.html"},
+            {title:"Tire<br>Changers",href:"/Products/Tire-Changers/list.html"},
+            {title:"Brake<br>Lathes",href:"/Products/Brake-Lathes/list.html"},
+            {title:"Alignment<br>racks",href:"/Products/Alignment-Racks/list.html"},
+            {title:"Vehicle<br>Inspection",href:"/Products/Vehicle-Inspection/list.html"},
+            {title:"Heavy-<br>Duty",href:"/Products/Heavy-Duty/list.html"}
         ];
         const updateMobileInfo=index=>{
             const product=mobileProducts[index];
