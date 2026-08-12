@@ -1632,7 +1632,7 @@ Sub Products Banner
 .sub-products-banner {
     position: relative;
     width: 100%;
-    height: calc(600 * var(--vw));
+    height: calc(700 * var(--vw));
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -1669,19 +1669,21 @@ Sub Products Banner
 .sub-products-banner-content h2 {
     margin: 0 0 calc(25 * var(--vw));
     color: #fff;
-    font-size: calc(60 * var(--vw));
+    font-family: "Pretendard", sans-serif;
+    font-size: calc(50 * var(--vw));
     font-weight: 700;
-    line-height: calc(75 * var(--vw));
-    letter-spacing: -.04em;
+    line-height: calc(64 * var(--vw));
+    letter-spacing: calc(-1 * var(--vw));
 }
 
 .sub-products-banner-content p {
     margin: 0 0 calc(25 * var(--vw));
     color: rgba(255, 255, 255, .6);
-    font-size: calc(20 * var(--vw));
-    font-weight: 400;
-    line-height: calc(30 * var(--vw));
-    letter-spacing: -.03em;
+    font-family: "Pretendard", sans-serif;
+    font-size: calc(17 * var(--vw));
+    font-weight: 500;
+    line-height: calc(26 * var(--vw));
+    letter-spacing: calc(-1 * var(--vw));
 }
 
 .sub-products-banner-button {
