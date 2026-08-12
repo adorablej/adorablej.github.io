@@ -9,6 +9,88 @@ function getCategoryOffset() {
     return Math.max(0, categoryHeading.getBoundingClientRect().left);
 }
 
+function initTcmwSpecSelector(){
+    const section=document.querySelector(".tcmw-detail-spec");
+    const selector=section?.querySelector(".tcmw-spec-selector");
+    const select=selector?.querySelector(".tcmw-spec-select");
+    const value=selector?.querySelector(".tcmw-spec-select-value");
+    const options=Array.from(selector?.querySelectorAll(".tcmw-spec-option")||[]);
+    const optionList=selector?.querySelector(".tcmw-spec-options");
+    const image=section?.querySelector("[data-tcmw-spec-image]");
+    const depth=section?.querySelector('[data-tcmw-spec-value="depth"]');
+    const weight=section?.querySelector('[data-tcmw-spec-value="weight"]');
+
+    if(!selector||!select||!value||!optionList||!options.length||!image||!depth||!weight)return;
+
+    const models={
+        tcmw:{
+            depth:"1,524 mm (60 in) / 1,803 mm (71 in)",
+            weight:"513 kg",
+            label:"TCMW",
+            image:"/images/products/TCMW_v.png",
+            alt:"TCMW Maverick™"
+        },
+        tcmpro:{
+            depth:"1,778 mm (70 in) / 2,057 mm (81 in)",
+            weight:"520 kg",
+            label:"TCMPRO",
+            image:"/images/products/TCMPRO_v.png",
+            alt:"TCMPRO Maverick™"
+        }
+    };
+
+    const close=()=>{
+        selector.classList.remove("is-open");
+        select.setAttribute("aria-expanded","false");
+        optionList.hidden=true;
+    };
+
+    const open=()=>{
+        selector.classList.add("is-open");
+        select.setAttribute("aria-expanded","true");
+        optionList.hidden=false;
+    };
+
+    const changeModel=modelKey=>{
+        const model=models[modelKey]||models.tcmw;
+        value.textContent=model.label;
+        depth.textContent=model.depth;
+        weight.textContent=model.weight;
+        options.forEach(option=>{
+            const isSelected=option.dataset.model===modelKey;
+            option.classList.toggle("is-selected",isSelected);
+            option.setAttribute("aria-selected",String(isSelected));
+        });
+        image.classList.add("is-changing");
+
+        window.setTimeout(()=>{
+            image.src=model.image;
+            image.alt=model.alt;
+            image.onload=()=>image.classList.remove("is-changing");
+            if(image.complete)image.classList.remove("is-changing");
+        },150);
+        close();
+    };
+
+    select.addEventListener("click",()=>{
+        if(selector.classList.contains("is-open"))close();
+        else open();
+    });
+
+    options.forEach(option=>option.addEventListener("click",()=>changeModel(option.dataset.model)));
+    document.addEventListener("click",event=>{
+        if(!selector.contains(event.target))close();
+    });
+    selector.addEventListener("keydown",event=>{
+        if(event.key==="Escape"){
+            close();
+            select.focus();
+        }
+    });
+}
+
+initTcmwSpecSelector();
+
 const categoryOffset = getCategoryOffset();
 
 const categorySwiper = new Swiper(".sub-category-slider", {
@@ -263,6 +345,50 @@ window.addEventListener("includeLoaded",initProductsHero,{once:true});
 function initProductsHero(){
     const section=document.querySelector(".sub-products-visual");
     if(!section)return;
+
+    const mobileSlider=section.querySelector(".mobile-products-swiper");
+    if(mobileSlider&&typeof Swiper!=="undefined"){
+        const fixedInfo=section.querySelector(".mobile-products-fixed-info");
+        const mobileProducts=[
+            {title:"Alignment<br>Systems",href:"/Products/Alignment-Systems/Hawkeye-Elite-X.html"},
+            {title:"Wheel<br>Balancers",href:"/Products/Wheel-Balancers/RoadForce-Walkaway.html"},
+            {title:"Tire<br>Changers",href:"/Products/Tire-Changers/TCRH-Revolution.html"},
+            {title:"Brake<br>Lathes",href:"/Products/Brake-Lathes/BL-Series.html"},
+            {title:"Alignment<br>racks",href:"/Products/Alignment-Racks/Scissor-Alignment-Lifts.html"},
+            {title:"Vehicle<br>Inspection",href:"/Products/Vehicle-Inspection/Hunter-Quick-Check-Inspection.html"},
+            {title:"Heavy-<br>Duty",href:"/Products/Heavy-Duty/HawkEye-XL.html"}
+        ];
+        const updateMobileInfo=index=>{
+            const product=mobileProducts[index];
+            if(!fixedInfo||!product)return;
+            fixedInfo.querySelector("h3").innerHTML=product.title;
+            fixedInfo.querySelector("a").href=product.href;
+        };
+
+        new Swiper(mobileSlider,{
+            slidesPerView:1,
+            speed:700,
+            effect:"fade",
+            fadeEffect:{
+                crossFade:true
+            },
+            observer:true,
+            observeParents:true,
+            resizeObserver:true,
+            pagination:{
+                el:section.querySelector(".mobile-products-pagination"),
+                clickable:true
+            },
+            on:{
+                init(swiper){
+                    updateMobileInfo(swiper.realIndex);
+                },
+                slideChange(swiper){
+                    updateMobileInfo(swiper.realIndex);
+                }
+            }
+        });
+    }
 
     const categoryItems=[...section.querySelectorAll(".sub-products-category-list li")];
     const productGroups=[...section.querySelectorAll(".sub-products-group")];

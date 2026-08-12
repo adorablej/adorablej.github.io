@@ -1822,7 +1822,7 @@ Sub Visual
     position: relative;
 
     width: 100%;
-    height: calc(700 * var(--vw));
+    height: calc(400 * var(--vw));
 
     overflow: hidden;
 }
@@ -1863,9 +1863,11 @@ Sub Visual
 
 .sub-visual-content p {
     color: #fff;
-    font-size: calc(68 * var(--vw));
+    font-family: "Pretendard", sans-serif;
+    font-size: calc(48 * var(--vw));
     font-weight: 700;
-    line-height: normal;
+    line-height: calc(58 * var(--vw));
+    letter-spacing: 0;
 }
 
 

@@ -12,7 +12,7 @@
     <link href="/css/common.css" rel="stylesheet" />
     <link href="/css/layout.css" rel="stylesheet" />
     <link href="/css/main.css" rel="stylesheet" />
-    <link href="/css/products.css" rel="stylesheet" />
+    <link href="/css/products.css?v=20260812-1" rel="stylesheet" />
     <link href="/css/responsive.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -270,12 +270,25 @@
             </section>
 
             <!-- Spec -->
-            <section class="detail-spec"  data-header-theme="dark">
+            <section class="detail-spec tcmw-detail-spec" data-header-theme="dark">
                 <div class="inner">
                     <div class="detail-section-heading">
                         <h2 class="detail-section-title">
                         Spec<span>.</span>
                     </h2>
+                    </div>
+                    <div class="tcmw-spec-selector">
+                        <button type="button" class="tcmw-spec-select" aria-haspopup="listbox"
+                            aria-expanded="false" aria-controls="tcmw-spec-options">
+                            <span class="tcmw-spec-select-value">TCMPRO</span>
+                            <span class="tcmw-spec-select-arrow" aria-hidden="true"></span>
+                        </button>
+                        <ul id="tcmw-spec-options" class="tcmw-spec-options" role="listbox" hidden>
+                            <li><button type="button" class="tcmw-spec-option is-selected" role="option"
+                                aria-selected="true" data-model="tcmpro">TCMPRO</button></li>
+                            <li><button type="button" class="tcmw-spec-option" role="option"
+                                aria-selected="false" data-model="tcmw">TCMW</button></li>
+                        </ul>
                     </div>
                     <div class="detail-spec-wrap">
                         <div class="detail-spec-content">
@@ -355,20 +368,14 @@
                                 </div>
                                 <div class="detail-spec-row">
                                     <dt>깊이</dt>
-                                    <dd>
-                                        1,168 mm (46 in) / 1,448 mm (57 in)
-                                    </dd>
-                                </div>
-                                <div class="detail-spec-row">
-                                    <dt>깊이</dt>
-                                    <dd>
-                                        1,524 mm (60in) / 1,803 mm (71 in)
+                                    <dd data-tcmw-spec-value="depth">
+                                        1,778 mm (70 in) / 2,057 mm (81 in)
                                     </dd>
                                 </div>
                                 <div class="detail-spec-row">
                                     <dt>장비 무게</dt>
-                                    <dd>
-                                        513 kg
+                                    <dd data-tcmw-spec-value="weight">
+                                        520 kg
                                     </dd>
                                 </div>
                             </dl>
@@ -377,8 +384,8 @@
                         </div>
 
                         <div class="detail-spec-image">
-                            <img src="/images/products/TCMW-Maverick_v.png"
-                            alt="TCMW Maverick™ 정면">
+                            <img src="/images/products/TCMPRO_v.png"
+                            alt="TCMPRO Maverick™" data-tcmw-spec-image>
                         </div>
 
                     </div>
@@ -491,7 +498,7 @@
     <script src="/js/include.js"></script>
     <script src="/js/common.js"></script>
     <script src="/js/main.js"></script>
-    <script src="/js/products.js"></script>
+    <script src="/js/products.js?v=20260812-1"></script>
 </body>
 
 </html>
