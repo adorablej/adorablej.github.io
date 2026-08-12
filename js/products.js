@@ -264,81 +264,14 @@ function initProductsHero(){
     const section=document.querySelector(".sub-products-visual");
     if(!section)return;
 
-    const productDetailUrls={
-        "HawkEye Elite X":"/Products/Alignment-Systems/Hawkeye-Elite-X.html",
-        "HawkEye Elite Premium":"/Products/Alignment-Systems/Hawkeye-Elite-Premium.html",
-        "Hunter Standard Alignment":"/Products/Alignment-Systems/Hunter-Standard-Alignment.html",
-        "RoadForce Walkaway":"/Products/Wheel-Balancers/RoadForce-Walkaway.html",
-        "RoadForce Elite":"/Products/Wheel-Balancers/RoadForce-Elite.html",
-        "SmartWeight Elite":"/Products/Wheel-Balancers/SmartWeight-Elite.html",
-        "SmartWeight Hybrid":"/Products/Wheel-Balancers/SmartWeight-Hybrid.html",
-        "TCRH Revolution":"/Products/Tire-Changers/TCRH-Revolution.html",
-        "TCMW Maverick":"/Products/Tire-Changers/TCMW-Maverick.html",
-        "TCX70":"/Products/Tire-Changers/TCX70.html",
-        "TCX54":"/Products/Tire-Changers/TCX54.html",
-        "AutoComp Elite":"/Products/Brake-Lathes/AutoComp-Elite.html",
-        "BL Series":"/Products/Brake-Lathes/BL-Series.html",
-        "Scissor Alignment Lifts":"/Products/Alignment-Racks/Scissor-Alignment-Lifts.html",
-        "Four-Post Lifts":"/Products/Alignment-Racks/Four-Post-Lifts.html",
-        "Hunter Quick Check Inspection":"/Products/Vehicle-Inspection/Hunter-Quick-Check-Inspection.html",
-        "Hunter Quick Check Commercial":"/Products/Vehicle-Inspection/Hunter-Quick-Check-Commercial.html",
-        "HawkEye XL":"/Products/Heavy-Duty/HawkEye-XL.html",
-        "HD Elite":"/Products/Heavy-Duty/HD-Elite.html",
-        "TCX635 HD":"/Products/Heavy-Duty/TCX635-PHD.html",
-        "Heavy-Duty Four-Post":"/Products/Heavy-Duty/Heavy-Duty-Four-Post.html"
-    };
-
     const categoryItems=[...section.querySelectorAll(".sub-products-category-list li")];
     const productGroups=[...section.querySelectorAll(".sub-products-group")];
-    const visualImage=section.querySelector(".sub-products-visual-bg img");
-    const visualMobileSource=section.querySelector(".sub-products-visual-bg source");
-    const mobileVisualIndexes=[18,19,20,21,15,16,17,1,10,11,12,13,14,4,9,5,8,2,3,6,7];
-    let productIndex=1;
-
-    productGroups.forEach(group=>{
-        group.querySelectorAll(".swiper-slide").forEach(slide=>{
-            slide.dataset.productIndex=productIndex;
-            productIndex+=1;
-        });
-    });
-
-    function changeProductVisual(slide){
-        const index=Number(slide?.dataset.productIndex);
-        if(!index||!visualImage||!visualMobileSource)return;
-
-        const desktopSrc=`/images/products/item/item_${index}.png`;
-        const mobileIndex=mobileVisualIndexes[index-1]||index;
-        const mobileSrc=`/images/products/item/item_m_${mobileIndex}.png`;
-
-        visualMobileSource.srcset=mobileSrc;
-        visualImage.src=window.matchMedia("(max-width: 720px)").matches?mobileSrc:desktopSrc;
-    }
 
     productGroups.forEach(group=>{
         const slider=group.querySelector(".sub-products-swiper");
         const prevButton=group.querySelector(".sub-products-prev");
         const nextButton=group.querySelector(".sub-products-next");
-        const categoryButton=section.querySelector(`.sub-products-category-button[data-category="${group.dataset.category}"]`);
-        const categoryName=categoryButton?.textContent.trim()||"Products";
-        const pagination=document.createElement("div");
-
-        pagination.className="sub-products-pagination";
-        group.appendChild(pagination);
-
-        group.querySelectorAll(".sub-products-info").forEach(info=>{
-            const mobileCategory=document.createElement("span");
-            const productMore=document.createElement("a");
-            const productName=info.closest(".swiper-slide")?.querySelector(".sub-products-image img")?.alt||"";
-
-            mobileCategory.className="sub-products-mobile-category";
-            mobileCategory.textContent=categoryName;
-            productMore.className="sub-button-more sub-products-more";
-            productMore.textContent="more";
-            productMore.href=productDetailUrls[productName]||"/Products/products.html";
-            productMore.setAttribute("aria-label",`${productName||"제품"} 상세 페이지로 이동`);
-            info.prepend(mobileCategory);
-            info.appendChild(productMore);
-        });
+        const pagination=group.querySelector(".sub-products-pagination");
 
         if(!slider||typeof Swiper==="undefined")return;
 
@@ -359,18 +292,6 @@ function initProductsHero(){
             pagination:{
                 el:pagination,
                 clickable:true
-            },
-            on:{
-                init(swiper){
-                    if(group.classList.contains("is-active")){
-                        changeProductVisual(swiper.slides[swiper.activeIndex]);
-                    }
-                },
-                slideChange(swiper){
-                    if(group.classList.contains("is-active")){
-                        changeProductVisual(swiper.slides[swiper.activeIndex]);
-                    }
-                }
             }
         });
     });
@@ -394,7 +315,6 @@ function initProductsHero(){
                 group.productSwiper.updateSlidesClasses();
                 group.productSwiper.slideTo(0,0,false);
                 group.productSwiper.navigation?.update();
-                changeProductVisual(group.productSwiper.slides[0]);
             });
         });
     }

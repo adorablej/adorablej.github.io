@@ -619,6 +619,11 @@
         const dim = document.querySelector(".sub-standard-detail-hero-dim");
         const copy = document.querySelector(".sub-standard-detail-hero-copy");
         const mobile = window.matchMedia("(max-width: 720px)").matches;
+        const useHeroVideo = Boolean(
+            video &&
+            !mobile &&
+            /\/Standard\/USA\.html$/i.test(window.location.pathname)
+        );
         const lines = gsap.utils.toArray(".sub-standard-detail-hero-line").filter(function (line) {
             return mobile
                 ? !line.classList.contains("pc-only")
@@ -635,89 +640,144 @@
         }
 
         function getHeroScrollDistance() {
-            return Math.max(window.innerHeight - getHeaderHeight(), 1) * 3.3;
+            return Math.max(window.innerHeight - getHeaderHeight(), 1) * (mobile ? 2.35 : 2.55);
         }
+
+        function getFrameClip() {
+            const width = sticky.clientWidth;
+            const height = sticky.clientHeight;
+
+            if (mobile) {
+                const side = 25;
+                const frameWidth = Math.max(width - side * 2, 1);
+                const frameHeight = Math.min(frameWidth * 460 / 310, height);
+                const vertical = Math.max((height - frameHeight) / 2, 0);
+                const x = side / width * 100;
+                const y = vertical / height * 100;
+                return "polygon(" + x + "% " + y + "%, " + (100 - x) + "% " + y + "%, " + (100 - x) + "% " + (100 - y) + "%, " + x + "% " + (100 - y) + "%)";
+            }
+
+            const designScale = width / 1920;
+            const frameWidth = Math.min(1300 * designScale, width);
+            const frameHeight = Math.min(840 * designScale, height);
+            const horizontal = Math.max((width - frameWidth) / 2, 0);
+            const vertical = Math.max((height - frameHeight) / 2, 0);
+
+            const x = horizontal / width * 100;
+            const y = vertical / height * 100;
+            return "polygon(" + x + "% " + y + "%, " + (100 - x) + "% " + y + "%, " + (100 - x) + "% " + (100 - y) + "%, " + x + "% " + (100 - y) + "%)";
+        }
+
+        const frameClip = getFrameClip();
 
         gsap.set(sticky, { position: "relative" });
         gsap.set(media, {
-            xPercent: -50,
-            yPercent: mobile ? 0 : -50
+            clipPath: frameClip
         });
-        gsap.set(copy, { autoAlpha: 0, y: 30 });
-        gsap.set(lines, { color: "rgba(255,255,255,.22)" });
-        if (video && !mobile) gsap.set(video, { autoAlpha: 0, scale: 1.04 });
+        gsap.set(copy, { autoAlpha: 0 });
+        gsap.set(lines, {
+            autoAlpha: 1,
+            yPercent: 0,
+            clipPath: "inset(0 0 0% 0)",
+            color: "rgba(255,255,255,.28)"
+        });
+        gsap.set(preview, { scale: mobile ? 1.1 : 1.08 });
+        if (video) {
+            const videoReady = useHeroVideo && video.readyState >= 2;
+            gsap.set(video, {
+                autoAlpha: videoReady ? 1 : 0,
+                scale: 1.08
+            });
+            video.pause();
+            if (useHeroVideo) {
+                if (videoReady) {
+                    gsap.set(preview, { autoAlpha: 0 });
+                } else {
+                    video.addEventListener("loadeddata", function () {
+                        video.pause();
+                        video.currentTime = 0;
+                        gsap.set(video, { autoAlpha: 1 });
+                        gsap.set(preview, { autoAlpha: 0 });
+                    }, { once: true });
+                }
+            }
+        }
 
         const timeline = gsap.timeline({
             defaults: { ease: "none" },
             scrollTrigger: {
                 trigger: hero,
-                start: function () { return "top top+=" + getHeaderHeight(); },
+                start: "top top",
                 end: function () { return "+=" + getHeroScrollDistance(); },
                 pin: sticky,
                 pinSpacing: true,
-                scrub: 1.15,
+                scrub: 0.9,
                 invalidateOnRefresh: true,
-                anticipatePin: 1
+                anticipatePin: 1,
+                onUpdate: function (self) {
+                    if (!useHeroVideo) return;
+
+                    if (self.progress >= 0.34) {
+                        if (video.paused) video.play().catch(function () {});
+                    } else {
+                        if (!video.paused) video.pause();
+                        if (self.progress <= 0.04 && video.readyState >= 1) video.currentTime = 0;
+                    }
+                }
             }
         });
 
         timeline
             .to(media, {
-                width: "100%",
-                height: "100%",
-                top: "50%",
-                xPercent: -50,
-                yPercent: -50,
-                duration: 1.05,
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                duration: 1.15,
                 ease: "power2.inOut"
-            }, "hero-expand")
+            }, "frame-open")
             .to(preview, {
                 scale: 1,
-                duration: 1.05,
-                ease: "power2.inOut"
-            }, "hero-expand")
+                duration: 1.15,
+                ease: "power2.out"
+            }, "frame-open")
             .set(media, {
-                width: "100%",
-                height: "100%"
-            }, "hero-expand+=1.05");
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"
+            }, "frame-open+=1.15");
 
-        if (video && !mobile) {
-            timeline
-                .to(video, {
-                    autoAlpha: 1,
-                    scale: 1,
-                    duration: 0.5,
-                    ease: "power1.out"
-                }, "hero-expand+=0.72")
-                .to(preview, {
-                    autoAlpha: 0,
-                    duration: 0.42
-                }, "hero-expand+=0.78");
+        if (useHeroVideo) {
+            timeline.to(video, {
+                scale: 1,
+                duration: 1.15,
+                ease: "power2.out"
+            }, "frame-open");
         }
 
         timeline
             .to(dim, {
                 opacity: 1,
-                duration: 0.42
-            }, "hero-expand+=0.72")
+                duration: 0.5,
+                ease: "power1.inOut"
+            }, "frame-open+=0.82")
             .to(copy, {
                 autoAlpha: 1,
-                y: 0,
-                duration: 0.36,
-                ease: "power2.out"
-            }, "hero-expand+=0.9");
-
-        lines.forEach(function (line, index) {
-            timeline.to(line, {
-                color: "rgba(255,255,255,1)",
-                duration: 0.48,
+                duration: 0.25,
                 ease: "power1.out"
-            }, "line-" + index);
+            }, "copy-in")
+            .to(useHeroVideo ? video : preview, {
+                scale: 1.035,
+                duration: 1.15,
+                ease: "none"
+            }, "copy-in+=0.12");
 
-            timeline.to({}, { duration: 0.22 });
+        lines.forEach(function (line) {
+            timeline
+                .to(line, {
+                    color: "rgba(255,255,255,1)",
+                    duration: 0.38,
+                    ease: "power1.out"
+                })
+                .to({}, { duration: 0.1 });
         });
 
-        timeline.to({}, { duration: 0.6 });
+        timeline.to({}, { duration: 0.35 });
 
         let heroResizeFrame = 0;
         window.addEventListener("resize", function () {
@@ -871,12 +931,51 @@
     function initValueMotions() {
         const motionDistance = window.matchMedia("(max-width: 720px)").matches ? 7 : 4;
 
+        function fitMaskImageToViewport(mask) {
+            const svg = mask.querySelector("svg");
+            const image = svg && svg.querySelector("image");
+            if (!svg || !image) return;
+
+            const rect = svg.getBoundingClientRect();
+            const viewBox = svg.viewBox.baseVal;
+            if (!rect.width || !rect.height || !viewBox.width || !viewBox.height) return;
+
+            const bleed = 2;
+            const clipPath = svg.querySelector("clipPath");
+            const clipId = clipPath ? clipPath.id : "";
+            const desktop = window.innerWidth > 720;
+            let focusX = 0;
+            let focusY = 0;
+
+            if (desktop && clipId === "sub-usa-awards-clip") {
+                focusX = window.innerWidth * -0.4;
+                focusY = window.innerHeight * -0.07;
+            } else if (desktop && clipId === "sub-usa-korea-clip") {
+                focusX = window.innerWidth * 0.28;
+                focusY = 0;
+            }
+
+            const centeredTop = (window.innerHeight - rect.height) / 2;
+            const x = (focusX - rect.left - bleed) / rect.width * viewBox.width;
+            const y = (focusY - centeredTop - bleed) / rect.height * viewBox.height;
+            const width = (window.innerWidth + bleed * 2) / rect.width * viewBox.width;
+            const height = (window.innerHeight + bleed * 2) / rect.height * viewBox.height;
+
+            image.setAttribute("x", x.toFixed(3));
+            image.setAttribute("y", y.toFixed(3));
+            image.setAttribute("width", width.toFixed(3));
+            image.setAttribute("height", height.toFixed(3));
+            image.setAttribute("preserveAspectRatio", "xMidYMid slice");
+        }
+
         gsap.utils.toArray(".sub-usa-value").forEach(function (section) {
             const copy = section.querySelector(".sub-usa-value-copy");
             const mask = section.querySelector(".sub-usa-h-mask");
             if (!copy || !mask) return;
 
             const fromLeft = mask.classList.contains("sub-usa-h-mask-left");
+
+            fitMaskImageToViewport(mask);
 
             // 문구는 페이지 진입 시부터 그대로 노출
             gsap.set(copy, {
@@ -905,6 +1004,14 @@
                 }
             );
         });
+
+        let maskResizeFrame = 0;
+        window.addEventListener("resize", function () {
+            window.cancelAnimationFrame(maskResizeFrame);
+            maskResizeFrame = window.requestAnimationFrame(function () {
+                document.querySelectorAll(".sub-usa-h-mask").forEach(fitMaskImageToViewport);
+            });
+        }, { passive: true });
     }
 
     function initUsaSectionSnap() {

@@ -11,9 +11,9 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 
     <link href="/css/common.css" rel="stylesheet"/>
-    <link href="/css/layout.css" rel="stylesheet"/>
+    <link href="/css/layout.css?v=20260812-16" rel="stylesheet"/>
     <link href="/css/main.css" rel="stylesheet"/>
-    <link href="/css/mypage.css" rel="stylesheet"/>
+    <link href="/css/mypage.css?v=20260812-4" rel="stylesheet"/>
     <link href="/css/common-form.css" rel="stylesheet"/>
     <link href="/css/responsive.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
@@ -166,10 +166,11 @@
 </section>
 </main>
 
-<div class="sub-modal sub-mypage-withdraw-modal" data-withdraw-modal aria-hidden="true">
+<div class="modal-layer sub-modal sub-mypage-withdraw-modal" data-withdraw-modal aria-hidden="true">
     <button type="button" class="sub-modal-dim" data-withdraw-close aria-label="회원탈퇴 팝업 닫기"></button>
 
-    <div class="sub-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="withdraw-modal-title">
+    <div class="modal-box sub-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="withdraw-modal-title">
+        <button type="button" class="modal-close-button" data-withdraw-close aria-label="회원탈퇴 팝업 닫기"></button>
         <div class="sub-modal-content">
             <h2 class="sub-modal-title" id="withdraw-modal-title">회원탈퇴</h2>
 
@@ -202,6 +203,6 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="/js/include.js"></script>
 <script src="/js/common.js"></script>
-<script src="/js/mypage.js"></script>
+<script src="/js/mypage.js?v=20260812-1"></script>
 </body>
 </html>

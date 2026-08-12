@@ -208,13 +208,13 @@ function parseDate(dateString) {
 
         modalContent.innerHTML = `
             <div
-                class="sub-training-modal-visual"
+                class="modal-media sub-training-modal-visual"
                 role="img"
                 aria-label="${training.courseName} 교육 이미지"
                 style="background-image:url('${modalImage}'); background-size:cover; background-position:center;"
             ></div>
 
-            <div class="sub-training-modal-body">
+            <div class="modal-content sub-training-modal-body">
                 <div class="sub-training-modal-summary">
                     <strong class="sub-training-modal-datetime">
                         ${training.date.replaceAll("-", ".")} / ${training.startTime}

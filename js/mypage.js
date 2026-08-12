@@ -498,7 +498,12 @@ function initMypageTrainingHistory() {
         lastFocusedElement = document.activeElement;
         date.textContent = `${row.dataset.date} / ${row.dataset.time}`;
         course.textContent = `${row.dataset.course} (${row.dataset.count})`;
-        dot.className = `sub-training-modal-course-dot ${row.dataset.color || 'training-color-1'}`;
+        const historyColorMap = {
+            'training-color-1': '#3ccba1', 'training-color-2': '#ec45ad',
+            'training-color-3': '#19a8e6', 'training-color-4': '#9566e9',
+            'training-color-5': '#ff8d3a'
+        };
+        dot.style.setProperty('--training-color', historyColorMap[row.dataset.color] || historyColorMap['training-color-1']);
 
         const isCancelled = row.dataset.status === '신청취소';
         cancelButton.textContent = isCancelled ? '취소 완료' : '신청 취소하기';
@@ -600,7 +605,7 @@ function initMypageHomeTrainingModal() {
         lastFocusedElement = button;
         date.textContent = `${row.dataset.date} / ${row.dataset.time}`;
         course.textContent = `${row.dataset.course} (${row.dataset.count})`;
-        dot.style.setProperty('--history-color', colorMap[row.dataset.color] || colorMap['training-color-1']);
+        dot.style.setProperty('--training-color', colorMap[row.dataset.color] || colorMap['training-color-1']);
 
         const cancelled = row.dataset.status === '신청취소';
         cancelButton.textContent = cancelled ? '취소 완료' : '신청 취소하기';

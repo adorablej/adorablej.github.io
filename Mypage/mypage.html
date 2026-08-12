@@ -10,9 +10,10 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 
     <link href="/css/common.css" rel="stylesheet" />
-    <link href="/css/layout.css" rel="stylesheet" />
+    <link href="/css/layout.css?v=20260812-16" rel="stylesheet" />
     <link href="/css/main.css" rel="stylesheet" />
-    <link href="/css/mypage.css" rel="stylesheet" />
+    <link href="/css/support.css?v=20260812-22" rel="stylesheet" />
+    <link href="/css/mypage.css?v=20260812-4" rel="stylesheet" />
     <link href="/css/responsive.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -209,17 +210,17 @@
         </section>
     </main>
 
-    <div class="sub-mypage-home-training-modal" id="mypage-home-training-modal" aria-hidden="true">
-        <button type="button" class="sub-mypage-home-modal-dim" data-home-training-close aria-label="상세 창 닫기"></button>
-        <div class="sub-mypage-home-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="mypage-home-training-modal-title">
-            <button type="button" class="sub-mypage-home-modal-close" data-home-training-close aria-label="상세 창 닫기"></button>
-            <div class="sub-mypage-home-modal-visual" aria-hidden="true"></div>
-            <div class="sub-mypage-home-modal-body">
-                <div class="sub-mypage-home-modal-summary">
-                    <strong id="mypage-home-training-modal-title" data-home-training-date></strong>
-                    <p><i data-home-training-dot aria-hidden="true"></i><span data-home-training-course></span></p>
+    <div class="modal-layer sub-training-modal" id="mypage-home-training-modal" aria-hidden="true">
+        <button type="button" class="sub-training-modal-dim" data-home-training-close aria-label="상세 창 닫기"></button>
+        <div class="modal-box modal-box--media sub-training-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="mypage-home-training-modal-title">
+            <button type="button" class="modal-close-button sub-training-modal-close" data-home-training-close aria-label="상세 창 닫기"></button>
+            <div class="modal-media sub-training-modal-visual" aria-hidden="true"></div>
+            <div class="modal-content sub-training-modal-body">
+                <div class="sub-training-modal-summary">
+                    <strong class="sub-training-modal-datetime" id="mypage-home-training-modal-title" data-home-training-date></strong>
+                    <div class="sub-training-modal-course"><i class="sub-training-modal-course-dot" data-home-training-dot aria-hidden="true"></i><span data-home-training-course></span></div>
                 </div>
-                <div class="sub-mypage-home-modal-actions"><button type="button" data-home-training-close>닫기</button><button type="button" class="is-primary" data-home-training-cancel>신청 취소하기</button></div>
+                <div class="sub-training-modal-actions"><button type="button" class="sub-training-modal-cancel" data-home-training-close>닫기</button><button type="button" class="sub-training-modal-submit" data-home-training-cancel>신청 취소하기</button></div>
             </div>
         </div>
     </div>
@@ -229,6 +230,6 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="/js/include.js"></script>
     <script src="/js/common.js"></script>
-    <script src="/js/mypage.js"></script>
+    <script src="/js/mypage.js?v=20260812-2"></script>
 </body>
 </html>

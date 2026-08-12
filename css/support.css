@@ -532,7 +532,7 @@ Training Registration
     align-items: center;
     gap: calc(min(100vw, 1920px) * 8 / 1920);
     color: #1E293B;
-    font-size: calc(min(100vw, 1920px) * 14 / 1920);
+    font-size: calc(18 * var(--vw));
     font-weight: 600;
     line-height: 1;
 }
@@ -652,7 +652,7 @@ Training Registration
     grid-column: 1;
     color: #777;
     font-size: calc(min(100vw, 1920px) * 16 / 1920);
-    font-weight: 400;
+    font-weight: 300;
 }
 
 .sub-training-card-apply {
@@ -724,51 +724,10 @@ Training Registration
 	background:rgba(0,0,0,.62);
 	cursor:pointer;
 }
-.sub-training-modal-dialog {
-	position:relative;
-	z-index:1;
-	width:calc(min(100vw, 1920px) * 1000 / 1920);
-	max-width:1510px;
-	max-height:calc(100vh - calc(min(100vw, 1920px) * 128 / 1920));
-	overflow-y:auto;
-	background:#fff;
-	box-shadow:0 calc(min(100vw, 1920px) * 24 / 1920) calc(min(100vw, 1920px) * 70 / 1920) rgba(0,0,0,.22);
-}
-.sub-training-modal-close {
-	position:absolute;
-	z-index:3;
-	top:calc(min(100vw, 1920px) * 28 / 1920);
-	right:calc(min(100vw, 1920px) * 28 / 1920);
-	width:calc(min(100vw, 1920px) * 48 / 1920);
-	height:calc(min(100vw, 1920px) * 48 / 1920);
-	padding:0;
-	border:0;
-	border-radius:50%;
-	background:#fff;
-	cursor:pointer;
-}
-.sub-training-modal-close::before,.sub-training-modal-close::after {
-	content:"";
-	position:absolute;
-	top:50%;
-	left:50%;
-	width:calc(min(100vw, 1920px) * 20 / 1920);
-	height:1px;
-	background:#000;
-}
-.sub-training-modal-close::before {
-	transform:translate(-50%,-50%) rotate(45deg);
-}
-.sub-training-modal-close::after {
-	transform:translate(-50%,-50%) rotate(-45deg);
-}
 .sub-training-modal-visual {
-	height:calc(min(100vw, 1920px) * 562 / 1920);
-	min-height:360px;
+	height:auto;
+	min-height:0;
 	background:#e2e2e2;
-}
-.sub-training-modal-body {
-	padding:calc(min(100vw, 1920px) * 50 / 1920);
 }
 .sub-training-modal-summary {
 	padding-bottom:calc(min(100vw, 1920px) * 34 / 1920);
@@ -875,7 +834,7 @@ Training Registration
 }
 .sub-training-modal-actions {
 	display:flex;
-	justify-content:flex-end;
+	justify-content:center;
 	gap:calc(min(100vw, 1920px) * 16 / 1920);
 	margin-top:calc(min(100vw, 1920px) * 54 / 1920);
 }
@@ -960,15 +919,6 @@ Equipment Operation Guide : Youtube Modal
     background: rgba(0, 0, 0, .72);
 }
 
-.sub-guide-video-modal-dialog {
-    position: relative;
-    z-index: 1;
-    width: calc(min(100vw, 1920px) * 1000 / 1920);
-    max-width: 1000px;
-    max-height: calc(100vh - 80px);
-    overflow-y: auto;
-    background: #fff;
-}
 
 .sub-guide-video-modal-close {
     position: absolute;
@@ -1722,6 +1672,7 @@ Wheel Alignment Specification
 }
 
 .sub-specification-table th {
+    font-size: calc(20 * var(--vw));
     font-weight: 700;
 }
 
@@ -1818,24 +1769,23 @@ Wheel Alignment Specification
 
 /* Wheel Alignment Specification : detail modal */
 .specification-modal[hidden] { display: none !important; }
-.specification-modal { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: flex-start; justify-content: center; padding: 130px 30px 30px; overflow-y: auto; opacity: 0; transition: opacity .2s ease; }
+.specification-modal { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: flex-start; justify-content: center; padding: 10vh 30px; overflow: hidden; opacity: 0; transition: opacity .2s ease; }
 .specification-modal.is-open { opacity: 1; }
 .specification-modal-dim { position: fixed; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: rgba(0,0,0,.68); cursor: pointer; }
-.specification-modal-dialog { position: relative; width: min(900px, 100%); overflow: visible; background: #fff; box-shadow: 0 20px 70px rgba(0,0,0,.3); transform: translateY(14px); transition: transform .2s ease; outline: none; }
+.specification-modal-dialog.modal-box { width: calc(900 * var(--vw)) !important; max-width: calc(100vw - calc(200 * var(--vw))) !important; height: 80vh !important; max-height: 80vh !important; overflow-y: auto !important; transform: translateY(14px); transition: transform .2s ease; outline: none; }
 .specification-modal.is-open .specification-modal-dialog { transform: translateY(0); }
 .specification-modal-header { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 110px; padding: 0 50px; background: #050505; color: #fff; }
-.specification-modal-header h2 { margin: 0; color: #fff; font-size: 32px; line-height: 1.2; }
-.specification-modal-header img { width: 130px; max-height: 40px; object-fit: contain; }
-.specification-modal-close { position: absolute; top: -80px; right: 0; left: auto; display: block; width: 70px; height: 70px; padding: 0; border: 0; border-radius: 50%; background: #fff; color: #000; cursor: pointer; transform: none; }
-.specification-modal-close::before, .specification-modal-close::after { content: ""; position: absolute; top: 50%; left: 50%; width: 28px; height: 2px; background: currentColor; }
-.specification-modal-close::before { transform: translate(-50%,-50%) rotate(45deg); }
-.specification-modal-close::after { transform: translate(-50%,-50%) rotate(-45deg); }
+.specification-modal-header h2 { margin: 0; color: #fff; font-family: "Russo One", sans-serif; font-size: calc(32 * var(--vw)); font-weight: 400; line-height: normal; letter-spacing: 0; }
+.specification-modal-logo { width: 130px; max-height: 40px; object-fit: contain; }
+.specification-modal-close { position: fixed !important; top: 10vh !important; right: calc(50% - calc(540 * var(--vw))) !important; }
+.specification-modal-print { position: fixed; z-index: 20; top: calc(10vh + calc(90 * var(--vw))); right: calc(50% - calc(540 * var(--vw))); display: flex; align-items: center; justify-content: center; width: calc(70 * var(--vw)); height: calc(70 * var(--vw)); padding: 0; border: 0; border-radius: 50%; background: var(--red); cursor: pointer; }
+.specification-modal-print img { width: calc(32 * var(--vw)); height: calc(32 * var(--vw)); object-fit: contain; filter: brightness(0) invert(1); }
 .specification-modal-accent { height: 7px; background: var(--red); }
 .specification-modal-body { position: relative; padding-bottom: 26px; }
 .specification-modal-body::after { content: ""; position: absolute; inset: 0; z-index: 5; background: url('/images/support/Watermark.png') center top / 100% auto repeat-y; opacity: .55; pointer-events: none; }
 .specification-modal-summary { display: grid; grid-template-columns: minmax(0,1fr) 342px; gap: 26px 48px; align-items: start; padding: 30px 40px 48px; }
 .specification-modal-brand { display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: #f5f5f5; color: #111; font-size: 10px; font-weight: 800; text-align: center; }
-.specification-modal-meta { grid-column: 1; margin: 0; color: #111; font-size: 14px; line-height: 1.6; }
+.specification-modal-meta { grid-column: 1; margin: 0; color: #000; font-family: "Pretendard", sans-serif; font-size: calc(14 * var(--vw)); font-weight: 400; line-height: calc(22 * var(--vw)); letter-spacing: 0; }
 .specification-modal-meta div { display: grid; grid-template-columns: 72px 1fr; }
 .specification-modal-meta div:nth-child(5),
 .specification-modal-meta div:nth-child(7) { margin-top: 24px; }
@@ -1844,7 +1794,7 @@ Wheel Alignment Specification
 .specification-modal-meta dd { margin: 0; font-weight: 400; }
 .specification-modal-vehicle { grid-column: 2; grid-row: 1 / span 2; display: flex; align-items: center; justify-content: center; height: 250px; margin: 0; border: 1px solid #ddd; }
 .specification-modal-vehicle img { width: 100%; height: 100%; object-fit: contain; }
-.specification-modal-links { display: flex; gap: 30px; margin: 0 40px; padding: 0 0 14px; border-bottom: 1px solid var(--red); color: var(--red); font-size: 14px; line-height: 20px; text-decoration: underline; }
+.specification-modal-links { display: flex; gap: 30px; margin: 0 40px; padding: 0 0 14px; border-bottom: 1px solid var(--red); color: var(--red); font-family: "Pretendard", sans-serif; font-size: calc(14 * var(--vw)); font-weight: 400; line-height: normal; letter-spacing: -.3px; text-decoration: underline; }
 .specification-modal-links a { color: inherit; }
 .specification-modal-table { width: calc(100% - 80px); margin: 0 40px; border-collapse: collapse; table-layout: fixed; color: #111; font-size: 14px; }
 .specification-modal-table th, .specification-modal-table td { padding: 14px 12px; border-bottom: 1px solid #e5e5e5; text-align: center; }
@@ -1853,7 +1803,7 @@ Wheel Alignment Specification
 .specification-modal-table .specification-modal-section { width: 18%; border-right: 1px solid #e5e5e5; text-align: center; vertical-align: middle; font-weight: 700; }
 .specification-modal-mobile-section,
 .specification-modal-mobile-head { display: none; }
-.specification-modal-toe-note { margin: 18px 40px 0; color: #111; font-size: 14px; line-height: 1.6; }
+.specification-modal-toe-note { margin: 18px 40px 0; color: #000; font-family: "Pretendard", sans-serif; font-size: calc(14 * var(--vw)); font-weight: 400; line-height: calc(22 * var(--vw)); letter-spacing: 0; }
 .specification-modal-toe-note::before { content: "•"; margin-right: 8px; }
 .specification-modal-extra { padding: 36px 40px 0; color: #111; }
 .specification-modal-extra:empty { display: none; }
@@ -1862,11 +1812,9 @@ Wheel Alignment Specification
 .specification-modal-extra dl div { display: grid; grid-template-columns: 200px minmax(0, 1fr); align-items: center; padding: 14px 60px; border-bottom: 1px solid #e5e5e5; }
 .specification-modal-extra dt { margin: 0; color: #111; font-size: 14px; font-weight: 700; }
 .specification-modal-extra dd { margin: 0; font-size: 14px; font-weight: 400; }
-.specification-modal-notes { margin: 20px 40px 0; padding-top: 0; color: #111; font-size: 14px; line-height: 1.6; }
+.specification-modal-notes { margin: 20px 40px 0; padding-top: 0; color: #333; font-family: "Pretendard", sans-serif; font-size: calc(14 * var(--vw)); font-weight: 400; line-height: calc(22 * var(--vw)); letter-spacing: 0; }
 .specification-modal-notes p { position: relative; margin: 2px 0; padding-left: 14px; }
 .specification-modal-notes p::before { content: "•"; position: absolute; left: 0; }
-.specification-modal-actions { padding-top: 24px; text-align: center; }
-.specification-modal-actions button { min-width: 84px; height: 38px; border: 0; border-radius: 999px; background: var(--red); color: #fff; font-weight: 700; cursor: pointer; }
 html.is-specification-modal-open, html.is-specification-modal-open body { overflow: hidden; }
 
 /* ========================================
@@ -1993,10 +1941,9 @@ Training Program : Mobile
 
 @media screen and (max-width: 680px) {
     .specification-modal { padding: 12px; }
-    .specification-modal-dialog { max-height: calc(100vh - 24px); }
     .specification-modal-header { padding: 0 20px; }
-    .specification-modal-header h2 { font-size: 17px; }
-    .specification-modal-header img { width: 90px; margin-right: 26px; }
+    .specification-modal-header h2 { font-size: 26px; line-height: normal; letter-spacing: 0; }
+    .specification-modal-logo { width: 90px; margin-right: 26px; }
     .specification-modal-summary { grid-template-columns: 64px 1fr; padding: 22px 20px 16px; }
     .specification-modal-vehicle { grid-column: 1 / -1; }
     .specification-modal-links { flex-direction: column; gap: 7px; margin: 0 20px; }
@@ -2011,8 +1958,20 @@ Training Program : Mobile
     html, body { width: auto; min-width: 0; margin: 0; background: #fff; }
     body > *:not(.specification-modal) { display: none !important; }
     .specification-modal { position: static; display: block !important; width: 100%; padding: 0; overflow: visible; opacity: 1; background: #fff; }
-    .specification-modal-dim, .specification-modal-close, .specification-modal-actions { display: none !important; }
-    .specification-modal-dialog { width: 100%; max-width: 900px; max-height: none; margin: 0 auto; overflow: visible; background: #fff; box-shadow: none; transform: none; }
+    .specification-modal-dim, .specification-modal-close, .specification-modal-print { display: none !important; }
+    .specification-modal-dialog.modal-box {
+        display: block !important;
+        width: 100% !important;
+        max-width: 900px !important;
+        height: auto !important;
+        max-height: none !important;
+        margin: 0 auto;
+        padding: 0 !important;
+        overflow: visible !important;
+        background: #fff;
+        box-shadow: none;
+        transform: none;
+    }
     .specification-modal-dialog,
     .specification-modal-dialog * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
     .specification-modal-header { background: #050505 !important; color: #fff !important; }
@@ -2291,18 +2250,20 @@ Training Program : Mobile
 
     .specification-modal {
         align-items: flex-start;
-        padding: 64px 20px 40px;
-        overflow-y: auto;
+        padding: calc(10vh + 26px) 20px 0;
+        overflow: hidden;
     }
 
     .specification-modal-dim {
         position: fixed;
     }
 
-    .specification-modal-dialog {
-        width: 100%;
-        max-height: none;
-        overflow: visible;
+    .specification-modal-dialog.modal-box {
+        width: 100% !important;
+        max-width: calc(100vw - 50px) !important;
+        height: 80vh !important;
+        max-height: 80vh !important;
+        overflow-y: auto !important;
         box-shadow: none;
     }
 
@@ -2315,34 +2276,37 @@ Training Program : Mobile
         box-sizing: border-box;
     }
 
-    .specification-modal-header img {
+    .specification-modal-logo {
         order: -1;
         width: 90px;
         margin-bottom: 15px;
     }
 
     .specification-modal-header h2 {
-        width: 210px;
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 26px;
+        line-height: normal;
+        letter-spacing: 0;
+    }
+
+    .specification-modal-print {
+        position: absolute;
+        top: calc(10vh - 26px);
+        right: calc(max(20px, calc((100vw - 310px) / 2)) + 52px);
+        left: auto;
+        width: 42px;
+        height: 42px;
     }
 
     .specification-modal-close {
-        top: -50px;
-        right: -2px;
-        left: auto;
-        display: block;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: #fff;
-        color: #000;
-        transform: none;
+        position: absolute !important;
+        top: calc(10vh - 26px) !important;
+        right: max(20px, calc((100vw - 310px) / 2)) !important;
+        left: auto !important;
     }
 
-    .specification-modal-close::before,
-    .specification-modal-close::after {
-        width: 18px;
+    .specification-modal-print img {
+        width: 22px;
+        height: 22px;
     }
 
     .specification-modal-summary {
@@ -2368,6 +2332,7 @@ Training Program : Mobile
     .specification-modal-meta {
         font-size: 14px;
         line-height: 22px;
+        letter-spacing: 0;
     }
 
     .specification-modal-meta div {
@@ -2379,7 +2344,7 @@ Training Program : Mobile
         gap: 8px;
         margin: 0 20px;
         font-size: 14px;
-        line-height: 20px;
+        line-height: normal;
     }
 
     .specification-modal-table {
@@ -2427,7 +2392,8 @@ Training Program : Mobile
     .specification-modal-toe-note {
         margin: 18px 20px 0;
         font-size: 14px;
-        line-height: 20px;
+        line-height: 22px;
+        letter-spacing: 0;
     }
 
     .specification-modal-extra {
@@ -2454,13 +2420,8 @@ Training Program : Mobile
 
     .specification-modal-notes {
         margin: 20px 20px 0;
-        line-height: 20px;
-    }
-
-    .specification-modal-actions button {
-        min-width: 110px;
-        height: 50px;
-        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: 0;
     }
 
     .page-heading:has(+ .sub-training) {
@@ -2617,35 +2578,6 @@ Training Program : Mobile
 
     .sub-training-modal {
         padding: 25px;
-    }
-
-    .sub-training-modal-dialog {
-        width: 310px;
-        max-width: 100%;
-        max-height: calc(100vh - 50px);
-        box-shadow: none;
-    }
-
-    .sub-training-modal-close {
-        top: 20px;
-        right: 20px;
-        width: 24px;
-        height: 24px;
-        background: transparent;
-    }
-
-    .sub-training-modal-close::before,
-    .sub-training-modal-close::after {
-        width: 24px;
-    }
-
-    .sub-training-modal-visual {
-        height: 174px;
-        min-height: 0;
-    }
-
-    .sub-training-modal-body {
-        padding: 28px 25px 30px;
     }
 
     .sub-training-modal-summary {
@@ -2971,11 +2903,6 @@ Training Program : Mobile
         padding: 20px;
     }
 
-    .sub-guide-video-modal-dialog {
-        width: 100%;
-        max-height: calc(100vh - 40px);
-    }
-
     .sub-guide-video-modal-body {
         padding: 24px;
     }
@@ -3019,5 +2946,104 @@ Training Program : Mobile
     .sub-operation-category-content strong {
         font-size: 20px;
         line-height: 22px;
+    }
+}
+
+/* Keep the vehicle specification printout in the desktop table layout. */
+@media print {
+    .specification-modal-dialog.modal-box {
+        display: block !important;
+        width: 900px !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    .specification-modal-header {
+        display: flex !important;
+        align-items: center !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        min-height: 110px !important;
+        padding: 0 50px !important;
+    }
+
+    .specification-modal-logo {
+        order: initial !important;
+        width: 130px !important;
+        margin: 0 !important;
+    }
+
+    .specification-modal-header h2 {
+        width: auto !important;
+        font-size: 32px !important;
+    }
+
+    .specification-modal-summary {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) 342px !important;
+        gap: 26px 48px !important;
+        padding: 30px 40px 48px !important;
+    }
+
+    .specification-modal-vehicle {
+        grid-column: 2 !important;
+        grid-row: 1 / span 2 !important;
+        order: initial !important;
+        width: auto !important;
+        height: 250px !important;
+    }
+
+    .specification-modal-links {
+        flex-direction: row !important;
+        gap: 30px !important;
+        margin: 0 40px !important;
+        font-size: 14px !important;
+        line-height: normal !important;
+    }
+
+    .specification-modal-meta,
+    .specification-modal-toe-note,
+    .specification-modal-notes {
+        font-size: 14px !important;
+        line-height: 22px !important;
+        letter-spacing: 0 !important;
+    }
+
+    .specification-modal-brand {
+        width: 64px !important;
+        height: 64px !important;
+        font-size: 10px !important;
+    }
+
+    .specification-modal-table {
+        display: table !important;
+        width: calc(100% - 80px) !important;
+        margin: 0 40px !important;
+        font-size: 14px !important;
+    }
+
+    .specification-modal-table thead { display: table-header-group !important; }
+    .specification-modal-table tbody { display: table-row-group !important; }
+    .specification-modal-table tr { display: table-row !important; }
+
+    .specification-modal-table th,
+    .specification-modal-table td {
+        display: table-cell !important;
+        width: auto !important;
+        padding: 14px 12px !important;
+        font-size: 14px !important;
+        line-height: 1.55 !important;
+    }
+
+    .specification-modal-table .specification-modal-section {
+        display: table-cell !important;
+    }
+
+    .specification-modal-mobile-section,
+    .specification-modal-mobile-head {
+        display: none !important;
     }
 }

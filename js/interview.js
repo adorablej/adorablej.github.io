@@ -45,7 +45,8 @@ function initHunterPrideInterviewPage() {
 
     function imageMarkup(item) {
         const id = getHunterPrideYoutubeId(item.youtube);
-        return `<img src="${getHunterPrideYoutubeThumbnail(item.youtube)}"
+        const thumbnail = String(item.thumbnail || "").trim() || getHunterPrideYoutubeThumbnail(item.youtube);
+        return `<img src="${thumbnail}"
                      onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${id}/hqdefault.jpg';"
                      alt="${item.title}">`;
     }

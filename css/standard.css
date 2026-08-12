@@ -363,10 +363,10 @@ overflow-y: visible;
 
 .sub-standard-detail-hero-sticky {
     position: sticky;
-    top: calc(100 * var(--vw));
+    top: 0;
     width: 100%;
-    height: calc(100vh - calc(100 * var(--vw)));
-    height: calc(100dvh - calc(100 * var(--vw)));
+    height: 100vh;
+    height: 100dvh;
     min-height: 0;
     overflow: hidden;
     background: #fff;
@@ -374,13 +374,12 @@ overflow-y: visible;
 
 .sub-standard-detail-hero-media {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    width: calc(1300 * var(--vw));
-    height: calc(840 * var(--vw));
-    transform: translate(-50%, -50%);
+    inset: 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
-    will-change: width, height;
+    will-change: clip-path;
+    contain: paint;
 }
 
 .sub-standard-detail-hero-preview,
@@ -408,7 +407,9 @@ overflow-y: visible;
     position: absolute;
     z-index: 3;
     inset: 0;
-    background: rgba(0, 0, 0, .58);
+    background:
+        linear-gradient(180deg, rgba(0, 0, 0, .16) 0%, rgba(0, 0, 0, .48) 100%),
+        rgba(0, 0, 0, .18);
     opacity: 0;
 }
 
@@ -427,12 +428,13 @@ overflow-y: visible;
 
 .sub-standard-detail-hero-line {
     margin: 0;
-    color: rgba(255, 255, 255, .22);
+    color: #fff;
     font-size: calc(60 * var(--vw));
     font-weight: 700;
     line-height: calc(76 * var(--vw));
     letter-spacing: -.045em;
     word-break: keep-all;
+    will-change: transform, clip-path, opacity;
 }
 
 /* 03. TRUST IN HUNTER */
@@ -2357,18 +2359,16 @@ History 연도별 1920 시안 좌표
     }
 
     .sub-standard-detail-hero-sticky {
-        top: 64px;
-        height: calc(100vh - 64px);
-        height: calc(100dvh - 64px);
+        top: 0;
+        height: 100vh;
+        height: 100dvh;
         min-height: 0;
     }
 
     .sub-standard-detail-hero-media {
-        top: 30px;
-        width: calc(100% - 50px);
-        height: auto;
-        aspect-ratio: 310 / 460;
-        transform: translateX(-50%);
+        inset: 0;
+        width: 100%;
+        height: 100%;
     }
 
     .sub-standard-detail-hero-video {
