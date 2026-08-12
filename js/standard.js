@@ -651,10 +651,12 @@
                 const side = 25;
                 const frameWidth = Math.max(width - side * 2, 1);
                 const frameHeight = Math.min(frameWidth * 460 / 310, height);
-                const vertical = Math.max((height - frameHeight) / 2, 0);
+                const top = mobilePinOffset + Math.min(30, Math.max(height - frameHeight, 0));
+                const bottom = Math.max(height - top - frameHeight, 0);
                 const x = side / width * 100;
-                const y = vertical / height * 100;
-                return "polygon(" + x + "% " + y + "%, " + (100 - x) + "% " + y + "%, " + (100 - x) + "% " + (100 - y) + "%, " + x + "% " + (100 - y) + "%)";
+                const topY = top / height * 100;
+                const bottomY = 100 - bottom / height * 100;
+                return "polygon(" + x + "% " + topY + "%, " + (100 - x) + "% " + topY + "%, " + (100 - x) + "% " + bottomY + "%, " + x + "% " + bottomY + "%)";
             }
 
             const designScale = width / 1920;
@@ -668,20 +670,70 @@
             return "polygon(" + x + "% " + y + "%, " + (100 - x) + "% " + y + "%, " + (100 - x) + "% " + (100 - y) + "%, " + x + "% " + (100 - y) + "%)";
         }
 
+        function getMobileFrameSize() {
+            const width = Math.max(sticky.clientWidth - 50, 1);
+            const availableHeight = sticky.clientHeight;
+            const height = Math.min(width * 460 / 310, availableHeight);
+            const top = mobilePinOffset + Math.min(30, Math.max(availableHeight - height, 0));
+            return {
+                width: width,
+                height: height,
+                top: top
+            };
+        }
+
+        const mobilePinOffset = mobile
+            ? Math.max(hero.getBoundingClientRect().top, 0)
+            : 0;
         const frameClip = getFrameClip();
+        const frameDuration = mobile ? 2.35 : 1.15;
+        const nextSection = hero.nextElementSibling;
+        let mobileStage = null;
+
+        if (mobile && nextSection) {
+            gsap.set(nextSection, { marginTop: -mobilePinOffset });
+        }
 
         gsap.set(sticky, { position: "relative" });
         gsap.set(media, {
-            clipPath: frameClip
+            clipPath: frameClip,
+            y: mobile ? -mobilePinOffset : 0,
+            height: "100%"
         });
-        gsap.set(copy, { autoAlpha: 0 });
+        gsap.set(copy, {
+            autoAlpha: 0,
+            y: mobile ? -mobilePinOffset : 0
+        });
         gsap.set(lines, {
             autoAlpha: 1,
             yPercent: 0,
             clipPath: "inset(0 0 0% 0)",
             color: "rgba(255,255,255,.28)"
         });
-        gsap.set(preview, { scale: mobile ? 1.1 : 1.08 });
+        if (mobile) {
+            const mobilePreview = Array.from(preview).find(function (image) {
+                return !image.classList.contains("pc-only");
+            }) || preview[0];
+            const frameSize = getMobileFrameSize();
+
+            mobileStage = mobilePreview.cloneNode(true);
+            mobileStage.className = "sub-standard-detail-hero-mobile-stage";
+            mobileStage.removeAttribute("id");
+            media.appendChild(mobileStage);
+
+            gsap.set(preview, { autoAlpha: 0, scale: 1 });
+            gsap.set(mobileStage, {
+                width: frameSize.width,
+                height: frameSize.height,
+                top: frameSize.top + frameSize.height / 2,
+                autoAlpha: 1,
+                scale: 1,
+                transformOrigin: "50% 50%"
+            });
+
+        } else {
+            gsap.set(preview, { scale: 1.08 });
+        }
         if (video) {
             const videoReady = useHeroVideo && video.readyState >= 2;
             gsap.set(video, {
@@ -707,7 +759,11 @@
             defaults: { ease: "none" },
             scrollTrigger: {
                 trigger: hero,
-                start: "top top",
+                start: function () {
+                    return mobile
+                        ? "top top+=" + mobilePinOffset
+                        : "top top";
+                },
                 end: function () { return "+=" + getHeroScrollDistance(); },
                 pin: sticky,
                 pinSpacing: true,
@@ -730,17 +786,28 @@
         timeline
             .to(media, {
                 clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-                duration: 1.15,
+                duration: frameDuration,
                 ease: "power2.inOut"
             }, "frame-open")
             .to(preview, {
                 scale: 1,
-                duration: 1.15,
+                duration: frameDuration,
                 ease: "power2.out"
             }, "frame-open")
             .set(media, {
                 clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"
-            }, "frame-open+=1.15");
+            }, "frame-open+=" + frameDuration);
+
+        if (mobileStage) {
+            timeline.to(mobileStage, {
+                width: "100%",
+                height: "100%",
+                top: "50%",
+                scale: 1,
+                duration: frameDuration,
+                ease: "power2.inOut"
+            }, "frame-open");
+        }
 
         if (useHeroVideo) {
             timeline.to(video, {
@@ -755,14 +822,16 @@
                 opacity: 1,
                 duration: 0.5,
                 ease: "power1.inOut"
-            }, "frame-open+=0.82")
+            }, "frame-open+=" + (mobile ? 1.82 : 0.82))
             .to(copy, {
                 autoAlpha: 1,
                 duration: 0.25,
                 ease: "power1.out"
             }, "copy-in")
-            .to(useHeroVideo ? video : preview, {
-                scale: 1.035,
+            .to(mobileStage || (useHeroVideo ? video : preview), {
+                scale: mobileStage
+                    ? 1
+                    : (mobile ? 1.012 : 1.035),
                 duration: 1.15,
                 ease: "none"
             }, "copy-in+=0.12");
@@ -795,33 +864,41 @@
         const panels = Array.from(
             document.querySelectorAll(".sub-korea-vision-panel")
         );
+        const desktopHover = window.matchMedia("(min-width: 721px) and (hover: hover) and (pointer: fine)");
     
         if (!section || !panels.length) return;
     
         function resetPanels() {
+            section.classList.remove("has-active");
             panels.forEach(function (panel) {
                 panel.classList.remove("is-active", "is-inactive");
             });
         }
-    
+
         function activatePanel(target) {
+            section.classList.add("has-active");
             panels.forEach(function (panel) {
                 panel.classList.toggle("is-active", panel === target);
                 panel.classList.toggle("is-inactive", panel !== target);
             });
         }
-    
+
+        section.addEventListener("pointerover", function (event) {
+            if (!desktopHover.matches) return;
+
+            const panel = event.target.closest(".sub-korea-vision-panel");
+            if (panel && section.contains(panel)) activatePanel(panel);
+        });
+
+        section.addEventListener("pointerleave", function () {
+            if (desktopHover.matches) resetPanels();
+        });
+
         panels.forEach(function (panel) {
-            panel.addEventListener("mouseenter", function () {
-                activatePanel(panel);
-            });
-    
             panel.addEventListener("focus", function () {
-                activatePanel(panel);
+                if (panel.matches(":focus-visible")) activatePanel(panel);
             });
         });
-    
-        section.addEventListener("mouseleave", resetPanels);
     
         resetPanels();
     }
@@ -929,7 +1006,8 @@
     }
 
     function initValueMotions() {
-        const motionDistance = window.matchMedia("(max-width: 720px)").matches ? 7 : 4;
+        const mobileValueLayout = window.matchMedia("(max-width: 720px)").matches;
+        const motionDistance = mobileValueLayout ? 7 : 4;
 
         function fitMaskImageToViewport(mask) {
             const svg = mask.querySelector("svg");
@@ -944,6 +1022,7 @@
             const clipPath = svg.querySelector("clipPath");
             const clipId = clipPath ? clipPath.id : "";
             const desktop = window.innerWidth > 720;
+            const motionBleed = desktop ? 0 : rect.width * 0.08;
             let focusX = 0;
             let focusY = 0;
 
@@ -956,9 +1035,9 @@
             }
 
             const centeredTop = (window.innerHeight - rect.height) / 2;
-            const x = (focusX - rect.left - bleed) / rect.width * viewBox.width;
+            const x = (focusX - rect.left - bleed - motionBleed) / rect.width * viewBox.width;
             const y = (focusY - centeredTop - bleed) / rect.height * viewBox.height;
-            const width = (window.innerWidth + bleed * 2) / rect.width * viewBox.width;
+            const width = (window.innerWidth + bleed * 2 + motionBleed * 2) / rect.width * viewBox.width;
             const height = (window.innerHeight + bleed * 2) / rect.height * viewBox.height;
 
             image.setAttribute("x", x.toFixed(3));

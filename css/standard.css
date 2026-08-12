@@ -398,6 +398,18 @@ overflow-y: visible;
     opacity: 1;
 }
 
+.sub-standard-detail-hero-mobile-stage {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 50%;
+    display: block;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    will-change: transform, opacity;
+}
+
 .sub-standard-detail-hero-video {
     z-index: 2;
     opacity: 0;
@@ -2363,6 +2375,7 @@ History 연도별 1920 시안 좌표
         height: 100vh;
         height: 100dvh;
         min-height: 0;
+        overflow: visible;
     }
 
     .sub-standard-detail-hero-media {
