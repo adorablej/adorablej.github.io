@@ -1928,6 +1928,7 @@ HUNTER History
 }
 
 .sub-history-finale {
+    margin-top: calc(min(100vw, 1920px) * -300 / 1920);
     padding: 0 0 calc(min(100vw, 1920px) * 140 / 1920);
 }
 
@@ -1935,6 +1936,7 @@ HUNTER History
     position: relative;
     width: 100%;
     height: calc(min(100vw, 1920px) * 860 / 1920);
+    background: #fff;
 }
 
 .sub-history-finale-image {

@@ -1279,9 +1279,11 @@
                     ease: "none",
                     scrollTrigger: {
                         trigger: finaleStage,
-                        start: "top 85%",
-                        end: "top top",
+                        start: "center center",
+                        end: "+=70%",
                         scrub: 1.1,
+                        pin: true,
+                        pinSpacing: true,
                         invalidateOnRefresh: true
                     }
                 }
