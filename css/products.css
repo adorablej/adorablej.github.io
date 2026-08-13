@@ -1014,7 +1014,7 @@ Detail Visual
 .detail-visual {
     position: relative;
     overflow: hidden;
-    background: none;
+    background: #c90000 url("../images/products/item/PDP_Products_bg.png") center / cover no-repeat;
 }
 .detail-visual.bg2 {
     position: relative;
@@ -1110,7 +1110,7 @@ Detail Visual
     display: block;
     max-width: none;
     max-height: none;
-    height: auto;
+    height: 100%;
 }
 
 @media (min-width: 768px) {

@@ -139,8 +139,8 @@
         const koreaScene = ".sub-standard-h-scene-korea";
         const partnersScene = ".sub-standard-h-scene-partners";
 
-        const usaImage = ".sub-standard-h-image-usa";
-        const koreaImage = ".sub-standard-h-image-korea";
+        const usaImage = isMobile ? ".sub-standard-h-image-usa-mobile" : ".sub-standard-h-image-usa";
+        const koreaImage = isMobile ? ".sub-standard-h-image-korea-mobile" : ".sub-standard-h-image-korea";
         const partnersImage = ".sub-standard-h-image-partners";
 
         const usaSolid = ".sub-standard-h-solid-usa";
@@ -167,10 +167,13 @@
             return window.innerWidth <= 720 ? window.innerHeight * -0.23 : 0;
         };
         const partnersExpandedScale = function () {
-            return window.innerWidth <= 720 ? 3.83 : 2.02;
+            return window.innerWidth <= 720 ? 3.83 : 3.24;
         };
         const partnersExpandedY = function () {
-            return window.innerHeight * (window.innerWidth <= 720 ? 0.31 : 0.49);
+            return window.innerHeight * (window.innerWidth <= 720 ? 0.31 : 0.469);
+        };
+        const partnersExpandedX = function () {
+            return window.innerWidth <= 720 ? 0 : vw(-0.03125);
         };
 
         gsap.set(copyUsa, {
@@ -327,6 +330,7 @@
             .to(partnersSolid, { opacity: 0, duration: 0.16 }, "partners-rise+=0.02")
             .to(partnersRed, { opacity: 0, scaleX: 0.78, duration: 0.16 }, "partners-rise+=0.02")
             .to(partnersScene, {
+                x: partnersExpandedX,
                 y: partnersExpandedY,
                 scale: partnersExpandedScale,
                 duration: 0.9,
@@ -340,6 +344,7 @@
                 ease: "power2.out"
             }, "partners-final")
             .to(partnersScene, {
+                x: 0,
                 y: 0,
                 scale: storyLogoScale,
                 duration: 0.95,

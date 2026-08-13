@@ -250,8 +250,8 @@ overflow-y: visible;
 
 .sub-standard-story-copy-partners {
     left: 50%;
-    top: calc(242 * var(--vw));
-    width: calc(920 * var(--vw));
+    top: calc(176 * var(--vw));
+    width: calc(1100 * var(--vw));
     text-align: center;
 }
 
@@ -299,6 +299,11 @@ overflow-y: visible;
 
 .sub-standard-h-image {
     opacity: 0;
+}
+
+.sub-standard-h-image-usa-mobile,
+.sub-standard-h-image-korea-mobile {
+    display: none;
 }
 
 .sub-standard-h-red {
@@ -3101,6 +3106,16 @@ History 연도별 1920 시안 좌표
 
     .sub-standard-page .sub-standard-h-scene {
         width: 94px;
+    }
+
+    .sub-standard-page .sub-standard-h-image-usa,
+    .sub-standard-page .sub-standard-h-image-korea {
+        display: none;
+    }
+
+    .sub-standard-page .sub-standard-h-image-usa-mobile,
+    .sub-standard-page .sub-standard-h-image-korea-mobile {
+        display: block;
     }
 
     .sub-standard-page .sub-standard-h-red {
