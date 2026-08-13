@@ -1211,11 +1211,14 @@
 
         const eraTrack = timeline.querySelector(".sub-history-era-track");
         const steps = gsap.utils.toArray(".sub-history-step");
+        const centerAxis = timeline.querySelector(".sub-history-center-axis");
         const copy = timeline.querySelector(".sub-history-center-copy");
         const year = timeline.querySelector(".sub-history-center-year");
         const content = timeline.querySelector(".sub-history-center-content");
         const title = timeline.querySelector(".sub-history-center-title");
         const description = timeline.querySelector(".sub-history-center-description");
+        const finaleStage = document.querySelector(".sub-history-finale-stage");
+        const finaleImage = finaleStage && finaleStage.querySelector(".sub-history-finale-image");
 
         if (eraTrack) {
             gsap.fromTo(eraTrack,
@@ -1236,7 +1239,57 @@
             );
         }
 
+        if (centerAxis && steps.length) {
+            gsap.fromTo(centerAxis,
+                { y: 0 },
+                {
+                    y: function () {
+                        return window.matchMedia("(max-width: 720px)").matches ? -30 : -80;
+                    },
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: timeline,
+                        start: "top top",
+                        endTrigger: steps[steps.length - 1],
+                        end: "top 58%",
+                        scrub: 1.1,
+                        invalidateOnRefresh: true
+                    }
+                }
+            );
+        }
+
+        if (finaleStage && finaleImage) {
+            gsap.fromTo(finaleImage,
+                {
+                    width: function () {
+                        return window.matchMedia("(max-width: 720px)").matches
+                            ? 244
+                            : Math.min(window.innerWidth, 1920) * 940 / 1920;
+                    },
+                    height: function () {
+                        return window.matchMedia("(max-width: 720px)").matches
+                            ? 137
+                            : Math.min(window.innerWidth, 1920) * 520 / 1920;
+                    }
+                },
+                {
+                    width: "100%",
+                    height: "100%",
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: finaleStage,
+                        start: "top 85%",
+                        end: "top top",
+                        scrub: 1.1,
+                        invalidateOnRefresh: true
+                    }
+                }
+            );
+        }
+
         let activeYear = year ? year.textContent.trim() : "1940";
+        let contentChangeId = 0;
 
         function buildYearDigits(value) {
             if (!year) return;
@@ -1343,30 +1396,38 @@
             const nextYear = step.dataset.year || "";
             if (!nextYear || activeYear === nextYear) return;
 
-            copy.dataset.activeYear = nextYear;
+            contentChangeId += 1;
+            const currentChangeId = contentChangeId;
             animateYear(nextYear);
 
             gsap.killTweensOf(content);
             gsap.to(content, {
                 autoAlpha: 0,
-                y: 12,
-                duration: .16,
-                ease: "power2.in",
+                duration: .18,
+                ease: "power1.out",
                 overwrite: true,
                 onComplete: function () {
-                    title.textContent = step.dataset.title || "";
-                    description.textContent = step.dataset.description || "";
+                    if (currentChangeId !== contentChangeId) return;
 
-                    gsap.fromTo(content,
-                        { autoAlpha: 0, y: -10 },
-                        {
-                            autoAlpha: 1,
-                            y: 0,
-                            duration: .34,
-                            ease: "power3.out",
-                            overwrite: true
-                        }
-                    );
+                    const nextTitle = step.dataset.title || "";
+                    const nextDescription = step.dataset.description || "";
+                    const hasContent = Boolean(nextTitle || nextDescription);
+
+                    copy.dataset.activeYear = nextYear;
+                    title.textContent = nextTitle;
+                    description.textContent = nextDescription;
+
+                    if (!hasContent) {
+                        gsap.set(content, { autoAlpha: 0 });
+                        return;
+                    }
+
+                    gsap.to(content, {
+                        autoAlpha: 1,
+                        duration: .3,
+                        ease: "power1.out",
+                        overwrite: true
+                    });
                 }
             });
         }
