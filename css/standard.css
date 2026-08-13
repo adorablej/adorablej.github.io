@@ -2684,7 +2684,23 @@ History 연도별 1920 시안 좌표
     }
 
     .sub-History-page .sub-history-center-copy {
-        z-index: 4;
+        z-index: 8;
+    }
+
+    .sub-History-page .sub-history-center-axis {
+        z-index: 6;
+    }
+
+    .sub-History-page .sub-history-center-axis::after {
+        content: "";
+        position: absolute;
+        z-index: 3;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 48%;
+        background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, .86) 52%, #fff 100%);
+        pointer-events: none;
     }
 
     .sub-History-page .sub-history-lead {
@@ -2766,16 +2782,12 @@ History 연도별 1920 시안 좌표
         z-index: 2;
     }
 
+    .sub-History-page .sub-history-finale-stage::before {
+        display: none;
+    }
+
     .sub-History-page .sub-history-timeline-sticky::after {
-        content: "";
-        position: absolute;
-        z-index: 3;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        height: 48%;
-        background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, .86) 52%, #fff 100%);
-        pointer-events: none;
+        display: none;
     }
 
     .sub-History-page .sub-history-finale-copy {
