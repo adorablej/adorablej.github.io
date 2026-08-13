@@ -733,7 +733,7 @@ Sub Product Item
     background: none;
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 
 .sub-product-item-bg {
@@ -768,25 +768,21 @@ Sub Product Item
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    width:  calc(600 * var(--vw));
+    height: 100%;
 }
 
 .sub-product-item-image img {
     display: block;
-    width: 100%;
-    height: auto;
+    height: 100%;
 }
 
 .sub-product-item > .sub-product-item-image {
-    display: block;
     width: 100%;
 }
 
 .sub-product-item > .sub-product-item-image > img.pc-only {
     position: static;
-    width: 100%;
     max-width: none;
-    height: auto;
 }
 
 .sub-product-item > .sub-product-item-image + .inner {
@@ -845,7 +841,7 @@ Sub Product Item
 
 .sub-product-item-desc {
     width: 100%;
-    margin-bottom: calc(60 * var(--vw));
+    margin-bottom: calc(40 * var(--vw));
     color: #666;
     font-size: calc(18 * var(--vw));
     font-weight: 300;
@@ -881,7 +877,7 @@ Sub Product Item
 .sub-product-item.sub-product-item-center .sub-product-item-content{
     text-align:center;
     width: 100%;
-    padding: calc(110 * var(--vw)) 0 0;
+    padding: calc(100 * var(--vw)) 0 0;
 }
 
 /* Alignment Racks */
@@ -1107,12 +1103,11 @@ Detail Visual
 .detail-visual > .detail-product-image {
     position: relative;
     width: 100%;
-    height: auto;
+    height: calc(1080 * var(--vw));;
 }
 
 .detail-visual > .detail-product-image img {
     display: block;
-    width: 100%;
     max-width: none;
     max-height: none;
     height: auto;

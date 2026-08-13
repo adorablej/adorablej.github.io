@@ -1281,7 +1281,7 @@
                         trigger: finaleStage,
                         start: "center center",
                         end: "+=70%",
-                        scrub: 1.1,
+                        scrub: true,
                         pin: true,
                         pinSpacing: true,
                         invalidateOnRefresh: true

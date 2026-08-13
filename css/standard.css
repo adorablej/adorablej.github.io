@@ -1928,7 +1928,6 @@ HUNTER History
 }
 
 .sub-history-finale {
-    margin-top: calc(min(100vw, 1920px) * -300 / 1920);
     padding: 0 0 calc(min(100vw, 1920px) * 140 / 1920);
 }
 
@@ -1936,11 +1935,24 @@ HUNTER History
     position: relative;
     width: 100%;
     height: calc(min(100vw, 1920px) * 860 / 1920);
-    background: #fff;
+    background: transparent;
+}
+
+.sub-history-finale-stage::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: calc(min(100vw, 1920px) * -320 / 1920);
+    bottom: 50%;
+    left: 50%;
+    width: 1px;
+    background: var(--red);
+    transform: translateX(-50%);
 }
 
 .sub-history-finale-image {
     position: absolute;
+    z-index: 1;
     top: 50%;
     left: 50%;
     width: calc(min(100vw, 1920px) * 940 / 1920);
@@ -1952,7 +1964,6 @@ HUNTER History
 }
 
 .sub-history-finale-copy {
-    width: calc(min(100vw, 1920px) * 1300 / 1920);
     margin: calc(min(100vw, 1920px) * 100 / 1920) auto 0;
     text-align: center;
 }
@@ -1972,21 +1983,33 @@ HUNTER History
     font-weight: 800;
 }
 
-.sub-history-finale-copy h2 span { color: var(--red); }
+.sub-history-finale-copy h2 span { color: var(--red); font-family: "Russo One", sans-serif;}
 
 .sub-history-finale-copy p {
     margin: calc(min(100vw, 1920px) * 20 / 1920) 0 0;
-    color: #777;
+    color: #696969;
+    font-family: "Pretendard", sans-serif;
     font-size: calc(min(100vw, 1920px) * 20 / 1920);
-    line-height: calc(min(100vw, 1920px) * 20 / 1920);
-    line-height: 1.7;
+    font-weight: 400;
+    line-height: calc(min(100vw, 1920px) * 30 / 1920);
+    letter-spacing: -0.06em;
 }
-
+.sub-history-finale-copy > span {
+    display: block;
+    font-family: "Russo One", sans-serif;
+    margin: calc(min(100vw, 1920px) * 20 / 1920) 0 0;
+    color: rgba(0, 0, 0, 0.1);
+    font-size: calc(min(100vw, 1920px) * 74 / 1920);
+    font-weight: 400;
+    line-height: calc(min(100vw, 1920px) * 80 / 1920);
+    letter-spacing: -1px;
+    margin: calc(min(100vw, 1920px) * 150 / 1920) auto;
+}
 /* ========================================
 History 연도별 1920 시안 좌표
 ======================================== */
 .sub-history-timeline {
-    height: calc(min(100vw, 1920px) * 11842 / 1920);
+    height: calc(min(100vw, 1920px) * 11542 / 1920);
 }
 
 .sub-history-era-track {
@@ -2165,7 +2188,7 @@ History 연도별 1920 시안 좌표
 .sub-history-step:nth-child(4) { height: calc(min(100vw, 1920px) * 1441 / 1920); }
 .sub-history-step:nth-child(5) { height: calc(min(100vw, 1920px) * 1670 / 1920); }
 .sub-history-step:nth-child(6) { height: calc(min(100vw, 1920px) * 1570 / 1920); }
-.sub-history-step:nth-child(7) { height: calc(min(100vw, 1920px) * 1632 / 1920); }
+.sub-history-step:nth-child(7) { height: calc(min(100vw, 1920px) * 1332 / 1920); }
 
 /* 시안에서 카피가 없는 연도 */
 .sub-history-center-copy[data-active-year="1950"] .sub-history-center-content,
