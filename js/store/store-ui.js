@@ -102,6 +102,27 @@
             `).join("");
         },
 
+        renderLoading() {
+            if (!this.list) return;
+            this.list.innerHTML = `
+                <div class="sub-pride-store-empty" role="status">
+                    <strong>매장 정보를 불러오는 중입니다.</strong>
+                    <span>잠시만 기다려주세요.</span>
+                </div>
+            `;
+        },
+
+        renderError(message) {
+            if (!this.list) return;
+            this.list.innerHTML = `
+                <div class="sub-pride-store-empty" role="alert">
+                    <span class="sub-pride-store-empty-icon" aria-hidden="true">!</span>
+                    <strong>매장 정보를 불러오지 못했습니다.</strong>
+                    <span>${escapeHtml(message || "잠시 후 다시 시도해주세요.")}</span>
+                </div>
+            `;
+        },
+
         renderCount(totalCount) {
             if (this.count) this.count.innerHTML = `총 <strong>${Number(totalCount) || 0}</strong>개의 매장이 있습니다.`;
         },
@@ -211,7 +232,7 @@
         StoreUI.init(section);
         StoreUI.initMap();
 
-        const allStores = Array.isArray(window.MOCK_STORES) ? window.MOCK_STORES : [];
+        let allStores = [];
         const setSelectOptions = (select, placeholder, options, disabled = false) => {
             const list = select.querySelector(".sub-form-select-options");
             const value = select.querySelector(".sub-form-select-value");
@@ -252,23 +273,36 @@
             }
         };
 
-        const loadStores = async () => {
-            try {
-                const result = await StoreAPI.getStores({
-                    keyword: keywordInput.value,
-                    region: regionInput.value,
-                    city: cityInput.value
-                });
-                StoreUI.closeDetail();
-                StoreUI.renderCount(result.totalCount);
-                StoreUI.renderStoreList(result.stores);
-                StoreUI.renderMarkers(result.stores, store => {
+        const renderFilteredStores = () => {
+            const keyword = keywordInput.value.trim().toLowerCase();
+            const stores = allStores.filter(store => {
+                const keywordTarget = [store.name, store.region, store.city, store.roadAddress]
+                    .join(" ").toLowerCase();
+                return (!keyword || keywordTarget.includes(keyword))
+                    && (!regionInput.value || store.region === regionInput.value)
+                    && (!cityInput.value || store.city === cityInput.value);
+            });
+
+            StoreUI.closeDetail();
+            StoreUI.renderCount(stores.length);
+            StoreUI.renderStoreList(stores);
+            StoreUI.renderMarkers(stores, store => {
                     StoreUI.setActiveStore(store, { scrollList: true, moveMap: true });
-                });
+            });
+        };
+
+        const loadStores = async () => {
+            StoreUI.renderLoading();
+            try {
+                const result = await StoreAPI.getStores({ size: 100 });
+                allStores = result.stores;
+                setRegionOptions();
+                setCityOptions("");
+                renderFilteredStores();
             } catch (error) {
                 console.error(error);
                 StoreUI.renderCount(0);
-                StoreUI.renderStoreList([]);
+                StoreUI.renderError(error.message);
                 StoreUI.renderMarkers([], () => {});
             }
         };
@@ -276,21 +310,19 @@
         let searchTimer;
         keywordInput.addEventListener("input", () => {
             clearTimeout(searchTimer);
-            searchTimer = setTimeout(loadStores, 200);
+            searchTimer = setTimeout(renderFilteredStores, 200);
         });
         regionInput.addEventListener("change", () => {
             setCityOptions(regionInput.value);
-            loadStores();
+            renderFilteredStores();
         });
-        cityInput.addEventListener("change", loadStores);
+        cityInput.addEventListener("change", renderFilteredStores);
         StoreUI.list.addEventListener("click", event => {
             const item = event.target.closest(".sub-pride-store-item");
             if (item) selectStore(item.dataset.storeId, { scrollList: false, moveMap: true });
         });
         closeButton?.addEventListener("click", () => StoreUI.closeDetail());
 
-        setRegionOptions();
-        setCityOptions("");
         loadStores();
     });
 })();

@@ -1555,7 +1555,7 @@ Detail Spec
     object-fit: contain;
 }
 
-/* TCMW Maverick model selector */
+/* TCMPRO Maverick model selector */
 .tcmw-detail-spec .detail-section-heading {
     margin-bottom: calc(68 * var(--vw));
 }

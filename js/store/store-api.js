@@ -1,8 +1,9 @@
 /* products-HunterPride-Map.html , Store API. */
 
 window.StoreAPI = {
-    // 개발계 API가 준비되면 false로 변경합니다.
-    useMock: true,
+    // 실제 API 호출이 어려울 때만 개발자 도구에서 true로 바꿔 목업 데이터를 확인합니다.
+    useMock: false,
+    stores: [],
 
     async getStores(params = {}) {
         if (this.useMock) return this.getMockStores(params);
@@ -14,6 +15,7 @@ window.StoreAPI = {
         });
         const items = Array.isArray(data) ? data : (data.content || data.items || []);
         const stores = items.map(this.normalizeStore);
+        this.stores = stores;
         return {
             totalCount: data.totalCount || data.totalElements || stores.length,
             stores
@@ -25,9 +27,8 @@ window.StoreAPI = {
             return window.MOCK_STORES.find(store => String(store.id) === String(id)) || null;
         }
 
-        // 드래프트에는 프론트 매장 상세 API가 없어 목록 결과에서 조회합니다.
-        const result = await this.getStores({ size: 100 });
-        return result.stores.find(store => String(store.id) === String(id)) || null;
+        // 드래프트에는 프론트 매장 상세 API가 없어 이미 받은 목록에서 조회합니다.
+        return this.stores.find(store => String(store.id) === String(id)) || null;
     },
 
     normalizeStore(store) {

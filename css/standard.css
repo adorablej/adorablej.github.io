@@ -3007,10 +3007,12 @@ History 연도별 1920 시안 좌표
         width: 100%;
     }
 
-    .sub-standard-page .sub-standard-main-title strong,
-    .sub-standard-page .sub-standard-main-title span {
-        font-size: 20px;
-        line-height: 24px;
+    .sub-standard-page .sub-standard-main-title > strong,
+    .sub-standard-page .sub-standard-main-title > span,
+    .sub-standard-page .sub-standard-main-title-base,
+    .sub-standard-page .sub-standard-main-title-fill {
+        font-size: 36px;
+        line-height: 43px;
     }
 
     .sub-standard-page .sub-standard-main-title span {
@@ -3026,8 +3028,10 @@ History 연도별 1920 시안 좌표
     }
 
     .sub-standard-page .sub-standard-main-reveal {
-        aspect-ratio: 4 / 5;
-        border-radius: 18px;
+        width: calc(100% - 80px);
+        max-width: 280px;
+        aspect-ratio: 14 / 23;
+        border-radius: 0;
     }
 
     .sub-standard-page .sub-standard-main-reveal-copy {
@@ -3037,7 +3041,8 @@ History 연도별 1920 시안 좌표
     .sub-standard-page .sub-standard-main-reveal-copy h2 {
         width: calc(100% - 40px);
         font-size: 25px;
-        line-height: 1.32;
+        line-height: 30px;
+        letter-spacing: -0.04em;
     }
 
     .sub-standard-page .sub-standard-intro-content {

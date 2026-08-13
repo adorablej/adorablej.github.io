@@ -28,7 +28,7 @@ function initTcmwSpecSelector(){
             weight:"513 kg",
             label:"TCMW",
             image:"/images/products/TCMW_v.png",
-            alt:"TCMW Maverick™"
+            alt:"TCMPRO Maverick™"
         },
         tcmpro:{
             depth:"1,778 mm (70 in) / 2,057 mm (81 in)",

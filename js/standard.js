@@ -27,7 +27,7 @@
         if (!titleTop || !titleBottom || !titleTopFill || !titleBottomFill || !frame || !reveal || !revealImage || !revealCopy) return;
 
         const revealHeight = function () {
-            const ratio = window.innerWidth <= 720 ? 1.25 : 9 / 16;
+            const ratio = window.innerWidth <= 720 ? 23 / 14 : 9 / 16;
             return Math.min(frame.clientHeight, reveal.clientWidth * ratio);
         };
 
@@ -159,8 +159,6 @@
             return designWidth() * value;
         };
 
-        // USA 상세 페이지의 H 폭(3000 * --vw)과 동일한 크기.
-        // story H의 기본 폭은 500 * --vw이므로 6배가 같은 실제 폭이다.
         const detailHScale = 6;
         const storyLogoScale = function () {
             return window.innerWidth <= 720 ? 2.02 : 1;
@@ -228,104 +226,6 @@
 
         gsap.set([usaRed, partnersRed], { opacity: 1, scaleX: 1 });
         gsap.set(koreaRed, { opacity: 0, scaleX: 1 });
-
-        let partnersAutoTimeline = null;
-        let partnersFinalTimeline = null;
-        let partnersAwaitingFinal = false;
-        let partnersRiseScrollY = 0;
-        let partnersLastScrollY = window.scrollY;
-
-        function playPartnersRise() {
-            const direction = timeline.scrollTrigger ? timeline.scrollTrigger.direction : 1;
-            if (partnersAutoTimeline) {
-                partnersAutoTimeline.kill();
-                partnersAutoTimeline = null;
-            }
-            if (partnersFinalTimeline) {
-                partnersFinalTimeline.kill();
-                partnersFinalTimeline = null;
-            }
-            partnersAwaitingFinal = false;
-            gsap.killTweensOf([partnersScene, partnersImage, partnersSolid, partnersRed]);
-
-            if (direction < 0) {
-                gsap.set(partnersScene, {
-                    y: function () { return window.innerHeight * 1.08; },
-                    scale: partnersExpandedScale,
-                    autoAlpha: 0
-                });
-                gsap.set(partnersImage, { opacity: 0 });
-                gsap.set(partnersSolid, { opacity: 1 });
-                gsap.set(partnersRed, { opacity: 1, scaleX: 1 });
-                gsap.set(copyPartners, { autoAlpha: 1, y: 0 });
-                return;
-            }
-
-            partnersAutoTimeline = gsap.timeline({ delay: 0.65 })
-                .set(partnersScene, { autoAlpha: 1 })
-                .to(partnersImage, { opacity: 1, duration: 0.18 }, 0.02)
-                .to(partnersSolid, { opacity: 0, duration: 0.16 }, 0.03)
-                .to(partnersRed, { opacity: 0, scaleX: 0.78, duration: 0.16 }, 0.03)
-                .to(partnersScene, {
-                    y: partnersExpandedY,
-                    scale: partnersExpandedScale,
-                    duration: 0.98,
-                    ease: "power3.out"
-                }, 0)
-                .call(function () {
-                    partnersAwaitingFinal = true;
-                    partnersRiseScrollY = window.scrollY;
-                });
-        }
-
-        function playPartnersFinal() {
-            if (!partnersAwaitingFinal || partnersFinalTimeline) return;
-            partnersAwaitingFinal = false;
-
-            partnersFinalTimeline = gsap.timeline()
-                .to(copyPartners, {
-                    autoAlpha: 0,
-                    y: -25,
-                    duration: 0.2,
-                    ease: "power2.out"
-                }, "final")
-                .to(partnersScene, {
-                    y: 0,
-                    scale: storyLogoScale,
-                    duration: 1,
-                    ease: "power2.inOut"
-                }, "final+=0.04")
-                .to(partnersImage, { opacity: 0, duration: 0.28 }, "final+=0.43")
-                .to(partnersSolid, { opacity: 1, duration: 0.28 }, "final+=0.46")
-                .to(partnersRed, { opacity: 1, scaleX: 1, duration: 0.3 }, "final+=0.5");
-
-            partnersFinalTimeline.eventCallback("onReverseComplete", function () {
-                partnersFinalTimeline = null;
-                partnersAwaitingFinal = true;
-                partnersRiseScrollY = window.scrollY;
-            });
-        }
-
-        window.addEventListener("scroll", function () {
-            const currentScrollY = window.scrollY;
-            const isScrollingDown = currentScrollY > partnersLastScrollY + 2;
-            const isScrollingUp = currentScrollY < partnersLastScrollY - 2;
-
-            if (partnersAwaitingFinal && currentScrollY > partnersRiseScrollY + 4) {
-                playPartnersFinal();
-            }
-
-            if (isScrollingUp && partnersFinalTimeline && partnersFinalTimeline.progress() > 0) {
-                partnersFinalTimeline.reverse();
-            } else if (isScrollingUp && partnersAwaitingFinal && partnersAutoTimeline) {
-                partnersAwaitingFinal = false;
-                partnersAutoTimeline.reverse();
-            } else if (isScrollingDown && partnersFinalTimeline && partnersFinalTimeline.reversed()) {
-                partnersFinalTimeline.play();
-            }
-
-            partnersLastScrollY = currentScrollY;
-        }, { passive: true });
 
         const timeline = gsap.timeline({
             defaults: { ease: "none" },
@@ -420,44 +320,35 @@
                 ease: "power2.out"
             }, "partners-copy+=0.56");
 
-        if (isMobile) {
-            /* 모바일은 관성 스크롤에서도 누락되지 않도록 마지막 H까지 스크롤 타임라인에 포함 */
-            timeline
-                .set(partnersScene, { autoAlpha: 1 }, "partners-mobile-rise")
-                .to(partnersImage, { opacity: 1, duration: 0.18 }, "partners-mobile-rise")
-                .to(partnersSolid, { opacity: 0, duration: 0.16 }, "partners-mobile-rise+=0.02")
-                .to(partnersRed, { opacity: 0, scaleX: 0.78, duration: 0.16 }, "partners-mobile-rise+=0.02")
-                .to(partnersScene, {
-                    y: partnersExpandedY,
-                    scale: partnersExpandedScale,
-                    duration: 0.9,
-                    ease: "power3.out"
-                }, "partners-mobile-rise")
-                .to({}, { duration: 0.35 })
-                .to(copyPartners, {
-                    autoAlpha: 0,
-                    y: -25,
-                    duration: 0.2,
-                    ease: "power2.out"
-                }, "partners-mobile-final")
-                .to(partnersScene, {
-                    y: 0,
-                    scale: storyLogoScale,
-                    duration: 0.95,
-                    ease: "power2.inOut"
-                }, "partners-mobile-final+=0.04")
-                .to(partnersImage, { opacity: 0, duration: 0.28 }, "partners-mobile-final+=0.4")
-                .to(partnersSolid, { opacity: 1, duration: 0.28 }, "partners-mobile-final+=0.43")
-                .to(partnersRed, { opacity: 1, scaleX: 1, duration: 0.3 }, "partners-mobile-final+=0.46")
-                .to({}, { duration: 1.2 });
-        } else {
-            timeline
-                .call(playPartnersRise, null, "partners-copy+=0.86")
-                // 자동 상승이 끝난 뒤 스크롤을 다시 받을 짧은 유지 구간
-                .to({}, { duration: 0.45 })
-                // 최종 H 로고 장면 유지
-                .to({}, { duration: 2.2 });
-        }
+        /* 마지막 PARTNERS H 등장부터 최종 로고 전환까지 PC·모바일 모두 스크롤 연동 */
+        timeline
+            .set(partnersScene, { autoAlpha: 1 }, "partners-rise")
+            .to(partnersImage, { opacity: 1, duration: 0.18 }, "partners-rise")
+            .to(partnersSolid, { opacity: 0, duration: 0.16 }, "partners-rise+=0.02")
+            .to(partnersRed, { opacity: 0, scaleX: 0.78, duration: 0.16 }, "partners-rise+=0.02")
+            .to(partnersScene, {
+                y: partnersExpandedY,
+                scale: partnersExpandedScale,
+                duration: 0.9,
+                ease: "power3.out"
+            }, "partners-rise")
+            .to({}, { duration: 0.35 })
+            .to(copyPartners, {
+                autoAlpha: 0,
+                y: -25,
+                duration: 0.2,
+                ease: "power2.out"
+            }, "partners-final")
+            .to(partnersScene, {
+                y: 0,
+                scale: storyLogoScale,
+                duration: 0.95,
+                ease: "power2.inOut"
+            }, "partners-final+=0.04")
+            .to(partnersImage, { opacity: 0, duration: 0.28 }, "partners-final+=0.4")
+            .to(partnersSolid, { opacity: 1, duration: 0.28 }, "partners-final+=0.43")
+            .to(partnersRed, { opacity: 1, scaleX: 1, duration: 0.3 }, "partners-final+=0.46")
+            .to({}, { duration: isMobile ? 1.2 : 2.2 });
     }
 
     function initTrackpadScrollStability() {
