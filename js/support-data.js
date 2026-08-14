@@ -22,6 +22,10 @@ const operationGuideCategories = {
     "vehicle-inspection": {
         title: "Vehicle Inspection",
         products: ["InspectPro 3000"]
+    },
+    "heavy-duty": {
+        title: "Heavy-Duty",
+        products: ["HD Elite", "HawkEye XL", "Heavy-Duty Four-Post Lift", "TCX635HD"]
     }
 };
 

@@ -91,6 +91,27 @@ function initTcmwSpecSelector(){
 
 initTcmwSpecSelector();
 
+(function initDetailGuideLinks() {
+    const categoryByPath = {
+        "Alignment-Systems": "alignment",
+        "Wheel-Balancers": "wheel-balancers",
+        "Tire-Changers": "tire-changers",
+        "Alignment-Racks": "alignment-racks",
+        "Brake-Lathes": "brake-lathes",
+        "Vehicle-Inspection": "vehicle-inspection",
+        "Heavy-Duty": "heavy-duty"
+    };
+    const productCategoryPath = window.location.pathname.split("/")[2];
+    const category = categoryByPath[productCategoryPath];
+    if (!category) return;
+
+    const guideUrl = "/Support/equipment-operation-guide-detail.html";
+    document.querySelectorAll(".detail-spec-button").forEach(button => {
+        const isVideo = button.querySelector(".detail-spec-icon-video");
+        button.href = `${guideUrl}?category=${category}${isVideo ? "&type=video" : ""}`;
+    });
+})();
+
 const categoryOffset = getCategoryOffset();
 
 const categorySwiper = new Swiper(".sub-category-slider", {
@@ -265,6 +286,20 @@ function getFeaturesOffset() {
 
 const featuresOffset = getFeaturesOffset();
 
+function updateFeaturesLayout(swiper) {
+    if (!swiper || swiper.destroyed) return;
+
+    const offset = getFeaturesOffset();
+    const activeIndex = swiper.activeIndex;
+
+    swiper.params.slidesOffsetBefore = offset;
+    swiper.params.slidesOffsetAfter = offset;
+    swiper.originalParams.slidesOffsetBefore = offset;
+    swiper.originalParams.slidesOffsetAfter = offset;
+    swiper.update();
+    swiper.slideTo(activeIndex, 0, false);
+}
+
 const featuresSwiper = new Swiper(".detail-features-slider", {
     slidesPerView: "auto",
     spaceBetween: 24,
@@ -281,12 +316,7 @@ const featuresSwiper = new Swiper(".detail-features-slider", {
 
     on: {
         resize(swiper) {
-            const offset = getFeaturesOffset();
-            swiper.params.slidesOffsetBefore = offset;
-            swiper.params.slidesOffsetAfter = offset;
-            swiper.originalParams.slidesOffsetBefore = offset;
-            swiper.originalParams.slidesOffsetAfter = offset;
-            swiper.updateSlides();
+            window.requestAnimationFrame(() => updateFeaturesLayout(swiper));
         },
     },
 
@@ -503,3 +533,61 @@ function initProductsHero(){
 
     changeCategory(activeButton?.dataset.category||"alignment");
 }
+
+(function initDetailTopButton() {
+    const detailVisual = document.querySelector(".detail-visual");
+    if (!detailVisual || document.querySelector(".detail-top-button")) return;
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "detail-top-button";
+    button.setAttribute("aria-label", "페이지 맨 위로 이동");
+    button.innerHTML = '<img src="/images/icon/TOP.png" alt="">';
+    document.body.appendChild(button);
+
+    let detailVisualBottom = 0;
+    let ticking = false;
+
+    function measureDetailVisualBottom() {
+        const rect = detailVisual.getBoundingClientRect();
+        detailVisualBottom = rect.bottom + window.scrollY;
+    }
+
+    function updateButtonVisibility() {
+        button.classList.toggle("is-visible", window.scrollY >= detailVisualBottom);
+        ticking = false;
+    }
+
+    function requestVisibilityUpdate() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(updateButtonVisibility);
+    }
+
+    measureDetailVisualBottom();
+    updateButtonVisibility();
+
+    window.addEventListener("scroll", requestVisibilityUpdate, { passive: true });
+    window.addEventListener("resize", function () {
+        measureDetailVisualBottom();
+        requestVisibilityUpdate();
+    });
+    window.addEventListener("load", function () {
+        measureDetailVisualBottom();
+        requestVisibilityUpdate();
+    }, { once: true });
+
+    if ("ResizeObserver" in window) {
+        new ResizeObserver(function () {
+            measureDetailVisualBottom();
+            requestVisibilityUpdate();
+        }).observe(detailVisual);
+    }
+
+    button.addEventListener("click", function () {
+        window.scrollTo({
+            top: 0,
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+        });
+    });
+})();

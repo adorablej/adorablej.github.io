@@ -36,7 +36,9 @@ function initOperationGuide() {
 
     if (!guideContent || !guideTabs.length) return;
 
-    const requestedCategory = new URLSearchParams(window.location.search).get("category") || "alignment";
+    const searchParams = new URLSearchParams(window.location.search);
+    const requestedCategory = searchParams.get("category") || "alignment";
+    const requestedType = searchParams.get("type") === "video" ? "video" : "manual";
     const category = operationGuideCategories[requestedCategory] ? requestedCategory : "alignment";
     const categoryInfo = operationGuideCategories[category];
     const visibleGuides = operationGuideData.filter(item => item.category === category && item.visible);
@@ -266,16 +268,17 @@ function initOperationGuide() {
         document.body.classList.remove("is-guide-video-modal-open");
     }
 
-    guideTabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            const type = tab.dataset.guideTab;
-            guideTabs.forEach(item => {
-                const active = item === tab;
-                item.classList.toggle("is-active", active);
-                item.setAttribute("aria-selected", String(active));
-            });
-            renderGuide(type);
+    function activateGuide(type) {
+        guideTabs.forEach(item => {
+            const active = item.dataset.guideTab === type;
+            item.classList.toggle("is-active", active);
+            item.setAttribute("aria-selected", String(active));
         });
+        renderGuide(type);
+    }
+
+    guideTabs.forEach(tab => {
+        tab.addEventListener("click", () => activateGuide(tab.dataset.guideTab));
     });
 
     guideContent.addEventListener("pointerdown", event => {
@@ -310,7 +313,7 @@ function initOperationGuide() {
         if (event.key === "Escape" && modal?.classList.contains("is-open")) closeVideoModal();
     });
 
-    renderGuide("manual");
+    activateGuide(requestedType);
 }
 
 document.addEventListener("DOMContentLoaded", initOperationGuide);
