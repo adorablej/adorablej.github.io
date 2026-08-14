@@ -264,7 +264,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: calc(40 * var(--vw));
+    padding: 40px;
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
@@ -290,42 +290,42 @@
 }
 
 .sub-modal-content {
-    padding: calc(50 * var(--vw));
+    padding: 50px;
 }
 
 .sub-modal-title {
     margin: 0;
     color: #111;
-    font-size: calc(38 * var(--vw));
+    font-size: 38px;
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: -.04em;
 }
 
 .sub-mypage-withdraw-modal .sub-modal-title {
-    font-size: calc(40 * var(--vw));
+    font-size: 40px;
 }
 
 .sub-modal-actions {
     display: flex;
     justify-content: center;
-    gap: calc(14 * var(--vw));
-    margin-top: calc(34 * var(--vw));
+    gap: 14px;
+    margin-top: 34px;
 }
 
 .sub-modal-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: calc(190 * var(--vw));
-    height: calc(58 * var(--vw));
-    padding: 0 calc(30 * var(--vw));
+    min-width: 190px;
+    height: 58px;
+    padding: 0 30px;
     border: 1px solid #ddd;
-    border-radius: calc(999 * var(--vw));
+    border-radius: 999px;
     background: #fff;
     color: #111;
     font-family: inherit;
-    font-size: calc(16 * var(--vw));
+    font-size: 16px;
     font-weight: 600;
     cursor: pointer;
     box-sizing: border-box;
@@ -358,9 +358,9 @@ body.is-modal-open {
     background: none;
     color: #bbb;
     font-family: inherit;
-    font-size: calc(14 * var(--vw));
+    font-size: 14px;
     text-decoration: underline;
-    text-underline-offset: calc(3 * var(--vw));
+    text-underline-offset: 3px;
     cursor: pointer;
 }
 
@@ -411,7 +411,7 @@ body.is-modal-open {
 }
 
 .sub-mypage-withdraw-modal .sub-modal-button {
-    font-size: calc(18 * var(--vw));
+    font-size: 18px;
 }
 .sub-mypage-business-type {
     display: flex;
@@ -748,11 +748,11 @@ button.sub-mypage-part-text {
 /* Part Detail Modal */
 .sub-mypage-part-modal-close {
     position: absolute;
-    top: calc(28 * var(--vw));
-    right: calc(28 * var(--vw));
+    top: 28px;
+    right: 28px;
     z-index: 2;
-    width: calc(34 * var(--vw));
-    height: calc(34 * var(--vw));
+    width: 34px;
+    height: 34px;
     padding: 0;
     border: 0;
     background: transparent;
@@ -764,8 +764,8 @@ button.sub-mypage-part-text {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: calc(28 * var(--vw));
-    height: calc(2 * var(--vw));
+    width: 28px;
+    height: 2px;
     background: #111;
     content: "";
 }
@@ -783,7 +783,7 @@ button.sub-mypage-part-text {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: calc(460 * var(--vw));
+    height: 460px;
     background: #f4f4f4;
 }
 
@@ -795,52 +795,52 @@ button.sub-mypage-part-text {
 }
 
 .sub-mypage-part-modal-content {
-    padding: calc(46 * var(--vw)) calc(48 * var(--vw)) calc(52 * var(--vw));
+    padding: 46px 48px 52px;
 }
 
 .sub-mypage-part-modal-content small {
     display: block;
     color: #aaa;
-    font-size: calc(13 * var(--vw));
+    font-size: 13px;
 }
 
 .sub-mypage-part-modal-content h3 {
-    margin: calc(8 * var(--vw)) 0 0;
+    margin: 8px 0 0;
     color: #111;
-    font-size: calc(19 * var(--vw));
+    font-size: 19px;
     font-weight: 700;
     line-height: 1.35;
 }
 
 .sub-mypage-part-modal-content > strong {
     display: block;
-    margin-top: calc(12 * var(--vw));
+    margin-top: 12px;
     color: var(--red);
-    font-size: calc(24 * var(--vw));
+    font-size: 24px;
     font-weight: 700;
 }
 
 .sub-mypage-part-modal-content dl {
-    margin-top: calc(36 * var(--vw));
-    padding-top: calc(28 * var(--vw));
+    margin-top: 36px;
+    padding-top: 28px;
     border-top: 1px solid #eee;
 }
 
 .sub-mypage-part-modal-content dl > div {
     display: grid;
-    grid-template-columns: calc(80 * var(--vw)) 1fr;
+    grid-template-columns: 80px 1fr;
     align-items: center;
 }
 
 .sub-mypage-part-modal-content dt {
     color: #222;
-    font-size: calc(14 * var(--vw));
+    font-size: 14px;
     font-weight: 600;
 }
 
 .sub-mypage-part-modal-content dd {
     color: var(--red);
-    font-size: calc(18 * var(--vw));
+    font-size: 18px;
     font-weight: 700;
 }
 

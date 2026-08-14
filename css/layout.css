@@ -13,12 +13,12 @@ Common Modal Close Button
     position: absolute !important;
     z-index: 20 !important;
     top: 0 !important;
-    right: calc(-90 * var(--vw)) !important;
+    right: -72px !important;
     display: block !important;
-    width: calc(70 * var(--vw)) !important;
-    min-width: calc(70 * var(--vw)) !important;
-    height: calc(70 * var(--vw)) !important;
-    min-height: calc(70 * var(--vw)) !important;
+    width: 56px !important;
+    min-width: 56px !important;
+    height: 56px !important;
+    min-height: 56px !important;
     padding: 0 !important;
     border: 0 !important;
     border-radius: 50% !important;
@@ -36,8 +36,8 @@ Common Modal Close Button
     top: 50% !important;
     left: 50% !important;
     display: block !important;
-    width: calc(28 * var(--vw)) !important;
-    height: calc(2 * var(--vw)) !important;
+    width: 22px !important;
+    height: 2px !important;
     border: 0 !important;
     border-radius: 999px;
     background: currentColor !important;
@@ -57,8 +57,8 @@ Common Modal Close Button
 }
 
 .modal-close-button:focus-visible {
-    outline: calc(3 * var(--vw)) solid rgba(204, 12, 0, .35);
-    outline-offset: calc(3 * var(--vw));
+    outline: 3px solid rgba(204, 12, 0, .35);
+    outline-offset: 3px;
 }
 
 /* Common modal surface */
@@ -67,10 +67,10 @@ Common Modal Close Button
     z-index: 1;
     display: flex;
     flex-direction: column;
-    width: calc(750 * var(--vw)) !important;
-    max-width: calc(100vw - calc(180 * var(--vw))) !important;
+    width: min(750px, calc(100vw - 160px)) !important;
+    max-width: none !important;
     height: auto !important;
-    max-height: calc(100vh - calc(80 * var(--vw)));
+    max-height: calc(100vh - 80px);
     box-sizing: border-box;
     overflow: visible !important;
     background: #fff;
@@ -78,12 +78,12 @@ Common Modal Close Button
 
 /* Text-only modal */
 .modal-box--text {
-    height: calc(700 * var(--vw)) !important;
-    padding: calc(50 * var(--vw)) !important;
+    height: min(700px, calc(100vh - 80px)) !important;
+    padding: 50px !important;
 }
 
 .modal-content {
-    padding: calc(50 * var(--vw)) !important;
+    padding: 50px !important;
     box-sizing: border-box;
 }
 
@@ -93,13 +93,13 @@ Common Modal Close Button
 }
 
 .modal-title {
-    font-size: calc(40 * var(--vw)) !important;
+    font-size: 40px !important;
 }
 
 .modal-text {
     color: #333;
-    font-size: calc(16 * var(--vw)) !important;
-    line-height: calc(26 * var(--vw));
+    font-size: 16px !important;
+    line-height: 26px;
     white-space: pre-wrap;
     word-break: keep-all;
     overflow-wrap: break-word;
@@ -1249,7 +1249,7 @@ All Menu SNS
     align-items: center;
     opacity: 0.5;
     width: 100%;
-    height: 100%;;
+    height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -1386,7 +1386,7 @@ sub page 공통
     background:transparent;
     color:var(--red);
     font-size:calc(18 * var(--vw));
-    line-height: calc(32 * var(--vw));;
+    line-height: calc(32 * var(--vw));
     font-weight:500;
     letter-spacing:calc(4 * var(--vw));
     transition:
@@ -1408,7 +1408,7 @@ sub page 공통
     background:transparent;
     color:var(--red);
     font-size:calc(18 * var(--vw));
-    line-height: calc(32 * var(--vw));;
+    line-height: calc(32 * var(--vw));
     font-weight:500;
     width: fit-content;
     transition:
@@ -1643,7 +1643,7 @@ Tabs 공통
 .sub-pill-tabs {
     display: flex;
     align-items: center;
-    gap: calc(min(100vw, 1920px) * 12 / 1920);
+    gap: calc(12 * var(--vw));
     margin-bottom: 80px;
 }
 
@@ -1651,16 +1651,16 @@ Tabs 공통
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: calc(min(100vw, 1920px) * 186 / 1920);
-    height: calc(min(100vw, 1920px) * 60 / 1920);
-    padding: calc(min(100vw, 1920px) * 14 / 1920) calc(min(100vw, 1920px) * 24 / 1920);
+    min-width: calc(186 * var(--vw));
+    height: calc(60 * var(--vw));
+    padding: calc(14 * var(--vw)) calc(24 * var(--vw));
     border: 1px solid #a8a8a8;
-    border-radius: calc(min(100vw, 1920px) * 100 / 1920);
+    border-radius: calc(100 * var(--vw));
     background: transparent;
     color: #a8a8a8;
-    font-size: calc(min(100vw, 1920px) * 18 / 1920);
+    font-size: calc(18 * var(--vw));
     font-weight: 500;
-    line-height: calc(min(100vw, 1920px) * 32 / 1920);
+    line-height: calc(32 * var(--vw));
     cursor: pointer;
     margin-right: 0;
     box-sizing: border-box;

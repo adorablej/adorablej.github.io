@@ -1,10 +1,10 @@
 /*support 공통*/
 .sub-support-s-heading {
-    margin: 0 0 calc(min(100vw, 1920px) * 60 / 1920);
+    margin: 0 0 calc(60 * var(--vw));
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 40 / 1920);
+    font-size: calc(40 * var(--vw));
     font-weight: 800;
-    line-height: calc(min(100vw, 1920px) * 50 / 1920);
+    line-height: calc(50 * var(--vw));
     letter-spacing: -.04em;
 }
 
@@ -23,20 +23,20 @@
 }
 
 .sub-operation-guide .inner {
-    width: calc(min(100vw, 1920px) * 1300 / 1920);
+    width: calc(1300 * var(--vw));
     margin: 0 auto;
 }
 
 .sub-guide-group + .sub-guide-group {
-    margin-top: calc(min(100vw, 1920px) * 80 / 1920);
+    margin-top: calc(80 * var(--vw));
 }
 
 .sub-guide-group-title {
-    margin: 0 0 calc(min(100vw, 1920px) * 34 / 1920);
+    margin: 0 0 calc(34 * var(--vw));
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 40 / 1920);
+    font-size: calc(40 * var(--vw));
     font-weight: 800;
-    line-height: calc(min(100vw, 1920px) * 50 / 1920);
+    line-height: calc(50 * var(--vw));
 }
 
 .sub-guide-list {
@@ -52,14 +52,14 @@
     justify-content: space-between;
     gap: 30px;
     border-bottom: 1px solid #e5e5e5;
-    padding: calc(min(100vw, 1920px) * 40 / 1920) 0;
+    padding: calc(40 * var(--vw)) 0;
 }
 
 .sub-guide-item-title {
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 20 / 1920);
+    font-size: calc(20 * var(--vw));
     font-weight: 700;
-    line-height: calc(min(100vw, 1920px) * 40 / 1920);
+    line-height: calc(40 * var(--vw));
     
 }
 
@@ -68,17 +68,17 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: calc(min(100vw, 1920px) * 10 / 1920);
+    gap: calc(10 * var(--vw));
     border: 1px solid var(--red);
     border-radius: 999px;
     background: #fff;
     color: var(--red);
-    font-size: calc(min(100vw, 1920px) * 18 / 1920);
-    line-height: calc(min(100vw, 1920px) * 32 / 1920);;
+    font-size: calc(18 * var(--vw));
+    line-height: calc(32 * var(--vw));
     letter-spacing: .28em;
     text-transform: lowercase;
     transition: background-color .25s ease, color .25s ease;
-    padding: calc(min(100vw, 1920px) * 14 / 1920) calc(min(100vw, 1920px) * 40 / 1920);
+    padding: calc(14 * var(--vw)) calc(40 * var(--vw));
 }
 
 .sub-guide-view::before{
@@ -99,11 +99,11 @@
 }
 
 .sub-guide-empty {
-    padding: calc(min(100vw, 1920px) * 70 / 1920) 0;
+    padding: calc(70 * var(--vw)) 0;
     border-top: 1px solid #333;
     border-bottom: 1px solid #e5e5e5;
     color: #777;
-    font-size: calc(min(100vw, 1920px) * 16 / 1920);
+    font-size: calc(16 * var(--vw));
     text-align: center;
 }
 
@@ -112,28 +112,28 @@ Equipment Operation Guide : Video
 ======================================== */
 .sub-guide-video-feature {
     position: relative;
-    padding-bottom: calc(min(100vw, 1920px) * 110 / 1920);
+    padding-bottom: calc(110 * var(--vw));
 }
 
 .sub-guide-video-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: calc(min(100vw, 1920px) * 52 / 1920);
+    margin-bottom: calc(52 * var(--vw));
 }
 
 .sub-guide-video-controls {
     display: flex;
-    gap: calc(min(100vw, 1920px) * 16 / 1920);
+    gap: calc(16 * var(--vw));
     margin-left: auto;
 }
 
 .sub-guide-video-featured-slider.swiper {
     position: relative;
-    width: calc(min(100vw, 1920px) * 1300 / 1920);
+    width: calc(1300 * var(--vw));
     margin: 0 auto;
     overflow: visible;
-    padding-bottom: calc(min(100vw, 1920px) * 110 / 1920);
+    padding-bottom: calc(110 * var(--vw));
 }
 
 .sub-guide-video-stage {
@@ -144,12 +144,12 @@ Equipment Operation Guide : Video
 
 .sub-guide-video-featured-slider .sub-guide-video-featured-card {
     display: block;
-    width: calc(min(100vw, 1920px) * 700 / 1920);
+    width: calc(700 * var(--vw));
     height: auto;
     padding: 0;
     overflow: hidden;
     border: 0;
-    border-radius: calc(min(100vw, 1920px) * 18 / 1920);
+    border-radius: calc(18 * var(--vw));
     background: #fff;
     text-align: left;
     backface-visibility: hidden;
@@ -174,14 +174,14 @@ Equipment Operation Guide : Video
 }
 .sub-guide-video-featured-card.is-active{
     z-index: 2;
-    box-shadow: 0 calc(min(100vw, 1920px) * 18 / 1920) calc(min(100vw, 1920px) * 42 / 1920) rgba(0, 0, 0, .14);
+    box-shadow: 0 calc(18 * var(--vw)) calc(42 * var(--vw)) rgba(0, 0, 0, .14);
 }
 
 
 .sub-guide-video-featured-image {
     position: relative;
     display: block;
-    height: calc(min(100vw, 1920px) * 394 / 1920);
+    height: calc(394 * var(--vw));
     overflow: hidden;
 }
 
@@ -202,8 +202,8 @@ Equipment Operation Guide : Video
     top: 50%;
     left: 50%;
     display: block;
-    width: calc(min(100vw, 1920px) * 78 / 1920);
-    height: calc(min(100vw, 1920px) * 78 / 1920);
+    width: calc(78 * var(--vw));
+    height: calc(78 * var(--vw));
     border-radius: 50%;
     background: rgba(0, 0, 0, .58);
     transform: translate(-50%, -50%);
@@ -216,33 +216,33 @@ Equipment Operation Guide : Video
     left: 52%;
     width: 0;
     height: 0;
-    border-top: calc(min(100vw, 1920px) * 11 / 1920) solid transparent;
-    border-bottom: calc(min(100vw, 1920px) * 11 / 1920) solid transparent;
-    border-left: calc(min(100vw, 1920px) * 18 / 1920) solid #fff;
+    border-top: calc(11 * var(--vw)) solid transparent;
+    border-bottom: calc(11 * var(--vw)) solid transparent;
+    border-left: calc(18 * var(--vw)) solid #fff;
     transform: translate(-50%, -50%);
 }
 
 .sub-guide-video-featured-content {
     display: block;
-    height: calc(min(100vw, 1920px) * 200 / 1920);
+    height: calc(200 * var(--vw));
 }
 
 .sub-guide-video-featured-content strong {
     display: block;
-    margin-bottom: calc(min(100vw, 1920px) * 18 / 1920);
-    padding: calc(min(100vw, 1920px) * 50 / 1920) calc(min(100vw, 1920px) * 50 / 1920) 0;
+    margin-bottom: calc(18 * var(--vw));
+    padding: calc(50 * var(--vw)) calc(50 * var(--vw)) 0;
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 24 / 1920);
+    font-size: calc(24 * var(--vw));
     font-weight: 600;
     line-height: 1.4;
 }
 
 .sub-guide-video-featured-content p {
     margin: 0;
-    padding: 0 calc(min(100vw, 1920px) * 50 / 1920) calc(min(100vw, 1920px) * 50 / 1920);
+    padding: 0 calc(50 * var(--vw)) calc(50 * var(--vw));
     color: #666;
-    font-size: calc(min(100vw, 1920px) * 18 / 1920);
-    line-height: calc(min(100vw, 1920px) * 26 / 1920);
+    font-size: calc(18 * var(--vw));
+    line-height: calc(26 * var(--vw));
     letter-spacing: -1px;
     word-break: keep-all;
 }
@@ -251,19 +251,19 @@ Equipment Operation Guide : Video
     position: relative;
     width: 100vw;
     margin-left: calc(50% - 50vw);
-    padding: calc(min(100vw, 1920px) * 108 / 1920) 0 calc(min(100vw, 1920px) * 115 / 1920);
+    padding: calc(108 * var(--vw)) 0 calc(115 * var(--vw));
     background: #f5f6fa;
 }
 
 .sub-guide-video-list-inner {
-    width: calc(min(100vw, 1920px) * 1300 / 1920);
+    width: calc(1300 * var(--vw));
     margin: 0 auto;
 }
 
 .sub-guide-video-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: calc(min(100vw, 1920px) * 60 / 1920) calc(min(100vw, 1920px) * 30 / 1920);
+    gap: calc(60 * var(--vw)) calc(30 * var(--vw));
 }
 
 .sub-guide-video-card {
@@ -272,7 +272,7 @@ Equipment Operation Guide : Video
     padding: 0;
     overflow: hidden;
     border: 0;
-    border-radius: calc(min(100vw, 1920px) * 18 / 1920);
+    border-radius: calc(18 * var(--vw));
     background: #fff;
     color: #000;
     text-align: left;
@@ -281,40 +281,40 @@ Equipment Operation Guide : Video
 }
 
 .sub-guide-video-card:hover {
-    transform: translateY(calc(min(100vw, 1920px) * -6 / 1920));
-    box-shadow: 0 calc(min(100vw, 1920px) * 14 / 1920) calc(min(100vw, 1920px) * 30 / 1920) rgba(0, 0, 0, .09);
+    transform: translateY(calc(-6 * var(--vw)));
+    box-shadow: 0 calc(14 * var(--vw)) calc(30 * var(--vw)) rgba(0, 0, 0, .09);
 }
 
 .sub-guide-video-thumb {
     position: relative;
     display: block;
-    height: calc(min(100vw, 1920px) * 230 / 1920);
+    height: calc(230 * var(--vw));
     overflow: hidden;
     background: #e9e9e9;
 }
 
 .sub-guide-video-thumb .sub-guide-play {
-    width: calc(min(100vw, 1920px) * 58 / 1920);
-    height: calc(min(100vw, 1920px) * 58 / 1920);
+    width: calc(58 * var(--vw));
+    height: calc(58 * var(--vw));
 }
 
 .sub-guide-video-thumb .sub-guide-play::before {
-    border-top-width: calc(min(100vw, 1920px) * 8 / 1920);
-    border-bottom-width: calc(min(100vw, 1920px) * 8 / 1920);
-    border-left-width: calc(min(100vw, 1920px) * 13 / 1920);
+    border-top-width: calc(8 * var(--vw));
+    border-bottom-width: calc(8 * var(--vw));
+    border-left-width: calc(13 * var(--vw));
 }
 
 .sub-guide-video-card-body {
     display: block;
-    height: calc(min(100vw, 1920px) * 160 / 1920);
-    padding: calc(min(100vw, 1920px) * 50 / 1920);
+    height: calc(160 * var(--vw));
+    padding: calc(50 * var(--vw));
 }
 
 .sub-guide-video-card strong {
     display: block;
-    margin-bottom: calc(min(100vw, 1920px) * 20 / 1920);
+    margin-bottom: calc(20 * var(--vw));
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 24 / 1920);
+    font-size: calc(24 * var(--vw));
     font-weight: 600;
     line-height: 1.35;
 }
@@ -324,8 +324,8 @@ Equipment Operation Guide : Video
     overflow: hidden;
     margin: 0;
     color: #666;
-    font-size: calc(min(100vw, 1920px) * 18 / 1920);
-    line-height: calc(min(100vw, 1920px) * 26 / 1920);
+    font-size: calc(18 * var(--vw));
+    line-height: calc(26 * var(--vw));
     word-break: keep-all;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
@@ -335,10 +335,10 @@ Equipment Operation Guide : Video
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: calc(min(100vw, 1920px) * 142 / 1920);
-    height: calc(min(100vw, 1920px) * 54 / 1920);
-    margin: calc(min(100vw, 1920px) * 70 / 1920) auto 0;
-    padding: 0 calc(min(100vw, 1920px) * 28 / 1920);
+    min-width: calc(142 * var(--vw));
+    height: calc(54 * var(--vw));
+    margin: calc(70 * var(--vw)) auto 0;
+    padding: 0 calc(28 * var(--vw));
     border: 1px solid var(--red);
     border-radius: 999px;
     background: transparent;
@@ -348,7 +348,7 @@ Equipment Operation Guide : Video
 
 .sub-guide-more span {
     font-family: "Russo One", sans-serif;
-    font-size: calc(min(100vw, 1920px) * 15 / 1920);
+    font-size: calc(15 * var(--vw));
     text-transform: lowercase;
 }
 
@@ -361,19 +361,19 @@ Equipment Operation Guide : Video
 Training Registration
 ======================================== */
 .sub-training {
-    padding: calc(min(100vw, 1920px) * 100 / 1920) 0 calc(min(100vw, 1920px) * 140 / 1920);
+    padding: calc(100 * var(--vw)) 0 calc(140 * var(--vw));
     background: #f5f6fa;
 }
 
 .sub-training .inner {
-    width: calc(min(100vw, 1920px) * 1300 / 1920);
+    width: calc(1300 * var(--vw));
     margin: 0 auto;
 }
 
 .sub-training-heading {
-    margin: 0 0 calc(min(100vw, 1920px) * 46 / 1920);
+    margin: 0 0 calc(46 * var(--vw));
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 38 / 1920);
+    font-size: calc(38 * var(--vw));
     font-weight: 800;
     line-height: 1;
     letter-spacing: -.04em;
@@ -385,36 +385,36 @@ Training Registration
 
 .sub-training-layout {
     display: grid;
-    grid-template-columns: minmax(0, calc(min(100vw, 1920px) * 860 / 1920)) minmax(0, calc(min(100vw, 1920px) * 430 / 1920));
-    gap: calc(min(100vw, 1920px) * 20 / 1920);
+    grid-template-columns: minmax(0, calc(860 * var(--vw))) minmax(0, calc(430 * var(--vw)));
+    gap: calc(20 * var(--vw));
     align-items: stretch;
 }
 
 .sub-training-calendar-wrap,
 .sub-training-sidebar {
-    border-radius: calc(min(100vw, 1920px) * 20 / 1920);
+    border-radius: calc(20 * var(--vw));
     background: #fff;
 }
 
 .sub-training-calendar-wrap {
-    padding: calc(min(100vw, 1920px) * 38 / 1920) calc(min(100vw, 1920px) * 24 / 1920) calc(min(100vw, 1920px) * 24 / 1920);
+    padding: calc(38 * var(--vw)) calc(24 * var(--vw)) calc(24 * var(--vw));
 }
 
 .sub-training-calendar-head {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: calc(min(100vw, 1920px) * 24 / 1920);
-    height: calc(min(100vw, 1920px) * 48 / 1920);
-    margin-bottom: calc(min(100vw, 1920px) * 22 / 1920);
+    gap: calc(24 * var(--vw));
+    height: calc(48 * var(--vw));
+    margin-bottom: calc(22 * var(--vw));
 }
 
 .sub-training-month-title {
-    min-width: calc(min(100vw, 1920px) * 120 / 1920);
+    min-width: calc(120 * var(--vw));
     margin: 0;
     color: #1E293B;
     font-family: inherit;
-    font-size: calc(min(100vw, 1920px) * 20 / 1920);
+    font-size: calc(24 * var(--vw));
     font-weight: 700;
     line-height: 1;
     text-align: center;
@@ -422,11 +422,11 @@ Training Registration
 
 .sub-training-month-btn {
     position: relative;
-    width: calc(min(100vw, 1920px) * 34 / 1920);
-    height: calc(min(100vw, 1920px) * 34 / 1920);
+    width: calc(34 * var(--vw));
+    height: calc(34 * var(--vw));
     padding: 0;
     border: 1px solid #E2E8F0;
-    border-radius: calc(min(100vw, 1920px) * 7 / 1920);
+    border-radius: calc(7 * var(--vw));
     background: #fff;
     cursor: pointer;
 }
@@ -436,10 +436,10 @@ Training Registration
     position: absolute;
     top: 50%;
     left: 50%;
-    width: calc(min(100vw, 1920px) * 8 / 1920);
-    height: calc(min(100vw, 1920px) * 8 / 1920);
-    border-top: calc(min(100vw, 1920px) * 2 / 1920) solid #7790ad;
-    border-left: calc(min(100vw, 1920px) * 2 / 1920) solid #7790ad;
+    width: calc(8 * var(--vw));
+    height: calc(8 * var(--vw));
+    border-top: calc(2 * var(--vw)) solid #7790ad;
+    border-left: calc(2 * var(--vw)) solid #7790ad;
 }
 
 .sub-training-month-prev::before { transform: translate(-35%, -50%) rotate(-45deg); }
@@ -460,19 +460,19 @@ Training Registration
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(min(100vw, 1920px) * 50 / 1920);
+    height: calc(50 * var(--vw));
     border-right: 1px solid #E2E8F0;
     border-bottom: 1px solid #E2E8F0;
     color: #71819b;
-    font-size: calc(min(100vw, 1920px) * 12 / 1920);
+    font-size: calc(12 * var(--vw));
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .sub-training-day {
     position: relative;
-    min-height: calc(min(100vw, 1920px) * 120 / 1920);
-    padding: calc(min(100vw, 1920px) * 15 / 1920) calc(min(100vw, 1920px) * 14 / 1920);
+    min-height: calc(120 * var(--vw));
+    padding: calc(15 * var(--vw)) calc(14 * var(--vw));
     border: 0;
     border-right: 1px solid #E2E8F0;
     border-bottom: 1px solid #E2E8F0;
@@ -512,7 +512,7 @@ Training Registration
 .sub-training-day-number {
     display: inline-flex;
     align-items: center;
-    gap: calc(min(100vw, 1920px) * 8 / 1920);
+    gap: calc(8 * var(--vw));
     color: #1E293B;
     font-size: calc(18 * var(--vw));
     font-weight: 600;
@@ -532,15 +532,15 @@ Training Registration
 .sub-training-day.is-today .sub-training-day-number::after {
     content: "TODAY";
     color: #c20e05;
-    font-size: calc(min(100vw, 1920px) * 14 / 1920);
+    font-size: calc(14 * var(--vw));
     font-weight: 700;
 }
 
 .sub-training-event-list {
     display: flex;
     flex-direction: column;
-    gap: calc(min(100vw, 1920px) * 5 / 1920);
-    margin-top: calc(min(100vw, 1920px) * 12 / 1920);
+    gap: calc(5 * var(--vw));
+    margin-top: calc(12 * var(--vw));
 }
 
 .training-color-1 { --training-color: #3CCBA1; }
@@ -558,10 +558,10 @@ Training Registration
 .sub-training-event-more {
     display: block;
     overflow: hidden;
-    padding: calc(min(100vw, 1920px) * 4 / 1920) calc(min(100vw, 1920px) * 8 / 1920);
-    border-radius: calc(min(100vw, 1920px) * 6 / 1920);
+    padding: calc(4 * var(--vw)) calc(8 * var(--vw));
+    border-radius: calc(6 * var(--vw));
     color: #fff;
-    font-size: calc(min(100vw, 1920px) * 11 / 1920);
+    font-size: calc(11 * var(--vw));
     font-weight: 600;
 }
 
@@ -573,7 +573,7 @@ Training Registration
     background: #A0A8B5;
 }
 .sub-training-sidebar {
-    padding: calc(min(100vw, 1920px) * 24 / 1920);
+    padding: calc(24 * var(--vw));
 }
 
 .sub-training-sidebar-head {
@@ -583,7 +583,7 @@ Training Registration
 .sub-training-list {
     display: flex;
     flex-direction: column;
-    gap: calc(min(100vw, 1920px) * 14 / 1920);
+    gap: calc(14 * var(--vw));
     height: 100%;
 }
 
@@ -593,11 +593,11 @@ Training Registration
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     width: 100%;
-    min-height: calc(min(100vw, 1920px) * 112 / 1920);
-    padding: calc(min(100vw, 1920px) * 24 / 1920) calc(min(100vw, 1920px) * 18 / 1920) calc(min(100vw, 1920px) * 24 / 1920) calc(min(100vw, 1920px) * 28 / 1920);
+    min-height: calc(112 * var(--vw));
+    padding: calc(24 * var(--vw)) calc(18 * var(--vw)) calc(24 * var(--vw)) calc(28 * var(--vw));
     overflow: hidden;
     border: 0;
-    border-radius: calc(min(100vw, 1920px) * 12 / 1920);
+    border-radius: calc(12 * var(--vw));
     background: #f4f6fa;
     color: #000;
     text-align: left;
@@ -608,7 +608,7 @@ Training Registration
     content: "";
     position: absolute;
     inset: 0 auto 0 0;
-    width: calc(min(100vw, 1920px) * 8 / 1920);
+    width: calc(8 * var(--vw));
     background: var(--training-color);
 }
 
@@ -619,7 +619,7 @@ Training Registration
 
 .sub-training-card-time {
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 18 / 1920);
+    font-size: calc(18 * var(--vw));
     font-weight: 700;
     line-height: 1.3;
 }
@@ -633,7 +633,7 @@ Training Registration
     display: block;
     grid-column: 1;
     color: #777;
-    font-size: calc(min(100vw, 1920px) * 16 / 1920);
+    font-size: calc(16 * var(--vw));
     font-weight: 300;
 }
 
@@ -643,13 +643,13 @@ Training Registration
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: calc(min(100vw, 1920px) * 99 / 1920);
-    height: calc(min(100vw, 1920px) * 56 / 1920);
+    min-width: calc(99 * var(--vw));
+    height: calc(56 * var(--vw));
     border-radius: 999px;
     background: var(--red);
     color: #fff;
-    font-size: calc(min(100vw, 1920px) * 17 / 1920);
-    line-height: calc(min(100vw, 1920px) * 32 / 1920);
+    font-size: calc(17 * var(--vw));
+    line-height: calc(32 * var(--vw));
     font-weight: 400;
 }
 
@@ -660,15 +660,15 @@ Training Registration
 .sub-training-empty::before{
     content: '';
     background: url(/images/icon/icon-warning-circle.svg);
-    width: calc(min(100vw, 1920px) * 58 / 1920);
-    height: calc(min(100vw, 1920px) * 58 / 1920);
+    width: calc(58 * var(--vw));
+    height: calc(58 * var(--vw));
     display: inline-block;
     background-size: cover;
-    margin-bottom: calc(min(100vw, 1920px) * 20 / 1920);
+    margin-bottom: calc(20 * var(--vw));
 }
 .sub-training-empty {
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 18 / 1920);
+    font-size: calc(18 * var(--vw));
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -686,7 +686,7 @@ Training Registration
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: calc(min(100vw, 1920px) * 64 / 1920);
+    padding: 64px;
     visibility: hidden;
     opacity: 0;
     transition: opacity .25s ease, visibility .25s ease;
@@ -716,29 +716,29 @@ Training Registration
 	background-repeat:no-repeat;
 }
 .sub-training-modal-summary {
-	padding-bottom:calc(min(100vw, 1920px) * 34 / 1920);
+	padding-bottom:34px;
 	border-bottom:1px solid #e3e3e3;
 }
 .sub-training-modal-datetime {
 	display:block;
 	color:#000;
-	font-size:calc(min(100vw, 1920px) * 28 / 1920);
+	font-size:28px;
 	font-weight:600;
 	line-height:1.25;
 }
 .sub-training-modal-course {
 	display:flex;
 	align-items:center;
-	gap:calc(min(100vw, 1920px) * 14 / 1920);
-	margin-top:calc(min(100vw, 1920px) * 20 / 1920);
+	gap:14px;
+	margin-top:20px;
 	color:#555;
-	font-size:calc(min(100vw, 1920px) * 22 / 1920);
+	font-size:22px;
 	font-weight:600;
 }
 .sub-training-modal-course-dot {
 	flex:0 0 auto;
-	width:calc(min(100vw, 1920px) * 20 / 1920);
-	height:calc(min(100vw, 1920px) * 20 / 1920);
+	width:20px;
+	height:20px;
 	border-radius:50%;
 	background:var(--training-color);
 }
@@ -750,7 +750,7 @@ Training Registration
 }
 .sub-training-modal-info{
     color: #888;
-    font-size: calc(min(100vw, 1920px) * 18 / 1920);
+    font-size: 18px;
 
 }
 /* .sub-training-modal-course-dot.is-waiting {
@@ -772,8 +772,8 @@ Training Registration
 	position:relative;
 	display:flex;
 	align-items:flex-start;
-	gap:calc(min(100vw, 1920px) * 14 / 1920);
-	margin-top:calc(min(100vw, 1920px) * 30 / 1920);
+	gap:14px;
+	margin-top:30px;
 	color:#555;
 	cursor:pointer;
 }
@@ -787,8 +787,8 @@ Training Registration
 .sub-training-modal-checkmark {
 	position:relative;
 	flex:0 0 auto;
-	width:calc(min(100vw, 1920px) * 36 / 1920);
-	height:calc(min(100vw, 1920px) * 36 / 1920);
+	width:36px;
+	height:36px;
 	border:1px solid #d8d8d8;
 	border-radius:50%;
 	background:#fff;
@@ -802,10 +802,10 @@ Training Registration
 	position:absolute;
 	top:48%;
 	left:50%;
-	width:calc(min(100vw, 1920px) * 12 / 1920);
-	height:calc(min(100vw, 1920px) * 7 / 1920);
-	border-left:calc(min(100vw, 1920px) * 3 / 1920) solid #fff;
-	border-bottom:calc(min(100vw, 1920px) * 3 / 1920) solid #fff;
+	width:12px;
+	height:7px;
+	border-left:3px solid #fff;
+	border-bottom:3px solid #fff;
 	transform:translate(-50%,-60%) rotate(-45deg);
 }
 .sub-training-modal-agree input:disabled+.sub-training-modal-checkmark {
@@ -813,26 +813,26 @@ Training Registration
 	background:#eee;
 }
 .sub-training-modal-agree-text {
-	padding-top:calc(min(100vw, 1920px) * 4 / 1920);
-	font-size:calc(min(100vw, 1920px) * 17 / 1920);
+	padding-top:4px;
+	font-size:17px;
     letter-spacing: -2%;
 	font-weight:300;
 }
 .sub-training-modal-actions {
 	display:flex;
 	justify-content:center;
-	gap:calc(min(100vw, 1920px) * 16 / 1920);
-	margin-top:calc(min(100vw, 1920px) * 54 / 1920);
+	gap:16px;
+	margin-top:54px;
 }
 .sub-training-modal-cancel,.sub-training-modal-submit {
 	display:inline-flex;
 	align-items:center;
 	justify-content:center;
-	min-width:calc(min(100vw, 1920px) * 260 / 1920);
-	height:calc(min(100vw, 1920px) * 76 / 1920);
-	padding:0 calc(min(100vw, 1920px) * 36 / 1920);
+	min-width:260px;
+	height:76px;
+	padding:0 36px;
 	border-radius:999px;
-	font-size:calc(min(100vw, 1920px) * 22 / 1920);
+	font-size:22px;
 	font-weight:500;
 	line-height:1;
 	cursor:pointer;
@@ -860,7 +860,7 @@ body.is-training-modal-open {
 .sub-training-modal-body .sub-form-checkbox
 {margin-top: 25px;}
 .sub-training-modal-body .sub-form-checkbox-text{
-    font-size:calc(min(100vw, 1920px) * 17 / 1920);
+    font-size:17px;
     letter-spacing: -2%;
     font-weight: 400;
     color: #555;
@@ -884,7 +884,7 @@ Equipment Operation Guide : Youtube Modal
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: calc(min(100vw, 1920px) * 50 / 1920);
+    padding: 50px;
     opacity: 0;
     visibility: hidden;
     transition: opacity .3s ease, visibility .3s ease;
@@ -908,11 +908,11 @@ Equipment Operation Guide : Youtube Modal
 
 .sub-guide-video-modal-close {
     position: absolute;
-    top: calc(min(100vw, 1920px) * 20 / 1920);
-    right: calc(min(100vw, 1920px) * 20 / 1920);
+    top: 20px;
+    right: 20px;
     z-index: 3;
-    width: calc(min(100vw, 1920px) * 46 / 1920);
-    height: calc(min(100vw, 1920px) * 46 / 1920);
+    width: 46px;
+    height: 46px;
     min-width: 40px;
     min-height: 40px;
     padding: 0;
@@ -927,7 +927,7 @@ Equipment Operation Guide : Youtube Modal
     position: absolute;
     top: 50%;
     left: 50%;
-    width: calc(min(100vw, 1920px) * 22 / 1920);
+    width: 22px;
     height: 2px;
     background: #000;
 }
@@ -951,21 +951,21 @@ Equipment Operation Guide : Youtube Modal
 }
 
 .sub-guide-video-modal-body {
-    padding: calc(min(100vw, 1920px) * 42 / 1920) calc(min(100vw, 1920px) * 48 / 1920) calc(min(100vw, 1920px) * 46 / 1920);
+    padding: 42px 48px 46px;
 }
 
 .sub-guide-video-modal-body h4 {
     margin: 0;
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 28 / 1920);
+    font-size: 28px;
     font-weight: 700;
     line-height: 1.4;
 }
 
 .sub-guide-video-modal-body p {
-    margin: calc(min(100vw, 1920px) * 16 / 1920) 0 0;
+    margin: 16px 0 0;
     color: #666;
-    font-size: calc(min(100vw, 1920px) * 17 / 1920);
+    font-size: 17px;
     line-height: 1.7;
 }
 
@@ -1128,8 +1128,24 @@ Training Program
     width: calc(120 * var(--vw));
     height: calc(120 * var(--vw));
     color: #e4e5e8;
-    background: url('/images/support/icon-product-alignment-equipment.png');
-    background-size: cover;
+    background-color: #e4e5e8;
+    -webkit-mask: url('/images/icon/icon-product-alignment-equipment.svg') center / contain no-repeat;
+    mask: url('/images/icon/icon-product-alignment-equipment.svg') center / contain no-repeat;
+}
+
+#training-panel-balance .sub-training-program-icon {
+    -webkit-mask-image: url('/images/icon/icon-product-wheel-balancer.svg');
+    mask-image: url('/images/icon/icon-product-wheel-balancer.svg');
+}
+
+#training-panel-tire .sub-training-program-icon {
+    -webkit-mask-image: url('/images/icon/icon-tire.svg');
+    mask-image: url('/images/icon/icon-tire.svg');
+}
+
+#training-panel-custom .sub-training-program-icon {
+    -webkit-mask-image: url('/images/icon/icon_guide.png');
+    mask-image: url('/images/icon/icon_guide.png');
 }
 
 .sub-training-program-icon svg {
@@ -1191,19 +1207,19 @@ Equipment Operation Guide : Category List
 ======================================== */
 .sub-operation-category {
     width: 100%;
-    padding: 0 0 calc(min(100vw, 1920px) * 110 / 1920);
+    padding: 0 0 calc(110 * var(--vw));
     background: #fff;
 }
 
 .sub-operation-category .inner {
-    width: calc(min(100vw, 1920px) * 1300 / 1920);
+    width: calc(1300 * var(--vw));
     margin: 0 auto;
 }
 
 .sub-operation-category-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: calc(min(100vw, 1920px) * 30 / 1920);
+    gap: calc(30 * var(--vw));
     margin: 0;
     padding: 0;
     list-style: none;
@@ -1216,29 +1232,29 @@ Equipment Operation Guide : Category List
 .sub-operation-category-link {
     position: relative;
     display: block;
-    height: calc(min(100vw, 1920px) * 500 / 1920);
+    height: calc(500 * var(--vw));
     overflow: hidden;
-    border-radius: calc(min(100vw, 1920px) * 18 / 1920);
+    border-radius: calc(18 * var(--vw));
     background: #f5f5f5;
     color: #000;
 }
 
 .sub-operation-category-content {
     position: absolute;
-    top: calc(min(100vw, 1920px) * 68 / 1920);
-    left: calc(min(100vw, 1920px) * 60 / 1920);
+    top: calc(68 * var(--vw));
+    left: calc(60 * var(--vw));
     z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: calc(min(100vw, 1920px) * 40 / 1920);
+    gap: calc(40 * var(--vw));
 }
 
 .sub-operation-category-content strong {
     color: #000;
     font-family: "Russo One", sans-serif;
-    font-size: calc(min(100vw, 1920px) * 35 / 1920);
-    line-height: calc(min(100vw, 1920px) * 42 / 1920);
+    font-size: calc(35 * var(--vw));
+    line-height: calc(42 * var(--vw));
 }
 
 .sub-operation-category-image {
@@ -1264,12 +1280,12 @@ Wheel Alignment Specification
 }
 
 .sub-specification .inner {
-    width: calc(min(100vw, 1920px) * 1300 / 1920);
+    width: calc(1300 * var(--vw));
     margin: 0 auto;
 }
 
 .sub-specification-search-section {
-    padding: calc(min(100vw, 1920px) * 100 / 1920) 0 calc(min(100vw, 1920px) * 90 / 1920);
+    padding: calc(100 * var(--vw)) 0 calc(90 * var(--vw));
     background: #f5f6fa;
 }
 
@@ -1277,7 +1293,7 @@ Wheel Alignment Specification
 .sub-specification-group-title {
     margin: 0;
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 40 / 1920);
+    font-size: calc(40 * var(--vw));
     font-weight: 800;
     line-height: 1.2;
 }
@@ -1293,16 +1309,16 @@ Wheel Alignment Specification
 }
 
 .sub-specification-search-form {
-    margin-top: calc(min(100vw, 1920px) * 38 / 1920);
+    margin-top: calc(38 * var(--vw));
 }
 
 .sub-specification-label,
 .sub-specification-field > span:first-child,
 .sub-specification-recent-row strong {
     display: block;
-    margin-bottom: calc(min(100vw, 1920px) * 20 / 1920);
+    margin-bottom: calc(20 * var(--vw));
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 22 / 1920);
+    font-size: calc(22 * var(--vw));
     font-weight: 600;
 }
 
@@ -1312,12 +1328,12 @@ Wheel Alignment Specification
 
 .sub-specification-keyword-wrap input {
     width: 100%;
-    height: calc(min(100vw, 1920px) * 80 / 1920);
-    padding: 0 calc(min(100vw, 1920px) * 24 / 1920) 0 calc(min(100vw, 1920px) * 58 / 1920);
+    height: calc(80 * var(--vw));
+    padding: 0 calc(24 * var(--vw)) 0 calc(58 * var(--vw));
     border: 1px solid #e3e5eb;
     background: #fff;
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 15 / 1920);
+    font-size: calc(15 * var(--vw));
     outline: none;
 }
 
@@ -1344,7 +1360,7 @@ Wheel Alignment Specification
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: calc(min(100vw, 1920px) * 40 / 1920);
+    margin-top: calc(40 * var(--vw));
 }
 
 .sub-specification-recent-reset {
@@ -1353,28 +1369,28 @@ Wheel Alignment Specification
     border-bottom: 1px solid #aaa;
     background: none;
     color: #999;
-    font-size: calc(min(100vw, 1920px) * 13 / 1920);
+    font-size: calc(13 * var(--vw));
     cursor: pointer;
 }
 
 .sub-specification-recent-list {
     display: flex;
     flex-wrap: wrap;
-    gap: calc(min(100vw, 1920px) * 15 / 1920);
-    min-height: calc(min(100vw, 1920px) * 60 / 1920);
+    gap: calc(15 * var(--vw));
+    min-height: calc(60 * var(--vw));
 }
 
 .sub-specification-recent-chip {
     display: inline-flex;
     align-items: center;
-    gap: calc(min(100vw, 1920px) * 20 / 1920);
-    height: calc(min(100vw, 1920px) * 60 / 1920);
-    padding: 0 calc(min(100vw, 1920px) * 30 / 1920);
+    gap: calc(20 * var(--vw));
+    height: calc(60 * var(--vw));
+    padding: 0 calc(30 * var(--vw));
     border: 0;
     border-radius: 999px;
     background: #B0B7D2;
     color: #fff;
-    font-size: calc(min(100vw, 1920px) * 18 / 1920);
+    font-size: calc(18 * var(--vw));
     cursor: pointer;
 }
 
@@ -1390,15 +1406,15 @@ Wheel Alignment Specification
 
 .sub-specification-recent-delete {
     position: relative;
-    width: calc(min(100vw, 1920px) * 24 / 1920);
-    height: calc(min(100vw, 1920px) * 24 / 1920);
+    width: calc(24 * var(--vw));
+    height: calc(24 * var(--vw));
 }
 
 .sub-specification-recent-delete,
 .sub-specification-chip-close {
     position: relative;
-    width: calc(min(100vw, 1920px) * 24 / 1920);
-    height: calc(min(100vw, 1920px) * 24 / 1920);
+    width: calc(24 * var(--vw));
+    height: calc(24 * var(--vw));
 }
 
 .sub-specification-recent-delete::before,
@@ -1421,15 +1437,15 @@ Wheel Alignment Specification
 
 .sub-specification-recent-empty {
     color: #aaa;
-    font-size: calc(min(100vw, 1920px) * 14 / 1920);
+    font-size: calc(14 * var(--vw));
 }
 
 .sub-specification-filter-row {
     display: grid;
     grid-template-columns: 1fr 1fr auto;
     align-items: end;
-    gap: calc(min(100vw, 1920px) * 20 / 1920);
-    margin-top: calc(min(100vw, 1920px) * 30 / 1920);
+    gap: calc(20 * var(--vw));
+    margin-top: calc(30 * var(--vw));
 }
 
 .sub-specification-select-wrap {
@@ -1441,11 +1457,11 @@ Wheel Alignment Specification
     content: "";
     position: absolute;
     top: 50%;
-    right: calc(min(100vw, 1920px) * 30 / 1920);
-    width: calc(min(100vw, 1920px) * 12 / 1920);
-    height: calc(min(100vw, 1920px) * 12 / 1920);
-    border-right: calc(min(100vw, 1920px) * 2 / 1920) solid #000;
-    border-bottom: calc(min(100vw, 1920px) * 2 / 1920) solid #000;
+    right: calc(30 * var(--vw));
+    width: calc(12 * var(--vw));
+    height: calc(12 * var(--vw));
+    border-right: calc(2 * var(--vw)) solid #000;
+    border-bottom: calc(2 * var(--vw)) solid #000;
     pointer-events: none;
     transform: translateY(-70%) rotate(45deg);
 }
@@ -1453,13 +1469,13 @@ Wheel Alignment Specification
 .sub-specification-field select {
     display: block;
     width: 100%;
-    height: calc(min(100vw, 1920px) * 80 / 1920);
-    padding: 0 calc(min(100vw, 1920px) * 72 / 1920) 0 calc(min(100vw, 1920px) * 24 / 1920);
+    height: calc(80 * var(--vw));
+    padding: 0 calc(72 * var(--vw)) 0 calc(24 * var(--vw));
     border: 1px solid #e1e3e8;
     background: #fff;
     color: #777;
     font-family: inherit;
-    font-size: calc(min(100vw, 1920px) * 15 / 1920);
+    font-size: calc(15 * var(--vw));
     cursor: pointer;
     outline: none;
     appearance: none;
@@ -1478,26 +1494,26 @@ Wheel Alignment Specification
 }
 
 .sub-specification-submit {
-    min-width: calc(min(100vw, 1920px) * 200 / 1920);
-    height: calc(min(100vw, 1920px) * 80 / 1920);
-    padding: 0 calc(min(100vw, 1920px) * 30 / 1920);
+    min-width: calc(200 * var(--vw));
+    height: calc(80 * var(--vw));
+    padding: 0 calc(30 * var(--vw));
     border: 0;
     border-radius: 999px;
     background: var(--red);
     color: #fff;
-    font-size: calc(min(100vw, 1920px) * 15 / 1920);
+    font-size: calc(15 * var(--vw));
     cursor: pointer;
 }
 
 .sub-specification-content-section {
-    padding: calc(min(100vw, 1920px) * 100 / 1920) 0 ;
+    padding: calc(100 * var(--vw)) 0 ;
 }
 
 .sub-specification-selected-list {
     display: flex;
     flex-wrap: wrap;
-    gap: calc(min(100vw, 1920px) * 16 / 1920);
-    margin-bottom: calc(min(100vw, 1920px) * 70 / 1920);
+    gap: calc(16 * var(--vw));
+    margin-bottom: calc(70 * var(--vw));
 }
 
 .sub-specification-selected-list:empty {
@@ -1507,37 +1523,37 @@ Wheel Alignment Specification
 .sub-specification-selected-chip {
     display: inline-flex;
     align-items: center;
-    gap: calc(min(100vw, 1920px) * 16 / 1920);
-    min-width: calc(min(100vw, 1920px) * 400 / 1920);
-    height: calc(min(100vw, 1920px) * 150 / 1920);
-    padding: 0 calc(min(100vw, 1920px) * 32 / 1920);
+    gap: calc(16 * var(--vw));
+    min-width: calc(400 * var(--vw));
+    height: calc(150 * var(--vw));
+    padding: 0 calc(32 * var(--vw));
     border: 0;
-    border-radius: calc(min(100vw, 1920px) * 12 / 1920);
+    border-radius: calc(12 * var(--vw));
     background: #f5f6fa;
     color: #000;
     cursor: pointer;
 }
 
 .sub-specification-selected-chip strong {
-    font-size: calc(min(100vw, 1920px) * 20 / 1920);
+    font-size: calc(20 * var(--vw));
 }
 
 .sub-specification-selected-logo {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: calc(min(100vw, 1920px) * 100 / 1920);
-    height: calc(min(100vw, 1920px) * 100 / 1920);
+    width: calc(100 * var(--vw));
+    height: calc(100 * var(--vw));
     border-radius: 50%;
     background: #fff;
     color: #333;
-    font-size: calc(min(100vw, 1920px) * 13 / 1920);
+    font-size: calc(13 * var(--vw));
     font-weight: 800;
 }
 
 .sub-specification-selected-chip img {
-    width: calc(min(100vw, 1920px) * 100 / 1920);
-    height: calc(min(100vw, 1920px) * 100 / 1920);
+    width: calc(100 * var(--vw));
+    height: calc(100 * var(--vw));
     border-radius: 50%;
     background: #fff;
     box-sizing: border-box;
@@ -1550,12 +1566,12 @@ Wheel Alignment Specification
 }
 
 .sub-specification-group + .sub-specification-group {
-    margin-top: calc(min(100vw, 1920px) * 200 / 1920);
+    margin-top: calc(200 * var(--vw));
 }
 
 .sub-specification-group-title {
-    margin-bottom: calc(min(100vw, 1920px) * 60 / 1920);
-    font-size: calc(min(100vw, 1920px) * 40 / 1920);
+    margin-bottom: calc(60 * var(--vw));
+    font-size: calc(40 * var(--vw));
 }
 .sub-specification-group-title span{
     color: var(--red);
@@ -1565,7 +1581,7 @@ Wheel Alignment Specification
 .sub-specification-model-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: calc(min(100vw, 1920px) * 33 / 1920) calc(min(100vw, 1920px) * 60 / 1920);
+    gap: calc(33 * var(--vw)) calc(60 * var(--vw));
 }
 
 .sub-specification-brand-card,
@@ -1593,7 +1609,7 @@ Wheel Alignment Specification
 
 .sub-specification-brand-logo {
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 20 / 1920);
+    font-size: calc(20 * var(--vw));
     font-weight: 900;
     text-align: center;
 }
@@ -1610,8 +1626,8 @@ Wheel Alignment Specification
 .sub-specification-brand-name,
 .sub-specification-model-card strong {
     display: block;
-    margin-top: calc(min(100vw, 1920px) * 20 / 1920);
-    font-size: calc(min(100vw, 1920px) * 20 / 1920);
+    margin-top: calc(20 * var(--vw));
+    font-size: calc(20 * var(--vw));
     font-weight: 400;
     text-align: center;
 }
@@ -1645,11 +1661,11 @@ Wheel Alignment Specification
 
 .sub-specification-table th,
 .sub-specification-table td {
-    padding: calc(min(100vw, 1920px) * 25 / 1920) calc(min(100vw, 1920px) * 15 / 1920);
+    padding: calc(25 * var(--vw)) calc(15 * var(--vw));
     box-sizing: border-box;
     border-bottom: 1px solid #e7e7e7;
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 14 / 1920);
+    font-size: calc(14 * var(--vw));
     line-height: 1.55;
     text-align: center;
     vertical-align: middle;
@@ -1663,13 +1679,13 @@ Wheel Alignment Specification
 }
 
 .sub-specification-table tbody tr {
-    height: calc(min(100vw, 1920px) * 210 / 1920);
+    height: calc(210 * var(--vw));
 }
 
 .sub-specification-table td img {
     display: block;
-    width: calc(min(100vw, 1920px) * 250 / 1920);
-    height: calc(min(100vw, 1920px) * 190 / 1920);
+    width: calc(250 * var(--vw));
+    height: calc(190 * var(--vw));
     max-width: 100%;
     margin: 0 auto;
     object-fit: contain;
@@ -1693,6 +1709,12 @@ Wheel Alignment Specification
 
 .sub-specification-result-row {
     transition: background-color .2s ease;
+}
+
+.sub-specification-result-row.has-specification td:nth-child(3) {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
 }
 
 .sub-specification-result-row.has-specification {
@@ -1758,20 +1780,20 @@ Wheel Alignment Specification
 .specification-modal { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: flex-start; justify-content: center; padding: 10vh 30px; overflow: hidden; opacity: 0; transition: opacity .2s ease; }
 .specification-modal.is-open { opacity: 1; }
 .specification-modal-dim { position: fixed; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: rgba(0,0,0,.68); cursor: pointer; }
-.specification-modal-dialog.modal-box { width: calc(900 * var(--vw)) !important; max-width: calc(100vw - calc(200 * var(--vw))) !important; height: 80vh !important; max-height: 80vh !important; overflow-y: auto !important; transform: translateY(14px); transition: transform .2s ease; outline: none; }
+.specification-modal-dialog.modal-box { width: min(900px, calc(100vw - 160px)) !important; max-width: none !important; height: 80vh !important; max-height: 80vh !important; overflow-y: auto !important; transform: translateY(14px); transition: transform .2s ease; outline: none; }
 .specification-modal.is-open .specification-modal-dialog { transform: translateY(0); }
 .specification-modal-header { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 110px; padding: 0 50px; background: #050505; color: #fff; }
-.specification-modal-header h2 { margin: 0; color: #fff; font-family: "Russo One", sans-serif; font-size: calc(32 * var(--vw)); font-weight: 400; line-height: normal; letter-spacing: 0; }
+.specification-modal-header h2 { margin: 0; color: #fff; font-family: "Russo One", sans-serif; font-size: 32px; font-weight: 400; line-height: normal; letter-spacing: 0; }
 .specification-modal-logo { width: 130px; max-height: 40px; object-fit: contain; }
-.specification-modal-close { position: fixed !important; top: 10vh !important; right: calc(50% - calc(540 * var(--vw))) !important; }
-.specification-modal-print { position: fixed; z-index: 20; top: calc(10vh + calc(90 * var(--vw))); right: calc(50% - calc(540 * var(--vw))); display: flex; align-items: center; justify-content: center; width: calc(70 * var(--vw)); height: calc(70 * var(--vw)); padding: 0; border: 0; border-radius: 50%; background: var(--red); cursor: pointer; }
-.specification-modal-print img { width: calc(32 * var(--vw)); height: calc(32 * var(--vw)); object-fit: contain; filter: brightness(0) invert(1); }
+.specification-modal-close { position: fixed !important; top: 10vh !important; right: max(20px, calc(50% - 520px)) !important; }
+.specification-modal-print { position: fixed; z-index: 20; top: calc(10vh + 72px); right: max(20px, calc(50% - 520px)); display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; padding: 0; border: 0; border-radius: 50%; background: var(--red); cursor: pointer; }
+.specification-modal-print img { width: 26px; height: 26px; object-fit: contain; filter: brightness(0) invert(1); }
 .specification-modal-accent { height: 7px; background: var(--red); }
 .specification-modal-body { position: relative; padding-bottom: 26px; }
 .specification-modal-body::after { content: ""; position: absolute; inset: 0; z-index: 5; background: url('/images/support/Watermark.png') center top / 100% auto repeat-y; opacity: .55; pointer-events: none; }
-.specification-modal-summary { display: grid; grid-template-columns: minmax(0,1fr) 342px; gap: 26px 48px; align-items: start; padding: 30px 40px 48px; }
+.specification-modal-summary { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, min(342px, 34vw)); gap: 26px clamp(20px, 3vw, 48px); align-items: start; padding: 30px clamp(24px, 4vw, 40px) 48px; }
 .specification-modal-brand { display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: #f5f5f5; color: #111; font-size: 10px; font-weight: 800; text-align: center; }
-.specification-modal-meta { grid-column: 1; margin: 0; color: #000; font-family: "Pretendard", sans-serif; font-size: calc(14 * var(--vw)); font-weight: 400; line-height: calc(22 * var(--vw)); letter-spacing: 0; }
+.specification-modal-meta { grid-column: 1; margin: 0; color: #000; font-family: "Pretendard", sans-serif; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: 0; }
 .specification-modal-meta div { display: grid; grid-template-columns: 72px 1fr; }
 .specification-modal-meta div:nth-child(5),
 .specification-modal-meta div:nth-child(7) { margin-top: 24px; }
@@ -1780,7 +1802,7 @@ Wheel Alignment Specification
 .specification-modal-meta dd { margin: 0; font-weight: 400; }
 .specification-modal-vehicle { grid-column: 2; grid-row: 1 / span 2; display: flex; align-items: center; justify-content: center; height: 250px; margin: 0; border: 1px solid #ddd; }
 .specification-modal-vehicle img { width: 100%; height: 100%; object-fit: contain; }
-.specification-modal-links { display: flex; gap: 30px; margin: 0 40px; padding: 0 0 14px; border-bottom: 1px solid var(--red); color: var(--red); font-family: "Pretendard", sans-serif; font-size: calc(14 * var(--vw)); font-weight: 400; line-height: normal; letter-spacing: -.3px; text-decoration: underline; }
+.specification-modal-links { display: flex; gap: 30px; margin: 0 clamp(24px, 4vw, 40px); padding: 0 0 14px; border-bottom: 1px solid var(--red); color: var(--red); font-family: "Pretendard", sans-serif; font-size: 14px; font-weight: 400; line-height: normal; letter-spacing: -.3px; text-decoration: underline; }
 .specification-modal-links a { color: inherit; }
 .specification-modal-table { width: calc(100% - 80px); margin: 0 40px; border-collapse: collapse; table-layout: fixed; color: #111; font-size: 14px; }
 .specification-modal-table th, .specification-modal-table td { padding: 14px 12px; border-bottom: 1px solid #e5e5e5; text-align: center; }
@@ -1789,7 +1811,7 @@ Wheel Alignment Specification
 .specification-modal-table .specification-modal-section { width: 18%; border-right: 1px solid #e5e5e5; text-align: center; vertical-align: middle; font-weight: 700; }
 .specification-modal-mobile-section,
 .specification-modal-mobile-head { display: none; }
-.specification-modal-toe-note { margin: 18px 40px 0; color: #000; font-family: "Pretendard", sans-serif; font-size: calc(14 * var(--vw)); font-weight: 400; line-height: calc(22 * var(--vw)); letter-spacing: 0; }
+.specification-modal-toe-note { margin: 18px 40px 0; color: #000; font-family: "Pretendard", sans-serif; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: 0; }
 .specification-modal-toe-note::before { content: "•"; margin-right: 8px; }
 .specification-modal-extra { padding: 36px 40px 0; color: #111; }
 .specification-modal-extra:empty { display: none; }
@@ -1798,7 +1820,7 @@ Wheel Alignment Specification
 .specification-modal-extra dl div { display: grid; grid-template-columns: 200px minmax(0, 1fr); align-items: center; padding: 14px 60px; border-bottom: 1px solid #e5e5e5; }
 .specification-modal-extra dt { margin: 0; color: #111; font-size: 14px; font-weight: 700; }
 .specification-modal-extra dd { margin: 0; font-size: 14px; font-weight: 400; }
-.specification-modal-notes { margin: 20px 40px 0; padding-top: 0; color: #333; font-family: "Pretendard", sans-serif; font-size: calc(14 * var(--vw)); font-weight: 400; line-height: calc(22 * var(--vw)); letter-spacing: 0; }
+.specification-modal-notes { margin: 20px 40px 0; padding-top: 0; color: #333; font-family: "Pretendard", sans-serif; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: 0; }
 .specification-modal-notes p { position: relative; margin: 2px 0; padding-left: 14px; }
 .specification-modal-notes p::before { content: "•"; position: absolute; left: 0; }
 html.is-specification-modal-open, html.is-specification-modal-open body { overflow: hidden; }
@@ -2034,25 +2056,6 @@ Mobile (720px and below)
         width: 58px;
         height: 58px;
         margin-top: 40px;
-        background-color: #e4e5e8;
-        background-image: none;
-        -webkit-mask: url('/images/icon/icon-product-alignment-equipment.svg') center / contain no-repeat;
-        mask: url('/images/icon/icon-product-alignment-equipment.svg') center / contain no-repeat;
-    }
-
-    #training-panel-balance .sub-training-program-icon {
-        -webkit-mask-image: url('/images/icon/icon-product-wheel-balancer.svg');
-        mask-image: url('/images/icon/icon-product-wheel-balancer.svg');
-    }
-
-    #training-panel-tire .sub-training-program-icon {
-        -webkit-mask-image: url('/images/icon/icon-tire.svg');
-        mask-image: url('/images/icon/icon-tire.svg');
-    }
-
-    #training-panel-custom .sub-training-program-icon {
-        -webkit-mask-image: url('/images/icon/icon_guide.png');
-        mask-image: url('/images/icon/icon_guide.png');
     }
 
     .sub-training-program-card-content {
@@ -2396,7 +2399,7 @@ Mobile (720px and below)
     .specification-modal-print {
         position: absolute;
         top: calc(10vh - 26px);
-        right: calc(max(20px, calc((100vw - 310px) / 2)) + 52px);
+        right: 72px;
         left: auto;
         width: 42px;
         height: 42px;
@@ -2405,7 +2408,7 @@ Mobile (720px and below)
     .specification-modal-close {
         position: absolute !important;
         top: calc(10vh - 26px) !important;
-        right: max(20px, calc((100vw - 310px) / 2)) !important;
+        right: 20px !important;
         left: auto !important;
     }
 

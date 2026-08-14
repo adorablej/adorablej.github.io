@@ -1192,7 +1192,7 @@ overflow-y: visible;
 
 .sub-korea-creative-card-list {
     display: grid;
-    grid-template-columns: 1fr 1fr calc(360 * var(--vw));;
+    grid-template-columns: 1fr 1fr calc(360 * var(--vw));
 }
 
 .sub-korea-creative-card-item {
@@ -1457,7 +1457,7 @@ overflow-y: visible;
     border-radius: 50px;
     background: #ffffff20;
     color: #fff;
-    padding: calc(5 * var(--vw)) calc(20 * var(--vw));;
+    padding: calc(5 * var(--vw)) calc(20 * var(--vw));
     font-size: calc(35 * var(--vw));
     line-height: calc(40 * var(--vw));
     position: absolute;
@@ -1555,18 +1555,18 @@ HUNTER History
     margin-left: auto;
     background-color: #fff;
     background-image:
-        linear-gradient(to right, transparent calc(50% - calc(min(100vw, 1920px) * 761 / 1920)), rgba(198, 0, 0, .075) calc(50% - calc(min(100vw, 1920px) * 761 / 1920)), rgba(198, 0, 0, .075) calc(50% - calc(min(100vw, 1920px) * 760 / 1920)), transparent calc(50% - calc(min(100vw, 1920px) * 760 / 1920))),
-        linear-gradient(to right, transparent calc(50% - calc(min(100vw, 1920px) * 381 / 1920)), rgba(198, 0, 0, .075) calc(50% - calc(min(100vw, 1920px) * 381 / 1920)), rgba(198, 0, 0, .075) calc(50% - calc(min(100vw, 1920px) * 380 / 1920)), transparent calc(50% - calc(min(100vw, 1920px) * 380 / 1920))),
+        linear-gradient(to right, transparent calc(50% - calc(761 * var(--vw))), rgba(198, 0, 0, .075) calc(50% - calc(761 * var(--vw))), rgba(198, 0, 0, .075) calc(50% - calc(760 * var(--vw))), transparent calc(50% - calc(760 * var(--vw)))),
+        linear-gradient(to right, transparent calc(50% - calc(381 * var(--vw))), rgba(198, 0, 0, .075) calc(50% - calc(381 * var(--vw))), rgba(198, 0, 0, .075) calc(50% - calc(380 * var(--vw))), transparent calc(50% - calc(380 * var(--vw)))),
         linear-gradient(to right, transparent calc(50% - .5px), rgba(198, 0, 0, .075) calc(50% - .5px), rgba(198, 0, 0, .075) calc(50% + .5px), transparent calc(50% + .5px)),
-        linear-gradient(to right, transparent calc(50% + calc(min(100vw, 1920px) * 380 / 1920)), rgba(198, 0, 0, .075) calc(50% + calc(min(100vw, 1920px) * 380 / 1920)), rgba(198, 0, 0, .075) calc(50% + calc(min(100vw, 1920px) * 381 / 1920)), transparent calc(50% + calc(min(100vw, 1920px) * 381 / 1920))),
-        linear-gradient(to right, transparent calc(50% + calc(min(100vw, 1920px) * 760 / 1920)), rgba(198, 0, 0, .075) calc(50% + calc(min(100vw, 1920px) * 760 / 1920)), rgba(198, 0, 0, .075) calc(50% + calc(min(100vw, 1920px) * 761 / 1920)), transparent calc(50% + calc(min(100vw, 1920px) * 761 / 1920)));
+        linear-gradient(to right, transparent calc(50% + calc(380 * var(--vw))), rgba(198, 0, 0, .075) calc(50% + calc(380 * var(--vw))), rgba(198, 0, 0, .075) calc(50% + calc(381 * var(--vw))), transparent calc(50% + calc(381 * var(--vw)))),
+        linear-gradient(to right, transparent calc(50% + calc(760 * var(--vw))), rgba(198, 0, 0, .075) calc(50% + calc(760 * var(--vw))), rgba(198, 0, 0, .075) calc(50% + calc(761 * var(--vw))), transparent calc(50% + calc(761 * var(--vw))));
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 .sub-history-lead {
     position: relative;
-    padding: calc(min(100vw, 1920px) * 150 / 1920) 0 calc(min(100vw, 1920px) * 115 / 1920);
+    padding: calc(150 * var(--vw)) 0 calc(115 * var(--vw));
 }
 
 .sub-history-lead::after {
@@ -1575,7 +1575,7 @@ HUNTER History
     left: 50%;
     bottom: 0;
     width: 1px;
-    height: calc(min(100vw, 1920px) * 115 / 1920);
+    height: calc(115 * var(--vw));
     background: var(--red);
     transform: translateX(-50%);
 }
@@ -1583,8 +1583,8 @@ HUNTER History
 .sub-history-lead-image {
     position: relative;
     z-index: 2;
-    width: calc(min(100vw, 1920px) * 940 / 1920);
-    height: calc(min(100vw, 1920px) * 520 / 1920);
+    width: calc(940 * var(--vw));
+    height: calc(520 * var(--vw));
     margin: 0 auto;
     overflow: hidden;
 }
@@ -1600,7 +1600,7 @@ HUNTER History
 
 .sub-history-timeline {
     position: relative;
-    height: calc(min(100vw, 1920px) * 7200 / 1920);
+    height: calc(7200 * var(--vw));
 }
 
 .sub-history-timeline-sticky {
@@ -1630,12 +1630,12 @@ HUNTER History
 
 .sub-history-center-line-top {
     top: 0;
-    height: calc(50% - calc(min(100vw, 1920px) * 60 / 1920));
+    height: calc(50% - calc(60 * var(--vw)));
 }
 
 .sub-history-center-line-bottom {
-    top: calc(50% + calc(min(100vw, 1920px) * 60 / 1920));
-    bottom: calc(min(100vw, 1920px) * -100 / 1920);
+    top: calc(50% + calc(60 * var(--vw)));
+    bottom: calc(-100 * var(--vw));
 }
 
 .sub-history-center-copy {
@@ -1655,11 +1655,11 @@ HUNTER History
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    padding: calc(min(100vw, 1920px) * 10 / 1920) calc(min(100vw, 1920px) * 24 / 1920);
+    padding: calc(10 * var(--vw)) calc(24 * var(--vw));
     overflow: hidden;
     color: var(--red);
     font-family: "Russo One", sans-serif;
-    font-size: calc(min(100vw, 1920px) * 100 / 1920);
+    font-size: calc(100 * var(--vw));
     line-height: 1;
     white-space: nowrap;
 }
@@ -1669,33 +1669,33 @@ HUNTER History
     position: absolute;
     left: 50%;
     top: 100%;
-    width: calc(min(100vw, 1920px) * 18 / 1920);
-    height: calc(min(100vw, 1920px) * 46 / 1920);
+    width: calc(18 * var(--vw));
+    height: calc(46 * var(--vw));
     transform: translateX(-50%);
 }
 
 .sub-history-center-content {
     position: absolute;
-    top: calc(min(100vw, 1920px) * 105 / 1920);
-    left: calc(50% + calc(min(100vw, 1920px) * 80 / 1920));
-    width: calc(min(100vw, 1920px) * 500 / 1920);
-    padding: calc(min(100vw, 1920px) * 18 / 1920) 0;
+    top: calc(105 * var(--vw));
+    left: calc(50% + calc(80 * var(--vw)));
+    width: calc(500 * var(--vw));
+    padding: calc(18 * var(--vw)) 0;
     text-align: left;
 }
 
 .sub-history-center-title {
     margin: 0;
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 22 / 1920);
+    font-size: calc(22 * var(--vw));
     font-weight: 600;
-    line-height: calc(min(100vw, 1920px) * 30 / 1920);
+    line-height: calc(30 * var(--vw));
 }
 
 .sub-history-center-description {
-    margin: calc(min(100vw, 1920px) * 14 / 1920) 0 0;
+    margin: calc(14 * var(--vw)) 0 0;
     color: #777;
-    font-size: calc(min(100vw, 1920px) * 18 / 1920);
-    line-height:calc(min(100vw, 1920px) * 30 / 1920);
+    font-size: calc(18 * var(--vw));
+    line-height:calc(30 * var(--vw));
     word-break: keep-all;
 }
 
@@ -1704,14 +1704,14 @@ HUNTER History
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(min(100vw, 1920px) * 6900 / 1920);
+    height: calc(6900 * var(--vw));
     will-change: transform;
 }
 
 .sub-history-era {
     position: relative;
     width: 100%;
-    height: calc(min(100vw, 1920px) * 985 / 1920);
+    height: calc(985 * var(--vw));
 }
 
 .sub-history-era-image {
@@ -1723,138 +1723,138 @@ HUNTER History
 }
 
 /* 1940 */
-.sub-history-era-1940 { height: calc(min(100vw, 1920px) * 1160 / 1920); }
+.sub-history-era-1940 { height: calc(1160 * var(--vw)); }
 .sub-history-era-1940 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 80 / 1920);
-    left: calc(min(100vw, 1920px) * 170 / 1920);
-    width: calc(min(100vw, 1920px) * 300 / 1920);
-    height: calc(min(100vw, 1920px) * 390 / 1920);
+    top: calc(80 * var(--vw));
+    left: calc(170 * var(--vw));
+    width: calc(300 * var(--vw));
+    height: calc(390 * var(--vw));
 }
 .sub-history-era-1940 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 250 / 1920);
-    right: calc(min(100vw, 1920px) * 160 / 1920);
-    width: calc(min(100vw, 1920px) * 300 / 1920);
-    height: calc(min(100vw, 1920px) * 290 / 1920);
+    top: calc(250 * var(--vw));
+    right: calc(160 * var(--vw));
+    width: calc(300 * var(--vw));
+    height: calc(290 * var(--vw));
 }
 .sub-history-era-1940 .sub-history-era-image-c {
-    top: calc(min(100vw, 1920px) * 690 / 1920);
-    left: calc(min(100vw, 1920px) * 365 / 1920);
-    width: calc(min(100vw, 1920px) * 290 / 1920);
-    height: calc(min(100vw, 1920px) * 210 / 1920);
+    top: calc(690 * var(--vw));
+    left: calc(365 * var(--vw));
+    width: calc(290 * var(--vw));
+    height: calc(210 * var(--vw));
 }
 
 /* 1950 */
 .sub-history-era-1950 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 120 / 1920);
-    left: calc(min(100vw, 1920px) * 70 / 1920);
-    width: calc(min(100vw, 1920px) * 220 / 1920);
-    height: calc(min(100vw, 1920px) * 360 / 1920);
+    top: calc(120 * var(--vw));
+    left: calc(70 * var(--vw));
+    width: calc(220 * var(--vw));
+    height: calc(360 * var(--vw));
 }
 .sub-history-era-1950 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 90 / 1920);
-    right: calc(min(100vw, 1920px) * 90 / 1920);
-    width: calc(min(100vw, 1920px) * 315 / 1920);
-    height: calc(min(100vw, 1920px) * 215 / 1920);
+    top: calc(90 * var(--vw));
+    right: calc(90 * var(--vw));
+    width: calc(315 * var(--vw));
+    height: calc(215 * var(--vw));
 }
 .sub-history-era-1950 .sub-history-era-image-c {
-    top: calc(min(100vw, 1920px) * 610 / 1920);
-    right: calc(min(100vw, 1920px) * 420 / 1920);
-    width: calc(min(100vw, 1920px) * 280 / 1920);
-    height: calc(min(100vw, 1920px) * 190 / 1920);
+    top: calc(610 * var(--vw));
+    right: calc(420 * var(--vw));
+    width: calc(280 * var(--vw));
+    height: calc(190 * var(--vw));
 }
 
 /* 1960 */
 .sub-history-era-1960 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 90 / 1920);
-    left: calc(min(100vw, 1920px) * 330 / 1920);
-    width: calc(min(100vw, 1920px) * 270 / 1920);
-    height: calc(min(100vw, 1920px) * 180 / 1920);
+    top: calc(90 * var(--vw));
+    left: calc(330 * var(--vw));
+    width: calc(270 * var(--vw));
+    height: calc(180 * var(--vw));
 }
 .sub-history-era-1960 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 160 / 1920);
-    right: calc(min(100vw, 1920px) * 75 / 1920);
-    width: calc(min(100vw, 1920px) * 390 / 1920);
-    height: calc(min(100vw, 1920px) * 250 / 1920);
+    top: calc(160 * var(--vw));
+    right: calc(75 * var(--vw));
+    width: calc(390 * var(--vw));
+    height: calc(250 * var(--vw));
 }
 .sub-history-era-1960 .sub-history-era-image-c {
-    top: calc(min(100vw, 1920px) * 590 / 1920);
-    left: calc(min(100vw, 1920px) * 80 / 1920);
-    width: calc(min(100vw, 1920px) * 350 / 1920);
-    height: calc(min(100vw, 1920px) * 220 / 1920);
+    top: calc(590 * var(--vw));
+    left: calc(80 * var(--vw));
+    width: calc(350 * var(--vw));
+    height: calc(220 * var(--vw));
 }
 
 /* 1970 */
 .sub-history-era-1970 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 115 / 1920);
-    left: calc(min(100vw, 1920px) * 505 / 1920);
-    width: calc(min(100vw, 1920px) * 230 / 1920);
-    height: calc(min(100vw, 1920px) * 250 / 1920);
+    top: calc(115 * var(--vw));
+    left: calc(505 * var(--vw));
+    width: calc(230 * var(--vw));
+    height: calc(250 * var(--vw));
 }
 .sub-history-era-1970 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 520 / 1920);
-    right: calc(min(100vw, 1920px) * 150 / 1920);
-    width: calc(min(100vw, 1920px) * 325 / 1920);
-    height: calc(min(100vw, 1920px) * 220 / 1920);
+    top: calc(520 * var(--vw));
+    right: calc(150 * var(--vw));
+    width: calc(325 * var(--vw));
+    height: calc(220 * var(--vw));
 }
 
 /* 1980 */
 .sub-history-era-1980 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 80 / 1920);
-    left: calc(min(100vw, 1920px) * 145 / 1920);
-    width: calc(min(100vw, 1920px) * 285 / 1920);
-    height: calc(min(100vw, 1920px) * 205 / 1920);
+    top: calc(80 * var(--vw));
+    left: calc(145 * var(--vw));
+    width: calc(285 * var(--vw));
+    height: calc(205 * var(--vw));
 }
 .sub-history-era-1980 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 370 / 1920);
-    right: calc(min(100vw, 1920px) * 430 / 1920);
-    width: calc(min(100vw, 1920px) * 240 / 1920);
-    height: calc(min(100vw, 1920px) * 300 / 1920);
+    top: calc(370 * var(--vw));
+    right: calc(430 * var(--vw));
+    width: calc(240 * var(--vw));
+    height: calc(300 * var(--vw));
 }
 .sub-history-era-1980 .sub-history-era-image-c {
-    top: calc(min(100vw, 1920px) * 570 / 1920);
-    right: calc(min(100vw, 1920px) * 75 / 1920);
-    width: calc(min(100vw, 1920px) * 320 / 1920);
-    height: calc(min(100vw, 1920px) * 210 / 1920);
+    top: calc(570 * var(--vw));
+    right: calc(75 * var(--vw));
+    width: calc(320 * var(--vw));
+    height: calc(210 * var(--vw));
 }
 
 /* 1990 */
 .sub-history-era-1990 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 70 / 1920);
-    left: calc(min(100vw, 1920px) * 70 / 1920);
-    width: calc(min(100vw, 1920px) * 260 / 1920);
-    height: calc(min(100vw, 1920px) * 350 / 1920);
+    top: calc(70 * var(--vw));
+    left: calc(70 * var(--vw));
+    width: calc(260 * var(--vw));
+    height: calc(350 * var(--vw));
 }
 .sub-history-era-1990 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 330 / 1920);
-    right: calc(min(100vw, 1920px) * 420 / 1920);
-    width: calc(min(100vw, 1920px) * 275 / 1920);
-    height: calc(min(100vw, 1920px) * 190 / 1920);
+    top: calc(330 * var(--vw));
+    right: calc(420 * var(--vw));
+    width: calc(275 * var(--vw));
+    height: calc(190 * var(--vw));
 }
 .sub-history-era-1990 .sub-history-era-image-c {
-    top: calc(min(100vw, 1920px) * 620 / 1920);
-    left: calc(min(100vw, 1920px) * 395 / 1920);
-    width: calc(min(100vw, 1920px) * 300 / 1920);
-    height: calc(min(100vw, 1920px) * 185 / 1920);
+    top: calc(620 * var(--vw));
+    left: calc(395 * var(--vw));
+    width: calc(300 * var(--vw));
+    height: calc(185 * var(--vw));
 }
 
 /* 2000 */
 .sub-history-era-2000 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 90 / 1920);
-    left: calc(min(100vw, 1920px) * 115 / 1920);
-    width: calc(min(100vw, 1920px) * 280 / 1920);
-    height: calc(min(100vw, 1920px) * 365 / 1920);
+    top: calc(90 * var(--vw));
+    left: calc(115 * var(--vw));
+    width: calc(280 * var(--vw));
+    height: calc(365 * var(--vw));
 }
 .sub-history-era-2000 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 230 / 1920);
-    right: calc(min(100vw, 1920px) * 85 / 1920);
-    width: calc(min(100vw, 1920px) * 300 / 1920);
-    height: calc(min(100vw, 1920px) * 300 / 1920);
+    top: calc(230 * var(--vw));
+    right: calc(85 * var(--vw));
+    width: calc(300 * var(--vw));
+    height: calc(300 * var(--vw));
 }
 .sub-history-era-2000 .sub-history-era-image-c {
-    top: calc(min(100vw, 1920px) * 630 / 1920);
-    right: calc(min(100vw, 1920px) * 450 / 1920);
-    width: calc(min(100vw, 1920px) * 390 / 1920);
-    height: calc(min(100vw, 1920px) * 220 / 1920);
+    top: calc(630 * var(--vw));
+    right: calc(450 * var(--vw));
+    width: calc(390 * var(--vw));
+    height: calc(220 * var(--vw));
 }
 
 .sub-history-steps {
@@ -1864,11 +1864,11 @@ HUNTER History
 }
 
 .sub-history-step {
-    height: calc(min(100vw, 1920px) * 1028 / 1920);
+    height: calc(1028 * var(--vw));
 }
 
 .sub-history-step:first-child {
-    height: calc(min(100vw, 1920px) * 1160 / 1920);
+    height: calc(1160 * var(--vw));
 }
 
 .sub-history-year-digit {
@@ -1901,13 +1901,13 @@ HUNTER History
 }
 
 .sub-history-finale {
-    padding: 0 0 calc(min(100vw, 1920px) * 140 / 1920);
+    padding: 0 0 calc(140 * var(--vw));
 }
 
 .sub-history-finale-stage {
     position: relative;
     width: 100%;
-    height: calc(min(100vw, 1920px) * 860 / 1920);
+    height: calc(860 * var(--vw));
     background: transparent;
 }
 
@@ -1915,7 +1915,7 @@ HUNTER History
     content: "";
     position: absolute;
     z-index: 0;
-    top: calc(min(100vw, 1920px) * -320 / 1920);
+    top: calc(-320 * var(--vw));
     bottom: 50%;
     left: 50%;
     width: 1px;
@@ -1928,8 +1928,8 @@ HUNTER History
     z-index: 1;
     top: 50%;
     left: 50%;
-    width: calc(min(100vw, 1920px) * 940 / 1920);
-    height: calc(min(100vw, 1920px) * 520 / 1920);
+    width: calc(940 * var(--vw));
+    height: calc(520 * var(--vw));
     margin: 0;
     overflow: hidden;
     transform: translate(-50%, -50%);
@@ -1937,7 +1937,7 @@ HUNTER History
 }
 
 .sub-history-finale-copy {
-    margin: calc(min(100vw, 1920px) * 100 / 1920) auto 0;
+    margin: calc(100 * var(--vw)) auto 0;
     text-align: center;
 }
 
@@ -1945,48 +1945,48 @@ HUNTER History
     display: block;
     color: var(--red);
     font-family: "Russo One", sans-serif;
-    font-size: calc(min(100vw, 1920px) * 100 / 1920);
+    font-size: calc(100 * var(--vw));
     line-height: 1;
 }
 
 .sub-history-finale-copy h2 {
-    margin: calc(min(100vw, 1920px) * 40 / 1920) 0 0;
+    margin: calc(40 * var(--vw)) 0 0;
     color: #000;
-    font-size: calc(min(100vw, 1920px) * 50 / 1920);
+    font-size: calc(50 * var(--vw));
     font-weight: 800;
 }
 
 .sub-history-finale-copy h2 span { color: var(--red); font-family: "Russo One", sans-serif;}
 
 .sub-history-finale-copy p {
-    margin: calc(min(100vw, 1920px) * 20 / 1920) 0 0;
+    margin: calc(20 * var(--vw)) 0 0;
     color: #696969;
     font-family: "Pretendard", sans-serif;
-    font-size: calc(min(100vw, 1920px) * 20 / 1920);
+    font-size: calc(20 * var(--vw));
     font-weight: 400;
-    line-height: calc(min(100vw, 1920px) * 30 / 1920);
+    line-height: calc(30 * var(--vw));
     letter-spacing: -0.06em;
 }
 .sub-history-finale-copy > span {
     display: block;
     font-family: "Russo One", sans-serif;
-    margin: calc(min(100vw, 1920px) * 20 / 1920) 0 0;
+    margin: calc(20 * var(--vw)) 0 0;
     color: rgba(0, 0, 0, 0.1);
-    font-size: calc(min(100vw, 1920px) * 74 / 1920);
+    font-size: calc(74 * var(--vw));
     font-weight: 400;
-    line-height: calc(min(100vw, 1920px) * 80 / 1920);
+    line-height: calc(80 * var(--vw));
     letter-spacing: -1px;
-    margin: calc(min(100vw, 1920px) * 150 / 1920) auto;
+    margin: calc(150 * var(--vw)) auto;
 }
 /* ========================================
 History 연도별 1920 시안 좌표
 ======================================== */
 .sub-history-timeline {
-    height: calc(min(100vw, 1920px) * 11542 / 1920);
+    height: calc(11542 * var(--vw));
 }
 
 .sub-history-era-track {
-    height: calc(min(100vw, 1920px) * 11842 / 1920);
+    height: calc(11842 * var(--vw));
 }
 
 .sub-history-era {
@@ -1995,173 +1995,173 @@ History 연도별 1920 시안 좌표
 
 /* 1940 : 1920 × 1670 */
 .sub-history-era-1940 {
-    height: calc(min(100vw, 1920px) * 1670 / 1920);
+    height: calc(1670 * var(--vw));
 }
 .sub-history-era-1940 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 136 / 1920);
-    left: calc(min(100vw, 1920px) * 213 / 1920);
-    width: calc(min(100vw, 1920px) * 474 / 1920);
-    height: calc(min(100vw, 1920px) * 602 / 1920);
+    top: calc(136 * var(--vw));
+    left: calc(213 * var(--vw));
+    width: calc(474 * var(--vw));
+    height: calc(602 * var(--vw));
 }
 .sub-history-era-1940 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 477 / 1920);
-    right: calc(min(100vw, 1920px) * 150 / 1920);
-    width: calc(min(100vw, 1920px) * 483 / 1920);
-    height: calc(min(100vw, 1920px) * 364 / 1920);
+    top: calc(477 * var(--vw));
+    right: calc(150 * var(--vw));
+    width: calc(483 * var(--vw));
+    height: calc(364 * var(--vw));
 }
 .sub-history-era-1940 .sub-history-era-image-c {
-    top: calc(min(100vw, 1920px) * 951 / 1920);
-    left: calc(min(100vw, 1920px) * 551 / 1920);
-    width: calc(min(100vw, 1920px) * 412 / 1920);
-    height: calc(min(100vw, 1920px) * 344 / 1920);
+    top: calc(951 * var(--vw));
+    left: calc(551 * var(--vw));
+    width: calc(412 * var(--vw));
+    height: calc(344 * var(--vw));
 }
 
 /* 1950 : 1920 × 1838 */
 .sub-history-era-1950 {
-    height: calc(min(100vw, 1920px) * 1838 / 1920);
+    height: calc(1838 * var(--vw));
 }
 .sub-history-era-1950 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 472 / 1920);
-    left: calc(min(100vw, 1920px) * 48 / 1920);
-    width: calc(min(100vw, 1920px) * 389 / 1920);
-    height: calc(min(100vw, 1920px) * 587 / 1920);
+    top: calc(472 * var(--vw));
+    left: calc(48 * var(--vw));
+    width: calc(389 * var(--vw));
+    height: calc(587 * var(--vw));
 }
 .sub-history-era-1950 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 94 / 1920);
-    right: calc(min(100vw, 1920px) * 96 / 1920);
-    width: calc(min(100vw, 1920px) * 448 / 1920);
-    height: calc(min(100vw, 1920px) * 407 / 1920);
+    top: calc(94 * var(--vw));
+    right: calc(96 * var(--vw));
+    width: calc(448 * var(--vw));
+    height: calc(407 * var(--vw));
 }
 .sub-history-era-1950 .sub-history-era-image-c {
-    top: calc(min(100vw, 1920px) * 1407 / 1920);
-    right: calc(min(100vw, 1920px) * 406 / 1920);
-    width: calc(min(100vw, 1920px) * 496 / 1920);
-    height: calc(min(100vw, 1920px) * 379 / 1920);
+    top: calc(1407 * var(--vw));
+    right: calc(406 * var(--vw));
+    width: calc(496 * var(--vw));
+    height: calc(379 * var(--vw));
 }
 
 /* 1960 : 1920 × 2021 */
 .sub-history-era-1960 {
-    height: calc(min(100vw, 1920px) * 2021 / 1920);
+    height: calc(2021 * var(--vw));
 }
 .sub-history-era-1960 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 26 / 1920);
-    left: calc(min(100vw, 1920px) * 288 / 1920);
-    width: calc(min(100vw, 1920px) * 362 / 1920);
-    height: calc(min(100vw, 1920px) * 227 / 1920);
+    top: calc(26 * var(--vw));
+    left: calc(288 * var(--vw));
+    width: calc(362 * var(--vw));
+    height: calc(227 * var(--vw));
 }
 .sub-history-era-1960 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 347 / 1920);
-    right: calc(min(100vw, 1920px) * 354 / 1920);
-    width: calc(min(100vw, 1920px) * 455 / 1920);
-    height: calc(min(100vw, 1920px) * 175 / 1920);
+    top: calc(347 * var(--vw));
+    right: calc(354 * var(--vw));
+    width: calc(455 * var(--vw));
+    height: calc(175 * var(--vw));
 }
 .sub-history-era-1960 .sub-history-era-image-c {
-    top: calc(min(100vw, 1920px) * 952 / 1920);
-    left: calc(min(100vw, 1920px) * 454 / 1920);
-    width: calc(min(100vw, 1920px) * 506 / 1920);
-    height: calc(min(100vw, 1920px) * 334 / 1920);
+    top: calc(952 * var(--vw));
+    left: calc(454 * var(--vw));
+    width: calc(506 * var(--vw));
+    height: calc(334 * var(--vw));
 }
 .sub-history-era-1960 .sub-history-era-image-d {
-    top: calc(min(100vw, 1920px) * 1442 / 1920);
-    right: calc(min(100vw, 1920px) * 200 / 1920);
-    width: calc(min(100vw, 1920px) * 446 / 1920);
-    height: calc(min(100vw, 1920px) * 579 / 1920);
+    top: calc(1442 * var(--vw));
+    right: calc(200 * var(--vw));
+    width: calc(446 * var(--vw));
+    height: calc(579 * var(--vw));
 }
 
 /* 1970 : 1920 × 1441 */
 .sub-history-era-1970 {
-    height: calc(min(100vw, 1920px) * 1441 / 1920);
+    height: calc(1441 * var(--vw));
 }
 .sub-history-era-1970 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 42 / 1920);
-    left: calc(min(100vw, 1920px) * 530 / 1920);
-    width: calc(min(100vw, 1920px) * 432 / 1920);
-    height: calc(min(100vw, 1920px) * 351 / 1920);
+    top: calc(42 * var(--vw));
+    left: calc(530 * var(--vw));
+    width: calc(432 * var(--vw));
+    height: calc(351 * var(--vw));
 }
 .sub-history-era-1970 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 675 / 1920);
-    right: calc(min(100vw, 1920px) * 215 / 1920);
-    width: calc(min(100vw, 1920px) * 568 / 1920);
-    height: calc(min(100vw, 1920px) * 338 / 1920);
+    top: calc(675 * var(--vw));
+    right: calc(215 * var(--vw));
+    width: calc(568 * var(--vw));
+    height: calc(338 * var(--vw));
 }
 
 /* 1980 : 1920 × 1670 */
 .sub-history-era-1980 {
-    height: calc(min(100vw, 1920px) * 1670 / 1920);
+    height: calc(1670 * var(--vw));
 }
 .sub-history-era-1980 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 47 / 1920);
-    left: calc(min(100vw, 1920px) * 299 / 1920);
-    width: calc(min(100vw, 1920px) * 411 / 1920);
-    height: calc(min(100vw, 1920px) * 247 / 1920);
+    top: calc(47 * var(--vw));
+    left: calc(299 * var(--vw));
+    width: calc(411 * var(--vw));
+    height: calc(247 * var(--vw));
 }
 .sub-history-era-1980 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 487 / 1920);
-    right: calc(min(100vw, 1920px) * 215 / 1920);
-    width: calc(min(100vw, 1920px) * 493 / 1920);
-    height: calc(min(100vw, 1920px) * 189 / 1920);
+    top: calc(487 * var(--vw));
+    right: calc(215 * var(--vw));
+    width: calc(493 * var(--vw));
+    height: calc(189 * var(--vw));
 }
 .sub-history-era-1980 .sub-history-era-image-c {
-    top: calc(min(100vw, 1920px) * 1018 / 1920);
-    left: calc(min(100vw, 1920px) * 407 / 1920);
-    width: calc(min(100vw, 1920px) * 553 / 1920);
-    height: calc(min(100vw, 1920px) * 250 / 1920);
+    top: calc(1018 * var(--vw));
+    left: calc(407 * var(--vw));
+    width: calc(553 * var(--vw));
+    height: calc(250 * var(--vw));
 }
 
 /* 1990 : 1920 × 1570 */
 .sub-history-era-1990 {
-    height: calc(min(100vw, 1920px) * 1570 / 1920);
+    height: calc(1570 * var(--vw));
 }
 .sub-history-era-1990 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 130 / 1920);
-    left: calc(min(100vw, 1920px) * 200 / 1920);
-    width: calc(min(100vw, 1920px) * 519 / 1920);
-    height: calc(min(100vw, 1920px) * 622 / 1920);
+    top: calc(130 * var(--vw));
+    left: calc(200 * var(--vw));
+    width: calc(519 * var(--vw));
+    height: calc(622 * var(--vw));
 }
 .sub-history-era-1990 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 486 / 1920);
-    right: calc(min(100vw, 1920px) * 130 / 1920);
-    width: calc(min(100vw, 1920px) * 504 / 1920);
-    height: calc(min(100vw, 1920px) * 382 / 1920);
+    top: calc(486 * var(--vw));
+    right: calc(130 * var(--vw));
+    width: calc(504 * var(--vw));
+    height: calc(382 * var(--vw));
 }
 .sub-history-era-1990 .sub-history-era-image-c {
-    top: calc(min(100vw, 1920px) * 968 / 1920);
-    left: calc(min(100vw, 1920px) * 625 / 1920);
-    width: calc(min(100vw, 1920px) * 430 / 1920);
-    height: calc(min(100vw, 1920px) * 361 / 1920);
+    top: calc(968 * var(--vw));
+    left: calc(625 * var(--vw));
+    width: calc(430 * var(--vw));
+    height: calc(361 * var(--vw));
 }
 
 /* 2000 : 1920 × 1632 */
 .sub-history-era-2000 {
-    height: calc(min(100vw, 1920px) * 1632 / 1920);
+    height: calc(1632 * var(--vw));
 }
 .sub-history-era-2000 .sub-history-era-image-a {
-    top: calc(min(100vw, 1920px) * 163 / 1920);
-    left: calc(min(100vw, 1920px) * 272 / 1920);
-    width: calc(min(100vw, 1920px) * 413 / 1920);
-    height: calc(min(100vw, 1920px) * 509 / 1920);
+    top: calc(163 * var(--vw));
+    left: calc(272 * var(--vw));
+    width: calc(413 * var(--vw));
+    height: calc(509 * var(--vw));
 }
 .sub-history-era-2000 .sub-history-era-image-b {
-    top: calc(min(100vw, 1920px) * 454 / 1920);
-    right: calc(min(100vw, 1920px) * 124 / 1920);
-    width: calc(min(100vw, 1920px) * 462 / 1920);
-    height: calc(min(100vw, 1920px) * 372 / 1920);
+    top: calc(454 * var(--vw));
+    right: calc(124 * var(--vw));
+    width: calc(462 * var(--vw));
+    height: calc(372 * var(--vw));
 }
 .sub-history-era-2000 .sub-history-era-image-c {
-    top: calc(min(100vw, 1920px) * 1124 / 1920);
-    left: calc(min(100vw, 1920px) * 450 / 1920);
-    width: calc(min(100vw, 1920px) * 510 / 1920);
-    height: calc(min(100vw, 1920px) * 406 / 1920);
+    top: calc(1124 * var(--vw));
+    left: calc(450 * var(--vw));
+    width: calc(510 * var(--vw));
+    height: calc(406 * var(--vw));
 }
 
 /* 연도별 스크롤 구간도 시안 높이와 동일 */
-.sub-history-step:nth-child(1) { height: calc(min(100vw, 1920px) * 1670 / 1920); }
-.sub-history-step:nth-child(2) { height: calc(min(100vw, 1920px) * 1838 / 1920); }
-.sub-history-step:nth-child(3) { height: calc(min(100vw, 1920px) * 2021 / 1920); }
-.sub-history-step:nth-child(4) { height: calc(min(100vw, 1920px) * 1441 / 1920); }
-.sub-history-step:nth-child(5) { height: calc(min(100vw, 1920px) * 1670 / 1920); }
-.sub-history-step:nth-child(6) { height: calc(min(100vw, 1920px) * 1570 / 1920); }
-.sub-history-step:nth-child(7) { height: calc(min(100vw, 1920px) * 1332 / 1920); }
+.sub-history-step:nth-child(1) { height: calc(1670 * var(--vw)); }
+.sub-history-step:nth-child(2) { height: calc(1838 * var(--vw)); }
+.sub-history-step:nth-child(3) { height: calc(2021 * var(--vw)); }
+.sub-history-step:nth-child(4) { height: calc(1441 * var(--vw)); }
+.sub-history-step:nth-child(5) { height: calc(1670 * var(--vw)); }
+.sub-history-step:nth-child(6) { height: calc(1570 * var(--vw)); }
+.sub-history-step:nth-child(7) { height: calc(1332 * var(--vw)); }
 
 /* 시안에서 카피가 없는 연도 */
 .sub-history-center-copy[data-active-year="1950"] .sub-history-center-content,
@@ -2173,14 +2173,14 @@ History 연도별 1920 시안 좌표
 
 /* 카피가 있는 연도별 위치 */
 .sub-history-center-copy[data-active-year="1940"] .sub-history-center-content {
-    top: calc(min(100vw, 1920px) * 210 / 1920);
-    left: calc(50% + calc(min(100vw, 1920px) * 48 / 1920));
+    top: calc(210 * var(--vw));
+    left: calc(50% + calc(48 * var(--vw)));
 }
 .sub-history-center-copy[data-active-year="1960"] .sub-history-center-content,
 .sub-history-center-copy[data-active-year="1980"] .sub-history-center-content,
 .sub-history-center-copy[data-active-year="2000"] .sub-history-center-content {
-    top: calc(min(100vw, 1920px) * 200 / 1920);
-    left: calc(50% + calc(min(100vw, 1920px) * 55 / 1920));
+    top: calc(200 * var(--vw));
+    left: calc(50% + calc(55 * var(--vw)));
 }
 
 /* History 전용 스크롤 wrapper */

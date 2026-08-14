@@ -301,7 +301,7 @@ Media Item
 .sub-media-category {
     display: block;
     margin-bottom: 12px;
-    color: var( --red );
+    color: var(--red);
     font-size: calc(16 * var(--vw));
     font-weight: 500;
     line-height: calc(30 * var(--vw));
@@ -367,9 +367,9 @@ Download Button
     min-width: calc(170 * var(--vw));
     height: calc(60 * var(--vw));
     padding: 0 calc(30 * var(--vw));
-    border: 1px solid var( --red );
+    border: 1px solid var(--red);
     border-radius: 100px;
-    color: var( --red );
+    color: var(--red);
     font-size:calc(18 * var(--vw));
     line-height: calc(32 * var(--vw));
     letter-spacing: 4px;
@@ -388,7 +388,7 @@ Download Button
     transition: background-color .3s;
 }
 .sub-media-download:hover {
-    background: var( --red );
+    background: var(--red);
     color: #fff;
 }
 
@@ -568,7 +568,7 @@ Media View
     background:transparent;
     color:var(--red);
     font-size:calc(18 * var(--vw));
-    line-height: calc(32 * var(--vw));;
+    line-height: calc(32 * var(--vw));
     font-weight:500;
     letter-spacing:calc(4 * var(--vw));
     transition:
@@ -576,7 +576,7 @@ Media View
         background-color .3s;
 }
 .sub-media-view-list-button:hover {
-    background: var( --red );
+    background: var(--red);
     color: #fff;
 }
 

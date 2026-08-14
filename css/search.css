@@ -1,5 +1,4 @@
 :root {
-    --vw: min(calc(100vw / 1920), 1px);
     --red: #c00c00;
 }
 
