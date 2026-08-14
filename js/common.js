@@ -460,7 +460,6 @@ function initDragCursor() {
  * - 로그인 / 로그아웃 상태 분기
  */
     function initAllMenu() {
-        console.log("initAllMenu 실행");
         const openButtons = document.querySelectorAll(".btn-menu");
         const allMenu = document.querySelector(".all-menu");
         const panel = document.querySelector(".all-menu-panel");
@@ -524,7 +523,6 @@ function initDragCursor() {
         }
     
         function openMenu() {
-            console.log("openMenu 실행");
             lastFocusedElement = document.activeElement;
     
             setMemberState();
@@ -682,7 +680,6 @@ function initDragCursor() {
         openButtons.forEach((button) => {
           
             button.addEventListener("click", () => {
-                console.log("메뉴 클릭");
                 if (allMenu.classList.contains("is-open")) {
                     closeMenu();
                 } else {

@@ -989,66 +989,6 @@
         }, { passive: true });
     }
 
-    function initUsaSectionSnap() {
-        const sections = Array.from(document.querySelectorAll(".sub-usa-trust, .sub-usa-value"));
-        if (!sections.length) return;
-
-        let locked = false;
-        let lockTimer = null;
-
-        function getActiveIndex() {
-            const center = window.scrollY + window.innerHeight * 0.5;
-            let index = -1;
-            let distance = Infinity;
-
-            sections.forEach(function (section, sectionIndex) {
-                const top = section.getBoundingClientRect().top + window.scrollY;
-                const sectionCenter = top + section.offsetHeight * 0.5;
-                const nextDistance = Math.abs(sectionCenter - center);
-
-                if (nextDistance < distance) {
-                    distance = nextDistance;
-                    index = sectionIndex;
-                }
-            });
-
-            return index;
-        }
-
-        function isSnapArea() {
-            const firstTop = sections[0].getBoundingClientRect().top + window.scrollY;
-            const last = sections[sections.length - 1];
-            const lastBottom = last.getBoundingClientRect().top + window.scrollY + last.offsetHeight;
-            const current = window.scrollY + window.innerHeight * 0.5;
-            return current >= firstTop && current <= lastBottom;
-        }
-
-        function goToSection(index) {
-            const target = sections[index];
-            if (!target) return;
-
-            locked = true;
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-
-            window.clearTimeout(lockTimer);
-            lockTimer = window.setTimeout(function () {
-                locked = false;
-            }, 900);
-        }
-
-        window.addEventListener("wheel", function (event) {
-            if (!isSnapArea() || locked || Math.abs(event.deltaY) < 12) return;
-
-            const activeIndex = getActiveIndex();
-            if (activeIndex < 0) return;
-
-            const nextIndex = event.deltaY > 0 ? activeIndex + 1 : activeIndex - 1;
-            if (nextIndex < 0 || nextIndex >= sections.length) return;
-
-            event.preventDefault();
-            goToSection(nextIndex);
-        }, { passive: false });
-    }
 
     function initTrackpadScrollStability() {
         const trust = document.querySelector(".sub-usa-trust");

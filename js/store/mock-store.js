@@ -16,7 +16,9 @@ window.MOCK_STORES = [
         products: [
             { category: "Alignment Systems", name: "Hawkeye Elite Premium" },
             { category: "Wheel Balancers", name: "Product name" },
-            { category: "Tire Changers", name: "Product name" }
+            { category: "Tire Changers", name: "Product name" },
+            { category: "Brake Lathes", name: "AutoComp Elite" },
+            { category: "Vehicle Inspection", name: "Quick Check Inspection" }
         ]
     },
     {

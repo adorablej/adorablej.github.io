@@ -728,6 +728,10 @@ Training Registration
 	height:auto;
 	min-height:0;
 	background:#e2e2e2;
+	background-image:url("/images/img_placeholder.png");
+	background-position:center;
+	background-size:cover;
+	background-repeat:no-repeat;
 }
 .sub-training-modal-summary {
 	padding-bottom:calc(min(100vw, 1920px) * 34 / 1920);

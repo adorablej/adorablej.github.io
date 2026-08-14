@@ -119,7 +119,7 @@ function setNavigationItem(element, type, item) {
 }
 
 function setContentImageFallback(content) {
-    const placeholder = "/images/common/img_placeholder.jpg";
+    const placeholder = "/images/img_placeholder.png";
 
     content.querySelectorAll("img").forEach(image => {
         image.addEventListener("error", function () {
