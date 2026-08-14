@@ -206,6 +206,7 @@
         const regionInput = regionSelect?.querySelector('input[type="hidden"]');
         const cityInput = citySelect?.querySelector('input[type="hidden"]');
         const closeButton = section.querySelector(".sub-pride-store-close");
+        const requestedStoreId = new URLSearchParams(window.location.search).get("storeId");
         if (!keywordInput || !regionSelect || !citySelect || !regionInput || !cityInput) return;
 
         StoreUI.init(section);
@@ -291,6 +292,10 @@
 
         setRegionOptions();
         setCityOptions("");
-        loadStores();
+        loadStores().then(() => {
+            if (requestedStoreId) {
+                selectStore(requestedStoreId, { scrollList: true, moveMap: true });
+            }
+        });
     });
 })();

@@ -209,7 +209,7 @@ function changeDealer(thumb, useFade = true) {
         dealerName.textContent = thumb.dataset.name;
         dealerAddress.textContent = thumb.dataset.address;
         dealerPhone.textContent = thumb.dataset.phone;
-        dealerMap.href = thumb.dataset.map;
+        dealerMap.href = `/Products/Hunter-Locator.html?storeId=${encodeURIComponent(thumb.dataset.storeId)}`;
         dealerMainImage.style.opacity = "1";
     };
 
