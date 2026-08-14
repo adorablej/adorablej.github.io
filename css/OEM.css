@@ -40,8 +40,8 @@ oem.html , Global OEMs.
     margin: 0 auto;
 
     border-radius: 50%;
-    background: #f7f7f7;
-    border: 4px solid #f7f7f7;
+    background: #FAFAFA;
+    border: 4px solid #FAFAFA;
     transition:
         transform .35s ease,
         box-shadow .35s ease;
@@ -329,6 +329,10 @@ BMW KDS II Alignment System Detail
     padding-left: 9px;
 }
 
+.global-oems-page .sub-partners-directory{
+    padding-top: calc(20 * var(--vw));
+
+}
 
 /* ========================================
 Mobile: OEM List
@@ -484,5 +488,9 @@ Mobile: OEM List
 
     .oem-product-desc ul li {
         list-style-position: inside;
+    }
+
+    .global-oems-page .sub-partners-inner{
+        margin-top: 40px;
     }
 }
