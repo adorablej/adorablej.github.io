@@ -4,7 +4,7 @@ const hunterPrideInterviewData = [
         title: "헌터 도입 후 달라진 우리 정비소",
         description: "헌터 장비 도입 후 정비의 정확도와 고객 만족도가 함께 높아졌습니다. 고객이 믿고 맡길 수 있는 정비 환경을 만들어가는 이야기를 확인해보세요.",
         date: "2026.07.07",
-        thumbnail: "",
+        thumbnail: "/images/sub_p_p01.png",
         youtube: "https://youtu.be/tlcEurH9Cpg?si=gLSgzMjAznvcH2hA",
         featured: true
     },
@@ -13,7 +13,7 @@ const hunterPrideInterviewData = [
         title: "성공적인 정비소 운영의 파트너",
         description: "정확한 측정 데이터와 빠른 작업 흐름을 통해 정비 품질과 작업 효율을 함께 높인 현장의 이야기를 소개합니다.",
         date: "2026.07.07",
-        thumbnail: "",
+        thumbnail: "/images/sub_p_p02.png",
         youtube: "https://youtu.be/SgUbLVfzr28?si=pihm_IV4BTEoDOSI",
         featured: true
     },
@@ -22,7 +22,7 @@ const hunterPrideInterviewData = [
         title: "고객 신뢰를 만든 헌터 솔루션",
         description: "헌터 솔루션을 바탕으로 고객에게 더 정확하고 신뢰할 수 있는 정비 서비스를 제공하는 현장을 만나보세요.",
         date: "2026.07.07",
-        thumbnail: "",
+        thumbnail: "/images/sub_p_p03.png",
         youtube: "https://youtu.be/sl1relqfdyU?si=au7fnBZFrwQxa7uf",
         featured: true
     },
@@ -32,7 +32,8 @@ const hunterPrideInterviewData = [
         description: "장비 도입 이후 달라진 진단 과정과 고객 상담 방식에 대한 실제 현장 인터뷰입니다.",
         date: "2026.07.07",
         thumbnail: "",
-        youtube: "https://youtu.be/sl1relqfdyU?si=au7fnBZFrwQxa7uf"
+        youtube: "https://youtu.be/sl1relqfdyU?si=au7fnBZFrwQxa7uf",
+        featured: true
     },
     {
         id: 5,

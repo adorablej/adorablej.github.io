@@ -241,6 +241,40 @@ if (dealerThumbs.length) {
 
 
 /* products.html , Hunter Pride Interview. */
+const prideList = document.querySelector(".sub-pride-list");
+
+if (prideList && Array.isArray(window.hunterPrideInterviewData || hunterPrideInterviewData)) {
+    const escapePrideText = (value = "") => String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    const getYoutubeId = (url = "") => {
+        const match = String(url).match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/)([^?&#/]+)/);
+        return match ? match[1] : "";
+    };
+    const featuredReviews = hunterPrideInterviewData.filter(review => review.featured);
+
+    prideList.innerHTML = featuredReviews.map(review => {
+        const youtubeId = getYoutubeId(review.youtube);
+        const thumbnail = review.thumbnail || `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
+        return `
+            <li class="swiper-slide sub-pride-item">
+                <a href="/Products/hunter-Pride.html?reviewId=${encodeURIComponent(review.id)}" class="sub-pride-card">
+                    <div class="sub-pride-image">
+                        <img src="${escapePrideText(thumbnail)}" alt="${escapePrideText(review.title)}">
+                    </div>
+                    <div class="sub-pride-content">
+                        <h3>${escapePrideText(review.title)}</h3>
+                        <p>${escapePrideText(review.description)}</p>
+                    </div>
+                </a>
+            </li>
+        `;
+    }).join("");
+}
+
 const prideSwiper = new Swiper(".sub-pride-slider", {
     slidesPerView: 3,
     spaceBetween: 38,

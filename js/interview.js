@@ -233,6 +233,12 @@ function initHunterPrideInterviewPage() {
 
     renderFeatured();
     renderList();
+
+    // Products 메인에서 전달한 fieldReviewId로 해당 리뷰 모달을 바로 엽니다.
+    const requestedId = Number(new URLSearchParams(window.location.search).get("reviewId"));
+    if (requestedId) {
+        openModal(hunterPrideInterviewData.find(item => item.id === requestedId));
+    }
 }
 
 document.addEventListener("DOMContentLoaded", initHunterPrideInterviewPage);
