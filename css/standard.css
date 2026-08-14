@@ -717,6 +717,27 @@ overflow-y: visible;
     color: #111;
 }
 
+.sub-awards-top-visual,
+.sub-awards-top-visual picture,
+.sub-awards-top-visual img {
+    display: block;
+}
+
+.sub-awards-top-visual {
+    width: calc(1300 * var(--vw));
+    max-width: calc(100% - 80px);
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.sub-awards-top-visual picture,
+.sub-awards-top-visual img { width: 100%; }
+
+.sub-awards-top-visual img {
+    height: auto;
+    object-fit: cover;
+}
+
 .sub-awards-inner {
     width: calc(1300 * var(--vw));
     margin: 0 auto;
@@ -2217,7 +2238,13 @@ Mobile (720px and below)
         font-size: 22px;
         line-height: 36px;
         white-space: nowrap;
-        opacity: .45;
+        opacity: 1;
+    }
+
+    .sub-partners-category-link .sub-partners-category-text {
+        color: #fff;
+        -webkit-text-stroke: 1px #fff;
+        opacity: 1;
     }
 
     .sub-partners-category-badge {
@@ -2229,6 +2256,9 @@ Mobile (720px and below)
         font-size: 10px;
         line-height: 18px;
         box-sizing: border-box;
+        background: var(--red);
+        color: #fff;
+        opacity: 1;
     }
 
     .sub-partners-top-button {
@@ -2313,6 +2343,16 @@ Mobile (720px and below)
         padding: 0 25px;
         box-sizing: border-box;
     }
+
+    .sub-awards-top-visual {
+        width: calc(100% - 50px);
+        max-width: none;
+        margin: 25px auto 0;
+        aspect-ratio: 310 / 460;
+    }
+
+    .sub-awards-top-visual picture,
+    .sub-awards-top-visual img { height: 100%; }
 
     .sub-awards-intro {
         padding-bottom: 80px;
@@ -2462,10 +2502,27 @@ Mobile (720px and below)
     }
 
     .sub-korea-vision {
-        display: flex;
-        flex-direction: column;
-        height: 640px;
+        display: block;
+        width: 100vw;
+        height: auto;
         min-height: 0;
+        padding: 40px 25px;
+        overflow: visible;
+        background: #fff;
+        box-sizing: border-box;
+    }
+
+    .sub-korea-vision-mobile-heading {
+        margin: 0 0 30px;
+        color: #111;
+        font-family: "Russo One", sans-serif;
+        font-size: 26px;
+        font-weight: 400;
+        line-height: 31px;
+    }
+
+    .sub-korea-vision-mobile-heading span {
+        color: var(--red);
     }
 
     .sub-korea-vision-panel,
@@ -2473,23 +2530,65 @@ Mobile (720px and below)
     .sub-korea-vision-panel.is-inactive,
     .sub-korea-vision.has-active .sub-korea-vision-panel.is-active,
     .sub-korea-vision.has-active .sub-korea-vision-panel:not(.is-active) {
-        flex: 0 0 50%;
+        display: block;
+        position: relative;
+        flex: none;
         width: 100%;
-        height: 50%;
+        height: auto;
+        overflow: visible;
+        cursor: default;
+    }
+
+    .sub-korea-vision-panel + .sub-korea-vision-panel {
+        margin-top: 36px;
+    }
+
+    .sub-korea-vision-media {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 310 / 192;
+        overflow: hidden;
     }
 
     .sub-korea-vision-panel .sub-korea-vision-media img,
     .sub-korea-vision-panel.is-active .sub-korea-vision-media img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         transform: none;
     }
 
     .sub-korea-vision-content {
-        width: calc(100% - 50px);
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        margin-top: 25px;
+        color: #111;
+        text-align: left;
+        transform: none;
+    }
+
+    .sub-korea-vision-number {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--red);
+        font-family: "Russo One", sans-serif;
+        font-size: 22px;
+        font-weight: 400;
+        line-height: normal;
     }
 
     .sub-korea-vision-content h2 {
-        font-size: 22px;
-        line-height: 30px;
+        margin: 0;
+        color: #111;
+        font-size: 18px;
+        font-weight: 800;
+        line-height: 22px;
+        letter-spacing: -.04em;
     }
 
     .sub-korea-vision-content h2 small {
@@ -2500,6 +2599,20 @@ Mobile (720px and below)
 
     .sub-korea-vision-content p,
     .sub-korea-vision-panel.is-active .sub-korea-vision-content p {
+        display: block;
+        max-height: none;
+        margin: 12px 0 0;
+        overflow: visible;
+        color: #333;
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: -.035em;
+        opacity: 1;
+        word-break: keep-all;
+        transform: none;
+    }
+
+    .sub-korea-vision-content p br {
         display: none;
     }
 
@@ -2511,6 +2624,7 @@ Mobile (720px and below)
     }
 
     .sub-korea-creative {
+        width: 100vw;
         padding: 40px 0;
     }
 
@@ -2540,6 +2654,11 @@ Mobile (720px and below)
         border-radius: 8px;
     }
 
+    .sub-korea-creative-principles {
+        padding-right: 25px;
+        padding-left: 25px;
+    }
+
     .sub-korea-creative-card {
         margin-top: 10px;
     }
@@ -2558,16 +2677,38 @@ Mobile (720px and below)
     .sub-korea-creative-principle-list {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         grid-auto-flow: row;
-        gap: 26px 18px;
+        gap: 30px 0;
         margin-top: 28px;
     }
 
     .sub-korea-creative-principle {
+        position: relative;
         min-height: 0;
         padding: 0;
         border: 0;
+        box-sizing: border-box;
         font-size: 14px;
-        line-height: 18px;
+        line-height: 20px;
+    }
+
+    .sub-korea-creative-principle:nth-child(odd) {
+        padding-right: 15px;
+    }
+
+    .sub-korea-creative-principle:nth-child(even) {
+        padding-left: 27px;
+    }
+
+    .sub-korea-creative-principle:nth-child(even)::before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 1px;
+        height: 28px;
+        border-radius: 1px;
+        background: rgba(255, 255, 255, .48);
+        content: "";
+        transform: translateY(-50%);
     }
 
     .sub-korea-creative-card-list {
@@ -2592,6 +2733,7 @@ Mobile (720px and below)
     }
 
     .sub-korea-before {
+        width: 100vw;
         padding: 40px 25px;
         background-image: url('/images/standard/korea_Service_bg_m.png');
         box-sizing: border-box;
@@ -2609,38 +2751,55 @@ Mobile (720px and below)
     }
 
     .sub-korea-before-copy p {
-        margin-top: 14px;
+        margin-top: 18px;
         font-size: 14px;
-        line-height: 20px;
+        line-height: 22px;
     }
 
     .sub-korea-before-list {
-        gap: 8px;
-        margin-top: 26px;
+        gap: 14px;
+        margin-top: 27px;
     }
 
     .sub-korea-before-item {
-        grid-template-columns: 50px 1fr;
-        min-height: 128px;
-        padding: 0 20px;
-        border-radius: 8px;
+        display: block;
+        min-height: 125px;
+        padding: 28px 25px;
+        border-radius: 14px;
     }
 
     .sub-korea-before-item > strong {
+        display: block;
         font-size: 26px;
+        line-height: 31px;
     }
 
     .sub-korea-before-item p {
+        margin-top: 12px;
         font-size: 14px;
         line-height: 20px;
     }
 
     .sub-korea-before-item-large {
-        padding: 22px 20px;
+        min-height: 275px;
+        padding: 30px 25px;
+    }
+
+    .sub-korea-before-item-large > div {
+        margin-top: 20px;
     }
 
     .sub-korea-before-item-large div p {
-        padding: 22px 0;
+        margin: 0;
+        padding: 18px 0;
+    }
+
+    .sub-korea-before-item-large div p:first-child {
+        padding-top: 0;
+    }
+
+    .sub-korea-before-item-large div p:last-child {
+        padding-bottom: 0;
     }
 
     .sub-korea-after {

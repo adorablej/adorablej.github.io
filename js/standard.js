@@ -1027,11 +1027,7 @@
         header.classList.toggle("theme-light", theme === "light");
     }
 
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initHunterUsaPage);
-    } else {
-        initHunterUsaPage();
-    }
+    window.addEventListener("includeLoaded", initHunterUsaPage, { once: true });
 })();
 
 
