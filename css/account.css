@@ -422,17 +422,6 @@
 .sub-account-phone-verification.is-verified .sub-account-code-input-wrap .sub-account-input { border-color:#e5e5e5; background:#f5f5f5; color:#888; opacity:1; -webkit-text-fill-color:#888; }
 .sub-account-phone-verification.is-verified .sub-account-code-timer { display:none; }
 
-@media (max-width: 767px) {
-    .sub-account-phone-request-row { grid-template-columns:minmax(0,1fr) 112px; gap:10px; }
-    .sub-account-phone-code-row { grid-template-columns:minmax(0,1fr) 112px; gap:10px; }
-    .sub-account-phone-code-button { height:56px; padding:0 10px; font-size:14px; }
-    .sub-account-phone-code-area { margin-top:10px; }
-    .sub-account-phone-verification .sub-account-code-input-wrap .sub-account-input { padding-right:68px; }
-    .sub-account-phone-verification .sub-account-code-timer { right:16px; font-size:13px; }
-    .sub-account-phone-verification .sub-account-code-feedback { min-height:28px; margin-top:8px; }
-    .sub-account-phone-verification .sub-account-code-status,
-    .sub-account-phone-verification .sub-account-code-resend { font-size:12px; }
-}
 
 /* ========================================
    Phone verification login
@@ -465,7 +454,36 @@
 .sub-account-login-code-actions { grid-template-columns:repeat(2,minmax(0,1fr)); gap:calc(12 * var(--vw)); }
 .sub-account-button:disabled { border-color:#efc6c3; background:#efc6c3; color:#fff; cursor:not-allowed; }
 
-@media (max-width:768px) {
+
+/* Policy agreement modal */
+.policy-modal { position:fixed; z-index:2000; inset:0; display:flex; align-items:center; justify-content:center; padding:40px; visibility:hidden; opacity:0; transition:opacity .25s ease,visibility .25s ease; }
+.policy-modal.is-open { visibility:visible; opacity:1; }
+.policy-modal__dim { position:absolute; inset:0; width:100%; height:100%; padding:0; border:0; background:rgba(0,0,0,.6); cursor:pointer; }
+.policy-modal__header { flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; min-height:calc(130 * var(--vw)); padding:0; box-sizing:border-box; border-bottom:0; }
+.policy-modal__header h2 { margin:0; color:#111; font-size:calc(38 * var(--vw)); font-weight:700; line-height:1.2; letter-spacing:-.045em; }
+.policy-modal__body { flex:1; min-height:0; margin:0; padding:0; overflow-y:auto; scrollbar-width:thin; scrollbar-color:#d8d8d8 transparent; }
+.policy-modal__body::-webkit-scrollbar { width:calc(6 * var(--vw)); }
+.policy-modal__body::-webkit-scrollbar-track { background:transparent; }
+.policy-modal__body::-webkit-scrollbar-thumb { border-radius:999px; background:#d8d8d8; }
+.policy-modal__footer { display:none; }
+.policy-modal__confirm { min-width:150px; height:50px; border:1px solid var(--red); border-radius:999px; background:var(--red); color:#fff; font-family:inherit; font-size:16px; cursor:pointer; }
+body.is-policy-modal-open { overflow:hidden; }
+
+
+/* ========================================
+Mobile (720px and below)
+======================================== */
+@media (max-width: 720px) {
+    .sub-account-phone-request-row { grid-template-columns:minmax(0,1fr) 112px; gap:10px; }
+    .sub-account-phone-code-row { grid-template-columns:minmax(0,1fr) 112px; gap:10px; }
+    .sub-account-phone-code-button { height:56px; padding:0 10px; font-size:14px; }
+    .sub-account-phone-code-area { margin-top:10px; }
+    .sub-account-phone-verification .sub-account-code-input-wrap .sub-account-input { padding-right:68px; }
+    .sub-account-phone-verification .sub-account-code-timer { right:16px; font-size:13px; }
+    .sub-account-phone-verification .sub-account-code-feedback { min-height:28px; margin-top:8px; }
+    .sub-account-phone-verification .sub-account-code-status,
+    .sub-account-phone-verification .sub-account-code-resend { font-size:12px; }
+
     .sub-account-login-section {
         height: 640px;
         min-height: 640px;
@@ -824,22 +842,7 @@
         padding: 0 24px;
         font-size: 14px;
     }
-}
 
-/* Policy agreement modal */
-.policy-modal { position:fixed; z-index:2000; inset:0; display:flex; align-items:center; justify-content:center; padding:40px; visibility:hidden; opacity:0; transition:opacity .25s ease,visibility .25s ease; }
-.policy-modal.is-open { visibility:visible; opacity:1; }
-.policy-modal__dim { position:absolute; inset:0; width:100%; height:100%; padding:0; border:0; background:rgba(0,0,0,.6); cursor:pointer; }
-.policy-modal__header { flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; min-height:calc(130 * var(--vw)); padding:0; box-sizing:border-box; border-bottom:0; }
-.policy-modal__header h2 { margin:0; color:#111; font-size:calc(38 * var(--vw)); font-weight:700; line-height:1.2; letter-spacing:-.045em; }
-.policy-modal__body { flex:1; min-height:0; margin:0; padding:0; overflow-y:auto; scrollbar-width:thin; scrollbar-color:#d8d8d8 transparent; }
-.policy-modal__body::-webkit-scrollbar { width:calc(6 * var(--vw)); }
-.policy-modal__body::-webkit-scrollbar-track { background:transparent; }
-.policy-modal__body::-webkit-scrollbar-thumb { border-radius:999px; background:#d8d8d8; }
-.policy-modal__footer { display:none; }
-.policy-modal__confirm { min-width:150px; height:50px; border:1px solid var(--red); border-radius:999px; background:var(--red); color:#fff; font-family:inherit; font-size:16px; cursor:pointer; }
-body.is-policy-modal-open { overflow:hidden; }
-@media (max-width:768px) {
     .policy-modal { padding:20px; }
     .policy-modal__header { min-height:88px; padding:0; }
     .policy-modal__header h2 { font-size:26px; }

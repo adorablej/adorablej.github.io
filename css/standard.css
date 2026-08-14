@@ -1495,38 +1495,6 @@ overflow-y: visible;
     scroll-margin-top: 120px;
 }
 
-@media (max-width: 767px) {
-    .sub-partners-intro {
-        height: 300px;
-        min-height: 0;
-    }
-
-    .sub-partners-intro-content {
-        width: 100%;
-    }
-
-    .sub-partners-category-link {
-        display: block;
-        min-height: 0;
-        color: #fff;
-        font-size: 22px;
-        line-height: 36px;
-        white-space: nowrap;
-        opacity: .45;
-    }
-
-    .sub-partners-category-badge {
-        top: -4px;
-        right: -22px;
-        width: auto;
-        height: 18px;
-        padding: 0 7px;
-        font-size: 10px;
-        line-height: 18px;
-        box-sizing: border-box;
-    }
-
-}
 
 .sub-partners-directory {
     padding: calc(120 * var(--vw)) 0 calc(160 * var(--vw));
@@ -2227,7 +2195,42 @@ History 연도별 1920 시안 좌표
    - Design width: 360px
    - Mobile breakpoint: 720px
 ========================================================= */
+
+
+/* ========================================
+Mobile (720px and below)
+======================================== */
 @media (max-width: 720px) {
+    .sub-partners-intro {
+        height: 300px;
+        min-height: 0;
+    }
+
+    .sub-partners-intro-content {
+        width: 100%;
+    }
+
+    .sub-partners-category-link {
+        display: block;
+        min-height: 0;
+        color: #fff;
+        font-size: 22px;
+        line-height: 36px;
+        white-space: nowrap;
+        opacity: .45;
+    }
+
+    .sub-partners-category-badge {
+        top: -4px;
+        right: -22px;
+        width: auto;
+        height: 18px;
+        padding: 0 7px;
+        font-size: 10px;
+        line-height: 18px;
+        box-sizing: border-box;
+    }
+
     .sub-partners-top-button {
         right: 20px;
         bottom: 20px;

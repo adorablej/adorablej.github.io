@@ -140,13 +140,6 @@
 .sub-mypage-table td:nth-child(2) { text-align: left; }
 .sub-mypage-table .sub-button-more { min-width: calc(110 * var(--vw)); padding: calc(3 * var(--vw)) calc(22 * var(--vw)); font-size: calc(14 * var(--vw)); line-height: calc(28 * var(--vw)); }
 
-@media (max-width: 1024px) {
-    .sub-mypage-inner { grid-template-columns: 1fr; gap: 50px; }
-    .sub-mypage-sidebar { width: 100%; }
-    .sub-mypage-nav { display: grid; grid-template-columns: repeat(2, 1fr); }
-    .sub-mypage-nav-group { grid-column: span 1; }
-    .sub-mypage-product-slider-wrap { padding: 0 50px; }
-}
 
 
 /* ========================================
@@ -692,80 +685,6 @@ body.is-modal-open {
 .sub-mypage-detail-more .sub-mypage-more-menu { top:0; }
 .sub-mypage-detail-parts-title { border-bottom:0; }
 
-@media (min-width: 721px) {
-    .sub-mypage-product-detail .sub-mypage-detail-product {
-        grid-template-columns: calc(292 * var(--vw)) minmax(0, 1fr) calc(178 * var(--vw));
-        gap: calc(48 * var(--vw));
-        padding: calc(38 * var(--vw)) 0;
-    }
-    .sub-mypage-product-detail .sub-mypage-detail-product::before {
-        content: "";
-        position: absolute;
-        top: calc(193 * var(--vw));
-        right: 0;
-        left: calc(340 * var(--vw));
-        height: 1px;
-        background: #ddd;
-    }
-    .sub-mypage-product-detail .sub-mypage-detail-image {
-        height: calc(292 * var(--vw));
-    }
-    .sub-mypage-product-detail .sub-mypage-detail-summary {
-        align-self: stretch;
-        padding-top: calc(21 * var(--vw));
-        box-sizing: border-box;
-    }
-    .sub-mypage-product-detail .sub-mypage-detail-summary .sub-mypage-product-status {
-        min-width: calc(78 * var(--vw));
-        height: calc(33 * var(--vw));
-        margin-bottom: calc(21 * var(--vw));
-        font-size: calc(13 * var(--vw));
-    }
-    .sub-mypage-product-detail .sub-mypage-detail-summary small {
-        display: block;
-        font-size: calc(16 * var(--vw));
-        line-height: 1.25;
-    }
-    .sub-mypage-product-detail .sub-mypage-detail-summary > strong {
-        display: block;
-        margin-top: calc(5 * var(--vw));
-        font-size: calc(23 * var(--vw));
-        line-height: 1.2;
-        white-space: nowrap;
-    }
-    .sub-mypage-product-detail .sub-mypage-detail-summary dl {
-        margin-top: calc(63 * var(--vw));
-    }
-    .sub-mypage-product-detail .sub-mypage-detail-summary dl > div {
-        grid-template-columns: calc(168 * var(--vw)) 1fr;
-        padding: calc(8 * var(--vw)) 0;
-    }
-    .sub-mypage-product-detail .sub-mypage-detail-summary dt,
-    .sub-mypage-product-detail .sub-mypage-detail-summary dd {
-        font-size: calc(16 * var(--vw));
-    }
-    .sub-mypage-product-detail .sub-mypage-detail-summary dt { font-weight: 700; }
-    .sub-mypage-product-detail .sub-mypage-detail-more {
-        align-self: start;
-        margin-top: calc(86 * var(--vw));
-    }
-    .sub-mypage-product-detail .sub-mypage-detail-more .sub-mypage-more-menu {
-        top: 0;
-        right: calc(32 * var(--vw));
-        width: calc(146 * var(--vw));
-        box-shadow: none;
-    }
-    .sub-mypage-product-detail .sub-mypage-detail-more .sub-mypage-more-menu a {
-        min-height: calc(58 * var(--vw));
-        font-size: calc(16 * var(--vw));
-    }
-    .sub-mypage-product-detail .sub-mypage-detail-more .sub-mypage-more-menu a:first-child {
-        border-color: var(--red);
-        background: var(--red);
-        color: #fff;
-        font-weight: 700;
-    }
-}
 
 .sub-mypage-parts-filter { display:grid; grid-template-columns:calc(340 * var(--vw)) minmax(0,1fr); gap:calc(18 * var(--vw)); margin-top:calc(28 * var(--vw)); }
 .sub-mypage-parts-table { border-top:1px solid #222; }
@@ -1020,16 +939,7 @@ button.sub-mypage-part-text {
     min-height: calc(150 * var(--vw));
     justify-content: center;
 }
-@media (max-width: 1024px) {
-    .sub-mypage-training-list { grid-template-columns: 1fr; }
-    .sub-mypage-training .sub-training-day { min-height: 100px; }
-}
 
-@media (max-width: 640px) {
-    .sub-mypage-training .sub-training-day { min-height: 72px; padding: 8px 6px; }
-    .sub-mypage-training .sub-training-event { padding: 3px 4px; font-size: 9px; }
-    .sub-mypage-training-list { margin-top: 28px; }
-}
 
 /* ========================================
    My Page - Training History
@@ -1069,12 +979,6 @@ button.sub-mypage-part-text {
     letter-spacing: .28em;
     cursor: pointer;
 }
-@media (max-width: 768px) {
-    .sub-mypage-training-history-table { overflow-x: auto; }
-    .sub-mypage-training-history-head,
-    .sub-mypage-training-history-row { grid-template-columns: 130px 210px 110px 110px; min-width: 560px; }
-    .sub-mypage-history-view { min-width: 88px; height: 40px; }
-}
 
 /* ========================================
    My Page Home - Revised
@@ -1111,7 +1015,109 @@ body.is-mypage-home-modal-open { overflow: hidden; }
 /* ========================================
    My Page Home - Mobile
 ======================================== */
-@media (max-width: 767px) {
+
+
+/* ========================================
+Desktop (721px and above)
+======================================== */
+@media (min-width: 721px) {
+    .sub-mypage-product-detail .sub-mypage-detail-product {
+        grid-template-columns: calc(292 * var(--vw)) minmax(0, 1fr) calc(178 * var(--vw));
+        gap: calc(48 * var(--vw));
+        padding: calc(38 * var(--vw)) 0;
+    }
+    .sub-mypage-product-detail .sub-mypage-detail-product::before {
+        content: "";
+        position: absolute;
+        top: calc(193 * var(--vw));
+        right: 0;
+        left: calc(340 * var(--vw));
+        height: 1px;
+        background: #ddd;
+    }
+    .sub-mypage-product-detail .sub-mypage-detail-image {
+        height: calc(292 * var(--vw));
+    }
+    .sub-mypage-product-detail .sub-mypage-detail-summary {
+        align-self: stretch;
+        padding-top: calc(21 * var(--vw));
+        box-sizing: border-box;
+    }
+    .sub-mypage-product-detail .sub-mypage-detail-summary .sub-mypage-product-status {
+        min-width: calc(78 * var(--vw));
+        height: calc(33 * var(--vw));
+        margin-bottom: calc(21 * var(--vw));
+        font-size: calc(13 * var(--vw));
+    }
+    .sub-mypage-product-detail .sub-mypage-detail-summary small {
+        display: block;
+        font-size: calc(16 * var(--vw));
+        line-height: 1.25;
+    }
+    .sub-mypage-product-detail .sub-mypage-detail-summary > strong {
+        display: block;
+        margin-top: calc(5 * var(--vw));
+        font-size: calc(23 * var(--vw));
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+    .sub-mypage-product-detail .sub-mypage-detail-summary dl {
+        margin-top: calc(63 * var(--vw));
+    }
+    .sub-mypage-product-detail .sub-mypage-detail-summary dl > div {
+        grid-template-columns: calc(168 * var(--vw)) 1fr;
+        padding: calc(8 * var(--vw)) 0;
+    }
+    .sub-mypage-product-detail .sub-mypage-detail-summary dt,
+    .sub-mypage-product-detail .sub-mypage-detail-summary dd {
+        font-size: calc(16 * var(--vw));
+    }
+    .sub-mypage-product-detail .sub-mypage-detail-summary dt { font-weight: 700; }
+    .sub-mypage-product-detail .sub-mypage-detail-more {
+        align-self: start;
+        margin-top: calc(86 * var(--vw));
+    }
+    .sub-mypage-product-detail .sub-mypage-detail-more .sub-mypage-more-menu {
+        top: 0;
+        right: calc(32 * var(--vw));
+        width: calc(146 * var(--vw));
+        box-shadow: none;
+    }
+    .sub-mypage-product-detail .sub-mypage-detail-more .sub-mypage-more-menu a {
+        min-height: calc(58 * var(--vw));
+        font-size: calc(16 * var(--vw));
+    }
+    .sub-mypage-product-detail .sub-mypage-detail-more .sub-mypage-more-menu a:first-child {
+        border-color: var(--red);
+        background: var(--red);
+        color: #fff;
+        font-weight: 700;
+    }
+}
+
+
+/* ========================================
+Mobile (720px and below)
+======================================== */
+@media (max-width: 720px) {
+    .sub-mypage-inner { grid-template-columns: 1fr; gap: 50px; }
+    .sub-mypage-sidebar { width: 100%; }
+    .sub-mypage-nav { display: grid; grid-template-columns: repeat(2, 1fr); }
+    .sub-mypage-nav-group { grid-column: span 1; }
+    .sub-mypage-product-slider-wrap { padding: 0 50px; }
+
+    .sub-mypage-training-list { grid-template-columns: 1fr; }
+    .sub-mypage-training .sub-training-day { min-height: 100px; }
+
+    .sub-mypage-training .sub-training-day { min-height: 72px; padding: 8px 6px; }
+    .sub-mypage-training .sub-training-event { padding: 3px 4px; font-size: 9px; }
+    .sub-mypage-training-list { margin-top: 28px; }
+
+    .sub-mypage-training-history-table { overflow-x: auto; }
+    .sub-mypage-training-history-head,
+    .sub-mypage-training-history-row { grid-template-columns: 130px 210px 110px 110px; min-width: 560px; }
+    .sub-mypage-history-view { min-width: 88px; height: 40px; }
+
     html { scrollbar-gutter: auto; }
     .sub-mypage-home-page { overflow-x: hidden; }
     .sub-mypage-page .page-heading:not(.page-heading--policy) {

@@ -194,7 +194,11 @@ html {
     display: none !important;
 }
 
-@media (max-width: 767px) {
+
+/* ========================================
+Mobile (720px and below)
+======================================== */
+@media (max-width: 720px) {
     .sub-pagination {
         gap: 18px;
         margin-top: 40px;
