@@ -29,6 +29,7 @@ function initPolicyModal() {
 
     var title = modal.querySelector("[data-policy-modal-title]");
     var content = modal.querySelector("[data-policy-modal-content]");
+    var body = modal.querySelector(".policy-modal__body");
     var lastFocusedElement = null;
 
     function openModal(policyKey) {
@@ -37,6 +38,7 @@ function initPolicyModal() {
         lastFocusedElement = document.activeElement;
         if (title) title.textContent = policy.title;
         if (content) content.textContent = policy.content;
+        if (body) body.scrollTop = 0;
         modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
         document.body.classList.add("is-policy-modal-open");

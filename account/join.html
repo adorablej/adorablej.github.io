@@ -12,7 +12,7 @@
     <link href="/css/common.css?v=20260814" rel="stylesheet" />
     <link href="/css/layout.css?v=20260814" rel="stylesheet" />
     <link href="/css/common-form.css?v=20260814" rel="stylesheet" />
-    <link href="/css/account.css?v=20260814" rel="stylesheet" />
+    <link href="/css/account.css?v=20260814-3" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -127,7 +127,7 @@
                             <input class="sub-form-input sub-account-input" id="business-number" name="businessNumber" type="text" inputmode="numeric" maxlength="10" placeholder="(-) 제외한 숫자만 입력해 주세요." data-required data-message="사업자등록번호를 입력해 주세요." />
                             <button class="sub-account-line-button sub-account-line-button-under" id="business-auth-button" type="button">사업자 인증</button>
                             <input id="business-authenticated" type="hidden" value="" data-required data-message="사업자 인증을 진행해 주세요." />
-                            <p class="sub-account-helper" id="business-auth-status" aria-live="polite"></p>
+                            <p class="sub-account-code-status" id="business-auth-status" hidden aria-live="polite"></p>
                             <p class="sub-form-message sub-account-error" aria-live="polite"></p>
                         </div>
 
@@ -169,7 +169,7 @@
                         <div class="sub-form-group sub-account-field sub-account-file-field">
                             <div class="sub-account-label-row">
                                 <span class="sub-account-label sub-account-required">사업자등록증 첨부</span>
-                                <a class="sub-account-text-button" href="#" id="file-example-link">찾아보기</a>
+                                <label class="sub-account-text-button" for="business-file" id="file-example-link">찾아보기</label>
                             </div>
                             <label class="sub-account-file" for="business-file">
                                 <span id="business-file-name">파일을 첨부해주세요.</span>
@@ -207,8 +207,8 @@
     <script src="/js/include.js?v=20260814"></script>
     <script src="/js/common.js?v=20260814"></script>
     <script src="/js/form.js?v=20260814"></script>
-    <script src="/js/account.js?v=20260814"></script>
+    <script src="/js/account.js?v=20260814-7"></script>
     <script src="/js/policy-data.js?v=20260814"></script>
-    <script src="/js/policy.js?v=20260814"></script>
+    <script src="/js/policy.js?v=20260814-1"></script>
 </body>
 </html>

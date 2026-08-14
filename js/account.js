@@ -13,7 +13,22 @@
         initPlaceholderLinks();
         initCompletePage();
         initNumericOnlyInputs();
+        initDatePickerInputs();
     });
+
+    function initDatePickerInputs() {
+        document.querySelectorAll('.sub-account-date-input[type="date"]').forEach(function (input) {
+            input.addEventListener('click', function () {
+                if (typeof input.showPicker !== 'function') return;
+
+                try {
+                    input.showPicker();
+                } catch (error) {
+                    // showPicker 미지원 환경에서는 브라우저 기본 날짜 선택 동작을 사용합니다.
+                }
+            });
+        });
+    }
 
     function initNumericOnlyInputs() {
         document.querySelectorAll('input[inputmode="numeric"]:not([data-phone])').forEach(function (input) {
@@ -267,8 +282,6 @@
         var radios = document.querySelectorAll('input[name="businessType"]');
         var corporationField = document.getElementById('corporation-number-field');
         var corporationInput = document.getElementById('corporation-number');
-        var businessAuth = document.getElementById('business-authenticated');
-        var businessButton = document.getElementById('business-auth-button');
         var fileGuide = document.getElementById('business-file-guide');
 
         if (!radios.length || !corporationField || !corporationInput) return;
@@ -279,18 +292,6 @@
 
             corporationField.classList.toggle('is-hidden', !isCorporation);
             corporationInput.disabled = !isCorporation;
-
-            if (businessAuth) {
-                businessAuth.disabled = !isCorporation;
-                if (!isCorporation) {
-                    businessAuth.value = '';
-                    clearFieldState(businessAuth.closest('.sub-form-group'));
-                } else if (!businessButton.classList.contains('is-complete')) {
-                    businessAuth.value = '';
-                }
-            }
-
-            if (businessButton) businessButton.hidden = !isCorporation;
 
             if (fileGuide && fileGuide.firstElementChild) {
                 fileGuide.firstElementChild.textContent = isCorporation
@@ -378,20 +379,38 @@
 
     function initAuthButtons() {
         var businessButton = document.getElementById('business-auth-button');
+        var businessNumber = document.getElementById('business-number');
+        var businessAuth = document.getElementById('business-authenticated');
+        var businessStatus = document.getElementById('business-auth-status');
 
-        if (businessButton) {
+        if (businessButton && businessNumber && businessAuth) {
             businessButton.addEventListener('click', function () {
-                var ids = ['business-number', 'business-name', 'opening-date', 'representative-name'];
-                var missing = ids.map(function (id) { return document.getElementById(id); })
-                    .find(function (input) { return !input || !input.value.trim(); });
+                var number = businessNumber.value.replace(/\D/g, '');
 
-                if (missing) {
-                    setFieldError(missing.closest('.sub-form-group'), '사업자 인증에 필요한 정보를 먼저 입력해 주세요.');
-                    missing.focus();
+                if (number.length !== 10) {
+                    setFieldError(businessNumber.closest('.sub-form-group'), '10자리 사업자등록번호를 입력해 주세요.');
+                    businessStatus.hidden = true;
+                    businessStatus.className = 'sub-account-code-status';
+                    businessStatus.textContent = '';
+                    businessNumber.focus();
                     return;
                 }
 
+                clearFieldState(businessNumber.closest('.sub-form-group'));
                 markAuthenticated('business-authenticated', businessButton, 'business-auth-status', '사업자 인증이 완료되었습니다.');
+            });
+
+            businessNumber.addEventListener('input', function () {
+                if (!businessAuth.value) return;
+                businessAuth.value = '';
+                businessButton.textContent = '사업자 인증';
+                businessButton.disabled = false;
+                businessButton.classList.remove('is-complete');
+                if (businessStatus) {
+                    businessStatus.hidden = true;
+                    businessStatus.className = 'sub-account-code-status';
+                    businessStatus.textContent = '';
+                }
             });
         }
     }
@@ -533,8 +552,13 @@
         hidden.value = 'true';
         hidden.dispatchEvent(new Event('change', { bubbles: true }));
         button.textContent = '인증 완료';
+        button.disabled = true;
         button.classList.add('is-complete');
-        if (status) status.textContent = message;
+        if (status) {
+            status.hidden = false;
+            status.className = 'sub-account-code-status is-success';
+            status.textContent = message;
+        }
     }
 
     function initAddressSearch() {
@@ -552,7 +576,7 @@
     }
 
     function initPlaceholderLinks() {
-        document.querySelectorAll('.sub-account-view-link, #file-example-link').forEach(function (link) {
+        document.querySelectorAll('.sub-account-view-link').forEach(function (link) {
             link.addEventListener('click', function (event) {
                 event.preventDefault();
             });
