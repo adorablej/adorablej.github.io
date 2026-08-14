@@ -14,7 +14,7 @@
     <link href="/css/main.css?v=20260814" rel="stylesheet">
     <link href="/css/common-form.css?v=20260814" rel="stylesheet">
     <link href="/css/support.css?v=20260814" rel="stylesheet">
-    <link href="/css/mypage.css?v=20260814" rel="stylesheet">
+    <link href="/css/mypage.css?v=20260814-6" rel="stylesheet">
 </head>
 <body>
     <div data-include="/includes/header.html"></div>
@@ -55,19 +55,19 @@
                             <strong role="columnheader">수강일자</strong><strong role="columnheader">수강제목</strong><strong role="columnheader">수강상태</strong><strong role="columnheader">상세</strong>
                         </div>
                         <div class="sub-mypage-training-history-body">
-                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.07.19" data-time="09:00" data-course="얼라인먼트 Level 1" data-count="00/00" data-status="신청완료" data-color="training-color-1">
+                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.07.19" data-time="09:00" data-course="얼라인먼트 Level 1" data-count="00/00" data-status="신청완료" data-color="training-color-1" data-instructor="김헌터" data-fee="무료">
                                 <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
                             </div>
-                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.07.27" data-time="16:00" data-course="얼라인먼트 Level 1" data-count="00/00" data-status="신청완료" data-color="training-color-4">
+                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.07.27" data-time="16:00" data-course="얼라인먼트 Level 1" data-count="00/00" data-status="신청완료" data-color="training-color-4" data-instructor="김헌터" data-fee="무료">
                                 <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
                             </div>
-                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.08.03" data-time="10:00" data-course="휠 얼라인먼트 Level 2" data-count="04/20" data-status="신청완료" data-color="training-color-3">
+                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.08.03" data-time="10:00" data-course="휠 얼라인먼트 Level 2" data-count="04/20" data-status="신청완료" data-color="training-color-3" data-instructor="김헌터" data-fee="15,000원">
                                 <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
                             </div>
-                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.08.10" data-time="14:00" data-course="얼라인먼트 Level 1" data-count="10/20" data-status="신청완료" data-color="training-color-2">
+                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.08.10" data-time="14:00" data-course="얼라인먼트 Level 1" data-count="10/20" data-status="신청완료" data-color="training-color-2" data-instructor="김헌터" data-fee="무료">
                                 <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
                             </div>
-                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.08.17" data-time="09:00" data-course="얼라인먼트 Level 3" data-count="12/20" data-status="신청완료" data-color="training-color-5">
+                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.08.17" data-time="09:00" data-course="얼라인먼트 Level 3" data-count="12/20" data-status="신청완료" data-color="training-color-5" data-instructor="김헌터" data-fee="무료">
                                 <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
                             </div>
                         </div>
@@ -85,7 +85,10 @@
             <div class="modal-content sub-training-modal-body">
                 <div class="sub-training-modal-summary">
                     <strong class="sub-training-modal-datetime" id="training-history-modal-title" data-history-modal-date></strong>
-                    <div class="sub-training-modal-course"><i class="sub-training-modal-course-dot" data-history-modal-dot aria-hidden="true"></i><span data-history-modal-course></span></div>
+                    <div class="sub-training-modal-course-row">
+                        <div class="sub-training-modal-course"><i class="sub-training-modal-course-dot" data-history-modal-dot aria-hidden="true"></i><span data-history-modal-course></span></div>
+                        <div class="sub-training-modal-info"><span data-history-modal-instructor></span><span data-history-modal-fee></span></div>
+                    </div>
                 </div>
                 <div class="sub-training-modal-actions"><button type="button" class="sub-training-modal-cancel" data-training-history-close>닫기</button><button type="button" class="sub-training-modal-submit" data-training-history-cancel>신청 취소하기</button></div>
             </div>
@@ -93,6 +96,6 @@
     </div>
 
     <div class="footer-section" data-header-theme="dark" data-include="/includes/footer.html"></div>
-    <script src="/js/include.js?v=20260814"></script><script src="/js/common.js?v=20260814"></script><script src="/js/main.js?v=20260814"></script><script src="/js/form.js?v=20260814"></script><script src="/js/mypage.js?v=20260814"></script>
+    <script src="/js/include.js?v=20260814"></script><script src="/js/common.js?v=20260814"></script><script src="/js/main.js?v=20260814"></script><script src="/js/form.js?v=20260814"></script><script src="/js/mypage.js?v=20260814-1"></script>
 </body>
 </html>

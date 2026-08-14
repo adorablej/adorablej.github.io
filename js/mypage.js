@@ -482,6 +482,8 @@ function initMypageTrainingHistory() {
     const date = modal.querySelector('[data-history-modal-date]');
     const course = modal.querySelector('[data-history-modal-course]');
     const dot = modal.querySelector('[data-history-modal-dot]');
+    const instructor = modal.querySelector('[data-history-modal-instructor]');
+    const fee = modal.querySelector('[data-history-modal-fee]');
     const cancelButton = modal.querySelector('[data-training-history-cancel]');
     let activeRow = null;
     let lastFocusedElement = null;
@@ -498,6 +500,8 @@ function initMypageTrainingHistory() {
         lastFocusedElement = document.activeElement;
         date.textContent = `${row.dataset.date} / ${row.dataset.time}`;
         course.textContent = `${row.dataset.course} (${row.dataset.count})`;
+        instructor.textContent = `강사이름 : ${row.dataset.instructor || '-'} / `;
+        fee.textContent = row.dataset.fee || '-';
         const historyColorMap = {
             'training-color-1': '#3ccba1', 'training-color-2': '#ec45ad',
             'training-color-3': '#19a8e6', 'training-color-4': '#9566e9',
