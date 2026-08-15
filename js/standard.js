@@ -9,7 +9,6 @@
         initMainVisualMotion();
         initStoryMotion();
         initAwardsHero();
-        initHeaderTheme();
     }
 
     function initMainVisualMotion() {
@@ -369,30 +368,6 @@
         });
     }
 
-    function initHeaderTheme() {
-        const header = document.querySelector(".header");
-        if (!header) return;
-
-        document.querySelectorAll("[data-header-theme]").forEach(function (target) {
-            ScrollTrigger.create({
-                trigger: target,
-                start: "top 5%",
-                end: "bottom 5%",
-                onEnter: function () {
-                    setHeaderTheme(header, target.dataset.headerTheme);
-                },
-                onEnterBack: function () {
-                    setHeaderTheme(header, target.dataset.headerTheme);
-                }
-            });
-        });
-    }
-
-    function setHeaderTheme(header, theme) {
-        header.classList.toggle("theme-dark", theme === "dark");
-        header.classList.toggle("theme-light", theme === "light");
-    }
-
     if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", initStandardPage);
     } else {
@@ -503,7 +478,6 @@
         initTrustAccordion();
         initValueMotions();
         initTrackpadScrollStability();
-        initHeaderTheme();
     }
 
     function initHeroStory() {
@@ -598,6 +572,7 @@
         });
         gsap.set(copy, {
             autoAlpha: 0,
+            yPercent: -50,
             y: mobile ? -mobilePinOffset : 0
         });
         gsap.set(lines, {
@@ -1003,30 +978,6 @@
         });
     }
 
-    function initHeaderTheme() {
-        const header = document.querySelector(".header");
-        if (!header) return;
-
-        document.querySelectorAll("[data-header-theme]").forEach(function (target) {
-            ScrollTrigger.create({
-                trigger: target,
-                start: "top 5%",
-                end: "bottom 5%",
-                onEnter: function () {
-                    setHeaderTheme(header, target.dataset.headerTheme);
-                },
-                onEnterBack: function () {
-                    setHeaderTheme(header, target.dataset.headerTheme);
-                }
-            });
-        });
-    }
-
-    function setHeaderTheme(header, theme) {
-        header.classList.toggle("theme-dark", theme === "dark");
-        header.classList.toggle("theme-light", theme === "light");
-    }
-
     window.addEventListener("includeLoaded", initHunterUsaPage, { once: true });
 })();
 
@@ -1034,6 +985,191 @@
 /* HUNTER History */
 (function () {
     "use strict";
+
+    function initMobileHistoryMotion() {
+        const timeline = document.querySelector(".sub-history-mobile-timeline");
+        if (!timeline || timeline.classList.contains("is-motion-ready")) return;
+
+        const scenes = Array.from(timeline.querySelectorAll(".sub-history-mobile-scene"));
+        const firstSource = scenes[0] && scenes[0].querySelector(".sub-history-mobile-copy");
+        if (!scenes.length || !firstSource) return;
+
+        const overlay = firstSource.cloneNode(true);
+        overlay.classList.add("sub-history-mobile-overlay");
+        overlay.removeAttribute("aria-hidden");
+        timeline.insertBefore(overlay, scenes[0]);
+        timeline.classList.add("is-motion-ready");
+
+        const year = overlay.querySelector("strong");
+        const content = overlay.querySelector(".sub-history-mobile-copy > div");
+        const title = content && content.querySelector("h2");
+        const description = content && content.querySelector("p");
+        let activeYear = year ? year.textContent.trim() : "1940";
+        let activeIndex = 0;
+        let changeId = 0;
+
+        function buildYearDigits(value) {
+            if (!year) return;
+            year.innerHTML = "";
+
+            value.split("").forEach(function (digit) {
+                const digitWrap = document.createElement("span");
+                const track = document.createElement("span");
+                const valueEl = document.createElement("span");
+
+                digitWrap.className = "sub-history-year-digit";
+                track.className = "sub-history-year-digit-track";
+                valueEl.className = "sub-history-year-digit-value";
+                valueEl.textContent = digit;
+                track.appendChild(valueEl);
+                digitWrap.appendChild(track);
+                year.appendChild(digitWrap);
+            });
+        }
+
+        function rollDigit(digitWrap, oldDigit, newDigit, direction, delay) {
+            if (oldDigit === newDigit) return;
+
+            const track = digitWrap.querySelector(".sub-history-year-digit-track");
+            if (!track) return;
+
+            const oldEl = document.createElement("span");
+            const newEl = document.createElement("span");
+            oldEl.className = "sub-history-year-digit-value";
+            newEl.className = "sub-history-year-digit-value";
+            oldEl.textContent = oldDigit;
+            newEl.textContent = newDigit;
+            track.innerHTML = "";
+
+            if (direction > 0) {
+                track.appendChild(oldEl);
+                track.appendChild(newEl);
+                gsap.set(track, { yPercent: 0 });
+                gsap.to(track, {
+                    yPercent: -50,
+                    duration: .46,
+                    delay: delay,
+                    ease: "power3.inOut",
+                    onComplete: function () {
+                        track.innerHTML = "";
+                        track.appendChild(newEl);
+                        gsap.set(track, { yPercent: 0 });
+                    }
+                });
+            } else {
+                track.appendChild(newEl);
+                track.appendChild(oldEl);
+                gsap.set(track, { yPercent: -50 });
+                gsap.to(track, {
+                    yPercent: 0,
+                    duration: .46,
+                    delay: delay,
+                    ease: "power3.inOut",
+                    onComplete: function () {
+                        track.innerHTML = "";
+                        track.appendChild(newEl);
+                        gsap.set(track, { yPercent: 0 });
+                    }
+                });
+            }
+        }
+
+        function animateYear(nextYear) {
+            if (!year || activeYear === nextYear) return;
+
+            const oldYear = activeYear.padStart(4, "0");
+            const targetYear = nextYear.padStart(4, "0");
+            const direction = Number(targetYear) > Number(oldYear) ? 1 : -1;
+            const digitWraps = Array.from(year.querySelectorAll(".sub-history-year-digit"));
+            const changedIndexes = [];
+
+            for (let index = 0; index < targetYear.length; index += 1) {
+                if (oldYear[index] !== targetYear[index]) changedIndexes.push(index);
+            }
+
+            changedIndexes.slice().sort(function (a, b) {
+                return direction > 0 ? b - a : a - b;
+            }).forEach(function (digitIndex, orderIndex) {
+                rollDigit(
+                    digitWraps[digitIndex],
+                    oldYear[digitIndex],
+                    targetYear[digitIndex],
+                    direction,
+                    orderIndex * .08
+                );
+            });
+
+            activeYear = targetYear;
+        }
+
+        function changeScene(index, immediate) {
+            if (index < 0 || index >= scenes.length || index === activeIndex && !immediate) return;
+
+            const source = scenes[index].querySelector(".sub-history-mobile-copy");
+            const sourceYear = source && source.querySelector("strong");
+            const sourceTitle = source && source.querySelector("h2");
+            const sourceDescription = source && source.querySelector("p");
+            if (!source || !sourceYear) return;
+
+            activeIndex = index;
+            changeId += 1;
+            const currentId = changeId;
+            animateYear(sourceYear.textContent.trim());
+
+            if (!content || !title || !description) return;
+            gsap.killTweensOf(content);
+
+            if (immediate) {
+                title.textContent = sourceTitle ? sourceTitle.textContent : "";
+                description.textContent = sourceDescription ? sourceDescription.textContent : "";
+                gsap.set(content, { autoAlpha: 1, y: 0 });
+                return;
+            }
+
+            gsap.to(content, {
+                autoAlpha: 0,
+                y: 14,
+                duration: .18,
+                ease: "power1.out",
+                overwrite: true,
+                onComplete: function () {
+                    if (currentId !== changeId) return;
+                    title.textContent = sourceTitle ? sourceTitle.textContent : "";
+                    description.textContent = sourceDescription ? sourceDescription.textContent : "";
+                    gsap.fromTo(content,
+                        { autoAlpha: 0, y: -12 },
+                        { autoAlpha: 1, y: 0, duration: .32, ease: "power2.out", overwrite: true }
+                    );
+                }
+            });
+        }
+
+        buildYearDigits(activeYear);
+        changeScene(0, true);
+
+        scenes.slice(1).forEach(function (scene, sceneIndex) {
+            const index = sceneIndex + 1;
+            const previousScene = scenes[index - 1];
+            const sceneImages = scene.querySelector(".sub-history-mobile-images");
+            const sceneTitle = scene.querySelector(".sub-history-mobile-copy h2");
+            const hasCopy = Boolean(sceneTitle && sceneTitle.textContent.trim());
+
+            ScrollTrigger.create({
+                trigger: hasCopy ? previousScene : (sceneImages || scene),
+                start: function () {
+                    if (hasCopy) {
+                        return "top+=" + Math.round(previousScene.offsetHeight * 2 / 3) + " top";
+                    }
+                    return "top " + Math.round(window.innerWidth * 120 / 360) + "px";
+                },
+                end: "bottom top",
+                onEnter: function () { changeScene(index, false); },
+                onEnterBack: function () { changeScene(index, false); },
+                onLeaveBack: function () { changeScene(index - 1, false); },
+                invalidateOnRefresh: true
+            });
+        });
+    }
 
     function initHistoryTimeline() {
         const timeline = document.querySelector(".sub-history-timeline");
@@ -1051,8 +1187,25 @@
         const description = timeline.querySelector(".sub-history-center-description");
         const finaleStage = document.querySelector(".sub-history-finale-stage");
         const finaleImage = finaleStage && finaleStage.querySelector(".sub-history-finale-image");
+        const finaleTagline = document.querySelector(".sub-history-finale-copy > span");
+        const mobileHistory = window.matchMedia("(max-width: 720px)").matches;
 
-        if (eraTrack) {
+        if (mobileHistory) initMobileHistoryMotion();
+
+        if (finaleTagline && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+            finaleTagline.addEventListener("pointermove", function (event) {
+                const rect = finaleTagline.getBoundingClientRect();
+                finaleTagline.style.setProperty("--history-hover-x", (event.clientX - rect.left) + "px");
+                finaleTagline.style.setProperty("--history-hover-y", (event.clientY - rect.top) + "px");
+                finaleTagline.classList.add("is-hovered");
+            });
+
+            finaleTagline.addEventListener("pointerleave", function () {
+                finaleTagline.classList.remove("is-hovered");
+            });
+        }
+
+        if (eraTrack && !mobileHistory) {
             gsap.fromTo(eraTrack,
                 { y: "58vh" },
                 {
@@ -1071,12 +1224,14 @@
             );
         }
 
-        if (centerAxis && steps.length) {
+        if (centerAxis && steps.length && !mobileHistory) {
             gsap.fromTo(centerAxis,
                 { y: 0 },
                 {
                     y: function () {
-                        return window.matchMedia("(max-width: 720px)").matches ? -30 : -80;
+                        if (window.matchMedia("(max-width: 720px)").matches) return -30;
+                        if (window.matchMedia("(max-width: 1200px)").matches) return 0;
+                        return -80;
                     },
                     ease: "none",
                     scrollTrigger: {
@@ -1092,34 +1247,59 @@
         }
 
         if (finaleStage && finaleImage) {
-            gsap.fromTo(finaleImage,
-                {
-                    width: function () {
-                        return window.matchMedia("(max-width: 720px)").matches
-                            ? 244
-                            : Math.min(window.innerWidth, 1920) * 940 / 1920;
+            const finaleMedia = gsap.matchMedia();
+
+            finaleMedia.add("(min-width: 721px) and (max-width: 1200px)", function () {
+                finaleStage.classList.add("is-static");
+
+                return function () {
+                    finaleStage.classList.remove("is-static");
+                };
+            });
+
+            finaleMedia.add("(max-width: 720px)", function () {
+                return gsap.fromTo(finaleImage,
+                    {
+                        width: 244,
+                        height: 137
                     },
-                    height: function () {
-                        return window.matchMedia("(max-width: 720px)").matches
-                            ? 137
-                            : Math.min(window.innerWidth, 1920) * 520 / 1920;
+                    {
+                        width: "100%",
+                        height: "100%",
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: finaleStage,
+                            start: "top 85%",
+                            end: "bottom 20%",
+                            scrub: true,
+                            invalidateOnRefresh: true
+                        }
                     }
-                },
-                {
-                    width: "100%",
-                    height: "100%",
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: finaleStage,
-                        start: "center center",
-                        end: "+=70%",
-                        scrub: true,
-                        pin: true,
-                        pinSpacing: true,
-                        invalidateOnRefresh: true
+                );
+            });
+
+            finaleMedia.add("(min-width: 1201px)", function () {
+                return gsap.fromTo(finaleImage,
+                    {
+                        width: function () { return Math.min(window.innerWidth, 1920) * 940 / 1920; },
+                        height: function () { return Math.min(window.innerWidth, 1920) * 520 / 1920; }
+                    },
+                    {
+                        width: "100%",
+                        height: "100%",
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: finaleStage,
+                            start: "center center",
+                            end: "+=70%",
+                            scrub: true,
+                            pin: true,
+                            pinSpacing: true,
+                            invalidateOnRefresh: true
+                        }
                     }
-                }
-            );
+                );
+            });
         }
 
         let activeYear = year ? year.textContent.trim() : "1940";
@@ -1266,25 +1446,27 @@
             });
         }
 
-        buildYearDigits(activeYear);
-        if (copy) copy.dataset.activeYear = activeYear;
+        if (!mobileHistory) {
+            buildYearDigits(activeYear);
+            if (copy) copy.dataset.activeYear = activeYear;
 
-        steps.forEach(function (step) {
-            ScrollTrigger.create({
-                trigger: step,
-                start: "top 58%",
-                end: "bottom 58%",
-                onEnter: function () { changeHistory(step); },
-                onEnterBack: function () { changeHistory(step); }
+            steps.forEach(function (step) {
+                ScrollTrigger.create({
+                    trigger: step,
+                    start: "top 58%",
+                    end: "bottom 58%",
+                    onEnter: function () { changeHistory(step); },
+                    onEnterBack: function () { changeHistory(step); }
+                });
             });
-        });
+        }
 
         ScrollTrigger.refresh();
     }
 
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initHistoryTimeline);
-    } else {
-        initHistoryTimeline();
-    }
+    window.addEventListener("includeLoaded", function () {
+        window.requestAnimationFrame(function () {
+            initHistoryTimeline();
+        });
+    }, { once: true });
 })();

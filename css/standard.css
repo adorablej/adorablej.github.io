@@ -1944,6 +1944,19 @@ HUNTER History
     transform: translateX(-50%);
 }
 
+.sub-history-finale-stage.is-static {
+    height: calc(520 * var(--vw));
+}
+
+.sub-history-finale-stage.is-static::before {
+    top: 0;
+}
+
+.sub-history-finale-stage.is-static .sub-history-finale-image {
+    top: 0;
+    transform: translateX(-50%);
+}
+
 .sub-history-finale-image {
     position: absolute;
     z-index: 1;
@@ -1989,6 +2002,9 @@ HUNTER History
     letter-spacing: -0.06em;
 }
 .sub-history-finale-copy > span {
+    --history-hover-x: 50%;
+    --history-hover-y: 50%;
+    position: relative;
     display: block;
     font-family: "Russo One", sans-serif;
     margin: calc(20 * var(--vw)) 0 0;
@@ -1999,11 +2015,36 @@ HUNTER History
     letter-spacing: -1px;
     margin: calc(150 * var(--vw)) auto;
 }
+
+.sub-history-finale-copy > span::after {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle clamp(54px, 4.67vw, 80px) at var(--history-hover-x) var(--history-hover-y),
+        rgba(198, 0, 0, 1) 0%,
+        rgba(198, 0, 0, .96) 28%,
+        rgba(198, 0, 0, .72) 48%,
+        rgba(198, 0, 0, .28) 66%,
+        rgba(198, 0, 0, 0) 82%
+    );
+    background-clip: text;
+    color: transparent;
+    content: attr(data-text);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sub-history-finale-copy > span.is-hovered::after {
+    opacity: 1;
+}
 /* ========================================
 History 연도별 1920 시안 좌표
 ======================================== */
 .sub-history-timeline {
-    height: calc(11542 * var(--vw));
+    height: calc(calc(10210 * var(--vw)) + 42vh);
 }
 
 .sub-history-era-track {
@@ -2182,7 +2223,7 @@ History 연도별 1920 시안 좌표
 .sub-history-step:nth-child(4) { height: calc(1441 * var(--vw)); }
 .sub-history-step:nth-child(5) { height: calc(1670 * var(--vw)); }
 .sub-history-step:nth-child(6) { height: calc(1570 * var(--vw)); }
-.sub-history-step:nth-child(7) { height: calc(1332 * var(--vw)); }
+.sub-history-step:nth-child(7) { height: 42vh; }
 
 /* 시안에서 카피가 없는 연도 */
 .sub-history-center-copy[data-active-year="1950"] .sub-history-center-content,
@@ -2854,6 +2895,154 @@ Mobile (720px and below)
         z-index: 8;
     }
 
+    .sub-history-mobile-timeline {
+        position: relative;
+        width: 100vw;
+        overflow: clip;
+        background-color: #fff;
+        background-image: none;
+    }
+
+    .sub-history-mobile-scene {
+        position: relative;
+    }
+
+    .sub-history-mobile-copy {
+        position: sticky;
+        z-index: 3;
+        top: 0;
+        width: 100%;
+        height: 100svh;
+        min-height: 640px;
+        color: #111;
+        text-align: center;
+        pointer-events: none;
+    }
+
+    .sub-history-mobile-timeline.is-motion-ready > .sub-history-mobile-overlay {
+        visibility: visible;
+    }
+
+    .sub-history-mobile-timeline.is-motion-ready .sub-history-mobile-scene > .sub-history-mobile-copy {
+        position: relative;
+        top: auto;
+        z-index: 0;
+        visibility: hidden;
+    }
+
+    .sub-history-mobile-timeline.is-motion-ready .sub-history-mobile-scene-1940 > .sub-history-mobile-copy,
+    .sub-history-mobile-timeline.is-motion-ready .sub-history-mobile-scene-1950 > .sub-history-mobile-copy,
+    .sub-history-mobile-timeline.is-motion-ready .sub-history-mobile-scene-1970 > .sub-history-mobile-copy,
+    .sub-history-mobile-timeline.is-motion-ready .sub-history-mobile-scene-1990 > .sub-history-mobile-copy {
+        height: 0;
+        min-height: 0;
+    }
+
+    .sub-history-mobile-line {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 1px;
+        height: 36%;
+        background: var(--red);
+        transform: translateX(-50%);
+    }
+
+    .sub-history-mobile-copy > strong {
+        position: absolute;
+        top: 41.5%;
+        left: 50%;
+        color: var(--red);
+        font-family: "Russo One", sans-serif;
+        font-size: 48px;
+        font-weight: 400;
+        line-height: 58px;
+        transform: translate(-50%, -50%);
+    }
+
+    .sub-history-mobile-copy > strong .sub-history-year-digit {
+        vertical-align: top;
+    }
+
+    .sub-history-mobile-copy > div {
+        position: absolute;
+        top: 62.5%;
+        left: 25px;
+        width: calc(100% - 50px);
+    }
+
+    .sub-history-mobile-copy h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 800;
+        line-height: 26px;
+        letter-spacing: -.04em;
+        word-break: keep-all;
+    }
+
+    .sub-history-mobile-copy p {
+        margin: 18px 0 0;
+        color: #888;
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: -.035em;
+        word-break: keep-all;
+    }
+
+    .sub-history-mobile-images {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+    }
+
+    .sub-history-mobile-images figure {
+        position: absolute;
+        margin: 0;
+    }
+
+    .sub-history-mobile-images img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .sub-history-mobile-scene-1940 .sub-history-mobile-images { height: calc(903 / 360 * 100vw); }
+    .history-mobile-1940-01 { top: calc(30 / 360 * 100vw); left: calc(25 / 360 * 100vw); width: calc(190 / 360 * 100vw); }
+    .history-mobile-1940-02 { top: calc(371 / 360 * 100vw); left: calc(95 / 360 * 100vw); width: calc(240 / 360 * 100vw); }
+    .history-mobile-1940-03 { top: calc(651 / 360 * 100vw); left: calc(25 / 360 * 100vw); width: calc(200 / 360 * 100vw); }
+    .sub-history-mobile-scene-1950 .sub-history-mobile-images { height: calc(971 / 360 * 100vw); }
+    .history-mobile-1950-03 { top: calc(30 / 360 * 100vw); left: calc(135 / 360 * 100vw); width: calc(200 / 360 * 100vw); }
+    .history-mobile-1950-01 { top: calc(290 / 360 * 100vw); left: calc(25 / 360 * 100vw); width: calc(182 / 360 * 100vw); }
+    .history-mobile-1950-02 { top: calc(663 / 360 * 100vw); left: calc(102 / 360 * 100vw); width: calc(233 / 360 * 100vw); }
+
+    .sub-history-mobile-scene-1960 .sub-history-mobile-images { height: calc(740 / 360 * 100vw); }
+    .history-mobile-1960-03 { top: calc(30 / 360 * 100vw); left: calc(25 / 360 * 100vw); width: calc(183 / 360 * 100vw); }
+    .history-mobile-1960-02 { top: calc(299 / 360 * 100vw); left: calc(114 / 360 * 100vw); width: calc(221 / 360 * 100vw); }
+    .history-mobile-1960-01 { top: calc(528 / 360 * 100vw); left: calc(25 / 360 * 100vw); width: calc(248 / 360 * 100vw); }
+
+    .sub-history-mobile-scene-1970 .sub-history-mobile-images { height: calc(945 / 360 * 100vw); }
+    .history-mobile-1960-04 { top: calc(30 / 360 * 100vw); left: calc(117 / 360 * 100vw); width: calc(218 / 360 * 100vw); }
+    .history-mobile-1970-01 { top: calc(400 / 360 * 100vw); left: calc(25 / 360 * 100vw); width: calc(182 / 360 * 100vw); }
+    .history-mobile-1970-02 { top: calc(725 / 360 * 100vw); left: calc(95 / 360 * 100vw); width: calc(240 / 360 * 100vw); }
+
+    .sub-history-mobile-scene-1980 .sub-history-mobile-images { height: calc(740 / 360 * 100vw); }
+    .history-mobile-1980-01 { top: calc(30 / 360 * 100vw); left: calc(25 / 360 * 100vw); width: calc(184 / 360 * 100vw); }
+    .history-mobile-1980-02 { top: calc(299 / 360 * 100vw); left: calc(114 / 360 * 100vw); width: calc(221 / 360 * 100vw); }
+    .history-mobile-1980-03 { top: calc(528 / 360 * 100vw); left: calc(25 / 360 * 100vw); width: calc(247 / 360 * 100vw); }
+
+    .sub-history-mobile-scene-1990 .sub-history-mobile-images { height: calc(930 / 360 * 100vw); }
+    .history-mobile-1990-01 { top: calc(30 / 360 * 100vw); left: calc(110 / 360 * 100vw); width: calc(225 / 360 * 100vw); }
+    .history-mobile-1990-02 { top: calc(415 / 360 * 100vw); left: calc(25 / 360 * 100vw); width: calc(230 / 360 * 100vw); }
+    .history-mobile-1990-03 { top: calc(688 / 360 * 100vw); left: calc(140 / 360 * 100vw); width: calc(195 / 360 * 100vw); }
+
+    .sub-history-mobile-scene-2000 .sub-history-mobile-images {
+        height: calc(945 / 360 * 100vw);
+        padding-bottom: 100svh;
+    }
+    .history-mobile-2000-01 { top: calc(30 / 360 * 100vw); left: calc(25 / 360 * 100vw); width: calc(182 / 360 * 100vw); }
+    .history-mobile-2000-02 { top: calc(403 / 360 * 100vw); left: calc(125 / 360 * 100vw); width: calc(210 / 360 * 100vw); }
+    .history-mobile-2000-03 { top: calc(671 / 360 * 100vw); left: calc(25 / 360 * 100vw); width: calc(233 / 360 * 100vw); }
+
     .sub-History-page .sub-history-center-axis {
         z-index: 6;
     }
@@ -2949,7 +3138,17 @@ Mobile (720px and below)
         z-index: 2;
     }
 
+    .sub-History-page .sub-history-finale {
+        background-image: none;
+        margin-bottom: 60px;
+    }
+
+    .sub-History-page .sub-history-finale-stage {
+        height: calc(100vw * 520 / 940);
+    }
+
     .sub-History-page .sub-history-finale-stage::before {
+        content: none;
         display: none;
     }
 
@@ -2960,6 +3159,10 @@ Mobile (720px and below)
     .sub-History-page .sub-history-finale-copy {
         width: calc(100% - 50px);
         margin: 40px auto 0;
+    }
+
+    .sub-History-page .sub-history-finale-copy > span {
+        display: none;
     }
 
     .sub-History-page .sub-history-finale-copy strong {
