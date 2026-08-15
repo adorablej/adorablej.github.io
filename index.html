@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link href="/css/common.css?v=20260814" rel="stylesheet" />
     <link href="/css/layout.css?v=20260814" rel="stylesheet" />
-    <link href="/css/main.css?v=20260814" rel="stylesheet" />
+    <link href="/css/main.css?v=20260815-1" rel="stylesheet" />
     <link href="/css/products.css?v=20260814" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,6 +24,17 @@
 <body class="main-page">
     <!-- header -->
     <div data-include="includes/header.html">
+    </div>
+
+    <!-- Main popup: 팝업 콘텐츠가 있을 때 노출 -->
+    <div class="modal-layer main-popup is-open" data-main-popup aria-hidden="false">
+        <button type="button" class="main-popup-dim" data-main-popup-close aria-label="팝업 닫기"></button>
+        <section class="modal-box main-popup-dialog" role="dialog" aria-modal="true" aria-label="메인 팝업" tabindex="-1">
+            <button type="button" class="modal-close-button main-popup-close" data-main-popup-close aria-label="팝업 닫기"></button>
+            <div class="main-popup-content">
+                <!-- 팝업 이미지 또는 배너 콘텐츠 영역 -->
+            </div>
+        </section>
     </div>
 
     <div class="page-scroll">
@@ -381,7 +392,7 @@ Specification
     </script>
     <script src="/js/common.js?v=20260814">
     </script>
-    <script src="/js/main.js?v=20260814">
+    <script src="/js/main.js?v=20260815-1">
     </script>
     <script src="/js/products.js?v=20260814"></script>
     <script src="/js/media-data.js?v=20260814"></script>

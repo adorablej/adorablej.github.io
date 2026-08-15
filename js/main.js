@@ -1,6 +1,12 @@
 (() => {
     "use strict";
 
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initMainPopup, { once: true });
+    } else {
+        initMainPopup();
+    }
+
     /*
      * DOM이 모두 로드된 뒤
      * 메인 페이지 기능 초기화
@@ -11,6 +17,32 @@
         initMainVisual();
         initSupportSlider();
         initMediaSection();
+    }
+
+    function initMainPopup() {
+        const popup = document.querySelector("[data-main-popup]");
+        if (!popup) return;
+
+        const closeButtons = popup.querySelectorAll("[data-main-popup-close]");
+
+        function closePopup() {
+            popup.classList.remove("is-open");
+            popup.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("is-main-popup-open");
+        }
+
+        document.body.classList.add("is-main-popup-open");
+        popup.querySelector(".main-popup-close")?.focus({ preventScroll: true });
+
+        closeButtons.forEach(function (button) {
+            button.addEventListener("click", closePopup);
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && popup.classList.contains("is-open")) {
+                closePopup();
+            }
+        });
     }
 
 

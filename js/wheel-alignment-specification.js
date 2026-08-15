@@ -115,7 +115,7 @@
         if (model) {
             html += `
                 <button type="button" class="sub-specification-selected-chip" data-remove="model">
-                    <img src="${model.image || "/images/car_default.png"}" alt="" onerror="this.onerror=null;this.src='/images/car_default.png'">
+                    <img src="${model.image && model.image !== "/images/car_default.png" ? model.image : "/images/car_default2.png"}" alt="" onerror="this.onerror=null;this.src='/images/car_default2.png'">
                     <strong>${model.name}</strong>
                     <span class="sub-specification-chip-close" aria-hidden="true"></span>
                 </button>
@@ -140,7 +140,7 @@
         elements.modelGrid.innerHTML = models.length
             ? models.map((model) => `
                 <button type="button" class="sub-specification-model-card${model.id === state.modelId ? " is-active" : ""}" data-model-id="${model.id}">
-                    <span class="sub-specification-model-image"><img src="${model.image || "/images/car_default.png"}" alt="${model.name}" onerror="this.onerror=null;this.src='/images/car_default.png'"></span>
+                    <span class="sub-specification-model-image"><img src="${model.image && model.image !== "/images/car_default.png" ? model.image : "/images/car_default2.png"}" alt="${model.name}" onerror="this.onerror=null;this.src='/images/car_default2.png'"></span>
                     <strong>${model.name}</strong>
                 </button>
             `).join("")
