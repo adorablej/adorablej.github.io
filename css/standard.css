@@ -22,7 +22,7 @@ overflow-y: visible;
 
 /* 01. Main visual */
 .sub-standard-main-visual {
-    height: 480vh;
+    height: 290vh;
     min-height: 0;
     overflow: visible;
     background-color: #050202;
@@ -117,8 +117,8 @@ overflow-y: visible;
 .sub-standard-main-reveal {
     position: relative;
     z-index: 2;
-    width: 100%;
-    max-width: calc(1300 * var(--vw));
+    width: calc(100% - 320px);
+    max-width: 1300px;
     aspect-ratio: 16 / 9;
     overflow: hidden;
     border-radius: calc(28 * var(--vw));
@@ -387,6 +387,10 @@ overflow-y: visible;
     contain: paint;
 }
 
+.sub-usa-page .sub-standard-detail-hero-media {
+    visibility: hidden;
+}
+
 .sub-standard-detail-hero-preview,
 .sub-standard-detail-hero-video {
     position: absolute;
@@ -458,8 +462,11 @@ overflow-y: visible;
 .sub-usa-trust {
     position: relative;
     width: 100%;
-    height: 220vh;
-    min-height: 1496px;
+    max-width: 1920px;
+    height: 100vh;
+    min-height: 680px;
+    margin-right: auto;
+    margin-left: auto;
     overflow: visible;
     padding: 0;
     background: #fff;
@@ -480,8 +487,10 @@ overflow-y: visible;
 
 .sub-usa-trust-list {
     display: flex;
-    width: calc(1600 * var(--vw));
-    height: calc(720 * var(--vw));
+    width: min(calc(100% - clamp(40px, 8.333vw, 160px)), 1600px);
+    height: auto;
+    max-height: 720px;
+    aspect-ratio: 20 / 9;
     margin: 0 0 0 auto;
     overflow: hidden;
     background: #fff;
@@ -489,8 +498,8 @@ overflow-y: visible;
 
 .sub-usa-trust-item {
     position: relative;
-    flex: 0 0 calc(220 * var(--vw));
-    width: calc(220 * var(--vw));
+    flex: 0 0 8.5%;
+    width: 8.5%;
     height: 100%;
     min-width: 0;
     overflow: hidden;
@@ -505,8 +514,8 @@ overflow-y: visible;
 }
 
 .sub-usa-trust-item.is-active {
-    flex-basis: calc(1160 * var(--vw));
-    width: calc(1160 * var(--vw));
+    flex-basis: 83%;
+    width: 83%;
     outline: none;
 }
 
@@ -616,9 +625,11 @@ overflow-y: visible;
 .sub-usa-value {
     position: relative;
     width: 100%;
-    height: 180vh;
-    min-height: 1224px;
-    overflow: visible;
+    height: 100vh;
+    min-height: 680px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow: hidden;
     background: #fff;
 }
 
@@ -626,11 +637,13 @@ overflow-y: visible;
     position: sticky;
     top: 0;
     width: 100%;
-    max-width: none;
+    max-width: 1920px;
     height: 100vh;
     min-height: 680px;
     margin: 0;
-    overflow: hidden;
+    margin-right: auto;
+    margin-left: auto;
+    overflow: visible;
     box-sizing: border-box;
 }
 
@@ -2309,13 +2322,6 @@ Mobile (720px and below)
         height: 60px;
     }
 
-    .sub-standard-scroll > .page-heading,
-    .sub-usa-scroll > .page-heading,
-    .sub-standard-detail-scroll > .page-heading {
-        margin-bottom: 0;
-        padding: 82px 0 18px;
-    }
-
     .sub-partners-directory {
         padding: 40px 0 60px;
     }
@@ -3198,7 +3204,7 @@ Mobile (720px and below)
     }
 
     .sub-usa-page .sub-usa-trust .sub-section-sm-heading {
-        margin-bottom: 28px;
+        margin-bottom: 30px;
         text-align: left;
     }
 
@@ -3215,6 +3221,8 @@ Mobile (720px and below)
         display: block;
         width: 100%;
         height: auto;
+        max-height: none;
+        aspect-ratio: auto;
         margin: 0;
         overflow: visible;
     }
@@ -3230,7 +3238,7 @@ Mobile (720px and below)
     }
 
     .sub-usa-page .sub-usa-trust-item + .sub-usa-trust-item {
-        margin-top: 40px;
+        margin-top: 44px;
     }
 
     .sub-usa-page .sub-usa-trust-item img {
@@ -3238,8 +3246,8 @@ Mobile (720px and below)
         inset: auto;
         display: block;
         width: 100%;
-        height: 180px;
-        object-fit: cover;
+        height: auto;
+        object-fit: contain;
     }
 
     .sub-usa-page .sub-usa-trust-dim {
@@ -3254,7 +3262,7 @@ Mobile (720px and below)
         left: auto;
         width: 100%;
         height: auto;
-        margin-top: 12px;
+        margin-top: 20px;
         color: #111;
         overflow: visible;
         text-align: left;
@@ -3284,14 +3292,15 @@ Mobile (720px and below)
     .sub-usa-page .sub-usa-trust-copy h3 {
         margin-top: 4px;
         font-size: 18px;
+        font-weight: 800;
         line-height: 22px;
     }
 
     .sub-usa-page .sub-usa-trust-copy p {
         margin-top: 8px;
-        color: #777;
+        color: #555;
         font-size: 14px;
-        line-height: 20px;
+        line-height: 22px;
         word-break: keep-all;
         overflow-wrap: break-word;
     }
@@ -3299,7 +3308,7 @@ Mobile (720px and below)
     .sub-usa-page .sub-usa-value {
         height: auto;
         min-height: 0;
-        padding: 40px 25px;
+        padding: 0 25px 40px;
         overflow: hidden;
         box-sizing: border-box;
     }
@@ -3326,10 +3335,18 @@ Mobile (720px and below)
         position: absolute;
         top: 0;
         right: auto;
-        left: calc(50% - 281px);
-        width: 562px;
+        left: calc(50% - 150px);
+        width: 504px;
         margin: 0;
         transform: none;
+    }
+
+    .sub-usa-page .sub-usa-value-awards .sub-usa-h-mask {
+        left: calc(50% - 350px);
+    }
+
+    .sub-usa-page .sub-usa-value-korea > .sub-usa-inner {
+        padding-top: 355px;
     }
 
     .sub-usa-page .sub-usa-value-copy,
@@ -3365,7 +3382,7 @@ Mobile (720px and below)
     }
 
     .sub-standard-page .sub-standard-main-visual {
-        height: 400vh;
+        height: 250vh;
         min-height: 0;
     }
 
@@ -3398,8 +3415,8 @@ Mobile (720px and below)
     }
 
     .sub-standard-page .sub-standard-main-reveal {
-        width: calc(100% - 80px);
-        max-width: 280px;
+        width: calc(100% - 50px);
+        max-width: none;
         aspect-ratio: 14 / 23;
         border-radius: 0;
     }
@@ -3432,28 +3449,50 @@ Mobile (720px and below)
     }
 
     .sub-standard-page .sub-standard-story-sticky {
+        position: relative;
+        top: auto;
+        height: auto;
         min-height: 0;
+        overflow: visible;
     }
 
     .sub-standard-page .sub-standard-story {
-        height: 600vh;
+        height: auto;
+        overflow: hidden;
+    }
+
+    .sub-standard-page .sub-standard-story-stage {
+        display: flex;
+        flex-direction: column;
+        height: auto;
     }
 
     .sub-standard-page .sub-standard-story-copy {
+        position: relative;
+        inset: auto;
         width: calc(100% - 50px);
+        opacity: 1;
+        visibility: visible;
+        transform: none;
     }
 
     .sub-standard-page .sub-standard-story-copy-usa,
     .sub-standard-page .sub-standard-story-copy-korea {
-        top: 78%;
-        right: auto;
-        left: 25px;
+        left: auto;
+        margin: 30px 25px 46px;
+        order: 2;
+    }
+
+    .sub-standard-page .sub-standard-story-copy-korea {
+        order: 4;
     }
 
     .sub-standard-page .sub-standard-story-copy-partners {
-        top: 27%;
-        left: 50%;
+        left: auto;
         width: calc(100% - 50px);
+        margin: 36px 25px 44px;
+        order: 5;
+        text-align: center;
     }
 
     .sub-standard-page .sub-standard-story-copy h2 {
@@ -3470,7 +3509,31 @@ Mobile (720px and below)
     }
 
     .sub-standard-page .sub-standard-h-scene {
-        width: 94px;
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 504px;
+        height: 318px;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        will-change: auto;
+    }
+
+    .sub-standard-page .sub-standard-h-scene-usa {
+        order: 1;
+        margin-left: calc(50% - 296px);
+    }
+
+    .sub-standard-page .sub-standard-h-scene-korea {
+        order: 3;
+        margin-left: calc(50% - 208px);
+    }
+
+    .sub-standard-page .sub-standard-h-scene-partners {
+        order: 6;
+        margin-left: calc(50% - 252px);
+        margin-bottom: 0;
     }
 
     .sub-standard-page .sub-standard-h-image-usa,
@@ -3481,11 +3544,18 @@ Mobile (720px and below)
     .sub-standard-page .sub-standard-h-image-usa-mobile,
     .sub-standard-page .sub-standard-h-image-korea-mobile {
         display: block;
+        opacity: 1;
+    }
+
+    .sub-standard-page .sub-standard-h-image-partners {
+        opacity: 1;
+    }
+
+    .sub-standard-page .sub-standard-h-solid {
+        opacity: 0;
     }
 
     .sub-standard-page .sub-standard-h-red {
-        bottom: -12px;
-        width: 78px;
-        height: 7px;
+        display: none;
     }
 }
