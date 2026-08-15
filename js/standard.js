@@ -875,17 +875,12 @@
             };
         }
 
-        const mobilePinOffset = mobile
-            ? Math.max(hero.getBoundingClientRect().top, 0)
-            : 0;
+        // The hero already starts below the page heading. Reusing its viewport
+        // position as an inner offset pushes the initial mobile KV down twice.
+        const mobilePinOffset = 0;
         const frameClip = getFrameClip();
         const frameDuration = mobile ? 2.35 : 1.15;
-        const nextSection = hero.nextElementSibling;
         let mobileStage = null;
-
-        if (mobile && nextSection) {
-            gsap.set(nextSection, { marginTop: -mobilePinOffset });
-        }
 
         gsap.set(sticky, { position: "relative" });
         gsap.set(media, {
