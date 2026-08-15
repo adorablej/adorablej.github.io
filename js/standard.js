@@ -878,7 +878,7 @@
         // The hero already starts below the page heading. Reusing its viewport
         // position as an inner offset pushes the initial mobile KV down twice.
         const mobilePinOffset = 0;
-        const frameClip = getFrameClip();
+        let frameClip = getFrameClip();
         const frameDuration = mobile ? 2.35 : 1.15;
         let mobileStage = null;
 
@@ -1046,11 +1046,46 @@
 
         if (!useHeroVideo) timeline.to({}, { duration: 0.35 });
 
+        function syncMobileInitialFrame() {
+            if (!mobile || !mobileStage || timeline.progress() > 0.02) return;
+
+            const frameSize = getMobileFrameSize();
+            frameClip = getFrameClip();
+
+            gsap.set(media, {
+                clipPath: frameClip,
+                height: "100%"
+            });
+            gsap.set(mobileStage, {
+                width: frameSize.width,
+                height: frameSize.height,
+                top: frameSize.top + frameSize.height / 2,
+                scale: 1
+            });
+        }
+
+        function refreshHeroLayout() {
+            syncMobileInitialFrame();
+            ScrollTrigger.refresh();
+        }
+
+        window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(refreshHeroLayout);
+        });
+
+        if (document.readyState !== "complete") {
+            window.addEventListener("load", refreshHeroLayout, { once: true });
+        }
+
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(refreshHeroLayout);
+        }
+
         let heroResizeFrame = 0;
         window.addEventListener("resize", function () {
             window.cancelAnimationFrame(heroResizeFrame);
             heroResizeFrame = window.requestAnimationFrame(function () {
-                ScrollTrigger.refresh();
+                refreshHeroLayout();
             });
         }, { passive: true });
     }

@@ -341,7 +341,8 @@ overflow-y: visible;
    HUNTER USA 
 ========================================================= */
 .sub-standard-detail-scroll {
-    overflow: visible;
+    overflow-x: clip;
+    overflow-y: visible;
     max-width: 100%;
     scroll-snap-type: none;
     overscroll-behavior-y: none;
@@ -2526,7 +2527,7 @@ Mobile (720px and below)
         height: 100vh;
         height: 100dvh;
         min-height: 0;
-        overflow: visible;
+        overflow: hidden;
     }
 
     .sub-standard-detail-hero-media {
