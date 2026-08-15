@@ -57,8 +57,7 @@ Common Modal Close Button
 }
 
 .modal-close-button:focus-visible {
-    outline: 3px solid rgba(204, 12, 0, .35);
-    outline-offset: 3px;
+    outline: none;
 }
 
 /* Common modal surface */

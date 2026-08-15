@@ -1498,6 +1498,10 @@ products-ROICalculator.html
     gap:calc(70 * var(--vw)) calc(60 * var(--vw));
 }
 
+.roi-form-item{
+    min-width:0;
+}
+
 .roi-form-item label{
     display:flex;
     align-items:center;
@@ -1512,10 +1516,12 @@ products-ROICalculator.html
     display:flex;
     align-items:center;
     gap:calc(18 * var(--vw));
+    min-width:0;
 }
 
 .roi-input{
     flex:1;
+    min-width:0;
     height:calc(80 * var(--vw));
     padding:0 calc(24 * var(--vw));
     border:1px solid #ddd;
@@ -3664,7 +3670,7 @@ Mobile (720px and below)
         min-width: 0;
         height: 60px;
         padding: 0 18px;
-        font-size: 14px;
+        font-size: 16px;
         box-sizing: border-box;
     }
 
