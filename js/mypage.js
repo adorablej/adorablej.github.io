@@ -340,12 +340,34 @@ function initMypagePartControls() {
     }));
 }
 
+function initCsRequestProductLinks() {
+    document.querySelectorAll('.sub-mypage-product-row').forEach(row => {
+        const productName = row.querySelector('.sub-mypage-list-product-text strong')?.textContent.trim() || '';
+        const productCategory = row.querySelector('.sub-mypage-list-product-text small')?.textContent.trim() || '';
+        const cells = [...row.children];
+        const productSerial = cells[1]?.textContent.trim() || '';
+
+        row.querySelectorAll('a[href*="/Mypage/cs-request.html"][href*="category="]').forEach(link => {
+            const url = new URL(link.href, window.location.origin);
+            const productId = url.searchParams.get('product') || productSerial;
+
+            url.searchParams.set('product', productId);
+            url.searchParams.set('productName', productName);
+            url.searchParams.set('productCategory', productCategory);
+            url.searchParams.set('productSerial', productSerial);
+            link.href = `${url.pathname}?${url.searchParams.toString()}`;
+        });
+    });
+}
+
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
+        initCsRequestProductLinks();
         initMypageProductMoreMenus();
         initMypagePartControls();
     });
 } else {
+    initCsRequestProductLinks();
     initMypageProductMoreMenus();
     initMypagePartControls();
 }

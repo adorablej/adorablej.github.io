@@ -1884,6 +1884,11 @@ Header Search
     border: 1px solid #d8d8d8;
     background: #fff;
     box-sizing: border-box;
+    transition: border-color .25s ease;
+}
+
+.header-search-field:focus-within {
+    border-color: #000;
 }
 
 .header-search-icon {
@@ -1907,6 +1912,11 @@ Header Search
 
 .header-search-input::placeholder {
     color: #aaa;
+}
+
+.header-search-input::-webkit-search-cancel-button {
+    display: none;
+    appearance: none;
 }
 
 .header-search-content {

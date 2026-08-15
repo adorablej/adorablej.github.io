@@ -8,10 +8,45 @@ function initFormComponents() {
     initTextareaCount();
     initCustomSelect();
     initContactInquiryCategory();
+    initCsRequestContext();
 
     document.querySelectorAll("form[data-form]").forEach(form => {
         new FormValidator(form);
     });
+}
+
+/* ========================================
+CS Request Category / Selected Product
+======================================== */
+
+function initCsRequestContext() {
+    const form = document.querySelector(".sub-mypage-cs-form");
+    if (!form) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const requestedCategory = (params.get("category") || "").toLowerCase();
+    const categoryInput = form.querySelector('input[name="category"]');
+    const categorySelect = categoryInput?.closest(".sub-form-select");
+    const categoryOption = categorySelect
+        ? [...categorySelect.querySelectorAll(".sub-form-select-option")]
+            .find(option => option.dataset.value === requestedCategory)
+        : null;
+
+    if (categorySelect && categoryOption) {
+        selectOption(categorySelect, categoryOption, false);
+    }
+
+    const productId = params.get("product") || "";
+    const productName = params.get("productName") || "";
+    const productCategory = params.get("productCategory") || "";
+    const productSerial = params.get("productSerial") || productId;
+
+    if (!productId) return;
+
+    form.querySelector('input[name="product_id"]').value = productId;
+    form.querySelector('input[name="product_name"]').value = productName;
+    form.querySelector('input[name="product_category"]').value = productCategory;
+    form.querySelector('input[name="product_serial"]').value = productSerial;
 }
 
 /* ========================================

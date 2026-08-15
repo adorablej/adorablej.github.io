@@ -40,9 +40,14 @@
     width: 100%;
     height: calc(80 * var(--vw));
     padding: 0 calc(25 * var(--vw));
-    border: 1px solid #111;
+    border: 1px solid #ddd;
     background: #fff;
     box-sizing: border-box;
+    transition: border-color .25s ease;
+}
+
+.sub-search-form:focus-within {
+    border-color: #000;
 }
 
 .sub-search-form-icon {
@@ -73,6 +78,11 @@
     border: 0;
     background: none;
     cursor: pointer;
+}
+
+.sub-search-input::-webkit-search-cancel-button {
+    display: none;
+    appearance: none;
 }
 
 .sub-search-clear::before,
