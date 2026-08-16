@@ -1133,14 +1133,23 @@ Header Alarm
 }
 
 .header-alarm-item h3 {
+    overflow: hidden;
     font-size: calc(22 * var(--vw));
     line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .header-alarm-item p {
+    display: -webkit-box;
+    overflow: hidden;
     margin-top: calc(14 * var(--vw));
     font-size: calc(16 * var(--vw));
     line-height: 1.55;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
 }
 
 .header-alarm-item time {
@@ -2692,7 +2701,7 @@ Mobile (720px and below)
         gap: 14px;
         flex-basis: 92px;
         height: 92px;
-        padding: 0 45px;
+        padding: 0 36px;
     }
 
     .header-alarm-head h2 { font-size: 26px; }
@@ -2706,16 +2715,27 @@ Mobile (720px and below)
 
     .header-alarm-tabs {
         gap: 10px;
-        padding: 0 45px 24px;
+        padding: 8px 36px 24px;
     }
 
-    .header-alarm-tabs button { height: 60px; font-size: 16px; }
-    .header-alarm-item { padding: 35px 45px 31px; }
-    .header-alarm-item h3 { font-size: 21px; line-height: 1.4; }
-    .header-alarm-item p { margin-top: 14px; font-size: 15px; line-height: 1.65; }
-    .header-alarm-item time { margin-top: 10px; font-size: 14px; }
-    .header-alarm-footer { padding: 30px 45px 34px; }
-    .header-alarm-footer button { min-width: 204px; height: 60px; font-size: 16px; }
+    .header-alarm-tabs button {
+        height: 46px;
+        padding: 0 12px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 44px;
+    }
+
+    .header-alarm-tabs button.is-active {
+        font-weight: 600;
+    }
+    .header-alarm-item { padding: 35px 36px 31px; }
+    .header-alarm-item h3 { font-size: 18px; line-height: 1.45; }
+    .header-alarm-item p { margin-top: 14px; font-size: 14px; line-height: 1.6; }
+    .header-alarm-item time { margin-top: 10px; font-size: 12px; }
+    .header-alarm-footer { padding: 30px 36px 34px; }
+    .header-alarm-footer button { min-width: 204px; height: 60px; font-size: 14px; }
 
     .all-menu-nav {
         padding: 8px 36px 38px;
