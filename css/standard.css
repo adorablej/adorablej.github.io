@@ -22,7 +22,7 @@ overflow-y: visible;
 
 /* 01. Main visual */
 .sub-standard-main-visual {
-    height: 290vh;
+    height: 250vh;
     min-height: 0;
     overflow: visible;
     background-color: #050202;
@@ -284,7 +284,6 @@ overflow-y: visible;
     top: 50%;
     width: calc(500 * var(--vw));
     transform-origin: 50% 50%;
-    will-change: transform;
 }
 
 .sub-standard-h-svg {
@@ -292,6 +291,7 @@ overflow-y: visible;
     width: 100%;
     height: 100%;
     overflow: visible;
+    shape-rendering: geometricPrecision;
 }
 
 .sub-standard-h-solid {
@@ -3385,7 +3385,7 @@ Mobile (720px and below)
     }
 
     .sub-standard-page .sub-standard-main-visual {
-        height: 250vh;
+        height: 220vh;
         min-height: 0;
     }
 

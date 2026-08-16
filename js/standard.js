@@ -1,3 +1,15 @@
+/* Shared desktop section transition speed for Standard and USA pages. */
+window.HUNTER_STANDARD_SECTION_SCROLL_DURATION = 1.2;
+window.HUNTER_STANDARD_SCROLL_UNLOCK_DELAY = 180;
+window.getHunterStandardSectionScrollDuration = function (fromY, toY) {
+    const viewportHeight = Math.max(window.innerHeight, 1);
+    const viewportDistance = Math.abs(toY - fromY) / viewportHeight;
+    return Math.min(
+        1.8,
+        window.HUNTER_STANDARD_SECTION_SCROLL_DURATION * Math.max(1, viewportDistance)
+    );
+};
+
 (function () {
     "use strict";
 
@@ -441,7 +453,7 @@
 
             scrollTween = gsap.to(state, {
                 y: targetY,
-                duration: 2.1,
+                duration: window.getHunterStandardSectionScrollDuration(state.y, targetY),
                 ease: "sine.inOut",
                 overwrite: true,
                 onUpdate: function () {
@@ -454,7 +466,7 @@
                     }
                     window.setTimeout(function () {
                         locked = false;
-                    }, 180);
+                    }, window.HUNTER_STANDARD_SCROLL_UNLOCK_DELAY);
                 }
             });
         }
@@ -746,32 +758,14 @@
         if (sections.length < 2) return;
 
         let locked = false;
-        let transitionDone = false;
-        let wheelIdle = false;
-        let wheelIdleTimer = 0;
         let scrollTween = null;
 
         function sectionTop(section) {
             return section.getBoundingClientRect().top + window.scrollY;
         }
 
-        function tryUnlock() {
-            if (transitionDone && wheelIdle) locked = false;
-        }
-
-        function markWheelActivity() {
-            wheelIdle = false;
-            window.clearTimeout(wheelIdleTimer);
-            wheelIdleTimer = window.setTimeout(function () {
-                wheelIdle = true;
-                tryUnlock();
-            }, 140);
-        }
-
         function beginSectionMove() {
             locked = true;
-            transitionDone = false;
-            markWheelActivity();
         }
 
         function moveTo(targetTop) {
@@ -781,20 +775,23 @@
 
             scrollTween = gsap.to(state, {
                 y: targetTop,
-                duration: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 2.1,
+                duration: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                    ? 0
+                    : window.getHunterStandardSectionScrollDuration(state.y, targetTop),
                 ease: "sine.inOut",
                 overwrite: true,
                 onUpdate: function () {
                     window.scrollTo(0, Math.round(state.y));
                 },
                 onComplete: function () {
-                    transitionDone = true;
                     const lastTop = sectionTop(sections[sections.length - 1]);
                     if (targetTop >= lastTop - 2) {
                         locked = false;
                         return;
                     }
-                    tryUnlock();
+                    window.setTimeout(function () {
+                        locked = false;
+                    }, window.HUNTER_STANDARD_SCROLL_UNLOCK_DELAY);
                 }
             });
         }
@@ -804,7 +801,6 @@
 
             if (locked) {
                 event.preventDefault();
-                markWheelActivity();
                 return;
             }
 
@@ -901,7 +897,7 @@
         }
 
         function getHeroScrollDistance() {
-            return Math.max(window.innerHeight - getHeaderHeight(), 1) * (mobile ? 2.35 : 2.55);
+            return Math.max(window.innerHeight - getHeaderHeight(), 1) * (mobile ? 1.9 : 2.1);
         }
 
         function getFrameClip() {
@@ -953,7 +949,7 @@
         // position as an inner offset pushes the initial mobile KV down twice.
         const mobilePinOffset = 0;
         let frameClip = getFrameClip();
-        const frameDuration = mobile ? 2.35 : 1.15;
+        const frameDuration = mobile ? 1.65 : 0.85;
         let mobileStage = null;
 
         gsap.set(sticky, { position: "relative" });
@@ -1082,7 +1078,7 @@
         if (useHeroVideo) {
             timeline.to(video, {
                 scale: 1,
-                duration: 1.15,
+                duration: 0.85,
                 ease: "power2.out"
             }, "frame-open");
         }

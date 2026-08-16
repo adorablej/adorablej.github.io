@@ -1555,68 +1555,108 @@ products-ROICalculator.html
     font-size:calc(15 * var(--vw));
 }
 
-.roi-result{
-    padding:calc(90 * var(--vw)) 0;
-    background:var(--red);
-    color:#fff;
+.roi-result {
+    padding: calc(98 * var(--vw)) 0;
+    background: var(--red);
+    color: #fff;
 }
 
-.roi-result .inner{
-    width:calc(1300 * var(--vw));
-    margin:auto;
+.roi-result .inner {
+    width: calc(1300 * var(--vw));
+    margin: auto;
 }
 
-.roi-result-top{
-    display:grid;
-    grid-template-columns:1fr auto 1fr auto 1fr;
-    align-items:center;
+.roi-result-formula {
+    display: grid;
+    grid-template-columns:
+        calc(135 * var(--vw))
+        calc(125 * var(--vw))
+        calc(160 * var(--vw))
+        calc(120 * var(--vw))
+        calc(250 * var(--vw))
+        calc(245 * var(--vw))
+        calc(265 * var(--vw));
+    align-items: center;
 }
 
-.roi-result-bottom{
-    display:grid;
-    grid-template-columns:1fr auto 1fr auto 1fr;
-    align-items:center;
-
-    margin-top:calc(90 * var(--vw));
+.roi-result-item {
+    min-width: 0;
+    text-align: center;
 }
 
-.roi-result-item p{
-    display:block;
-    margin-bottom:calc(26 * var(--vw));
-    font-size:calc(24 * var(--vw));
+.roi-result-item p {
+    display: block;
+    margin: 0 0 calc(12 * var(--vw));
+    color: rgba(255, 255, 255, .65);
+    font-size: calc(18 * var(--vw));
+    line-height: 1.35;
 }
 
-.roi-result-item span{
-    display:inline-block;
-    margin-bottom:calc(26 * var(--vw));
-    font-size:calc(50 * var(--vw));
+.roi-result-item strong {
+    display: block;
+    font-size: calc(24 * var(--vw));
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -.02em;
+    white-space: nowrap;
 }
 
-.roi-result-item strong{
-    font-size:calc(50 * var(--vw));
-    font-weight:400;
-    letter-spacing: -2%;
+.roi-result-item span {
+    display: inline;
+    margin: 0;
+    font-size: inherit;
 }
 
-.roi-result-item em{
-    font-style:normal;
-    font-size:.45em;
+.roi-result-item em {
+    margin-left: calc(2 * var(--vw));
+    font-size: calc(20 * var(--vw));
+    font-style: normal;
 }
 
-.roi-result-symbol{
-    padding:0 calc(45 * var(--vw));
-
-    font-size:calc(70 * var(--vw));
-    font-weight:200;
+.roi-result-symbol {
+    position: relative;
+    padding: 0;
+    font-size: 0;
 }
 
-.roi-divider{
-    width:1px;
-    height:calc(90 * var(--vw));
+.roi-result-symbol::before,
+.roi-result-symbol--equals::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: calc(30 * var(--vw));
+    height: calc(3 * var(--vw));
+    background: #fff;
+    transform: translate(-50%, -50%);
+}
 
-    background:rgba(255,255,255,.35);
+.roi-result-symbol--equals::before {
+    margin-top: calc(-7 * var(--vw));
+}
 
-    transform:rotate(25deg);
+.roi-result-symbol--equals::after {
+    margin-top: calc(7 * var(--vw));
+}
+
+.roi-result-item--primary strong,
+.roi-result-item--metric strong {
+    font-size: calc(40 * var(--vw));
+    font-weight: 600;
+}
+
+.roi-result-item--primary p,
+.roi-result-item--metric p {
+    color: #fff;
+}
+
+.roi-result-item--metric {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(80 * var(--vw));
+    border-left: 1px solid rgba(255, 255, 255, .35);
+    box-sizing: border-box;
 }
 
 /* ROI Tooltip */
@@ -2807,13 +2847,13 @@ products-HunterPride-Interview.html
 
 .sub-pride-interview-close {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: calc(20 * var(--vw));
+    right: calc(20 * var(--vw));
     z-index: 3;
-    width: 46px;
-    height: 46px;
-    min-width: 40px;
-    min-height: 40px;
+    width: calc(46 * var(--vw));
+    height: calc(46 * var(--vw));
+    min-width: calc(40 * var(--vw));
+    min-height: calc(40 * var(--vw));
     padding: 0;
     border: 0;
     border-radius: 50%;
@@ -2826,8 +2866,8 @@ products-HunterPride-Interview.html
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 22px;
-    height: 2px;
+    width: calc(22 * var(--vw));
+    height: calc(2 * var(--vw));
     background: #111;
 }
 
@@ -2855,29 +2895,29 @@ products-HunterPride-Interview.html
 }
 
 .sub-pride-interview-modal-content {
-    padding: 42px 48px 46px;
+    padding: calc(42 * var(--vw)) calc(48 * var(--vw)) calc(46 * var(--vw));
 }
 
 .sub-pride-interview-modal-content h4 {
     margin: 0;
     color: #111;
-    font-size: 28px;
+    font-size: calc(28 * var(--vw));
     font-weight: 700;
     line-height: 1.4;
 }
 
 .sub-pride-interview-modal-content p {
-    margin: 16px 0 0;
+    margin: calc(16 * var(--vw)) 0 0;
     color: #666;
-    font-size: 17px;
+    font-size: calc(17 * var(--vw));
     line-height: 1.7;
 }
 
 .sub-pride-interview-modal-content time {
     display: block;
-    margin-top: 16px;
+    margin-top: calc(16 * var(--vw));
     color: #aaa;
-    font-size: 15px;
+    font-size: calc(15 * var(--vw));
 }
 
 body.is-modal-open {
@@ -3709,20 +3749,15 @@ Mobile (720px and below)
     }
 
     .roi-result {
-        padding: 50px 0;
+        padding: 38px 0 15px;
+        background: #cf0b00;
     }
 
-    .roi-result-top,
-    .roi-result-bottom {
+    .roi-result-formula {
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-
-    .roi-result-bottom {
-        margin-top: 44px;
-        padding-top: 44px;
-        border-top: 1px solid rgba(255, 255, 255, .25);
+        gap: 0;
     }
 
     .roi-result-item {
@@ -3731,7 +3766,8 @@ Mobile (720px and below)
     }
 
     .roi-result-item p {
-        margin: 0 0 12px;
+        margin: 0 0 5px;
+        color: rgba(255, 255, 255, .55);
         font-size: 16px;
         line-height: 22px;
     }
@@ -3739,31 +3775,82 @@ Mobile (720px and below)
     .roi-result-item strong,
     .roi-result-item span {
         margin: 0;
-        font-size: 30px;
-        line-height: 38px;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 28px;
     }
 
     .roi-result-item em {
-        font-size: 14px;
+        margin-left: 1px;
+        font-size: 20px;
     }
 
     .roi-result-symbol {
-        min-height: 64px;
-        padding: 8px 0;
-        font-size: 24px;
-        line-height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 70px;
+        padding: 0;
+        font-size: 0;
+        line-height: 1;
         box-sizing: border-box;
     }
 
-    .roi-divider {
-        width: 1px;
-        height: 70px;
-        background: rgba(255, 255, 255, .35);
+    .roi-result-symbol::before,
+    .roi-result-symbol--equals::after {
+        width: 30px;
+        height: 3px;
     }
 
-    .roi-result-bottom > .roi-result-symbol:last-of-type,
-    .roi-result-bottom > .roi-result-item:last-child {
-        display: none;
+    .roi-result-symbol--equals::before {
+        margin-top: -7px;
+    }
+
+    .roi-result-symbol--equals::after {
+        margin-top: 7px;
+    }
+
+    .roi-result-item--primary,
+    .roi-result-item--metric {
+        margin-top: 0;
+        padding: 0 0 31px;
+        border-top: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, .32);
+    }
+
+    .roi-result-item--metric {
+        min-height: 0;
+        padding: 29px 0 31px;
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .roi-result-item--primary p,
+    .roi-result-item--metric p {
+        margin-bottom: 7px;
+        color: #fff;
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .roi-result-item--primary strong,
+    .roi-result-item--primary span,
+    .roi-result-item--metric strong,
+    .roi-result-item--metric span {
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 42px;
+    }
+
+    .roi-result-item--primary em,
+    .roi-result-item--metric em {
+        font-size: 20px;
+        font-weight: 400;
+    }
+
+    .roi-result-item--metric:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
     }
 
     .sub-products-visual{

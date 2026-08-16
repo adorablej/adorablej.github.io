@@ -1,4 +1,6 @@
-/*support 공통*/
+/* ========================================
+Support Common
+======================================== */
 .sub-support-s-heading {
     margin: 0 0 calc(60 * var(--vw));
     color: #000;
@@ -12,11 +14,9 @@
     color: var(--red);
     font-family: "Russo One", sans-serif;
 }
-
-
-
-/*operation page*/
-
+/* ========================================
+Equipment Operation Guide
+======================================== */
 .sub-operation-guide {
     padding-bottom: 110px;
     background: #fff;
@@ -51,8 +51,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 30px;
-    border-bottom: 1px solid #e5e5e5;
     padding: calc(40 * var(--vw)) 0;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .sub-guide-item-title {
@@ -60,7 +60,6 @@
     font-size: calc(20 * var(--vw));
     font-weight: 700;
     line-height: calc(40 * var(--vw));
-    
 }
 
 .sub-guide-view {
@@ -69,6 +68,7 @@
     align-items: center;
     justify-content: center;
     gap: calc(10 * var(--vw));
+    padding: calc(14 * var(--vw)) calc(40 * var(--vw));
     border: 1px solid var(--red);
     border-radius: 999px;
     background: #fff;
@@ -78,10 +78,9 @@
     letter-spacing: .28em;
     text-transform: lowercase;
     transition: background-color .25s ease, color .25s ease;
-    padding: calc(14 * var(--vw)) calc(40 * var(--vw));
 }
 
-.sub-guide-view::before{
+.sub-guide-view::before {
     content: "";
     width: 24px;
     height: 24px;
@@ -89,7 +88,6 @@
     -webkit-mask: url(/images/icon/icon-note-text.svg) center / contain no-repeat;
     mask: url(/images/icon/icon-note-text.svg) center / contain no-repeat;
     transition: background-color .3s;
-    
 }
 
 .sub-guide-view:hover,
@@ -132,8 +130,8 @@ Equipment Operation Guide : Video
     position: relative;
     width: calc(1300 * var(--vw));
     margin: 0 auto;
-    overflow: visible;
     padding-bottom: calc(110 * var(--vw));
+    overflow: visible;
 }
 
 .sub-guide-video-stage {
@@ -172,11 +170,10 @@ Equipment Operation Guide : Video
 .sub-guide-video-featured-card.is-active::after {
     opacity: 0;
 }
-.sub-guide-video-featured-card.is-active{
+.sub-guide-video-featured-card.is-active {
     z-index: 2;
     box-shadow: 0 calc(18 * var(--vw)) calc(42 * var(--vw)) rgba(0, 0, 0, .14);
 }
-
 
 .sub-guide-video-featured-image {
     position: relative;
@@ -194,7 +191,6 @@ Equipment Operation Guide : Video
     object-position: center;
     transition: transform .45s ease;
 }
-
 
 .sub-guide-play {
     position: absolute;
@@ -412,7 +408,7 @@ Training Registration
 .sub-training-month-title {
     min-width: calc(120 * var(--vw));
     margin: 0;
-    color: #1E293B;
+    color: #1e293b;
     font-family: inherit;
     font-size: calc(24 * var(--vw));
     font-weight: 700;
@@ -425,7 +421,7 @@ Training Registration
     width: calc(34 * var(--vw));
     height: calc(34 * var(--vw));
     padding: 0;
-    border: 1px solid #E2E8F0;
+    border: 1px solid #e2e8f0;
     border-radius: calc(7 * var(--vw));
     background: #fff;
     cursor: pointer;
@@ -442,8 +438,13 @@ Training Registration
     border-left: calc(2 * var(--vw)) solid #7790ad;
 }
 
-.sub-training-month-prev::before { transform: translate(-35%, -50%) rotate(-45deg); }
-.sub-training-month-next::before { transform: translate(-65%, -50%) rotate(135deg); }
+.sub-training-month-prev::before {
+    transform: translate(-35%, -50%) rotate(-45deg);
+}
+
+.sub-training-month-next::before {
+    transform: translate(-65%, -50%) rotate(135deg);
+}
 
 .sub-training-week,
 .sub-training-calendar {
@@ -452,8 +453,8 @@ Training Registration
 }
 
 .sub-training-week {
-    border-top: 1px solid #E2E8F0;
-    border-left: 1px solid #E2E8F0;
+    border-top: 1px solid #e2e8f0;
+    border-left: 1px solid #e2e8f0;
 }
 
 .sub-training-week span {
@@ -461,8 +462,8 @@ Training Registration
     align-items: center;
     justify-content: center;
     height: calc(50 * var(--vw));
-    border-right: 1px solid #E2E8F0;
-    border-bottom: 1px solid #E2E8F0;
+    border-right: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
     color: #71819b;
     font-size: calc(12 * var(--vw));
     font-weight: 700;
@@ -471,22 +472,22 @@ Training Registration
 
 .sub-training-day {
     position: relative;
-    min-height: calc(120 * var(--vw));
-    padding: calc(15 * var(--vw)) calc(14 * var(--vw));
-    border: 0;
-    border-right: 1px solid #E2E8F0;
-    border-bottom: 1px solid #E2E8F0;
-    background: #fff;
-    color: #1E293B;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    min-height: calc(120 * var(--vw));
+    padding: calc(15 * var(--vw)) calc(14 * var(--vw));
+    border: 0;
+    border-right: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    background: #fff;
+    color: #1e293b;
     text-align: left;
     cursor: pointer;
 }
 
 .sub-training-day:nth-child(7n + 1) {
-    border-left: 1px solid #E2E8F0;
+    border-left: 1px solid #e2e8f0;
 }
 
 .sub-training-day:hover {
@@ -495,10 +496,6 @@ Training Registration
 
 .sub-training-day.is-selected {
     box-shadow: inset 0 0 0 2px #c20e05;
-}
-
-.sub-training-day.is-selected.is-today {
-    background: #f9e3df;
 }
 
 .sub-training-day.is-today {
@@ -513,7 +510,7 @@ Training Registration
     display: inline-flex;
     align-items: center;
     gap: calc(8 * var(--vw));
-    color: #1E293B;
+    color: #1e293b;
     font-size: calc(18 * var(--vw));
     font-weight: 600;
     line-height: 1;
@@ -522,9 +519,11 @@ Training Registration
 .sub-training-day.is-outside .sub-training-day-number {
     color: #c5cad4;
 }
-.sub-training-day.is-outside .sub-training-event-list{
+
+.sub-training-day.is-outside .sub-training-event-list {
     opacity: 0.5;
 }
+
 .sub-training-day.is-today .sub-training-day-number {
     color: #c20e05;
 }
@@ -543,15 +542,15 @@ Training Registration
     margin-top: calc(12 * var(--vw));
 }
 
-.training-color-1 { --training-color: #3CCBA1; }
-.training-color-2 { --training-color: #EC45AD; }
-.training-color-3 { --training-color: #19A8E6; }
-.training-color-4 { --training-color: #9566E9; }
-.training-color-5 { --training-color: #FF8D3A; }
-.training-color-6 { --training-color: #F5B82E; }
-.training-color-7 { --training-color: #58B957; }
-.training-color-8 { --training-color: #5878E8; }
-.training-color-9 { --training-color: #F06464; }
+.training-color-1 { --training-color: #3ccba1; }
+.training-color-2 { --training-color: #ec45ad; }
+.training-color-3 { --training-color: #19a8e6; }
+.training-color-4 { --training-color: #9566e9; }
+.training-color-5 { --training-color: #ff8d3a; }
+.training-color-6 { --training-color: #f5b82e; }
+.training-color-7 { --training-color: #58b957; }
+.training-color-8 { --training-color: #5878e8; }
+.training-color-9 { --training-color: #f06464; }
 .training-color-10 { --training-color: #718096; }
 
 .sub-training-event,
@@ -570,8 +569,9 @@ Training Registration
 }
 
 .sub-training-event-more {
-    background: #A0A8B5;
+    background: #a0a8b5;
 }
+
 .sub-training-sidebar {
     padding: calc(24 * var(--vw));
 }
@@ -649,222 +649,218 @@ Training Registration
     background: var(--red);
     color: #fff;
     font-size: calc(17 * var(--vw));
-    line-height: calc(32 * var(--vw));
     font-weight: 400;
+    line-height: calc(32 * var(--vw));
 }
 
 .sub-training-card-apply.is-disabled {
     background: #c8ccd6;
 }
 
-.sub-training-empty::before{
-    content: '';
-    background: url(/images/icon/icon-warning-circle.svg);
+.sub-training-empty::before {
+    content: "";
+    display: inline-block;
     width: calc(58 * var(--vw));
     height: calc(58 * var(--vw));
-    display: inline-block;
-    background-size: cover;
     margin-bottom: calc(20 * var(--vw));
+    background: url(/images/icon/icon-warning-circle.svg) center / cover no-repeat;
 }
+
 .sub-training-empty {
-    color: #000;
-    font-size: calc(18 * var(--vw));
-    text-align: center;
+    position: relative;
+    top: 50%;
+    bottom: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    top: 50%;
-    position: relative;
-    bottom: 50%;
     height: 100%;
+    color: #000;
+    font-size: calc(18 * var(--vw));
+    text-align: center;
 }
 
 .sub-training-modal {
-    position: fixed;
-    z-index: 1000;
+    padding: calc(64 * var(--vw));
+}
+
+.sub-training-modal-dim {
+    position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: rgba(0, 0, 0, .62);
+    cursor: pointer;
+}
+
+.sub-training-modal-visual {
+    height: auto;
+    min-height: 0;
+    background: #e2e2e2 url("/images/img_placeholder.png") center / cover no-repeat;
+}
+
+.sub-training-modal-summary {
+    padding-bottom: calc(34 * var(--vw));
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.sub-training-modal-datetime {
+    display: block;
+    color: #000;
+    font-size: calc(28 * var(--vw));
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.sub-training-modal-course {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 64px;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity .25s ease, visibility .25s ease;
-}
-
-.sub-training-modal.is-open {
-	visibility:visible;
-	opacity:1;
-}
-.sub-training-modal-dim {
-	position:absolute;
-	inset:0;
-	width:100%;
-	height:100%;
-	padding:0;
-	border:0;
-	background:rgba(0,0,0,.62);
-	cursor:pointer;
-}
-.sub-training-modal-visual {
-	height:auto;
-	min-height:0;
-	background:#e2e2e2;
-	background-image:url("/images/img_placeholder.png");
-	background-position:center;
-	background-size:cover;
-	background-repeat:no-repeat;
-}
-.sub-training-modal-summary {
-	padding-bottom:34px;
-	border-bottom:1px solid #e3e3e3;
-}
-.sub-training-modal-datetime {
-	display:block;
-	color:#000;
-	font-size:28px;
-	font-weight:600;
-	line-height:1.25;
-}
-.sub-training-modal-course {
-	display:flex;
-	align-items:center;
-	gap:14px;
-	margin-top:20px;
-	color:#555;
-	font-size:22px;
-	font-weight:600;
-}
-.sub-training-modal-course-dot {
-	flex:0 0 auto;
-	width:20px;
-	height:20px;
-	border-radius:50%;
-	background:var(--training-color);
-}
-.sub-training-modal-course-row{
-    display:flex; 
-    justify-content:space-between; 
-    align-items:flex-end;
-
-}
-.sub-training-modal-info{
-    color: #888;
-    font-size: 18px;
-
-}
-/* .sub-training-modal-course-dot.is-waiting {
-	background:#19a8e6;
-}
-.sub-training-modal-course-dot.is-open {
-	background:#3fc9a4;
-}
-.sub-training-modal-course-dot.is-closed {
-	background:#ec45ad;
-}
-.sub-training-modal-course-dot.is-training {
-	background:#f0a130;
-}
-.sub-training-modal-course-dot.is-completed {
-	background:#9566e9;
-} */
-.sub-training-modal-agree {
-	position:relative;
-	display:flex;
-	align-items:flex-start;
-	gap:14px;
-	margin-top:30px;
-	color:#555;
-	cursor:pointer;
-}
-.sub-training-modal-agree input {
-	position:absolute;
-	width:1px;
-	height:1px;
-	overflow:hidden;
-	opacity:0;
-}
-.sub-training-modal-checkmark {
-	position:relative;
-	flex:0 0 auto;
-	width:36px;
-	height:36px;
-	border:1px solid #d8d8d8;
-	border-radius:50%;
-	background:#fff;
-}
-.sub-training-modal-agree input:checked+.sub-training-modal-checkmark {
-	border-color:var(--red);
-	background:var(--red);
-}
-.sub-training-modal-agree input:checked+.sub-training-modal-checkmark::after {
-	content:"";
-	position:absolute;
-	top:48%;
-	left:50%;
-	width:12px;
-	height:7px;
-	border-left:3px solid #fff;
-	border-bottom:3px solid #fff;
-	transform:translate(-50%,-60%) rotate(-45deg);
-}
-.sub-training-modal-agree input:disabled+.sub-training-modal-checkmark {
-	border-color:#d8d8d8;
-	background:#eee;
-}
-.sub-training-modal-agree-text {
-	padding-top:4px;
-	font-size:17px;
-    letter-spacing: -2%;
-	font-weight:300;
-}
-.sub-training-modal-actions {
-	display:flex;
-	justify-content:center;
-	gap:16px;
-	margin-top:54px;
-}
-.sub-training-modal-cancel,.sub-training-modal-submit {
-	display:inline-flex;
-	align-items:center;
-	justify-content:center;
-	min-width:260px;
-	height:76px;
-	padding:0 36px;
-	border-radius:999px;
-	font-size:22px;
-	font-weight:500;
-	line-height:1;
-	cursor:pointer;
-}
-.sub-training-modal-cancel {
-	border:1px solid #e2e2e2;
-	background:#fff;
-	color:#000;
-}
-.sub-training-modal-submit {
-	border:1px solid var(--red);
-	background:var(--red);
-	color:#fff;
-}
-.sub-training-modal-submit:disabled {
-	border-color:#b4b4b4;
-	background:#b4b4b4;
-	color:#fff;
-	cursor:not-allowed;
-}
-body.is-training-modal-open {
-	overflow: hidden;
-}
-
-.sub-training-modal-body .sub-form-checkbox
-{margin-top: 25px;}
-.sub-training-modal-body .sub-form-checkbox-text{
-    font-size:17px;
-    letter-spacing: -2%;
-    font-weight: 400;
+    gap: calc(14 * var(--vw));
+    margin-top: calc(20 * var(--vw));
     color: #555;
+    font-size: calc(22 * var(--vw));
+    font-weight: 600;
 }
+
+.sub-training-modal-course-dot {
+    flex: 0 0 auto;
+    width: calc(20 * var(--vw));
+    height: calc(20 * var(--vw));
+    border-radius: 50%;
+    background: var(--training-color);
+}
+
+.sub-training-modal-course-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.sub-training-modal-info {
+    color: #888;
+    font-size: calc(18 * var(--vw));
+}
+
+.sub-training-modal-agree {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: calc(14 * var(--vw));
+    margin-top: calc(30 * var(--vw));
+    color: #555;
+    cursor: pointer;
+}
+
+.sub-training-modal-agree input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.sub-training-modal-checkmark {
+    position: relative;
+    flex: 0 0 auto;
+    width: calc(36 * var(--vw));
+    height: calc(36 * var(--vw));
+    border: 1px solid #d8d8d8;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.sub-training-modal-agree input:checked + .sub-training-modal-checkmark {
+    border-color: var(--red);
+    background: var(--red);
+}
+
+.sub-training-modal-agree input:checked + .sub-training-modal-checkmark::after {
+    content: "";
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    width: 12px;
+    height: 7px;
+    border-left: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    transform: translate(-50%, -60%) rotate(-45deg);
+}
+
+.sub-training-modal-agree input:disabled + .sub-training-modal-checkmark {
+    border-color: #d8d8d8;
+    background: #eee;
+}
+
+.sub-training-modal-agree-text {
+    padding-top: 4px;
+    font-size: calc(17 * var(--vw));
+    font-weight: 300;
+    letter-spacing: -.02em;
+}
+
+.sub-training-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: calc(16 * var(--vw));
+    margin-top: calc(54 * var(--vw));
+}
+
+.sub-training-modal-cancel,
+.sub-training-modal-submit {
+    display: inline-flex;
+    flex: 1 1 calc(260 * var(--vw));
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    max-width: calc(260 * var(--vw));
+    height: calc(76 * var(--vw));
+    padding: 0 calc(36 * var(--vw));
+    border-radius: 999px;
+    font-size: calc(22 * var(--vw));
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.sub-training-modal-cancel {
+    border: 1px solid #e2e2e2;
+    background: #fff;
+    color: #000;
+}
+
+.sub-training-modal-submit {
+    border: 1px solid var(--red);
+    background: var(--red);
+    color: #fff;
+}
+
+.sub-training-modal-submit:disabled {
+    border-color: #b4b4b4;
+    background: #b4b4b4;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+body.is-training-modal-open {
+    overflow: hidden;
+}
+
+.sub-training-modal-body .sub-form-checkbox {
+    margin-top: calc(25 * var(--vw));
+}
+
+.sub-training-modal-body {
+    padding: calc(50 * var(--vw)) !important;
+}
+
+.sub-training-modal-body .sub-form-checkbox-text {
+    color: #555;
+    font-size: calc(17 * var(--vw));
+    font-weight: 400;
+    letter-spacing: -.02em;
+}
+
 /* ========================================
 Equipment Operation Guide : Youtube Modal
 ======================================== */
@@ -878,62 +874,13 @@ Equipment Operation Guide : Youtube Modal
 }
 
 .sub-guide-video-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 1200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 50px;
-    opacity: 0;
-    visibility: hidden;
+    padding: calc(50 * var(--vw));
     transition: opacity .3s ease, visibility .3s ease;
 }
 
-.sub-guide-video-modal.is-open {
-    opacity: 1;
-    visibility: visible;
-}
-
 .sub-guide-video-modal-dim {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    border: 0;
     background: rgba(0, 0, 0, .72);
 }
-
-
-.sub-guide-video-modal-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 3;
-    width: 46px;
-    height: 46px;
-    min-width: 40px;
-    min-height: 40px;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, .95);
-}
-
-.sub-guide-video-modal-close::before,
-.sub-guide-video-modal-close::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 22px;
-    height: 2px;
-    background: #000;
-}
-
-.sub-guide-video-modal-close::before { transform: translate(-50%, -50%) rotate(45deg); }
-.sub-guide-video-modal-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
 
 .sub-guide-video-modal-frame {
     position: relative;
@@ -951,21 +898,21 @@ Equipment Operation Guide : Youtube Modal
 }
 
 .sub-guide-video-modal-body {
-    padding: 42px 48px 46px;
+    padding: calc(42 * var(--vw)) calc(48 * var(--vw)) calc(46 * var(--vw));
 }
 
 .sub-guide-video-modal-body h4 {
     margin: 0;
     color: #000;
-    font-size: 28px;
+    font-size: calc(28 * var(--vw));
     font-weight: 700;
     line-height: 1.4;
 }
 
 .sub-guide-video-modal-body p {
-    margin: 16px 0 0;
+    margin: calc(16 * var(--vw)) 0 0;
     color: #666;
-    font-size: 17px;
+    font-size: calc(17 * var(--vw));
     line-height: 1.7;
 }
 
@@ -976,8 +923,7 @@ body.is-guide-video-modal-open {
 
 .training-products {
     width: 100%;
-    padding-bottom: calc(100 * var(--vw));
-    padding-top: calc(100 * var(--vw));
+    padding: calc(100 * var(--vw)) 0;
 }
 
 .training-products .inner {
@@ -988,7 +934,6 @@ body.is-guide-video-modal-open {
 .training-product-list {
     display: flex;
     flex-direction: column;
-
     margin: 0;
     padding: 0;
     list-style: none;
@@ -1046,6 +991,7 @@ body.is-guide-video-modal-open {
 .training-product-content .sub-button-more {
     width: fit-content;
 }
+
 /* ========================================
 Training Program
 ======================================== */
@@ -1166,9 +1112,6 @@ Training Program
     fill: none;
 }
 
-.sub-training-program-card-content {
-}
-
 .sub-training-program-card-content p {
     margin: 0;
     color: #000;
@@ -1271,6 +1214,7 @@ Equipment Operation Guide : Category List
     object-position: center;
     transition: transform .6s cubic-bezier(.22, 1, .36, 1);
 }
+
 /* ========================================
 Wheel Alignment Specification
 ======================================== */
@@ -1299,13 +1243,8 @@ Wheel Alignment Specification
 }
 .sub-specification-heading span,
 .sub-specification-group-title span {
+    color: var(--red);
     font-family: "Russo One", sans-serif;
-    color: var(--red);
-}
-
-.sub-specification-heading span,
-.sub-specification-group-title span {
-    color: var(--red);
 }
 
 .sub-specification-search-form {
@@ -1388,7 +1327,7 @@ Wheel Alignment Specification
     padding: 0 calc(30 * var(--vw));
     border: 0;
     border-radius: 999px;
-    background: #B0B7D2;
+    background: #b0b7d2;
     color: #fff;
     font-size: calc(18 * var(--vw));
     cursor: pointer;
@@ -1402,12 +1341,6 @@ Wheel Alignment Specification
     color: inherit;
     font: inherit;
     cursor: pointer;
-}
-
-.sub-specification-recent-delete {
-    position: relative;
-    width: calc(24 * var(--vw));
-    height: calc(24 * var(--vw));
 }
 
 .sub-specification-recent-delete,
@@ -1506,7 +1439,7 @@ Wheel Alignment Specification
 }
 
 .sub-specification-content-section {
-    padding: calc(100 * var(--vw)) 0 ;
+    padding: calc(100 * var(--vw)) 0;
 }
 
 .sub-specification-selected-list {
@@ -1573,10 +1506,7 @@ Wheel Alignment Specification
     margin-bottom: calc(60 * var(--vw));
     font-size: calc(40 * var(--vw));
 }
-.sub-specification-group-title span{
-    color: var(--red);
-    font-family: "Russo One", sans-serif;
-}
+
 .sub-specification-brand-grid,
 .sub-specification-model-grid {
     display: grid;
@@ -1796,67 +1726,369 @@ Wheel Alignment Specification
 }
 
 /* Wheel Alignment Specification : detail modal */
-.specification-modal[hidden] { display: none !important; }
-.specification-modal { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: flex-start; justify-content: center; padding: 10vh 30px; overflow: hidden; opacity: 0; transition: opacity .2s ease; }
-.specification-modal.is-open { opacity: 1; }
-.specification-modal-dim { position: fixed; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: rgba(0,0,0,.68); cursor: pointer; }
-.specification-modal-dialog.modal-box { width: min(900px, calc(100vw - 160px)) !important; max-width: none !important; height: 80vh !important; max-height: 80vh !important; overflow-y: auto !important; transform: translateY(14px); transition: transform .2s ease; outline: none; }
-.specification-modal.is-open .specification-modal-dialog { transform: translateY(0); }
-.specification-modal-header { position: relative; display: flex; align-items: center; justify-content: space-between; min-height: 110px; padding: 0 50px; background: #050505; color: #fff; }
-.specification-modal-header h2 { margin: 0; color: #fff; font-family: "Russo One", sans-serif; font-size: 32px; font-weight: 400; line-height: normal; letter-spacing: 0; }
-.specification-modal-logo { width: 130px; max-height: 40px; object-fit: contain; }
-.specification-modal-close { position: fixed !important; top: 10vh !important; right: max(20px, calc(50% - 520px)) !important; }
-.specification-modal-print { position: fixed; z-index: 20; top: calc(10vh + 72px); right: max(20px, calc(50% - 520px)); display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; padding: 0; border: 0; border-radius: 50%; background: var(--red); cursor: pointer; }
-.specification-modal-print img { width: 26px; height: 26px; object-fit: contain; filter: brightness(0) invert(1); }
-.specification-modal-accent { height: 7px; background: var(--red); }
-.specification-modal-body { position: relative; padding-bottom: 26px; }
-.specification-modal-body::after { content: ""; position: absolute; inset: 0; z-index: 5; background: url('/images/support/Watermark.png') center top / 100% auto repeat-y; opacity: .55; pointer-events: none; }
-.specification-modal-summary { display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, min(342px, 34vw)); gap: 26px clamp(20px, 3vw, 48px); align-items: start; padding: 30px clamp(24px, 4vw, 40px) 48px; }
-.specification-modal-brand { display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: #f5f5f5; color: #111; font-size: 10px; font-weight: 800; text-align: center; }
-.specification-modal-meta { grid-column: 1; margin: 0; color: #000; font-family: "Pretendard", sans-serif; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: 0; }
-.specification-modal-meta div { display: grid; grid-template-columns: 72px 1fr; }
+.specification-modal[hidden] {
+    display: none !important;
+}
+
+.specification-modal {
+    align-items: flex-start;
+    padding: 10vh 30px;
+    overflow: hidden;
+    transition-duration: .2s;
+}
+
+.specification-modal-dim {
+    position: fixed;
+    background: rgba(0, 0, 0, .68);
+}
+
+.specification-modal-dialog.modal-box {
+    width: min(900px, calc(100vw - 160px)) !important;
+    max-width: none !important;
+    height: 80vh !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+    outline: none;
+    transform: translateY(14px);
+    transition: transform .2s ease;
+}
+
+.specification-modal.is-open .specification-modal-dialog {
+    transform: translateY(0);
+}
+
+.specification-modal-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 110px;
+    padding: 0 50px;
+    background: #050505;
+    color: #fff;
+}
+
+.specification-modal-header h2 {
+    margin: 0;
+    color: #fff;
+    font-family: "Russo One", sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0;
+}
+
+.specification-modal-logo {
+    width: 130px;
+    max-height: 40px;
+    object-fit: contain;
+}
+
+.specification-modal-close {
+    position: fixed !important;
+    top: 10vh !important;
+    right: max(20px, calc(50% - 520px)) !important;
+}
+
+.specification-modal-print {
+    position: fixed;
+    z-index: 20;
+    top: calc(10vh + 72px);
+    right: max(20px, calc(50% - 520px));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: var(--red);
+    cursor: pointer;
+}
+
+.specification-modal-print img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.specification-modal-accent {
+    height: 7px;
+    background: var(--red);
+}
+
+.specification-modal-body {
+    position: relative;
+    padding-bottom: 26px;
+}
+
+.specification-modal-body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    background: url('/images/support/Watermark.png') center top / 100% auto repeat-y;
+    opacity: .55;
+    pointer-events: none;
+}
+
+.specification-modal-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, min(342px, 34vw));
+    align-items: start;
+    gap: 26px clamp(20px, 3vw, 48px);
+    padding: 30px clamp(24px, 4vw, 40px) 48px;
+}
+
+.specification-modal-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #f5f5f5;
+    color: #111;
+    font-size: 10px;
+    font-weight: 800;
+    text-align: center;
+}
+.specification-modal-meta {
+    grid-column: 1;
+    margin: 0;
+    color: #000;
+    font-family: "Pretendard", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0;
+}
+
+.specification-modal-meta div {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+}
+
 .specification-modal-meta div:nth-child(5),
-.specification-modal-meta div:nth-child(7) { margin-top: 24px; }
-.specification-modal-meta dt { color: #111; font-weight: 400; }
-.specification-modal-meta dt::after { content: " :"; }
-.specification-modal-meta dd { margin: 0; font-weight: 400; }
-.specification-modal-vehicle { grid-column: 2; grid-row: 1 / span 2; display: flex; align-items: center; justify-content: center; height: 250px; margin: 0; border: 1px solid #ddd; }
-.specification-modal-vehicle img { width: 100%; height: 100%; object-fit: contain; }
-.specification-modal-links { display: flex; gap: 30px; margin: 0 clamp(24px, 4vw, 40px); padding: 0 0 14px; border-bottom: 1px solid var(--red); color: var(--red); font-family: "Pretendard", sans-serif; font-size: 14px; font-weight: 400; line-height: normal; letter-spacing: -.3px; text-decoration: underline; }
-.specification-modal-links a { color: inherit; }
-.specification-modal-table { width: calc(100% - 80px); margin: 0 40px; border-collapse: collapse; table-layout: fixed; color: #111; font-size: 14px; }
-.specification-modal-table th, .specification-modal-table td { padding: 14px 12px; border-bottom: 1px solid #e5e5e5; text-align: center; }
-.specification-modal-table thead th { font-weight: 700; }
-.specification-modal-table tbody th { text-align: left; font-weight: 500; }
-.specification-modal-table .specification-modal-section { width: 18%; border-right: 1px solid #e5e5e5; text-align: center; vertical-align: middle; font-weight: 700; }
+.specification-modal-meta div:nth-child(7) {
+    margin-top: 24px;
+}
+
+.specification-modal-meta dt {
+    color: #111;
+    font-weight: 400;
+}
+
+.specification-modal-meta dt::after {
+    content: " :";
+}
+
+.specification-modal-meta dd {
+    margin: 0;
+    font-weight: 400;
+}
+
+.specification-modal-vehicle {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    margin: 0;
+    border: 1px solid #ddd;
+}
+
+.specification-modal-vehicle img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.specification-modal-links {
+    display: flex;
+    gap: 30px;
+    margin: 0 clamp(24px, 4vw, 40px);
+    padding: 0 0 14px;
+    border-bottom: 1px solid var(--red);
+    color: var(--red);
+    font-family: "Pretendard", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -.3px;
+    text-decoration: underline;
+}
+
+.specification-modal-links a {
+    color: inherit;
+}
+
+.specification-modal-table {
+    width: calc(100% - 80px);
+    margin: 0 40px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    color: #111;
+    font-size: 14px;
+}
+
+.specification-modal-table th,
+.specification-modal-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: center;
+}
+
+.specification-modal-table thead th {
+    font-weight: 700;
+}
+
+.specification-modal-table tbody th {
+    font-weight: 500;
+    text-align: left;
+}
+
+.specification-modal-table .specification-modal-section {
+    width: 18%;
+    border-right: 1px solid #e5e5e5;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: middle;
+}
+
 .specification-modal-mobile-section,
-.specification-modal-mobile-head { display: none; }
-.specification-modal-toe-note { margin: 18px 40px 0; color: #000; font-family: "Pretendard", sans-serif; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: 0; }
-.specification-modal-toe-note::before { content: "•"; margin-right: 8px; }
-.specification-modal-extra { padding: 36px 40px 0; color: #111; }
-.specification-modal-extra:empty { display: none; }
-.specification-modal-extra h3 { margin: 0; padding: 14px 9px; border-top: 1px solid var(--red); border-bottom: 1px solid #ddd; font-size: 14px; text-align: center; }
-.specification-modal-extra dl { display: block; margin: 0; }
-.specification-modal-extra dl div { display: grid; grid-template-columns: 200px minmax(0, 1fr); align-items: center; padding: 14px 60px; border-bottom: 1px solid #e5e5e5; }
-.specification-modal-extra dt { margin: 0; color: #111; font-size: 14px; font-weight: 700; }
-.specification-modal-extra dd { margin: 0; font-size: 14px; font-weight: 400; }
-.specification-modal-notes { margin: 20px 40px 0; padding-top: 0; color: #333; font-family: "Pretendard", sans-serif; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: 0; }
-.specification-modal-notes p { position: relative; margin: 2px 0; padding-left: 14px; }
-.specification-modal-notes p::before { content: "•"; position: absolute; left: 0; }
-html.is-specification-modal-open, html.is-specification-modal-open body { overflow: hidden; }
+.specification-modal-mobile-head {
+    display: none;
+}
+
+.specification-modal-toe-note {
+    margin: 18px 40px 0;
+    color: #000;
+    font-family: "Pretendard", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0;
+}
+
+.specification-modal-toe-note::before {
+    content: "•";
+    margin-right: 8px;
+}
+
+.specification-modal-extra {
+    padding: 36px 40px 0;
+    color: #111;
+}
+
+.specification-modal-extra:empty {
+    display: none;
+}
+
+.specification-modal-extra h3 {
+    margin: 0;
+    padding: 14px 9px;
+    border-top: 1px solid var(--red);
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    text-align: center;
+}
+
+.specification-modal-extra dl {
+    display: block;
+    margin: 0;
+}
+
+.specification-modal-extra dl div {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    align-items: center;
+    padding: 14px 60px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.specification-modal-extra dt {
+    margin: 0;
+    color: #111;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.specification-modal-extra dd {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.specification-modal-notes {
+    margin: 20px 40px 0;
+    padding-top: 0;
+    color: #333;
+    font-family: "Pretendard", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0;
+}
+
+.specification-modal-notes p {
+    position: relative;
+    margin: 2px 0;
+    padding-left: 14px;
+}
+
+.specification-modal-notes p::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+}
+
+html.is-specification-modal-open,
+html.is-specification-modal-open body {
+    overflow: hidden;
+}
 
 /* ========================================
 Training Program : Mobile
 ======================================== */
 
 
-@page { size: A4 portrait; margin: 10mm; }
+@page {
+    size: A4 portrait;
+    margin: 10mm;
+}
 
 @media print {
-    html, body { width: auto; min-width: 0; margin: 0; background: #fff; }
-    body > *:not(.specification-modal) { display: none !important; }
-    .specification-modal { position: static; display: block !important; width: 100%; padding: 0; overflow: visible; opacity: 1; background: #fff; }
-    .specification-modal-dim, .specification-modal-close, .specification-modal-print { display: none !important; }
+    html,
+    body {
+        width: auto;
+        min-width: 0;
+        margin: 0;
+        background: #fff;
+    }
+
+    body > *:not(.specification-modal) {
+        display: none !important;
+    }
+
+    .specification-modal {
+        position: static;
+        display: block !important;
+        width: 100%;
+        padding: 0;
+        overflow: visible;
+        background: #fff;
+        opacity: 1;
+    }
+
+    .specification-modal-dim,
+    .specification-modal-close,
+    .specification-modal-print {
+        display: none !important;
+    }
     .specification-modal-dialog.modal-box {
         display: block !important;
         width: 100% !important;
@@ -1870,16 +2102,36 @@ Training Program : Mobile
         box-shadow: none;
         transform: none;
     }
+
     .specification-modal-dialog,
-    .specification-modal-dialog * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-    .specification-modal-header { background: #050505 !important; color: #fff !important; }
-    .specification-modal-accent { background: var(--red) !important; }
-    .specification-modal-body::after { opacity: .55; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .specification-modal-dialog * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .specification-modal-header {
+        background: #050505 !important;
+        color: #fff !important;
+    }
+
+    .specification-modal-accent {
+        background: var(--red) !important;
+    }
+
+    .specification-modal-body::after {
+        opacity: .55;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
     .specification-modal-summary,
     .specification-modal-links,
     .specification-modal-table tr,
     .specification-modal-extra dl div,
-    .specification-modal-notes p { break-inside: avoid; page-break-inside: avoid; }
+    .specification-modal-notes p {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
 }
 
 
@@ -1959,9 +2211,17 @@ Training Program : Mobile
         font-size: 14px !important;
     }
 
-    .specification-modal-table thead { display: table-header-group !important; }
-    .specification-modal-table tbody { display: table-row-group !important; }
-    .specification-modal-table tr { display: table-row !important; }
+    .specification-modal-table thead {
+        display: table-header-group !important;
+    }
+
+    .specification-modal-table tbody {
+        display: table-row-group !important;
+    }
+
+    .specification-modal-table tr {
+        display: table-row !important;
+    }
 
     .specification-modal-table th,
     .specification-modal-table td {
@@ -2101,17 +2361,6 @@ Mobile (720px and below)
         font-weight: 300;
         word-break: keep-all;
     }
-
-    .specification-modal { padding: 12px; }
-    .specification-modal-header { padding: 0 20px; }
-    .specification-modal-header h2 { font-size: 26px; line-height: normal; letter-spacing: 0; }
-    .specification-modal-logo { width: 90px; margin-right: 26px; }
-    .specification-modal-summary { grid-template-columns: 64px 1fr; padding: 22px 20px 16px; }
-    .specification-modal-vehicle { grid-column: 1 / -1; }
-    .specification-modal-links { flex-direction: column; gap: 7px; margin: 0 20px; }
-    .specification-modal-table { width: calc(100% - 40px); margin: 0 20px; }
-    .specification-modal-extra { padding-right: 20px; padding-left: 20px; }
-    .specification-modal-extra dl { grid-template-columns: repeat(2, 1fr); }
 
     .sub-specification .inner {
         width: auto;
@@ -2360,11 +2609,21 @@ Mobile (720px and below)
         font-weight: 700;
     }
 
-    .sub-specification-table td:nth-child(2)::before { content: "연식"; }
-    .sub-specification-table td:nth-child(3)::before { content: "모델명"; }
-    .sub-specification-table td:nth-child(4)::before { content: "Model"; }
-    .sub-specification-table td:nth-child(5)::before { content: "세부모델명"; }
-    .sub-specification-table td:nth-child(6)::before { content: "비고"; }
+    .sub-specification-table td:nth-child(2)::before {
+        content: "연식";
+    }
+    .sub-specification-table td:nth-child(3)::before {
+        content: "모델명";
+    }
+    .sub-specification-table td:nth-child(4)::before {
+        content: "Model";
+    }
+    .sub-specification-table td:nth-child(5)::before {
+        content: "세부모델명";
+    }
+    .sub-specification-table td:nth-child(6)::before {
+        content: "비고";
+    }
 
     .sub-specification-table td:first-child {
         display: block;
@@ -2634,9 +2893,10 @@ Mobile (720px and below)
     .sub-training-day.is-today .sub-training-day-number::after {
         font-size: 10px;
     }
-    .sub-training-day.is-selected{
+    .sub-training-day.is-selected {
         box-shadow: inset 0 0 0 1px #c20e05;
     }
+
     .sub-training-day.is-today .sub-training-day-number {
         align-items: flex-start;
         flex-direction: column;
@@ -2744,6 +3004,10 @@ Mobile (720px and below)
         margin-top: 20px;
     }
 
+    .sub-training-modal-body {
+        padding: 25px !important;
+    }
+
     .sub-training-modal-body .sub-form-checkbox-text {
         font-size: 14px;
         line-height: 22px;
@@ -2758,6 +3022,7 @@ Mobile (720px and below)
     .sub-training-modal-submit {
         flex: 1 1 0;
         min-width: 0;
+        max-width: none;
         height: 50px;
         padding: 0;
         font-size: 14px;

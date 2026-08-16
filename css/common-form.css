@@ -9,10 +9,10 @@ Common Form
 }
 
 .sub-form-group {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: calc(18 * var(--vw));
-    position: relative;
 }
 
 .sub-form-label {
@@ -26,12 +26,12 @@ Common Form
 .sub-form-textarea,
 .sub-form-select-trigger {
     width: 100%;
+    box-sizing: border-box;
     border: 1px solid #ddd;
     background: #fff;
     color: #111;
     font-family: inherit;
     font-size: calc(20 * var(--vw));
-    box-sizing: border-box;
     outline: none;
     transition:
         border-color .25s ease,
@@ -65,7 +65,7 @@ Common Form
 .sub-form-group.is-filled .sub-form-input,
 .sub-form-group.is-filled .sub-form-textarea {
     color: #000;
-    border-color: #DDD;
+    border-color: #ddd;
 }
 
 /* 오류 */
@@ -78,22 +78,21 @@ Common Form
     border-color: var(--red);
 }
 
-.sub-form-group.is-error .sub-form-message::before{
-    content:"¡";
-    position:absolute;
-    left:0;
-    width:calc(14 * var(--vw));
-    height:calc(14 * var(--vw));
-    border-radius:50%;
-    background:var(--red);
-    color:#fff;
-    font-size:calc(10 * var(--vw));
-    font-weight:700;
-    line-height:calc(10 * var(--vw));
+.sub-form-group.is-error .sub-form-message::before {
+    position: absolute;
+    left: 0;
+    width: calc(14 * var(--vw));
+    height: calc(14 * var(--vw));
     margin-top: calc(2 * var(--vw));
-    text-align:center;
-  }
-
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    font-size: calc(10 * var(--vw));
+    font-weight: 700;
+    line-height: calc(10 * var(--vw));
+    text-align: center;
+    content: "¡";
+}
 
 /* Disabled */
 
@@ -114,13 +113,11 @@ Common Form
 
 .sub-form-message {
     display: none;
-    margin: 0;
+    margin: 0 0 0 calc(20 * var(--vw));
     color: var(--red);
     font-size: calc(14 * var(--vw));
     line-height: calc(18 * var(--vw));
-    margin-left: calc(20 * var(--vw));
 }
-
 
 .sub-form-group.is-error > .sub-form-message {
     display: block;
@@ -204,11 +201,11 @@ Custom Select
     width: 100%;
     margin: 0;
     padding: calc(8 * var(--vw)) 0;
+    box-sizing: border-box;
     border: 1px solid var(--red);
     border-top: 0;
     background: #fff;
     list-style: none;
-    box-sizing: border-box;
 }
 
 .sub-form-select-option {
@@ -347,14 +344,13 @@ Radio
     flex: 0 0 auto;
     width: calc(20 * var(--vw));
     height: calc(20 * var(--vw));
+    box-sizing: border-box;
     border: calc(2 * var(--vw)) solid #555;
     border-radius: 50%;
     background: #fff;
-    box-sizing: border-box;
 }
 
 .sub-form-radio-icon::after {
-    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -362,6 +358,7 @@ Radio
     height: calc(10 * var(--vw));
     border-radius: 50%;
     background: transparent;
+    content: "";
     transform: translate(-50%, -50%);
 }
 
@@ -444,7 +441,7 @@ Form Page Layout
 }
 
 .sub-form-section {
-    padding-bottom: calc(120 * var(--vw)) 0;
+    padding-bottom: calc(120 * var(--vw));
 }
 
 .sub-form-section + .sub-form-section {
@@ -664,13 +661,13 @@ Form Page Layout
     justify-content: center;
     min-height: calc(58 * var(--vw));
     padding: calc(10 * var(--vw));
+    box-sizing: border-box;
     border-right: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     color: #666;
     font-size: calc(14 * var(--vw));
     line-height: 1.4;
     text-align: center;
-    box-sizing: border-box;
 }
 
 .sub-form-privacy-row.is-heading span {
@@ -736,8 +733,8 @@ Mobile Forms
     .sub-form-section .inner {
         width: auto;
         margin: 0;
-        padding: 0 25px;
         box-sizing: border-box;
+        padding: 0 25px;
     }
 
     .sub-form-section-title {
@@ -935,14 +932,6 @@ Mobile Forms
         gap: 10px;
     }
 
-    .sub-form-page-contact .sub-form-email > .sub-form-control:nth-of-type(2) {
-        grid-column: 1 / -1;
-    }
-
-    .sub-form-page-contact .sub-form-email > .sub-form-select {
-        grid-column: 1 / -1;
-    }
-
     .sub-form-page-contact .sub-form-email-at {
         font-size: 12px;
     }
@@ -1024,10 +1013,6 @@ Mobile Forms
     /* Vehicle Specification Request */
     .sub-form-page-vehicle .sub-form-section + .sub-form-section {
         padding-top: 72px;
-    }
-
-    .sub-form-page-vehicle .sub-form-section:last-child {
-        padding-bottom: 50px;
     }
 
     .sub-form-page-vehicle .sub-form-bottom {

@@ -394,105 +394,366 @@
 }
 
 
-.sub-account-business-type{
-    display:flex;
-    align-items:center;
-    gap:calc(50 * var(--vw));
+.sub-account-business-type {
+    display: flex;
+    align-items: center;
+    gap: calc(50 * var(--vw));
 }
 
-.sub-account-business-option{
-    display:inline-flex;
-    align-items:center;
-    gap:calc(12 * var(--vw));
+.sub-account-business-option {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(12 * var(--vw));
 }
 
-.sub-account-business-text{
-    color:#111;
-    font-size:calc(18 * var(--vw));
-    line-height:1;
+.sub-account-business-text {
+    color: #111;
+    font-size: calc(18 * var(--vw));
+    line-height: 1;
 }
 
 /* ========================================
    Join phone verification
 ======================================== */
-.sub-account-phone-verification { margin-bottom: calc(48 * var(--vw)); }
-.sub-account-phone-request-row { display: grid; grid-template-columns: minmax(0,1fr) calc(180 * var(--vw)); gap: calc(16 * var(--vw)); }
-.sub-account-phone-code-button { display:flex; align-items:center; justify-content:center; height:calc(80 * var(--vw)); padding:0 calc(16 * var(--vw)); border:1px solid var(--red); background:#fff; color:var(--red); font-family:inherit; font-size:calc(18 * var(--vw)); font-weight:600; cursor:pointer; box-sizing:border-box; }
-.sub-account-phone-code-button:disabled { border-color:#d9d9d9; background:#f5f5f5; color:#999; cursor:default; }
-.sub-account-phone-code-area { margin-top:calc(12 * var(--vw)); }
-.sub-account-phone-code-area[hidden] { display:none !important; }
-.sub-account-phone-code-row { display:grid; grid-template-columns:minmax(0,1fr) calc(180 * var(--vw)); gap:calc(16 * var(--vw)); }
-.sub-account-phone-verification .sub-account-code-input-wrap { position:relative; }
-.sub-account-phone-verification .sub-account-code-input-wrap .sub-account-input { padding-right:calc(86 * var(--vw)); }
-.sub-account-phone-verification .sub-account-code-timer { right:calc(20 * var(--vw)); font-size:calc(15 * var(--vw)); }
-.sub-account-phone-verification .sub-account-code-feedback { min-height:calc(34 * var(--vw)); margin-top:calc(12 * var(--vw)); }
-.sub-account-phone-verification .sub-account-code-status { font-size:calc(14 * var(--vw)); }
-.sub-account-phone-verification .sub-account-code-resend { font-size:calc(14 * var(--vw)); }
-.sub-account-phone-verification .sub-account-input.is-error { border-color:var(--red); }
-.sub-account-phone-verification.is-verified .sub-account-code-input-wrap .sub-account-input { border-color:#e5e5e5; background:#f5f5f5; color:#888; opacity:1; -webkit-text-fill-color:#888; }
-.sub-account-phone-verification.is-verified .sub-account-code-timer { display:none; }
+.sub-account-phone-verification {
+    margin-bottom: calc(48 * var(--vw));
+}
+
+.sub-account-phone-request-row,
+.sub-account-phone-code-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) calc(180 * var(--vw));
+    gap: calc(16 * var(--vw));
+}
+
+.sub-account-phone-code-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(80 * var(--vw));
+    padding: 0 calc(16 * var(--vw));
+    box-sizing: border-box;
+    border: 1px solid var(--red);
+    background: #fff;
+    color: var(--red);
+    font-family: inherit;
+    font-size: calc(18 * var(--vw));
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.sub-account-phone-code-button:disabled {
+    border-color: #d9d9d9;
+    background: #f5f5f5;
+    color: #999;
+    cursor: default;
+}
+
+.sub-account-phone-code-area {
+    margin-top: calc(12 * var(--vw));
+}
+
+.sub-account-phone-code-area[hidden] {
+    display: none !important;
+}
+
+.sub-account-phone-verification .sub-account-code-input-wrap {
+    position: relative;
+}
+
+.sub-account-phone-verification .sub-account-code-input-wrap .sub-account-input {
+    padding-right: calc(86 * var(--vw));
+}
+
+.sub-account-phone-verification .sub-account-code-timer {
+    right: calc(20 * var(--vw));
+    font-size: calc(15 * var(--vw));
+}
+
+.sub-account-phone-verification .sub-account-code-feedback {
+    min-height: calc(34 * var(--vw));
+    margin-top: calc(12 * var(--vw));
+}
+
+.sub-account-phone-verification .sub-account-code-status,
+.sub-account-phone-verification .sub-account-code-resend {
+    font-size: calc(14 * var(--vw));
+}
+
+.sub-account-phone-verification .sub-account-input.is-error {
+    border-color: var(--red);
+}
+
+.sub-account-phone-verification.is-verified .sub-account-code-input-wrap .sub-account-input {
+    border-color: #e5e5e5;
+    background: #f5f5f5;
+    color: #888;
+    opacity: 1;
+    -webkit-text-fill-color: #888;
+}
+
+.sub-account-phone-verification.is-verified .sub-account-code-timer {
+    display: none;
+}
 
 
 /* ========================================
    Phone verification login
 ======================================== */
-.sub-account-login-section { min-height:calc(100vh - calc(100 * var(--vw))); padding:calc(220 * var(--vw)) 0 calc(190 * var(--vw)); box-sizing:border-box; }
-.sub-account-phone-login { display:block; }
-.sub-account-login-step[hidden] { display:none !important; }
-.sub-account-phone-login .sub-account-field { margin-bottom:calc(20 * var(--vw)); }
-.sub-account-phone-login .sub-account-label { margin-bottom:calc(16 * var(--vw)); color:#555; font-size:calc(20 * var(--vw)); font-weight:600; }
-.sub-account-phone-login .sub-account-input { height:calc(80 * var(--vw)); font-size:calc(18 * var(--vw)); }
-.sub-account-login-check { margin-top:calc(18 * var(--vw)); color:#111; font-size:calc(17 * var(--vw)); font-weight:600; }
-.sub-account-phone-login .sub-account-actions { margin-top:calc(52 * var(--vw)); }
-.sub-account-phone-login .sub-account-button { height:calc(78 * var(--vw)); }
-.sub-account-login-join { display:block; width:max-content; margin:calc(34 * var(--vw)) auto 0; color:var(--red); font-size:calc(16 * var(--vw)); text-decoration:underline; }
-.sub-account-code-input-wrap { position:relative; }
-.sub-account-code-input-wrap .sub-account-input { padding-right:calc(92 * var(--vw)); }
-.sub-account-code-timer { position:absolute; top:50%; right:calc(22 * var(--vw)); color:#888; font-size:calc(17 * var(--vw)); transform:translateY(-50%); }
-.sub-account-code-feedback { display:flex; align-items:center; justify-content:space-between; gap:calc(20 * var(--vw)); min-height:calc(24 * var(--vw)); margin-top:calc(14 * var(--vw)); }
-.sub-account-code-resend { display:block; margin-left:auto; padding:0; border:0; background:transparent; color:#999; font-family:inherit; font-size:calc(15 * var(--vw)); text-decoration:underline; cursor:pointer; }
-.sub-account-code-status { position:relative; margin:0; padding-left:calc(28 * var(--vw)); color:#999; font-size:calc(15 * var(--vw)); line-height:calc(24 * var(--vw)); }
-.sub-account-code-status::before,.sub-account-code-status::after { content:''; position:absolute; left:calc(9 * var(--vw)); top:50%; }
-.sub-account-code-status.is-success::before { content:'✓'; color:#27a844; font-size:calc(20 * var(--vw)); font-weight:700; transform:translate(-50%,-56%); }
-.sub-account-code-status.is-error { color:#999; }
-.sub-account-code-status.is-error::before,.sub-account-code-status.is-error::after { width:calc(18 * var(--vw)); height:calc(2 * var(--vw)); background:var(--red); }
-.sub-account-code-status.is-error::before { transform:translate(-50%,-50%) rotate(45deg); }
-.sub-account-code-status.is-error::after { transform:translate(-50%,-50%) rotate(-45deg); }
-.sub-account-code-status.is-success + .sub-account-code-resend { display:none; }
-.sub-account-phone-login .sub-account-code-field { margin-bottom:0; }
-.sub-account-phone-login .sub-account-code-field.is-error .sub-account-input { border-color:#ddd; }
-.sub-account-login-code-actions { grid-template-columns:repeat(2,minmax(0,1fr)); gap:calc(12 * var(--vw)); }
-.sub-account-button:disabled { border-color:#efc6c3; background:#efc6c3; color:#fff; cursor:not-allowed; }
+.sub-account-login-section {
+    min-height: calc(100vh - calc(100 * var(--vw)));
+    padding: calc(220 * var(--vw)) 0 calc(190 * var(--vw));
+    box-sizing: border-box;
+}
+
+.sub-account-phone-login {
+    display: block;
+}
+
+.sub-account-login-step[hidden] {
+    display: none !important;
+}
+
+.sub-account-phone-login .sub-account-field {
+    margin-bottom: calc(20 * var(--vw));
+}
+
+.sub-account-phone-login .sub-account-label {
+    margin-bottom: calc(16 * var(--vw));
+    color: #555;
+    font-size: calc(20 * var(--vw));
+    font-weight: 600;
+}
+
+.sub-account-phone-login .sub-account-input {
+    height: calc(80 * var(--vw));
+    font-size: calc(18 * var(--vw));
+}
+
+.sub-account-login-check {
+    margin-top: calc(18 * var(--vw));
+    color: #111;
+    font-size: calc(17 * var(--vw));
+    font-weight: 600;
+}
+
+.sub-account-phone-login .sub-account-actions {
+    margin-top: calc(52 * var(--vw));
+}
+
+.sub-account-phone-login .sub-account-button {
+    height: calc(78 * var(--vw));
+}
+
+.sub-account-login-join {
+    display: block;
+    width: max-content;
+    margin: calc(34 * var(--vw)) auto 0;
+    color: var(--red);
+    font-size: calc(16 * var(--vw));
+    text-decoration: underline;
+}
+
+.sub-account-code-input-wrap {
+    position: relative;
+}
+
+.sub-account-code-input-wrap .sub-account-input {
+    padding-right: calc(92 * var(--vw));
+}
+
+.sub-account-code-timer {
+    position: absolute;
+    top: 50%;
+    right: calc(22 * var(--vw));
+    color: #888;
+    font-size: calc(17 * var(--vw));
+    transform: translateY(-50%);
+}
+
+.sub-account-code-feedback {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(20 * var(--vw));
+    min-height: calc(24 * var(--vw));
+    margin-top: calc(14 * var(--vw));
+}
+
+.sub-account-code-resend {
+    display: block;
+    margin-left: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #999;
+    font-family: inherit;
+    font-size: calc(15 * var(--vw));
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.sub-account-code-status {
+    position: relative;
+    margin: 0;
+    padding-left: calc(28 * var(--vw));
+    color: #999;
+    font-size: calc(15 * var(--vw));
+    line-height: calc(24 * var(--vw));
+}
+
+.sub-account-code-status::before,
+.sub-account-code-status::after {
+    position: absolute;
+    top: 50%;
+    left: calc(9 * var(--vw));
+    content: "";
+}
+
+.sub-account-code-status.is-success::before {
+    color: #27a844;
+    font-size: calc(20 * var(--vw));
+    font-weight: 700;
+    content: "✓";
+    transform: translate(-50%, -56%);
+}
+
+.sub-account-code-status.is-error {
+    color: #999;
+}
+
+.sub-account-code-status.is-error::before,
+.sub-account-code-status.is-error::after {
+    width: calc(18 * var(--vw));
+    height: calc(2 * var(--vw));
+    background: var(--red);
+}
+
+.sub-account-code-status.is-error::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.sub-account-code-status.is-error::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.sub-account-code-status.is-success + .sub-account-code-resend {
+    display: none;
+}
+
+.sub-account-phone-login .sub-account-code-field {
+    margin-bottom: 0;
+}
+
+.sub-account-phone-login .sub-account-code-field.is-error .sub-account-input {
+    border-color: #ddd;
+}
+
+.sub-account-login-code-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: calc(12 * var(--vw));
+}
+
+.sub-account-button:disabled {
+    border-color: #efc6c3;
+    background: #efc6c3;
+    color: #fff;
+    cursor: not-allowed;
+}
 
 
 /* Policy agreement modal */
-.policy-modal { position:fixed; z-index:2000; inset:0; display:flex; align-items:center; justify-content:center; padding:40px; visibility:hidden; opacity:0; transition:opacity .25s ease,visibility .25s ease; }
-.policy-modal.is-open { visibility:visible; opacity:1; }
-.policy-modal__dim { position:absolute; inset:0; width:100%; height:100%; padding:0; border:0; background:rgba(0,0,0,.6); cursor:pointer; }
-.policy-modal__header { flex:0 0 auto; display:flex; align-items:center; justify-content:space-between; padding:0; box-sizing:border-box; border-bottom:0; margin-bottom: calc(50 * var(--vw)); }
-.policy-modal__header h2 { margin:0; color:#111; font-size:38px; font-weight:700; line-height:1.2; letter-spacing:-.045em; }
-.policy-modal__body { flex:1; min-height:0; margin:0; padding:0; overflow-y:auto; scrollbar-width:thin; scrollbar-color:#d8d8d8 transparent; }
-.policy-modal__body::-webkit-scrollbar { width:6px; }
-.policy-modal__body::-webkit-scrollbar-track { background:transparent; }
-.policy-modal__body::-webkit-scrollbar-thumb { border-radius:999px; background:#d8d8d8; }
-.policy-modal__footer { display:none; }
-.policy-modal__confirm { min-width:150px; height:50px; border:1px solid var(--red); border-radius:999px; background:var(--red); color:#fff; font-family:inherit; font-size:16px; cursor:pointer; }
-body.is-policy-modal-open { overflow:hidden; }
+.policy-modal {
+    padding: calc(40 * var(--vw));
+}
+
+.policy-modal__dim {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: rgba(0, 0, 0, .6);
+    cursor: pointer;
+}
+
+.policy-modal__header {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: calc(50 * var(--vw));
+    padding: 0;
+    box-sizing: border-box;
+    border-bottom: 0;
+}
+
+.policy-modal__header h2 {
+    margin: 0;
+    color: #111;
+    font-size: calc(38 * var(--vw));
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -.045em;
+}
+
+.policy-modal__body {
+    flex: 1;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    scrollbar-color: #d8d8d8 transparent;
+    scrollbar-width: thin;
+}
+
+.policy-modal__body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.policy-modal__body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.policy-modal__body::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: #d8d8d8;
+}
+
+.policy-modal__footer {
+    display: none;
+}
+
+.policy-modal__confirm {
+    min-width: calc(150 * var(--vw));
+    height: calc(50 * var(--vw));
+    border: 1px solid var(--red);
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+    font-family: inherit;
+    font-size: calc(16 * var(--vw));
+    cursor: pointer;
+}
+
+body.is-policy-modal-open {
+    overflow: hidden;
+}
 
 
 /* ========================================
 Mobile (720px and below)
 ======================================== */
 @media (max-width: 720px) {
-    .sub-account-phone-request-row { grid-template-columns:minmax(0,1fr) 112px; gap:10px; }
-    .sub-account-phone-code-row { grid-template-columns:minmax(0,1fr) 112px; gap:10px; }
-    .sub-account-phone-code-button { height:56px; padding:0 10px; font-size:14px; }
-    .sub-account-phone-code-area { margin-top:10px; }
-    .sub-account-phone-verification .sub-account-code-input-wrap .sub-account-input { padding-right:68px; }
-    .sub-account-phone-verification .sub-account-code-timer { right:16px; font-size:13px; }
-    .sub-account-phone-verification .sub-account-code-feedback { min-height:28px; margin-top:8px; }
-    .sub-account-phone-verification .sub-account-code-status,
-    .sub-account-phone-verification .sub-account-code-resend { font-size:12px; }
+    .sub-account-phone-verification .sub-account-code-input-wrap .sub-account-input {
+        padding-right: 68px;
+    }
+
+    .sub-account-phone-verification .sub-account-code-timer {
+        right: 16px;
+        font-size: 13px;
+    }
 
     .sub-account-login-section {
         height: 640px;
@@ -531,9 +792,9 @@ Mobile (720px and below)
         position: relative;
         margin: 8px 0 0;
         padding-left: 23px;
+        box-sizing: border-box;
         font-size: 14px;
         line-height: 20px;
-        box-sizing: border-box;
     }
 
     .sub-account-phone-login .sub-form-group.is-error > .sub-form-message::before {
@@ -542,16 +803,16 @@ Mobile (720px and below)
         width: 14px;
         height: 14px;
         margin-top: 0;
+        box-sizing: border-box;
         font-size: 10px;
         line-height: 13px;
         transform: translateY(-50%);
-        box-sizing: border-box;
     }
 
     .sub-account-login-check {
+        align-items: center;
         gap: 7px;
         margin-top: 0;
-        align-items: center;
         font-size: 14px;
         font-weight: 400;
     }
@@ -630,13 +891,15 @@ Mobile (720px and below)
         -webkit-text-fill-color: #888;
     }
 
-    .sub-account-login-code-actions { gap:10px; }
+    .sub-account-login-code-actions {
+        gap: 10px;
+    }
 
     .sub-account-complete-section {
         height: 640px;
         min-height: 640px;
-        padding: 136px 0 0;
         box-sizing: border-box;
+        padding: 136px 0 0;
     }
 
     .sub-account-complete-container {
@@ -671,12 +934,12 @@ Mobile (720px and below)
     }
 
     .sub-account-complete-container .sub-form-submit {
-        min-width: 110px;
         width: 110px;
+        min-width: 110px;
         height: 50px;
         padding: 0;
-        font-size: 14px;
         box-sizing: border-box;
+        font-size: 14px;
     }
 
     #join-form-section {
@@ -853,8 +1116,21 @@ Mobile (720px and below)
         font-size: 14px;
     }
 
-    .policy-modal { padding:20px; }
-    .policy-modal__header { min-height:88px; padding:0; }
-    .policy-modal__header h2 { font-size:26px; }
-    .policy-modal__body { margin:0; padding:0; }
+    .policy-modal {
+        padding: 20px;
+    }
+
+    .policy-modal__header {
+        min-height: 88px;
+        padding: 0;
+    }
+
+    .policy-modal__header h2 {
+        font-size: 26px;
+    }
+
+    .policy-modal__body {
+        margin: 0;
+        padding: 0;
+    }
 }
