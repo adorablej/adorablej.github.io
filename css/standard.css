@@ -1585,6 +1585,7 @@ HUNTER History
 
 .sub-history-timeline {
     position: relative;
+    z-index: 2;
     height: calc(7200 * var(--vw));
 }
 
@@ -1887,7 +1888,7 @@ HUNTER History
 
 .sub-history-finale {
     position: relative;
-    z-index: 7;
+    z-index: 1;
     padding: 0 0 calc(140 * var(--vw));
 }
 
@@ -1926,13 +1927,13 @@ HUNTER History
 .sub-history-finale-image {
     position: absolute;
     z-index: 1;
-    top: 50%;
+    top: 0;
     left: 50%;
     width: calc(940 * var(--vw));
     height: calc(520 * var(--vw));
     margin: 0;
     overflow: hidden;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     will-change: width, height;
 }
 

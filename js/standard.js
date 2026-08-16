@@ -1673,7 +1673,6 @@ window.getHunterStandardSectionScrollDuration = function (fromY, toY) {
         const content = timeline.querySelector(".sub-history-center-content");
         const title = timeline.querySelector(".sub-history-center-title");
         const description = timeline.querySelector(".sub-history-center-description");
-        const finaleSection = document.querySelector(".sub-history-finale");
         const finaleStage = document.querySelector(".sub-history-finale-stage");
         const finaleImage = finaleStage && finaleStage.querySelector(".sub-history-finale-image");
         const finaleTagline = document.querySelector(".sub-history-finale-copy > span");
@@ -1760,19 +1759,7 @@ window.getHunterStandardSectionScrollDuration = function (fromY, toY) {
             });
 
             finaleMedia.add("(min-width: 721px)", function () {
-                const setFinaleVisibility = function (isVisible) {
-                    gsap.set(finaleImage, {
-                        autoAlpha: isVisible ? 1 : 0
-                    });
-                };
-                const finaleReveal = ScrollTrigger.create({
-                    trigger: finaleSection || finaleStage,
-                    start: "top bottom",
-                    onEnter: function () { setFinaleVisibility(true); },
-                    onEnterBack: function () { setFinaleVisibility(true); },
-                    onLeaveBack: function () { setFinaleVisibility(false); }
-                });
-                const finaleTween = gsap.fromTo(finaleImage,
+                return gsap.fromTo(finaleImage,
                     {
                         width: function () { return Math.min(window.innerWidth, 1920) * 940 / 1920; },
                         height: function () { return Math.min(window.innerWidth, 1920) * 520 / 1920; }
@@ -1786,22 +1773,13 @@ window.getHunterStandardSectionScrollDuration = function (fromY, toY) {
                             start: "center center",
                             end: "+=70%",
                             scrub: true,
-                            pin: true,
+                            pin: finaleStage,
                             pinSpacing: true,
+                            refreshPriority: -10,
                             invalidateOnRefresh: true
                         }
                     }
                 );
-
-                setFinaleVisibility(
-                    (finaleSection || finaleStage).getBoundingClientRect().top <= window.innerHeight
-                );
-
-                return function () {
-                    finaleReveal.kill();
-                    finaleTween.kill();
-                    gsap.set(finaleImage, { clearProps: "opacity,visibility" });
-                };
             });
         }
 
