@@ -2,7 +2,9 @@
     "use strict";
 
     function initStandardPage() {
-        if (typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") return;
+        if (typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") {
+            return;
+        }
 
         gsap.registerPlugin(ScrollTrigger);
 
@@ -89,7 +91,27 @@
         const dim = hero && hero.querySelector(".sub-awards-hero-dim");
         const copy = hero && hero.querySelector(".sub-awards-hero-copy");
         const lines = copy && copy.querySelectorAll("span");
-        if (!scroll || !hero || !media || !images || !dim || !copy || !lines.length) return;
+        if (!scroll || !hero || !media || !images || !dim || !copy || !lines.length) {
+            const topVisual = document.querySelector(".sub-awards-top-visual");
+            const topImage = topVisual && topVisual.querySelector("img");
+            if (!topVisual || !topImage) return;
+
+            gsap.fromTo(topImage,
+                { scale: 1.06 },
+                {
+                    scale: 1,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: topVisual,
+                        start: "top 88%",
+                        end: "bottom 20%",
+                        scrub: 1,
+                        invalidateOnRefresh: true
+                    }
+                }
+            );
+            return;
+        }
 
         const mobile = window.matchMedia("(max-width: 720px)").matches;
         gsap.set(copy, { xPercent: mobile ? -50 : 0, yPercent: -50, y: 30 });
@@ -668,8 +690,16 @@
 (function () {
     "use strict";
 
+    let detailPageInitialized = false;
+
     function initHunterUsaPage() {
-        if (typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") return;
+        if (detailPageInitialized) return;
+        if (typeof window.gsap === "undefined" || typeof window.ScrollTrigger === "undefined") {
+            return;
+        }
+        if (!document.querySelector(".sub-standard-detail-page")) return;
+
+        detailPageInitialized = true;
 
         gsap.registerPlugin(ScrollTrigger);
 
@@ -1335,7 +1365,7 @@
 
     function initValueMotions() {
         const mobileValueLayout = window.matchMedia("(max-width: 720px)").matches;
-        const motionDistance = mobileValueLayout ? 7 : 4;
+        const valueMasks = [];
 
         function fitMaskImageToViewport(mask) {
             const svg = mask.querySelector("svg");
@@ -1375,46 +1405,48 @@
             const mask = section.querySelector(".sub-usa-h-mask");
             if (!copy || !mask) return;
 
-            const fromLeft = mask.classList.contains("sub-usa-h-mask-left");
-
             fitMaskImageToViewport(mask);
-
-            // 문구는 페이지 진입 시부터 그대로 노출
-            gsap.set(copy, {
-                y: 0,
-                autoAlpha: 1,
-                clearProps: "visibility"
+            valueMasks.push({
+                section: section,
+                mask: mask,
+                direction: mask.classList.contains("sub-usa-h-mask-left") ? 1 : -1
             });
-
-            const startXPercent = mobileValueLayout ? 0 : (fromLeft ? -motionDistance : motionDistance);
-            const endXPercent = fromLeft ? motionDistance : -motionDistance;
-
-            // 모바일은 시안의 H 위치에서 시작하고, 현재처럼 좌우로만 이동
-            gsap.fromTo(mask,
-                {
-                    xPercent: startXPercent,
-                    autoAlpha: 1
-                },
-                {
-                    xPercent: endXPercent,
-                    autoAlpha: 1,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top bottom",
-                        end: "bottom top",
-                        scrub: mobileValueLayout ? 1 : true,
-                        invalidateOnRefresh: true
-                    }
-                }
-            );
         });
+
+        let motionFrame = 0;
+
+        function updateValueMasks() {
+            motionFrame = 0;
+            const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+            const distance = Math.min(
+                window.innerWidth * (mobileValueLayout ? 0.12 : 0.1),
+                mobileValueLayout ? 70 : 180
+            );
+
+            valueMasks.forEach(function (item) {
+                const rect = item.section.getBoundingClientRect();
+                const progress = Math.max(0, Math.min(1,
+                    (viewportHeight - rect.top) / (viewportHeight + rect.height)
+                ));
+                const x = (progress * 2 - 1) * distance * item.direction;
+                item.mask.style.translate = x.toFixed(2) + "px 0";
+            });
+        }
+
+        function requestValueMaskUpdate() {
+            if (motionFrame) return;
+            motionFrame = window.requestAnimationFrame(updateValueMasks);
+        }
+
+        updateValueMasks();
+        window.addEventListener("scroll", requestValueMaskUpdate, { passive: true });
 
         let maskResizeFrame = 0;
         window.addEventListener("resize", function () {
             window.cancelAnimationFrame(maskResizeFrame);
             maskResizeFrame = window.requestAnimationFrame(function () {
                 document.querySelectorAll(".sub-usa-h-mask").forEach(fitMaskImageToViewport);
+                updateValueMasks();
             });
         }, { passive: true });
     }
@@ -1434,6 +1466,11 @@
     }
 
     window.addEventListener("includeLoaded", initHunterUsaPage, { once: true });
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initHunterUsaPage, { once: true });
+    } else {
+        initHunterUsaPage();
+    }
 })();
 
 
