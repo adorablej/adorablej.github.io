@@ -20,20 +20,15 @@
 
     /**
      * 로그인 헤더 미리보기
-     * - 실제 토큰이 있으면 로그인 상태
-     * - ?previewAuth=login 또는 logout으로 화면 상태만 확인 가능
-     * - ?previewAlarm=1이면 확인하지 않은 알림 상태
+     * - 기본 화면은 로그인 + 확인하지 않은 알림 있음
+     * - ?previewAuth=logout이면 로그아웃 상태
+     * - ?previewAlarm=0이면 로그인 + 확인하지 않은 알림 없음
      */
     function initAuthState() {
         const params = new URLSearchParams(window.location.search);
         const previewAuth = params.get("previewAuth");
-        const hasStoredToken = Boolean(
-            window.sessionStorage.getItem("hunter.accessToken") ||
-            window.localStorage.getItem("hunter.accessToken")
-        );
-        const isLoggedIn = previewAuth === "login" ||
-            (previewAuth !== "logout" && hasStoredToken);
-        const hasAlarm = isLoggedIn && params.get("previewAlarm") === "1";
+        const isLoggedIn = previewAuth !== "logout";
+        const hasAlarm = isLoggedIn && params.get("previewAlarm") !== "0";
         const headerLogin = document.querySelector(".header-r.is-login");
         const headerLogout = document.querySelector(".header-r.is-logout");
         const allMenu = document.querySelector(".all-menu");

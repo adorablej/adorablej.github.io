@@ -3,7 +3,7 @@
 ========================================================= */
 .sub-standard-scroll {
     overflow-x: clip;
-overflow-y: visible;
+    overflow-y: visible;
 }
 
 .sub-standard-page {
@@ -198,7 +198,7 @@ overflow-y: visible;
     margin: 0;
     font-size: calc(70 * var(--vw));
     font-weight: 700;
-    line-height:calc(84 * var(--vw));
+    line-height: calc(84 * var(--vw));
 }
 
 .sub-standard-intro-content p {
@@ -263,7 +263,7 @@ overflow-y: visible;
     letter-spacing: calc(-1 * var(--vw));
 }
 
-.sub-standard-story-copy h2 span{
+.sub-standard-story-copy h2 span {
     color: var(--red);
     font-family: "Russo One", sans-serif;
 }
@@ -747,7 +747,9 @@ overflow-y: visible;
 }
 
 .sub-awards-top-visual picture,
-.sub-awards-top-visual img { width: 100%; }
+.sub-awards-top-visual img {
+    width: 100%;
+}
 
 .sub-awards-top-visual img {
     height: auto;
@@ -879,7 +881,7 @@ overflow-y: visible;
     margin: 0;
     color: #222;
     font-size: calc(18 * var(--vw));
-    line-height:calc(30 * var(--vw));
+    line-height: calc(30 * var(--vw));
     word-break: keep-all;
     letter-spacing: calc(-1 * var(--vw));
 }
@@ -1017,60 +1019,6 @@ overflow-y: visible;
     z-index: 2;
     top: 50%;
     left: 50%;
-    width: calc(700 * var(--vw));
-    color: #fff;
-    text-align: center;
-    transform: translate(-50%, -50%);
-}
-
-.sub-korea-vision-content h2 {
-    margin: 0;
-    font-size: calc(54 * var(--vw));
-    font-weight: 800;
-    line-height: 1.18;
-    letter-spacing: -.055em;
-    word-break: keep-all;
-}
-
-.sub-korea-vision-content h2 small {
-    display: block;
-    margin-bottom: calc(8 * var(--vw));
-    font-size: calc(34 * var(--vw));
-    line-height: 1;
-}
-
-.sub-korea-vision-content h2 span {
-    color: var(--red);
-}
-
-.sub-korea-vision-content p {
-    max-height: 0;
-    margin: 0;
-    overflow: hidden;
-    color: rgba(255, 255, 255, .72);
-    font-size: calc(15 * var(--vw));
-    line-height: 1.8;
-    opacity: 0;
-    transform: translateY(calc(20 * var(--vw)));
-    transition:
-        max-height .65s ease,
-        margin .65s ease,
-        opacity .35s ease,
-        transform .65s cubic-bezier(.22, 1, .36, 1);
-}
-
-.sub-korea-vision-panel.is-active .sub-korea-vision-content p {
-    max-height: calc(220 * var(--vw));
-    margin-top: calc(38 * var(--vw));
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.sub-korea-vision-content {
-    position: absolute;
-    z-index: 2;
-    top: 50%;
-    left: 50%;
     width: calc(760 * var(--vw));
     transform: translate(-50%, -50%);
     color: #fff;
@@ -1176,7 +1124,7 @@ overflow-y: visible;
     box-sizing: border-box;
 }
 
-.sub-korea-creative-label strong{
+.sub-korea-creative-label strong {
     display: block;
     font-size: calc(30 * var(--vw));
     font-weight: 600;
@@ -1209,8 +1157,8 @@ overflow-y: visible;
     font-weight: 400;
     line-height: 1.2;
 }
-.sub-korea-creative-principle:first-child{
-    border-left:none;
+.sub-korea-creative-principle:first-child {
+    border-left: none;
 }
 .sub-korea-creative-card {
     display: grid;
@@ -1233,12 +1181,12 @@ overflow-y: visible;
 }
 
 .sub-korea-creative-card-item {
-    padding:0 0 0 calc(42 * var(--vw));
+    padding: 0 0 0 calc(42 * var(--vw));
     border-left: 1px solid #e5e5e5;
     box-sizing: border-box;
 }
-.sub-korea-creative-card-item:first-child{
-    border-left:none;
+.sub-korea-creative-card-item:first-child {
+    border-left: none;
 }
 
 .sub-korea-creative-card-item p {
@@ -1362,7 +1310,7 @@ overflow-y: visible;
     box-sizing: border-box;
 }
 
-.sub-korea-after-item_icon{
+.sub-korea-after-item_icon {
     margin-bottom: calc(40 * var(--vw));
 }
 
@@ -1732,7 +1680,7 @@ HUNTER History
     margin: calc(14 * var(--vw)) 0 0;
     color: #777;
     font-size: calc(18 * var(--vw));
-    line-height:calc(30 * var(--vw));
+    line-height: calc(30 * var(--vw));
     word-break: keep-all;
 }
 
@@ -1938,6 +1886,8 @@ HUNTER History
 }
 
 .sub-history-finale {
+    position: relative;
+    z-index: 7;
     padding: 0 0 calc(140 * var(--vw));
 }
 
@@ -2006,7 +1956,10 @@ HUNTER History
     font-weight: 800;
 }
 
-.sub-history-finale-copy h2 span { color: var(--red); font-family: "Russo One", sans-serif;}
+.sub-history-finale-copy h2 span {
+    color: var(--red);
+    font-family: "Russo One", sans-serif;
+}
 
 .sub-history-finale-copy p {
     margin: calc(20 * var(--vw)) 0 0;
@@ -2233,13 +2186,33 @@ History 연도별 1920 시안 좌표
 }
 
 /* 연도별 스크롤 구간도 시안 높이와 동일 */
-.sub-history-step:nth-child(1) { height: calc(1670 * var(--vw)); }
-.sub-history-step:nth-child(2) { height: calc(1838 * var(--vw)); }
-.sub-history-step:nth-child(3) { height: calc(2021 * var(--vw)); }
-.sub-history-step:nth-child(4) { height: calc(1441 * var(--vw)); }
-.sub-history-step:nth-child(5) { height: calc(1670 * var(--vw)); }
-.sub-history-step:nth-child(6) { height: calc(1570 * var(--vw)); }
-.sub-history-step:nth-child(7) { height: 42vh; }
+.sub-history-step:nth-child(1) {
+    height: calc(1670 * var(--vw));
+}
+
+.sub-history-step:nth-child(2) {
+    height: calc(1838 * var(--vw));
+}
+
+.sub-history-step:nth-child(3) {
+    height: calc(2021 * var(--vw));
+}
+
+.sub-history-step:nth-child(4) {
+    height: calc(1441 * var(--vw));
+}
+
+.sub-history-step:nth-child(5) {
+    height: calc(1670 * var(--vw));
+}
+
+.sub-history-step:nth-child(6) {
+    height: calc(1570 * var(--vw));
+}
+
+.sub-history-step:nth-child(7) {
+    height: 42vh;
+}
 
 /* 시안에서 카피가 없는 연도 */
 .sub-history-center-copy[data-active-year="1950"] .sub-history-center-content,

@@ -392,6 +392,7 @@ body:not(.main-page) .header:not(.is-scrolled):not(.is-menu-open) {
 body:not(.main-page) .header.is-scrolled:not(.is-menu-open) {
     border-bottom-color: #e9e9e9;
 }
+
 .main-page .header {
     background: transparent;
     box-shadow: none;
@@ -412,21 +413,19 @@ body:not(.main-page) .header.is-scrolled:not(.is-menu-open) {
     color: #000;
 }
 
-.header .inner{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    height:100%;
-
-    margin:0 auto;
-    padding:0 calc(60 * var(--vw));
+.header .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 calc(60 * var(--vw));
 }
 
-.header-l{
-    display:flex;
-    align-items:center;
-    gap:calc(80 * var(--vw));
+.header-l {
+    display: flex;
+    align-items: center;
+    gap: calc(80 * var(--vw));
 }
 
 
@@ -434,62 +433,58 @@ body:not(.main-page) .header.is-scrolled:not(.is-menu-open) {
 Logo
 ======================================== */
 
-.logo{
-    flex-shrink:0;
+.logo {
+    flex-shrink: 0;
 }
 
-.header-logo{
-    position:relative;
-    display:block;
-
-    width:calc(220 * var(--vw));
-    height:calc(40 * var(--vw));
+.header-logo {
+    position: relative;
+    display: block;
+    width: calc(220 * var(--vw));
+    height: calc(40 * var(--vw));
 }
 
-.header-logo-image{
-    position:absolute;
-    top:50%;
-    left:0;
-
-    display:block;
-    height:calc(40 * var(--vw));
-    width:auto;
-
-    transform:translateY(-50%);
-
+.header-logo-image {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: block;
+    width: auto;
+    height: calc(40 * var(--vw));
+    transform: translateY(-50%);
     transition:
         opacity .25s ease,
         visibility .25s ease;
 }
 
-.header-logo-dark{
-    opacity:1;
-    visibility:visible;
+.header-logo-dark {
+    opacity: 1;
+    visibility: visible;
 }
 
-.header-logo-light{
-    opacity:0;
-    visibility:hidden;
+.header-logo-light {
+    opacity: 0;
+    visibility: hidden;
 }
 
-.header.theme-light .header-logo-dark{
-    opacity:0;
-    visibility:hidden;
+.header.theme-light .header-logo-dark {
+    opacity: 0;
+    visibility: hidden;
 }
 
-.header.theme-light .header-logo-light{
-    opacity:1;
-    visibility:visible;
+.header.theme-light .header-logo-light {
+    opacity: 1;
+    visibility: visible;
 }
 
-.header.theme-dark .header-logo-dark{
-    opacity:1;
-    visibility:visible;
+.header.theme-dark .header-logo-dark {
+    opacity: 1;
+    visibility: visible;
 }
 
-.header.theme-dark .header-logo-light{
-    opacity:0;
-    visibility:hidden;
+.header.theme-dark .header-logo-light {
+    opacity: 0;
+    visibility: hidden;
 }
 
 .header-actions .btn-menu {
@@ -518,42 +513,37 @@ Logo
 GNB
 ======================================== */
 
-.gnb{
-    height:100%;
+.gnb {
+    height: 100%;
 }
 
-.depth1{
-    display:flex;
-    align-items:center;
-    height:100%;
-    gap:calc(70 * var(--vw));
+.depth1 {
+    display: flex;
+    align-items: center;
+    gap: calc(70 * var(--vw));
+    height: 100%;
 }
 
-.depth1>li{
-    height:100%;
+.depth1 > li {
+    height: 100%;
 }
 
-.depth1>li>a{
-    position:relative;
-
-    display:flex;
-    align-items:center;
-
-    height:100%;
-
-    color:currentColor;
-
-    font-family:"Pretendard",sans-serif;
-    font-size:calc(18 * var(--vw));
-    font-weight:500;
-    text-decoration:none;
-
-    transition:color .3s ease;
+.depth1 > li > a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: currentColor;
+    font-family: "Pretendard", sans-serif;
+    font-size: calc(18 * var(--vw));
+    font-weight: 500;
+    text-decoration: none;
+    transition: color .3s ease;
 }
 
-.depth1>li>a:hover,
-.depth1>li>a.is-active{
-    color:var(--red);
+.depth1 > li > a:hover,
+.depth1 > li > a.is-active {
+    color: var(--red);
 }
 
 
@@ -561,50 +551,43 @@ GNB
 Header Right
 ======================================== */
 
-.header-r{
-    display:flex;
-    align-items:center;
-    gap:calc(50 * var(--vw));
+.header-r {
+    display: flex;
+    align-items: center;
+    gap: calc(50 * var(--vw));
 }
 
-.header-r[hidden]{
-    display:none !important;
+.header-r[hidden] {
+    display: none !important;
 }
 
-.header-r button{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:0;
-
-    border:none;
-    background:none;
-
-    color:currentColor;
-
-    cursor:pointer;
+.header-r button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background: none;
+    color: currentColor;
+    cursor: pointer;
 }
 
-.header-r i{
-    display:block;
-
-    width:calc(30 * var(--vw));
-    height:calc(30 * var(--vw));
-
-    background-repeat:no-repeat;
-    background-position:center;
-    background-size:contain;
-
-    transition:filter .3s ease;
+.header-r i {
+    display: block;
+    width: calc(30 * var(--vw));
+    height: calc(30 * var(--vw));
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: filter .3s ease;
 }
 
-.header-r .ic-search{
-    background-image:url("../images/icon/icon_search.svg");
+.header-r .ic-search {
+    background-image: url("../images/icon/icon_search.svg");
 }
 
-.header-r .ic-alarm{
-    background-image:url("../images/icon/icon_bell.svg");
+.header-r .ic-alarm {
+    background-image: url("../images/icon/icon_bell.svg");
 }
 
 .header-r .ic-menu {
@@ -650,12 +633,12 @@ Header Right
 }
 
 
-.header.theme-light + .header-actions .header-r i{
-    filter:none;
+.header.theme-light + .header-actions .header-r i {
+    filter: none;
 }
 
-.header.theme-dark + .header-actions .header-r i{
-    filter:brightness(0);
+.header.theme-dark + .header-actions .header-r i {
+    filter: brightness(0);
 }
 
 
@@ -663,24 +646,19 @@ Header Right
 Login
 ======================================== */
 
-.btn-login{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    padding:calc(8 * var(--vw)) calc(30 * var(--vw));
-
-    border-radius:calc(50 * var(--vw));
-    background:var(--red);
-
-    color:#fff;
-
-    font-size:calc(14 * var(--vw));
-    font-weight:500;
-    line-height:calc(32 * var(--vw));
-    letter-spacing:calc(4 * var(--vw));
-
-    transition:.3s;
+.btn-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: calc(8 * var(--vw)) calc(30 * var(--vw));
+    border-radius: calc(50 * var(--vw));
+    background: var(--red);
+    color: #fff;
+    font-size: calc(14 * var(--vw));
+    font-weight: 500;
+    line-height: calc(32 * var(--vw));
+    letter-spacing: calc(4 * var(--vw));
+    transition: .3s;
 }
 
 
@@ -1089,7 +1067,6 @@ Header Alarm
 ======================================== */
 .header-alarm-panel {
     padding-top: 0;
-    background: linear-gradient(155deg, rgba(34, 10, 10, .82), rgba(0, 0, 0, .94));
 }
 
 .header-alarm-head {
@@ -2633,6 +2610,26 @@ Mobile (720px and below)
         filter: brightness(0);
     }
 
+    .main-page .header.is-search-open {
+        border-bottom: 1px solid #e9e9e9;
+        background: #fff !important;
+        color: #111 !important;
+    }
+
+    .main-page .header.is-search-open .header-logo-dark {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .main-page .header.is-search-open .header-logo-light {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .main-page .header.is-search-open + .header-actions .header-r i {
+        filter: brightness(0) !important;
+    }
+
     .gnb {
         display: none;
     }
@@ -2722,20 +2719,21 @@ Mobile (720px and below)
         justify-content: stretch;
     }
 
-    .all-menu-panel {
+    .all-menu-panel,
+    .header-alarm-panel {
         width: 100%;
         min-height: 100%;
-        padding-top: 92px;
         background: rgba(0, 0, 0, .6);
         -webkit-backdrop-filter: blur(18px) saturate(180%);
         backdrop-filter: blur(18px) saturate(180%);
     }
 
+    .all-menu-panel {
+        padding-top: 92px;
+    }
+
     .header-alarm-panel {
-        width: 100%;
-        min-height: 100%;
         padding-top: 0;
-        background: linear-gradient(155deg, rgba(35, 8, 8, .9), rgba(0, 0, 0, .97));
     }
 
     .header-alarm-head {
