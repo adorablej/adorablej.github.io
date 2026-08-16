@@ -30,8 +30,8 @@
 
 <div class="header-actions">
 
-        <!-- Right : 로그인 상태 
-        <div class="header-r is-login">
+        <!-- Right : 로그인 상태 -->
+        <div class="header-r is-login" hidden>
             <a href="/Mypage/mypage.html" class="btn-login">MY</a>
 
             <button type="button" class="btn-search" aria-label="검색 열기">
@@ -45,7 +45,7 @@
             <button type="button" class="btn-menu" aria-label="전체 메뉴 열기" aria-expanded="false">
                 <i class="ic-menu" aria-hidden="true"></i>
             </button>
-        </div>-->
+        </div>
 
         <!-- Right : 로그아웃 상태 -->
         <div class="header-r is-logout">
@@ -59,6 +59,17 @@
                 <i class="ic-menu" aria-hidden="true"></i>
             </button>
         </div> 
+</div>
+
+<div class="hunter-alert" data-hunter-alert aria-hidden="true">
+    <div class="hunter-alert-dim" aria-hidden="true"></div>
+    <div class="hunter-alert-dialog" role="alertdialog" aria-modal="true" aria-describedby="hunter-alert-message">
+        <p class="hunter-alert-message" id="hunter-alert-message" data-hunter-alert-message></p>
+        <div class="hunter-alert-actions">
+            <button type="button" class="hunter-alert-button hunter-alert-cancel" data-hunter-alert-cancel>취소</button>
+            <button type="button" class="hunter-alert-button hunter-alert-confirm" data-hunter-alert-confirm>확인</button>
+        </div>
+    </div>
 </div>
 
 
@@ -111,8 +122,8 @@ Header Search
 전체 메뉴
 ======================================== -->
 
-<div class="all-menu" aria-hidden="true">
-    <aside class="all-menu-panel" role="dialog" aria-label="전체 메뉴">
+<div class="all-menu header-layer" aria-hidden="true">
+    <aside class="all-menu-panel header-side-panel" role="dialog" aria-modal="true" aria-label="전체 메뉴">
 
         <!-- 메뉴 -->
         <nav class="all-menu-nav" aria-label="전체 메뉴">
@@ -234,19 +245,19 @@ Header Search
         <!-- 회원 영역 -->
         <div class="all-menu-member">
 
-            <!-- 로그인 + 확인하지 않은 알림 있음 
+            <!-- 로그인 + 확인하지 않은 알림 있음 -->
             <div class="all-menu-member-content is-login is-alarm">
                 <p class="all-menu-member-greeting">안녕하세요</p>
                 <strong class="all-menu-member-name">김헌터님</strong>
                 <p class="all-menu-member-message">확인 안하신 알림이 있어요!</p>
-                <a href="/Mypage/mypage.html" class="all-menu-member-button">지금 확인하기</a>
+                <a href="#header-alarm" class="all-menu-member-button" data-alarm-open>지금 확인하기</a>
             </div>
 
-            로그인 + 확인하지 않은 알림 없음 
+            <!-- 로그인 + 확인하지 않은 알림 없음 -->
             <div class="all-menu-member-content is-login is-no-alarm">
                 <p class="all-menu-member-greeting">안녕하세요</p>
                 <strong class="all-menu-member-name">김헌터님</strong>
-            </div> -->
+            </div>
 
             <!-- 로그아웃 -->
             <div class="all-menu-member-content is-logout">
@@ -280,5 +291,49 @@ Header Search
             </a>
         </div>
 
+    </aside>
+</div>
+
+<!-- ========================================
+알림
+======================================== -->
+<div class="header-alarm header-layer" id="header-alarm" aria-hidden="true">
+    <aside class="header-alarm-panel header-side-panel" role="dialog" aria-modal="true" aria-labelledby="header-alarm-title">
+        <div class="header-alarm-head">
+            <button type="button" class="header-alarm-back" data-alarm-close aria-label="알림 닫기"></button>
+            <h2 id="header-alarm-title">알림</h2>
+        </div>
+
+        <div class="header-alarm-tabs" role="tablist" aria-label="알림 분류">
+            <button type="button" class="is-active" role="tab" aria-selected="true" data-alarm-tab="all">전체</button>
+            <button type="button" role="tab" aria-selected="false" data-alarm-tab="product">제품/기술</button>
+        </div>
+
+        <div class="header-alarm-list" aria-live="polite">
+            <article class="header-alarm-item is-unread" data-alarm-category="all">
+                <h3>[공지사항] 서버 점검 안내</h3>
+                <p>서버 점검 관련 안내 드립니다. 안정적인 서비스 제공을 위하여 서버 점검을 실시합니다. 점검기간:2000.00.00/00:00~00:00</p>
+                <time datetime="2026-08-15">2026.08.15</time>
+            </article>
+            <article class="header-alarm-item is-unread" data-alarm-category="all">
+                <h3>[프로모션] 2026 헌터코리아 프로모션 안내</h3>
+                <p>헌터코리아 전례없는 24개월 무이자 할부 특별 프로모션 비즈니스확장, 망설이던 한계를 ‘수익의기회’로 바꿀시간 입니다. 지금 확인해보세요!</p>
+                <time datetime="2026-08-15">2026.08.15</time>
+            </article>
+            <article class="header-alarm-item" data-alarm-category="product">
+                <h3>[부품주문] 주문 상태가 변경되었습니다.</h3>
+                <p>부품주문상태가 “000000”으로 변경되었습니다. 지금확인해보세요!</p>
+                <time datetime="2026-08-15">2026.08.15</time>
+            </article>
+            <article class="header-alarm-item" data-alarm-category="product">
+                <h3>[트레이닝센터] 수강신청한 일정이 하루 남았습니다.</h3>
+                <p>수강 신청하신 “000000000000”과목의 일정이 하루 남았습니다. 지금 확인해보세요!</p>
+                <time datetime="2026-08-15">2026.08.15</time>
+            </article>
+        </div>
+
+        <div class="header-alarm-footer">
+            <button type="button">이전 알림 보기</button>
+        </div>
     </aside>
 </div>

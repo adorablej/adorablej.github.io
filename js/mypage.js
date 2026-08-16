@@ -257,6 +257,18 @@ function initMypageWithdrawModal() {
         lastFocusedElement?.focus?.();
     };
 
+    const openCompleteModal = () => {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.documentElement.classList.remove("is-modal-open");
+        document.body.classList.remove("is-modal-open");
+        if (agree) agree.checked = false;
+        if (submit) submit.disabled = true;
+        window.HunterAlert?.open({
+            message: "회원 탈퇴 신청이 완료되었습니다.\n더 나은 서비스로 찾아뵙겠습니다.\n감사합니다."
+        });
+    };
+
     openButton.addEventListener("click", openModal);
     closeButtons.forEach(button => button.addEventListener("click", closeModal));
 
@@ -267,10 +279,12 @@ function initMypageWithdrawModal() {
     submit?.addEventListener("click", () => {
         if (!agree?.checked) return;
         // API 연동 시 회원탈퇴 요청 로직 연결
+        openCompleteModal();
     });
 
     window.addEventListener("keydown", event => {
-        if (event.key === "Escape" && modal.classList.contains("is-open")) {
+        if (event.key !== "Escape") return;
+        if (modal.classList.contains("is-open")) {
             closeModal();
         }
     });
@@ -445,8 +459,27 @@ function initMypageCart() {
         if (event.target.matches('.sub-mypage-part-check, [data-check-all], .sub-mypage-quantity input')) updateSummary();
     });
     page.querySelector('[data-cart-delete]')?.addEventListener('click', () => {
-        rows().forEach(row => { if (row.querySelector('.sub-mypage-part-check')?.checked) row.remove(); });
-        updateSummary();
+        if (!rows().some(row => row.querySelector('.sub-mypage-part-check')?.checked)) return;
+        window.HunterAlert?.open({
+            type: 'confirm',
+            message: '선택하신 부품을 장바구니에서\n삭제하시겠습니까?',
+            cancelText: '취소'
+        }).then(confirmed => {
+            if (!confirmed) return;
+            rows().forEach(row => { if (row.querySelector('.sub-mypage-part-check')?.checked) row.remove(); });
+            updateSummary();
+        });
+    });
+    page.querySelector('.sub-mypage-cart-submit a')?.addEventListener('click', event => {
+        event.preventDefault();
+        const target = event.currentTarget.href;
+        window.HunterAlert?.open({
+            type: 'confirm',
+            message: '선택하신 부품들을 주문하시겠습니까?',
+            cancelText: '취소'
+        }).then(confirmed => {
+            if (confirmed) window.location.href = target;
+        });
     });
     updateSummary();
 }
@@ -553,8 +586,14 @@ function initMypageTrainingHistory() {
         button.addEventListener('click', closeModal);
     });
 
-    cancelButton?.addEventListener('click', () => {
+    cancelButton?.addEventListener('click', async () => {
         if (!activeRow || activeRow.dataset.status === '신청취소') return;
+        const confirmed = await window.HunterAlert?.open({
+            type: 'confirm',
+            message: '교육 신청 취소시 교육 재신청이 어려울 수 있습니다.\n신청을 취소 하시겠습니까?',
+            cancelText: '취소'
+        });
+        if (!confirmed) return;
         activeRow.dataset.status = '신청취소';
         activeRow.classList.add('is-cancelled');
         const status = activeRow.querySelector('[data-history-status]');

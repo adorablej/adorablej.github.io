@@ -284,6 +284,8 @@ function parseDate(dateString) {
 
             renderCalendar();
             renderSidebar();
+            closeModal();
+            window.HunterAlert?.open({ message: "트레이닝 교육 신청이 완료되었습니다." });
         });
 
         modal.classList.add("is-open");

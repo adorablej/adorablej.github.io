@@ -61,6 +61,12 @@
         var TEST_LOGIN_CODE = '111111';
         var returnTarget = getLoginReturnTarget();
 
+        form.addEventListener('loginMemberNotFound', function () {
+            window.HunterAlert?.open({
+                message: '가입되지 않은 번호입니다.\n회원가입 이후에 다시 시도해주세요.'
+            });
+        });
+
         function getLoginReturnTarget() {
             var params = new URLSearchParams(window.location.search);
             var requestedTarget = params.get('returnUrl');
@@ -384,6 +390,11 @@
         var businessStatus = document.getElementById('business-auth-status');
 
         if (businessButton && businessNumber && businessAuth) {
+            businessButton.addEventListener('businessInfoMismatch', function () {
+                window.HunterAlert?.open({
+                    message: '입력하신 사업자 정보가 맞지 않습니다.\n다시한번 확인해주세요.'
+                });
+            });
             businessButton.addEventListener('click', function () {
                 var number = businessNumber.value.replace(/\D/g, '');
 

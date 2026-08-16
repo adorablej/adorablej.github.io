@@ -7,12 +7,44 @@
     window.addEventListener("includeLoaded", initCommon);
 
     function initCommon() {
+        initAuthState();
         initCurrentGnb();
         initHeaderTheme();
         initDragCursor();
         initAllMenu();
+        initHeaderAlarm();
+        initHunterAlert();
         initHeaderSearch();
         initHeaderTransition();
+    }
+
+    /**
+     * 로그인 헤더 미리보기
+     * - 실제 토큰이 있으면 로그인 상태
+     * - ?previewAuth=login 또는 logout으로 화면 상태만 확인 가능
+     * - ?previewAlarm=1이면 확인하지 않은 알림 상태
+     */
+    function initAuthState() {
+        const params = new URLSearchParams(window.location.search);
+        const previewAuth = params.get("previewAuth");
+        const hasStoredToken = Boolean(
+            window.sessionStorage.getItem("hunter.accessToken") ||
+            window.localStorage.getItem("hunter.accessToken")
+        );
+        const isLoggedIn = previewAuth === "login" ||
+            (previewAuth !== "logout" && hasStoredToken);
+        const hasAlarm = isLoggedIn && params.get("previewAlarm") === "1";
+        const headerLogin = document.querySelector(".header-r.is-login");
+        const headerLogout = document.querySelector(".header-r.is-logout");
+        const allMenu = document.querySelector(".all-menu");
+
+        if (headerLogin) headerLogin.hidden = !isLoggedIn;
+        if (headerLogout) headerLogout.hidden = isLoggedIn;
+
+        if (allMenu) {
+            allMenu.dataset.authState = isLoggedIn ? "login" : "logout";
+            allMenu.dataset.hasAlarm = hasAlarm ? "true" : "false";
+        }
     }
 
     /**
@@ -486,13 +518,17 @@ function initDragCursor() {
                 "has-alarm"
             );
     
-            if (headerLogin) {
+            const isLoggedIn = allMenu.dataset.authState === "login" ||
+                (headerLogin && !headerLogin.hidden);
+            const hasAlarm = allMenu.dataset.hasAlarm === "true";
+
+            if (isLoggedIn) {
                 allMenu.classList.add("is-login");
-                allMenu.classList.add("has-alarm");
+                if (hasAlarm) allMenu.classList.add("has-alarm");
                 return;
             }
     
-            if (headerLogout) {
+            if (headerLogout && !headerLogout.hidden) {
                 allMenu.classList.add("is-logout");
                 return;
             }
@@ -738,6 +774,137 @@ function initDragCursor() {
         });
     
         setMemberState();
+    }
+
+    /**
+     * Header Alarm
+     * - 헤더 알림 버튼 / 전체 메뉴의 알림 CTA로 열기
+     * - 탭 필터, ESC 및 바깥 영역 클릭으로 닫기
+     */
+    function initHeaderAlarm() {
+        const alarm = document.querySelector(".header-alarm");
+        const panel = alarm?.querySelector(".header-alarm-panel");
+        const openButtons = document.querySelectorAll(".btn-alarm, [data-alarm-open]");
+        const closeButtons = alarm?.querySelectorAll("[data-alarm-close]") || [];
+        const tabs = alarm?.querySelectorAll("[data-alarm-tab]") || [];
+        const items = alarm?.querySelectorAll("[data-alarm-category]") || [];
+
+        if (!alarm || !panel || !openButtons.length) return;
+
+        let lastFocusedElement = null;
+
+        function closeMenuIfOpen() {
+            const menu = document.querySelector(".all-menu");
+            if (!menu?.classList.contains("is-open")) return;
+            menu.classList.remove("is-open");
+            menu.setAttribute("aria-hidden", "true");
+            document.querySelector(".header")?.classList.remove("is-menu-open");
+            document.documentElement.classList.remove("is-menu-open");
+            document.body.classList.remove("is-menu-open");
+            document.querySelectorAll(".btn-menu").forEach((button) => {
+                button.setAttribute("aria-expanded", "false");
+                button.setAttribute("aria-label", "전체 메뉴 열기");
+            });
+        }
+
+        function openAlarm() {
+            lastFocusedElement = document.activeElement;
+            closeMenuIfOpen();
+            alarm.classList.add("is-open");
+            alarm.setAttribute("aria-hidden", "false");
+            document.documentElement.classList.add("is-header-layer-open");
+            document.body.classList.add("is-header-layer-open");
+            document.querySelectorAll(".btn-alarm").forEach((button) => {
+                button.setAttribute("aria-expanded", "true");
+            });
+            window.setTimeout(() => alarm.querySelector("[data-alarm-close]")?.focus(), 250);
+        }
+
+        function closeAlarm() {
+            alarm.classList.remove("is-open");
+            alarm.setAttribute("aria-hidden", "true");
+            document.documentElement.classList.remove("is-header-layer-open");
+            document.body.classList.remove("is-header-layer-open");
+            document.querySelectorAll(".btn-alarm").forEach((button) => {
+                button.setAttribute("aria-expanded", "false");
+            });
+            if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+                lastFocusedElement.focus();
+            }
+        }
+
+        openButtons.forEach((button) => button.addEventListener("click", (event) => {
+            event.preventDefault();
+            openAlarm();
+        }));
+        closeButtons.forEach((button) => button.addEventListener("click", closeAlarm));
+
+        tabs.forEach((tab) => tab.addEventListener("click", () => {
+            const category = tab.dataset.alarmTab;
+            tabs.forEach((button) => {
+                const isActive = button === tab;
+                button.classList.toggle("is-active", isActive);
+                button.setAttribute("aria-selected", String(isActive));
+            });
+            items.forEach((item) => {
+                item.hidden = category !== "all" && item.dataset.alarmCategory !== category;
+            });
+        }));
+
+        alarm.addEventListener("click", (event) => {
+            if (window.innerWidth <= 720 || panel.contains(event.target)) return;
+            closeAlarm();
+        });
+        window.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && alarm.classList.contains("is-open")) closeAlarm();
+        });
+    }
+
+    function initHunterAlert() {
+        const layer = document.querySelector("[data-hunter-alert]");
+        if (!layer || layer.dataset.initialized === "true") return;
+        const dialog = layer.querySelector(".hunter-alert-dialog");
+        const message = layer.querySelector("[data-hunter-alert-message]");
+        const confirmButton = layer.querySelector("[data-hunter-alert-confirm]");
+        const cancelButton = layer.querySelector("[data-hunter-alert-cancel]");
+        let resolver = null;
+        let lastFocusedElement = null;
+
+        const close = result => {
+            layer.classList.remove("is-open");
+            layer.setAttribute("aria-hidden", "true");
+            document.documentElement.classList.remove("is-alert-open");
+            document.body.classList.remove("is-alert-open");
+            const resolve = resolver;
+            resolver = null;
+            resolve?.(result);
+            lastFocusedElement?.focus?.();
+        };
+
+        window.HunterAlert = {
+            open(options = {}) {
+                const isConfirm = options.type === "confirm" || options.cancelText;
+                lastFocusedElement = document.activeElement;
+                message.textContent = options.message || "";
+                confirmButton.textContent = options.confirmText || "확인";
+                cancelButton.textContent = options.cancelText || "취소";
+                layer.classList.toggle("is-confirm", Boolean(isConfirm));
+                layer.classList.add("is-open");
+                layer.setAttribute("aria-hidden", "false");
+                document.documentElement.classList.add("is-alert-open");
+                document.body.classList.add("is-alert-open");
+                confirmButton.focus();
+                return new Promise(resolve => { resolver = resolve; });
+            },
+            close
+        };
+
+        confirmButton.addEventListener("click", () => close(true));
+        cancelButton.addEventListener("click", () => close(false));
+        window.addEventListener("keydown", event => {
+            if (event.key === "Escape" && layer.classList.contains("is-open")) close(false);
+        });
+        layer.dataset.initialized = "true";
     }
 
     /**

@@ -13,6 +13,26 @@ function initFormComponents() {
     document.querySelectorAll("form[data-form]").forEach(form => {
         new FormValidator(form);
     });
+
+    initCompletionAlerts();
+}
+
+function initCompletionAlerts() {
+    const messages = new Map([
+        ["contact-form", "CS문의접수가 완료되었습니다.\n입력하신 연락처로 회신드리겠습니다.\n감사합니다."],
+        ["vehicle-specification-form", "차량제원 추가 등록 요청이 완료되었습니다."]
+    ]);
+
+    document.querySelectorAll("#contact-form, .sub-mypage-cs-form, #vehicle-specification-form").forEach(form => {
+        form.addEventListener("submit", event => {
+            if (event.defaultPrevented) return;
+            event.preventDefault();
+            const message = form.classList.contains("sub-mypage-cs-form")
+                ? "CS문의접수가 완료되었습니다.\n입력하신 연락처로 회신드리겠습니다.\n감사합니다."
+                : messages.get(form.id);
+            window.HunterAlert?.open({ message });
+        });
+    });
 }
 
 /* ========================================

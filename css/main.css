@@ -743,9 +743,13 @@ Mobile
 .main-popup-content {
     width: 100%;
     height: 100%;
+    overflow: auto;
+}
+.main-popup-content img {
+    width: 100%;
+    height: auto;
     overflow: hidden;
 }
-
 body.is-main-popup-open {
     overflow: hidden;
 }

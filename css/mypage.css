@@ -296,20 +296,20 @@
 }
 
 .sub-modal-content {
-    padding: 50px;
+    padding: clamp(25px, calc(50 * var(--vw)), 50px);
 }
 
 .sub-modal-title {
     margin: 0;
     color: #111;
-    font-size: 38px;
+    font-size: calc(38 * var(--vw));
     font-weight: 700;
     line-height: 1.25;
     letter-spacing: -.04em;
 }
 
 .sub-mypage-withdraw-modal .sub-modal-title {
-    font-size: 40px;
+    font-size: calc(40 * var(--vw));
 }
 
 .sub-modal-actions {
@@ -364,7 +364,7 @@ body.is-modal-open {
     background: none;
     color: #bbb;
     font-family: inherit;
-    font-size: 14px;
+    font-size: calc(14 * var(--vw));
     text-decoration: underline;
     text-underline-offset: 3px;
     cursor: pointer;
@@ -419,6 +419,7 @@ body.is-modal-open {
 .sub-mypage-withdraw-modal .sub-modal-button {
     font-size: 18px;
 }
+
 .sub-mypage-business-type {
     display: flex;
     align-items: center;
