@@ -11,6 +11,19 @@
         initAwardsHero();
     }
 
+    function initStandardPageWhenReady() {
+        const initialImage = document.querySelector(".sub-standard-main-reveal img");
+        const imageReady = initialImage && typeof initialImage.decode === "function"
+            ? initialImage.decode().catch(function () {})
+            : Promise.resolve();
+
+        imageReady.then(function () {
+            window.requestAnimationFrame(function () {
+                window.requestAnimationFrame(initStandardPage);
+            });
+        });
+    }
+
     function initMainVisualMotion() {
         const section = document.querySelector(".sub-standard-main-visual");
         if (!section) return;
@@ -41,6 +54,7 @@
             scale: 1.12
         });
         gsap.set(revealCopy, { autoAlpha: 0, y: 32 });
+        gsap.set(reveal, { visibility: "visible" });
 
         gsap.timeline({
             defaults: { ease: "none" },
@@ -517,9 +531,9 @@
     }
 
     if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initStandardPage);
+        document.addEventListener("DOMContentLoaded", initStandardPageWhenReady);
     } else {
-        initStandardPage();
+        initStandardPageWhenReady();
     }
 })();
 
@@ -659,13 +673,37 @@
 
         gsap.registerPlugin(ScrollTrigger);
 
-        initHeroStory();
+        initHeroStoryWhenReady();
         initKoreaVision();
         initKoreaMobileReveal();
         initTrustAccordion();
         initValueMotions();
         initTrackpadScrollStability();
         initDesktopUsaSectionScroll();
+    }
+
+    function initHeroStoryWhenReady() {
+        const hero = document.querySelector(".sub-standard-detail-hero");
+        if (!hero) return;
+
+        const mobile = window.matchMedia("(max-width: 720px)").matches;
+        const preview = hero.querySelector(
+            mobile
+                ? ".sub-standard-detail-hero-preview.mo-only"
+                : ".sub-standard-detail-hero-preview.pc-only"
+        );
+        const imageReady = preview && typeof preview.decode === "function"
+            ? preview.decode().catch(function () {})
+            : Promise.resolve();
+
+        imageReady.then(function () {
+            window.requestAnimationFrame(function () {
+                window.requestAnimationFrame(function () {
+                    initHeroStory();
+                    ScrollTrigger.refresh();
+                });
+            });
+        });
     }
 
     function initDesktopUsaSectionScroll() {
@@ -837,7 +875,9 @@
         }
 
         function getFrameClip() {
-            const width = sticky.clientWidth;
+            const width = mobile
+                ? Math.max(document.documentElement.clientWidth || window.innerWidth, 1)
+                : sticky.clientWidth;
             const height = sticky.clientHeight;
 
             if (mobile) {
@@ -864,7 +904,11 @@
         }
 
         function getMobileFrameSize() {
-            const width = Math.max(sticky.clientWidth - 50, 1);
+            const viewportWidth = Math.max(
+                document.documentElement.clientWidth || window.innerWidth,
+                1
+            );
+            const width = Math.max(viewportWidth - 50, 1);
             const availableHeight = sticky.clientHeight;
             const height = Math.min(width * 460 / 310, availableHeight);
             const top = mobilePinOffset + Math.min(30, Math.max(availableHeight - height, 0));

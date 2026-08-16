@@ -124,6 +124,7 @@ overflow-y: visible;
     border-radius: calc(28 * var(--vw));
     transform: scale(.92);
     box-shadow: 0 calc(24 * var(--vw)) calc(80 * var(--vw)) rgba(0, 0, 0, .45);
+    visibility: hidden;
 }
 
 .sub-standard-main-reveal img,
@@ -386,6 +387,7 @@ overflow-y: visible;
     overflow: hidden;
     will-change: clip-path;
     contain: paint;
+    visibility: hidden;
 }
 
 .sub-usa-page .sub-standard-detail-hero-media {
