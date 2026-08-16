@@ -763,7 +763,7 @@ body.is-main-popup-open .page-scroll {
         width: calc(100vw - 50px) !important;
         max-width: 310px !important;
         max-height: none;
-        transform: translateY(26px);
+        transform: none;
     }
 
     .main-visual-bg video.mo-only {
