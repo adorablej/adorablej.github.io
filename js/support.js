@@ -41,18 +41,29 @@ function initOperationGuide() {
     const requestedType = searchParams.get("type") === "video" ? "video" : "manual";
     const category = operationGuideCategories[requestedCategory] ? requestedCategory : "alignment";
     const categoryInfo = operationGuideCategories[category];
-    const visibleGuides = operationGuideData.filter(item => item.category === category && item.visible);
-    const manualGroups = Object.values(visibleGuides
-        .filter(item => item.type === "manual")
+    const productsById = new Map(categoryInfo.products.map(product => [product.productId, product]));
+    const manualGroups = Object.values(operationGuideManualData
+        .filter(item => item.categoryId === categoryInfo.categoryId)
+        .sort((a, b) => a.displayOrder - b.displayOrder)
         .reduce((groups, item) => {
-            if (!groups[item.product]) groups[item.product] = { title: item.product, items: [] };
-            groups[item.product].items.push({ title: item.title, url: item.fileUrl });
+            const product = productsById.get(item.productId);
+            const productName = product?.productName || "Other documents";
+            if (!groups[item.productId]) {
+                groups[item.productId] = {
+                    title: productName,
+                    displayOrder: product?.productDisplayOrder || 999,
+                    items: []
+                };
+            }
+            groups[item.productId].items.push({ title: item.title, url: item.fileUrl });
             return groups;
-        }, {}));
-    const videos = visibleGuides
-        .filter(item => item.type === "video")
+        }, {}))
+        .sort((a, b) => a.displayOrder - b.displayOrder);
+    const videos = operationGuideVideoData
+        .filter(item => item.categoryId === categoryInfo.categoryId)
+        .sort((a, b) => a.displayOrder - b.displayOrder)
         .map(item => ({ ...item, youtube: item.youtubeUrl }));
-    const currentGuide = { title: categoryInfo.title, manual: manualGroups, video: videos };
+    const currentGuide = { title: categoryInfo.categoryName, manual: manualGroups, video: videos };
 
     if (pageTitle) pageTitle.textContent = currentGuide.title;
 
@@ -193,7 +204,7 @@ function initOperationGuide() {
             destroyFeatured = null;
             return;
         }
-        const featured = videos.filter(video => video.featured);
+        const featured = videos.slice(0, 3);
         const featuredSlides = featured.length > 1 ? [...featured, ...featured, ...featured] : featured;
         const list = videos.slice(0, visibleVideoCount);
 
@@ -208,14 +219,14 @@ function initOperationGuide() {
                 <div class="sub-guide-video-featured-slider swiper">
                     <div class="sub-guide-video-stage swiper-wrapper">
                         ${featuredSlides.map(video => `
-                            <button type="button" class="sub-guide-video-featured-card swiper-slide" data-video-id="${video.id}">
+                            <button type="button" class="sub-guide-video-featured-card swiper-slide" data-video-id="${video.eogGuideId}">
                                 <span class="sub-guide-video-featured-image">
                                     <img src="${getYoutubeThumbnail(video.youtube)}" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${getYoutubeId(video.youtube)}/hqdefault.jpg';" alt="${video.title}">
                                     ${playIcon()}
                                 </span>
                                 <span class="sub-guide-video-featured-content">
                                     <strong>${video.title}</strong>
-                                    <p>${video.description}</p>
+                                    <p>${video.summary}</p>
                                 </span>
                             </button>
                         `).join("")}
@@ -226,13 +237,13 @@ function initOperationGuide() {
                 <div class="sub-guide-video-list-inner">
                     <div class="sub-guide-video-grid">
                         ${list.map(video => `
-                            <button type="button" class="sub-guide-video-card" data-video-id="${video.id}">
+                            <button type="button" class="sub-guide-video-card" data-video-id="${video.eogGuideId}">
                                 <span class="sub-guide-video-thumb">
                                     <img src="${getYoutubeThumbnail(video.youtube)}" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${getYoutubeId(video.youtube)}/hqdefault.jpg';" alt="${video.title}">
                                 </span>
                                 <span class="sub-guide-video-card-body">
                                     <strong>${video.title}</strong>
-                                    <p>${video.description}</p>
+                                    <p>${video.summary}</p>
                                 </span>
                             </button>
                         `).join("")}
@@ -253,7 +264,7 @@ function initOperationGuide() {
         if (!modal || !video) return;
         const iframe = modal.querySelector("iframe");
         modal.querySelector("h4").textContent = video.title;
-        modal.querySelector("p").textContent = video.description;
+        modal.querySelector("p").textContent = video.summary;
         iframe.src = `https://www.youtube.com/embed/${getYoutubeId(video.youtube)}?autoplay=1&rel=0`;
         modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
@@ -297,7 +308,7 @@ function initOperationGuide() {
                 pointerStartedOnActiveVideo = false;
                 if (!canOpen) return;
             }
-            const video = currentGuide.video.find(item => item.id === Number(videoButton.dataset.videoId));
+            const video = currentGuide.video.find(item => item.eogGuideId === Number(videoButton.dataset.videoId));
             openVideoModal(video);
             return;
         }

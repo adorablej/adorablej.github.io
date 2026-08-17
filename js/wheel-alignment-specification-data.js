@@ -1,6 +1,16 @@
 window.WHEEL_ALIGNMENT_DATA = {
     brands: [
-        { id: "hyundai", name: "Hyundai", type: "domestic", logoText: "HYUNDAI", logo: "/images/standard/Hyundai.png", keywords: ["현대"] },
+        {
+            id: "hyundai",
+            manufacturerId: 1,
+            manufacturerCode: "HYUNDAI",
+            name: "Hyundai",
+            nameKo: "현대",
+            type: "domestic",
+            logoText: "HYUNDAI",
+            logo: "/images/standard/Hyundai.png",
+            keywords: ["현대", "현대자동차"]
+        },
         { id: "kia", name: "Kia", type: "domestic", logoText: "KIA", logo: "/images/standard/KIA.png", keywords: ["기아"] },
         { id: "gm-korea", name: "GM Korea", type: "domestic", logoText: "GM", logo: "/images/standard/GM Korea.png" },
         { id: "chevrolet", name: "Chevrolet", type: "domestic", logoText: "CHEVROLET", logo: "/images/standard/Chevrolet.png" },
@@ -49,7 +59,14 @@ window.WHEEL_ALIGNMENT_DATA = {
     models: {
         hyundai: [
             { id: "avante", name: "아반떼", image: "/images/car_default.png" },
-            { id: "sonata", name: "쏘나타", image: "/images/car_default.png" },
+            {
+                id: "sonata",
+                vehicleModelId: 102,
+                modelCode: "SONATA_DN8",
+                name: "쏘나타",
+                nameEn: "Sonata",
+                image: "/images/car_default.png"
+            },
             { id: "grandeur", name: "그랜저", image: "/images/car_default.png" },
             { id: "ioniq5", name: "아이오닉 5", image: "/images/car_default.png" },
             { id: "tucson", name: "투싼", image: "/images/car_default.png" },
@@ -77,6 +94,56 @@ window.WHEEL_ALIGNMENT_DATA = {
         ]
     },
     results: {
+        "hyundai:sonata": [
+            {
+                vehicleSpecId: 9,
+                vehicleModelId: 102,
+                trimName: "DN8",
+                modelYear: 2020,
+                year: "2020-2024",
+                modelName: "쏘나타",
+                model: "Sonata",
+                modelCode: "SONATA_DN8",
+                manufacturerName: "현대",
+                manufacturerNameEn: "Hyundai",
+                detail: "DN8",
+                description: "국내 판매 표준 사양 기준",
+                note: "국내 판매 표준 사양 기준",
+                isExposed: true,
+                image: "/images/car_default.png",
+                specValues: [
+                    { specKey: "F_CAMBER", specName: "전륜 캠버", specValue: "0°00'", unitName: "deg", displayOrder: 1 },
+                    { specKey: "F_CASTER", specName: "전륜 캐스터", specValue: "3°00'", unitName: "deg", displayOrder: 2 },
+                    { specKey: "F_TOE", specName: "전륜 토오", specValue: "0°10'", unitName: "deg", displayOrder: 3 },
+                    { specKey: "R_CAMBER", specName: "후륜 캠버", specValue: "-0°30'", unitName: "deg", displayOrder: 4 },
+                    { specKey: "R_TOE", specName: "후륜 토오", specValue: "0°08'", unitName: "deg", displayOrder: 5 },
+                    { specKey: "SAI", specName: "SAI", specValue: "10°30'", unitName: "deg", displayOrder: 6 },
+                    { specKey: "TURN_ANGLE", specName: "회전각", specValue: "38°00'", unitName: "deg", displayOrder: 7 },
+                    { specKey: "THRUST_ANGLE", specName: "스러스트각", specValue: "0°00'", unitName: "deg", displayOrder: 8 },
+                    { specKey: "SAS_RESET", specName: "SAS 리셋 필요", specValue: "필요", unitName: "", displayOrder: 9 },
+                    { specKey: "TPMS", specName: "TPMS", specValue: "315/45R21 자동인식", unitName: "", displayOrder: 10 }
+                ],
+                // 현재 API에는 기준값과 허용치 하한/상한 분리 필드가 없어 화면용으로 유지합니다.
+                specifications: [
+                    { section: "전륜", label: "캠버", value: "0°00'", min: "-0°30'", max: "0°30'" },
+                    { section: "전륜", label: "캐스터", value: "3°00'", min: "-0°30'", max: "0°30'" },
+                    { section: "전륜", label: "토오", value: "0°10'", min: "-0°05'", max: "0°15'" },
+                    { section: "후륜", label: "캠버", value: "-0°30'", min: "-1°00'", max: "0°00'" },
+                    { section: "후륜", label: "토오", value: "0°08'", min: "-0°05'", max: "0°10'" }
+                ],
+                extra: {
+                    SAI: "10°30'",
+                    회전각: "38°00'",
+                    스러스트각: "0°00'",
+                    "SAS 리셋 필요": "필요",
+                    TPMS: "315/45R21 자동인식"
+                },
+                suspensionAdjustments: {
+                    "전륜 캠버": "얼라인먼트 볼트 조정",
+                    "전륜 캐스터": "캐스터 캠버 플레이트 조정"
+                }
+            }
+        ],
         "kia:k5": [
             { year: "2020-2023", modelName: "K5 (DL3)", model: "K5 (DL3)", detail: "All Models / 하이브리드 포함", note: "내리막 경사가 기울어 있다면 작업 가능", image: "/images/car_default.png" },
             { year: "2016-2020", modelName: "K5 HEV (JF)", model: "Optima HEV (JF)", detail: "하이브리드", note: "-", image: "/images/car_default.png" },

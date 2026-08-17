@@ -32,13 +32,14 @@ window.StoreAPI = {
 
     normalizeStore(store) {
         const address = store.address || "";
+        const detailAddress = store.detailAddress || "";
         return {
             id: store.prideStoreId,
             region: address.split(" ")[0] || "",
             city: address.split(" ")[1] || "",
             name: store.displayName || store.storeName || "",
-            roadAddress: address,
-            jibunAddress: address,
+            address,
+            detailAddress,
             phone: store.phoneNumber || "",
             latitude: store.latitude,
             longitude: store.longitude,
@@ -55,7 +56,7 @@ window.StoreAPI = {
         const stores = window.MOCK_STORES.filter(store => {
             const keywordTarget = [
                 store.name, store.region, store.city, store.district,
-                store.roadAddress, store.jibunAddress
+                store.address, store.detailAddress
             ].join(" ").toLowerCase();
 
             return (!keyword || keywordTarget.includes(keyword))

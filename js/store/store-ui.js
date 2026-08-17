@@ -96,7 +96,7 @@
                 <button type="button" class="sub-pride-store-item" data-store-id="${escapeHtml(store.id)}">
                     <span class="sub-pride-store-region">${escapeHtml(store.region)}</span>
                     <strong>${escapeHtml(store.name)}</strong>
-                    <span class="sub-pride-store-address">${escapeHtml(store.roadAddress)}</span>
+                    <span class="sub-pride-store-address">${escapeHtml(store.address)}</span>
                     <i aria-hidden="true"></i>
                 </button>
             `).join("");
@@ -166,8 +166,8 @@
             this.detail.querySelector(".sub-pride-store-region").textContent = store.region || "";
             this.detail.querySelector("h4").textContent = store.name || "";
             this.detail.querySelector(".sub-pride-store-meta").innerHTML = `
-                <div><dt>도로명</dt><dd>${escapeHtml(store.roadAddress)}</dd></div>
-                <div><dt>지번</dt><dd>${escapeHtml(store.jibunAddress)}</dd></div>
+                <div><dt>주소</dt><dd>${escapeHtml(store.address)}</dd></div>
+                <div><dt>상세주소</dt><dd>${escapeHtml(store.detailAddress || "-")}</dd></div>
                 <div><dt>전화번호</dt><dd>${escapeHtml(store.phone)}</dd></div>
             `;
             this.detail.querySelector(".sub-pride-store-products ul").innerHTML = (store.products || []).map(product => `

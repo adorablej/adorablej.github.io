@@ -156,10 +156,18 @@ function initMypageMobileMenu() {
 window.addEventListener("includeLoaded", initMypageMobileMenu);
 
 function initMypageAccordion() {
-    document.querySelectorAll("[data-mypage-accordion]").forEach(group => {
+    const groups = [...document.querySelectorAll("[data-mypage-accordion]")];
+
+    const updateNavOpenState = nav => {
+        if (!nav) return;
+        nav.classList.toggle("has-open-group", Boolean(nav.querySelector("[data-mypage-accordion].is-open")));
+    };
+
+    groups.forEach(group => {
         const button = group.querySelector(".sub-mypage-nav-toggle");
         const depth = group.querySelector(".sub-mypage-nav-depth");
         const inner = group.querySelector(".sub-mypage-nav-depth-inner");
+        const nav = group.closest(".sub-mypage-nav");
 
         if (!button || !depth || !inner) return;
 
@@ -183,9 +191,11 @@ function initMypageAccordion() {
             group.classList.toggle("is-open", willOpen);
             button.setAttribute("aria-expanded", String(willOpen));
             updateHeight();
+            updateNavOpenState(nav);
         });
 
         updateHeight();
+        updateNavOpenState(nav);
         window.addEventListener("resize", updateHeight);
     });
 }

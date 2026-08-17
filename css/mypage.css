@@ -86,6 +86,11 @@
     color: #fff;
 }
 
+.sub-mypage-nav.has-open-group > .sub-mypage-nav-link.is-active:not(:hover) {
+    background: #fff;
+    color: #222;
+}
+
 .sub-mypage-nav-group.is-open > .sub-mypage-nav-toggle {
     background: var(--red);
     color: #fff;
@@ -112,6 +117,10 @@
 .sub-mypage-nav-link:hover .sub-mypage-nav-icon img,
 .sub-mypage-nav-group.is-open > .sub-mypage-nav-toggle .sub-mypage-nav-icon img {
     filter: brightness(0) invert(1);
+}
+
+.sub-mypage-nav.has-open-group > .sub-mypage-nav-link.is-active:not(:hover) .sub-mypage-nav-icon img {
+    filter: none;
 }
 .sub-mypage-nav-toggle > span:nth-child(2) {
     flex: 1;
@@ -1074,6 +1083,8 @@ body.is-modal-open {
 }
 
 .sub-mypage-product-row > div:not(:first-child):not(:last-child) {
+    font-size: calc(17 * var(--vw));
+    font-weight: 500;
     text-align: center;
 }
 
@@ -1110,15 +1121,16 @@ body.is-modal-open {
 .sub-mypage-detail-summary small,
 .sub-mypage-part-info small {
     color: #aaa;
-    font-size: calc(12 * var(--vw));
+    font-size: calc(16 * var(--vw));
+    font-weight: 500;
 }
 
 .sub-mypage-list-product-text strong,
 .sub-mypage-detail-summary > strong {
     margin-top: calc(4 * var(--vw));
     color: #111;
-    font-size: calc(15 * var(--vw));
-    font-weight: 700;
+    font-size: calc(18 * var(--vw));
+    font-weight: 600;
 }
 
 .sub-mypage-product-status {
@@ -1985,6 +1997,36 @@ body.is-mypage-home-modal-open {
 Desktop (721px and above)
 ======================================== */
 @media (min-width: 721px) {
+    .sub-mypage-products-page .page-heading {
+        padding-top: calc(262 * var(--vw));
+    }
+    .sub-mypage-products-page .sub-mypage-section {
+        padding-bottom: calc(124 * var(--vw));
+    }
+    .sub-mypage-products-page .sub-mypage-inner {
+        gap: calc(100 * var(--vw));
+    }
+    .sub-mypage-products-page .sub-mypage-page-title {
+        margin-bottom: calc(94 * var(--vw));
+    }
+    .sub-mypage-products-page .sub-mypage-filter-label {
+        margin-bottom: calc(37 * var(--vw));
+    }
+    .sub-mypage-products-page .sub-mypage-filter-controls {
+        grid-template-columns: calc(300 * var(--vw)) minmax(0, 1fr);
+        gap: calc(16 * var(--vw));
+    }
+    .sub-mypage-products-page .sub-mypage-filter-select .sub-form-select-trigger,
+    .sub-mypage-products-page .sub-mypage-search {
+        height: calc(80 * var(--vw));
+    }
+    .sub-mypage-products-page .sub-mypage-product-list-head {
+        min-height: calc(100 * var(--vw));
+    }
+    .sub-mypage-products-page .sub-mypage-product-row {
+        min-height: calc(180 * var(--vw));
+    }
+
     .sub-mypage-product-detail .sub-mypage-detail-product {
         grid-template-columns: calc(292 * var(--vw)) minmax(0, 1fr) calc(178 * var(--vw));
         gap: calc(48 * var(--vw));
@@ -2021,7 +2063,8 @@ Desktop (721px and above)
     .sub-mypage-product-detail .sub-mypage-detail-summary > strong {
         display: block;
         margin-top: calc(5 * var(--vw));
-        font-size: calc(23 * var(--vw));
+        font-size: calc(18 * var(--vw));
+        font-weight: 600;
         line-height: 1.2;
         white-space: nowrap;
     }
@@ -2796,12 +2839,22 @@ Mobile (720px and below)
         justify-content: center;
         padding-right: 20px;
     }
+    .sub-mypage-detail-summary small {
+        font-size: 12px;
+        font-weight: 400;
+    }
+    .sub-mypage-detail-summary > strong {
+        font-size: 15px;
+        font-weight: 700;
+    }
     .sub-mypage-list-product-text small {
         font-size: 14px;
+        font-weight: 400;
     }
     .sub-mypage-list-product-text strong {
         margin-top: 7px;
         font-size: 16px;
+        font-weight: 700;
         line-height: 1.35;
     }
     .sub-mypage-product-row > div:nth-child(2),
@@ -2809,6 +2862,8 @@ Mobile (720px and below)
     .sub-mypage-product-row > div:nth-child(4) {
         position: relative;
         display: grid;
+        font-size: 14px;
+        font-weight: 400;
         grid-template-columns: 120px 1fr;
         align-items: center;
         min-height: 38px;
@@ -3199,6 +3254,7 @@ Mobile (720px and below)
     }
     .sub-mypage-part-info small {
         font-size: 12px;
+        font-weight: 400;
     }
     .sub-mypage-part-info strong {
         margin-top: 5px;

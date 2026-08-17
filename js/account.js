@@ -252,7 +252,7 @@
             event.preventDefault();
             var name = document.getElementById('join-name');
             sessionStorage.setItem('joinUserName', name ? name.value.trim() : '');
-            window.location.href = '/Account/join-complete.html';
+            window.location.href = '/account/join-complete.html';
         });
     }
 

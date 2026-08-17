@@ -233,13 +233,13 @@
         if (!query) return;
 
         const normalizedQuery = query.toLocaleLowerCase("ko-KR");
-        const brand = data.brands.find((item) => [item.id, item.name, item.logoText, ...(item.keywords || [])]
+        const brand = data.brands.find((item) => [item.id, item.manufacturerCode, item.name, item.nameKo, item.logoText, ...(item.keywords || [])]
             .some((value) => String(value || "").toLocaleLowerCase("ko-KR").includes(normalizedQuery)));
 
         let matchedModel = null;
         let matchedBrand = null;
         Object.entries(data.models).some(([brandId, models]) => {
-            const model = models.find((item) => [item.id, item.name]
+            const model = models.find((item) => [item.id, item.modelCode, item.name, item.nameEn]
                 .some((value) => String(value || "").toLocaleLowerCase("ko-KR").includes(normalizedQuery)));
             if (!model) return false;
             matchedModel = model;
@@ -332,11 +332,11 @@
             ? `<img src="${brand.logo}" alt="${escapeHtml(brand.name)}">`
             : escapeHtml(brand.logoText);
         elements.modalMeta.innerHTML = `
-            <div><dt>제조사</dt><dd>${escapeHtml(brand.name)}</dd></div>
+            <div><dt>제조사</dt><dd>${escapeHtml(brand.nameKo || brand.name)}</dd></div>
             <div><dt>모델명</dt><dd>${escapeHtml(result.modelName)}</dd></div>
             <div><dt>세부명</dt><dd>${escapeHtml(result.detail)}</dd></div>
             <div><dt>비고</dt><dd>${escapeHtml(result.note || "-")}</dd></div>
-            <div><dt>Maker</dt><dd>${escapeHtml(brand.name)}</dd></div>
+            <div><dt>Maker</dt><dd>${escapeHtml(result.manufacturerNameEn || brand.name)}</dd></div>
             <div><dt>Model</dt><dd>${escapeHtml(result.model)}</dd></div>
             <div><dt>연식</dt><dd>${escapeHtml(result.year)}</dd></div>
         `;

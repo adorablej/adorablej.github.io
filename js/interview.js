@@ -34,7 +34,13 @@ function initHunterPrideInterviewPage() {
 
     if (!page || !stage || !grid || !modal || !Array.isArray(hunterPrideInterviewData)) return;
 
-    const featured = hunterPrideInterviewData.filter(item => item.featured);
+    const exposedReviews = hunterPrideInterviewData.filter(item => item.isExposed);
+    const featured = exposedReviews
+        .filter(item => item.exposureType === "FEATURED")
+        .sort((a, b) => a.displayOrder - b.displayOrder);
+    const general = exposedReviews
+        .filter(item => item.exposureType === "GENERAL")
+        .sort((a, b) => a.displayOrder - b.displayOrder);
     const featuredSlides = featured.length > 1 ? [...featured, ...featured, ...featured] : featured;
     const isMobile = window.matchMedia("(max-width: 720px)").matches;
     let visibleCount = isMobile ? 5 : 9;
@@ -44,8 +50,8 @@ function initHunterPrideInterviewPage() {
     let normalizeFeaturedTimer = null;
 
     function imageMarkup(item) {
-        const id = getHunterPrideYoutubeId(item.youtube);
-        const thumbnail = String(item.thumbnail || "").trim() || getHunterPrideYoutubeThumbnail(item.youtube);
+        const id = getHunterPrideYoutubeId(item.videoUrl);
+        const thumbnail = String(item.thumbnailUrl || "").trim() || getHunterPrideYoutubeThumbnail(item.videoUrl);
         return `<img src="${thumbnail}"
                      onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${id}/hqdefault.jpg';"
                      alt="${item.title}">`;
@@ -53,14 +59,14 @@ function initHunterPrideInterviewPage() {
 
     function renderFeatured() {
         stage.innerHTML = featuredSlides.map(item => `
-            <button type="button" class="sub-pride-featured-card swiper-slide" data-interview-id="${item.id}">
+            <button type="button" class="sub-pride-featured-card swiper-slide" data-interview-id="${item.fieldReviewId}">
                 <span class="sub-pride-featured-image">
                     ${imageMarkup(item)}
                     ${hunterPridePlayIcon()}
                 </span>
                 <span class="sub-pride-featured-content">
                     <strong>${item.title}</strong>
-                    <p>${item.description}</p>
+                    <p>${item.contentSummary}</p>
                 </span>
             </button>
         `).join("");
@@ -69,21 +75,21 @@ function initHunterPrideInterviewPage() {
     }
 
     function renderList() {
-        const list = hunterPrideInterviewData.slice(0, visibleCount);
+        const list = general.slice(0, visibleCount);
 
         grid.innerHTML = list.map(item => `
-            <button type="button" class="sub-pride-interview-card" data-interview-id="${item.id}">
+            <button type="button" class="sub-pride-interview-card" data-interview-id="${item.fieldReviewId}">
                 <span class="sub-pride-interview-image">
                     ${imageMarkup(item)}
                 </span>
                 <span class="sub-pride-interview-content">
                     <strong>${item.title}</strong>
-                    <p>${item.description}</p>
+                    <p>${item.contentSummary}</p>
                 </span>
             </button>
         `).join("");
 
-        more.classList.toggle("is-hidden", visibleCount >= hunterPrideInterviewData.length);
+        more.classList.toggle("is-hidden", visibleCount >= general.length);
     }
 
     function initFeaturedMotion() {
@@ -179,11 +185,11 @@ function initHunterPrideInterviewPage() {
         const description = modal.querySelector("p");
         const date = modal.querySelector("time");
 
-        iframe.src = `https://www.youtube.com/embed/${getHunterPrideYoutubeId(item.youtube)}?autoplay=1&rel=0`;
+        iframe.src = `https://www.youtube.com/embed/${getHunterPrideYoutubeId(item.videoUrl)}?autoplay=1&rel=0`;
         title.textContent = item.title;
-        description.textContent = item.description;
-        date.textContent = item.date || "";
-        date.setAttribute("datetime", (item.date || "").replaceAll(".", "-"));
+        description.textContent = item.contentSummary;
+        date.textContent = item.publishedAt || "";
+        date.setAttribute("datetime", (item.publishedAt || "").replaceAll(".", "-"));
 
         modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
@@ -215,7 +221,7 @@ function initHunterPrideInterviewPage() {
             if (!canOpen) return;
         }
 
-        const item = hunterPrideInterviewData.find(data => data.id === Number(card.dataset.interviewId));
+        const item = exposedReviews.find(data => data.fieldReviewId === Number(card.dataset.interviewId));
         openModal(item);
     });
 
@@ -237,7 +243,7 @@ function initHunterPrideInterviewPage() {
     // Products 메인에서 전달한 fieldReviewId로 해당 리뷰 모달을 바로 엽니다.
     const requestedId = Number(new URLSearchParams(window.location.search).get("reviewId"));
     if (requestedId) {
-        openModal(hunterPrideInterviewData.find(item => item.id === requestedId));
+        openModal(exposedReviews.find(item => item.fieldReviewId === requestedId));
     }
 }
 

@@ -1,8 +1,20 @@
 (() => {
     "use strict";
 
-    const trainingData = (window.TRAINING_DATA || []).map((item) => ({ ...item }));
-    const appliedTrainingIds = new Set();
+    const APPLICATION_STORAGE_KEY = "hunter.trainingApplications";
+    const PENDING_APPLICATION_KEY = "hunter.pendingTrainingApplication";
+    const trainingData = (window.TRAINING_DATA || []).map((item) => ({
+        ...item,
+        id: item.scheduleId,
+        courseName: item.courseTitle || item.scheduleName,
+        date: item.startAt?.slice(0, 10) || "",
+        startTime: item.startAt?.slice(11, 16) || "",
+        endTime: item.endAt?.slice(11, 16) || "",
+        currentApplicants: item.applicationCount || 0,
+        status: item.statusCode,
+        feeType: String(item.feeType || "FREE").toLowerCase()
+    }));
+    const appliedTrainingIds = loadAppliedTrainingIds();
     const DEFAULT_TRAINING_IMAGE = "/images/img_placeholder.png";
     const TRAINING_COLOR_COUNT = 10;
 
@@ -28,12 +40,55 @@
     }
 
     const statusLabel = {
-        waiting: "접수대기",
-        open: "접수중",
-        closed: "접수마감",
-        training: "교육중",
-        completed: "교육완료"
+        RECRUITING: "접수중",
+        CLOSED: "접수마감",
+        IN_PROGRESS: "교육중",
+        COMPLETED: "교육완료",
+        CANCELED: "교육취소"
     };
+
+    const statusClass = {
+        RECRUITING: "open",
+        CLOSED: "closed",
+        IN_PROGRESS: "training",
+        COMPLETED: "completed",
+        CANCELED: "canceled"
+    };
+
+    function loadAppliedTrainingIds() {
+        try {
+            const storedIds = JSON.parse(localStorage.getItem(APPLICATION_STORAGE_KEY) || "[]");
+            const sourceAppliedIds = (window.TRAINING_DATA || [])
+                .filter((item) => item.applied)
+                .map((item) => item.scheduleId);
+            return new Set([...storedIds, ...sourceAppliedIds].map(Number).filter(Number.isFinite));
+        } catch (error) {
+            return new Set();
+        }
+    }
+
+    function saveAppliedTrainingIds() {
+        localStorage.setItem(APPLICATION_STORAGE_KEY, JSON.stringify([...appliedTrainingIds]));
+    }
+
+    function isLoggedIn() {
+        return new URLSearchParams(window.location.search).get("previewAuth") !== "logout";
+    }
+
+    function getStatusClass(status) {
+        return statusClass[status] || "closed";
+    }
+
+    function moveToLogin(trainingId) {
+        sessionStorage.setItem(PENDING_APPLICATION_KEY, String(trainingId));
+
+        const returnUrl = new URL(window.location.href);
+        returnUrl.searchParams.delete("previewAuth");
+
+        const loginUrl = new URL("/account/login.html", window.location.origin);
+        loginUrl.searchParams.set("returnUrl", returnUrl.href);
+        window.location.href = loginUrl.href;
+    }
 
     const calendar = document.querySelector("#training-calendar");
     const isMypageView = calendar?.dataset.trainingView === "mypage";
@@ -118,7 +173,7 @@ function parseDate(dateString) {
                 <span class="sub-training-day-number">${cellDate.getDate()}</span>
                 <span class="sub-training-event-list">
                     ${events.slice(0, 2).map((event) => `
-                        <span class="sub-training-event ${getTrainingColorClass(event)} is-${event.status}">
+                        <span class="sub-training-event ${getTrainingColorClass(event)} is-${getStatusClass(event.status)}">
                             ${event.startTime}
                         </span>
                     `).join("")}
@@ -165,13 +220,13 @@ function parseDate(dateString) {
 
         trainingList.innerHTML = events.map((event) => {
             const remaining = Math.max(event.capacity - event.currentApplicants, 0);
-            const available = event.status === "open" && remaining > 0;
+            const available = event.status === "RECRUITING" && remaining > 0;
             const applyLabel = available ? "교육신청" : statusLabel[event.status];
             return `
                 <button type="button" class="sub-training-card ${getTrainingColorClass(event)} ${selectedDate === event.date ? "is-selected" : ""}" data-training-id="${event.id}">
                     <span class="sub-training-card-top">
                         <span class="sub-training-card-time">${event.date.replaceAll("-", ".")} / ${event.startTime}</span>
-                        <span class="sub-training-card-status is-${event.status}">${statusLabel[event.status]}</span>
+                        <span class="sub-training-card-status is-${getStatusClass(event.status)}">${statusLabel[event.status]}</span>
                     </span>
                     <strong class="sub-training-card-title">
                     ${event.courseName}
@@ -199,7 +254,7 @@ function parseDate(dateString) {
 
         const remaining = Math.max(training.capacity - training.currentApplicants, 0);
         const isApplied = appliedTrainingIds.has(training.id);
-        const isAvailable = training.status === "open" && remaining > 0 && !isApplied;
+        const isAvailable = training.status === "RECRUITING" && remaining > 0 && !isApplied;
         const fee = training.feeType === "free"
             ? "무료"
             : `${new Intl.NumberFormat("ko-KR").format(training.price)}원`;
@@ -222,7 +277,7 @@ function parseDate(dateString) {
 
                     <div class="sub-training-modal-course-row">
                         <div class="sub-training-modal-course">
-                            <span class="sub-training-modal-course-dot ${getTrainingColorClass(training)} is-${training.status}" aria-hidden="true"></span>
+                            <span class="sub-training-modal-course-dot ${getTrainingColorClass(training)} is-${getStatusClass(training.status)}" aria-hidden="true"></span>
                             <span>${training.courseName} (${training.currentApplicants}/${training.capacity})</span>
                         </div>
 
@@ -272,11 +327,19 @@ function parseDate(dateString) {
             submit.disabled = !checkbox.checked || !isAvailable;
         });
         cancel?.addEventListener("click", closeModal);
-        submit?.addEventListener("click", () => {
+        submit?.addEventListener("click", async () => {
             if (submit.disabled || !isAvailable) return;
+
+            if (!isLoggedIn()) {
+                moveToLogin(training.id);
+                return;
+            }
 
             appliedTrainingIds.add(training.id);
             training.currentApplicants = Math.min(training.currentApplicants + 1, training.capacity);
+            training.applicationCount = training.currentApplicants;
+            training.applied = true;
+            saveAppliedTrainingIds();
 
             submit.textContent = "신청완료";
             submit.disabled = true;
@@ -285,7 +348,14 @@ function parseDate(dateString) {
             renderCalendar();
             renderSidebar();
             closeModal();
-            window.HunterAlert?.open({ message: "트레이닝 교육 신청이 완료되었습니다." });
+            const confirmed = await window.HunterAlert?.open({
+                message: "트레이닝 교육 신청이 완료되었습니다.",
+                confirmText: "확인"
+            });
+
+            if (confirmed) {
+                window.location.href = "/Mypage/training-history.html";
+            }
         });
 
         modal.classList.add("is-open");
@@ -324,4 +394,19 @@ function parseDate(dateString) {
 
     renderCalendar();
     renderSidebar();
+
+    const pendingTrainingId = Number(sessionStorage.getItem(PENDING_APPLICATION_KEY));
+    if (pendingTrainingId && isLoggedIn()) {
+        sessionStorage.removeItem(PENDING_APPLICATION_KEY);
+        const pendingTraining = trainingData.find((item) => item.id === pendingTrainingId);
+
+        if (pendingTraining) {
+            const pendingDate = parseDate(pendingTraining.date);
+            currentDate = new Date(pendingDate.getFullYear(), pendingDate.getMonth(), 1);
+            selectedDate = pendingTraining.date;
+            renderCalendar();
+            renderSidebar();
+            openModal(pendingTraining);
+        }
+    }
 })();

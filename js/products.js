@@ -254,20 +254,22 @@ if (prideList && Array.isArray(window.hunterPrideInterviewData || hunterPrideInt
         const match = String(url).match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/)([^?&#/]+)/);
         return match ? match[1] : "";
     };
-    const featuredReviews = hunterPrideInterviewData.filter(review => review.featured);
+    const featuredReviews = hunterPrideInterviewData
+        .filter(review => review.isExposed && review.exposureType === "FEATURED")
+        .sort((a, b) => a.displayOrder - b.displayOrder);
 
     prideList.innerHTML = featuredReviews.map(review => {
-        const youtubeId = getYoutubeId(review.youtube);
-        const thumbnail = review.thumbnail || `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
+        const youtubeId = getYoutubeId(review.videoUrl);
+        const thumbnail = review.thumbnailUrl || `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
         return `
             <li class="swiper-slide sub-pride-item">
-                <a href="/Products/hunter-Pride.html?reviewId=${encodeURIComponent(review.id)}" class="sub-pride-card">
+                <a href="/Products/hunter-Pride.html?reviewId=${encodeURIComponent(review.fieldReviewId)}" class="sub-pride-card">
                     <div class="sub-pride-image">
                         <img src="${escapePrideText(thumbnail)}" alt="${escapePrideText(review.title)}">
                     </div>
                     <div class="sub-pride-content">
                         <h3>${escapePrideText(review.title)}</h3>
-                        <p>${escapePrideText(review.description)}</p>
+                        <p>${escapePrideText(review.contentSummary)}</p>
                     </div>
                 </a>
             </li>

@@ -14,7 +14,43 @@ function initFormComponents() {
         new FormValidator(form);
     });
 
+    initVehicleSpecificationRequest();
     initCompletionAlerts();
+}
+
+function initVehicleSpecificationRequest() {
+    const form = document.querySelector("#vehicle-specification-form");
+    const submitButton = form?.querySelector('[type="submit"]');
+    if (!form || !submitButton) return;
+
+    const requiredFields = [...form.querySelectorAll("[data-required]")];
+
+    const isFieldComplete = field => {
+        if (field.type === "checkbox") return field.checked;
+
+        const value = field.value.trim();
+        if (!value) return false;
+
+        if (field.dataset.pattern) {
+            try {
+                return new RegExp(field.dataset.pattern).test(value);
+            } catch (error) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    const updateSubmitState = () => {
+        submitButton.disabled = !requiredFields.every(isFieldComplete);
+    };
+
+    requiredFields.forEach(field => {
+        field.addEventListener(field.type === "checkbox" ? "change" : "input", updateSubmitState);
+    });
+
+    updateSubmitState();
 }
 
 function initCompletionAlerts() {
@@ -24,13 +60,17 @@ function initCompletionAlerts() {
     ]);
 
     document.querySelectorAll("#contact-form, .sub-mypage-cs-form, #vehicle-specification-form").forEach(form => {
-        form.addEventListener("submit", event => {
+        form.addEventListener("submit", async event => {
             if (event.defaultPrevented) return;
             event.preventDefault();
             const message = form.classList.contains("sub-mypage-cs-form")
                 ? "CS문의접수가 완료되었습니다.\n입력하신 연락처로 회신드리겠습니다.\n감사합니다."
                 : messages.get(form.id);
-            window.HunterAlert?.open({ message });
+            const confirmed = await window.HunterAlert?.open({ message });
+
+            if (form.id === "vehicle-specification-form" && confirmed) {
+                window.location.href = "/Support/Wheel-Alignment-Specification.html";
+            }
         });
     });
 }

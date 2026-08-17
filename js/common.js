@@ -28,7 +28,9 @@
         const params = new URLSearchParams(window.location.search);
         const previewAuth = params.get("previewAuth");
         const isLoggedIn = previewAuth !== "logout";
-        const hasAlarm = isLoggedIn && params.get("previewAlarm") !== "0";
+        const previewAlarm = params.get("previewAlarm");
+        const hasUnreadAlarm = Boolean(document.querySelector(".header-alarm-item.is-unread"));
+        const hasAlarm = isLoggedIn && (previewAlarm === null ? hasUnreadAlarm : previewAlarm !== "0");
         const headerLogin = document.querySelector(".header-r.is-login");
         const headerLogout = document.querySelector(".header-r.is-logout");
         const allMenu = document.querySelector(".all-menu");
@@ -783,10 +785,67 @@ function initDragCursor() {
         const closeButtons = alarm?.querySelectorAll("[data-alarm-close]") || [];
         const tabs = alarm?.querySelectorAll("[data-alarm-tab]") || [];
         const items = alarm?.querySelectorAll("[data-alarm-category]") || [];
+        const footer = alarm?.querySelector(".header-alarm-footer");
+        const olderButton = alarm?.querySelector("[data-alarm-older]");
 
         if (!alarm || !panel || !openButtons.length) return;
 
         let lastFocusedElement = null;
+        let activeCategory = tabs[0]?.dataset.alarmTab || "service";
+        let showingOlder = false;
+        let openedUnreadIds = [];
+        const readStorageKey = "hunter-header-read-alarms";
+        const day = 24 * 60 * 60 * 1000;
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const recentCutoff = today.getTime() - (9 * day);
+
+        function getStoredReadIds() {
+            try {
+                const value = JSON.parse(window.localStorage.getItem(readStorageKey) || "[]");
+                return Array.isArray(value) ? value : [];
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function isOlderItem(item) {
+            const date = item.querySelector("time")?.getAttribute("datetime");
+            if (!date) return false;
+            const timestamp = new Date(`${date}T00:00:00`).getTime();
+            return Number.isFinite(timestamp) && timestamp < recentCutoff;
+        }
+
+        function updateUnreadState() {
+            const hasUnread = [...items].some((item) => item.classList.contains("is-unread"));
+            document.querySelectorAll(".btn-alarm").forEach((button) => {
+                button.classList.toggle("has-unread", hasUnread);
+            });
+            const allMenu = document.querySelector(".all-menu");
+            if (allMenu) {
+                allMenu.dataset.hasAlarm = hasUnread ? "true" : "false";
+                allMenu.classList.toggle("has-alarm", hasUnread);
+                allMenu.classList.toggle("has-no-alarm", !hasUnread);
+            }
+        }
+
+        function renderItems() {
+            let hasOlder = false;
+            items.forEach((item) => {
+                const matchesCategory = item.dataset.alarmCategory === activeCategory;
+                const older = isOlderItem(item);
+                if (matchesCategory && older) hasOlder = true;
+                item.hidden = !matchesCategory || (older && !showingOlder);
+            });
+            if (footer) footer.hidden = !hasOlder || showingOlder;
+        }
+
+        const storedReadIds = new Set(getStoredReadIds());
+        items.forEach((item) => {
+            if (storedReadIds.has(item.dataset.alarmId)) item.classList.remove("is-unread");
+        });
+        renderItems();
+        updateUnreadState();
 
         function closeMenuIfOpen() {
             const menu = document.querySelector(".all-menu");
@@ -804,6 +863,10 @@ function initDragCursor() {
 
         function openAlarm() {
             lastFocusedElement = document.activeElement;
+            openedUnreadIds = [...items]
+                .filter((item) => item.classList.contains("is-unread"))
+                .map((item) => item.dataset.alarmId)
+                .filter(Boolean);
             closeMenuIfOpen();
             alarm.classList.add("is-open");
             alarm.setAttribute("aria-hidden", "false");
@@ -823,6 +886,19 @@ function initDragCursor() {
             document.querySelectorAll(".btn-alarm").forEach((button) => {
                 button.setAttribute("aria-expanded", "false");
             });
+            if (openedUnreadIds.length) {
+                const readIds = new Set([...getStoredReadIds(), ...openedUnreadIds]);
+                try {
+                    window.localStorage.setItem(readStorageKey, JSON.stringify([...readIds]));
+                } catch (error) {
+                    // Storage may be unavailable in privacy-restricted contexts.
+                }
+                items.forEach((item) => {
+                    if (readIds.has(item.dataset.alarmId)) item.classList.remove("is-unread");
+                });
+                openedUnreadIds = [];
+                updateUnreadState();
+            }
             if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
                 lastFocusedElement.focus();
             }
@@ -835,16 +911,20 @@ function initDragCursor() {
         closeButtons.forEach((button) => button.addEventListener("click", closeAlarm));
 
         tabs.forEach((tab) => tab.addEventListener("click", () => {
-            const category = tab.dataset.alarmTab;
+            activeCategory = tab.dataset.alarmTab;
+            showingOlder = false;
             tabs.forEach((button) => {
                 const isActive = button === tab;
                 button.classList.toggle("is-active", isActive);
                 button.setAttribute("aria-selected", String(isActive));
             });
-            items.forEach((item) => {
-                item.hidden = category !== "all" && item.dataset.alarmCategory !== category;
-            });
+            renderItems();
         }));
+
+        olderButton?.addEventListener("click", () => {
+            showingOlder = true;
+            renderItems();
+        });
 
         alarm.addEventListener("click", (event) => {
             if (window.innerWidth <= 720 || panel.contains(event.target)) return;
