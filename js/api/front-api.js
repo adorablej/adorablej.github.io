@@ -35,6 +35,19 @@
             getList: function (params) {
                 return client.get('/api/v1/pride-stores', { query: params || {}, auth: false });
             }
+        }),
+        fieldReviews: Object.freeze({
+            getList: function (params) {
+                return client.get('/api/v1/field-reviews', { query: params || {}, auth: false });
+            }
+        }),
+        contents: Object.freeze({
+            getList: function (params) {
+                return client.get('/api/v1/contents', { query: params || {}, auth: false });
+            },
+            getDetail: function (contentId) {
+                return client.get('/api/v1/contents/' + encodeURIComponent(contentId), { auth: false });
+            }
         })
     });
 })(window);

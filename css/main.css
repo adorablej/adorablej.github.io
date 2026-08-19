@@ -23,6 +23,10 @@ body {
     overflow-y: auto;
 }
 
+.main-page sup.trademark {
+    font-family: "Russo One", sans-serif !important;
+}
+
 .page-scroll,
 .main-scroll,
 main {

@@ -5,6 +5,10 @@
     background: #fff;
 }
 
+.sub-mypage-page .page-heading:not(.page-heading--policy) {
+    padding-top: calc(270 * var(--vw));
+}
+
 .sub-mypage-section {
     padding-bottom: calc(160 * var(--vw));
 }
@@ -397,12 +401,13 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: calc(90 * var(--vw));
-    height: calc(38 * var(--vw));
+    min-width: calc(100 * var(--vw));
+    height: calc(44 * var(--vw));
     padding: 0 calc(16 * var(--vw));
+    box-sizing: border-box;
     border-radius: calc(999 * var(--vw));
     color: #fff;
-    font-size: calc(13 * var(--vw));
+    font-size: calc(14 * var(--vw));
     font-weight: 600;
 }
 
@@ -416,7 +421,7 @@
     justify-content: center;
     gap: calc(20 * var(--vw));
     width: 100%;
-    height: calc(64 * var(--vw));
+    height: calc(72 * var(--vw));
     margin: calc(30 * var(--vw)) 0 calc(20 * var(--vw));
     border: 1px solid #ddd;
     background: #fff;
@@ -1628,7 +1633,7 @@ button.sub-mypage-part-text {
    My Page - Order List
 ======================================== */
 .sub-mypage-page-title {
-    margin: 0 0 calc(62 * var(--vw));
+    margin: 0 0 calc(78 * var(--vw));
     color: #111;
     font-size: calc(38 * var(--vw));
     font-weight: 700;
@@ -1641,7 +1646,7 @@ button.sub-mypage-part-text {
     display: flex;
     align-items: center;
     width: 100%;
-    height: calc(72 * var(--vw));
+    height: calc(80 * var(--vw));
     box-sizing: border-box;
     border: 1px solid #ddd;
 }
@@ -1655,7 +1660,7 @@ button.sub-mypage-part-text {
     background: #fff;
     color: #111;
     font-family: inherit;
-    font-size: calc(15 * var(--vw));
+    font-size: calc(16 * var(--vw));
 }
 
 .sub-mypage-order-search input::placeholder {
@@ -1675,21 +1680,21 @@ button.sub-mypage-part-text {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: calc(12 * var(--vw));
-    margin-top: calc(34 * var(--vw));
+    margin-top: calc(38 * var(--vw));
 }
 
 .sub-mypage-order-tabs button {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(50 * var(--vw));
+    height: calc(60 * var(--vw));
     padding: 0 calc(12 * var(--vw));
     border: 1px solid #bbb;
     border-radius: calc(999 * var(--vw));
     background: #fff;
     color: #aaa;
     font-family: inherit;
-    font-size: calc(14 * var(--vw));
+    font-size: calc(15 * var(--vw));
     cursor: pointer;
 }
 
@@ -1700,11 +1705,11 @@ button.sub-mypage-part-text {
 }
 
 .sub-mypage-order-result {
-    margin: calc(30 * var(--vw)) 0 0;
-    padding-bottom: calc(18 * var(--vw));
+    margin: calc(40 * var(--vw)) 0 0;
+    padding-bottom: calc(24 * var(--vw));
     border-bottom: 1px solid #222;
     color: #222;
-    font-size: calc(14 * var(--vw));
+    font-size: calc(15 * var(--vw));
     font-weight: 600;
 }
 
@@ -1723,7 +1728,7 @@ button.sub-mypage-part-text {
 }
 
 .sub-mypage-order-history + .sub-mypage-order-history {
-    margin-top: calc(24 * var(--vw));
+    margin-top: calc(64 * var(--vw));
     border-top: 1px solid #222;
 }
 
@@ -1736,7 +1741,7 @@ button.sub-mypage-part-text {
 
 .sub-mypage-order-history-head strong {
     color: #111;
-    font-size: calc(15 * var(--vw));
+    font-size: calc(16 * var(--vw));
     font-weight: 700;
 }
 
@@ -1747,6 +1752,9 @@ button.sub-mypage-part-text {
 .sub-mypage-order-meta,
 .sub-mypage-order-total {
     display: inline;
+}
+.sub-mypage-order-total::before {
+    content: " / ";
 }
 .sub-mypage-status.is-request {
     background: #38c99b;
@@ -1762,18 +1770,18 @@ button.sub-mypage-part-text {
 }
 
 .sub-mypage-order-history-body {
-    margin-top: calc(26 * var(--vw));
+    margin-top: calc(48 * var(--vw));
 }
 
 .sub-mypage-order-history-item {
     display: grid;
-    grid-template-columns: calc(240 * var(--vw)) minmax(0, 1fr);
-    gap: calc(34 * var(--vw));
-    min-height: calc(225 * var(--vw));
+    grid-template-columns: calc(250 * var(--vw)) minmax(0, 1fr);
+    gap: calc(38 * var(--vw));
+    min-height: calc(250 * var(--vw));
 }
 
 .sub-mypage-order-history-item + .sub-mypage-order-history-item {
-    margin-top: calc(16 * var(--vw));
+    margin-top: calc(20 * var(--vw));
 }
 
 .sub-mypage-order-history-image {
@@ -1792,9 +1800,8 @@ button.sub-mypage-part-text {
 .sub-mypage-order-history-info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: calc(20 * var(--vw)) 0;
-    border-bottom: 1px solid #ddd;
+    justify-content: flex-start;
+    padding: calc(44 * var(--vw)) 0 calc(20 * var(--vw));
 }
 
 .sub-mypage-order-history-info > strong {
@@ -1804,13 +1811,15 @@ button.sub-mypage-part-text {
 }
 
 .sub-mypage-order-history-info > span {
-    margin-top: calc(8 * var(--vw));
+    margin-top: calc(18 * var(--vw));
     color: #aaa;
     font-size: calc(13 * var(--vw));
 }
 
 .sub-mypage-order-history-info dl {
-    margin-top: calc(28 * var(--vw));
+    margin-top: calc(36 * var(--vw));
+    padding-top: calc(28 * var(--vw));
+    border-top: 1px solid #ddd;
 }
 
 .sub-mypage-order-history-info dl > div {
@@ -1836,10 +1845,10 @@ button.sub-mypage-part-text {
 }
 
 .sub-mypage-order-history .sub-mypage-order-toggle {
-    margin: calc(24 * var(--vw)) 0 0;
+    margin: calc(40 * var(--vw)) 0 0;
 }
 
-.sub-mypage-order-history.is-collapsed .sub-mypage-order-history-body {
+.sub-mypage-order-history.is-collapsed .sub-mypage-order-history-item:not(:first-child) {
     display: none;
 }
 
@@ -1900,25 +1909,30 @@ button.sub-mypage-part-text {
 /* ========================================
    My Page - Training History
 ======================================== */
+.sub-mypage-training-history-page .sub-mypage-page-title {
+    margin-bottom: calc(42 * var(--vw));
+}
 .sub-mypage-training-history-table {
     border-top: 1px solid #222;
 }
 .sub-mypage-training-history-head,
 .sub-mypage-training-history-row {
     display: grid;
-    grid-template-columns: 1.1fr 1.35fr 1fr calc(130 * var(--vw));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     align-items: center;
-    min-height: calc(86 * var(--vw));
+    min-height: calc(120 * var(--vw));
     border-bottom: 1px solid #ddd;
 }
 .sub-mypage-training-history-head {
-    min-height: calc(68 * var(--vw));
+    min-height: calc(100 * var(--vw));
 }
 .sub-mypage-training-history-head strong,
 .sub-mypage-training-history-row > span {
     padding: 0 calc(18 * var(--vw));
     color: #222;
-    font-size: calc(15 * var(--vw));
+    font-size: calc(18 * var(--vw));
+    line-height: 1.4;
+    text-align: center;
 }
 .sub-mypage-training-history-head strong {
     font-weight: 700;
@@ -1930,15 +1944,15 @@ button.sub-mypage-part-text {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: calc(112 * var(--vw));
-    height: calc(48 * var(--vw));
+    min-width: calc(132 * var(--vw));
+    height: calc(60 * var(--vw));
     padding: 0 calc(20 * var(--vw));
     border: 1px solid var(--red);
     border-radius: 999px;
     background: #fff;
     color: var(--red);
     font-family: inherit;
-    font-size: calc(14 * var(--vw));
+    font-size: calc(16 * var(--vw));
     font-weight: 700;
     letter-spacing: .28em;
     cursor: pointer;
@@ -2395,6 +2409,9 @@ Mobile (720px and below)
     .sub-mypage-order-total {
         display: block;
         white-space: nowrap;
+    }
+    .sub-mypage-order-total::before {
+        content: none;
     }
     .sub-mypage-status {
         min-width: 88px;
@@ -2956,6 +2973,7 @@ Mobile (720px and below)
         color: #222;
         font-size: 14px;
         line-height: 1.45;
+        text-align: left;
         box-sizing: border-box;
     }
     .sub-mypage-training-history-row > span::before {

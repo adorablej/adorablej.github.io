@@ -2214,6 +2214,7 @@ products-HunterPride-Map.html , Store Map
     padding-top: calc(40 * var(--vw));
     padding-bottom: calc(40 * var(--vw));
     box-sizing: border-box;
+    pointer-events: none;
 }
 
 .sub-pride-map-search {
@@ -2222,6 +2223,11 @@ products-HunterPride-Map.html , Store Map
     flex: 0 0 calc(500 * var(--vw));
     padding: calc(60 * var(--vw)) calc(50 * var(--vw));
     background: #fff;
+    pointer-events: auto;
+}
+
+.sub-pride-store-detail {
+    pointer-events: auto;
 }
 
 .sub-pride-map-title{

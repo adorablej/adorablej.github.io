@@ -23,7 +23,7 @@ function hunterPridePlayIcon() {
     return '<span class="sub-pride-play-button" aria-hidden="true"></span>';
 }
 
-function initHunterPrideInterviewPage() {
+async function initHunterPrideInterviewPage() {
     const page = document.querySelector(".sub-pride-interview-page");
     const stage = document.querySelector("#sub-pride-featured-stage");
     const grid = document.querySelector("#sub-pride-interview-grid");
@@ -32,12 +32,16 @@ function initHunterPrideInterviewPage() {
     const next = page?.querySelector(".sub-pride-interview-next");
     const more = page?.querySelector(".sub-pride-more-button");
 
-    if (!page || !stage || !grid || !modal || !Array.isArray(hunterPrideInterviewData)) return;
+    if (!page || !stage || !grid || !modal) return;
 
-    const exposedReviews = hunterPrideInterviewData.filter(item => item.isExposed);
+    const reviews = window.HunterPrideAPI
+        ? await window.HunterPrideAPI.getReviews()
+        : (window.hunterPrideInterviewData || []);
+    const exposedReviews = reviews.filter(item => item.isExposed);
     const featured = exposedReviews
         .filter(item => item.exposureType === "FEATURED")
-        .sort((a, b) => a.displayOrder - b.displayOrder);
+        .sort((a, b) => a.displayOrder - b.displayOrder)
+        .slice(0, 3);
     const general = exposedReviews
         .filter(item => item.exposureType === "GENERAL")
         .sort((a, b) => a.displayOrder - b.displayOrder);

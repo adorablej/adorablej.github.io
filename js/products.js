@@ -190,14 +190,20 @@ const dealerSwiper = new Swiper(".sub-dealer-slider", {
 
 /* products.html , Hunter Pride Dealer. */
 
-const dealerThumbs = document.querySelectorAll(".sub-dealer-thumb");
-
 const dealerMainImage = document.getElementById("dealerMainImage");
 const dealerArea = document.getElementById("dealerArea");
 const dealerName = document.getElementById("dealerName");
 const dealerAddress = document.getElementById("dealerAddress");
 const dealerPhone = document.getElementById("dealerPhone");
 const dealerMap = document.getElementById("dealerMap");
+const dealerList = document.querySelector(".sub-dealer-list");
+
+const escapeDealerText = (value = "") => String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 
 function changeDealer(thumb, useFade = true) {
     if (!thumb || !dealerMainImage) return;
@@ -213,7 +219,7 @@ function changeDealer(thumb, useFade = true) {
         dealerMainImage.style.opacity = "1";
     };
 
-    dealerThumbs.forEach((item) => {
+    document.querySelectorAll(".sub-dealer-thumb").forEach((item) => {
         item.classList.remove("is-active");
     });
 
@@ -228,22 +234,63 @@ function changeDealer(thumb, useFade = true) {
     setTimeout(updateDealer, 180);
 }
 
-dealerThumbs.forEach((thumb) => {
-    thumb.addEventListener("click", () => {
-        changeDealer(thumb);
+function bindDealerThumbs() {
+    const dealerThumbs = document.querySelectorAll(".sub-dealer-thumb");
+    dealerThumbs.forEach((thumb) => {
+        thumb.addEventListener("click", () => {
+            changeDealer(thumb);
+        });
     });
-});
 
-// 첫 번째 업체를 초기 선택 상태로 적용
-if (dealerThumbs.length) {
-    changeDealer(dealerThumbs[0], false);
+    if (dealerThumbs.length) changeDealer(dealerThumbs[0], false);
 }
+
+async function loadFeaturedDealers() {
+    if (!dealerList || !window.StoreAPI) {
+        bindDealerThumbs();
+        return;
+    }
+
+    try {
+        const result = await window.StoreAPI.getStores({ size: 100, mainOnly: true });
+        if (!result.stores.length) return;
+
+        dealerList.innerHTML = result.stores.map((store, index) => {
+            const image = store.image || "/images/products/sub_p_hp.png";
+            return `
+                <li class="swiper-slide sub-dealer-item">
+                    <button type="button"
+                        class="sub-dealer-thumb${index === 0 ? " is-active" : ""}"
+                        data-image="${escapeDealerText(image)}"
+                        data-alt="${escapeDealerText(store.name)}"
+                        data-area="${escapeDealerText(store.region)}"
+                        data-name="${escapeDealerText(store.name)}"
+                        data-address="${escapeDealerText(store.address)}"
+                        data-phone="${escapeDealerText(store.phone)}"
+                        data-store-id="${escapeDealerText(store.id)}">
+                        <img src="${escapeDealerText(image)}" alt="${escapeDealerText(store.name)}">
+                    </button>
+                </li>
+            `;
+        }).join("");
+
+        dealerSwiper.update();
+        bindDealerThumbs();
+    } catch (error) {
+        console.error(error);
+        bindDealerThumbs();
+    }
+}
+
+loadFeaturedDealers();
 
 
 /* products.html , Hunter Pride Interview. */
 const prideList = document.querySelector(".sub-pride-list");
 
-if (prideList && Array.isArray(window.hunterPrideInterviewData || hunterPrideInterviewData)) {
+async function loadFeaturedPrideReviews() {
+    if (!prideList) return;
+
     const escapePrideText = (value = "") => String(value)
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
@@ -254,9 +301,13 @@ if (prideList && Array.isArray(window.hunterPrideInterviewData || hunterPrideInt
         const match = String(url).match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/)([^?&#/]+)/);
         return match ? match[1] : "";
     };
-    const featuredReviews = hunterPrideInterviewData
+    const reviews = window.HunterPrideAPI
+        ? await window.HunterPrideAPI.getReviews()
+        : (window.hunterPrideInterviewData || []);
+    const featuredReviews = reviews
         .filter(review => review.isExposed && review.exposureType === "FEATURED")
-        .sort((a, b) => a.displayOrder - b.displayOrder);
+        .sort((a, b) => a.displayOrder - b.displayOrder)
+        .slice(0, 3);
 
     prideList.innerHTML = featuredReviews.map(review => {
         const youtubeId = getYoutubeId(review.videoUrl);
@@ -275,6 +326,8 @@ if (prideList && Array.isArray(window.hunterPrideInterviewData || hunterPrideInt
             </li>
         `;
     }).join("");
+
+    prideSwiper.update();
 }
 
 const prideSwiper = new Swiper(".sub-pride-slider", {
@@ -308,6 +361,8 @@ const prideSwiper = new Swiper(".sub-pride-slider", {
         },
     },
 });
+
+loadFeaturedPrideReviews().catch(console.error);
 
 
 /* product-detail.html , Main Features. */

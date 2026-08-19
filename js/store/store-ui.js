@@ -114,14 +114,21 @@
 
             const bounds = new naver.maps.LatLngBounds();
             stores.forEach(store => {
-                const position = new naver.maps.LatLng(Number(store.latitude), Number(store.longitude));
+                const latitude = Number(store.latitude);
+                const longitude = Number(store.longitude);
+                if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) return;
+
+                const position = new naver.maps.LatLng(latitude, longitude);
                 const marker = new naver.maps.Marker({
                     map: this.map,
                     position,
                     title: store.name,
-                    icon: getStoreMarkerIcon()
+                    icon: getStoreMarkerIcon(),
+                    clickable: true
                 });
-                naver.maps.Event.addListener(marker, "click", () => onMarkerClick(store));
+                naver.maps.Event.addListener(marker, "click", () => {
+                    if (typeof onMarkerClick === "function") onMarkerClick(store);
+                });
                 this.markers.set(String(store.id), { marker, store });
                 bounds.extend(position);
             });
@@ -152,8 +159,17 @@
 
             const markerEntry = this.markers.get(id);
             if (this.map && markerEntry && options.moveMap !== false) {
-                this.map.panTo(markerEntry.marker.getPosition());
-                if (this.map.getZoom() < 14) this.map.setZoom(14);
+                const position = markerEntry.marker.getPosition();
+                const needsZoom = this.map.getZoom() < 14;
+
+                // 확대를 이동보다 나중에 실행하면 pan 애니메이션의 중심이
+                // 기존 위치로 되돌아갈 수 있어 확대 후 매장을 중앙에 배치합니다.
+                if (needsZoom) {
+                    this.map.setZoom(14, false);
+                    this.map.setCenter(position);
+                } else {
+                    this.map.panTo(position);
+                }
             }
             this.renderDetail(store);
         },
@@ -212,7 +228,7 @@
         StoreUI.init(section);
         StoreUI.initMap();
 
-        const allStores = Array.isArray(window.MOCK_STORES) ? window.MOCK_STORES : [];
+        let allStores = [];
         const setSelectOptions = (select, placeholder, options, disabled = false) => {
             const list = select.querySelector(".sub-form-select-options");
             const value = select.querySelector(".sub-form-select-value");
@@ -258,7 +274,8 @@
                 const result = await StoreAPI.getStores({
                     keyword: keywordInput.value,
                     region: regionInput.value,
-                    city: cityInput.value
+                    city: cityInput.value,
+                    mapOnly: true
                 });
                 StoreUI.closeDetail();
                 StoreUI.renderCount(result.totalCount);
@@ -290,12 +307,21 @@
         });
         closeButton?.addEventListener("click", () => StoreUI.closeDetail());
 
-        setRegionOptions();
-        setCityOptions("");
-        loadStores().then(() => {
+        StoreAPI.getStores({ size: 100, mapOnly: true }).then(result => {
+            allStores = result.stores;
+            setRegionOptions();
+            setCityOptions("");
+            return loadStores();
+        }).then(() => {
             if (requestedStoreId) {
                 selectStore(requestedStoreId, { scrollList: true, moveMap: true });
             }
+        }).catch(error => {
+            console.error(error);
+            setRegionOptions();
+            setCityOptions("");
+            StoreUI.renderCount(0);
+            StoreUI.renderStoreList([]);
         });
     });
 })();

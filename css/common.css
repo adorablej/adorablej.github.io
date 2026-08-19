@@ -127,6 +127,21 @@ textarea {
     font-family: inherit;
 }
 
+sup {
+    font-family:
+        "Pretendard",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Apple SD Gothic Neo",
+        "Noto Sans KR",
+        "Malgun Gothic",
+        sans-serif;
+}
+
+sup.trademark {
+    font-family: "Russo One", sans-serif;
+}
+
 ol, ul {
     list-style: none;
 }

@@ -1,26 +1,79 @@
 let isMediaViewInitialized = false;
+let isMediaViewInitializing = false;
 
 window.addEventListener("includeLoaded", initMediaView);
 
-function initMediaView() {
-    if (isMediaViewInitialized) return;
+async function initMediaView() {
+    if (isMediaViewInitialized || isMediaViewInitializing) return;
+    isMediaViewInitializing = true;
 
     const params = new URLSearchParams(window.location.search);
     const requestedType = params.get("type") || "archive";
     const type = MEDIA_CONFIG[requestedType] ? requestedType : "archive";
     const requestedId = Number(params.get("id"));
     const config = MEDIA_CONFIG[type];
-    const list = sortMediaByLatest(MEDIA_DATA[type] || []);
-    const item = list.find(data => data.id === requestedId) || list[0];
+    let list = sortMediaByLatest(MEDIA_DATA[type] || []);
+    let item = list.find(data => data.id === requestedId) || list[0];
+
+    if (type === "promotion" && Number.isFinite(requestedId)) {
+        try {
+            item = mapContentDetail(await window.HunterFrontAPI.contents.getDetail(requestedId));
+            list = sortMediaByLatest([
+                mapContentNavigation(item.nextContent),
+                item,
+                mapContentNavigation(item.previousContent)
+            ].filter(Boolean));
+        } catch (error) {
+            console.error("Promotion & Event 상세 콘텐츠를 불러오지 못했습니다.", error);
+            item = null;
+            list = [];
+        }
+    }
 
     if (!item) {
         isMediaViewInitialized = true;
+        isMediaViewInitializing = false;
         renderMediaViewEmpty(type, config);
         return;
     }
 
     isMediaViewInitialized = true;
+    isMediaViewInitializing = false;
     renderMediaView(type, config, list, item);
+}
+
+function mapContentDetail(item) {
+    const thumbnail = item.thumbnailUrl
+        ? `<div class="sub-media-view-image"><img src="${escapeHtml(item.thumbnailUrl)}" alt="${escapeHtml(item.title)}"></div>`
+        : "";
+    const body = item.content || (item.summary ? `<div class="sub-media-view-text"><p>${escapeHtml(item.summary)}</p></div>` : "");
+
+    return {
+        id: item.contentId,
+        category: item.contentTypeCode === "EVENT" ? "Event" : "Promotion",
+        title: item.title || "",
+        date: formatMediaDate(item.publishedAt),
+        content: thumbnail + body,
+        attachments: item.attachments || [],
+        publishedAt: item.publishedAt,
+        previousContent: item.previousContent,
+        nextContent: item.nextContent
+    };
+}
+
+function mapContentNavigation(item) {
+    if (!item) return null;
+    return {
+        id: item.contentId,
+        title: item.title || "",
+        date: formatMediaDate(item.publishedAt),
+        publishedAt: item.publishedAt
+    };
+}
+
+function formatMediaDate(value) {
+    if (!value) return "";
+    return String(value).slice(0, 10).replaceAll("-", ".");
 }
 
 function sortMediaByLatest(data) {

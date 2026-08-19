@@ -108,3 +108,5 @@ const hunterPrideInterviewData = [
         displayOrder: 5
     }
 ];
+
+window.hunterPrideInterviewData = hunterPrideInterviewData;
