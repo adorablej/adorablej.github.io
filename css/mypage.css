@@ -36,6 +36,10 @@
     border-radius: calc(8 * var(--vw));
     background: #f5f5f5;
 }
+
+.sub-mypage-user-card.has-company-select {
+    padding: calc(32 * var(--vw)) calc(25 * var(--vw)) calc(27 * var(--vw));
+}
 .sub-mypage-user-card p {
     color: #555;
     font-size: calc(14 * var(--vw));
@@ -60,6 +64,45 @@
     color: #aaa;
     font-size: calc(12 * var(--vw));
     text-decoration: underline;
+}
+
+.sub-mypage-company-select-wrap {
+    position: relative;
+    margin-top: calc(25 * var(--vw));
+}
+
+.sub-mypage-company-select-wrap::after {
+    position: absolute;
+    top: 50%;
+    right: calc(20 * var(--vw));
+    width: calc(10 * var(--vw));
+    height: calc(10 * var(--vw));
+    border-right: calc(2 * var(--vw)) solid #111;
+    border-bottom: calc(2 * var(--vw)) solid #111;
+    content: "";
+    pointer-events: none;
+    transform: translateY(-70%) rotate(45deg);
+}
+
+.sub-mypage-company-select {
+    width: 100%;
+    height: calc(60 * var(--vw));
+    padding: 0 calc(50 * var(--vw)) 0 calc(18 * var(--vw));
+    overflow: hidden;
+    box-sizing: border-box;
+    border: 1px solid #d5d5d5;
+    border-radius: 0;
+    outline: 0;
+    background: #fff;
+    color: #555;
+    font-family: inherit;
+    font-size: calc(16 * var(--vw));
+    line-height: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 .sub-mypage-nav {
@@ -520,6 +563,43 @@
     letter-spacing: -.03em;
 }
 
+.sub-mypage-account-heading-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: calc(18 * var(--vw));
+    border-bottom: 1px solid #222;
+}
+
+.sub-mypage-account-heading-row .sub-mypage-account-heading {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.sub-mypage-business-add-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(10 * var(--vw));
+    min-width: calc(210 * var(--vw));
+    height: calc(58 * var(--vw));
+    padding: 0 calc(24 * var(--vw));
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 999px;
+    background: #fff;
+    color: #222;
+    font-family: inherit;
+    font-size: calc(16 * var(--vw));
+    cursor: pointer;
+}
+
+.sub-mypage-business-add-button span {
+    font-size: calc(24 * var(--vw));
+    font-weight: 300;
+    line-height: 1;
+}
+
 .sub-mypage-account-list {
     padding: calc(18 * var(--vw)) 0 calc(20 * var(--vw));
     border-bottom: 1px solid #ddd;
@@ -592,6 +672,118 @@
     color: #6a9ed8;
     text-decoration: underline;
     text-underline-offset: calc(3 * var(--vw));
+}
+
+/* Account - Business Add Modal */
+.sub-mypage-business-add-dialog {
+    width: clamp(650px, calc(790 * var(--vw)), 790px) !important;
+    max-height: calc(100vh - 80px) !important;
+}
+
+.sub-mypage-business-add-content {
+    padding: calc(64 * var(--vw));
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.sub-mypage-business-add-title {
+    margin: 0;
+    color: #111;
+    font-size: calc(40 * var(--vw));
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -.04em;
+}
+
+.sub-mypage-business-add-form {
+    margin-top: calc(54 * var(--vw));
+}
+
+.sub-mypage-business-add-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: calc(72 * var(--vw));
+}
+
+.sub-mypage-business-add-actions button {
+    min-width: calc(260 * var(--vw));
+    height: calc(62 * var(--vw));
+    padding: 0 calc(30 * var(--vw));
+    border: 0;
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+    font-family: inherit;
+    font-size: calc(17 * var(--vw));
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.sub-mypage-business-complete-dialog {
+    width: calc(420 * var(--vw)) !important;
+    min-width: 420px;
+}
+
+.sub-mypage-business-complete-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: calc(58 * var(--vw)) calc(48 * var(--vw)) calc(50 * var(--vw));
+    text-align: center;
+}
+
+.sub-mypage-business-complete-icon {
+    width: calc(70 * var(--vw));
+    height: calc(70 * var(--vw));
+}
+
+.sub-mypage-business-complete-icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sub-mypage-business-complete-content p {
+    margin: calc(30 * var(--vw)) 0 0;
+    color: #222;
+    font-size: calc(18 * var(--vw));
+    line-height: calc(27 * var(--vw));
+}
+
+.sub-mypage-business-complete-content p strong,
+.sub-mypage-business-complete-content p b {
+    display: block;
+}
+
+.sub-mypage-business-complete-content p strong {
+    font-weight: 700;
+}
+
+.sub-mypage-business-complete-content p b {
+    font-weight: 400;
+}
+
+.sub-mypage-business-complete-content span {
+    margin-top: calc(20 * var(--vw));
+    color: #888;
+    font-size: calc(14 * var(--vw));
+    line-height: calc(23 * var(--vw));
+}
+
+.sub-mypage-business-complete-content > button {
+    min-width: calc(140 * var(--vw));
+    height: calc(58 * var(--vw));
+    margin-top: calc(40 * var(--vw));
+    border: 0;
+    border-radius: 999px;
+    background: var(--red);
+    color: #fff;
+    font-family: inherit;
+    font-size: calc(16 * var(--vw));
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .sub-mypage-account-withdraw {
@@ -2184,6 +2376,9 @@ Mobile (720px and below)
         background: #f5f5f5;
         box-sizing: border-box;
     }
+    .sub-mypage-user-card.has-company-select {
+        padding: 32px 25px 27px;
+    }
     .sub-mypage-user-card p {
         font-size: 16px;
         line-height: 1.35;
@@ -2195,6 +2390,20 @@ Mobile (720px and below)
         font-size: 18px;
     }
     .sub-mypage-user-row a {
+        font-size: 14px;
+    }
+    .sub-mypage-company-select-wrap {
+        margin-top: 25px;
+    }
+    .sub-mypage-company-select-wrap::after {
+        right: 18px;
+        width: 8px;
+        height: 8px;
+        border-width: 0 2px 2px 0;
+    }
+    .sub-mypage-company-select {
+        height: 60px;
+        padding: 0 46px 0 18px;
         font-size: 14px;
     }
     .sub-mypage-mobile-menu {
@@ -2578,6 +2787,22 @@ Mobile (720px and below)
         font-size: 20px;
         line-height: 1.3;
     }
+    .sub-mypage-account-heading-row {
+        padding-bottom: 14px;
+    }
+    .sub-mypage-account-heading-row .sub-mypage-account-heading {
+        padding-bottom: 0;
+    }
+    .sub-mypage-business-add-button {
+        gap: 8px;
+        min-width: 155px;
+        height: 46px;
+        padding: 0 17px;
+        font-size: 14px;
+    }
+    .sub-mypage-business-add-button span {
+        font-size: 22px;
+    }
     .sub-mypage-account-list {
         padding: 14px 0 15px;
     }
@@ -2611,6 +2836,115 @@ Mobile (720px and below)
     .sub-mypage-account-withdraw-button {
         font-size: 14px;
         text-underline-offset: 2px;
+    }
+
+    /* Account - Business add modal */
+    .sub-mypage-business-add-modal {
+        padding: 50px 25px;
+    }
+    .sub-mypage-business-add-dialog {
+        width: calc(100vw - 50px) !important;
+        min-width: 0;
+        max-height: calc(100vh - 100px) !important;
+    }
+    .sub-mypage-business-add-content {
+        padding: 40px 25px;
+    }
+    .sub-mypage-business-add-title {
+        font-size: 26px;
+        line-height: 34px;
+    }
+    .sub-mypage-business-add-form {
+        margin-top: 28px;
+    }
+    .sub-mypage-business-add-form .sub-account-group-title {
+        margin-bottom: 30px;
+        padding-bottom: 14px;
+        font-size: 20px;
+        line-height: 26px;
+    }
+    .sub-mypage-business-add-form .sub-account-field {
+        margin-bottom: 24px;
+    }
+    .sub-mypage-business-add-form .sub-account-label,
+    .sub-mypage-business-add-form .sub-account-fieldset legend {
+        margin-bottom: 10px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .sub-mypage-business-add-form .sub-account-input,
+    .sub-mypage-business-add-form .sub-account-file {
+        height: 60px;
+        padding: 0 17px;
+        font-size: 14px;
+    }
+    .sub-mypage-business-add-form .sub-account-input-gap {
+        margin-top: 10px;
+    }
+    .sub-mypage-business-add-form .sub-account-business-type {
+        gap: 30px;
+    }
+    .sub-mypage-business-add-form .sub-account-business-option {
+        gap: 8px;
+    }
+    .sub-mypage-business-add-form .sub-account-business-text {
+        font-size: 14px;
+    }
+    .sub-mypage-business-add-form .sub-account-line-button {
+        height: 60px;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+    .sub-mypage-business-add-form .sub-account-label-row .sub-account-label,
+    .sub-mypage-business-add-form .sub-account-label-row .sub-account-text-button {
+        margin-bottom: 10px;
+    }
+    .sub-mypage-business-add-form .sub-account-text-button {
+        font-size: 12px;
+    }
+    .sub-mypage-business-add-form .sub-account-file-guide {
+        margin-top: 14px;
+        font-size: 12px;
+        line-height: 18px;
+        word-break: keep-all;
+    }
+    .sub-mypage-business-add-actions {
+        margin-top: 40px;
+    }
+    .sub-mypage-business-add-actions button {
+        min-width: 180px;
+        height: 50px;
+        padding: 0 22px;
+        font-size: 14px;
+    }
+
+    .sub-mypage-business-complete-dialog {
+        width: calc(100vw - 50px) !important;
+        min-width: 0;
+        max-width: 310px !important;
+    }
+    .sub-mypage-business-complete-content {
+        padding: 30px 25px;
+    }
+    .sub-mypage-business-complete-icon {
+        width: 60px;
+        height: 60px;
+    }
+    .sub-mypage-business-complete-content p {
+        margin-top: 24px;
+        font-size: 16px;
+        line-height: 22px;
+    }
+    .sub-mypage-business-complete-content span {
+        margin-top: 24px;
+        font-size: 13px;
+        line-height: 23px;
+    }
+    .sub-mypage-business-complete-content > button {
+        min-width: 110px;
+        height: 50px;
+        margin-top: 26px;
+        font-size: 14px;
     }
 
     /* Account withdraw modal */

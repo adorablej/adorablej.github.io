@@ -14,7 +14,10 @@
     <link href="/css/main.css?v=20260814" rel="stylesheet">
     <link href="/css/common-form.css?v=20260814" rel="stylesheet">
     <link href="/css/support.css?v=20260814" rel="stylesheet">
-    <link href="/css/mypage.css?v=20260819-1" rel="stylesheet">
+    <link href="/css/mypage.css?v=20260820-2" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 </head>
 <body>
     <div data-include="/includes/header.html"></div>
@@ -29,23 +32,7 @@
 
         <section class="sub-mypage-section">
             <div class="sub-mypage-inner">
-                <aside class="sub-mypage-sidebar" aria-label="마이페이지 메뉴">
-                    <div class="sub-mypage-user-card"><p>안녕하세요</p><div class="sub-mypage-user-row"><strong>홍길동님</strong><a href="/logout.html">로그아웃</a></div></div>
-                    <nav class="sub-mypage-nav">
-                        <a class="sub-mypage-nav-link" href="/Mypage/mypage.html"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-avatar.svg" alt=""></span><span>마이페이지 홈</span></a>
-                        <a class="sub-mypage-nav-link" href="/Mypage/account.html"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-avatar-circle.svg" alt=""></span><span>계정/회원정보 관리</span></a>
-                        <a class="sub-mypage-nav-link" href="/Mypage/cs-request.html"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-headphones.svg" alt=""></span><span>CS 신청하기</span></a>
-                        <a class="sub-mypage-nav-link" href="/Mypage/products.html"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-product-alignment-equipment.svg" alt=""></span><span>나의 제품 관리</span></a>
-                        <div class="sub-mypage-nav-group" data-mypage-accordion>
-                            <button class="sub-mypage-nav-link sub-mypage-nav-toggle" type="button" aria-expanded="false"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-gear-double.svg" alt=""></span><span>부품 주문 관리</span><i class="sub-mypage-nav-arrow" aria-hidden="true"></i></button>
-                            <div class="sub-mypage-nav-depth"><div class="sub-mypage-nav-depth-inner"><a href="/Mypage/parts-list.html">전체 부품 목록</a><a href="/Mypage/cart.html">장바구니</a><a href="/Mypage/order-list.html">부품 주문 신청 내역</a></div></div>
-                        </div>
-                        <div class="sub-mypage-nav-group is-open" data-mypage-accordion>
-                            <button class="sub-mypage-nav-link sub-mypage-nav-toggle is-active" type="button" aria-expanded="true"><span class="sub-mypage-nav-icon"><img src="/images/icon/mypage/icon-product-tire-changer-walkaway.svg" alt=""></span><span>트레이닝 센터</span><i class="sub-mypage-nav-arrow" aria-hidden="true"></i></button>
-                            <div class="sub-mypage-nav-depth"><div class="sub-mypage-nav-depth-inner"><a href="/Mypage/training-apply.html">트레이닝 수강 신청</a><a class="is-active" href="/Mypage/training-history.html">트레이닝 수강 이력</a></div></div>
-                        </div>
-                    </nav>
-                </aside>
+                <div data-include="/includes/mypage-sidebar.html?v=20260820-1" data-include-selector=".sub-mypage-sidebar" data-include-mode="replace"></div>
                 <div data-include="/includes/mypage-mobile-menu.html" data-include-selector=".sub-mypage-mobile-menu" data-include-mode="replace"></div>
 
                 <div class="sub-mypage-content sub-mypage-training-history">
@@ -96,6 +83,6 @@
     </div>
 
     <div class="footer-section" data-include="/includes/footer.html"></div>
-    <script src="/js/include.js?v=20260814"></script><script src="/js/common.js?v=20260814"></script><script src="/js/main.js?v=20260814"></script><script src="/js/form.js?v=20260814"></script><script src="/js/mypage.js?v=20260814-1"></script>
+    <script src="/js/include.js?v=20260814"></script><script src="/js/common.js?v=20260814"></script><script src="/js/main.js?v=20260814"></script><script src="/js/form.js?v=20260814"></script><script src="/js/mypage.js?v=20260820-1"></script>
 </body>
 </html>

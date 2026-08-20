@@ -130,6 +130,8 @@ OEM-list.html , OEM Products.
     color: #555;
     font-size: calc(18 * var(--vw));
     line-height: calc(30 * var(--vw));
+    word-break: keep-all;
+    letter-spacing: -0.01rem;
 }
 
 .oem-product-desc ul li {

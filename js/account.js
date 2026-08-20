@@ -13,22 +13,7 @@
         initPlaceholderLinks();
         initCompletePage();
         initNumericOnlyInputs();
-        initDatePickerInputs();
     });
-
-    function initDatePickerInputs() {
-        document.querySelectorAll('.sub-account-date-input[type="date"]').forEach(function (input) {
-            input.addEventListener('click', function () {
-                if (typeof input.showPicker !== 'function') return;
-
-                try {
-                    input.showPicker();
-                } catch (error) {
-                    // showPicker 미지원 환경에서는 브라우저 기본 날짜 선택 동작을 사용합니다.
-                }
-            });
-        });
-    }
 
     function initNumericOnlyInputs() {
         document.querySelectorAll('input[inputmode="numeric"]:not([data-phone])').forEach(function (input) {

@@ -740,6 +740,13 @@ Detail Visual
     font-family: "Russo One", sans-serif;
     color: #000;
 }
+.detail-visual-title .disc {
+    display: block;
+    font-size: calc(18 * var(--vw));
+    color: #777777;
+    margin-top: calc(50 * var(--vw));
+    line-height: normal;
+}
 
 .detail-visual-title .greenX {
     background: url('/images/products/p_X.png');
@@ -754,7 +761,7 @@ Detail Visual
 
 .detail-visual-title sup {
     position: relative;
-    top: calc(-20 * var(--vw));
+    top: calc(-10 * var(--vw));
     font-size: calc(40 * var(--vw));
 }
 
@@ -808,7 +815,7 @@ Detail Visual
 }
 
 .detail-visual > .detail-product-image + .inner .detail-visual-content {
-    margin-top:calc(180 * var(--vw));
+    margin-top:calc(260 * var(--vw));
 }
 /* ========================================
 Detail Visual Controls
@@ -3334,6 +3341,14 @@ Mobile (720px and below)
 
     .detail-visual-title .black {
         font-size: 22px;
+    }
+
+    .detail-visual-title .disc {
+        display: block;
+        font-size: 13px;
+        color: #777777;
+        margin-top: 15px;
+        line-height: normal;
     }
 
     .detail-visual-title sup {

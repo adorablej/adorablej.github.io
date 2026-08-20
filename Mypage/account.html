@@ -13,8 +13,9 @@
     <link href="/css/common.css?v=20260819-2" rel="stylesheet"/>
     <link href="/css/layout.css?v=20260814" rel="stylesheet"/>
     <link href="/css/main.css?v=20260814" rel="stylesheet"/>
-    <link href="/css/mypage.css?v=20260814-6" rel="stylesheet"/>
+    <link href="/css/mypage.css?v=20260820-5" rel="stylesheet"/>
     <link href="/css/common-form.css?v=20260814" rel="stylesheet"/>
+    <link href="/css/account.css?v=20260820-5" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -34,60 +35,7 @@
 </section>
 <section class="sub-mypage-section">
 <div class="sub-mypage-inner">
-<aside aria-label="마이페이지 메뉴" class="sub-mypage-sidebar">
-<div class="sub-mypage-user-card">
-<p>안녕하세요</p>
-<div class="sub-mypage-user-row">
-<strong>홍길동님</strong>
-<a href="/logout.html">로그아웃</a>
-</div>
-</div>
-<nav class="sub-mypage-nav">
-<a class="sub-mypage-nav-link" href="/Mypage/mypage.html">
-<span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-avatar.svg"/></span>
-<span>마이페이지 홈</span>
-</a>
-<a class="sub-mypage-nav-link is-active" href="/Mypage/account.html">
-<span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-avatar-circle.svg"/></span>
-<span>계정/회원정보 관리</span>
-</a>
-<a class="sub-mypage-nav-link" href="/Mypage/cs-request.html">
-<span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-headphones.svg"/></span>
-<span>CS 신청하기</span>
-</a>
-<a class="sub-mypage-nav-link" href="/Mypage/products.html">
-<span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-product-alignment-equipment.svg"/></span>
-<span>나의 제품 관리</span>
-</a>
-<div class="sub-mypage-nav-group" data-mypage-accordion="">
-<button aria-expanded="false" class="sub-mypage-nav-link sub-mypage-nav-toggle" type="button">
-<span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-gear-double.svg"/></span>
-<span>부품 주문 관리</span>
-<i aria-hidden="true" class="sub-mypage-nav-arrow"></i>
-</button>
-<div class="sub-mypage-nav-depth">
-<div class="sub-mypage-nav-depth-inner">
-<a href="/Mypage/parts-list.html">전체 부품 목록</a>
-<a href="/Mypage/cart.html">장바구니</a>
-<a href="/Mypage/order-list.html">부품 주문 신청 내역</a>
-</div>
-</div>
-</div>
-<div class="sub-mypage-nav-group" data-mypage-accordion="">
-<button aria-expanded="false" class="sub-mypage-nav-link sub-mypage-nav-toggle" type="button">
-<span class="sub-mypage-nav-icon"><img alt="" src="/images/icon/mypage/icon-product-tire-changer-walkaway.svg"/></span>
-<span>트레이닝 센터</span>
-<i aria-hidden="true" class="sub-mypage-nav-arrow"></i>
-</button>
-<div class="sub-mypage-nav-depth">
-<div class="sub-mypage-nav-depth-inner">
-<a href="/Mypage/training-apply.html">트레이닝 수강 신청</a>
-<a href="/Mypage/training-history.html">트레이닝 수강 이력</a>
-</div>
-</div>
-</div>
-</nav>
-</aside>
+<div data-include="/includes/mypage-sidebar.html?v=20260820-1" data-include-selector=".sub-mypage-sidebar" data-include-mode="replace"></div>
 <div data-include="/includes/mypage-mobile-menu.html" data-include-selector=".sub-mypage-mobile-menu" data-include-mode="replace"></div>
 <div class="sub-mypage-content">
 <div class="sub-mypage-account">
@@ -106,7 +54,10 @@
 </dl>
 </section>
 <section class="sub-mypage-account-section">
+<div class="sub-mypage-account-heading-row">
 <h4 class="sub-mypage-account-heading">기업/사업체 정보</h4>
+<button type="button" class="sub-mypage-business-add-button" data-business-add-open><span aria-hidden="true">＋</span> 기업/사업체 추가</button>
+</div>
 <dl class="sub-mypage-account-list sub-mypage-account-business-list">
     <div class="sub-mypage-account-row">
         <dt>사업자 정보</dt>
@@ -165,6 +116,96 @@
 </section>
 </main>
 
+<div class="modal-layer sub-modal sub-mypage-business-add-modal" data-business-add-modal aria-hidden="true">
+    <button type="button" class="modal-dim sub-modal-dim" data-business-add-close aria-label="기업/사업체 추가 팝업 닫기"></button>
+    <div class="modal-box sub-mypage-business-add-dialog" role="dialog" aria-modal="true" aria-labelledby="business-add-modal-title">
+        <button type="button" class="modal-close-button" data-business-add-close aria-label="기업/사업체 추가 팝업 닫기"></button>
+        <div class="sub-mypage-business-add-content">
+            <h2 class="sub-mypage-business-add-title" id="business-add-modal-title">기업/사업체 추가</h2>
+            <form class="sub-mypage-business-add-form" data-business-add-form novalidate>
+                <section class="sub-account-group sub-account-business-group" aria-labelledby="business-add-form-title">
+                    <h2 class="sub-account-group-title" id="business-add-form-title">기업/사업체 정보</h2>
+
+                    <fieldset class="sub-form-group sub-account-fieldset">
+                        <legend class="sub-account-label sub-account-required">사업자 정보</legend>
+                        <div class="sub-account-business-type">
+                            <label class="sub-form-checkbox sub-account-business-option"><input type="radio" name="businessType" value="corporation" checked><span class="sub-form-checkbox-icon" aria-hidden="true"></span><span class="sub-account-business-text">법인</span></label>
+                            <label class="sub-form-checkbox sub-account-business-option"><input type="radio" name="businessType" value="individual"><span class="sub-form-checkbox-icon" aria-hidden="true"></span><span class="sub-account-business-text">개인</span></label>
+                        </div>
+                    </fieldset>
+
+                    <div class="sub-form-group sub-account-field sub-account-business-number-field">
+                        <label class="sub-account-label sub-account-required" for="mypage-business-number">사업자등록번호</label>
+                        <input class="sub-form-input sub-account-input" id="mypage-business-number" name="businessNumber" type="text" inputmode="numeric" maxlength="10" placeholder="(-) 제외한 숫자만 입력해 주세요." data-required data-message="사업자등록번호를 입력해 주세요." />
+                        <button class="sub-account-line-button sub-account-line-button-under" type="button" data-business-auth>사업자 인증</button>
+                        <input type="hidden" value="" data-business-authenticated data-required data-message="사업자 인증을 진행해 주세요." />
+                        <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="sub-form-group sub-account-field sub-account-corporation-number-field" data-corporation-number-field>
+                        <label class="sub-account-label sub-account-required" for="mypage-corporation-number">법인등록번호</label>
+                        <input class="sub-form-input sub-account-input" id="mypage-corporation-number" name="corporationNumber" type="text" inputmode="numeric" maxlength="13" placeholder="(-) 제외한 숫자만 입력해 주세요." data-required data-message="법인등록번호를 입력해 주세요." />
+                        <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="sub-form-group sub-account-field sub-account-business-name-field">
+                        <label class="sub-account-label sub-account-required" for="mypage-business-name">기업/사업체명</label>
+                        <input class="sub-form-input sub-account-input" id="mypage-business-name" name="businessName" type="text" placeholder="기업/사업체명을 입력해 주세요." data-required data-message="기업/사업체명을 입력해 주세요." />
+                        <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="sub-form-group sub-account-field sub-account-opening-date-field">
+                        <label class="sub-account-label sub-account-required" for="mypage-opening-date">개업년월</label>
+                        <div class="sub-account-date-wrap">
+                            <input class="sub-form-input sub-account-input sub-account-date-input" id="mypage-opening-date" name="openingDate" type="date" required data-required data-message="일자를 선택해주세요." />
+                            <span class="sub-account-date-placeholder" aria-hidden="true">연도. 월. 일</span>
+                        </div>
+                        <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="sub-form-group sub-account-field sub-account-representative-field">
+                        <label class="sub-account-label sub-account-required" for="mypage-representative-name">대표자명</label>
+                        <input class="sub-form-input sub-account-input" id="mypage-representative-name" name="representativeName" type="text" placeholder="대표자명을 입력해 주세요." data-required data-message="대표자명을 입력해 주세요." />
+                        <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="sub-form-group sub-account-field sub-account-address-field">
+                        <div class="sub-account-label-row"><label class="sub-account-label sub-account-required" for="mypage-business-address">사업장 주소</label><button class="sub-account-text-button" type="button" data-business-postcode>우편번호</button></div>
+                        <input class="sub-form-input sub-account-input" id="mypage-business-address" name="businessAddress" type="text" readonly data-required data-message="주소를 입력해 주세요." />
+                        <input class="sub-form-input sub-account-input sub-account-input-gap" id="mypage-business-address-detail" name="businessAddressDetail" type="text" placeholder="상세 주소를 입력해 주세요." data-required data-message="상세 주소를 입력해 주세요." />
+                        <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                    </div>
+
+                    <div class="sub-form-group sub-account-field sub-account-file-field">
+                        <div class="sub-account-label-row"><span class="sub-account-label sub-account-required">사업자등록증 첨부</span><label class="sub-account-text-button" for="mypage-business-file">찾아보기</label></div>
+                        <label class="sub-account-file" for="mypage-business-file"><span data-business-file-name>파일을 첨부해주세요.</span></label>
+                        <input class="sub-account-file-input" id="mypage-business-file" name="businessFile" type="file" accept=".jpg,.jpeg,.png,.pdf" data-business-file data-required data-message="파일을 첨부해주세요." />
+                        <ul class="sub-account-file-guide">
+                            <li>10MB 이하의 이미지파일(JPG, PNG), PDF 파일 1개만 첨부할 수 있습니다.</li>
+                            <li>사업자등록번호와 사업자등록증 내용이 일치해야 기업/사업체 추가 신청이 가능합니다.</li>
+                            <li>사업자등록증, 사업자등록증명원으로 신청이 가능합니다. 고유번호증은 불가합니다.</li>
+                        </ul>
+                        <p class="sub-form-message sub-account-error" aria-live="polite"></p>
+                    </div>
+                </section>
+                <div class="sub-mypage-business-add-actions"><button type="submit">기업/사업체 추가 요청</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal-layer sub-modal sub-mypage-business-complete-modal" data-business-complete-modal aria-hidden="true">
+    <button type="button" class="modal-dim sub-modal-dim" data-business-complete-close aria-label="완료 안내 닫기"></button>
+    <div class="modal-box sub-mypage-business-complete-dialog" role="alertdialog" aria-modal="true" aria-labelledby="business-complete-title">
+        <div class="sub-mypage-business-complete-content">
+            <div class="sub-mypage-business-complete-icon" aria-hidden="true"><img src="/images/icon/icon_complete_check.png" alt=""></div>
+            <p id="business-complete-title"><strong>홍길동 님,</strong><b>기업/사업체 추가 요청이 완료되었습니다.</b></p>
+            <span>입력하신 정보의 확인까지 영업일 기준<br>1~2일이 소요될 수 있습니다.<br>확인 자료에 대한 보완 필요시 고객님께<br class="mo-only">SMS로 요청사항을 전달드리니<br>꼭 확인 부탁드립니다.</span>
+            <button type="button" data-business-complete-close>확인</button>
+        </div>
+    </div>
+</div>
+
 <div class="modal-layer sub-modal sub-mypage-withdraw-modal" data-withdraw-modal aria-hidden="true">
     <button type="button" class="modal-dim sub-modal-dim" data-withdraw-close aria-label="회원탈퇴 팝업 닫기"></button>
 
@@ -202,6 +243,6 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="/js/include.js?v=20260814"></script>
 <script src="/js/common.js?v=20260814"></script>
-<script src="/js/mypage.js?v=20260814"></script>
+<script src="/js/mypage.js?v=20260820-4"></script>
 </body>
 </html>

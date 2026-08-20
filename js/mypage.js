@@ -1,11 +1,44 @@
 document.addEventListener("DOMContentLoaded", () => {
+    initMypageSidebar();
     initMypageAccordion();
     initMypageProductSlider();
     initMypageOrderToggle();
+    initMypageBusinessAddModal();
     initMypageWithdrawModal();
     initMypageMobileMenu();
     initMypagePagination();
 });
+
+function initMypageSidebar() {
+    document.querySelectorAll(".sub-mypage-sidebar").forEach(sidebar => {
+        if (sidebar.dataset.initialized === "true") return;
+
+        const rawPath = window.location.pathname.replace(/\/+$/, "").toLowerCase();
+        const currentPath = rawPath === "/mypage/product-detail.html"
+            ? "/mypage/products.html"
+            : rawPath;
+        const links = [...sidebar.querySelectorAll(".sub-mypage-nav a[href]")];
+        const activeLink = links.find(link => {
+            const linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, "").toLowerCase();
+            return linkPath === currentPath;
+        });
+
+        if (activeLink) {
+            activeLink.classList.add("is-active");
+            activeLink.setAttribute("aria-current", "page");
+
+            const group = activeLink.closest("[data-mypage-accordion]");
+            if (group) {
+                group.classList.add("is-open");
+                const toggle = group.querySelector(".sub-mypage-nav-toggle");
+                toggle?.classList.add("is-active");
+                toggle?.setAttribute("aria-expanded", "true");
+            }
+        }
+
+        sidebar.dataset.initialized = "true";
+    });
+}
 
 function initMypagePagination() {
     document.querySelectorAll('.sub-mypage-pagination-row').forEach(row => {
@@ -153,7 +186,11 @@ function initMypageMobileMenu() {
     });
 }
 
-window.addEventListener("includeLoaded", initMypageMobileMenu);
+window.addEventListener("includeLoaded", () => {
+    initMypageSidebar();
+    initMypageAccordion();
+    initMypageMobileMenu();
+});
 
 function initMypageAccordion() {
     const groups = [...document.querySelectorAll("[data-mypage-accordion]")];
@@ -164,6 +201,7 @@ function initMypageAccordion() {
     };
 
     groups.forEach(group => {
+        if (group.dataset.accordionInitialized === "true") return;
         const button = group.querySelector(".sub-mypage-nav-toggle");
         const depth = group.querySelector(".sub-mypage-nav-depth");
         const inner = group.querySelector(".sub-mypage-nav-depth-inner");
@@ -197,6 +235,7 @@ function initMypageAccordion() {
         updateHeight();
         updateNavOpenState(nav);
         window.addEventListener("resize", updateHeight);
+        group.dataset.accordionInitialized = "true";
     });
 }
 
@@ -231,6 +270,202 @@ function initMypageOrderToggle() {
             button.setAttribute("aria-expanded", String(!collapsed));
             text.textContent = collapsed ? "총 3건 주문 펼치기" : "총 3건 주문 접기";
         });
+    });
+}
+
+function initMypageBusinessAddModal() {
+    const modal = document.querySelector("[data-business-add-modal]");
+    const completeModal = document.querySelector("[data-business-complete-modal]");
+    const openButton = document.querySelector("[data-business-add-open]");
+    const form = document.querySelector("[data-business-add-form]");
+    if (!modal || !completeModal || !openButton || !form) return;
+
+    const closeButtons = modal.querySelectorAll("[data-business-add-close]");
+    const completeCloseButtons = completeModal.querySelectorAll("[data-business-complete-close]");
+    const fileInput = form.querySelector("[data-business-file]");
+    const fileName = form.querySelector("[data-business-file-name]");
+    const fileOpenButtons = form.querySelectorAll("[data-business-file-open]");
+    const postcodeButton = form.querySelector("[data-business-postcode]");
+    const authButton = form.querySelector("[data-business-auth]");
+    const authenticatedInput = form.querySelector("[data-business-authenticated]");
+    const corporationField = form.querySelector("[data-corporation-number-field]");
+    const businessTypeInputs = form.querySelectorAll('input[name="businessType"]');
+    let lastFocusedElement = null;
+
+    const setPageLocked = locked => {
+        document.documentElement.classList.toggle("is-modal-open", locked);
+        document.body.classList.toggle("is-modal-open", locked);
+    };
+
+    const clearValidation = () => {
+        form.querySelectorAll('[aria-invalid="true"]').forEach(field => field.removeAttribute("aria-invalid"));
+        form.querySelectorAll(".sub-form-group.is-error").forEach(group => group.classList.remove("is-error"));
+        form.querySelectorAll(".sub-form-message").forEach(message => message.textContent = "");
+    };
+
+    const setFieldError = (field, message) => {
+        const group = field.closest(".sub-form-group");
+        field.setAttribute("aria-invalid", "true");
+        group?.classList.add("is-error");
+        const messageElement = group?.querySelector(".sub-form-message");
+        if (messageElement) messageElement.textContent = message || field.dataset.message || "필수 정보를 입력해 주세요.";
+    };
+
+    const syncBusinessType = () => {
+        const isCorporation = form.elements.businessType.value === "corporation";
+        corporationField?.classList.toggle("is-hidden", !isCorporation);
+        const corporationNumber = form.elements.corporationNumber;
+        if (!isCorporation && corporationNumber) {
+            corporationNumber.value = "";
+            corporationNumber.removeAttribute("data-required");
+            corporationNumber.removeAttribute("aria-invalid");
+            corporationField?.classList.remove("is-error");
+        } else {
+            corporationNumber?.setAttribute("data-required", "");
+        }
+    };
+
+    const resetForm = () => {
+        form.reset();
+        clearValidation();
+        if (fileName) {
+            fileName.textContent = "파일을 첨부해주세요.";
+            fileName.removeAttribute("aria-invalid");
+            fileName.closest(".sub-account-file")?.classList.remove("has-file");
+        }
+        if (authButton) {
+            authButton.textContent = "사업자 인증";
+            authButton.classList.remove("is-complete");
+            delete authButton.dataset.verified;
+        }
+        if (authenticatedInput) authenticatedInput.value = "";
+        syncBusinessType();
+    };
+
+    const openModal = () => {
+        lastFocusedElement = document.activeElement;
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        setPageLocked(true);
+        modal.querySelector("input")?.focus();
+    };
+
+    const closeModal = (restoreFocus = true) => {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        if (!completeModal.classList.contains("is-open")) setPageLocked(false);
+        if (restoreFocus) lastFocusedElement?.focus?.();
+    };
+
+    const openCompleteModal = () => {
+        closeModal(false);
+        completeModal.classList.add("is-open");
+        completeModal.setAttribute("aria-hidden", "false");
+        setPageLocked(true);
+        completeModal.querySelector("[data-business-complete-close]")?.focus();
+    };
+
+    const closeCompleteModal = () => {
+        completeModal.classList.remove("is-open");
+        completeModal.setAttribute("aria-hidden", "true");
+        setPageLocked(false);
+        resetForm();
+        lastFocusedElement?.focus?.();
+    };
+
+    const validateForm = () => {
+        clearValidation();
+        const requiredFields = [...form.querySelectorAll("input[required], input[data-required]")];
+        let firstInvalid = null;
+
+        requiredFields.forEach(field => {
+            const isFile = field.type === "file";
+            const valid = isFile ? Boolean(field.files?.length || field.value) : Boolean(field.value.trim()) && field.checkValidity();
+            if (valid) return;
+            const errorTarget = isFile ? fileName : field;
+            if (errorTarget) setFieldError(errorTarget, field.dataset.message);
+            if (!firstInvalid) firstInvalid = isFile ? fileName : field;
+        });
+
+        firstInvalid?.focus?.();
+        return !firstInvalid;
+    };
+
+    openButton.addEventListener("click", openModal);
+    closeButtons.forEach(button => button.addEventListener("click", () => closeModal()));
+    completeCloseButtons.forEach(button => button.addEventListener("click", closeCompleteModal));
+
+    form.querySelectorAll("input").forEach(input => {
+        const clearInputError = () => {
+            input.removeAttribute("aria-invalid");
+            input.closest(".sub-form-group")?.classList.remove("is-error");
+            const message = input.closest(".sub-form-group")?.querySelector(".sub-form-message");
+            if (message) message.textContent = "";
+        };
+        input.addEventListener("input", clearInputError);
+        input.addEventListener("change", clearInputError);
+    });
+
+    businessTypeInputs.forEach(input => input.addEventListener("change", syncBusinessType));
+
+    fileOpenButtons.forEach(button => button.addEventListener("click", () => fileInput?.click()));
+    fileInput?.addEventListener("change", () => {
+        const file = fileInput.files?.[0];
+        if (!file) {
+            fileName.textContent = "파일을 첨부해주세요.";
+            return;
+        }
+        const allowed = /\.(jpe?g|png|pdf)$/i.test(file.name);
+        const validSize = file.size <= 10 * 1024 * 1024;
+        if (!allowed || !validSize) {
+            fileInput.value = "";
+            fileName.textContent = "JPG, PNG, PDF 파일을 10MB 이하로 첨부해주세요.";
+            fileName.setAttribute("aria-invalid", "true");
+            return;
+        }
+        fileName.textContent = file.name;
+        fileName.removeAttribute("aria-invalid");
+        fileName.closest(".sub-account-file")?.classList.add("has-file");
+    });
+
+    postcodeButton?.addEventListener("click", () => {
+        const address = form.elements.businessAddress;
+        if (!address.value) address.value = "(12345) 경기도 부천시 부천중동대로 123";
+        address.removeAttribute("aria-invalid");
+        address.closest(".sub-form-group")?.classList.remove("is-error");
+        form.elements.businessAddressDetail?.focus();
+    });
+
+    authButton?.addEventListener("click", () => {
+        const businessNumber = form.elements.businessNumber;
+        if (!/^\d{10}$/.test(businessNumber.value.trim())) {
+            setFieldError(businessNumber, "10자리 사업자등록번호를 입력해 주세요.");
+            businessNumber.focus();
+            return;
+        }
+        authButton.textContent = "사업자 인증 완료";
+        authButton.classList.add("is-complete");
+        authButton.dataset.verified = "true";
+        if (authenticatedInput) {
+            authenticatedInput.value = "true";
+            authenticatedInput.removeAttribute("aria-invalid");
+        }
+        authButton.closest(".sub-form-group")?.classList.remove("is-error");
+        const message = authButton.closest(".sub-form-group")?.querySelector(".sub-form-message");
+        if (message) message.textContent = "";
+    });
+
+    form.addEventListener("submit", event => {
+        event.preventDefault();
+        if (!validateForm()) return;
+        // API 연동 시 기업/사업체 추가 요청 로직 연결
+        openCompleteModal();
+    });
+
+    window.addEventListener("keydown", event => {
+        if (event.key !== "Escape") return;
+        if (completeModal.classList.contains("is-open")) closeCompleteModal();
+        else if (modal.classList.contains("is-open")) closeModal();
     });
 }
 
