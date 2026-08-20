@@ -42,7 +42,9 @@ function mapContentDetail(item) {
         category: item.categoryName || formatContentType(item.contentTypeCode),
         title: item.title || "",
         date: formatMediaDate(item.publishedAt),
-        content: item.content || "",
+        content: item.content || (item.summary
+            ? `<div class="sub-media-view-text"><p>${escapeHtml(item.summary)}</p></div>`
+            : ""),
         attachments: item.attachments || [],
         previousContent: mapContentNavigation(item.previousContent),
         nextContent: mapContentNavigation(item.nextContent)
