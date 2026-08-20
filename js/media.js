@@ -4,28 +4,31 @@
         : "/images/img_placeholder.png";
 
     async function initMediaMain() {
-        if (typeof MEDIA_DATA === "undefined") {
-            console.error("media-data.js가 먼저 로드");
-            return;
+        const tasks = [];
+        if (document.getElementById("mediaMainArchiveList")) {
+            tasks.push(loadContentSection("ARCHIVE", 3, renderArchive));
         }
+        if (document.getElementById("mediaMainNewsList")) {
+            tasks.push(loadContentSection("NEWS", 3, renderNews));
+        }
+        if (document.getElementById("mediaMainPromotionList")) {
+            tasks.push(loadContentSection(["PROMOTION", "EVENT"], 4, renderPromotion));
+        }
+        await Promise.allSettled(tasks);
+    }
 
-        renderArchive();
-        renderNews();
-
+    async function loadContentSection(contentTypeCode, size, render) {
         try {
-            const items = await fetchPromotionItems();
-            renderPromotion(items);
+            render(await fetchContentItems(contentTypeCode, size));
         } catch (error) {
-            console.error("Promotion & Event 콘텐츠를 불러오지 못했습니다.", error);
-            renderPromotion([]);
+            console.error(`${[].concat(contentTypeCode).join(" & ")} 콘텐츠를 불러오지 못했습니다.`, error);
+            render([]);
         }
     }
 
-    function renderArchive() {
+    function renderArchive(items) {
         const container = document.getElementById("mediaMainArchiveList");
         if (!container) return;
-
-        const items = getLatestItems("archive", 3);
 
         container.innerHTML = items.map(item => {
             const url = getViewUrl("archive", item.id);
@@ -39,18 +42,16 @@
                     <div class="media-archive-content">
                         <span class="media-archive-category">${escapeHtml(item.category)}</span>
                         <strong class="media-archive-subject">${escapeHtml(item.title)}</strong>
-                        <div class="media-archive-desc">${getPreview(item.content, 2)}</div>
+                        <div class="media-archive-desc"><p>${escapeHtml(item.summary)}</p></div>
                     </div>
                 </a>
             `;
         }).join("");
     }
 
-    function renderNews() {
+    function renderNews(items) {
         const container = document.getElementById("mediaMainNewsList");
         if (!container) return;
-
-        const items = getLatestItems("news", 3);
 
         container.innerHTML = items.map(item => {
             const url = getViewUrl("news", item.id);
@@ -64,23 +65,23 @@
                     <div class="media-news-content">
                         <span class="media-news-category">${escapeHtml(item.category)}</span>
                         <strong class="media-news-subject">${escapeHtml(item.title)}</strong>
-                        <div class="media-news-desc">${getPreview(item.content, 2)}</div>
-                        <time datetime="${toDateTime(item.date)}">${escapeHtml(item.date || "")}</time>
+                        <div class="media-news-desc"><p>${escapeHtml(item.summary)}</p></div>
+                        <time datetime="${escapeHtml(item.publishedAt)}">${escapeHtml(formatDate(item.publishedAt))}</time>
                     </div>
                 </a>
             `;
         }).join("");
     }
 
-    async function fetchPromotionItems() {
+    async function fetchContentItems(contentTypeCode, size) {
         if (!window.HunterFrontAPI?.contents) {
             throw new Error("콘텐츠 API가 로드되지 않았습니다.");
         }
 
         const response = await window.HunterFrontAPI.contents.getList({
-            contentTypeCode: ["PROMOTION", "EVENT"],
+            contentTypeCode,
             page: 1,
-            size: 4
+            size
         });
         const data = Array.isArray(response)
             ? response
@@ -93,7 +94,7 @@
         return data
             .map(item => ({
                 id: item.contentId,
-                category: formatContentType(item.contentTypeCode),
+                category: item.categoryName || formatContentType(item.contentTypeCode),
                 title: item.title || "",
                 thumbnail: item.thumbnailUrl || "",
                 summary: item.summary || "",
@@ -101,7 +102,7 @@
             }))
             .filter(item => item.id !== undefined && item.id !== null)
             .sort((a, b) => normalizeDate(b.publishedAt) - normalizeDate(a.publishedAt))
-            .slice(0, 4);
+            .slice(0, size);
     }
 
     function formatContentType(code) {
@@ -221,37 +222,8 @@
         text.textContent = item.summary || "";
     }
 
-    function getLatestItems(type, limit) {
-        return [...(MEDIA_DATA[type] || [])]
-            .sort((a, b) => normalizeDate(b.date) - normalizeDate(a.date))
-            .slice(0, limit);
-    }
-
     function getViewUrl(type, id) {
         return `/Media/media-view.html?type=${encodeURIComponent(type)}&id=${encodeURIComponent(id)}`;
-    }
-
-    function getPreview(content, limit) {
-        const paragraphs = getParagraphs(content).slice(0, limit);
-        return paragraphs.map(text => `<p>${escapeHtml(text)}</p>`).join("");
-    }
-
-    function getPlainPreview(content, limit) {
-        return getParagraphs(content).slice(0, limit).join(" ");
-    }
-
-    function getParagraphs(content) {
-        const wrapper = document.createElement("div");
-        wrapper.innerHTML = content || "";
-
-        const paragraphs = Array.from(wrapper.querySelectorAll("p"))
-            .map(element => element.textContent.trim())
-            .filter(Boolean);
-
-        if (paragraphs.length) return paragraphs;
-
-        const text = wrapper.textContent.trim();
-        return text ? [text] : [];
     }
 
     function normalizeDate(date) {
@@ -260,8 +232,8 @@
         return Number.isNaN(timestamp) ? 0 : timestamp;
     }
 
-    function toDateTime(date) {
-        return String(date || "").replaceAll(".", "-");
+    function formatDate(value) {
+        return value ? String(value).slice(0, 10).replaceAll("-", ".") : "";
     }
 
     function escapeHtml(value) {

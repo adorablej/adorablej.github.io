@@ -29,7 +29,16 @@
             }
         }),
         member: Object.freeze({
-            getMe: function () { return client.get('/api/v1/me'); }
+            getMe: function () { return client.get('/api/v1/me'); },
+            getProducts: function (params) {
+                return client.get('/api/v1/me/products', { query: params || {} });
+            },
+            getOrders: function (params) {
+                return client.get('/api/v1/me/orders', { query: params || {} });
+            },
+            getTrainingApplications: function (params) {
+                return client.get('/api/v1/me/training-applications', { query: params || {} });
+            }
         }),
         prideStores: Object.freeze({
             getList: function (params) {

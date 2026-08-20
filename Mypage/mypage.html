@@ -45,18 +45,18 @@
                     <section class="sub-mypage-info-section">
                         <h3 class="sub-mypage-section-title">계정/회원정보<span class="sub-mypage-title-dot" aria-hidden="true">.</span></h3>
                         <dl class="sub-mypage-info-list">
-                            <div><dt>이름</dt><dd>홍길동</dd></div>
-                            <div><dt>휴대폰번호</dt><dd>010-1234-5678</dd></div>
+                            <div><dt>이름</dt><dd id="mypageMemberName">-</dd></div>
+                            <div><dt>휴대폰번호</dt><dd id="mypageMemberPhone">-</dd></div>
                         </dl>
                     </section>
 
                     <section class="sub-mypage-info-section">
                         <h3 class="sub-mypage-section-title">기업/사업체 정보<span class="sub-mypage-title-dot" aria-hidden="true">.</span></h3>
                         <dl class="sub-mypage-info-list">
-                            <div><dt>이름</dt><dd>가나다 타이어전문점</dd></div>
-                            <div><dt>사업자 등록번호</dt><dd>000 000 00000</dd></div>
-                            <div><dt>대표자명</dt><dd>김길순</dd></div>
-                            <div><dt>사업장 주소</dt><dd>서초시 마포구 마포로 가나다빌딩 102호</dd></div>
+                            <div><dt>이름</dt><dd id="mypageBusinessName">-</dd></div>
+                            <div><dt>사업자 등록번호</dt><dd id="mypageBusinessNumber">-</dd></div>
+                            <div><dt>대표자명</dt><dd id="mypageBusinessRepresentative">-</dd></div>
+                            <div><dt>사업장 주소</dt><dd id="mypageBusinessAddress">-</dd></div>
                         </dl>
                     </section>
 
@@ -70,24 +70,7 @@
                         <div class="sub-mypage-product-slider-wrap">
                             <button type="button" class="sub-mypage-slider-button sub-mypage-product-prev" aria-label="이전 제품"></button>
                             <div class="swiper sub-mypage-product-slider">
-                                <div class="swiper-wrapper">
-                                    <article class="swiper-slide sub-mypage-product-card">
-                                        <div class="sub-mypage-product-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="HawkEye Elite Premium"></div>
-                                        <div class="sub-mypage-product-info"><strong>Product name</strong><span>설치일 : 2026.07.07</span></div>
-                                    </article>
-                                    <article class="swiper-slide sub-mypage-product-card">
-                                        <div class="sub-mypage-product-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="HawkEye Elite Premium"></div>
-                                        <div class="sub-mypage-product-info"><strong>Product name</strong><span>설치일 : 2026.07.07</span></div>
-                                    </article>
-                                    <article class="swiper-slide sub-mypage-product-card">
-                                        <div class="sub-mypage-product-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="HawkEye Elite Premium"></div>
-                                        <div class="sub-mypage-product-info"><strong>Product name</strong><span>설치일 : 2026.07.07</span></div>
-                                    </article>
-                                    <article class="swiper-slide sub-mypage-product-card">
-                                        <div class="sub-mypage-product-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="HawkEye Elite Premium"></div>
-                                        <div class="sub-mypage-product-info"><strong>Product name</strong><span>설치일 : 2026.07.07</span></div>
-                                    </article>
-                                </div>
+                                <div class="swiper-wrapper" id="mypageProductList"></div>
                             </div>
                             <button type="button" class="sub-mypage-slider-button sub-mypage-product-next" aria-label="다음 제품"></button>
                         </div>
@@ -102,23 +85,7 @@
                         </div>
 
                         <div class="sub-mypage-list-region" data-mypage-list data-item-selector=".sub-mypage-order-history">
-                        <article class="sub-mypage-order-history sub-mypage-home-order-history" data-order-card>
-                            <div class="sub-mypage-order-history-head">
-                                <strong>
-                                    <span class="sub-mypage-order-meta">2026.06.10 / 총 2개 주문</span>
-                                    <span class="sub-mypage-order-total">총금액 <em>000,000,000원</em></span>
-                                </strong>
-                                <span class="sub-mypage-status is-request">주문 신청</span>
-                            </div>
-                            <div class="sub-mypage-order-history-body">
-                                <div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="부품 이름 Text text text"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div>
-                                <div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="부품 이름 Text text text"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div>
-                                <div class="sub-mypage-order-history-item"><div class="sub-mypage-order-history-image"><img src="/images/item/HawkEye-Elite-Premium.png" alt="부품 이름 Text text text"></div><div class="sub-mypage-order-history-info"><strong>부품 이름 Text text text</strong><span>부품 설명 Text text text</span><dl><div><dt>부품 개수</dt><dd>20개</dd></div><div><dt>금액</dt><dd>1,000,000원 <small>(개당 5,000원)</small></dd></div></dl></div></div>
-                            </div>
-                            <button type="button" class="sub-mypage-order-toggle" aria-expanded="true">
-                                <span>총 3건 주문 접기</span><i aria-hidden="true"></i>
-                            </button>
-                        </article>
+                        <div id="mypageOrderList"></div>
                         <p class="sub-mypage-list-empty" data-mypage-empty hidden>부품 주문 신청 내역이 없습니다.</p>
                         </div>
                     </section>
@@ -134,11 +101,7 @@
                                 <thead>
                                     <tr><th>수강일자</th><th>수강제목</th><th>수강상태</th><th>상세</th></tr>
                                 </thead>
-                                <tbody>
-                                    <tr data-training-history data-date="2026.07.19" data-time="09:00" data-course="얼라인먼트 Level 1" data-count="00/00" data-status="신청완료" data-color="training-color-1"><td>2026.07.30</td><td>휠 얼라인먼트_Level 1</td><td data-history-status>신청완료</td><td><button type="button" class="sub-button-more" data-training-history-open>view</button></td></tr>
-                                    <tr data-training-history data-date="2026.07.27" data-time="16:00" data-course="얼라인먼트 Level 1" data-count="00/00" data-status="신청완료" data-color="training-color-4"><td>2026.07.30</td><td>휠 얼라인먼트_Level 1</td><td data-history-status>신청완료</td><td><button type="button" class="sub-button-more" data-training-history-open>view</button></td></tr>
-                                    <tr data-training-history data-date="2026.08.03" data-time="10:00" data-course="휠 얼라인먼트 Level 2" data-count="04/20" data-status="신청완료" data-color="training-color-3"><td>2026.07.30</td><td>휠 얼라인먼트_Level 1</td><td data-history-status>신청완료</td><td><button type="button" class="sub-button-more" data-training-history-open>view</button></td></tr>
-                                </tbody>
+                                <tbody id="mypageTrainingList"></tbody>
                             </table>
                         </div>
                         <p class="sub-mypage-list-empty" data-mypage-empty hidden>트레이닝 수강 이력이 없습니다.</p>
@@ -170,5 +133,9 @@
     <script src="/js/include.js?v=20260814"></script>
     <script src="/js/common.js?v=20260814"></script>
     <script src="/js/mypage.js?v=20260820-1"></script>
+    <script src="/js/api/config.js?v=20260820"></script>
+    <script src="/js/api/client.js?v=20260820"></script>
+    <script src="/js/api/front-api.js?v=20260820"></script>
+    <script src="/js/mypage-home.js?v=20260820"></script>
 </body>
 </html>

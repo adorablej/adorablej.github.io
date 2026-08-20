@@ -261,15 +261,18 @@ function initMypageProductSlider() {
 
 function initMypageOrderToggle() {
     document.querySelectorAll(".sub-mypage-order-toggle").forEach(button => {
+        if (button.dataset.initialized === "true") return;
         const card = button.closest(".sub-mypage-order-card, .sub-mypage-order-history");
         const text = button.querySelector("span");
         if (!card || !text) return;
+        const count = card.querySelectorAll(".sub-mypage-order-history-item").length;
 
         button.addEventListener("click", () => {
             const collapsed = card.classList.toggle("is-collapsed");
             button.setAttribute("aria-expanded", String(!collapsed));
-            text.textContent = collapsed ? "총 3건 주문 펼치기" : "총 3건 주문 접기";
+            text.textContent = collapsed ? `총 ${count}건 주문 펼치기` : `총 ${count}건 주문 접기`;
         });
+        button.dataset.initialized = "true";
     });
 }
 
