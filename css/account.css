@@ -557,7 +557,6 @@
    Phone verification login
 ======================================== */
 .sub-account-login-section {
-    min-height: calc(100vh - calc(100 * var(--vw)));
     padding: calc(220 * var(--vw)) 0 calc(190 * var(--vw));
     box-sizing: border-box;
 }

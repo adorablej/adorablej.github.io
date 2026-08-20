@@ -623,10 +623,20 @@ Media Empty
 ======================================== */
 .sub-media-empty {
     padding: calc(140 * var(--vw)) 0;
-    border-bottom: 1px solid #ddd;
+    /* border-bottom: 1px solid #ddd; */
     color: #999;
     font-size: calc(18 * var(--vw));
     text-align: center;
+}
+
+.media-archive-list > .sub-media-empty,
+.media-list > .sub-media-empty {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+.media-section .media-content .media-featured[hidden] {
+    display: none;
 }
 
 
@@ -920,6 +930,9 @@ Mobile (720px and below)
 
     .sub-media-list {
         border-top: 0;
+    }
+    .sub-media-empty{
+        font-size: 12px;
     }
 
     .sub-media-item {

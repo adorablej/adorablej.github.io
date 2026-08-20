@@ -30,6 +30,11 @@
         const container = document.getElementById("mediaMainArchiveList");
         if (!container) return;
 
+        if (!items.length) {
+            container.innerHTML = '<div class="sub-media-empty">등록된 게시물이 없습니다.</div>';
+            return;
+        }
+
         container.innerHTML = items.map(item => {
             const url = getViewUrl("archive", item.id);
             const thumbnail = item.thumbnail || PLACEHOLDER;
@@ -52,6 +57,11 @@
     function renderNews(items) {
         const container = document.getElementById("mediaMainNewsList");
         if (!container) return;
+
+        if (!items.length) {
+            container.innerHTML = '<div class="sub-media-empty">등록된 게시물이 없습니다.</div>';
+            return;
+        }
 
         container.innerHTML = items.map(item => {
             const url = getViewUrl("news", item.id);
@@ -115,12 +125,18 @@
         const featured = document.getElementById("mediaMainFeatured");
         if (!container || !featured) return;
 
+        container.closest(".media-content")?.classList.toggle("is-empty", !items.length);
+
         if (!items.length) {
             featured.hidden = true;
-            container.innerHTML = "";
-            if (mobileContainer) mobileContainer.innerHTML = "";
+            container.innerHTML = '<div class="sub-media-empty">등록된 게시물이 없습니다.</div>';
+            if (mobileContainer) {
+                mobileContainer.innerHTML = '<div class="sub-media-empty">등록된 게시물이 없습니다.</div>';
+            }
             return;
         }
+
+        featured.hidden = false;
 
         container.innerHTML = items.map((item, index) => `
             <article

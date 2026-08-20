@@ -465,6 +465,21 @@ Section 05 : Media
     padding-top: calc(56 * var(--vw));
 }
 
+.media-content.is-empty {
+    width: calc(1300 * var(--vw));
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.media-content.is-empty .media-list {
+    display: block;
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+.media-featured[hidden] {
+    display: none;
+}
+
 .media-featured {
     overflow: hidden;
     border-radius: calc(20 * var(--vw));
@@ -928,6 +943,10 @@ body.is-main-popup-open .page-scroll {
     .media-content {
         display: block;
         padding-top: 30px;
+    }
+
+    .media-content.is-empty {
+        width: 100%;
     }
 
     .media-list {
