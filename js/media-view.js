@@ -12,21 +12,15 @@ async function initMediaView() {
     const type = MEDIA_CONFIG[requestedType] ? requestedType : "archive";
     const requestedId = Number(params.get("id"));
     const config = MEDIA_CONFIG[type];
-    let list = sortMediaByLatest(MEDIA_DATA[type] || []);
-    let item = list.find(data => data.id === requestedId) || list[0];
+    let item = null;
 
-    if (type === "promotion" && Number.isFinite(requestedId)) {
+    if (Number.isInteger(requestedId) && requestedId > 0) {
         try {
-            item = mapContentDetail(await window.HunterFrontAPI.contents.getDetail(requestedId));
-            list = sortMediaByLatest([
-                mapContentNavigation(item.nextContent),
-                item,
-                mapContentNavigation(item.previousContent)
-            ].filter(Boolean));
+            const detail = await window.HunterFrontAPI.contents.getDetail(requestedId);
+            item = matchesContentType(type, detail.contentTypeCode) ? mapContentDetail(detail) : null;
         } catch (error) {
-            console.error("Promotion & Event 상세 콘텐츠를 불러오지 못했습니다.", error);
+            console.error("Media 상세 콘텐츠를 불러오지 못했습니다.", error);
             item = null;
-            list = [];
         }
     }
 
@@ -39,26 +33,29 @@ async function initMediaView() {
 
     isMediaViewInitialized = true;
     isMediaViewInitializing = false;
-    renderMediaView(type, config, list, item);
+    renderMediaView(type, config, item);
 }
 
 function mapContentDetail(item) {
-    const thumbnail = item.thumbnailUrl
-        ? `<div class="sub-media-view-image"><img src="${escapeHtml(item.thumbnailUrl)}" alt="${escapeHtml(item.title)}"></div>`
-        : "";
-    const body = item.content || (item.summary ? `<div class="sub-media-view-text"><p>${escapeHtml(item.summary)}</p></div>` : "");
-
     return {
         id: item.contentId,
-        category: item.contentTypeCode === "EVENT" ? "Event" : "Promotion",
+        category: item.categoryName || formatContentType(item.contentTypeCode),
         title: item.title || "",
         date: formatMediaDate(item.publishedAt),
-        content: thumbnail + body,
+        content: item.content || "",
         attachments: item.attachments || [],
-        publishedAt: item.publishedAt,
-        previousContent: item.previousContent,
-        nextContent: item.nextContent
+        previousContent: mapContentNavigation(item.previousContent),
+        nextContent: mapContentNavigation(item.nextContent)
     };
+}
+
+function matchesContentType(type, code) {
+    if (type === "promotion") return code === "PROMOTION" || code === "EVENT";
+    return code === type.toUpperCase();
+}
+
+function formatContentType(code) {
+    return code === "PROMOTION" ? "Promotion" : code === "EVENT" ? "Event" : code || "";
 }
 
 function mapContentNavigation(item) {
@@ -76,18 +73,7 @@ function formatMediaDate(value) {
     return String(value).slice(0, 10).replaceAll("-", ".");
 }
 
-function sortMediaByLatest(data) {
-    return [...data].sort((a, b) => {
-        return normalizeMediaDate(b.date) - normalizeMediaDate(a.date);
-    });
-}
-
-function normalizeMediaDate(date) {
-    const timestamp = Date.parse(String(date || "").replaceAll(".", "-"));
-    return Number.isNaN(timestamp) ? 0 : timestamp;
-}
-
-function renderMediaView(type, config, list, item) {
+function renderMediaView(type, config, item) {
     const breadcrumb = document.getElementById("mediaViewBreadcrumb");
     const pageTitle = document.getElementById("mediaViewPageTitle");
     const category = document.getElementById("mediaViewCategory");
@@ -142,16 +128,12 @@ function renderMediaView(type, config, list, item) {
         fileWrap.hidden = true;
     }
 
-    renderMediaNavigation(type, list, item);
+    renderMediaNavigation(type, item);
 }
 
-function renderMediaNavigation(type, list, item) {
-    const currentIndex = list.findIndex(data => data.id === item.id);
-    const prevItem = list[currentIndex - 1];
-    const nextItem = list[currentIndex + 1];
-
-    setNavigationItem(document.getElementById("mediaViewPrev"), type, prevItem);
-    setNavigationItem(document.getElementById("mediaViewNext"), type, nextItem);
+function renderMediaNavigation(type, item) {
+    setNavigationItem(document.getElementById("mediaViewPrev"), type, item.previousContent);
+    setNavigationItem(document.getElementById("mediaViewNext"), type, item.nextContent);
 }
 
 function setNavigationItem(element, type, item) {
@@ -204,7 +186,7 @@ function getMediaAttachments(item) {
             if (!file || typeof file !== "object") return null;
 
             const url = file.url || file.fileUrl || file.downloadUrl || file.path || "";
-            const name = file.name || file.fileName || file.originalName || getFileName(url);
+            const name = file.displayFileName || file.name || file.fileName || file.originalName || getFileName(url);
             return { url, name };
         })
         .filter(file => file?.url)

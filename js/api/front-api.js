@@ -43,7 +43,7 @@
         }),
         contents: Object.freeze({
             getList: function (params) {
-                return client.get('/api/v1/contents', { query: params || {}, auth: false });
+                return client.get('/api/v1/contents', { query: params || {}, auth: false, raw: true });
             },
             getDetail: function (contentId) {
                 return client.get('/api/v1/contents/' + encodeURIComponent(contentId), { auth: false });

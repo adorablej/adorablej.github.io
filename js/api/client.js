@@ -93,6 +93,8 @@
                 });
             }
 
+            // 목록처럼 meta 정보가 필요한 요청은 원본 응답을 반환합니다.
+            if (options.raw) return payload;
             // 공통 ApiResponse 형식이면 data만, 파일·문자열 등은 원문을 반환합니다.
             return payload && Object.prototype.hasOwnProperty.call(payload, 'success') ? payload.data : payload;
         } catch (error) {
