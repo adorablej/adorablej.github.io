@@ -658,7 +658,29 @@ Login
     font-weight: 500;
     line-height: calc(32 * var(--vw));
     letter-spacing: calc(4 * var(--vw));
+    text-indent: calc(4 * var(--vw));
     transition: .3s;
+}
+
+.btn-logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: calc(110 * var(--vw));
+    height: calc(48 * var(--vw));
+    padding: 0 calc(24 * var(--vw));
+    box-sizing: border-box;
+    border: 1px solid var(--red);
+    border-radius: calc(50 * var(--vw));
+    background: #fff;
+    color: var(--red);
+    font-size: calc(14 * var(--vw));
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: calc(2 * var(--vw));
+    text-indent: calc(2 * var(--vw));
+    margin-right: calc(-30 * var(--vw));
+    text-decoration: none;
 }
 
 
@@ -1636,9 +1658,8 @@ sub page 공통
     line-height: calc(32 * var(--vw));
     font-weight:500;
     letter-spacing:calc(4 * var(--vw));
-    transition:
-        color .3s,
-        background-color .3s;
+    text-indent: calc(4 * var(--vw));
+    transition: none;
 }
 
 .sub-button-more:hover {
@@ -1658,9 +1679,7 @@ sub page 공통
     line-height: calc(32 * var(--vw));
     font-weight:500;
     width: fit-content;
-    transition:
-        color .3s,
-        background-color .3s;
+    transition: none;
 }
 .sub-button-more:hover {
     background:var(--red);
@@ -2669,6 +2688,7 @@ Mobile (720px and below)
     }
 
     .header:not(.is-menu-open) + .header-actions .btn-login,
+    .header:not(.is-menu-open) + .header-actions .btn-logout,
     .header:not(.is-menu-open) + .header-actions .btn-alarm {
         display: none;
     }
@@ -2680,18 +2700,23 @@ Mobile (720px and below)
         color: #fff;
     }
 
+    .header.is-menu-open + .header-actions {
+        right: 25px;
+        left: 25px;
+    }
+
     .header.is-menu-open .header-l {
         display: none;
     }
 
     .header.is-menu-open + .header-actions .header-r {
-        width: auto;
-        margin-left: auto;
+        width: 100%;
+        margin: 0;
         color: #fff;
     }
 
     .header.is-menu-open + .header-actions .btn-menu {
-        margin-left: 0;
+        margin-left: auto;
     }
 
     .header.is-menu-open + .header-actions .btn-search {
@@ -2710,6 +2735,27 @@ Mobile (720px and below)
         font-size: 10px;
         line-height: 36px;
         letter-spacing: 2px;
+        text-indent: 2px;
+        box-sizing: border-box;
+    }
+
+    .header.is-menu-open + .header-actions .header-r.is-logout .btn-login {
+        min-width: 82px;
+    }
+
+    .header.is-menu-open + .header-actions .btn-logout {
+        min-width: 82px;
+        height: 36px;
+        padding: 0 17px;
+        border: 0;
+        border-radius: 22px;
+        background: #fff;
+        color: var(--red);
+        font-size: 10px;
+        line-height: 36px;
+        letter-spacing: 2px;
+        text-indent: 2px;
+        margin-right: -12px;
         box-sizing: border-box;
     }
 

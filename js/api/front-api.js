@@ -48,6 +48,13 @@
             getDetail: function (contentId) {
                 return client.get('/api/v1/contents/' + encodeURIComponent(contentId), { auth: false });
             }
+        }),
+        csRequests: Object.freeze({
+            create: function (payload) {
+                // 로그인 상태면 Authorization 헤더가 자동으로 포함되고,
+                // 비회원이면 헤더 없이 같은 엔드포인트를 호출합니다.
+                return client.post('/api/v1/me/cs-requests', payload);
+            }
         })
     });
 })(window);

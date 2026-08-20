@@ -203,7 +203,7 @@
     width: 100%;
     height: calc(80 * var(--vw));
     border: 1px solid var(--red);
-    border-radius: calc(100 * var(--vw));
+    border-radius: 999px;
     font-size: calc(20 * var(--vw));
     font-weight: 600;
     text-decoration: none;

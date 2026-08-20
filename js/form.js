@@ -15,6 +15,7 @@ function initFormComponents() {
     });
 
     initVehicleSpecificationRequest();
+    initContactFormSubmission();
     initCompletionAlerts();
 }
 
@@ -55,11 +56,10 @@ function initVehicleSpecificationRequest() {
 
 function initCompletionAlerts() {
     const messages = new Map([
-        ["contact-form", "CS문의접수가 완료되었습니다.\n입력하신 연락처로 회신드리겠습니다.\n감사합니다."],
         ["vehicle-specification-form", "차량제원 추가 등록 요청이 완료되었습니다."]
     ]);
 
-    document.querySelectorAll("#contact-form, .sub-mypage-cs-form, #vehicle-specification-form").forEach(form => {
+    document.querySelectorAll(".sub-mypage-cs-form, #vehicle-specification-form").forEach(form => {
         form.addEventListener("submit", async event => {
             if (event.defaultPrevented) return;
             event.preventDefault();
@@ -72,6 +72,72 @@ function initCompletionAlerts() {
                 window.location.href = "/Support/Wheel-Alignment-Specification.html";
             }
         });
+    });
+}
+
+async function showContactAlert(message) {
+    if (window.HunterAlert?.open) {
+        await window.HunterAlert.open({ message });
+        return;
+    }
+
+    window.alert(message);
+}
+
+function initContactFormSubmission() {
+    const form = document.querySelector("#contact-form");
+    const submitButton = form?.querySelector('[type="submit"]');
+    const api = window.HunterFrontAPI?.csRequests;
+
+    if (!form || !submitButton) return;
+
+    form.addEventListener("submit", async event => {
+        if (event.defaultPrevented) return;
+        event.preventDefault();
+
+        const emailId = form.elements.email_id.value.trim();
+        const emailDomain = form.elements.email_domain.value.trim();
+
+        if ((emailId && !emailDomain) || (!emailId && emailDomain)) {
+            const emailGroup = form.elements.email_id.closest(".sub-form-group");
+            setFieldError(emailGroup, "이메일 주소를 확인해주세요.");
+            (emailId ? form.elements.email_domain : form.elements.email_id).focus();
+            return;
+        }
+
+        if (!api?.create) {
+            await showContactAlert("문의 접수 기능을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.");
+            return;
+        }
+
+        const payload = {
+            companyName: form.elements.company_name.value.trim(),
+            requesterName: form.elements.user_name.value.trim(),
+            phoneNumber: form.elements.user_phone.value.trim(),
+            csTypeCode: form.elements.inquiry_category.value,
+            title: form.elements.inquiry_title.value.trim(),
+            content: form.elements.message.value.trim(),
+            privacyAgreed: form.elements.agree.checked
+        };
+
+        if (emailId && emailDomain) {
+            payload.email = `${emailId}@${emailDomain}`;
+        }
+
+        submitButton.disabled = true;
+        submitButton.setAttribute("aria-busy", "true");
+
+        try {
+            await api.create(payload);
+            await showContactAlert(
+                "CS 문의접수가 완료되었습니다.\n입력하신 연락처로 회신드리겠습니다.\n감사합니다."
+            );
+        } catch (error) {
+            await showContactAlert(error?.message || "문의 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        } finally {
+            submitButton.disabled = false;
+            submitButton.removeAttribute("aria-busy");
+        }
     });
 }
 
@@ -121,17 +187,16 @@ function initContactInquiryCategory() {
     if (!select || !hidden) return;
 
     const aliases = {
-        all: "all",
-        product: "purchase",
-        parts: "purchase",
-        purchase: "purchase",
-        service: "as",
-        as: "as",
-        installation: "transfer",
-        transfer: "transfer",
-        business: "business",
-        education: "training",
-        training: "training",
+        product: "PURCHASE",
+        parts: "PURCHASE",
+        purchase: "PURCHASE",
+        service: "AS",
+        as: "AS",
+        installation: "TRANSFER",
+        transfer: "TRANSFER",
+        business: "BUSINESS",
+        education: "TRAINING",
+        training: "TRAINING",
     };
     const params = new URLSearchParams(window.location.search);
     const requestedCategory = (params.get("category") || params.get("type") || "").toLowerCase();

@@ -75,9 +75,10 @@ Common Section
     font-weight: 500;
     letter-spacing: calc(2.5 * var(--vw));
     line-height: calc(32 * var(--vw));
+    text-indent: calc(2.5 * var(--vw));
     text-decoration: none;
     text-transform: lowercase;
-    transition: .3s;
+    transition: none;
 }
 
 /* ========================================
@@ -815,6 +816,7 @@ body.is-main-popup-open .page-scroll {
         font-size: 14px;
         line-height: 1;
         letter-spacing: 3px;
+        text-indent: 3px;
     }
 
     .support-section {
@@ -910,6 +912,7 @@ body.is-main-popup-open .page-scroll {
         font-size: 13px;
         line-height: 1;
         letter-spacing: 3px;
+        text-indent: 3px;
     }
 
     .media-inner {
