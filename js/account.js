@@ -42,15 +42,12 @@
         var keepCode = document.getElementById('login-keep-code');
         var timerId = null;
         var remainingSeconds = 599;
-        var verified = false;
-        var TEST_LOGIN_CODE = '111111';
+        var verificationId = '';
+        var requesting = false;
+        var loggingIn = false;
+        var authApi = window.HunterFrontAPI && window.HunterFrontAPI.auth;
+        var memberApi = window.HunterFrontAPI && window.HunterFrontAPI.member;
         var returnTarget = getLoginReturnTarget();
-
-        form.addEventListener('loginMemberNotFound', function () {
-            window.HunterAlert?.open({
-                message: '가입되지 않은 번호입니다.\n회원가입 이후에 다시 시도해주세요.'
-            });
-        });
 
         function getLoginReturnTarget() {
             var params = new URLSearchParams(window.location.search);
@@ -75,13 +72,7 @@
                 window.location.href = returnTarget;
                 return;
             }
-
-            if (window.history.length > 1) {
-                window.history.back();
-                return;
-            }
-
-            window.location.href = new URL('../index.html', window.location.href).href;
+            window.location.href = '/index.html';
         }
 
         function showStep(step) {
@@ -99,9 +90,9 @@
             timer.textContent = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
         }
 
-        function startTimer() {
+        function startTimer(seconds) {
             window.clearInterval(timerId);
-            remainingSeconds = 599;
+            remainingSeconds = Number(seconds) || 599;
             renderTimer();
             timerId = window.setInterval(function () {
                 remainingSeconds -= 1;
@@ -119,106 +110,104 @@
 
         phone.addEventListener('input', function () {
             phone.value = phone.value.replace(/\D/g, '').slice(0, 11);
+            verificationId = '';
         });
         code.addEventListener('input', function () {
             code.value = code.value.replace(/\D/g, '').slice(0, 6);
-            verified = false;
             status.hidden = true;
             status.textContent = '';
             code.disabled = false;
             codeGroup.classList.remove('is-error');
             codeGroup.classList.remove('is-verified');
-            submitButton.textContent = '확인';
             submitButton.disabled = code.value.length !== 6 || remainingSeconds <= 0;
         });
         keepPhone.addEventListener('change', function () { keepCode.checked = keepPhone.checked; });
         keepCode.addEventListener('change', function () { keepPhone.checked = keepCode.checked; });
 
-        requestButton.addEventListener('click', function () {
+        async function requestLoginCode() {
+            if (requesting) return;
             var digits = phone.value.replace(/\D/g, '');
             if (digits.length < 10 || digits.length > 11) {
                 setFieldError(phone.closest('.sub-form-group'), '올바른 휴대전화번호를 입력해 주세요.');
                 phone.focus();
                 return;
             }
-            clearFieldState(phone.closest('.sub-form-group'));
-            verified = false;
-            code.disabled = false;
-            code.value = '';
-            status.hidden = true;
-            status.className = 'sub-account-code-status';
-            status.textContent = '';
-            codeGroup.classList.remove('is-error');
-            codeGroup.classList.remove('is-verified');
-            submitButton.textContent = '확인';
-            submitButton.disabled = true;
-            showStep('code');
-            startTimer();
-        });
-
-        resendButton.addEventListener('click', function () {
-            verified = false;
-            code.disabled = false;
-            code.value = '';
-            status.hidden = true;
-            status.textContent = '';
-            codeGroup.classList.remove('is-error');
-            codeGroup.classList.remove('is-verified');
-            submitButton.textContent = '확인';
-            submitButton.disabled = true;
-            startTimer();
-            code.focus();
-        });
-
-        backButton.addEventListener('click', function () {
-            window.clearInterval(timerId);
-            showStep('phone');
-        });
-
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-            if (submitButton.disabled) return;
-
-            if (verified) {
-                var shouldMove = form.dispatchEvent(new CustomEvent('phoneLoginSubmit', {
-                    bubbles: true,
-                    cancelable: true,
-                    detail: { phone: phone.value, keepLogin: keepCode.checked }
-                }));
-                // API 연동 시 이벤트에서 preventDefault()한 뒤 로그인 성공 시 이동 처리합니다.
-                if (shouldMove) moveToPreviousPage();
+            if (!authApi || !authApi.requestPhoneVerification) {
+                await showAccountAlert('로그인 인증 기능을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
                 return;
             }
 
-            if (code.value.length !== 6) return;
+            clearFieldState(phone.closest('.sub-form-group'));
+            requesting = true;
+            requestButton.disabled = true;
+            resendButton.disabled = true;
+            try {
+                var response = await authApi.requestPhoneVerification(digits, 'LOGIN');
+                verificationId = String(response && response.verificationId || '');
+                if (!verificationId) throw new Error('인증 요청 정보를 확인할 수 없습니다.');
+                code.disabled = false;
+                code.value = '';
+                status.hidden = true;
+                status.className = 'sub-account-code-status';
+                status.textContent = '';
+                codeGroup.classList.remove('is-error', 'is-verified');
+                submitButton.disabled = true;
+                showStep('code');
+                startTimer(response.expiresIn);
+            } catch (error) {
+                await showAccountAlert(error && error.message ? error.message : '인증번호 발송에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+            } finally {
+                requesting = false;
+                requestButton.disabled = false;
+                resendButton.disabled = false;
+            }
+        }
 
-            if (code.value !== TEST_LOGIN_CODE) {
-                verified = false;
+        requestButton.addEventListener('click', requestLoginCode);
+        resendButton.addEventListener('click', requestLoginCode);
+
+        backButton.addEventListener('click', function () {
+            window.clearInterval(timerId);
+            verificationId = '';
+            showStep('phone');
+        });
+
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            if (submitButton.disabled || loggingIn || code.value.length !== 6 || !verificationId) return;
+            if (!authApi || !authApi.confirmPhoneVerification || !authApi.login || !memberApi || !memberApi.getMe) return;
+
+            loggingIn = true;
+            submitButton.disabled = true;
+            submitButton.setAttribute('aria-busy', 'true');
+            try {
+                var confirmation = await authApi.confirmPhoneVerification(verificationId, code.value);
+                if (!confirmation || !confirmation.verificationToken) throw new Error('휴대전화 인증 정보를 확인할 수 없습니다.');
+                window.clearInterval(timerId);
+                status.hidden = false;
+                status.className = 'sub-account-code-status is-success';
+                status.textContent = '인증되었습니다.';
+                codeGroup.classList.remove('is-error');
+                codeGroup.classList.add('is-verified');
+
+                await authApi.login({ verificationToken: confirmation.verificationToken }, keepCode.checked);
+                var member = await memberApi.getMe();
+                var storage = keepCode.checked ? window.localStorage : window.sessionStorage;
+                storage.setItem('hunter.member', JSON.stringify(member || {}));
+                moveToPreviousPage();
+            } catch (error) {
+                if (window.HunterAPI && window.HunterAPI.auth) window.HunterAPI.auth.clearTokens();
                 status.hidden = false;
                 status.className = 'sub-account-code-status is-error';
-                status.textContent = '인증번호가 틀립니다.';
+                status.textContent = error && error.message ? error.message : '로그인에 실패했습니다.';
                 codeGroup.classList.add('is-error');
                 codeGroup.classList.remove('is-verified');
                 code.focus();
                 code.select();
-                return;
+                loggingIn = false;
+                submitButton.disabled = code.value.length !== 6 || remainingSeconds <= 0;
+                submitButton.removeAttribute('aria-busy');
             }
-
-            verified = true;
-            window.clearInterval(timerId);
-            code.disabled = true;
-            status.hidden = false;
-            status.className = 'sub-account-code-status is-success';
-            status.textContent = '인증되었습니다.';
-            codeGroup.classList.remove('is-error');
-            codeGroup.classList.add('is-verified');
-            submitButton.textContent = '로그인';
-            submitButton.disabled = false;
-            form.dispatchEvent(new CustomEvent('phoneLoginVerified', {
-                bubbles: true,
-                detail: { phone: phone.value, keepLogin: keepCode.checked }
-            }));
-            // phoneLoginVerified는 인증 성공 상태 알림용 이벤트입니다.
         });
     }
 
@@ -646,7 +635,7 @@
                 resend.hidden = false;
                 group.classList.remove('is-verified');
                 setStatus('', '');
-                startTimer(response.expiresInSeconds);
+                startTimer(response.expiresIn || response.expiresInSeconds);
                 code.focus();
             } catch (error) {
                 setStatus('error', error && error.message ? error.message : '인증번호 발송에 실패했습니다.');

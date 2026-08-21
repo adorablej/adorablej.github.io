@@ -27,14 +27,15 @@
                     headers: refreshToken ? { 'X-Refresh-Token': refreshToken } : {}
                 }).finally(function () { client.auth.clearTokens(); });
             },
-            requestPhoneVerification: function (phoneNumber) {
+            requestPhoneVerification: function (phoneNumber, purpose) {
                 return client.post('/api/v1/auth/phone-verifications', {
-                    phoneNumber: phoneNumber
+                    phoneNumber: phoneNumber,
+                    purpose: purpose
                 }, { auth: false });
             },
             confirmPhoneVerification: function (verificationId, verificationCode) {
                 return client.post('/api/v1/auth/phone-verifications/' + encodeURIComponent(verificationId) + '/confirm', {
-                    verificationCode: verificationCode
+                    code: verificationCode
                 }, { auth: false });
             }
         }),

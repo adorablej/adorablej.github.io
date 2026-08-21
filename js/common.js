@@ -18,16 +18,19 @@
         initHeaderTransition();
     }
 
-    /**
-     * 로그인 헤더 미리보기
-     * - 기본 화면은 로그인 + 확인하지 않은 알림 있음
-     * - ?previewAuth=logout이면 로그아웃 상태
-     * - ?previewAlarm=0이면 로그인 + 확인하지 않은 알림 없음
-     */
+    /** 저장된 액세스 토큰을 기준으로 공통 헤더 로그인 상태를 표시합니다. */
     function initAuthState() {
         const params = new URLSearchParams(window.location.search);
         const previewAuth = params.get("previewAuth");
-        const isLoggedIn = previewAuth !== "logout";
+        const hasAccessToken = Boolean(
+            window.sessionStorage.getItem("hunter.accessToken") ||
+            window.localStorage.getItem("hunter.accessToken")
+        );
+        const isLoggedIn = previewAuth === "login"
+            ? true
+            : previewAuth === "logout"
+                ? false
+                : hasAccessToken;
         const previewAlarm = params.get("previewAlarm");
         const hasUnreadAlarm = Boolean(document.querySelector(".header-alarm-item.is-unread"));
         const hasAlarm = isLoggedIn && (previewAlarm === null ? hasUnreadAlarm : previewAlarm !== "0");
@@ -42,6 +45,18 @@
             allMenu.dataset.authState = isLoggedIn ? "login" : "logout";
             allMenu.dataset.hasAlarm = hasAlarm ? "true" : "false";
         }
+
+        document.querySelectorAll(".btn-logout").forEach((button) => {
+            button.addEventListener("click", (event) => {
+                event.preventDefault();
+                [window.localStorage, window.sessionStorage].forEach((storage) => {
+                    storage.removeItem("hunter.accessToken");
+                    storage.removeItem("hunter.refreshToken");
+                    storage.removeItem("hunter.member");
+                });
+                window.location.href = "/account/login.html";
+            });
+        });
     }
 
     /**
