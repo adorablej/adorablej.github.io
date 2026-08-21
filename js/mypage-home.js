@@ -58,6 +58,11 @@
             ? businesses.find(item => item.businessId === response.selectedBusiness.businessId) || response.selectedBusiness
             : businesses.find(item => item.isSelected) || businesses[0];
 
+        if (selected?.businessId) {
+            window.localStorage.setItem("hunter.selectedBusinessId", String(selected.businessId));
+            window.localStorage.setItem("hunter.selectedBusinessName", selected.businessName || "");
+        }
+
         renderBusiness(selected);
         updateBusinessSelect(businesses, selected);
     }
@@ -89,7 +94,13 @@
                 </option>`).join("");
             wrap.hidden = businesses.length <= 1;
             select.addEventListener("change", () => {
-                renderBusiness(businesses.find(item => String(item.businessId) === select.value));
+                const business = businesses.find(item => String(item.businessId) === select.value);
+                renderBusiness(business);
+                window.localStorage.setItem("hunter.selectedBusinessId", String(business?.businessId || ""));
+                window.localStorage.setItem("hunter.selectedBusinessName", business?.businessName || "");
+                window.dispatchEvent(new CustomEvent("hunterBusinessChanged", {
+                    detail: { businessId: business?.businessId || "" }
+                }));
             });
         });
     }

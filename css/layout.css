@@ -1159,6 +1159,14 @@ Header Alarm
     flex: 1 0 auto;
 }
 
+.header-alarm-empty {
+    margin: 0;
+    padding: calc(60 * var(--vw)) calc(45 * var(--vw));
+    color: rgba(255, 255, 255, .55);
+    font-size: calc(16 * var(--vw));
+    text-align: center;
+}
+
 .header-alarm-item {
     padding: calc(36 * var(--vw)) calc(45 * var(--vw)) calc(32 * var(--vw));
     border-bottom: 1px solid rgba(255, 255, 255, .1);
@@ -1167,6 +1175,10 @@ Header Alarm
 
 .header-alarm-item.is-unread {
     color: #fff;
+}
+
+.header-alarm-item[data-link-url]:not([data-link-url=""]) {
+    cursor: pointer;
 }
 
 .header-alarm-item h3,

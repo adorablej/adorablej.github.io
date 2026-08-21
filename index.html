@@ -27,14 +27,11 @@
     </div>
 
     <!-- Main popup: 팝업 콘텐츠가 있을 때 노출 -->
-    <div class="modal-layer main-popup is-open" data-main-popup aria-hidden="false">
+    <div class="modal-layer main-popup" data-main-popup aria-hidden="true" hidden>
         <button type="button" class="modal-dim main-popup-dim" data-main-popup-close aria-label="팝업 닫기"></button>
         <section class="modal-box main-popup-dialog" role="dialog" aria-modal="true" aria-label="메인 팝업" tabindex="-1">
             <button type="button" class="modal-close-button main-popup-close" data-main-popup-close aria-label="팝업 닫기"></button>
-            <div class="main-popup-content">
-                <!-- 팝업 이미지 또는 배너 콘텐츠 영역 -->
-                 <img src="/images/popup_img.png">
-            </div>
+            <div class="main-popup-content" data-main-popup-content></div>
         </section>
     </div>
 
@@ -391,9 +388,9 @@ Specification
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="/js/include.js?v=20260814">
     </script>
-    <script src="/js/common.js?v=20260816-2">
+    <script src="/js/common.js?v=20260821">
     </script>
-    <script src="/js/main.js?v=20260815-1">
+    <script src="/js/main.js?v=20260821">
     </script>
     <script src="/js/products.js?v=20260814"></script>
     <script src="/js/api/config.js?v=20260820"></script>

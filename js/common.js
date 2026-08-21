@@ -6,8 +6,8 @@
      */
     window.addEventListener("includeLoaded", initCommon);
 
-    function initCommon() {
-        initAuthState();
+    async function initCommon() {
+        await initAuthState();
         initCurrentGnb();
         initHeaderTheme();
         initDragCursor();
@@ -18,26 +18,92 @@
         initHeaderTransition();
     }
 
+    function getStoredAccessToken() {
+        return window.sessionStorage.getItem("hunter.accessToken") ||
+            window.localStorage.getItem("hunter.accessToken") || "";
+    }
+
+    function getStoredRefreshToken() {
+        return window.sessionStorage.getItem("hunter.refreshToken") ||
+            window.localStorage.getItem("hunter.refreshToken") || "";
+    }
+
+    function clearStoredAuth() {
+        [window.localStorage, window.sessionStorage].forEach((storage) => {
+            storage.removeItem("hunter.accessToken");
+            storage.removeItem("hunter.refreshToken");
+            storage.removeItem("hunter.member");
+        });
+    }
+
+    async function requestCommonApi(path, options = {}) {
+        const baseUrl = window.HunterAPIConfig?.baseUrl || "https://api-dev.hunterkorea.com";
+        const headers = new Headers(options.headers || {});
+        const token = getStoredAccessToken();
+        headers.set("Accept", "application/json");
+        if (token) headers.set("Authorization", `Bearer ${token}`);
+        if (options.body && !(options.body instanceof FormData)) headers.set("Content-Type", "application/json");
+        const response = await fetch(`${baseUrl}${path}`, {
+            method: options.method || "GET",
+            headers,
+            body: options.body && !(options.body instanceof FormData) ? JSON.stringify(options.body) : options.body
+        });
+        const payload = await response.json();
+        if (!response.ok || payload?.success === false) {
+            const error = new Error(payload?.error?.message || "요청을 처리하지 못했습니다.");
+            error.status = response.status;
+            throw error;
+        }
+        return options.raw ? payload : payload?.data;
+    }
+
     /** 저장된 액세스 토큰을 기준으로 공통 헤더 로그인 상태를 표시합니다. */
-    function initAuthState() {
+    async function initAuthState() {
         const params = new URLSearchParams(window.location.search);
         const previewAuth = params.get("previewAuth");
-        const hasAccessToken = Boolean(
-            window.sessionStorage.getItem("hunter.accessToken") ||
-            window.localStorage.getItem("hunter.accessToken")
-        );
-        const isLoggedIn = previewAuth === "login"
+        const hasAccessToken = Boolean(getStoredAccessToken());
+        let isLoggedIn = previewAuth === "login"
             ? true
             : previewAuth === "logout"
                 ? false
                 : hasAccessToken;
         const previewAlarm = params.get("previewAlarm");
-        const hasUnreadAlarm = Boolean(document.querySelector(".header-alarm-item.is-unread"));
-        const hasAlarm = isLoggedIn && (previewAlarm === null ? hasUnreadAlarm : previewAlarm !== "0");
+        let hasAlarm = false;
         const headerLogin = document.querySelector(".header-r.is-login");
         const headerLogout = document.querySelector(".header-r.is-logout");
         const allMenu = document.querySelector(".all-menu");
 
+        if (isLoggedIn && hasAccessToken) {
+            try {
+                const selectedBusinessId = window.localStorage.getItem("hunter.selectedBusinessId") || "";
+                const notificationQuery = new URLSearchParams({ page: "1", size: "20" });
+                if (selectedBusinessId) notificationQuery.set("businessId", selectedBusinessId);
+                const [member, notifications] = await Promise.all([
+                    requestCommonApi("/api/v1/me"),
+                    requestCommonApi(`/api/v1/me/notifications?${notificationQuery}`, { raw: true })
+                ]);
+                const memberData = member?.member || member || {};
+                document.querySelectorAll(".all-menu-member-name").forEach((element) => {
+                    element.textContent = memberData.memberName ? `${memberData.memberName}님` : "회원님";
+                });
+                const storage = window.localStorage.getItem("hunter.accessToken") ? window.localStorage : window.sessionStorage;
+                storage.setItem("hunter.member", JSON.stringify(memberData));
+                renderHeaderNotifications(notifications);
+                hasAlarm = Array.isArray(notifications?.data) && notifications.data.some((item) => !item.read);
+            } catch (error) {
+                if (error.status === 401) {
+                    clearStoredAuth();
+                    isLoggedIn = false;
+                } else {
+                    console.error("헤더 회원정보를 불러오지 못했습니다.", error);
+                    renderHeaderNotifications({ data: [], meta: {} });
+                }
+            }
+        } else {
+            renderHeaderNotifications({ data: [], meta: {} });
+        }
+
+        if (previewAlarm !== null) hasAlarm = isLoggedIn && previewAlarm !== "0";
         if (headerLogin) headerLogin.hidden = !isLoggedIn;
         if (headerLogout) headerLogout.hidden = isLoggedIn;
 
@@ -47,16 +113,61 @@
         }
 
         document.querySelectorAll(".btn-logout").forEach((button) => {
-            button.addEventListener("click", (event) => {
+            button.addEventListener("click", async (event) => {
                 event.preventDefault();
-                [window.localStorage, window.sessionStorage].forEach((storage) => {
-                    storage.removeItem("hunter.accessToken");
-                    storage.removeItem("hunter.refreshToken");
-                    storage.removeItem("hunter.member");
-                });
+                const refreshToken = getStoredRefreshToken();
+                try {
+                    await requestCommonApi("/api/v1/auth/logout", {
+                        method: "POST",
+                        headers: refreshToken ? { "X-Refresh-Token": refreshToken } : {}
+                    });
+                } catch (error) {
+                    console.error("로그아웃 요청에 실패했습니다.", error);
+                }
+                clearStoredAuth();
                 window.location.href = "/account/login.html";
             });
         });
+    }
+
+    function renderHeaderNotifications(response, append = false) {
+        const list = document.querySelector(".header-alarm-list");
+        const alarm = document.querySelector(".header-alarm");
+        if (!list || !alarm) return;
+        const notifications = Array.isArray(response?.data) ? response.data : [];
+        if (!append) list.innerHTML = "";
+        notifications.forEach((notification) => {
+            const article = document.createElement("article");
+            article.className = `header-alarm-item${notification.read ? "" : " is-unread"}`;
+            article.dataset.alarmId = String(notification.notificationId);
+            article.dataset.alarmCategory = notification.notificationType === "ADMIN" ? "admin" : "service";
+            article.dataset.linkUrl = notification.linkUrl || "";
+            article.dataset.createdAt = notification.createdAt || "";
+            const title = document.createElement("h3");
+            const body = document.createElement("p");
+            const time = document.createElement("time");
+            title.textContent = notification.title || "";
+            body.textContent = notification.body || "";
+            time.dateTime = notification.createdAt || "";
+            time.textContent = formatCommonDate(notification.createdAt);
+            article.append(title, body, time);
+            list.append(article);
+        });
+        if (!list.querySelector(".header-alarm-item")) {
+            const empty = document.createElement("p");
+            empty.className = "header-alarm-empty";
+            empty.textContent = "등록된 알림이 없습니다.";
+            list.append(empty);
+        }
+        alarm.dataset.currentPage = String(response?.meta?.page || 1);
+        alarm.dataset.totalPages = String(response?.meta?.totalPages || 1);
+    }
+
+    function formatCommonDate(value) {
+        if (!value) return "";
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return value;
+        return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, "0")}.${String(date.getDate()).padStart(2, "0")}`;
     }
 
     /**
@@ -799,7 +910,6 @@ function initDragCursor() {
         const openButtons = document.querySelectorAll(".btn-alarm, [data-alarm-open]");
         const closeButtons = alarm?.querySelectorAll("[data-alarm-close]") || [];
         const tabs = alarm?.querySelectorAll("[data-alarm-tab]") || [];
-        const items = alarm?.querySelectorAll("[data-alarm-category]") || [];
         const footer = alarm?.querySelector(".header-alarm-footer");
         const olderButton = alarm?.querySelector("[data-alarm-older]");
 
@@ -809,29 +919,21 @@ function initDragCursor() {
         let activeCategory = tabs[0]?.dataset.alarmTab || "service";
         let showingOlder = false;
         let openedUnreadIds = [];
-        const readStorageKey = "hunter-header-read-alarms";
+        let loadingOlder = false;
         const day = 24 * 60 * 60 * 1000;
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const recentCutoff = today.getTime() - (9 * day);
 
-        function getStoredReadIds() {
-            try {
-                const value = JSON.parse(window.localStorage.getItem(readStorageKey) || "[]");
-                return Array.isArray(value) ? value : [];
-            } catch (error) {
-                return [];
-            }
-        }
-
         function isOlderItem(item) {
-            const date = item.querySelector("time")?.getAttribute("datetime");
+            const date = item.dataset.createdAt || item.querySelector("time")?.getAttribute("datetime");
             if (!date) return false;
-            const timestamp = new Date(`${date}T00:00:00`).getTime();
+            const timestamp = new Date(date).getTime();
             return Number.isFinite(timestamp) && timestamp < recentCutoff;
         }
 
         function updateUnreadState() {
+            const items = [...alarm.querySelectorAll("[data-alarm-category]")];
             const hasUnread = [...items].some((item) => item.classList.contains("is-unread"));
             document.querySelectorAll(".btn-alarm").forEach((button) => {
                 button.classList.toggle("has-unread", hasUnread);
@@ -845,6 +947,7 @@ function initDragCursor() {
         }
 
         function renderItems() {
+            const items = [...alarm.querySelectorAll("[data-alarm-category]")];
             let hasOlder = false;
             items.forEach((item) => {
                 const matchesCategory = item.dataset.alarmCategory === activeCategory;
@@ -852,13 +955,9 @@ function initDragCursor() {
                 if (matchesCategory && older) hasOlder = true;
                 item.hidden = !matchesCategory || (older && !showingOlder);
             });
-            if (footer) footer.hidden = !hasOlder || showingOlder;
+            const hasMorePages = Number(alarm.dataset.currentPage || 1) < Number(alarm.dataset.totalPages || 1);
+            if (footer) footer.hidden = (!hasOlder || showingOlder) && !hasMorePages;
         }
-
-        const storedReadIds = new Set(getStoredReadIds());
-        items.forEach((item) => {
-            if (storedReadIds.has(item.dataset.alarmId)) item.classList.remove("is-unread");
-        });
         renderItems();
         updateUnreadState();
 
@@ -876,12 +975,18 @@ function initDragCursor() {
             });
         }
 
-        function openAlarm() {
-            lastFocusedElement = document.activeElement;
-            openedUnreadIds = [...items]
-                .filter((item) => item.classList.contains("is-unread"))
+        function trackVisibleUnread() {
+            const ids = [...alarm.querySelectorAll("[data-alarm-category]")]
+                .filter((item) => !item.hidden && item.classList.contains("is-unread"))
                 .map((item) => item.dataset.alarmId)
                 .filter(Boolean);
+            openedUnreadIds = [...new Set([...openedUnreadIds, ...ids])];
+        }
+
+        function openAlarm() {
+            lastFocusedElement = document.activeElement;
+            openedUnreadIds = [];
+            trackVisibleUnread();
             closeMenuIfOpen();
             alarm.classList.add("is-open");
             alarm.setAttribute("aria-hidden", "false");
@@ -893,6 +998,22 @@ function initDragCursor() {
             window.setTimeout(() => alarm.querySelector("[data-alarm-close]")?.focus(), 250);
         }
 
+        async function markNotificationsRead(ids) {
+            if (!ids.length) return;
+            try {
+                await requestCommonApi("/api/v1/me/notifications/read-status", {
+                    method: "PATCH",
+                    body: { notificationIds: ids.map(Number), readAll: false }
+                });
+                alarm.querySelectorAll("[data-alarm-id]").forEach((item) => {
+                    if (ids.includes(item.dataset.alarmId)) item.classList.remove("is-unread");
+                });
+                updateUnreadState();
+            } catch (error) {
+                console.error("알림 읽음 처리에 실패했습니다.", error);
+            }
+        }
+
         function closeAlarm() {
             alarm.classList.remove("is-open");
             alarm.setAttribute("aria-hidden", "true");
@@ -902,17 +1023,8 @@ function initDragCursor() {
                 button.setAttribute("aria-expanded", "false");
             });
             if (openedUnreadIds.length) {
-                const readIds = new Set([...getStoredReadIds(), ...openedUnreadIds]);
-                try {
-                    window.localStorage.setItem(readStorageKey, JSON.stringify([...readIds]));
-                } catch (error) {
-                    // Storage may be unavailable in privacy-restricted contexts.
-                }
-                items.forEach((item) => {
-                    if (readIds.has(item.dataset.alarmId)) item.classList.remove("is-unread");
-                });
+                markNotificationsRead(openedUnreadIds);
                 openedUnreadIds = [];
-                updateUnreadState();
             }
             if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
                 lastFocusedElement.focus();
@@ -934,11 +1046,56 @@ function initDragCursor() {
                 button.setAttribute("aria-selected", String(isActive));
             });
             renderItems();
+            trackVisibleUnread();
         }));
 
-        olderButton?.addEventListener("click", () => {
+        olderButton?.addEventListener("click", async () => {
             showingOlder = true;
+            const currentPage = Number(alarm.dataset.currentPage || 1);
+            const totalPages = Number(alarm.dataset.totalPages || 1);
+            if (!loadingOlder && currentPage < totalPages) {
+                loadingOlder = true;
+                olderButton.disabled = true;
+                try {
+                    const query = new URLSearchParams({ page: String(currentPage + 1), size: "20" });
+                    const businessId = window.localStorage.getItem("hunter.selectedBusinessId") || "";
+                    if (businessId) query.set("businessId", businessId);
+                    const response = await requestCommonApi(`/api/v1/me/notifications?${query}`, { raw: true });
+                    alarm.querySelector(".header-alarm-empty")?.remove();
+                    renderHeaderNotifications(response, true);
+                } catch (error) {
+                    console.error("이전 알림을 불러오지 못했습니다.", error);
+                } finally {
+                    loadingOlder = false;
+                    olderButton.disabled = false;
+                }
+            }
             renderItems();
+            trackVisibleUnread();
+        });
+
+        alarm.querySelector(".header-alarm-list")?.addEventListener("click", async (event) => {
+            const item = event.target.closest("[data-alarm-id]");
+            if (!item) return;
+            const id = item.dataset.alarmId;
+            if (item.classList.contains("is-unread")) await markNotificationsRead([id]);
+            const linkUrl = item.dataset.linkUrl || "";
+            if (/^(\/|https?:\/\/)/i.test(linkUrl)) window.location.href = linkUrl;
+        });
+
+        window.addEventListener("hunterBusinessChanged", async (event) => {
+            const query = new URLSearchParams({ page: "1", size: "20" });
+            const businessId = String(event.detail?.businessId || "");
+            if (businessId) query.set("businessId", businessId);
+            try {
+                const response = await requestCommonApi(`/api/v1/me/notifications?${query}`, { raw: true });
+                showingOlder = false;
+                renderHeaderNotifications(response);
+                renderItems();
+                updateUnreadState();
+            } catch (error) {
+                console.error("선택 사업체 알림을 불러오지 못했습니다.", error);
+            }
         });
 
         alarm.addEventListener("click", (event) => {

@@ -58,6 +58,15 @@
             },
             withdraw: function () {
                 return client.post('/api/v1/me/withdrawal');
+            },
+            getNotifications: function (params) {
+                return client.get('/api/v1/me/notifications', { query: params || {}, raw: true });
+            },
+            readNotifications: function (notificationIds, readAll) {
+                return client.patch('/api/v1/me/notifications/read-status', {
+                    notificationIds: notificationIds || [],
+                    readAll: Boolean(readAll)
+                });
             }
         }),
         prideStores: Object.freeze({
@@ -116,6 +125,11 @@
             },
             getRecommendations: function () {
                 return client.get('/api/v1/search/recommendations', { auth: false });
+            }
+        }),
+        popups: Object.freeze({
+            getActive: function () {
+                return client.get('/api/v1/popups', { auth: false });
             }
         }),
         csRequests: Object.freeze({

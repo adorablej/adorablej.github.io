@@ -19,20 +19,90 @@
         initMediaSection();
     }
 
-    function initMainPopup() {
+    async function initMainPopup() {
         const popup = document.querySelector("[data-main-popup]");
         if (!popup) return;
 
         const closeButtons = popup.querySelectorAll("[data-main-popup-close]");
+        const content = popup.querySelector("[data-main-popup-content]");
+        const dialog = popup.querySelector(".main-popup-dialog");
 
         function closePopup() {
             popup.classList.remove("is-open");
             popup.setAttribute("aria-hidden", "true");
             document.body.classList.remove("is-main-popup-open");
+            window.setTimeout(() => { popup.hidden = true; }, 200);
         }
 
-        document.body.classList.add("is-main-popup-open");
-        popup.querySelector(".main-popup-close")?.focus({ preventScroll: true });
+        function isAvailable(data) {
+            if (!data || data.isOpen === false) return false;
+            const now = Date.now();
+            const start = data.exposureStartAt ? new Date(data.exposureStartAt).getTime() : Number.NEGATIVE_INFINITY;
+            const end = data.exposureEndAt ? new Date(data.exposureEndAt).getTime() : Number.POSITIVE_INFINITY;
+            if (Number.isNaN(start) || Number.isNaN(end) || now < start || now > end) return false;
+            return Boolean(data.imageUrl || data.content);
+        }
+
+        function safeLink(value) {
+            const link = String(value || "");
+            return /^(\/|https?:\/\/)/i.test(link) ? link : "";
+        }
+
+        function sanitizeHtml(value) {
+            const template = document.createElement("template");
+            template.innerHTML = String(value || "");
+            template.content.querySelectorAll("script, iframe, object, embed").forEach((element) => element.remove());
+            template.content.querySelectorAll("*").forEach((element) => {
+                [...element.attributes].forEach((attribute) => {
+                    if (/^on/i.test(attribute.name) || /javascript:/i.test(attribute.value)) {
+                        element.removeAttribute(attribute.name);
+                    }
+                });
+            });
+            return template.innerHTML;
+        }
+
+        function showPopup(data) {
+            if (!content || !isAvailable(data)) {
+                closePopup();
+                return false;
+            }
+
+            content.innerHTML = "";
+            if (data.imageUrl) {
+                const image = document.createElement("img");
+                image.src = data.imageUrl;
+                image.alt = data.imageAlt || data.title || "메인 팝업";
+                image.addEventListener("error", () => image.remove(), { once: true });
+                const linkUrl = safeLink(data.linkUrl);
+                if (linkUrl) {
+                    const link = document.createElement("a");
+                    link.href = linkUrl;
+                    link.target = data.linkTarget === "_blank" ? "_blank" : "_self";
+                    if (link.target === "_blank") link.rel = "noopener noreferrer";
+                    link.append(image);
+                    content.append(link);
+                } else {
+                    content.append(image);
+                }
+            }
+            if (data.content) {
+                const html = document.createElement("div");
+                html.className = "main-popup-html";
+                html.innerHTML = sanitizeHtml(data.content);
+                content.append(html);
+            }
+
+            dialog?.setAttribute("aria-label", data.title || data.imageAlt || "메인 팝업");
+            popup.hidden = false;
+            popup.setAttribute("aria-hidden", "false");
+            document.body.classList.add("is-main-popup-open");
+            requestAnimationFrame(() => popup.classList.add("is-open"));
+            popup.querySelector(".main-popup-close")?.focus({ preventScroll: true });
+            return true;
+        }
+
+        window.HunterMainPopup = Object.freeze({ show: showPopup, close: closePopup });
 
         closeButtons.forEach(function (button) {
             button.addEventListener("click", closePopup);
@@ -43,6 +113,20 @@
                 closePopup();
             }
         });
+
+        if (window.HUNTER_MAIN_POPUP) {
+            showPopup(window.HUNTER_MAIN_POPUP);
+            return;
+        }
+
+        try {
+            const popups = await window.HunterFrontAPI?.popups?.getActive();
+            const popupData = Array.isArray(popups) ? popups[0] : popups;
+            if (popupData) showPopup(popupData);
+        } catch (error) {
+            console.error("메인 팝업 조회에 실패했습니다.", error);
+            closePopup();
+        }
     }
 
 
