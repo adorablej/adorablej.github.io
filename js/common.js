@@ -1001,6 +1001,7 @@ function initDragCursor() {
         const recentSection = search.querySelector(".header-search-recent");
         const recentList = search.querySelector(".header-search-recent-list");
         const deleteAllButton = search.querySelector(".header-search-delete-all");
+        const recommendList = search.querySelector(".header-search-recommend-list");
         const storageKey = "hunterRecentSearches";
         const maxRecentCount = 8;
         let lastFocusedElement = null;
@@ -1055,7 +1056,7 @@ function initDragCursor() {
 
                 const link = document.createElement("a");
                 link.className = "header-search-recent-link";
-                link.href = `/search.html?keyword=${encodeURIComponent(keyword)}`;
+                link.href = `/search.html?q=${encodeURIComponent(keyword)}`;
                 link.textContent = keyword;
 
                 const deleteButton = document.createElement("button");
@@ -1069,6 +1070,35 @@ function initDragCursor() {
                 item.append(link, deleteButton);
                 recentList.append(item);
             });
+        }
+
+        async function loadRecommendedSearches() {
+            if (!recommendList) return;
+            const baseUrl = window.HunterAPIConfig?.baseUrl || "https://api-dev.hunterkorea.com";
+            try {
+                const response = await fetch(`${baseUrl}/api/v1/search/recommendations`, {
+                    headers: { Accept: "application/json" }
+                });
+                const payload = await response.json();
+                if (!response.ok || payload?.success === false) return;
+                const keywords = Array.isArray(payload?.data?.keywords) ? payload.data.keywords : [];
+                if (!keywords.length) return;
+                recommendList.innerHTML = "";
+                keywords
+                    .slice()
+                    .sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0))
+                    .forEach((item) => {
+                        const li = document.createElement("li");
+                        const link = document.createElement("a");
+                        const targetUrl = String(item.targetUrl || "");
+                        link.href = /^(\/|https?:\/\/)/i.test(targetUrl) ? targetUrl : "#";
+                        link.textContent = item.keyword || "";
+                        li.append(link);
+                        recommendList.append(li);
+                    });
+            } catch (error) {
+                console.error("추천 검색어 조회에 실패했습니다.", error);
+            }
         }
 
         function openSearch() {
@@ -1151,6 +1181,7 @@ function initDragCursor() {
         });
 
         renderRecentSearches();
+        loadRecommendedSearches();
     }
 
 })();

@@ -1,17 +1,17 @@
-(function () {
+(async function () {
     "use strict";
 
-    const data = window.WHEEL_ALIGNMENT_DATA;
-    if (!data) return;
+    const api = window.HunterFrontAPI?.vehicles;
+    const data = { brands: [], models: {}, results: {} };
 
     const RECENT_STORAGE_KEY = "hunter-wheel-alignment-recent";
 
     function loadRecent() {
         try {
             const saved = JSON.parse(localStorage.getItem(RECENT_STORAGE_KEY));
-            return Array.isArray(saved) ? saved.filter(Boolean).slice(0, 5) : ["아반떼", "쏘나타"];
+            return Array.isArray(saved) ? saved.filter(Boolean).slice(0, 5) : [];
         } catch (error) {
-            return ["아반떼", "쏘나타"];
+            return [];
         }
     }
 
@@ -67,9 +67,14 @@
         </div>
     `;
 
+    const brandLogoMarkup = (brand, decorative) => `
+        <img src="${escapeHtml(brand.logo || "/images/img_placeholder.png")}" alt="${decorative ? "" : escapeHtml(brand.name)}"
+            onerror="this.onerror=null;this.src='/images/img_placeholder.png'">
+    `;
+
     function renderBrandSelect() {
         elements.brandSelect.insertAdjacentHTML("beforeend", data.brands.map((brand) => (
-            `<option value="${brand.id}">${brand.name}</option>`
+            `<option value="${brand.id}">${escapeHtml(brand.name)}</option>`
         )).join(""));
     }
 
@@ -78,8 +83,8 @@
             .filter((brand) => brand.type === type)
             .map((brand) => `
                 <button type="button" class="sub-specification-brand-card" data-brand-id="${brand.id}">
-                    <span class="sub-specification-brand-logo">${brand.logo ? `<img src="${brand.logo}" alt="${brand.name}">` : brand.logoText}</span>
-                    <span class="sub-specification-brand-name">${brand.name}</span>
+                    <span class="sub-specification-brand-logo">${brandLogoMarkup(brand, false)}</span>
+                    <span class="sub-specification-brand-name">${escapeHtml(brand.name)}</span>
                 </button>
             `).join("");
 
@@ -106,8 +111,8 @@
         if (brand) {
             html += `
                 <button type="button" class="sub-specification-selected-chip" data-remove="brand">
-                    <span class="sub-specification-selected-logo">${brand.logo ? `<img src="${brand.logo}" alt="">` : brand.logoText}</span>
-                    <strong>${brand.name}</strong>
+                    <span class="sub-specification-selected-logo">${brandLogoMarkup(brand, true)}</span>
+                    <strong>${escapeHtml(brand.name)}</strong>
                     <span class="sub-specification-chip-close" aria-hidden="true"></span>
                 </button>
             `;
@@ -147,35 +152,23 @@
             : emptyResultMarkup();
     }
 
-    function createFallbackResults() {
-        const model = getModel();
-        return model ? [{
-            year: "2020-2024",
-            modelName: model.name,
-            model: model.name,
-            detail: "All Models",
-            note: "관리자 데이터 연결 예정",
-            image: model.image
-        }] : [];
-    }
-
     function renderResults() {
         const key = `${state.brandId}:${state.modelId}`;
-        const rows = data.results[key] || createFallbackResults();
-        elements.resultBody.innerHTML = rows.map((row, index) => {
+        const rows = data.results[key] || [];
+        elements.resultBody.innerHTML = rows.length ? rows.map((row, index) => {
             const hasSpecification = Array.isArray(row.specifications) && row.specifications.length > 0;
             return `
             <tr class="sub-specification-result-row${hasSpecification ? " has-specification" : ""}"
                 ${hasSpecification ? `data-result-index="${index}" tabindex="0" role="button" aria-label="${row.modelName} 제원 상세 보기"` : ""}>
                 <td><img src="${row.image || "/images/car_default.png"}" alt="${row.modelName}" onerror="this.onerror=null;this.src='/images/car_default.png'"></td>
-                <td>${row.year}</td>
-                <td>${row.modelName}</td>
-                <td>${row.model}</td>
-                <td>${row.detail}</td>
-                <td>${row.note}</td>
+                <td>${escapeHtml(row.year)}</td>
+                <td>${escapeHtml(row.modelName)}</td>
+                <td>${escapeHtml(row.model)}</td>
+                <td>${escapeHtml(row.detail)}</td>
+                <td>${escapeHtml(row.note)}</td>
             </tr>
         `;
-        }).join("");
+        }).join("") : `<tr><td colspan="6">${emptyResultMarkup()}</td></tr>`;
     }
 
     function updateUrl() {
@@ -209,7 +202,7 @@
         renderStep();
     }
 
-    function selectModel(modelId) {
+    async function selectModel(modelId) {
         state.modelId = modelId;
         const model = getModel();
         if (model && !state.recent.includes(model.name)) {
@@ -219,6 +212,7 @@
             renderRecent();
         }
         renderStep();
+        await loadSpecifications();
     }
 
     function addRecentKeyword(keyword) {
@@ -253,6 +247,7 @@
             state.brandId = matchedBrand.id;
             state.modelId = matchedModel.id;
             renderStep();
+            loadSpecifications();
             return;
         }
 
@@ -324,13 +319,11 @@
     function openSpecificationModal(resultIndex) {
         const brand = getBrand();
         const model = getModel();
-        const rows = data.results[`${state.brandId}:${state.modelId}`] || createFallbackResults();
+        const rows = data.results[`${state.brandId}:${state.modelId}`] || [];
         const result = rows[resultIndex];
         if (!brand || !model || !result || !Array.isArray(result.specifications) || !result.specifications.length) return;
 
-        elements.modalBrand.innerHTML = brand.logo
-            ? `<img src="${brand.logo}" alt="${escapeHtml(brand.name)}">`
-            : escapeHtml(brand.logoText);
+        elements.modalBrand.innerHTML = brandLogoMarkup(brand, false);
         elements.modalMeta.innerHTML = `
             <div><dt>제조사</dt><dd>${escapeHtml(brand.nameKo || brand.name)}</dd></div>
             <div><dt>모델명</dt><dd>${escapeHtml(result.modelName)}</dd></div>
@@ -464,6 +457,102 @@
         window.location.href = "/Support/Vehicle-Specification-Request.html";
     });
 
+    function isDomesticManufacturer(manufacturer) {
+        if (manufacturer.manufacturerType) {
+            return manufacturer.manufacturerType === "DOMESTIC";
+        }
+        return /^(현대|기아|제네시스|쉐보레|한국GM|대우|르노|르노코리아|르노삼성|삼성|쌍용|KG모빌리티|KGM)/i.test(manufacturer.manufacturerName || "");
+    }
+
+    function mapCatalog(response) {
+        const manufacturers = Array.isArray(response?.manufacturers) ? response.manufacturers : [];
+        manufacturers.forEach((manufacturer) => {
+            const brandId = String(manufacturer.manufacturerId);
+            const brandName = manufacturer.manufacturerName || manufacturer.manufacturerNameEn || manufacturer.manufacturerCode || "-";
+            data.brands.push({
+                id: brandId,
+                manufacturerId: manufacturer.manufacturerId,
+                manufacturerCode: manufacturer.manufacturerCode,
+                name: brandName,
+                nameKo: manufacturer.manufacturerName || brandName,
+                logoText: manufacturer.manufacturerNameEn || brandName,
+                logo: manufacturer.logoUrl || "",
+                type: isDomesticManufacturer(manufacturer) ? "domestic" : "import",
+                keywords: [manufacturer.manufacturerNameEn]
+            });
+            data.models[brandId] = (manufacturer.models || []).map((model) => ({
+                id: String(model.modelId),
+                modelId: model.modelId,
+                modelCode: model.modelCode,
+                name: model.modelName || model.modelNameEn || model.modelCode || "-",
+                nameEn: model.modelNameEn || "",
+                image: model.imageUrl || "/images/car_default2.png"
+            }));
+        });
+    }
+
+    function formatSpecValue(item) {
+        const value = item?.specValue ?? "-";
+        return item?.unitName ? `${value} ${item.unitName}` : String(value);
+    }
+
+    function mapSpecification(row) {
+        const specifications = [];
+        const extra = {};
+        (row.specValues || []).slice().sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0)).forEach((item) => {
+            const isFront = String(item.specKey || "").startsWith("F_");
+            const isRear = String(item.specKey || "").startsWith("R_");
+            if (isFront || isRear) {
+                specifications.push({
+                    section: isFront ? "전륜" : "후륜",
+                    label: String(item.specName || item.specKey || "-").replace(/^(전륜|후륜)\s*/, ""),
+                    value: formatSpecValue(item),
+                    min: item.minValue ?? "-",
+                    max: item.maxValue ?? "-"
+                });
+            } else {
+                extra[item.specName || item.specKey || "기타"] = formatSpecValue(item);
+            }
+        });
+
+        return {
+            vehicleSpecId: row.vehicleSpecId,
+            year: row.modelYearRange || row.modelYear || "-",
+            modelName: row.modelName || "-",
+            model: row.modelNameEn || row.modelName || "-",
+            detail: row.trimName || "-",
+            note: row.description || "-",
+            manufacturerNameEn: row.manufacturerNameEn || "",
+            image: row.imageUrl || getModel()?.image || "/images/car_default.png",
+            specifications,
+            extra
+        };
+    }
+
+    async function loadSpecifications() {
+        const brand = getBrand();
+        const model = getModel();
+        if (!api || !brand || !model) return;
+        const key = `${state.brandId}:${state.modelId}`;
+        try {
+            const response = await api.getSpecifications({
+                manufacturerId: brand.manufacturerId,
+                modelId: model.modelId
+            });
+            data.results[key] = (Array.isArray(response) ? response : []).map(mapSpecification);
+        } catch (error) {
+            console.error("차량 제원 조회에 실패했습니다.", error);
+            data.results[key] = [];
+        }
+        if (key === `${state.brandId}:${state.modelId}`) renderResults();
+    }
+
+    async function loadCatalog() {
+        if (!api) throw new Error("차량 제원 API를 불러올 수 없습니다.");
+        const response = await api.getCatalog();
+        mapCatalog(response);
+    }
+
     function restoreFromUrl() {
         const params = new URLSearchParams(location.search);
         const brandId = params.get("brand") || "";
@@ -476,9 +565,20 @@
         }
     }
 
+    try {
+        await loadCatalog();
+    } catch (error) {
+        console.error("차량 카탈로그 조회에 실패했습니다.", error);
+        elements.domesticGrid.innerHTML = emptyResultMarkup();
+        elements.importGrid.innerHTML = emptyResultMarkup();
+        renderRecent();
+        return;
+    }
+
     restoreFromUrl();
     renderBrandSelect();
     renderBrands();
     renderRecent();
     renderStep();
+    if (state.modelId) await loadSpecifications();
 })();

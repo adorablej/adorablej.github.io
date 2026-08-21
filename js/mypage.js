@@ -458,11 +458,12 @@ function initMypageBusinessAddModal() {
         if (message) message.textContent = "";
     });
 
-    form.addEventListener("submit", event => {
+    form.addEventListener("submit", async event => {
         event.preventDefault();
         if (!validateForm()) return;
-        // API 연동 시 기업/사업체 추가 요청 로직 연결
-        openCompleteModal();
+        await window.HunterAlert?.open({
+            message: "기업/사업체 추가 신청 API가 준비되지 않았습니다."
+        });
     });
 
     window.addEventListener("keydown", event => {
@@ -512,7 +513,7 @@ function initMypageWithdrawModal() {
         document.body.classList.remove("is-modal-open");
         if (agree) agree.checked = false;
         if (submit) submit.disabled = true;
-        window.HunterAlert?.open({
+        return window.HunterAlert?.open({
             message: "회원 탈퇴 신청이 완료되었습니다.\n더 나은 서비스로 찾아뵙겠습니다.\n감사합니다."
         });
     };
@@ -524,10 +525,21 @@ function initMypageWithdrawModal() {
         if (submit) submit.disabled = !agree.checked;
     });
 
-    submit?.addEventListener("click", () => {
+    submit?.addEventListener("click", async () => {
         if (!agree?.checked) return;
-        // API 연동 시 회원탈퇴 요청 로직 연결
-        openCompleteModal();
+        submit.disabled = true;
+        try {
+            const result = await window.HunterFrontAPI.member.withdraw();
+            if (result?.withdrawn !== true) throw new Error("회원탈퇴 응답을 확인할 수 없습니다.");
+            window.HunterAPI.auth.clearTokens();
+            await openCompleteModal();
+            window.location.replace("/account/login.html");
+        } catch (error) {
+            submit.disabled = false;
+            await window.HunterAlert?.open({
+                message: error?.message || "회원탈퇴 요청을 처리하지 못했습니다."
+            });
+        }
     });
 
     window.addEventListener("keydown", event => {

@@ -124,7 +124,8 @@ const operationGuideManualData = Object.values(operationGuideCategories).flatMap
         fileUrl: "/images/support/IMG_5191.pdf",
         originalFileName: `${item[1].replaceAll(/[^a-zA-Z0-9]+/g, "_")}.pdf`,
         downloadAllowed: true,
-        displayOrder: index + 1
+        displayOrder: index + 1,
+        isExposed: true
     }));
 });
 
@@ -141,7 +142,9 @@ const operationGuideVideoData = Object.values(operationGuideCategories).flatMap(
             thumbnailUrl: "",
             duration: index % 2 ? "6:52" : "4:09",
             captionSupported: index % 2 === 0,
-            displayOrder: index + 1
+            isFeatured: index < 3,
+            displayOrder: index + 1,
+            isExposed: true
         };
     })
 );

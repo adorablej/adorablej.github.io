@@ -225,20 +225,68 @@
     function initJoinSubmit() {
         var form = document.getElementById('join-form');
         if (!form) return;
+        var submitButton = form.querySelector('[type="submit"]');
+        var api = window.HunterFrontAPI && window.HunterFrontAPI.members;
+        var submitting = false;
 
-        form.addEventListener('submit', function (event) {
+        form.addEventListener('submit', async function (event) {
             if (event.defaultPrevented) return;
+            event.preventDefault();
 
             if (!validateUploadedFile()) {
-                event.preventDefault();
                 return;
             }
 
-            event.preventDefault();
-            var name = document.getElementById('join-name');
-            sessionStorage.setItem('joinUserName', name ? name.value.trim() : '');
-            window.location.href = '/account/join-complete.html';
+            if (!api || !api.create) {
+                await showAccountAlert('회원가입 기능을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
+                return;
+            }
+
+            if (submitting) return;
+            submitting = true;
+            submitButton.disabled = true;
+            submitButton.setAttribute('aria-busy', 'true');
+
+            var businessType = form.querySelector('input[name="businessType"]:checked').value;
+            var payload = new FormData();
+            payload.append('memberName', form.elements.name.value.trim());
+            payload.append('phoneNumber', form.elements.phone.value.trim());
+            payload.append('verificationToken', document.getElementById('phone-authenticated').value);
+            payload.append('agreeTerms', String(form.elements.agreeTerms.checked));
+            payload.append('agreePrivacy', String(form.elements.agreePrivacy.checked));
+            payload.append('agreeMarketing', String(form.elements.agreeMarketing.checked));
+            payload.append('businessType', businessType === 'corporation' ? 'CORPORATION' : 'SOLE_PROPRIETOR');
+            payload.append('businessNumber', form.elements.businessNumber.value.trim());
+            if (businessType === 'corporation') {
+                payload.append('corporationNumber', form.elements.corporationNumber.value.trim());
+            }
+            payload.append('businessName', form.elements.businessName.value.trim());
+            payload.append('openingDate', form.elements.openingDate.value);
+            payload.append('representativeName', form.elements.representativeName.value.trim());
+            payload.append('postalCode', form.elements.postalCode.value);
+            payload.append('businessAddress', form.elements.businessAddress.value.trim());
+            payload.append('businessAddressDetail', form.elements.businessAddressDetail.value.trim());
+            payload.append('businessFile', form.elements.businessFile.files[0]);
+
+            try {
+                await api.create(payload);
+                sessionStorage.setItem('joinUserName', form.elements.name.value.trim());
+                window.location.href = '/account/join-complete.html';
+            } catch (error) {
+                await showAccountAlert(error && error.message ? error.message : '회원가입 신청 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+                submitting = false;
+                submitButton.disabled = false;
+                submitButton.removeAttribute('aria-busy');
+            }
         });
+    }
+
+    async function showAccountAlert(message) {
+        if (window.HunterAlert && window.HunterAlert.open) {
+            return window.HunterAlert.open({ message: message });
+        }
+        window.alert(message);
+        return true;
     }
 
     function initAgreementControls() {
@@ -373,15 +421,42 @@
         var businessNumber = document.getElementById('business-number');
         var businessAuth = document.getElementById('business-authenticated');
         var businessStatus = document.getElementById('business-auth-status');
+        var openingDate = document.getElementById('opening-date');
+        var representativeName = document.getElementById('representative-name');
+        var businessName = document.getElementById('business-name');
+        var corporationNumber = document.getElementById('corporation-number');
+        var businessAddress = document.getElementById('business-address');
+        var serviceKey = 'c43099117f7a32bacb563e8aad7893df567f7d7a426d94b4ef94bd3f97e7a711';
+        var apiBaseUrl = 'https://api.odcloud.kr/api/nts-businessman/v1';
 
         if (businessButton && businessNumber && businessAuth) {
             businessButton.addEventListener('businessInfoMismatch', function () {
                 window.HunterAlert?.open({
-                    message: '입력하신 사업자 정보가 맞지 않습니다.\n다시한번 확인해주세요.'
+                    message: '입력하신 사업자 정보가 맞지 않습니다.\n다시 한번 확인해 주세요.'
                 });
             });
-            businessButton.addEventListener('click', function () {
+            function resetBusinessAuthentication() {
+                if (!businessAuth.value) return;
+                businessAuth.value = '';
+                businessAuth.dispatchEvent(new Event('change', { bubbles: true }));
+                businessButton.textContent = '사업자 인증';
+                businessButton.disabled = false;
+                businessButton.classList.remove('is-complete');
+                if (businessStatus) {
+                    businessStatus.hidden = true;
+                    businessStatus.className = 'sub-account-code-status';
+                    businessStatus.textContent = '';
+                }
+            }
+
+            function showBusinessMismatch() {
+                return showAccountAlert('입력하신 사업자 정보가 맞지 않습니다.\n다시 한번 확인해 주세요.');
+            }
+
+            businessButton.addEventListener('click', async function () {
                 var number = businessNumber.value.replace(/\D/g, '');
+                var selectedType = document.querySelector('input[name="businessType"]:checked');
+                var isCorporation = selectedType && selectedType.value === 'corporation';
 
                 if (number.length !== 10) {
                     setFieldError(businessNumber.closest('.sub-form-group'), '10자리 사업자등록번호를 입력해 주세요.');
@@ -392,21 +467,81 @@
                     return;
                 }
 
+                if (!openingDate.value || !representativeName.value.trim() || !businessName.value.trim()) {
+                    await showAccountAlert('개업일, 기업/사업체명, 대표자명을 먼저 입력해 주세요.');
+                    (!businessName.value.trim() ? businessName : !openingDate.value ? openingDate : representativeName).focus();
+                    return;
+                }
+
+                var corporationDigits = corporationNumber.value.replace(/\D/g, '');
+                if (isCorporation && corporationDigits.length !== 13) {
+                    setFieldError(corporationNumber.closest('.sub-form-group'), '13자리 법인등록번호를 입력해 주세요.');
+                    corporationNumber.focus();
+                    return;
+                }
+
                 clearFieldState(businessNumber.closest('.sub-form-group'));
-                markAuthenticated('business-authenticated', businessButton, 'business-auth-status', '사업자 인증이 완료되었습니다.');
+                businessButton.disabled = true;
+                businessButton.textContent = '인증 중';
+
+                var validationBody = {
+                    businesses: [{
+                        b_no: number,
+                        start_dt: openingDate.value.replace(/\D/g, ''),
+                        p_nm: representativeName.value.trim(),
+                        b_nm: businessName.value.trim(),
+                        corp_no: isCorporation ? corporationDigits : '',
+                        b_sector: '',
+                        b_type: '',
+                        b_adr: businessAddress.value.trim()
+                    }]
+                };
+                var requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', Accept: 'application/json' }
+                };
+
+                try {
+                    var responses = await Promise.all([
+                        fetch(apiBaseUrl + '/validate?serviceKey=' + encodeURIComponent(serviceKey), Object.assign({}, requestOptions, {
+                            body: JSON.stringify(validationBody)
+                        })),
+                        fetch(apiBaseUrl + '/status?serviceKey=' + encodeURIComponent(serviceKey), Object.assign({}, requestOptions, {
+                            body: JSON.stringify({ b_no: [number] })
+                        }))
+                    ]);
+                    var payloads = await Promise.all(responses.map(function (response) { return response.json(); }));
+                    if (!responses[0].ok || !responses[1].ok) throw new Error('사업자 정보를 확인하지 못했습니다.');
+
+                    var validation = payloads[0] && payloads[0].data && payloads[0].data[0];
+                    var statusResult = payloads[1] && payloads[1].data && payloads[1].data[0];
+                    if (!validation || validation.valid !== '01' || !statusResult || statusResult.b_stt_cd !== '01') {
+                        resetBusinessAuthentication();
+                        await showBusinessMismatch();
+                        return;
+                    }
+
+                    markAuthenticated('business-authenticated', businessButton, 'business-auth-status', '사업자 인증이 완료되었습니다.');
+                } catch (error) {
+                    resetBusinessAuthentication();
+                    await showAccountAlert(error && error.message ? error.message : '사업자 인증 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+                } finally {
+                    if (!businessAuth.value) {
+                        businessButton.disabled = false;
+                        businessButton.textContent = '사업자 인증';
+                    }
+                }
             });
 
             businessNumber.addEventListener('input', function () {
-                if (!businessAuth.value) return;
-                businessAuth.value = '';
-                businessButton.textContent = '사업자 인증';
-                businessButton.disabled = false;
-                businessButton.classList.remove('is-complete');
-                if (businessStatus) {
-                    businessStatus.hidden = true;
-                    businessStatus.className = 'sub-account-code-status';
-                    businessStatus.textContent = '';
-                }
+                resetBusinessAuthentication();
+            });
+            [openingDate, representativeName, businessName, corporationNumber, businessAddress].forEach(function (field) {
+                field.addEventListener('input', resetBusinessAuthentication);
+                field.addEventListener('change', resetBusinessAuthentication);
+            });
+            document.querySelectorAll('input[name="businessType"]').forEach(function (radio) {
+                radio.addEventListener('change', resetBusinessAuthentication);
             });
         }
     }
@@ -427,7 +562,8 @@
         var intervalId = null;
         var remainingSeconds = 599;
         var requestedPhone = '';
-        var TEST_CODE = '123456';
+        var verificationId = '';
+        var authApi = window.HunterFrontAPI && window.HunterFrontAPI.auth;
 
         function renderTimer() {
             var minutes = String(Math.floor(remainingSeconds / 60)).padStart(2, '0');
@@ -450,6 +586,7 @@
         function resetVerification(hideCodeArea) {
             stopTimer();
             authenticated.value = '';
+            verificationId = '';
             code.disabled = false;
             code.value = '';
             confirmButton.disabled = true;
@@ -462,9 +599,9 @@
             setStatus('', '');
         }
 
-        function startTimer() {
+        function startTimer(seconds) {
             stopTimer();
-            remainingSeconds = 599;
+            remainingSeconds = Number(seconds) || 599;
             renderTimer();
             intervalId = window.setInterval(function () {
                 remainingSeconds -= 1;
@@ -478,7 +615,7 @@
             }, 1000);
         }
 
-        function requestCode() {
+        async function requestCode() {
             var numbers = phone.value.replace(/\D/g, '');
             if (numbers.length < 10 || numbers.length > 11) {
                 setFieldError(group, '올바른 휴대전화번호를 입력해 주세요.');
@@ -486,40 +623,62 @@
                 return;
             }
 
-            clearFieldState(group);
-            requestedPhone = numbers;
-            authenticated.value = '';
-            codeArea.hidden = false;
-            code.disabled = false;
-            code.value = '';
-            confirmButton.disabled = true;
-            requestButton.textContent = '코드 요청';
-            resend.hidden = false;
-            group.classList.remove('is-verified');
-            setStatus('', '');
-            startTimer();
-            code.focus();
-        }
-
-        function verifyCode() {
-            if (code.value.length !== 6 || remainingSeconds <= 0) return;
-
-            if (code.value !== TEST_CODE) {
-                setStatus('error', '인증번호가 틀립니다.');
-                code.focus();
-                code.select();
+            if (!authApi || !authApi.requestPhoneVerification) {
+                await showAccountAlert('SMS 인증 기능을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
                 return;
             }
 
-            stopTimer();
-            authenticated.value = 'true';
-            authenticated.dispatchEvent(new Event('change', { bubbles: true }));
-            code.disabled = true;
-            confirmButton.disabled = true;
-            resend.hidden = true;
-            group.classList.add('is-verified');
             clearFieldState(group);
-            setStatus('success', '인증되었습니다.');
+            requestButton.disabled = true;
+            resend.disabled = true;
+            try {
+                var response = await authApi.requestPhoneVerification(phone.value.trim());
+                verificationId = String(response && response.verificationId || '');
+                if (!verificationId) throw new Error('인증 요청 정보를 확인할 수 없습니다.');
+                requestedPhone = numbers;
+                authenticated.value = '';
+                authenticated.dispatchEvent(new Event('change', { bubbles: true }));
+                codeArea.hidden = false;
+                code.disabled = false;
+                code.value = '';
+                confirmButton.disabled = true;
+                requestButton.textContent = '코드 요청';
+                resend.hidden = false;
+                group.classList.remove('is-verified');
+                setStatus('', '');
+                startTimer(response.expiresInSeconds);
+                code.focus();
+            } catch (error) {
+                setStatus('error', error && error.message ? error.message : '인증번호 발송에 실패했습니다.');
+            } finally {
+                requestButton.disabled = false;
+                resend.disabled = false;
+            }
+        }
+
+        async function verifyCode() {
+            if (code.value.length !== 6 || remainingSeconds <= 0) return;
+            if (!verificationId || !authApi || !authApi.confirmPhoneVerification) return;
+
+            confirmButton.disabled = true;
+            try {
+                var response = await authApi.confirmPhoneVerification(verificationId, code.value);
+                var token = response && response.verificationToken;
+                if (!token) throw new Error('인증 완료 정보를 확인할 수 없습니다.');
+                stopTimer();
+                authenticated.value = token;
+                authenticated.dispatchEvent(new Event('change', { bubbles: true }));
+                code.disabled = true;
+                resend.hidden = true;
+                group.classList.add('is-verified');
+                clearFieldState(group);
+                setStatus('success', '인증되었습니다.');
+            } catch (error) {
+                setStatus('error', error && error.message ? error.message : '인증번호가 틀립니다.');
+                code.focus();
+                code.select();
+                confirmButton.disabled = false;
+            }
         }
 
         requestButton.addEventListener('click', requestCode);
@@ -560,14 +719,35 @@
     function initAddressSearch() {
         var button = document.getElementById('address-search-button');
         var address = document.getElementById('business-address');
-        if (!button || !address) return;
+        var postalCode = document.getElementById('postal-code');
+        var detail = document.getElementById('business-address-detail');
+        if (!button || !address || !postalCode) return;
 
-        button.addEventListener('click', function () {
-            // 실제 적용 시 우편번호 API 호출 코드로 교체합니다.
-            address.value = '서울시 마포구 토정로 137';
-            address.dispatchEvent(new Event('input', { bubbles: true }));
-            address.dispatchEvent(new Event('change', { bubbles: true }));
-            document.getElementById('business-address-detail').focus();
+        function openPostcode() {
+            if (!window.daum || !window.daum.Postcode) {
+                showAccountAlert('주소 검색 기능을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
+                return;
+            }
+
+            new window.daum.Postcode({
+                oncomplete: function (data) {
+                    postalCode.value = data.zonecode || '';
+                    address.value = data.roadAddress || data.jibunAddress || '';
+                    postalCode.dispatchEvent(new Event('change', { bubbles: true }));
+                    address.dispatchEvent(new Event('input', { bubbles: true }));
+                    address.dispatchEvent(new Event('change', { bubbles: true }));
+                    clearFieldState(address.closest('.sub-form-group'));
+                    detail.focus();
+                }
+            }).open();
+        }
+
+        button.addEventListener('click', openPostcode);
+        address.addEventListener('click', openPostcode);
+        address.addEventListener('keydown', function (event) {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            openPostcode();
         });
     }
 

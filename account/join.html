@@ -125,9 +125,6 @@
                         <div class="sub-form-group sub-account-field sub-account-business-number-field">
                             <label class="sub-account-label sub-account-required" for="business-number">사업자등록번호</label>
                             <input class="sub-form-input sub-account-input" id="business-number" name="businessNumber" type="text" inputmode="numeric" maxlength="10" placeholder="(-) 제외한 숫자만 입력해 주세요." data-required data-message="사업자등록번호를 입력해 주세요." />
-                            <button class="sub-account-line-button sub-account-line-button-under" id="business-auth-button" type="button">사업자 인증</button>
-                            <input id="business-authenticated" type="hidden" value="" data-required data-message="사업자 인증을 진행해 주세요." />
-                            <p class="sub-account-code-status" id="business-auth-status" hidden aria-live="polite"></p>
                             <p class="sub-form-message sub-account-error" aria-live="polite"></p>
                         </div>
 
@@ -165,7 +162,11 @@
                                 <button class="sub-account-text-button" id="address-search-button" type="button">우편번호</button>
                             </div>
                             <input class="sub-form-input sub-account-input" id="business-address" name="businessAddress" type="text" placeholder="" readonly data-required data-message="" />
+                            <input id="postal-code" name="postalCode" type="hidden" data-required data-message="우편번호를 검색해 주세요." />
                             <input class="sub-form-input sub-account-input sub-account-input-gap" id="business-address-detail" name="businessAddressDetail" type="text" placeholder="상세 주소를 입력해 주세요." data-required data-message="상세 주소를 입력해 주세요." />
+                            <button class="sub-account-line-button sub-account-line-button-under" id="business-auth-button" type="button">사업자 인증</button>
+                            <input id="business-authenticated" type="hidden" value="" data-required data-message="사업자 인증을 진행해 주세요." />
+                            <p class="sub-account-code-status" id="business-auth-status" hidden aria-live="polite"></p>
                             <p class="sub-form-message sub-account-error" aria-live="polite"></p>
                         </div>
 
@@ -209,8 +210,12 @@
 
     <script src="/js/include.js?v=20260814"></script>
     <script src="/js/common.js?v=20260814"></script>
-    <script src="/js/form.js?v=20260814"></script>
-    <script src="/js/account.js?v=20260820-1"></script>
+    <script src="/js/api/config.js?v=20260821"></script>
+    <script src="/js/api/client.js?v=20260821"></script>
+    <script src="/js/api/front-api.js?v=20260821"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/js/form.js?v=20260821"></script>
+    <script src="/js/account.js?v=20260821"></script>
     <script src="/js/policy-data.js?v=20260814"></script>
     <script src="/js/policy.js?v=20260814-1"></script>
 </body>

@@ -22,9 +22,11 @@ function initFormComponents() {
 function initVehicleSpecificationRequest() {
     const form = document.querySelector("#vehicle-specification-form");
     const submitButton = form?.querySelector('[type="submit"]');
+    const api = window.HunterFrontAPI?.vehicles;
     if (!form || !submitButton) return;
 
     const requiredFields = [...form.querySelectorAll("[data-required]")];
+    let isSubmitting = false;
 
     const isFieldComplete = field => {
         if (field.type === "checkbox") return field.checked;
@@ -44,44 +46,81 @@ function initVehicleSpecificationRequest() {
     };
 
     const updateSubmitState = () => {
-        submitButton.disabled = !requiredFields.every(isFieldComplete);
+        submitButton.disabled = isSubmitting || !requiredFields.every(isFieldComplete);
     };
 
     requiredFields.forEach(field => {
         field.addEventListener(field.type === "checkbox" ? "change" : "input", updateSubmitState);
     });
 
+    form.addEventListener("submit", async event => {
+        if (event.defaultPrevented) return;
+        event.preventDefault();
+
+        const emailId = form.elements.email_id.value.trim();
+        const emailDomain = form.elements.email_domain.value.trim();
+        if ((emailId && !emailDomain) || (!emailId && emailDomain)) {
+            await showContactAlert("이메일 주소를 확인해주세요.");
+            (emailId ? form.elements.email_domain : form.elements.email_id).focus();
+            return;
+        }
+
+        if (!api?.createSpecificationRequest) {
+            await showContactAlert("차량제원 요청 기능을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.");
+            return;
+        }
+
+        const payload = {
+            vehicleInfo: form.elements.vehicle_name.value.trim(),
+            additionalInfo: form.elements.vehicle_detail.value.trim(),
+            companyName: form.elements.company_name.value.trim(),
+            requesterName: form.elements.requester_name.value.trim(),
+            phoneNumber: form.elements.phone_number.value.trim(),
+            marketingAgreed: form.elements.marketing_agree.checked
+        };
+        if (emailId && emailDomain) payload.email = `${emailId}@${emailDomain}`;
+
+        isSubmitting = true;
+        updateSubmitState();
+        submitButton.setAttribute("aria-busy", "true");
+
+        try {
+            await api.createSpecificationRequest(payload);
+            const confirmed = await showContactAlert("차량제원 추가 등록 요청이 완료되었습니다.");
+            if (confirmed !== false) {
+                window.location.href = "/Support/Wheel-Alignment-Specification.html";
+            }
+        } catch (error) {
+            await showContactAlert(error?.message || "차량제원 요청 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        } finally {
+            isSubmitting = false;
+            updateSubmitState();
+            submitButton.removeAttribute("aria-busy");
+        }
+    });
+
     updateSubmitState();
 }
 
 function initCompletionAlerts() {
-    const messages = new Map([
-        ["vehicle-specification-form", "차량제원 추가 등록 요청이 완료되었습니다."]
-    ]);
-
-    document.querySelectorAll(".sub-mypage-cs-form, #vehicle-specification-form").forEach(form => {
+    document.querySelectorAll(".sub-mypage-cs-form").forEach(form => {
         form.addEventListener("submit", async event => {
             if (event.defaultPrevented) return;
             event.preventDefault();
-            const message = form.classList.contains("sub-mypage-cs-form")
-                ? "CS문의접수가 완료되었습니다.\n입력하신 연락처로 회신드리겠습니다.\n감사합니다."
-                : messages.get(form.id);
-            const confirmed = await window.HunterAlert?.open({ message });
-
-            if (form.id === "vehicle-specification-form" && confirmed) {
-                window.location.href = "/Support/Wheel-Alignment-Specification.html";
-            }
+            await window.HunterAlert?.open({
+                message: "CS문의접수가 완료되었습니다.\n입력하신 연락처로 회신드리겠습니다.\n감사합니다."
+            });
         });
     });
 }
 
 async function showContactAlert(message) {
     if (window.HunterAlert?.open) {
-        await window.HunterAlert.open({ message });
-        return;
+        return await window.HunterAlert.open({ message });
     }
 
     window.alert(message);
+    return true;
 }
 
 function initContactFormSubmission() {

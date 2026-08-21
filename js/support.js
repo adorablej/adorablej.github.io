@@ -23,7 +23,7 @@ function playIcon() {
     return '<span class="sub-guide-play" aria-hidden="true"></span>';
 }
 
-function initOperationGuide() {
+async function initOperationGuide() {
     const guideContent = document.querySelector("#sub-guide-content");
     const guideTabs = document.querySelectorAll("[data-guide-tab]");
     const modal = document.querySelector(".sub-guide-video-modal");
@@ -39,31 +39,36 @@ function initOperationGuide() {
     const searchParams = new URLSearchParams(window.location.search);
     const requestedCategory = searchParams.get("category") || "alignment";
     const requestedType = searchParams.get("type") === "video" ? "video" : "manual";
-    const category = operationGuideCategories[requestedCategory] ? requestedCategory : "alignment";
-    const categoryInfo = operationGuideCategories[category];
-    const productsById = new Map(categoryInfo.products.map(product => [product.productId, product]));
-    const manualGroups = Object.values(operationGuideManualData
-        .filter(item => item.categoryId === categoryInfo.categoryId)
-        .sort((a, b) => a.displayOrder - b.displayOrder)
-        .reduce((groups, item) => {
-            const product = productsById.get(item.productId);
-            const productName = product?.productName || "Other documents";
-            if (!groups[item.productId]) {
-                groups[item.productId] = {
-                    title: productName,
-                    displayOrder: product?.productDisplayOrder || 999,
-                    items: []
-                };
-            }
-            groups[item.productId].items.push({ title: item.title, url: item.fileUrl });
-            return groups;
-        }, {}))
-        .sort((a, b) => a.displayOrder - b.displayOrder);
-    const videos = operationGuideVideoData
-        .filter(item => item.categoryId === categoryInfo.categoryId)
-        .sort((a, b) => a.displayOrder - b.displayOrder)
-        .map(item => ({ ...item, youtube: item.youtubeUrl }));
-    const currentGuide = { title: categoryInfo.categoryName, manual: manualGroups, video: videos };
+    let categoryInfo = null;
+    try {
+        categoryInfo = await window.HunterFrontAPI.eog.getCategory(requestedCategory);
+    } catch (error) {
+        console.error("Equipment Operation Guide를 불러오지 못했습니다.", error);
+    }
+
+    const products = Array.isArray(categoryInfo?.products) ? categoryInfo.products : [];
+    const manualGroups = products
+        .slice()
+        .sort((a, b) => Number(a.displayOrder) - Number(b.displayOrder))
+        .map(product => ({
+            title: product.productName || "Other documents",
+            displayOrder: product.displayOrder,
+            items: (Array.isArray(product.manuals) ? product.manuals : [])
+                .filter(item => item.isExposed !== false)
+                .sort((a, b) => Number(a.displayOrder) - Number(b.displayOrder))
+                .map(item => ({ title: item.title || "", url: item.fileUrl || "" }))
+                .filter(item => item.url)
+        }))
+        .filter(group => group.items.length);
+    const videos = (Array.isArray(categoryInfo?.videos) ? categoryInfo.videos : [])
+        .filter(item => item.isExposed !== false)
+        .sort((a, b) => Number(a.displayOrder) - Number(b.displayOrder))
+        .map(item => ({ ...item, youtube: item.youtubeUrl || "" }));
+    const currentGuide = {
+        title: categoryInfo?.categoryName || requestedCategory,
+        manual: manualGroups,
+        video: videos
+    };
 
     if (pageTitle) pageTitle.textContent = currentGuide.title;
 
@@ -204,12 +209,12 @@ function initOperationGuide() {
             destroyFeatured = null;
             return;
         }
-        const featured = videos.slice(0, 3);
+        const featured = videos.filter(video => video.isFeatured).slice(0, 3);
         const featuredSlides = featured.length > 1 ? [...featured, ...featured, ...featured] : featured;
         const list = videos.slice(0, visibleVideoCount);
 
         guideContent.innerHTML = `
-            <section class="sub-guide-video-feature">
+            ${featured.length ? `<section class="sub-guide-video-feature">
                 <div class="sub-guide-video-head">
                     <div class="sub-guide-video-controls sub-slider-controls">
                         <button type="button" class="sub-guide-video-prev sub-slider-button sub-slider-prev" aria-label="이전 영상"></button>
@@ -232,7 +237,7 @@ function initOperationGuide() {
                         `).join("")}
                     </div>
                 </div>
-            </section>
+            </section>` : ""}
             <section class="sub-guide-video-list-section">
                 <div class="sub-guide-video-list-inner">
                     <div class="sub-guide-video-grid">

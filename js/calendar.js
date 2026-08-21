@@ -1,9 +1,9 @@
-(() => {
+(async () => {
     "use strict";
 
-    const APPLICATION_STORAGE_KEY = "hunter.trainingApplications";
     const PENDING_APPLICATION_KEY = "hunter.pendingTrainingApplication";
-    const trainingData = (window.TRAINING_DATA || []).map((item) => ({
+    let trainingData = [];
+    const mapTraining = (item) => ({
         ...item,
         id: item.scheduleId,
         courseName: item.courseTitle || item.scheduleName,
@@ -13,12 +13,18 @@
         currentApplicants: item.applicationCount || 0,
         status: item.statusCode,
         feeType: String(item.feeType || "FREE").toLowerCase()
-    }));
-    const appliedTrainingIds = loadAppliedTrainingIds();
+    });
+    const appliedTrainingIds = new Set();
     const DEFAULT_TRAINING_IMAGE = "/images/img_placeholder.png";
     const TRAINING_COLOR_COUNT = 10;
 
-    const trainingColorClassById = new Map(
+    const trainingColorClassById = new Map();
+
+    function updateTrainingState(items) {
+        trainingData = items.map(mapTraining);
+        appliedTrainingIds.clear();
+        trainingColorClassById.clear();
+        trainingData.filter(item => item.applied).forEach(item => appliedTrainingIds.add(item.id));
         [...trainingData]
             .sort((a, b) => {
                 const dateCompare = a.date.localeCompare(b.date);
@@ -29,11 +35,10 @@
 
                 return a.id - b.id;
             })
-            .map((item, index) => [
-                item.id,
-                `training-color-${(index % TRAINING_COLOR_COUNT) + 1}`
-            ])
-    );
+            .forEach((item, index) => {
+                trainingColorClassById.set(item.id, `training-color-${(index % TRAINING_COLOR_COUNT) + 1}`);
+            });
+    }
 
     function getTrainingColorClass(training) {
         return trainingColorClassById.get(training.id) || "training-color-1";
@@ -55,24 +60,9 @@
         CANCELED: "canceled"
     };
 
-    function loadAppliedTrainingIds() {
-        try {
-            const storedIds = JSON.parse(localStorage.getItem(APPLICATION_STORAGE_KEY) || "[]");
-            const sourceAppliedIds = (window.TRAINING_DATA || [])
-                .filter((item) => item.applied)
-                .map((item) => item.scheduleId);
-            return new Set([...storedIds, ...sourceAppliedIds].map(Number).filter(Number.isFinite));
-        } catch (error) {
-            return new Set();
-        }
-    }
-
-    function saveAppliedTrainingIds() {
-        localStorage.setItem(APPLICATION_STORAGE_KEY, JSON.stringify([...appliedTrainingIds]));
-    }
-
     function isLoggedIn() {
-        return new URLSearchParams(window.location.search).get("previewAuth") !== "logout";
+        if (new URLSearchParams(window.location.search).get("previewAuth") === "logout") return false;
+        return Boolean(window.HunterAPI?.auth.getAccessToken());
     }
 
     function getStatusClass(status) {
@@ -106,6 +96,37 @@
     const initialDate = getInitialDate();
     let currentDate = new Date(initialDate.getFullYear(), initialDate.getMonth(), 1);
     let selectedDate = isMypageView ? "" : formatDate(initialDate);
+
+    if (isMypageView && !isLoggedIn()) {
+        const loginUrl = new URL("/account/login.html", window.location.origin);
+        loginUrl.searchParams.set("returnUrl", window.location.href);
+        window.location.replace(loginUrl.href);
+        return;
+    }
+
+    async function loadMonth(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const fromDate = formatDate(new Date(year, month, 1));
+        const toDate = formatDate(new Date(year, month + 1, 0));
+        try {
+            const response = await window.HunterFrontAPI.training.getSchedules({
+                fromDate,
+                toDate,
+                page: 1,
+                size: 100
+            });
+            const items = Array.isArray(response?.data)
+                ? response.data
+                : Array.isArray(response)
+                    ? response
+                    : [];
+            updateTrainingState(items);
+        } catch (error) {
+            console.error("교육 일정 목록을 불러오지 못했습니다.", error);
+            updateTrainingState([]);
+        }
+    }
 
     function getInitialDate() {
         return new Date();
@@ -220,8 +241,8 @@ function parseDate(dateString) {
 
         trainingList.innerHTML = events.map((event) => {
             const remaining = Math.max(event.capacity - event.currentApplicants, 0);
-            const available = event.status === "RECRUITING" && remaining > 0;
-            const applyLabel = available ? "교육신청" : statusLabel[event.status];
+            const isApplied = appliedTrainingIds.has(event.id);
+            const available = event.status === "RECRUITING" && remaining > 0 && !isApplied;
             return `
                 <button type="button" class="sub-training-card ${getTrainingColorClass(event)} ${selectedDate === event.date ? "is-selected" : ""}" data-training-id="${event.id}">
                     <span class="sub-training-card-top">
@@ -235,16 +256,23 @@ function parseDate(dateString) {
                     ${event.courseName} (${event.currentApplicants}/${event.capacity})
                     </span>
                     <span class="sub-training-card-apply ${available ? "" : "is-disabled"}">
-                        ${statusLabel[event.status]}
+                        ${isApplied ? "신청완료" : statusLabel[event.status]}
                     </span>
                 </button>
             `;
         }).join("");
 
         trainingList.querySelectorAll("[data-training-id]").forEach((button) => {
-            button.addEventListener("click", () => {
-                const training = trainingData.find((item) => item.id === Number(button.dataset.trainingId));
-                if (training) openModal(training);
+            button.addEventListener("click", async () => {
+                const scheduleId = Number(button.dataset.trainingId);
+                try {
+                    const detail = await window.HunterFrontAPI.training.getSchedule(scheduleId);
+                    openModal(mapTraining(detail));
+                } catch (error) {
+                    console.error("교육 일정 상세를 불러오지 못했습니다.", error);
+                    const training = trainingData.find(item => item.id === scheduleId);
+                    if (training) openModal(training);
+                }
             });
         });
     }
@@ -286,6 +314,7 @@ function parseDate(dateString) {
                             <span class="sub-training-modal-fee">${fee}</span>
                         </div>
                     </div>
+                    ${training.description ? `<p class="sub-training-modal-description">${training.description}</p>` : ""}
                 </div>
 
                 <label class="sub-form-checkbox">
@@ -335,11 +364,22 @@ function parseDate(dateString) {
                 return;
             }
 
+            try {
+                await window.HunterFrontAPI.training.apply(training.id);
+            } catch (error) {
+                await window.HunterAlert?.open({
+                    message: error?.message || "교육 신청을 처리하지 못했습니다."
+                });
+                return;
+            }
+
             appliedTrainingIds.add(training.id);
-            training.currentApplicants = Math.min(training.currentApplicants + 1, training.capacity);
-            training.applicationCount = training.currentApplicants;
-            training.applied = true;
-            saveAppliedTrainingIds();
+            const listTraining = trainingData.find(item => item.id === training.id);
+            if (listTraining) {
+                listTraining.currentApplicants = Math.min(listTraining.currentApplicants + 1, listTraining.capacity);
+                listTraining.applicationCount = listTraining.currentApplicants;
+                listTraining.applied = true;
+            }
 
             submit.textContent = "신청완료";
             submit.disabled = true;
@@ -370,16 +410,18 @@ function parseDate(dateString) {
         document.body.classList.remove("is-training-modal-open");
     }
 
-    prevButton.addEventListener("click", () => {
+    prevButton.addEventListener("click", async () => {
         currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
         selectedDate = isMypageView ? "" : formatDate(currentDate);
+        await loadMonth(currentDate);
         renderCalendar();
         renderSidebar();
     });
 
-    nextButton.addEventListener("click", () => {
+    nextButton.addEventListener("click", async () => {
         currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1);
         selectedDate = isMypageView ? "" : formatDate(currentDate);
+        await loadMonth(currentDate);
         renderCalendar();
         renderSidebar();
     });
@@ -392,21 +434,24 @@ function parseDate(dateString) {
         if (event.key === "Escape") closeModal();
     });
 
+    await loadMonth(currentDate);
     renderCalendar();
     renderSidebar();
 
     const pendingTrainingId = Number(sessionStorage.getItem(PENDING_APPLICATION_KEY));
     if (pendingTrainingId && isLoggedIn()) {
         sessionStorage.removeItem(PENDING_APPLICATION_KEY);
-        const pendingTraining = trainingData.find((item) => item.id === pendingTrainingId);
-
-        if (pendingTraining) {
+        try {
+            const pendingTraining = mapTraining(await window.HunterFrontAPI.training.getSchedule(pendingTrainingId));
             const pendingDate = parseDate(pendingTraining.date);
             currentDate = new Date(pendingDate.getFullYear(), pendingDate.getMonth(), 1);
             selectedDate = pendingTraining.date;
+            await loadMonth(currentDate);
             renderCalendar();
             renderSidebar();
             openModal(pendingTraining);
+        } catch (error) {
+            console.error("선택한 교육 일정을 다시 불러오지 못했습니다.", error);
         }
     }
 })();

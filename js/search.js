@@ -1,177 +1,178 @@
 (() => {
     "use strict";
 
-    const searchData = [
-        {
-            category: "product",
-            categoryLabel: "Product",
-            path: "Products > Wheel Balancer",
-            title: "RoadForce Elite",
-            description: "휠 밸런서의 개념을 완전히 바꾼 기술혁명! RoadForce Elite 세계 최초의 비전 테크놀로지 기술, 세계에서 가장 빠른 최강의 진단 휠 밸런서...",
-            date: "2026.07.15",
-            href: "/Products/Wheel-Balancers/RoadForce-Elite.html"
-        },
-        {
-            category: "product",
-            categoryLabel: "Product",
-            path: "Products > Wheel Balancer",
-            title: "RoadForce Elite",
-            description: "RoadForce Elite는 정밀한 진단과 빠른 작업 프로세스를 제공하는 프리미엄 휠 밸런서입니다.",
-            date: "2026.07.15",
-            href: "/Products/Wheel-Balancers/RoadForce-Elite.html"
-        },
-        {
-            category: "product",
-            categoryLabel: "Product",
-            path: "Products > Wheel Balancer",
-            title: "RoadForce Elite",
-            description: "로드포스 측정과 비전 시스템을 통해 진동의 원인을 정확하게 확인할 수 있습니다.",
-            date: "2026.07.15",
-            href: "/Products/Wheel-Balancers/RoadForce-Elite.html"
-        },
-        {
-            category: "product",
-            categoryLabel: "Product",
-            path: "Products > Wheel Balancer",
-            title: "RoadForce Elite",
-            description: "작업자 중심의 자동화 기능으로 작업 시간을 단축하고 일관된 결과를 제공합니다.",
-            date: "2026.07.15",
-            href: "/Products/Wheel-Balancers/RoadForce-Elite.html"
-        },
-        {
-            category: "support",
-            categoryLabel: "Support",
-            path: "Support > Equipment Operation Guide",
-            title: "RoadForce Elite 장비 운용 가이드",
-            description: "RoadForce Elite의 기본 측정 순서와 주요 기능을 영상으로 확인할 수 있습니다.",
-            date: "2026.07.14",
-            href: "/Support/equipment-operation-guide.html"
-        },
-        {
-            category: "media",
-            categoryLabel: "Media",
-            path: "Media > News",
-            title: "RoadForce Elite 신제품 소식",
-            description: "헌터코리아 RoadForce Elite의 새로운 기능과 현장 적용 사례를 소개합니다.",
-            date: "2026.07.10",
-            href: "/Media/media-list.html?type=news"
-        }
-    ];
-
-    const productData = [
-        { name: "HawkEye Elite X", image: "/images/products/HawkEyeElite_X.png", href: "/Products/Alignment-Systems/Hawkeye-Elite-X.html" },
-        { name: "HawkEye Elite X", image: "/images/products/HawkEyeElite_X.png", href: "/Products/Alignment-Systems/Hawkeye-Elite-X.html" },
-        { name: "HawkEye Elite X", image: "/images/products/HawkEyeElite_X.png", href: "/Products/Alignment-Systems/Hawkeye-Elite-X.html" },
-        { name: "HawkEye Elite X", image: "/images/products/HawkEyeElite_X.png", href: "/Products/Alignment-Systems/Hawkeye-Elite-X.html" },
-        { name: "HawkEye Elite X", image: "/images/products/HawkEyeElite_X.png", href: "/Products/Alignment-Systems/Hawkeye-Elite-X.html" }
-        
+    const FALLBACK_PRODUCTS = [
+        { productName: "HawkEye Elite X", imageUrl: "/images/products/HawkEyeElite_X.png", targetUrl: "/Products/Alignment-Systems/Hawkeye-Elite-X.html" },
+        { productName: "HawkEye Elite Premium", imageUrl: "/images/products/HawkEyeElite_Premium.png", targetUrl: "/Products/Alignment-Systems/Hawkeye-Elite-Premium.html" },
+        { productName: "TCRH Revolution", imageUrl: "/images/products/TCRH-Revolution_v.png", targetUrl: "/Products/Tire-Changers/TCRH-Revolution.html" },
+        { productName: "RoadForce Elite", imageUrl: "/images/products/Road-Force-Elite_v.png", targetUrl: "/Products/Wheel-Balancers/RoadForce-Elite.html" },
+        { productName: "RoadForce Walkaway", imageUrl: "/images/products/Road-Force-Walkaway_v.png", targetUrl: "/Products/Wheel-Balancers/RoadForce-Walkaway.html" }
     ];
 
     document.addEventListener("DOMContentLoaded", initSearchPage);
 
-    function initSearchPage() {
+    async function initSearchPage() {
+        const api = window.HunterFrontAPI?.search;
         const form = document.querySelector(".sub-search-form");
         const input = document.querySelector(".sub-search-input");
         const clearButton = document.querySelector(".sub-search-clear");
         const resultArea = document.querySelector(".sub-search-result");
-        const tabs = document.querySelectorAll(".sub-search-tab");
-
+        const tabs = [...document.querySelectorAll(".sub-search-tab")];
+        const recommendSection = document.querySelector(".sub-search-recommend");
+        const recommendList = document.querySelector(".sub-search-recommend-list");
+        const productSection = document.querySelector(".sub-search-products");
         if (!form || !input || !resultArea) return;
 
         const params = new URLSearchParams(window.location.search);
-        const initialKeyword = params.get("keyword")?.trim() || "";
-        let activeCategory = "all";
-        let currentPage = 1;
+        let keyword = (params.get("q") || params.get("keyword") || "").trim();
+        let activeCategory = (params.get("type") || "all").toLowerCase();
+        let currentPage = Math.max(1, Number(params.get("page")) || 1);
         const pageSize = 10;
-        let paginationGroupSize = window.innerWidth <= 767 ? 3 : 10;
+        let recommendedProducts = FALLBACK_PRODUCTS;
+        let requestSequence = 0;
 
-        input.value = initialKeyword;
-        saveRecentSearch(initialKeyword);
+        if (!tabs.some((tab) => tab.dataset.category === activeCategory)) activeCategory = "all";
+        input.value = keyword;
+        tabs.forEach((tab) => tab.classList.toggle("is-active", tab.dataset.category === activeCategory));
+        saveRecentSearch(keyword);
 
-        function getFilteredResults() {
-            const keyword = input.value.trim().toLowerCase();
-            if (!keyword) return [];
+        const showEmptyRecommendations = (visible) => {
+            if (recommendSection) recommendSection.hidden = !visible;
+            if (productSection) productSection.hidden = !visible;
+        };
 
-            return searchData.filter((item) => {
-                const matchesKeyword = [
-                    item.title,
-                    item.description,
-                    item.path
-                ].some((value) => value.toLowerCase().includes(keyword));
-
-                const matchesCategory =
-                    activeCategory === "all" ||
-                    item.category === activeCategory;
-
-                return matchesKeyword && matchesCategory;
-            });
+        function updateUrl() {
+            const url = new URL(window.location.href);
+            url.searchParams.delete("keyword");
+            if (keyword) url.searchParams.set("q", keyword);
+            else url.searchParams.delete("q");
+            if (activeCategory === "all") url.searchParams.delete("type");
+            else url.searchParams.set("type", activeCategory.toUpperCase());
+            if (currentPage === 1) url.searchParams.delete("page");
+            else url.searchParams.set("page", currentPage);
+            window.history.replaceState({}, "", url);
         }
 
-        function render() {
-            const keyword = input.value.trim();
-            const results = getFilteredResults();
-            const recommendSection = document.querySelector(".sub-search-recommend");
-            const productSection = document.querySelector(".sub-search-products");
+        async function loadRecommendations() {
+            if (!api?.getRecommendations) return;
+            try {
+                const response = await api.getRecommendations();
+                const keywords = Array.isArray(response?.keywords) ? response.keywords : [];
+                keywords.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
+                if (recommendList) {
+                    recommendList.innerHTML = keywords.map((item) => `
+                        <a href="${escapeHtml(safeUrl(item.targetUrl))}">${escapeHtml(item.keyword)}</a>
+                    `).join("");
+                }
+                if (Array.isArray(response?.products) && response.products.length) {
+                    recommendedProducts = response.products
+                        .slice()
+                        .sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
+                }
+            } catch (error) {
+                console.error("추천 검색어 조회에 실패했습니다.", error);
+            }
+            renderProducts(recommendedProducts);
+        }
 
-            if (!results.length) {
-                if (recommendSection) recommendSection.style.display = "";
-                if (productSection) productSection.style.display = "";
-
-                resultArea.innerHTML = `
-                    <div class="sub-search-empty">
-                        <span class="sub-search-empty-icon" aria-hidden="true">!</span>
-                        <strong>검색하신 조건에 맞는<br class="mo-only">결과가 없습니다.</strong>
-                        <p>아래의 핵심 서비스를 통해 원하는 정보를 빠르게 확인해 보세요.</p>
-                    </div>
-                `;
+        async function loadResults() {
+            const sequence = ++requestSequence;
+            if (!keyword) {
+                showEmptyRecommendations(true);
+                renderEmpty();
+                return;
+            }
+            if (!api?.getResults) {
+                renderError("검색 기능을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.");
                 return;
             }
 
-            if (recommendSection) recommendSection.style.display = "none";
-            if (productSection) productSection.style.display = "none";
+            resultArea.setAttribute("aria-busy", "true");
+            resultArea.innerHTML = '<div class="sub-search-empty"><strong>검색 중입니다.</strong></div>';
+            try {
+                const query = { q: keyword, page: currentPage, size: pageSize };
+                if (activeCategory !== "all") query.type = activeCategory.toUpperCase();
+                const response = await api.getResults(query);
+                if (sequence !== requestSequence) return;
+                const results = Array.isArray(response?.data?.results) ? response.data.results : [];
+                const meta = response?.meta || {};
+                const totalElements = Number(meta.totalElements) || 0;
+                const totalPages = Number(meta.totalPages) || 0;
+                showEmptyRecommendations(results.length === 0);
+                if (!results.length) renderEmpty();
+                else renderResults(results, totalElements, totalPages);
+            } catch (error) {
+                if (sequence !== requestSequence) return;
+                showEmptyRecommendations(true);
+                renderError(error?.message || "검색 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+            } finally {
+                if (sequence === requestSequence) resultArea.removeAttribute("aria-busy");
+            }
+        }
 
-            const totalPages = Math.max(1, Math.ceil(results.length / pageSize));
-            currentPage = Math.min(currentPage, totalPages);
-            const startIndex = (currentPage - 1) * pageSize;
-            const visibleItems = results.slice(startIndex, startIndex + pageSize);
-
+        function renderEmpty() {
             resultArea.innerHTML = `
-                <p class="sub-search-count">총 <strong>${results.length}개</strong></p>
-                <ul class="sub-search-list">
-                    ${visibleItems.map((item) => createResultItem(item, keyword)).join("")}
-                </ul>
+                <div class="sub-search-empty">
+                    <span class="sub-search-empty-icon" aria-hidden="true">!</span>
+                    <strong>검색하신 조건에 맞는<br class="mo-only">결과가 없습니다.</strong>
+                    <p>아래의 핵심 서비스를 통해 원하는 정보를 빠르게 확인해 보세요.</p>
+                </div>`;
+        }
+
+        function renderError(message) {
+            resultArea.innerHTML = `
+                <div class="sub-search-empty">
+                    <span class="sub-search-empty-icon" aria-hidden="true">!</span>
+                    <strong>검색 결과를 불러오지 못했습니다.</strong>
+                    <p>${escapeHtml(message)}</p>
+                </div>`;
+        }
+
+        function renderResults(results, totalElements, totalPages) {
+            resultArea.innerHTML = `
+                <p class="sub-search-count">총 <strong>${totalElements}개</strong></p>
+                <ul class="sub-search-list">${results.map(createResultItem).join("")}</ul>
                 ${createPagination(totalPages, currentPage)}
             `;
-
             resultArea.querySelectorAll("[data-page]").forEach((button) => {
                 button.addEventListener("click", () => {
-                    const nextPage = Number(button.dataset.page);
-                    if (!Number.isNaN(nextPage)) {
-                        currentPage = Math.min(Math.max(nextPage, 1), totalPages);
-                        render();
-                    }
+                    currentPage = Number(button.dataset.page) || 1;
+                    updateUrl();
+                    loadResults();
+                    document.querySelector(".sub-search-result-section")?.scrollIntoView({ behavior: "smooth" });
                 });
             });
         }
 
+        function createResultItem(item) {
+            return `
+                <li class="sub-search-item">
+                    <a href="${escapeHtml(safeUrl(item.targetUrl))}" class="sub-search-item-link">
+                        <span class="sub-search-item-category">${escapeHtml(item.categoryName || item.categoryCode || "")}</span>
+                        <p class="sub-search-item-path">${escapeHtml(item.path || "")}</p>
+                        <div class="sub-search-item-heading">
+                            <h3 class="sub-search-item-title">${highlightKeyword(item.title || "", keyword)}</h3>
+                            <time class="sub-search-item-date pc-only">${formatDate(item.publishedAt)}</time>
+                        </div>
+                        <p class="sub-search-item-description">${highlightKeyword(item.summary || "", keyword)}</p>
+                        <time class="sub-search-item-date mo-only">${formatDate(item.publishedAt)}</time>
+                    </a>
+                </li>`;
+        }
+
         form.addEventListener("submit", (event) => {
             event.preventDefault();
-            const keyword = input.value.trim();
+            keyword = input.value.trim();
             if (!keyword) return;
-
             saveRecentSearch(keyword);
-            const nextUrl = new URL(window.location.href);
-            nextUrl.searchParams.set("keyword", keyword);
-            window.history.replaceState({}, "", nextUrl);
             currentPage = 1;
-            render();
+            updateUrl();
+            loadResults();
         });
 
         clearButton?.addEventListener("click", () => {
             input.value = "";
             input.focus();
-            currentPage = 1;
-            render();
         });
 
         tabs.forEach((tab) => {
@@ -180,202 +181,113 @@
                 tab.classList.add("is-active");
                 activeCategory = tab.dataset.category || "all";
                 currentPage = 1;
-                render();
+                updateUrl();
+                loadResults();
             });
         });
 
-        window.addEventListener("resize", () => {
-            const nextGroupSize = window.innerWidth <= 767 ? 3 : 10;
-            if (nextGroupSize === paginationGroupSize) return;
-            paginationGroupSize = nextGroupSize;
-            render();
-        });
-
-        renderProducts();
-        initProductSlider();
-        render();
-    }
-
-    function createResultItem(item, keyword) {
-        return `
-            <li class="sub-search-item">
-                <a href="${item.href}" class="sub-search-item-link">
-                    <span class="sub-search-item-category">${item.categoryLabel}</span>
-                    <p class="sub-search-item-path">${item.path}</p>
-                    <div class="sub-search-item-heading">
-                        <h3 class="sub-search-item-title">${highlightKeyword(item.title, keyword)}</h3>
-                        <time class="sub-search-item-date pc-only">${item.date}</time>
-                    </div>
-                    <p class="sub-search-item-description">${highlightKeyword(item.description, keyword)}</p>
-                    <time class="sub-search-item-date mo-only">${item.date}</time>
-                </a>
-            </li>
-        `;
+        await loadRecommendations();
+        initProductSlider(() => recommendedProducts.length);
+        updateUrl();
+        await loadResults();
     }
 
     function createPagination(totalPages, currentPage) {
         if (totalPages <= 1) return "";
-
         const groupSize = window.innerWidth <= 767 ? 3 : 10;
         const groupStart = Math.floor((currentPage - 1) / groupSize) * groupSize + 1;
         const groupEnd = Math.min(groupStart + groupSize - 1, totalPages);
-        const pageButtons = [];
-
+        const buttons = [];
         for (let page = groupStart; page <= groupEnd; page += 1) {
-            pageButtons.push(`
-                <button type="button" data-page="${page}" class="${page === currentPage ? "is-active" : ""}" ${page === currentPage ? 'aria-current="page"' : ""}>${page}</button>
-            `);
+            buttons.push(`<button type="button" data-page="${page}" class="${page === currentPage ? "is-active" : ""}" ${page === currentPage ? 'aria-current="page"' : ""}>${page}</button>`);
         }
-
         return `
             <nav class="sub-pagination" aria-label="검색 결과 페이지">
                 <button type="button" class="sub-pagination-arrow is-prev" data-page="${Math.max(1, groupStart - groupSize)}" aria-label="이전 페이지 묶음" ${groupStart === 1 ? "disabled" : ""}></button>
-                ${pageButtons.join("")}
+                ${buttons.join("")}
                 <button type="button" class="sub-pagination-arrow is-next" data-page="${groupEnd + 1}" aria-label="다음 페이지 묶음" ${groupEnd === totalPages ? "disabled" : ""}></button>
-            </nav>
-        `;
+            </nav>`;
+    }
+
+    function renderProducts(products) {
+        const track = document.querySelector(".sub-search-product-track");
+        if (!track) return;
+        track.innerHTML = products.map((product) => `
+            <a href="${escapeHtml(safeUrl(product.targetUrl))}" class="sub-search-product-card">
+                <div class="sub-search-product-image">
+                    <img src="${escapeHtml(product.imageUrl || "/images/img_placeholder.png")}" alt="${escapeHtml(product.productName || "")}" onerror="this.onerror=null;this.src='/images/img_placeholder.png'">
+                </div>
+                <p class="sub-search-product-name">${escapeHtml(product.productName || "")}</p>
+            </a>`).join("");
+    }
+
+    function initProductSlider(getProductCount) {
+        const viewport = document.querySelector(".sub-search-product-viewport");
+        const track = document.querySelector(".sub-search-product-track");
+        const prev = document.querySelector(".sub-search-product-prev");
+        const next = document.querySelector(".sub-search-product-next");
+        if (!viewport || !track || !prev || !next) return;
+        let index = 0;
+        const maxIndex = () => Math.max(0, getProductCount() - (window.innerWidth <= 720 ? 2 : 4));
+        const update = (move) => {
+            const card = track.querySelector(".sub-search-product-card");
+            if (!card) return;
+            const distance = card.getBoundingClientRect().width + (parseFloat(getComputedStyle(track).gap) || 0);
+            index = Math.min(index, maxIndex());
+            if (move) viewport.scrollTo({ left: index * distance, behavior: "smooth" });
+            prev.disabled = index === 0;
+            next.disabled = index === maxIndex();
+        };
+        prev.addEventListener("click", () => { index = Math.max(0, index - 1); update(true); });
+        next.addEventListener("click", () => { index = Math.min(maxIndex(), index + 1); update(true); });
+        viewport.addEventListener("scroll", () => {
+            const card = track.querySelector(".sub-search-product-card");
+            if (!card) return;
+            const distance = card.getBoundingClientRect().width + (parseFloat(getComputedStyle(track).gap) || 0);
+            index = Math.round(viewport.scrollLeft / distance);
+            update(false);
+        }, { passive: true });
+        window.addEventListener("resize", () => update(false));
+        update(false);
     }
 
     function highlightKeyword(text, keyword) {
-        if (!keyword) return escapeHtml(text);
+        const safeText = escapeHtml(text);
+        if (!keyword) return safeText;
+        return safeText.replace(new RegExp(`(${escapeRegExp(escapeHtml(keyword))})`, "gi"), "<mark>$1</mark>");
+    }
 
-        const escapedText = escapeHtml(text);
-        const escapedKeyword = escapeRegExp(escapeHtml(keyword));
+    function formatDate(value) {
+        if (!value) return "";
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return escapeHtml(value);
+        return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, "0")}.${String(date.getDate()).padStart(2, "0")}`;
+    }
 
-        return escapedText.replace(
-            new RegExp(`(${escapedKeyword})`, "gi"),
-            "<mark>$1</mark>"
-        );
+    function saveRecentSearch(keyword) {
+        if (!keyword) return;
+        const storageKey = "hunterRecentSearches";
+        let items = [];
+        try {
+            const saved = JSON.parse(localStorage.getItem(storageKey));
+            items = Array.isArray(saved) ? saved : [];
+        } catch (error) { items = []; }
+        items = items.filter((item) => item.toLowerCase() !== keyword.toLowerCase());
+        localStorage.setItem(storageKey, JSON.stringify([keyword, ...items].slice(0, 8)));
+    }
+
+    function safeUrl(value) {
+        const url = String(value || "");
+        return /^(\/|https?:\/\/)/i.test(url) ? url : "#";
     }
 
     function escapeHtml(value) {
-        return value.replace(/[&<>'"]/g, (character) => ({
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            "'": "&#39;",
-            '"': "&quot;"
+        return String(value ?? "").replace(/[&<>'"]/g, (character) => ({
+            "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
         })[character]);
     }
 
     function escapeRegExp(value) {
         return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    }
-
-    function saveRecentSearch(keyword) {
-        if (!keyword) return;
-
-        const storageKey = "hunterRecentSearches";
-        let items = [];
-
-        try {
-            const saved = JSON.parse(localStorage.getItem(storageKey));
-            items = Array.isArray(saved) ? saved : [];
-        } catch (error) {
-            items = [];
-        }
-
-        items = items.filter(
-            (item) => item.toLowerCase() !== keyword.toLowerCase()
-        );
-        items.unshift(keyword);
-        localStorage.setItem(storageKey, JSON.stringify(items.slice(0, 8)));
-    }
-
-    function renderProducts() {
-        const track = document.querySelector(".sub-search-product-track");
-        if (!track) return;
-
-        track.innerHTML = productData.map((product) => `
-            <a href="${product.href}" class="sub-search-product-card">
-                <div class="sub-search-product-image">
-                    <img src="${product.image}" alt="${product.name}">
-                </div>
-                <p class="sub-search-product-name">${product.name}</p>
-            </a>
-        `).join("");
-    }
-
-    function initProductSlider() {
-        const viewport = document.querySelector(".sub-search-product-viewport");
-        const track = document.querySelector(".sub-search-product-track");
-        const prevButton = document.querySelector(".sub-search-product-prev");
-        const nextButton = document.querySelector(".sub-search-product-next");
-
-        if (!viewport || !track || !prevButton || !nextButton) return;
-
-        let index = 0;
-        let isDragging = false;
-        let dragMoved = false;
-        let dragStartX = 0;
-        let dragStartScrollLeft = 0;
-        const getMaxIndex = () => Math.max(0, productData.length - (window.innerWidth <= 720 ? 2 : 4));
-
-        function updateSlider(moveViewport = false) {
-            const card = track.querySelector(".sub-search-product-card");
-            if (!card) return;
-
-            const gap = parseFloat(window.getComputedStyle(track).gap) || 0;
-            const distance = card.getBoundingClientRect().width + gap;
-            const maxIndex = getMaxIndex();
-            index = Math.min(index, maxIndex);
-
-            track.style.transform = "none";
-            if (moveViewport) viewport.scrollTo({ left: index * distance, behavior: "smooth" });
-            else index = Math.min(maxIndex, Math.max(0, Math.round(viewport.scrollLeft / distance)));
-
-            prevButton.classList.toggle("swiper-button-disabled", index === 0);
-            nextButton.classList.toggle("swiper-button-disabled", index === maxIndex);
-        }
-
-        prevButton.addEventListener("click", () => {
-            index = Math.max(0, index - 1);
-            updateSlider(true);
-        });
-
-        nextButton.addEventListener("click", () => {
-            index = Math.min(getMaxIndex(), index + 1);
-            updateSlider(true);
-        });
-
-        viewport.addEventListener("scroll", () => {
-            updateSlider();
-        }, { passive: true });
-
-        viewport.addEventListener("pointerdown", (event) => {
-            if (event.pointerType !== "mouse") return;
-            isDragging = true;
-            dragMoved = false;
-            dragStartX = event.clientX;
-            dragStartScrollLeft = viewport.scrollLeft;
-            viewport.classList.add("is-dragging");
-            viewport.setPointerCapture(event.pointerId);
-        });
-
-        viewport.addEventListener("pointermove", (event) => {
-            if (!isDragging) return;
-            const distance = event.clientX - dragStartX;
-            if (Math.abs(distance) > 4) dragMoved = true;
-            viewport.scrollLeft = dragStartScrollLeft - distance;
-        });
-
-        const stopDragging = (event) => {
-            if (!isDragging) return;
-            isDragging = false;
-            viewport.classList.remove("is-dragging");
-            if (viewport.hasPointerCapture(event.pointerId)) viewport.releasePointerCapture(event.pointerId);
-        };
-
-        viewport.addEventListener("pointerup", stopDragging);
-        viewport.addEventListener("pointercancel", stopDragging);
-        viewport.addEventListener("click", (event) => {
-            if (!dragMoved) return;
-            event.preventDefault();
-            event.stopPropagation();
-            dragMoved = false;
-        }, true);
-
-        window.addEventListener("resize", updateSlider);
-        updateSlider();
     }
 })();
