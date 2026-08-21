@@ -13,8 +13,8 @@
     <link href="/css/common.css?v=20260819-2" rel="stylesheet"/>
     <link href="/css/layout.css?v=20260820-4" rel="stylesheet"/>
     <link href="/css/main.css?v=20260820-1" rel="stylesheet"/>
-    <link href="/css/mypage.css?v=20260820-2" rel="stylesheet"/>
-    <link href="/css/common-form.css?v=20260814" rel="stylesheet"/>
+    <link href="/css/mypage.css?v=20260821-4" rel="stylesheet"/>
+    <link href="/css/common-form.css?v=20260821-4" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -86,6 +86,7 @@
 <section class="sub-mypage-cs-section">
 <h4 class="sub-mypage-cs-heading">CS문의자 내용</h4>
 <div class="sub-mypage-cs-fields">
+<div class="sub-cs-product-fields-row">
 <div class="sub-form-group sub-mypage-cs-category">
 <label class="sub-form-label">문의 분류</label>
 <div class="sub-form-select" data-select>
@@ -103,6 +104,17 @@
 <input type="hidden" name="category" data-required data-message="문의 분류를 선택해주세요.">
 </div>
 <p class="sub-form-message"></p>
+</div>
+<div class="sub-form-group sub-cs-product-field" data-cs-product-category hidden>
+<label class="sub-form-label">제품 카테고리<span class="sub-form-required">*</span></label>
+<div class="sub-form-select" data-select><button type="button" class="sub-form-select-trigger" aria-expanded="false"><span class="sub-form-select-value is-placeholder">제품 카테고리를 선택해 주세요.</span><i class="sub-form-select-arrow" aria-hidden="true"></i></button><ul class="sub-form-select-options"></ul><input type="hidden" name="product_category_code" data-required data-message="제품 카테고리를 선택해주세요."></div>
+<p class="sub-form-message"></p>
+</div>
+<div class="sub-form-group sub-cs-product-field" data-cs-product-serial hidden>
+<label class="sub-form-label">제품 시리얼번호<span class="sub-form-required">*</span></label>
+<div class="sub-form-select" data-select><button type="button" class="sub-form-select-trigger" aria-expanded="false"><span class="sub-form-select-value is-placeholder">제품 시리얼번호를 선택해 주세요.</span><i class="sub-form-select-arrow" aria-hidden="true"></i></button><ul class="sub-form-select-options"></ul><input type="hidden" name="owned_product_id" data-required data-message="제품 시리얼번호를 선택해주세요."></div>
+<p class="sub-form-message"></p>
+</div>
 </div>
 <div class="sub-form-group">
 <label class="sub-form-label" for="cs-title">문의 제목</label>
@@ -143,8 +155,11 @@
 <div data-include="/includes/footer.html"></div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="/js/include.js?v=20260814"></script>
-<script src="/js/common.js?v=20260814"></script>
-<script src="/js/form.js?v=20260814"></script>
-<script src="/js/mypage.js?v=20260820-1"></script>
+<script src="/js/common.js?v=20260821"></script>
+<script src="/js/api/config.js?v=20260821"></script>
+<script src="/js/api/client.js?v=20260821"></script>
+<script src="/js/api/front-api.js?v=20260821-4"></script>
+<script src="/js/form.js?v=20260821-4"></script>
+<script src="/js/mypage.js?v=20260821-4"></script>
 </body>
 </html>

@@ -1035,6 +1035,14 @@ body.is-modal-open {
     width: calc(320 * var(--vw));
 }
 
+.sub-mypage-cs .sub-cs-product-fields-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sub-mypage-cs .sub-cs-product-fields-row .sub-mypage-cs-category {
+    width: auto;
+}
+
 .sub-mypage-cs .sub-form-textarea {
     height: calc(300 * var(--vw));
     font-size: calc(15 * var(--vw));
@@ -3053,6 +3061,10 @@ Mobile (720px and below)
     }
     .sub-mypage-cs-category {
         width: 100%;
+    }
+    .sub-mypage-cs .sub-cs-product-fields-row {
+        grid-template-columns: 1fr;
+        gap: 28px;
     }
     .sub-mypage-cs .sub-form-textarea {
         height: 190px;

@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link href="/css/common.css?v=20260819-2" rel="stylesheet"/>
-    <link href="/css/common-form.css?v=20260814" rel="stylesheet"/>
+    <link href="/css/common-form.css?v=20260821-4" rel="stylesheet"/>
     <link href="/css/layout.css?v=20260820-4" rel="stylesheet"/>
     <link href="/css/main.css?v=20260820-1" rel="stylesheet"/>
     <link href="/css/products.css?v=20260814" rel="stylesheet"/>
@@ -132,6 +132,7 @@
 <h3>CS문의 내용<span>.</span></h3>
 </div>
 <div class="sub-form">
+<div class="sub-cs-product-fields-row">
 <div class="sub-form-group sub-form-category-group">
 <span class="sub-form-label">
                                 문의 유형<span class="sub-form-required">*</span>
@@ -149,12 +150,12 @@
                                             제품/부품 구매
                                         </button>
 </li>
-<li>
+<li data-auth-inquiry hidden>
 <button class="sub-form-select-option" data-value="AS" type="button">
                                             A/S 신청
                                         </button>
 </li>
-<li>
+<li data-auth-inquiry hidden>
 <button class="sub-form-select-option" data-value="TRANSFER" type="button">
                                             제품 이전 설치
                                         </button>
@@ -175,6 +176,17 @@
 <p class="sub-form-message">
                                 문의 유형을 선택해주세요.
                             </p>
+</div>
+<div class="sub-form-group sub-cs-product-field" data-cs-product-category hidden>
+<span class="sub-form-label">제품 카테고리<span class="sub-form-required">*</span></span>
+<div class="sub-form-select" data-select><button type="button" class="sub-form-select-trigger" aria-expanded="false"><span class="sub-form-select-value is-placeholder">제품 카테고리를 선택해 주세요.</span><i class="sub-form-select-arrow" aria-hidden="true"></i></button><ul class="sub-form-select-options"></ul><input type="hidden" name="product_category_code" data-required data-message="제품 카테고리를 선택해주세요."></div>
+<p class="sub-form-message">제품 카테고리를 선택해주세요.</p>
+</div>
+<div class="sub-form-group sub-cs-product-field" data-cs-product-serial hidden>
+<span class="sub-form-label">제품 시리얼번호<span class="sub-form-required">*</span></span>
+<div class="sub-form-select" data-select><button type="button" class="sub-form-select-trigger" aria-expanded="false"><span class="sub-form-select-value is-placeholder">제품 시리얼번호를 선택해 주세요.</span><i class="sub-form-select-arrow" aria-hidden="true"></i></button><ul class="sub-form-select-options"></ul><input type="hidden" name="owned_product_id" data-required data-message="제품 시리얼번호를 선택해주세요."></div>
+<p class="sub-form-message">제품 시리얼번호를 선택해주세요.</p>
+</div>
 </div>
 <div class="sub-form-group">
 <label class="sub-form-label" for="inquiry-title">
@@ -234,8 +246,8 @@
 <script src="/js/common.js?v=20260814"></script>
 <script src="/js/api/config.js?v=20260820"></script>
 <script src="/js/api/client.js?v=20260820"></script>
-<script src="/js/api/front-api.js?v=20260820"></script>
-<script src="/js/form.js?v=20260820"></script>
+<script src="/js/api/front-api.js?v=20260821-4"></script>
+<script src="/js/form.js?v=20260821-4"></script>
 <script src="/js/main.js?v=20260814"></script>
 <script src="/js/products.js?v=20260814"></script>
 </body>

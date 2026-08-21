@@ -607,6 +607,22 @@ Form Page Layout
     width: calc(300 * var(--vw));
 }
 
+.sub-cs-product-fields-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: calc(20 * var(--vw));
+    align-items: start;
+}
+
+.sub-cs-product-fields-row .sub-form-category-group,
+.sub-cs-product-fields-row .sub-form-category-group .sub-form-select {
+    width: 100%;
+}
+
+.sub-cs-product-field[hidden] {
+    display: none;
+}
+
 .sub-form-page-contact .sub-form-bottom {
     display: block;
     margin-top: calc(70 * var(--vw));
@@ -912,6 +928,10 @@ Mobile Forms
 
     .sub-form-page-contact .sub-form-group {
         gap: 8px;
+    }
+    .sub-cs-product-fields-row {
+        grid-template-columns: 1fr;
+        gap: 28px;
     }
 
     .sub-form-page-contact .sub-form-label {

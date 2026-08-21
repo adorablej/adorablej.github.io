@@ -9,6 +9,7 @@ function initFormComponents() {
     initCustomSelect();
     initContactInquiryCategory();
     initCsRequestContext();
+    initCsProductFields();
 
     document.querySelectorAll("form[data-form]").forEach(form => {
         new FormValidator(form);
@@ -107,9 +108,33 @@ function initCompletionAlerts() {
         form.addEventListener("submit", async event => {
             if (event.defaultPrevented) return;
             event.preventDefault();
-            await window.HunterAlert?.open({
-                message: "CS문의접수가 완료되었습니다.\n입력하신 연락처로 회신드리겠습니다.\n감사합니다."
-            });
+            const api = window.HunterFrontAPI?.csRequests;
+            if (!api?.create) return;
+            const emailId = form.elements.email_id.value.trim();
+            const emailDomain = form.elements.email_domain.value.trim();
+            const category = String(form.elements.category.value || "").toUpperCase();
+            const typeMap = { PURCHASE: "PURCHASE", AS: "AS", TRANSFER: "TRANSFER", BUSINESS: "BUSINESS", TRAINING: "TRAINING" };
+            const payload = {
+                companyName: form.elements.company.value.trim(),
+                requesterName: form.elements.name.value.trim(),
+                phoneNumber: form.elements.phone.value.trim(),
+                csTypeCode: typeMap[category] || category,
+                title: form.elements.title.value.trim(),
+                content: form.elements.message.value.trim(),
+                privacyAgreed: form.elements.privacy_agree.checked
+            };
+            if (emailId && emailDomain) payload.email = `${emailId}@${emailDomain}`;
+            if (["AS", "TRANSFER"].includes(payload.csTypeCode)) payload.ownedProductId = Number(form.elements.owned_product_id.value);
+            const submit = form.querySelector('[type="submit"]');
+            submit.disabled = true;
+            try {
+                await api.create(payload);
+                await showContactAlert("CS문의접수가 완료되었습니다.\n입력하신 연락처로 회신드리겠습니다.\n감사합니다.");
+            } catch (error) {
+                await showContactAlert(error?.message || "CS 문의를 접수하지 못했습니다.");
+            } finally {
+                submit.disabled = false;
+            }
         });
     });
 }
@@ -162,6 +187,9 @@ function initContactFormSubmission() {
         if (emailId && emailDomain) {
             payload.email = `${emailId}@${emailDomain}`;
         }
+        if (["AS", "TRANSFER"].includes(payload.csTypeCode)) {
+            payload.ownedProductId = Number(form.elements.owned_product_id.value);
+        }
 
         submitButton.disabled = true;
         submitButton.setAttribute("aria-busy", "true");
@@ -178,6 +206,145 @@ function initContactFormSubmission() {
             submitButton.removeAttribute("aria-busy");
         }
     });
+}
+
+/* ========================================
+CS Product Category / Serial Selection
+======================================== */
+
+function initCsProductFields() {
+    document.querySelectorAll("#contact-form, .sub-mypage-cs-form").forEach(form => {
+        const inquiryInput = form.querySelector('input[name="inquiry_category"], input[name="category"]');
+        const categoryGroup = form.querySelector("[data-cs-product-category]");
+        const serialGroup = form.querySelector("[data-cs-product-serial]");
+        const categoryInput = form.elements.product_category_code;
+        const productInput = form.elements.owned_product_id;
+        const memberApi = window.HunterFrontAPI?.member;
+        const isContact = form.id === "contact-form";
+        const isAuthenticated = !isContact || Boolean(window.HunterAPI?.auth?.getAccessToken?.());
+        const requestedProductId = new URLSearchParams(location.search).get("ownedProductId") || "";
+        let products = [];
+        let loadingPromise = null;
+
+        if (!inquiryInput || !categoryGroup || !serialGroup || !categoryInput || !productInput) return;
+
+        if (isContact) {
+            form.querySelectorAll("[data-auth-inquiry]").forEach(item => { item.hidden = !isAuthenticated; });
+            const type = String(inquiryInput.value || "").toUpperCase();
+            if (!isAuthenticated && ["AS", "TRANSFER"].includes(type)) resetSelect(inquiryInput.closest(".sub-form-select"), "카테고리를 선택해 주세요.");
+        }
+
+        const categorySelect = categoryInput.closest(".sub-form-select");
+        const productSelect = productInput.closest(".sub-form-select");
+
+        function needsProduct() {
+            return ["AS", "TRANSFER"].includes(String(inquiryInput.value || "").toUpperCase());
+        }
+
+        async function ensureProducts() {
+            if (products.length || loadingPromise || !memberApi || !isAuthenticated) return loadingPromise;
+            loadingPromise = (async () => {
+                const params = { page: 1, size: 100 };
+                const businessId = localStorage.getItem("hunter.selectedBusinessId") || "";
+                if (businessId) params.businessId = businessId;
+                const response = await memberApi.getProducts(params);
+                products = Array.isArray(response) ? response : Array.isArray(response?.data) ? response.data : [];
+                if (requestedProductId && !products.some(item => String(item.ownedProductId) === requestedProductId)) {
+                    try {
+                        const detail = await memberApi.getProduct(requestedProductId);
+                        if (detail) products.push(detail);
+                    } catch (error) {
+                        // 선택 사업체 소유가 아닌 제품은 목록에 추가하지 않습니다.
+                    }
+                }
+                renderCategories();
+                if (requestedProductId) preselectProduct(requestedProductId);
+            })().catch(error => {
+                categorySelect.querySelector(".sub-form-select-value").textContent = error?.message || "제품을 불러오지 못했습니다.";
+            }).finally(() => { loadingPromise = null; });
+            return loadingPromise;
+        }
+
+        function renderCategories() {
+            const categories = new Map();
+            products.forEach(item => {
+                if (item.productCategoryCode) categories.set(item.productCategoryCode, item.productCategoryName || item.productCategoryCode);
+            });
+            categorySelect.querySelector(".sub-form-select-options").innerHTML = [...categories].map(([code, name]) =>
+                `<li><button type="button" class="sub-form-select-option" data-value="${escapeFormHtml(code)}">${escapeFormHtml(name)}</button></li>`
+            ).join("");
+            initCustomSelect();
+        }
+
+        function renderProducts(categoryCode) {
+            const filtered = products.filter(item => item.productCategoryCode === categoryCode);
+            productSelect.querySelector(".sub-form-select-options").innerHTML = filtered.map(item =>
+                `<li><button type="button" class="sub-form-select-option" data-value="${escapeFormHtml(item.ownedProductId)}">${escapeFormHtml(item.serialNumber || "시리얼번호 없음")} · ${escapeFormHtml(item.productName || "-")}</button></li>`
+            ).join("");
+            resetSelect(productSelect, filtered.length ? "제품 시리얼번호를 선택해 주세요." : "등록된 제품이 없습니다.");
+            initCustomSelect();
+        }
+
+        function preselectProduct(id) {
+            const product = products.find(item => String(item.ownedProductId) === String(id));
+            if (!product) return;
+            const categoryOption = [...categorySelect.querySelectorAll(".sub-form-select-option")].find(option => option.dataset.value === product.productCategoryCode);
+            if (categoryOption) selectOption(categorySelect, categoryOption, false);
+            renderProducts(product.productCategoryCode);
+            const productOption = [...productSelect.querySelectorAll(".sub-form-select-option")].find(option => option.dataset.value === String(id));
+            if (productOption) selectOption(productSelect, productOption, false);
+            syncLegacyFields(product);
+        }
+
+        function toggleFields() {
+            const show = needsProduct() && isAuthenticated;
+            categoryGroup.hidden = !show;
+            serialGroup.hidden = !show;
+            if (show) ensureProducts();
+            else {
+                resetSelect(categorySelect, "제품 카테고리를 선택해 주세요.");
+                resetSelect(productSelect, "제품 시리얼번호를 선택해 주세요.");
+            }
+        }
+
+        categoryInput.addEventListener("change", () => renderProducts(categoryInput.value));
+        productInput.addEventListener("change", () => {
+            const product = products.find(item => String(item.ownedProductId) === productInput.value);
+            if (product) syncLegacyFields(product);
+        });
+        inquiryInput.addEventListener("change", toggleFields);
+        toggleFields();
+
+        function syncLegacyFields(product) {
+            const legacyId = form.elements.product_id;
+            const legacyName = form.elements.product_name;
+            const legacyCategory = form.elements.product_category;
+            const legacySerial = form.elements.product_serial;
+            if (legacyId) legacyId.value = product.ownedProductId || "";
+            if (legacyName) legacyName.value = product.productName || "";
+            if (legacyCategory) legacyCategory.value = product.productCategoryName || "";
+            if (legacySerial) legacySerial.value = product.serialNumber || "";
+        }
+    });
+}
+
+function resetSelect(select, placeholder) {
+    if (!select) return;
+    const input = select.querySelector('input[type="hidden"]');
+    const value = select.querySelector(".sub-form-select-value");
+    select.querySelectorAll(".sub-form-select-option.is-selected").forEach(option => option.classList.remove("is-selected"));
+    if (input) {
+        input.value = "";
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+    if (value) {
+        value.textContent = placeholder;
+        value.classList.add("is-placeholder");
+    }
+}
+
+function escapeFormHtml(value) {
+    return String(value ?? "").replace(/[&<>'"]/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);
 }
 
 /* ========================================
