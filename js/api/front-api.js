@@ -47,11 +47,20 @@
         member: Object.freeze({
             getMe: function () { return client.get('/api/v1/me'); },
             getProfile: function () { return client.get('/api/v1/me/profile'); },
-            getProducts: function (params) {
-                return client.get('/api/v1/me/products', { query: params || {} });
+            getProducts: function (params, raw) {
+                return client.get('/api/v1/me/products', { query: params || {}, raw: Boolean(raw) });
             },
-            getOrders: function (params) {
-                return client.get('/api/v1/me/orders', { query: params || {} });
+            getProduct: function (ownedProductId) {
+                return client.get('/api/v1/me/products/' + encodeURIComponent(ownedProductId));
+            },
+            getProductParts: function (ownedProductId, params) {
+                return client.get('/api/v1/me/products/' + encodeURIComponent(ownedProductId) + '/parts', {
+                    query: params || {},
+                    raw: true
+                });
+            },
+            getOrders: function (params, raw) {
+                return client.get('/api/v1/me/orders', { query: params || {}, raw: Boolean(raw) });
             },
             getTrainingApplications: function (params) {
                 return client.get('/api/v1/me/training-applications', { query: params || {} });
@@ -67,6 +76,24 @@
                     notificationIds: notificationIds || [],
                     readAll: Boolean(readAll)
                 });
+            },
+            addCartItem: function (payload) {
+                return client.post('/api/v1/me/cart/items', payload);
+            },
+            getCart: function (params) {
+                return client.get('/api/v1/me/cart', { query: params || {}, raw: true });
+            },
+            updateCartItem: function (cartItemId, quantity) {
+                return client.put('/api/v1/me/cart/items/' + encodeURIComponent(cartItemId), { quantity: quantity });
+            },
+            deleteCartItems: function (cartItemIds) {
+                return client.request('/api/v1/me/cart/items', {
+                    method: 'DELETE',
+                    body: { cartItemIds: cartItemIds || [] }
+                });
+            },
+            createOrder: function (payload) {
+                return client.post('/api/v1/me/orders', payload);
             }
         }),
         prideStores: Object.freeze({
@@ -87,6 +114,11 @@
                 return client.get('/api/v1/contents/' + encodeURIComponent(contentId), { auth: false });
             }
         }),
+        parts: Object.freeze({
+            getList: function (params) {
+                return client.get('/api/v1/parts', { query: params || {}, raw: true });
+            }
+        }),
         eog: Object.freeze({
             getCategories: function () {
                 return client.get('/api/v1/eog-categories', { auth: false });
@@ -105,6 +137,11 @@
             apply: function (scheduleId) {
                 return client.post('/api/v1/training-schedules/' + encodeURIComponent(scheduleId) + '/applications/actions', {
                     action: 'APPLY'
+                });
+            },
+            cancel: function (scheduleId) {
+                return client.post('/api/v1/training-schedules/' + encodeURIComponent(scheduleId) + '/applications/actions', {
+                    action: 'CANCEL'
                 });
             }
         }),

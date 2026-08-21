@@ -201,7 +201,7 @@ function initCsRequestContext() {
         selectOption(categorySelect, categoryOption, false);
     }
 
-    const productId = params.get("product") || "";
+    const productId = params.get("ownedProductId") || params.get("product") || "";
     const productName = params.get("productName") || "";
     const productCategory = params.get("productCategory") || "";
     const productSerial = params.get("productSerial") || productId;

@@ -1652,6 +1652,10 @@ body.is-modal-open {
     grid-template-columns: calc(300 * var(--vw)) calc(300 * var(--vw)) minmax(0, 1fr);
 }
 
+.sub-mypage-parts-filter-all.is-api-filter {
+    grid-template-columns: calc(300 * var(--vw)) minmax(0, 1fr);
+}
+
 button.sub-mypage-part-image,
 button.sub-mypage-part-text {
     padding: 0;

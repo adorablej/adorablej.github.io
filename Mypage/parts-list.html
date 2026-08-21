@@ -18,7 +18,7 @@
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="sub-mypage-parts-page">
 <div data-include="/includes/header.html?v=20260820-2"></div>
 <main class="sub-mypage-page">
 <section class="page-heading"><div class="inner"><ul class="breadcrumb"><li><a aria-label="Home" class="breadcrumb-home" href="/"></a></li><li><a href="/Mypage/mypage.html">My page</a></li></ul><h2 class="page-title">My page</h2></div></section>
@@ -28,59 +28,15 @@
 <div class="sub-mypage-content">
 <div class="sub-mypage-products sub-mypage-parts-list-page">
 <h3 class="sub-mypage-page-title">전체 부품 목록<span class="sub-mypage-title-dot" aria-hidden="true">.</span></h3>
-<div class="sub-mypage-parts-filter sub-mypage-parts-filter-all">
-<div class="sub-form-select sub-mypage-filter-select" data-select><button type="button" class="sub-form-select-trigger" aria-expanded="false"><span class="sub-form-select-value is-placeholder">제품 분류</span><i class="sub-form-select-arrow" aria-hidden="true"></i></button><ul class="sub-form-select-options"><li><button type="button" class="sub-form-select-option" data-value="alignment">Wheel Alignment</button></li><li><button type="button" class="sub-form-select-option" data-value="balancer">Wheel Balancer</button></li><li><button type="button" class="sub-form-select-option" data-value="changer">Tire Changer</button></li></ul><input type="hidden" name="product_category"></div>
-<div class="sub-form-select sub-mypage-filter-select" data-select><button type="button" class="sub-form-select-trigger" aria-expanded="false"><span class="sub-form-select-value is-placeholder">부품 분류</span><i class="sub-form-select-arrow" aria-hidden="true"></i></button><ul class="sub-form-select-options"><li><button type="button" class="sub-form-select-option" data-value="plate">Plate</button></li><li><button type="button" class="sub-form-select-option" data-value="sleeves">Sleeves</button></li><li><button type="button" class="sub-form-select-option" data-value="kit">Kit</button></li></ul><input type="hidden" name="part_category"></div>
-<label class="sub-mypage-search"><i aria-hidden="true"></i><input type="search" placeholder="검색어를 입력해주세요" aria-label="부품 검색"></label>
+<div class="sub-mypage-parts-filter sub-mypage-parts-filter-all is-api-filter">
+<div class="sub-form-select sub-mypage-filter-select" data-select data-part-category-select><button type="button" class="sub-form-select-trigger" aria-expanded="false"><span class="sub-form-select-value">전체</span><i class="sub-form-select-arrow" aria-hidden="true"></i></button><ul class="sub-form-select-options"><li><button type="button" class="sub-form-select-option is-selected" data-value="">전체</button></li></ul><input type="hidden" name="part_category_id"></div>
+<label class="sub-mypage-search"><i aria-hidden="true"></i><input type="search" placeholder="검색어를 입력해주세요" aria-label="부품명 또는 부품번호 검색" data-part-keyword></label>
 </div>
-<div class="sub-mypage-list-actions sub-mypage-parts-actions"><strong>총 <em>70</em>개</strong><a href="/Mypage/cart.html" class="sub-mypage-outline-button"><span class="sub-mypage-cart-icon" aria-hidden="true"></span>장바구니 담기</a></div>
+<div class="sub-mypage-list-actions sub-mypage-parts-actions"><strong>총 <em data-part-total>0</em>개</strong><button type="button" class="sub-mypage-outline-button" data-add-cart><span class="sub-mypage-cart-icon" aria-hidden="true"></span>장바구니 담기</button></div>
 <div class="sub-mypage-parts-table">
 <div class="sub-mypage-parts-head"><label class="sub-form-checkbox"><input type="checkbox" data-check-all><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label><span>부품정보</span><span>판매가</span><span>수량</span><span>최종금액</span></div>
-<div class="sub-mypage-parts-body">
-<article class="sub-mypage-part-row">
-<label class="sub-form-checkbox"><input class="sub-mypage-part-check" type="checkbox"><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label>
-<div class="sub-mypage-part-info"><button type="button" class="sub-mypage-part-image sub-mypage-part-open" data-part-modal-open aria-label="FLANGE PLATES AND STUD KITS 상세보기"><img src="/images/products/HawkEyeElite_X.png" alt="FLANGE PLATES AND STUD KITS"></button><button type="button" class="sub-mypage-part-text sub-mypage-part-open" data-part-modal-open><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></button></div>
-<div class="sub-mypage-part-price" data-price="1000000">₩1,000,000</div>
-<div class="sub-mypage-quantity"><button type="button" data-qty-minus aria-label="수량 감소">−</button><input type="number" value="10" min="1" max="99" aria-label="수량"><button type="button" data-qty-plus aria-label="수량 증가">＋</button></div>
-<div class="sub-mypage-part-total">₩0</div>
-</article>
-<article class="sub-mypage-part-row">
-<label class="sub-form-checkbox"><input class="sub-mypage-part-check" type="checkbox"><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label>
-<div class="sub-mypage-part-info"><button type="button" class="sub-mypage-part-image sub-mypage-part-open" data-part-modal-open aria-label="FLANGE PLATES AND STUD KITS 상세보기"><img src="/images/products/HawkEyeElite_X.png" alt="FLANGE PLATES AND STUD KITS"></button><button type="button" class="sub-mypage-part-text sub-mypage-part-open" data-part-modal-open><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></button></div>
-<div class="sub-mypage-part-price" data-price="1000000">₩1,000,000</div>
-<div class="sub-mypage-quantity"><button type="button" data-qty-minus aria-label="수량 감소">−</button><input type="number" value="10" min="1" max="99" aria-label="수량"><button type="button" data-qty-plus aria-label="수량 증가">＋</button></div>
-<div class="sub-mypage-part-total">₩0</div>
-</article>
-<article class="sub-mypage-part-row">
-<label class="sub-form-checkbox"><input class="sub-mypage-part-check" type="checkbox"><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label>
-<div class="sub-mypage-part-info"><button type="button" class="sub-mypage-part-image sub-mypage-part-open" data-part-modal-open aria-label="FLANGE PLATES AND STUD KITS 상세보기"><img src="/images/products/HawkEyeElite_X.png" alt="FLANGE PLATES AND STUD KITS"></button><button type="button" class="sub-mypage-part-text sub-mypage-part-open" data-part-modal-open><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></button></div>
-<div class="sub-mypage-part-price" data-price="1000000">₩1,000,000</div>
-<div class="sub-mypage-quantity"><button type="button" data-qty-minus aria-label="수량 감소">−</button><input type="number" value="10" min="1" max="99" aria-label="수량"><button type="button" data-qty-plus aria-label="수량 증가">＋</button></div>
-<div class="sub-mypage-part-total">₩0</div>
-</article>
-<article class="sub-mypage-part-row">
-<label class="sub-form-checkbox"><input class="sub-mypage-part-check" type="checkbox"><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label>
-<div class="sub-mypage-part-info"><button type="button" class="sub-mypage-part-image sub-mypage-part-open" data-part-modal-open aria-label="FLANGE PLATES AND STUD KITS 상세보기"><img src="/images/products/HawkEyeElite_X.png" alt="FLANGE PLATES AND STUD KITS"></button><button type="button" class="sub-mypage-part-text sub-mypage-part-open" data-part-modal-open><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></button></div>
-<div class="sub-mypage-part-price" data-price="1000000">₩1,000,000</div>
-<div class="sub-mypage-quantity"><button type="button" data-qty-minus aria-label="수량 감소">−</button><input type="number" value="10" min="1" max="99" aria-label="수량"><button type="button" data-qty-plus aria-label="수량 증가">＋</button></div>
-<div class="sub-mypage-part-total">₩0</div>
-</article>
-<article class="sub-mypage-part-row">
-<label class="sub-form-checkbox"><input class="sub-mypage-part-check" type="checkbox"><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label>
-<div class="sub-mypage-part-info"><button type="button" class="sub-mypage-part-image sub-mypage-part-open" data-part-modal-open aria-label="FLANGE PLATES AND STUD KITS 상세보기"><img src="/images/products/HawkEyeElite_X.png" alt="FLANGE PLATES AND STUD KITS"></button><button type="button" class="sub-mypage-part-text sub-mypage-part-open" data-part-modal-open><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></button></div>
-<div class="sub-mypage-part-price" data-price="1000000">₩1,000,000</div>
-<div class="sub-mypage-quantity"><button type="button" data-qty-minus aria-label="수량 감소">−</button><input type="number" value="10" min="1" max="99" aria-label="수량"><button type="button" data-qty-plus aria-label="수량 증가">＋</button></div>
-<div class="sub-mypage-part-total">₩0</div>
-</article>
-<article class="sub-mypage-part-row">
-<label class="sub-form-checkbox"><input class="sub-mypage-part-check" type="checkbox"><span class="sub-form-checkbox-icon" aria-hidden="true"></span></label>
-<div class="sub-mypage-part-info"><button type="button" class="sub-mypage-part-image sub-mypage-part-open" data-part-modal-open aria-label="FLANGE PLATES AND STUD KITS 상세보기"><img src="/images/products/HawkEyeElite_X.png" alt="FLANGE PLATES AND STUD KITS"></button><button type="button" class="sub-mypage-part-text sub-mypage-part-open" data-part-modal-open><small>Wheel Alignment</small><strong>SPADES SLEEVES</strong><em>20-1355-1</em></button></div>
-<div class="sub-mypage-part-price" data-price="1000000">₩1,000,000</div>
-<div class="sub-mypage-quantity"><button type="button" data-qty-minus aria-label="수량 감소">−</button><input type="number" value="10" min="1" max="99" aria-label="수량"><button type="button" data-qty-plus aria-label="수량 증가">＋</button></div>
-<div class="sub-mypage-part-total">₩0</div>
-</article>
-</div></div>
-<div class="sub-mypage-pagination-row"><nav class="sub-pagination" aria-label="페이지 이동"><button type="button" class="sub-pagination-arrow is-prev" aria-label="이전 페이지"></button><a class="is-active" href="#">1</a><a href="#">2</a><a href="#">3</a><button type="button" class="sub-pagination-arrow is-next" aria-label="다음 페이지"></button></nav></div>
+<div class="sub-mypage-parts-body" data-parts-list aria-live="polite"><p class="sub-mypage-list-empty">부품 목록을 불러오는 중입니다.</p></div></div>
+<div class="sub-mypage-pagination-row" data-parts-pagination data-server-pagination hidden><nav class="sub-pagination" aria-label="페이지 이동"></nav></div>
 </div>
 </div>
 </div></section>
@@ -89,14 +45,18 @@
 <button type="button" class="modal-dim sub-modal-dim" data-part-modal-close aria-label="부품 상세 닫기"></button>
 <div class="modal-box sub-modal-dialog sub-mypage-part-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="part-modal-title">
 <button type="button" class="modal-close-button sub-mypage-part-modal-close" data-part-modal-close aria-label="닫기"></button>
-<div class="sub-mypage-part-modal-image"><img src="/images/products/HawkEyeElite_X.png" alt="FLANGE PLATES AND STUD KITS"></div>
-<div class="sub-mypage-part-modal-content"><small>Wheel Alignment</small><h3 id="part-modal-title">FLANGE PLATES AND STUD KITS</h3><strong>20-3698-1</strong><dl><div><dt>판매가</dt><dd>1,003,000원</dd></div></dl></div>
+<div class="sub-mypage-part-modal-image"><img src="/images/img_placeholder.png" alt="" data-modal-part-image></div>
+<div class="sub-mypage-part-modal-content"><small data-modal-part-category>-</small><h3 id="part-modal-title" data-modal-part-name>-</h3><strong data-modal-part-code>-</strong><dl><div><dt>판매가</dt><dd data-modal-part-price>-</dd></div></dl></div>
 </div>
 </div>
 <div data-include="/includes/footer.html"></div>
 <script src="/js/include.js?v=20260814"></script>
-<script src="/js/common.js?v=20260814"></script>
+<script src="/js/common.js?v=20260821"></script>
+<script src="/js/api/config.js?v=20260821"></script>
+<script src="/js/api/client.js?v=20260821"></script>
+<script src="/js/api/front-api.js?v=20260821"></script>
 <script src="/js/form.js?v=20260814"></script>
-<script src="/js/mypage.js?v=20260820-1"></script>
+<script src="/js/mypage.js?v=20260821"></script>
+<script src="/js/mypage-parts-list.js?v=20260821"></script>
 </body>
 </html>

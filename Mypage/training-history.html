@@ -41,22 +41,8 @@
                         <div class="sub-mypage-training-history-head" role="row">
                             <strong role="columnheader">수강일자</strong><strong role="columnheader">수강제목</strong><strong role="columnheader">수강상태</strong><strong role="columnheader">상세</strong>
                         </div>
-                        <div class="sub-mypage-training-history-body">
-                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.07.19" data-time="09:00" data-course="얼라인먼트 Level 1" data-count="00/00" data-status="신청완료" data-color="training-color-1" data-instructor="김헌터" data-fee="무료">
-                                <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
-                            </div>
-                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.07.27" data-time="16:00" data-course="얼라인먼트 Level 1" data-count="00/00" data-status="신청완료" data-color="training-color-4" data-instructor="김헌터" data-fee="무료">
-                                <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
-                            </div>
-                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.08.03" data-time="10:00" data-course="휠 얼라인먼트 Level 2" data-count="04/20" data-status="신청완료" data-color="training-color-3" data-instructor="김헌터" data-fee="15,000원">
-                                <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
-                            </div>
-                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.08.10" data-time="14:00" data-course="얼라인먼트 Level 1" data-count="10/20" data-status="신청완료" data-color="training-color-2" data-instructor="김헌터" data-fee="무료">
-                                <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
-                            </div>
-                            <div class="sub-mypage-training-history-row" role="row" data-training-history data-date="2026.08.17" data-time="09:00" data-course="얼라인먼트 Level 3" data-count="12/20" data-status="신청완료" data-color="training-color-5" data-instructor="김헌터" data-fee="무료">
-                                <span role="cell">2026.07.30</span><span role="cell">휠 얼라인먼트_Level 1</span><span role="cell" data-history-status>신청완료</span><span role="cell"><button type="button" class="sub-mypage-history-view" data-training-history-open>view</button></span>
-                            </div>
+                        <div class="sub-mypage-training-history-body" data-training-history-list aria-live="polite">
+                            <p class="sub-mypage-list-empty">수강 이력을 불러오는 중입니다.</p>
                         </div>
                     </div>
                 </div>
@@ -83,6 +69,14 @@
     </div>
 
     <div class="footer-section" data-include="/includes/footer.html"></div>
-    <script src="/js/include.js?v=20260814"></script><script src="/js/common.js?v=20260814"></script><script src="/js/main.js?v=20260814"></script><script src="/js/form.js?v=20260814"></script><script src="/js/mypage.js?v=20260820-1"></script>
+    <script src="/js/include.js?v=20260814"></script>
+    <script src="/js/common.js?v=20260821"></script>
+    <script src="/js/api/config.js?v=20260821"></script>
+    <script src="/js/api/client.js?v=20260821"></script>
+    <script src="/js/api/front-api.js?v=20260821"></script>
+    <script src="/js/main.js?v=20260814"></script>
+    <script src="/js/form.js?v=20260814"></script>
+    <script src="/js/mypage.js?v=20260821"></script>
+    <script src="/js/training-history.js?v=20260821"></script>
 </body>
 </html>

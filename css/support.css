@@ -700,6 +700,13 @@ Training Registration
     background: #e2e2e2 url("/images/img_placeholder.png") center / cover no-repeat;
 }
 
+.sub-training-modal-visual img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
 .sub-training-modal-summary {
     padding-bottom: calc(34 * var(--vw));
     border-bottom: 1px solid #e3e3e3;
