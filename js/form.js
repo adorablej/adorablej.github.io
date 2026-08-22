@@ -355,6 +355,12 @@ function initCsRequestContext() {
     const form = document.querySelector(".sub-mypage-cs-form");
     if (!form) return;
 
+    fillCsRequester(form);
+    window.addEventListener("hunterBusinessChanged", () => fillCsRequester(form));
+    window.addEventListener("includeLoaded", () => {
+        applyCsSidebarMember(readStoredCsMember());
+    });
+
     const params = new URLSearchParams(window.location.search);
     const requestedCategory = (params.get("category") || "").toLowerCase();
     const categoryInput = form.querySelector('input[name="category"]');
@@ -379,6 +385,51 @@ function initCsRequestContext() {
     form.querySelector('input[name="product_name"]').value = productName;
     form.querySelector('input[name="product_category"]').value = productCategory;
     form.querySelector('input[name="product_serial"]').value = productSerial;
+}
+
+async function fillCsRequester(form) {
+    const companyInput = form.elements.company;
+    const nameInput = form.elements.name;
+    const phoneInput = form.elements.phone;
+    const storedMember = readStoredCsMember();
+
+    applyCsRequesterValues(storedMember);
+
+    try {
+        const member = await window.HunterFrontAPI?.member?.getMe?.();
+        if (!member) return;
+        applyCsRequesterValues(member.member || member.data?.member || member.data || member);
+    } catch (error) {
+        if (error?.status === 401) window.location.replace("/account/login.html");
+    }
+
+    function applyCsRequesterValues(member) {
+        if (companyInput) companyInput.value = window.localStorage.getItem("hunter.selectedBusinessName") || "";
+        if (nameInput) nameInput.value = member?.memberName || "";
+        if (phoneInput) phoneInput.value = member?.phoneNumber || "";
+        applyCsSidebarMember(member);
+        [companyInput, nameInput, phoneInput].forEach(input => {
+            input?.closest(".sub-form-group")?.classList.toggle("is-filled", Boolean(input.value));
+        });
+    }
+}
+
+function applyCsSidebarMember(member) {
+    document.querySelectorAll(".sub-mypage-user-row strong").forEach(element => {
+        element.textContent = member?.memberName ? `${member.memberName}님` : "회원님";
+    });
+}
+
+function readStoredCsMember() {
+    for (const storage of [window.sessionStorage, window.localStorage]) {
+        try {
+            const value = JSON.parse(storage.getItem("hunter.member") || "null");
+            if (value) return value.member || value;
+        } catch (error) {
+            // 손상된 임시 저장값은 무시합니다.
+        }
+    }
+    return null;
 }
 
 /* ========================================

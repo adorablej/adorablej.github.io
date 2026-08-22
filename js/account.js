@@ -54,6 +54,16 @@
             return String(apiBaseUrl || '').replace(/\/$/, '') === 'https://api-dev.hunterkorea.com';
         }
 
+        function formatPhoneNumber(digits) {
+            if (digits.length === 11) {
+                return digits.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+            }
+            if (digits.length === 10) {
+                return digits.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+            }
+            return digits;
+        }
+
         async function completeLogin(credentials, rememberLogin) {
             await authApi.login(credentials, rememberLogin);
             var member = await memberApi.getMe();
@@ -139,6 +149,10 @@
         keepPhone.addEventListener('change', function () { keepCode.checked = keepPhone.checked; });
         keepCode.addEventListener('change', function () { keepPhone.checked = keepCode.checked; });
 
+        if (isDevelopmentApi()) {
+            requestButton.textContent = '개발계 테스트 로그인';
+        }
+
         async function requestLoginCode() {
             if (requesting) return;
             var digits = phone.value.replace(/\D/g, '');
@@ -147,7 +161,7 @@
                 phone.focus();
                 return;
             }
-            if (!authApi || !authApi.requestPhoneVerification || !authApi.login || !memberApi || !memberApi.getMe) {
+            if (!authApi || !authApi.login || !memberApi || !memberApi.getMe) {
                 await showAccountAlert('로그인 인증 기능을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
                 return;
             }
@@ -157,6 +171,19 @@
             requestButton.disabled = true;
             resendButton.disabled = true;
             try {
+                if (isDevelopmentApi()) {
+                    requestButton.setAttribute('aria-busy', 'true');
+                    await completeLogin({
+                        verificationToken: 'DEV_BYPASS_2026',
+                        phoneNumber: formatPhoneNumber(digits)
+                    }, keepPhone.checked);
+                    return;
+                }
+
+                if (!authApi.requestPhoneVerification) {
+                    throw new Error('로그인 인증 기능을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
+                }
+
                 var response = await authApi.requestPhoneVerification(digits, 'LOGIN');
                 verificationId = String(response && response.verificationId || '');
                 if (!verificationId) throw new Error('인증 요청 정보를 확인할 수 없습니다.');

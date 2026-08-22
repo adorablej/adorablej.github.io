@@ -13,6 +13,7 @@
         if (!api) return;
 
         bindLogout();
+        renderCachedMember();
 
         const results = await Promise.allSettled([
             api.getMe(),
@@ -37,6 +38,26 @@
         else renderTraining([]);
     }
 
+    function renderCachedMember() {
+        const member = readStoredMember();
+        if (!member) return;
+        setText("mypageMemberName", member.memberName);
+        setText("mypageMemberPhone", member.phoneNumber);
+        updateSidebarMember(member.memberName);
+    }
+
+    function readStoredMember() {
+        for (const storage of [window.sessionStorage, window.localStorage]) {
+            try {
+                const value = JSON.parse(storage.getItem("hunter.member") || "null");
+                if (value) return value.member || value;
+            } catch (error) {
+                // 손상된 임시 저장값은 무시하고 API 회원정보를 사용합니다.
+            }
+        }
+        return null;
+    }
+
     function getList(response) {
         if (Array.isArray(response)) return response;
         if (Array.isArray(response?.data)) return response.data;
@@ -46,10 +67,13 @@
 
     function renderMember(response) {
         latestMemberResponse = response;
-        const member = response?.member || response || {};
+        const member = response?.member || response?.data?.member || response?.data || response || {};
         setText("mypageMemberName", member.memberName);
         setText("mypageMemberPhone", member.phoneNumber);
         updateSidebarMember(member.memberName);
+        const refreshTokenKey = window.HunterAPIConfig?.tokenKeys?.refresh || "hunter.refreshToken";
+        const storage = window.localStorage.getItem(refreshTokenKey) ? window.localStorage : window.sessionStorage;
+        storage.setItem("hunter.member", JSON.stringify(member));
 
         const businesses = Array.isArray(response?.businesses)
             ? response.businesses.filter(item => item.approvalStatusCode === "APPROVED")
