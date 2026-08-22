@@ -1,0 +1,29 @@
+name: Deploy to Dev
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+# 같은 레포에서 연달아 push된 경우 이전 배포 트리거만 취소 (실행 자체는 유지)
+concurrency:
+  group: deploy-dev
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 실제 pull/build/compose는 default-infra의 scripts/deploy-dev.sh가 수행.
+      # 이 워크플로우는 개발 서버에 SSH로 접속해 그 스크립트를 트리거만 함.
+      - name: Trigger dev server deploy
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEV_SSH_HOST }}
+          username: ${{ secrets.DEV_SSH_USER }}
+          key: ${{ secrets.DEV_SSH_KEY }}
+          port: ${{ secrets.DEV_SSH_PORT || 22 }}
+          script_stop: true
+          script: |
+            cd ${{ secrets.DEV_INFRA_PATH }}
+            bash scripts/deploy-dev.sh front
