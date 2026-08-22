@@ -64,13 +64,13 @@
         <dd>
             <div class="sub-mypage-business-type">
                 <label class="sub-form-checkbox">
-                    <input type="checkbox" checked disabled>
+                    <input type="checkbox" id="mypageAccountBusinessCorporate" disabled>
                     <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
                     <span class="sub-form-checkbox-text">법인</span>
                 </label>
     
                 <label class="sub-form-checkbox">
-                    <input type="checkbox" disabled>
+                    <input type="checkbox" id="mypageAccountBusinessIndividual" disabled>
                     <span class="sub-form-checkbox-icon" aria-hidden="true"></span>
                     <span class="sub-form-checkbox-text">개인</span>
                 </label>
@@ -79,31 +79,31 @@
     </div>
 <div class="sub-mypage-account-row">
 <dt>사업자등록번호</dt>
-<dd>000-00-00000</dd>
+<dd id="mypageAccountBusinessNumber">-</dd>
 </div>
 <div class="sub-mypage-account-row">
 <dt>법인등록번호</dt>
-<dd>000-00-00000</dd>
+<dd id="mypageAccountCorporationNumber">-</dd>
 </div>
 <div class="sub-mypage-account-row">
 <dt>기업/사업체명</dt>
-<dd>은하수타이어센터</dd>
+<dd id="mypageAccountBusinessName">-</dd>
 </div>
 <div class="sub-mypage-account-row">
 <dt>개업년월</dt>
-<dd>2025.07.07</dd>
+<dd id="mypageAccountOpeningDate">-</dd>
 </div>
 <div class="sub-mypage-account-row">
 <dt>대표자명</dt>
-<dd>김은하</dd>
+<dd id="mypageAccountRepresentativeName">-</dd>
 </div>
 <div class="sub-mypage-account-row">
 <dt>사업장 주소</dt>
-<dd>(12345) 경기도 부천시 부천중동대로 123 은하수빌딩 203호</dd>
+<dd id="mypageAccountBusinessAddress">-</dd>
 </div>
 <div class="sub-mypage-account-row">
 <dt>사업자등록증</dt>
-<dd><a class="sub-mypage-account-file" download="" href="/images/img_placeholder.png">은하수센터_사업자등록증.jpg</a></dd>
+<dd><a class="sub-mypage-account-file" id="mypageAccountBusinessFile" target="_blank" rel="noopener" hidden></a><span id="mypageAccountBusinessFileEmpty">-</span></dd>
 </div>
 </dl>
 </section>
@@ -137,8 +137,6 @@
                     <div class="sub-form-group sub-account-field sub-account-business-number-field">
                         <label class="sub-account-label sub-account-required" for="mypage-business-number">사업자등록번호</label>
                         <input class="sub-form-input sub-account-input" id="mypage-business-number" name="businessNumber" type="text" inputmode="numeric" maxlength="10" placeholder="(-) 제외한 숫자만 입력해 주세요." data-required data-message="사업자등록번호를 입력해 주세요." />
-                        <button class="sub-account-line-button sub-account-line-button-under" type="button" data-business-auth>사업자 인증</button>
-                        <input type="hidden" value="" data-business-authenticated data-required data-message="사업자 인증을 진행해 주세요." />
                         <p class="sub-form-message sub-account-error" aria-live="polite"></p>
                     </div>
 
@@ -172,7 +170,11 @@
                     <div class="sub-form-group sub-account-field sub-account-address-field">
                         <div class="sub-account-label-row"><label class="sub-account-label sub-account-required" for="mypage-business-address">사업장 주소</label><button class="sub-account-text-button" type="button" data-business-postcode>우편번호</button></div>
                         <input class="sub-form-input sub-account-input" id="mypage-business-address" name="businessAddress" type="text" readonly data-required data-message="주소를 입력해 주세요." />
+                        <input name="postalCode" type="hidden" data-business-postal-code data-required data-message="우편번호를 검색해 주세요." />
                         <input class="sub-form-input sub-account-input sub-account-input-gap" id="mypage-business-address-detail" name="businessAddressDetail" type="text" placeholder="상세 주소를 입력해 주세요." data-required data-message="상세 주소를 입력해 주세요." />
+                        <button class="sub-account-line-button sub-account-line-button-under" type="button" data-business-auth>사업자 인증</button>
+                        <input type="hidden" value="" data-business-authenticated data-required data-message="사업자 인증을 진행해 주세요." />
+                        <p class="sub-account-code-status" data-business-auth-status hidden aria-live="polite"></p>
                         <p class="sub-form-message sub-account-error" aria-live="polite"></p>
                     </div>
 
@@ -241,12 +243,13 @@
 
 <div data-include="/includes/footer.html"></div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/include.js?v=20260814"></script>
 <script src="/js/common.js?v=20260814"></script>
-<script src="/js/mypage.js?v=20260820-4"></script>
+<script src="/js/mypage.js?v=20260822-2"></script>
 <script src="/js/api/config.js?v=20260820"></script>
 <script src="/js/api/client.js?v=20260820"></script>
-<script src="/js/api/front-api.js?v=20260820"></script>
-<script src="/js/mypage-account.js?v=20260820"></script>
+<script src="/js/api/front-api.js?v=20260822-1"></script>
+<script src="/js/mypage-account.js?v=20260822-1"></script>
 </body>
 </html>

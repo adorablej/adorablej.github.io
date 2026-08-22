@@ -52,6 +52,17 @@
         member: Object.freeze({
             getMe: function () { return client.get('/api/v1/me'); },
             getProfile: function () { return client.get('/api/v1/me/profile'); },
+            getBusinesses: function (approvedOnly) {
+                return client.get('/api/v1/me/businesses', {
+                    query: { approvedOnly: Boolean(approvedOnly) }
+                });
+            },
+            selectBusiness: function (businessId) {
+                return client.patch('/api/v1/me/businesses/' + encodeURIComponent(businessId) + '/select');
+            },
+            addBusiness: function (formData) {
+                return client.post('/api/v1/me/businesses', formData);
+            },
             getProducts: function (params, raw) {
                 return client.get('/api/v1/me/products', { query: params || {}, raw: Boolean(raw) });
             },

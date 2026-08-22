@@ -289,8 +289,10 @@ function initMypageBusinessAddModal() {
     const fileName = form.querySelector("[data-business-file-name]");
     const fileOpenButtons = form.querySelectorAll("[data-business-file-open]");
     const postcodeButton = form.querySelector("[data-business-postcode]");
+    const postalCodeInput = form.querySelector("[data-business-postal-code]");
     const authButton = form.querySelector("[data-business-auth]");
     const authenticatedInput = form.querySelector("[data-business-authenticated]");
+    const authStatus = form.querySelector("[data-business-auth-status]");
     const corporationField = form.querySelector("[data-corporation-number-field]");
     const businessTypeInputs = form.querySelectorAll('input[name="businessType"]');
     let lastFocusedElement = null;
@@ -338,10 +340,16 @@ function initMypageBusinessAddModal() {
         }
         if (authButton) {
             authButton.textContent = "사업자 인증";
+            authButton.disabled = false;
             authButton.classList.remove("is-complete");
             delete authButton.dataset.verified;
         }
         if (authenticatedInput) authenticatedInput.value = "";
+        if (authStatus) {
+            authStatus.hidden = true;
+            authStatus.className = "sub-account-code-status";
+            authStatus.textContent = "";
+        }
         syncBusinessType();
     };
 
@@ -431,39 +439,175 @@ function initMypageBusinessAddModal() {
         fileName.closest(".sub-account-file")?.classList.add("has-file");
     });
 
-    postcodeButton?.addEventListener("click", () => {
+    const openPostcode = () => {
         const address = form.elements.businessAddress;
-        if (!address.value) address.value = "(12345) 경기도 부천시 부천중동대로 123";
-        address.removeAttribute("aria-invalid");
-        address.closest(".sub-form-group")?.classList.remove("is-error");
-        form.elements.businessAddressDetail?.focus();
-    });
+        if (!window.daum?.Postcode) {
+            window.HunterAlert?.open({ message: "주소 검색 기능을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요." });
+            return;
+        }
 
-    authButton?.addEventListener("click", () => {
+        new window.daum.Postcode({
+            oncomplete(data) {
+                const postalCode = data.zonecode || "";
+                address.value = data.roadAddress || data.jibunAddress || "";
+                address.dataset.postalCode = postalCode;
+                if (postalCodeInput) postalCodeInput.value = postalCode;
+                postalCodeInput?.dispatchEvent(new Event("change", { bubbles: true }));
+                address.dispatchEvent(new Event("input", { bubbles: true }));
+                address.dispatchEvent(new Event("change", { bubbles: true }));
+                address.removeAttribute("aria-invalid");
+                address.closest(".sub-form-group")?.classList.remove("is-error");
+                form.elements.businessAddressDetail?.focus();
+            }
+        }).open();
+    };
+
+    postcodeButton?.addEventListener("click", openPostcode);
+    form.elements.businessAddress?.addEventListener("click", openPostcode);
+
+    const resetBusinessAuthentication = () => {
+        if (authenticatedInput) authenticatedInput.value = "";
+        if (authButton) {
+            authButton.textContent = "사업자 인증";
+            authButton.disabled = false;
+            authButton.classList.remove("is-complete");
+            delete authButton.dataset.verified;
+        }
+        if (authStatus) {
+            authStatus.hidden = true;
+            authStatus.className = "sub-account-code-status";
+            authStatus.textContent = "";
+        }
+    };
+
+    [form.elements.businessNumber, form.elements.openingDate, form.elements.representativeName,
+        form.elements.businessName, form.elements.corporationNumber, form.elements.businessAddress]
+        .filter(Boolean)
+        .forEach(field => {
+            field.addEventListener("input", resetBusinessAuthentication);
+            field.addEventListener("change", resetBusinessAuthentication);
+        });
+    businessTypeInputs.forEach(input => input.addEventListener("change", resetBusinessAuthentication));
+
+    authButton?.addEventListener("click", async () => {
         const businessNumber = form.elements.businessNumber;
-        if (!/^\d{10}$/.test(businessNumber.value.trim())) {
+        const number = businessNumber.value.replace(/\D/g, "");
+        const isCorporation = form.elements.businessType.value === "corporation";
+        const corporationDigits = form.elements.corporationNumber.value.replace(/\D/g, "");
+
+        if (!/^\d{10}$/.test(number)) {
             setFieldError(businessNumber, "10자리 사업자등록번호를 입력해 주세요.");
             businessNumber.focus();
             return;
         }
-        authButton.textContent = "사업자 인증 완료";
-        authButton.classList.add("is-complete");
-        authButton.dataset.verified = "true";
-        if (authenticatedInput) {
+
+        if (!form.elements.openingDate.value || !form.elements.representativeName.value.trim() || !form.elements.businessName.value.trim()) {
+            await window.HunterAlert?.open({ message: "개업일, 기업/사업체명, 대표자명을 먼저 입력해 주세요." });
+            return;
+        }
+
+        if (isCorporation && corporationDigits.length !== 13) {
+            setFieldError(form.elements.corporationNumber, "13자리 법인등록번호를 입력해 주세요.");
+            form.elements.corporationNumber.focus();
+            return;
+        }
+
+        authButton.disabled = true;
+        authButton.textContent = "인증 중";
+        const serviceKey = "c43099117f7a32bacb563e8aad7893df567f7d7a426d94b4ef94bd3f97e7a711";
+        const apiBaseUrl = "https://api.odcloud.kr/api/nts-businessman/v1";
+        const requestOptions = { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" } };
+        const validationBody = {
+            businesses: [{
+                b_no: number,
+                start_dt: form.elements.openingDate.value.replace(/\D/g, ""),
+                p_nm: form.elements.representativeName.value.trim(),
+                b_nm: form.elements.businessName.value.trim(),
+                corp_no: isCorporation ? corporationDigits : "",
+                b_sector: "",
+                b_type: "",
+                b_adr: form.elements.businessAddress.value.trim()
+            }]
+        };
+
+        try {
+            const responses = await Promise.all([
+                fetch(`${apiBaseUrl}/validate?serviceKey=${encodeURIComponent(serviceKey)}`, { ...requestOptions, body: JSON.stringify(validationBody) }),
+                fetch(`${apiBaseUrl}/status?serviceKey=${encodeURIComponent(serviceKey)}`, { ...requestOptions, body: JSON.stringify({ b_no: [number] }) })
+            ]);
+            const payloads = await Promise.all(responses.map(response => response.json()));
+            if (!responses[0].ok || !responses[1].ok) throw new Error("사업자 정보를 확인하지 못했습니다.");
+
+            const validation = payloads[0]?.data?.[0];
+            const statusResult = payloads[1]?.data?.[0];
+            if (!validation || validation.valid !== "01" || !statusResult || statusResult.b_stt_cd !== "01") {
+                resetBusinessAuthentication();
+                await window.HunterAlert?.open({ message: "입력하신 사업자 정보가 맞지 않습니다.\n다시 한번 확인해 주세요." });
+                return;
+            }
+
             authenticatedInput.value = "true";
             authenticatedInput.removeAttribute("aria-invalid");
+            authButton.textContent = "인증 완료";
+            authButton.classList.add("is-complete");
+            authButton.dataset.verified = "true";
+            authStatus.hidden = false;
+            authStatus.className = "sub-account-code-status is-success";
+            authStatus.textContent = "사업자 인증이 완료되었습니다.";
+            authButton.closest(".sub-form-group")?.classList.remove("is-error");
+        } catch (error) {
+            resetBusinessAuthentication();
+            await window.HunterAlert?.open({ message: error?.message || "사업자 인증 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요." });
+        } finally {
+            if (!authenticatedInput.value) {
+                authButton.disabled = false;
+                authButton.textContent = "사업자 인증";
+            }
         }
-        authButton.closest(".sub-form-group")?.classList.remove("is-error");
-        const message = authButton.closest(".sub-form-group")?.querySelector(".sub-form-message");
-        if (message) message.textContent = "";
     });
 
     form.addEventListener("submit", async event => {
         event.preventDefault();
         if (!validateForm()) return;
-        await window.HunterAlert?.open({
-            message: "기업/사업체 추가 신청 API가 준비되지 않았습니다."
-        });
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        const addressValue = form.elements.businessAddress.value.trim();
+        const addressMatch = addressValue.match(/^\((\d{5})\)\s*(.*)$/);
+        const businessNumber = form.elements.businessNumber.value.trim();
+        const corporationNumber = form.elements.corporationNumber?.value.trim() || "";
+        const formatBusinessNumber = value => value.length === 10
+            ? `${value.slice(0, 3)}-${value.slice(3, 5)}-${value.slice(5)}`
+            : value;
+        const formatCorporationNumber = value => value.length === 13
+            ? `${value.slice(0, 6)}-${value.slice(6)}`
+            : value;
+        const request = {
+            businessTypeCode: form.elements.businessType.value === "corporation" ? "CORPORATION" : "INDIVIDUAL",
+            businessNumber: formatBusinessNumber(businessNumber),
+            corporationNumber: formatCorporationNumber(corporationNumber),
+            businessName: form.elements.businessName.value.trim(),
+            openingDate: form.elements.openingDate.value,
+            representativeName: form.elements.representativeName.value.trim(),
+            postalCode: postalCodeInput?.value || form.elements.businessAddress.dataset.postalCode || addressMatch?.[1] || "",
+            address1: addressMatch?.[2] || addressValue,
+            address2: form.elements.businessAddressDetail.value.trim()
+        };
+        const formData = new FormData();
+        formData.append("request", new Blob([JSON.stringify(request)], { type: "application/json" }));
+        formData.append("businessLicenseFile", fileInput.files[0]);
+
+        if (submitButton) submitButton.disabled = true;
+        try {
+            await window.HunterFrontAPI.member.addBusiness(formData);
+            window.dispatchEvent(new CustomEvent("hunterBusinessesUpdated"));
+            openCompleteModal();
+        } catch (error) {
+            const message = error?.message || "기업/사업체 추가 신청을 처리하지 못했습니다.";
+            if (window.HunterAlert?.alert) await window.HunterAlert.alert(message);
+            else await window.HunterAlert?.open({ message });
+        } finally {
+            if (submitButton) submitButton.disabled = false;
+        }
     });
 
     window.addEventListener("keydown", event => {
