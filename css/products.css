@@ -215,7 +215,7 @@ Sub Pride Dealer
     width: calc(24 * var(--vw));
     height: calc(24 * var(--vw));
     background: url("/images/icon/icon_map.png")center / cover no-repeat;
-    
+
 }
 
 
@@ -1049,7 +1049,7 @@ Detail Summary
     padding: 0;
     list-style: none;
     margin-top: calc(60 * var(--vw));
-    
+
 }
 
 .detail-summary-item {
@@ -1498,10 +1498,71 @@ products-ROICalculator.html
     font-family: "Russo One", sans-serif;
 }
 
+.roi-product-selector {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(40 * var(--vw));
+    margin-bottom: calc(80 * var(--vw));
+}
+
+.roi-product-card {
+    position: relative;
+    height: calc(330 * var(--vw));
+    overflow: hidden;
+    padding: 0;
+    border: 4px solid transparent;
+    border-radius: calc(20 * var(--vw));
+    background: #f6f6f6;
+    text-align: left;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.roi-product-card.is-active {
+    border-color: var(--red);
+}
+
+.roi-product-card:focus {
+    outline: none;
+}
+
+.roi-product-card:focus-visible {
+    box-shadow: 0 0 0 2px var(--red);
+}
+
+.roi-product-card span {
+    position: absolute;
+    top: calc(52 * var(--vw));
+    left: calc(48 * var(--vw));
+    z-index: 2;
+    font-size: calc(28 * var(--vw));
+    font-weight: 700;
+    line-height: 1.05;
+}
+
+.roi-product-card img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+[data-roi-panel][hidden],
+[data-roi-result-panel][hidden] {
+    display: none !important;
+}
+
 .roi-form {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: calc(70 * var(--vw)) calc(60 * var(--vw));
+}
+
+.roi-form--changer {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: calc(110 * var(--vw));
 }
 
 .roi-form-item {
@@ -1514,7 +1575,8 @@ products-ROICalculator.html
     gap: calc(10 * var(--vw));
     margin-bottom: calc(20 * var(--vw));
     font-size: calc(22 * var(--vw));
-    font-weight: 600;
+    color: #000;
+    font-weight: 500;
     letter-spacing: -.02em;
 }
 
@@ -1531,7 +1593,10 @@ products-ROICalculator.html
     height:calc(80 * var(--vw));
     padding:0 calc(24 * var(--vw));
     border:1px solid #ddd;
-    font-size:calc(22 * var(--vw));
+    color: #999;
+    font-size: calc(18 * var(--vw));
+    font-weight: 500;
+    letter-spacing: -.02em;
 }
 .roi-input::placeholder{
     color: #999;
@@ -1574,49 +1639,7 @@ products-ROICalculator.html
 
 .roi-result-formula {
     display: grid;
-    grid-template-columns:
-        calc(135 * var(--vw))
-        calc(125 * var(--vw))
-        calc(160 * var(--vw))
-        calc(120 * var(--vw))
-        calc(250 * var(--vw))
-        calc(245 * var(--vw))
-        calc(265 * var(--vw));
     align-items: center;
-}
-
-.roi-result-item {
-    min-width: 0;
-    text-align: center;
-}
-
-.roi-result-item p {
-    display: block;
-    margin: 0 0 calc(12 * var(--vw));
-    color: rgba(255, 255, 255, .65);
-    font-size: calc(18 * var(--vw));
-    line-height: 1.35;
-}
-
-.roi-result-item strong {
-    display: block;
-    font-size: calc(24 * var(--vw));
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: -.02em;
-    white-space: nowrap;
-}
-
-.roi-result-item span {
-    display: inline;
-    margin: 0;
-    font-size: inherit;
-}
-
-.roi-result-item em {
-    margin-left: calc(2 * var(--vw));
-    font-size: calc(20 * var(--vw));
-    font-style: normal;
 }
 
 .roi-result-symbol {
@@ -1645,25 +1668,106 @@ products-ROICalculator.html
     margin-top: calc(7 * var(--vw));
 }
 
-.roi-result-item--primary strong,
-.roi-result-item--metric strong {
-    font-size: calc(40 * var(--vw));
-    font-weight: 600;
+.roi-result-formula {
+    grid-template-columns: minmax(0, 1fr) 0 minmax(0, 1fr) 0 minmax(0, 1fr);
+    column-gap: calc(30 * var(--vw));
+    row-gap: calc(55 * var(--vw));
 }
 
-.roi-result-item--primary p,
-.roi-result-item--metric p {
-    color: #fff;
+.roi-result-item,
+.roi-comparison-item {
+    min-width: 0;
 }
 
-.roi-result-item--metric {
+.roi-result-item {
+    text-align: left;
+}
+
+.roi-result-label {
+    display: block;
+    margin: 0 0 calc(18 * var(--vw));
+    color: #FFA59F;
+    font-size: calc(22 * var(--vw));
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -.02em;
+}
+
+.roi-result-output {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) calc(20 * var(--vw));
+    align-items: center;
+    gap: calc(18 * var(--vw));
+    min-height: calc(70 * var(--vw));
+    padding: 0;
+    background: transparent;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+.roi-result-value {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: calc(80 * var(--vw));
-    border-left: 1px solid rgba(255, 255, 255, .35);
+    flex: 1;
+    align-items: center;
+    min-width: 0;
+    min-height: calc(70 * var(--vw));
+    padding: 0 calc(26 * var(--vw));
+    background: #B20B00;
+    font-size: calc(26 * var(--vw));
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -.02em;
     box-sizing: border-box;
 }
+
+.roi-result-output > em {
+    width: max-content;
+    margin-left: 0;
+    font-size: calc(22 * var(--vw));
+    font-style: normal;
+    font-weight: 400;
+}
+
+.roi-result-formula > .roi-result-symbol {
+    align-self: end;
+    height: calc(70 * var(--vw));
+    min-height: 0;
+}
+
+.roi-result-formula .roi-result-item--metric {
+    min-height: 0;
+    border-left: 0;
+}
+
+.roi-result-formula .roi-result-item:nth-child(6) {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.roi-result-formula .roi-result-item:nth-child(7) {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.roi-result--changer {
+    padding: calc(70 * var(--vw)) 0;
+}
+
+.roi-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: calc(80 * var(--vw));
+    row-gap: calc(38 * var(--vw));
+}
+
+.roi-comparison-item--total {
+    padding: calc(38 * var(--vw)) 0 0;
+    border-top: 1px solid rgba(255, 255, 255, .28);
+}
+.roi-comparison-item--tip .roi-tooltip { vertical-align: middle; }
+.roi-comparison-item--tip .roi-info { background: #fff; color: var(--red); }
+.roi-comparison-item--tip .roi-tooltip-box { color: var(--red); background: #fff; }
+.roi-comparison-item--tip .roi-tooltip-box::before { border-bottom-color: #fff; }
 
 /* ROI Tooltip */
 
@@ -1674,30 +1778,25 @@ products-ROICalculator.html
 }
 
 .roi-tooltip-box{
-    position:absolute;
-    left:calc(90 * var(--vw));
-    bottom:calc(-100 * var(--vw));
-    transform:translateX(-50%);
-
-    width:calc(210 * var(--vw));
-    padding:calc(20 * var(--vw));
-
-    border-radius:calc(15 * var(--vw));
-    background:var(--red);
-
-    color:#fff;
-    font-size:calc(16 * var(--vw));
-    font-weight:400;
-    line-height:calc(20 * var(--vw));
-
-    white-space:normal;
-
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-
-    transition:.25s;
-    z-index:30;
+    position: absolute;
+    left: calc(90 * var(--vw));
+    top: calc(50 * var(--vw));
+    transform: translateX(-50%);
+    min-width: calc(210 * var(--vw));
+    padding: calc(20 * var(--vw));
+    border-radius: calc(15 * var(--vw));
+    background: var(--red);
+    color: #fff;
+    font-size: calc(16 * var(--vw));
+    font-weight: 400;
+    line-height: calc(20 * var(--vw));
+    white-space: normal;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: .25s;
+    z-index: 30;
+    word-break: keep-all;
 }
 
 .roi-tooltip-box::before{
@@ -3697,13 +3796,52 @@ Mobile (720px and below)
         line-height: normal;
     }
 
+    .roi-product-selector {
+        display: flex;
+        gap: 10px;
+        width: calc(100% + 50px);
+        margin: 0 0 40px;
+        margin-left: -25px;
+        padding: 0 25px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        box-sizing: border-box;
+    }
+
+    .roi-product-selector::-webkit-scrollbar {
+        display: none;
+    }
+
+    .roi-product-card {
+        flex: 0 0 200px;
+        height: 170px;
+        border: 2px solid transparent;
+        border-radius: 8px;
+    }
+
+    .roi-product-card span {
+        top: 22px;
+        left: 18px;
+        font-size: 16px;
+    }
+
+
     .roi-form {
         grid-template-columns: 1fr;
-        gap: 45px;
+        gap: 30px;
     }
 
     .roi-form-item:last-child {
         display: none;
+    }
+
+    .roi-form--changer {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .roi-form--changer .roi-form-item:last-child {
+        display: block;
     }
 
     .roi-form-item label {
@@ -3760,7 +3898,7 @@ Mobile (720px and below)
     }
 
     .roi-result {
-        padding: 38px 0 15px;
+        padding: 42px 0 37px;
         background: #cf0b00;
     }
 
@@ -3773,27 +3911,15 @@ Mobile (720px and below)
 
     .roi-result-item {
         width: 100%;
-        text-align: center;
+        text-align: left;
     }
 
-    .roi-result-item p {
-        margin: 0 0 5px;
-        color: rgba(255, 255, 255, .55);
+    .roi-result-label {
+        margin: 0 0 12px;
+        color: #FFA59F;
         font-size: 16px;
         line-height: 22px;
-    }
-
-    .roi-result-item strong,
-    .roi-result-item span {
-        margin: 0;
-        font-size: 20px;
-        font-weight: 400;
-        line-height: 28px;
-    }
-
-    .roi-result-item em {
-        margin-left: 1px;
-        font-size: 20px;
+        text-align: left;
     }
 
     .roi-result-symbol {
@@ -3809,16 +3935,16 @@ Mobile (720px and below)
 
     .roi-result-symbol::before,
     .roi-result-symbol--equals::after {
-        width: 30px;
-        height: 3px;
+        width: 15px;
+        height: 2px;
     }
 
     .roi-result-symbol--equals::before {
-        margin-top: -7px;
+        margin-top: -5px;
     }
 
     .roi-result-symbol--equals::after {
-        margin-top: 7px;
+        margin-top: 5px;
     }
 
     .roi-result-item--primary,
@@ -3836,32 +3962,102 @@ Mobile (720px and below)
         border-left: 0;
     }
 
-    .roi-result-item--primary p,
-    .roi-result-item--metric p {
-        margin-bottom: 7px;
-        color: #fff;
-        font-size: 18px;
-        line-height: 24px;
-    }
-
-    .roi-result-item--primary strong,
-    .roi-result-item--primary span,
-    .roi-result-item--metric strong,
-    .roi-result-item--metric span {
-        font-size: 32px;
-        font-weight: 600;
-        line-height: 42px;
-    }
-
-    .roi-result-item--primary em,
-    .roi-result-item--metric em {
-        font-size: 20px;
-        font-weight: 400;
-    }
-
     .roi-result-item--metric:last-child {
         padding-bottom: 0;
         border-bottom: 0;
+    }
+
+    .roi-result-output {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 14px;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        min-height: 60px;
+        padding: 0;
+        background: transparent;
+        font-size: 20px;
+        font-weight: 600;
+        box-sizing: border-box;
+    }
+
+    .roi-result-value {
+        min-height: 60px;
+        padding: 0 16px;
+        background: #B20B00;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 28px;
+    }
+
+    .roi-result-output > em {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+    }
+
+    .roi-result-formula > .roi-result-symbol {
+        align-self: center;
+        height: auto;
+        min-height: 61px;
+    }
+
+    .roi-result-formula .roi-result-item:nth-child(6),
+    .roi-result-formula .roi-result-item:nth-child(7) {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .roi-result-formula .roi-result-item--metric {
+        border-bottom: 0;
+    }
+
+    .roi-result-formula .roi-result-item--primary {
+        padding-bottom: 37px;
+    }
+
+    .roi-result-formula .roi-result-item--metric {
+        padding: 44px 0 0;
+    }
+
+    .roi-result-formula .roi-result-item--metric + .roi-result-item--metric {
+        padding-top: 45px;
+    }
+
+    .roi-result--changer {
+        padding: 42px 0 20px;
+    }
+
+    .roi-comparison {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .roi-comparison-item {
+        padding-bottom: 45px;
+    }
+
+    .roi-comparison-item--total {
+        padding-top: 0;
+        border-top: 0;
+    }
+
+    .roi-comparison-item--total:nth-child(5) {
+        padding-top: 38px;
+        border-top: 1px solid rgba(255, 255, 255, .32);
+    }
+
+    .roi-comparison-item--total:last-child {
+        padding-bottom: 20px;
+    }
+    .roi-comparison-item--tip .roi-tooltip-box {
+        top: 28px;
+        left: -45px;
+        width: 200px;
+        border-radius: 10px;
+    }
+    .roi-comparison-item--tip .roi-tooltip-box::before {
+        left: 75%;
     }
 
     .sub-products-visual {
