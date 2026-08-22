@@ -5,10 +5,6 @@
     background: #fff;
 }
 
-.sub-mypage-page .page-heading:not(.page-heading--policy) {
-    padding-top: calc(270 * var(--vw));
-}
-
 .sub-mypage-section {
     padding-bottom: calc(160 * var(--vw));
 }
@@ -2354,14 +2350,6 @@ Mobile (720px and below)
 
     .sub-mypage-home-page {
         overflow-x: hidden;
-    }
-    .sub-mypage-page .page-heading:not(.page-heading--policy) {
-        margin-bottom: 34px;
-        padding-top: 107px;
-    }
-    .sub-mypage-page .page-heading:not(.page-heading--policy) .page-title {
-        font-size: 30px;
-        line-height: 1.2;
     }
     .sub-mypage-section {
         padding-bottom: 72px;
