@@ -150,7 +150,7 @@
         keepCode.addEventListener('change', function () { keepPhone.checked = keepCode.checked; });
 
         if (isDevelopmentApi()) {
-            requestButton.textContent = '개발계 테스트 로그인';
+            requestButton.textContent = '로그인';
         }
 
         async function requestLoginCode() {
