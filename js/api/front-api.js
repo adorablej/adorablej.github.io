@@ -33,6 +33,11 @@
                     purpose: purpose
                 }, { auth: false });
             },
+            getPhoneVerificationCode: function (verificationId) {
+                return client.get('/api/v1/auth/phone-verifications/' + encodeURIComponent(verificationId) + '/code', {
+                    auth: false
+                });
+            },
             confirmPhoneVerification: function (verificationId, verificationCode) {
                 return client.post('/api/v1/auth/phone-verifications/' + encodeURIComponent(verificationId) + '/confirm', {
                     code: verificationCode

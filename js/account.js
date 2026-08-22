@@ -48,24 +48,10 @@
         var authApi = window.HunterFrontAPI && window.HunterFrontAPI.auth;
         var memberApi = window.HunterFrontAPI && window.HunterFrontAPI.member;
         var returnTarget = getLoginReturnTarget();
-        var devBypassToken = 'DEV_BYPASS_2026';
-        var devTestPhones = [
-            '01090010001',
-            '01090010002',
-            '01090010003',
-            '01090010004',
-            '01090010005'
-        ];
 
-        function isDevBypassLogin(phoneNumber) {
+        function isDevelopmentApi() {
             var apiBaseUrl = window.HunterAPIConfig && window.HunterAPIConfig.baseUrl;
-            var isDevelopmentApi = String(apiBaseUrl || '').replace(/\/$/, '') === 'https://api-dev.hunterkorea.com';
-
-            return isDevelopmentApi && devTestPhones.indexOf(phoneNumber) !== -1;
-        }
-
-        function formatPhoneNumber(phoneNumber) {
-            return phoneNumber.replace(/^(\d{3})(\d{4})(\d{4})$/, '$1-$2-$3');
+            return String(apiBaseUrl || '').replace(/\/$/, '') === 'https://api-dev.hunterkorea.com';
         }
 
         async function completeLogin(credentials, rememberLogin) {
@@ -171,15 +157,6 @@
             requestButton.disabled = true;
             resendButton.disabled = true;
             try {
-                if (isDevBypassLogin(digits)) {
-                    requestButton.setAttribute('aria-busy', 'true');
-                    await completeLogin({
-                        verificationToken: devBypassToken,
-                        phoneNumber: formatPhoneNumber(digits)
-                    }, keepPhone.checked);
-                    return;
-                }
-
                 var response = await authApi.requestPhoneVerification(digits, 'LOGIN');
                 verificationId = String(response && response.verificationId || '');
                 if (!verificationId) throw new Error('인증 요청 정보를 확인할 수 없습니다.');
@@ -192,12 +169,22 @@
                 submitButton.disabled = true;
                 showStep('code');
                 startTimer(response.expiresIn);
-            } catch (error) {
-                if (isDevBypassLogin(digits)) {
-                    authApi.clearTokens();
-                    window.localStorage.removeItem('hunter.member');
-                    window.sessionStorage.removeItem('hunter.member');
+
+                if (isDevelopmentApi() && authApi.getPhoneVerificationCode) {
+                    try {
+                        var developmentCode = await authApi.getPhoneVerificationCode(verificationId);
+                        if (developmentCode && developmentCode.code) {
+                            status.hidden = false;
+                            status.className = 'sub-account-code-status is-success';
+                            status.textContent = '개발용 인증번호: ' + developmentCode.code;
+                        }
+                    } catch (developmentCodeError) {
+                        status.hidden = false;
+                        status.className = 'sub-account-code-status is-error';
+                        status.textContent = '개발용 인증번호를 조회하지 못했습니다.';
+                    }
                 }
+            } catch (error) {
                 await showAccountAlert(error && error.message ? error.message : '인증번호 발송에 실패했습니다. 잠시 후 다시 시도해 주세요.');
             } finally {
                 requesting = false;
