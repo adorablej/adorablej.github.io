@@ -48,6 +48,35 @@
         var authApi = window.HunterFrontAPI && window.HunterFrontAPI.auth;
         var memberApi = window.HunterFrontAPI && window.HunterFrontAPI.member;
         var returnTarget = getLoginReturnTarget();
+        var devBypassToken = 'DEV_BYPASS_2026';
+        var devTestPhones = [
+            '01090010001',
+            '01090010002',
+            '01090010003',
+            '01090010004',
+            '01090010005'
+        ];
+
+        function isDevBypassLogin(phoneNumber) {
+            var apiBaseUrl = window.HunterAPIConfig && window.HunterAPIConfig.baseUrl;
+            var isDevelopmentApi = String(apiBaseUrl || '').replace(/\/$/, '') === 'https://api-dev.hunterkorea.com';
+
+            return isDevelopmentApi && devTestPhones.indexOf(phoneNumber) !== -1;
+        }
+
+        function formatPhoneNumber(phoneNumber) {
+            return phoneNumber.replace(/^(\d{3})(\d{4})(\d{4})$/, '$1-$2-$3');
+        }
+
+        async function completeLogin(credentials, rememberLogin) {
+            await authApi.login(credentials, rememberLogin);
+            var member = await memberApi.getMe();
+            window.localStorage.removeItem('hunter.member');
+            window.sessionStorage.removeItem('hunter.member');
+            var storage = rememberLogin ? window.localStorage : window.sessionStorage;
+            storage.setItem('hunter.member', JSON.stringify(member || {}));
+            moveToPreviousPage();
+        }
 
         function getLoginReturnTarget() {
             var params = new URLSearchParams(window.location.search);
@@ -132,7 +161,7 @@
                 phone.focus();
                 return;
             }
-            if (!authApi || !authApi.requestPhoneVerification) {
+            if (!authApi || !authApi.requestPhoneVerification || !authApi.login || !memberApi || !memberApi.getMe) {
                 await showAccountAlert('로그인 인증 기능을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
                 return;
             }
@@ -142,6 +171,15 @@
             requestButton.disabled = true;
             resendButton.disabled = true;
             try {
+                if (isDevBypassLogin(digits)) {
+                    requestButton.setAttribute('aria-busy', 'true');
+                    await completeLogin({
+                        verificationToken: devBypassToken,
+                        phoneNumber: formatPhoneNumber(digits)
+                    }, keepPhone.checked);
+                    return;
+                }
+
                 var response = await authApi.requestPhoneVerification(digits, 'LOGIN');
                 verificationId = String(response && response.verificationId || '');
                 if (!verificationId) throw new Error('인증 요청 정보를 확인할 수 없습니다.');
@@ -155,10 +193,16 @@
                 showStep('code');
                 startTimer(response.expiresIn);
             } catch (error) {
+                if (isDevBypassLogin(digits)) {
+                    authApi.clearTokens();
+                    window.localStorage.removeItem('hunter.member');
+                    window.sessionStorage.removeItem('hunter.member');
+                }
                 await showAccountAlert(error && error.message ? error.message : '인증번호 발송에 실패했습니다. 잠시 후 다시 시도해 주세요.');
             } finally {
                 requesting = false;
                 requestButton.disabled = false;
+                requestButton.removeAttribute('aria-busy');
                 resendButton.disabled = false;
             }
         }
@@ -190,11 +234,7 @@
                 codeGroup.classList.remove('is-error');
                 codeGroup.classList.add('is-verified');
 
-                await authApi.login({ verificationToken: confirmation.verificationToken }, keepCode.checked);
-                var member = await memberApi.getMe();
-                var storage = keepCode.checked ? window.localStorage : window.sessionStorage;
-                storage.setItem('hunter.member', JSON.stringify(member || {}));
-                moveToPreviousPage();
+                await completeLogin({ verificationToken: confirmation.verificationToken }, keepCode.checked);
             } catch (error) {
                 if (window.HunterAPI && window.HunterAPI.auth) window.HunterAPI.auth.clearTokens();
                 status.hidden = false;
