@@ -50,12 +50,14 @@ function initRoiCalculator() {
         const otherLife = getNumber(changerInputs.otherLife);
         const hunterAnnualCost = 1120000;
         const otherAnnualCost = 8400000;
-        setResult(changerResults.hunterAnnualCost, hunterAnnualCost);
-        setResult(changerResults.otherAnnualCost, otherAnnualCost);
-        setResult(changerResults.hunterDepreciation, hunterLife > 0 ? hunterInvestment / hunterLife : 0);
-        setResult(changerResults.otherDepreciation, otherLife > 0 ? otherInvestment / otherLife : 0);
-        setResult(changerResults.hunterTco, hunterInvestment + (hunterAnnualCost * hunterLife));
-        setResult(changerResults.otherTco, otherInvestment + (otherAnnualCost * otherLife));
+        const hasHunterValues = hunterInvestment > 0 && hunterLife > 0;
+        const hasOtherValues = otherInvestment > 0 && otherLife > 0;
+        setResult(changerResults.hunterAnnualCost, hasHunterValues ? hunterAnnualCost : 0);
+        setResult(changerResults.otherAnnualCost, hasOtherValues ? otherAnnualCost : 0);
+        setResult(changerResults.hunterDepreciation, hasHunterValues ? hunterInvestment / hunterLife : 0);
+        setResult(changerResults.otherDepreciation, hasOtherValues ? otherInvestment / otherLife : 0);
+        setResult(changerResults.hunterTco, hasHunterValues ? hunterInvestment + (hunterAnnualCost * hunterLife) : 0);
+        setResult(changerResults.otherTco, hasOtherValues ? otherInvestment + (otherAnnualCost * otherLife) : 0);
     }
 
     [inputs.investment, inputs.jobCost, inputs.dailyJobs, changerInputs.hunterInvestment, changerInputs.otherInvestment].forEach((input) => input?.addEventListener("input", () => {
