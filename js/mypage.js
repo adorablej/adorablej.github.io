@@ -40,6 +40,91 @@ function initMypageSidebar() {
     });
 }
 
+function initMypageCompanySelect() {
+    document.querySelectorAll(".sub-mypage-company-select").forEach(select => {
+        const wrap = select.closest(".sub-mypage-company-select-wrap");
+        if (!wrap || wrap.dataset.customSelect === "true") return;
+
+        const trigger = document.createElement("button");
+        trigger.type = "button";
+        trigger.className = "sub-mypage-company-select-trigger";
+        trigger.setAttribute("aria-haspopup", "listbox");
+        trigger.setAttribute("aria-expanded", "false");
+        trigger.innerHTML = '<span class="sub-mypage-company-select-value"></span><i aria-hidden="true"></i>';
+
+        const options = document.createElement("div");
+        options.className = "sub-mypage-company-select-options";
+        options.setAttribute("role", "listbox");
+        options.hidden = true;
+        wrap.append(trigger, options);
+        wrap.dataset.customSelect = "true";
+
+        const escapeOption = value => String(value ?? "").replace(/[&<>'"]/g, character => ({
+            "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
+        })[character]);
+        const close = () => {
+            wrap.classList.remove("is-open");
+            trigger.setAttribute("aria-expanded", "false");
+            options.hidden = true;
+        };
+        const render = () => {
+            const items = [...select.options];
+            const selected = items.find(option => option.selected) || items[0];
+            trigger.querySelector("span").textContent = selected?.textContent || "기업/사업체 선택";
+            options.innerHTML = items.map((option, index) =>
+                `<button type="button" role="option" data-company-option="${index}" aria-selected="${String(option === selected)}"${option.disabled ? " disabled" : ""}>${escapeOption(option.textContent)}</button>`
+            ).join("");
+            trigger.disabled = select.disabled || items.length < 2;
+        };
+
+        trigger.addEventListener("click", () => {
+            const willOpen = !wrap.classList.contains("is-open");
+            close();
+            if (!willOpen) return;
+            wrap.classList.add("is-open");
+            trigger.setAttribute("aria-expanded", "true");
+            options.hidden = false;
+            options.querySelector('[aria-selected="true"]')?.focus();
+        });
+        options.addEventListener("click", event => {
+            const optionButton = event.target.closest("[data-company-option]:not(:disabled)");
+            if (!optionButton) return;
+            select.selectedIndex = Number(optionButton.dataset.companyOption);
+            const selected = select.options[select.selectedIndex];
+            localStorage.setItem("hunter.selectedBusinessId", selected?.value || "");
+            localStorage.setItem("hunter.selectedBusinessName", selected?.textContent || "");
+            select.dispatchEvent(new Event("change", { bubbles: true }));
+            window.dispatchEvent(new CustomEvent("hunterBusinessChanged", {
+                detail: { businessId: selected?.value || "" }
+            }));
+            render();
+            close();
+            trigger.focus();
+        });
+        options.addEventListener("keydown", event => {
+            const buttons = [...options.querySelectorAll("button:not(:disabled)")];
+            const index = buttons.indexOf(document.activeElement);
+            if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+                event.preventDefault();
+                const offset = event.key === "ArrowDown" ? 1 : -1;
+                buttons[(index + offset + buttons.length) % buttons.length]?.focus();
+            }
+        });
+        document.addEventListener("click", event => {
+            if (!wrap.contains(event.target)) close();
+        });
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape" && wrap.classList.contains("is-open")) {
+                close();
+                trigger.focus();
+            }
+        });
+        new MutationObserver(render).observe(select, { childList: true, attributes: true, subtree: true });
+        select.addEventListener("change", render);
+        render();
+    });
+}
+
 function initMypagePagination() {
     document.querySelectorAll('.sub-mypage-pagination-row:not([data-server-pagination])').forEach(row => {
         if (row.dataset.paginationInitialized === 'true') return;
@@ -188,6 +273,7 @@ function initMypageMobileMenu() {
 
 window.addEventListener("includeLoaded", () => {
     initMypageSidebar();
+    initMypageCompanySelect();
     initMypageAccordion();
     initMypageMobileMenu();
 });

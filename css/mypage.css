@@ -73,8 +73,8 @@
     right: calc(20 * var(--vw));
     width: calc(10 * var(--vw));
     height: calc(10 * var(--vw));
-    border-right: calc(2 * var(--vw)) solid #111;
-    border-bottom: calc(2 * var(--vw)) solid #111;
+    border-right: calc(2 * var(--vw)) solid var(--red);
+    border-bottom: calc(2 * var(--vw)) solid var(--red);
     content: "";
     pointer-events: none;
     transform: translateY(-70%) rotate(45deg);
@@ -99,6 +99,102 @@
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
+}
+
+/* Custom company selector */
+.sub-mypage-company-select-wrap[data-custom-select="true"]::after {
+    display: none;
+}
+
+.sub-mypage-company-select-wrap[data-custom-select="true"] .sub-mypage-company-select {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    border: 0;
+    white-space: nowrap;
+}
+
+.sub-mypage-company-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: calc(55 * var(--vw));
+    padding: 0 calc(12 * var(--vw)) 0 0;
+    border: 0;
+    border-bottom: 1px solid #d5d5d5;
+    background: transparent;
+    color: #555;
+    font-family: inherit;
+    font-size: calc(16 * var(--vw));
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sub-mypage-company-select-trigger span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sub-mypage-company-select-trigger i {
+    flex: 0 0 auto;
+    width: calc(10 * var(--vw));
+    height: calc(10 * var(--vw));
+    margin-left: calc(14 * var(--vw));
+    border-right: calc(2 * var(--vw)) solid var(--red);
+    border-bottom: calc(2 * var(--vw)) solid var(--red);
+    transform: translateY(-25%) rotate(45deg);
+    transition: transform .2s ease;
+}
+
+.sub-mypage-company-select-wrap.is-open .sub-mypage-company-select-trigger i {
+    transform: translateY(25%) rotate(225deg);
+}
+
+.sub-mypage-company-select-options {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 1px);
+    left: 0;
+    width: 100%;
+    border: 1px solid #d5d5d5;
+    background: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 calc(8 * var(--vw)) calc(20 * var(--vw)) rgba(0, 0, 0, .08);
+}
+
+.sub-mypage-company-select-options button {
+    display: block;
+    width: 100%;
+    min-height: calc(60 * var(--vw));
+    padding: calc(12 * var(--vw)) calc(18 * var(--vw));
+    border: 0;
+    border-bottom: 1px solid #d5d5d5;
+    background: #fff;
+    color: #999;
+    font-family: inherit;
+    font-size: calc(16 * var(--vw));
+    line-height: 1.35;
+    text-align: center;
+    cursor: pointer;
+}
+
+.sub-mypage-company-select-options button:last-child {
+    border-bottom: 0;
+}
+
+.sub-mypage-company-select-options button:hover,
+.sub-mypage-company-select-options button:focus-visible,
+.sub-mypage-company-select-options button[aria-selected="true"] {
+    background: #f7f7f7;
+    color: #555;
+    outline: 0;
 }
 
 .sub-mypage-nav {
@@ -2405,6 +2501,25 @@ Mobile (720px and below)
         height: 60px;
         padding: 0 46px 0 18px;
         font-size: 14px;
+    }
+    .sub-mypage-company-select-trigger {
+        height: 55px;
+        padding-right: 12px;
+        font-size: 16px;
+    }
+    .sub-mypage-company-select-trigger i {
+        width: 10px;
+        height: 10px;
+        margin-left: 14px;
+        border-width: 0 2px 2px 0;
+    }
+    .sub-mypage-company-select-options {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+    }
+    .sub-mypage-company-select-options button {
+        min-height: 60px;
+        padding: 12px 18px;
+        font-size: 16px;
     }
     .sub-mypage-mobile-menu {
         display: block;
