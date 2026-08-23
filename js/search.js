@@ -1,14 +1,6 @@
 (() => {
     "use strict";
 
-    const FALLBACK_PRODUCTS = [
-        { productName: "HawkEye Elite X", imageUrl: "/images/products/HawkEyeElite_X.png", targetUrl: "/Products/Alignment-Systems/Hawkeye-Elite-X.html" },
-        { productName: "HawkEye Elite Premium", imageUrl: "/images/products/HawkEyeElite_Premium.png", targetUrl: "/Products/Alignment-Systems/Hawkeye-Elite-Premium.html" },
-        { productName: "TCRH Revolution", imageUrl: "/images/products/TCRH-Revolution_v.png", targetUrl: "/Products/Tire-Changers/TCRH-Revolution.html" },
-        { productName: "RoadForce Elite", imageUrl: "/images/products/Road-Force-Elite_v.png", targetUrl: "/Products/Wheel-Balancers/RoadForce-Elite.html" },
-        { productName: "RoadForce Walkaway", imageUrl: "/images/products/Road-Force-Walkaway_v.png", targetUrl: "/Products/Wheel-Balancers/RoadForce-Walkaway.html" }
-    ];
-
     document.addEventListener("DOMContentLoaded", initSearchPage);
 
     async function initSearchPage() {
@@ -28,7 +20,7 @@
         let activeCategory = (params.get("type") || "all").toLowerCase();
         let currentPage = Math.max(1, Number(params.get("page")) || 1);
         const pageSize = 10;
-        let recommendedProducts = FALLBACK_PRODUCTS;
+        let recommendedProducts = [];
         let requestSequence = 0;
 
         if (!tabs.some((tab) => tab.dataset.category === activeCategory)) activeCategory = "all";
@@ -38,7 +30,7 @@
 
         const showEmptyRecommendations = (visible) => {
             if (recommendSection) recommendSection.hidden = !visible;
-            if (productSection) productSection.hidden = !visible;
+            if (productSection) productSection.hidden = !visible || !recommendedProducts.length;
         };
 
         function updateUrl() {
@@ -64,7 +56,7 @@
                         <a href="${escapeHtml(safeUrl(item.targetUrl))}">${escapeHtml(item.keyword)}</a>
                     `).join("");
                 }
-                if (Array.isArray(response?.products) && response.products.length) {
+                if (Array.isArray(response?.products)) {
                     recommendedProducts = response.products
                         .slice()
                         .sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
@@ -73,6 +65,7 @@
                 console.error("추천 검색어 조회에 실패했습니다.", error);
             }
             renderProducts(recommendedProducts);
+            if (productSection && !recommendedProducts.length) productSection.hidden = true;
         }
 
         async function loadResults() {
