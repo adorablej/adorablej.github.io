@@ -162,11 +162,6 @@ function parseDate(dateString) {
             .sort((a, b) => a.startTime.localeCompare(b.startTime));
     }
 
-    function formatTrainingTime(training) {
-        if (!training.endTime || training.endTime === training.startTime) return training.startTime;
-        return `${training.startTime} ~ ${training.endTime}`;
-    }
-
     function renderCalendar() {
         monthTitle.textContent = formatMonth(currentDate);
         calendar.innerHTML = "";
@@ -251,7 +246,7 @@ function parseDate(dateString) {
             return `
                 <button type="button" class="sub-training-card ${getTrainingColorClass(event)} ${selectedDate === event.date ? "is-selected" : ""}" data-training-id="${event.id}">
                     <span class="sub-training-card-top">
-                        <span class="sub-training-card-time">${event.date.replaceAll("-", ".")} / ${formatTrainingTime(event)}</span>
+                        <span class="sub-training-card-time">${event.date.replaceAll("-", ".")} / ${event.startTime}</span>
                         <span class="sub-training-card-status is-${getStatusClass(event.status)}">${statusLabel[event.status]}</span>
                     </span>
                     <strong class="sub-training-card-title">
@@ -305,7 +300,7 @@ function parseDate(dateString) {
             <div class="modal-content sub-training-modal-body">
                 <div class="sub-training-modal-summary">
                     <strong class="sub-training-modal-datetime">
-                        ${training.date.replaceAll("-", ".")} / ${formatTrainingTime(training)}
+                        ${training.date.replaceAll("-", ".")} / ${training.startTime}
                     </strong>
 
                     <div class="sub-training-modal-course-row">
