@@ -67,6 +67,10 @@
     margin-top: calc(25 * var(--vw));
 }
 
+.sub-mypage-company-select-wrap[hidden] {
+    display: none;
+}
+
 .sub-mypage-company-select-wrap::after {
     position: absolute;
     top: 50%;

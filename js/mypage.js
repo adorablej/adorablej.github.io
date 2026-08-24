@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const mypageBusinessContext = {
     request: null,
+    member: null,
     businesses: [],
     selectedBusiness: null
 };
@@ -33,12 +34,28 @@ function normalizeMypageBusinesses(response) {
         || businesses.find(item => String(item.businessId) === String(storedId))
         || businesses[0]
         || null;
-    return { businesses, selectedBusiness };
+    return {
+        member: data.member || null,
+        businesses,
+        selectedBusiness
+    };
 }
 
 function renderMypageBusinessContext() {
-    const { businesses, selectedBusiness } = mypageBusinessContext;
+    const { member, businesses, selectedBusiness } = mypageBusinessContext;
     const showSelector = businesses.length > 1;
+
+    if (member?.memberName) {
+        document.querySelectorAll(".sub-mypage-user-row strong").forEach(element => {
+            element.textContent = `${member.memberName}님`;
+        });
+        const storedMember = (() => {
+            try { return JSON.parse(localStorage.getItem("hunter.member") || sessionStorage.getItem("hunter.member") || "{}"); }
+            catch (error) { return {}; }
+        })();
+        const storage = localStorage.getItem("hunter.accessToken") ? localStorage : sessionStorage;
+        storage.setItem("hunter.member", JSON.stringify({ ...storedMember, ...member }));
+    }
 
     document.querySelectorAll(".sub-mypage-company-select").forEach(select => {
         const wrap = select.closest(".sub-mypage-company-select-wrap");
@@ -111,6 +128,7 @@ async function initMypageBusinessContext(force = false) {
     mypageBusinessContext.request = window.HunterFrontAPI.member.getBusinesses(false)
         .then(response => {
             const normalized = normalizeMypageBusinesses(response);
+            mypageBusinessContext.member = normalized.member;
             mypageBusinessContext.businesses = normalized.businesses;
             mypageBusinessContext.selectedBusiness = normalized.selectedBusiness;
             storeMypageBusiness(normalized.selectedBusiness);
