@@ -4,7 +4,6 @@
     const PLACEHOLDER = "/images/img_placeholder.png";
     let initialized = false;
     let latestMemberResponse = null;
-    let latestBusinessResponse = null;
 
     async function initMypageHome() {
         if (initialized || !document.querySelector(".sub-mypage-home-page")) return;
@@ -27,14 +26,7 @@
             return;
         }
 
-        try {
-            latestBusinessResponse = await api.getBusinesses(false);
-        } catch (error) {
-            console.error("기업/사업체 정보를 불러오지 못했습니다.", error);
-            latestBusinessResponse = null;
-        }
-
-        renderMember(memberResponse, latestBusinessResponse);
+        renderMember(memberResponse);
 
         const businessId = window.localStorage.getItem("hunter.selectedBusinessId") || "";
         const results = await loadHomeLists(businessId);
@@ -59,7 +51,6 @@
     async function reloadBusinessLists(businessId) {
         const api = window.HunterFrontAPI.member;
         try {
-            if (businessId) await api.selectBusiness(businessId);
             const businessQuery = businessId ? { businessId } : {};
             const results = await Promise.allSettled([
                 api.getProducts({ ...businessQuery, page: 1, size: 4 }),
@@ -100,9 +91,8 @@
         return [];
     }
 
-    function renderMember(response, businessResponse) {
+    function renderMember(response) {
         latestMemberResponse = response;
-        if (businessResponse !== undefined) latestBusinessResponse = businessResponse;
         const member = response?.member || response?.data?.member || response?.data || response || {};
         setText("mypageMemberName", member.memberName);
         setText("mypageMemberPhone", member.phoneNumber);
@@ -111,22 +101,6 @@
         const storage = window.localStorage.getItem(refreshTokenKey) ? window.localStorage : window.sessionStorage;
         storage.setItem("hunter.member", JSON.stringify(member));
 
-        const businessData = latestBusinessResponse?.data || latestBusinessResponse || {};
-        const businesses = uniqueBusinesses(businessData.businesses).filter(item =>
-            item.approvalStatusCode === "APPROVED"
-        );
-        const selectedBusiness = businessData.selectedBusiness;
-        const selected = selectedBusiness
-            ? businesses.find(item => String(item.businessId) === String(selectedBusiness.businessId)) || selectedBusiness
-            : businesses.find(item => item.selected || item.isSelected) || businesses[0];
-
-        if (selected?.businessId) {
-            window.localStorage.setItem("hunter.selectedBusinessId", String(selected.businessId));
-            window.localStorage.setItem("hunter.selectedBusinessName", selected.businessName || "");
-        }
-
-        renderBusiness(selected);
-        updateBusinessSelect(businesses, selected);
     }
 
     function renderBusiness(business) {
@@ -142,48 +116,6 @@
         });
     }
 
-    function updateBusinessSelect(businesses, selected) {
-        document.querySelectorAll(".sub-mypage-company-select").forEach(select => {
-            const wrap = select.closest(".sub-mypage-company-select-wrap");
-            if (!businesses.length) {
-                wrap.hidden = true;
-                return;
-            }
-
-            select.innerHTML = businesses.map(item => `
-                <option value="${escapeHtml(item.businessId)}" ${String(item.businessId) === String(selected?.businessId) ? "selected" : ""}>
-                    ${escapeHtml(item.businessName)}
-                </option>`).join("");
-            wrap.hidden = false;
-            select.disabled = false;
-            if (select.dataset.businessChangeBound === "true") return;
-            select.dataset.businessChangeBound = "true";
-            select.addEventListener("change", async () => {
-                const currentData = latestBusinessResponse?.data || latestBusinessResponse || {};
-                const currentBusinesses = uniqueBusinesses(currentData.businesses).filter(item =>
-                    item.approvalStatusCode === "APPROVED"
-                );
-                const business = currentBusinesses.find(item => String(item.businessId) === select.value);
-                renderBusiness(business);
-                window.localStorage.setItem("hunter.selectedBusinessId", String(business?.businessId || ""));
-                window.localStorage.setItem("hunter.selectedBusinessName", business?.businessName || "");
-                await reloadBusinessLists(business?.businessId || "");
-                window.dispatchEvent(new CustomEvent("hunterBusinessChanged", {
-                    detail: { businessId: business?.businessId || "" }
-                }));
-            });
-        });
-    }
-
-    function uniqueBusinesses(items) {
-        const businesses = Array.isArray(items) ? items : [];
-        const unique = new Map();
-        businesses.forEach(item => {
-            const key = String(item?.businessId || "");
-            if (key && !unique.has(key)) unique.set(key, item);
-        });
-        return [...unique.values()];
-    }
 
     function renderProducts(items) {
         const list = document.getElementById("mypageProductList");
@@ -251,6 +183,12 @@
         });
     }
 
+    window.addEventListener("hunterBusinessChanged", event => {
+        const detail = event.detail || {};
+        renderBusiness(detail.business);
+        reloadBusinessLists(detail.businessId || "");
+    });
+
     function setText(id, value) {
         const element = document.getElementById(id);
         if (element) element.textContent = value || "-";
@@ -288,6 +226,6 @@
     }
 
     window.addEventListener("includeLoaded", () => {
-        if (latestMemberResponse) renderMember(latestMemberResponse, latestBusinessResponse);
+        if (latestMemberResponse) renderMember(latestMemberResponse);
     });
 })();

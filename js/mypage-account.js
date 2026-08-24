@@ -67,33 +67,9 @@
         }
     }
 
-    function renderBusinessSelector() {
-        const select = document.querySelector(".sub-mypage-company-select");
-        const wrap = document.querySelector(".sub-mypage-company-select-wrap");
-        const businesses = approvedBusinesses();
-        if (!select) return;
-
-        select.innerHTML = "";
-        businesses.forEach(business => {
-            const option = document.createElement("option");
-            option.value = business.businessId;
-            option.textContent = business.businessName || "사업체";
-            option.selected = state.selectedBusiness
-                && String(state.selectedBusiness.businessId) === String(business.businessId);
-            select.appendChild(option);
-        });
-        if (wrap) wrap.hidden = businesses.length < 2;
-        select.disabled = businesses.length < 2;
-
-        if (select.dataset.accountApiBound === "true") return;
-        select.dataset.accountApiBound = "true";
-        select.addEventListener("change", () => selectBusiness(select.value, select));
-    }
-
     function renderAll() {
         renderMember();
         renderBusiness();
-        renderBusinessSelector();
     }
 
     function applyResponse(response) {
@@ -102,8 +78,8 @@
         state.businesses = Array.isArray(response.businesses) ? response.businesses : [];
         state.selectedBusiness = resolveSelectedBusiness(response);
         if (state.selectedBusiness) {
-            localStorage.setItem("hunter-selected-business-id", state.selectedBusiness.businessId);
-            localStorage.setItem("hunter-selected-business-name", state.selectedBusiness.businessName || "");
+            localStorage.setItem("hunter.selectedBusinessId", state.selectedBusiness.businessId);
+            localStorage.setItem("hunter.selectedBusinessName", state.selectedBusiness.businessName || "");
         }
         renderAll();
     }
@@ -126,23 +102,13 @@
         }
     }
 
-    async function selectBusiness(businessId, select) {
-        if (!businessId) return;
-        select.disabled = true;
-        try {
-            applyResponse(await api.member.selectBusiness(businessId));
-            window.dispatchEvent(new CustomEvent("hunterBusinessChanged", {
-                detail: { businessId: Number(businessId) }
-            }));
-        } catch (error) {
-            renderBusinessSelector();
-            showError(error);
-        } finally {
-            select.disabled = approvedBusinesses().length < 2;
-        }
-    }
-
     document.addEventListener("includeLoaded", renderAll);
+    window.addEventListener("hunterBusinessChanged", event => {
+        const business = event.detail?.business;
+        if (!business) return;
+        state.selectedBusiness = business;
+        renderBusiness();
+    });
     window.addEventListener("hunterBusinessesUpdated", loadBusinesses);
     loadBusinesses();
 })();

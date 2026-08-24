@@ -140,6 +140,10 @@
             checkAll.checked = checks.length > 0 && checks.every(check => check.checked);
         });
         addCartButton.addEventListener("click", addSelectedParts);
+        window.addEventListener("hunterBusinessChanged", event => {
+            if (event.detail?.initial) return;
+            location.href = "/Mypage/products.html";
+        });
 
         async function addSelectedParts() {
             const selectedRows = [...partsWrap.querySelectorAll(".sub-mypage-part-row")].filter(row => row.querySelector(".sub-mypage-part-check")?.checked);

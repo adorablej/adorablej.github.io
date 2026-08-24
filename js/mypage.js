@@ -7,7 +7,123 @@ document.addEventListener("DOMContentLoaded", () => {
     initMypageWithdrawModal();
     initMypageMobileMenu();
     initMypagePagination();
+    initMypageBusinessContext();
 });
+
+const mypageBusinessContext = {
+    request: null,
+    businesses: [],
+    selectedBusiness: null
+};
+
+function normalizeMypageBusinesses(response) {
+    const data = response?.data || response || {};
+    const source = Array.isArray(data) ? data : (Array.isArray(data.businesses) ? data.businesses : []);
+    const unique = new Map();
+    source.forEach(business => {
+        const id = String(business?.businessId || "");
+        const approval = String(business?.approvalStatusCode || "").toUpperCase();
+        if (id && (!approval || approval === "APPROVED") && !unique.has(id)) unique.set(id, business);
+    });
+    const businesses = [...unique.values()];
+    const storedId = localStorage.getItem("hunter.selectedBusinessId") || "";
+    const responseSelected = data.selectedBusiness?.businessId;
+    const selectedBusiness = businesses.find(item => responseSelected && String(item.businessId) === String(responseSelected))
+        || businesses.find(item => item.selected === true || item.isSelected === true)
+        || businesses.find(item => String(item.businessId) === String(storedId))
+        || businesses[0]
+        || null;
+    return { businesses, selectedBusiness };
+}
+
+function renderMypageBusinessContext() {
+    const { businesses, selectedBusiness } = mypageBusinessContext;
+    const showSelector = businesses.length > 1;
+
+    document.querySelectorAll(".sub-mypage-company-select").forEach(select => {
+        const wrap = select.closest(".sub-mypage-company-select-wrap");
+        const card = select.closest(".sub-mypage-user-card");
+        select.innerHTML = "";
+        businesses.forEach(business => {
+            const option = document.createElement("option");
+            option.value = business.businessId;
+            option.textContent = business.businessName || "사업체";
+            option.selected = String(business.businessId) === String(selectedBusiness?.businessId || "");
+            select.appendChild(option);
+        });
+        select.disabled = !showSelector;
+        if (wrap) wrap.hidden = !showSelector;
+        card?.classList.toggle("has-company-select", showSelector);
+
+        if (select.dataset.businessContextBound !== "true") {
+            select.dataset.businessContextBound = "true";
+            select.addEventListener("change", () => changeMypageBusiness(select.value, select));
+        }
+    });
+    initMypageCompanySelect();
+}
+
+function notifyMypageBusinessChanged(initial) {
+    const business = mypageBusinessContext.selectedBusiness;
+    window.dispatchEvent(new CustomEvent("hunterBusinessChanged", {
+        detail: {
+            businessId: business?.businessId || "",
+            businessName: business?.businessName || "",
+            business,
+            businesses: mypageBusinessContext.businesses,
+            initial: Boolean(initial)
+        }
+    }));
+}
+
+function storeMypageBusiness(business) {
+    localStorage.setItem("hunter.selectedBusinessId", String(business?.businessId || ""));
+    localStorage.setItem("hunter.selectedBusinessName", business?.businessName || "");
+}
+
+async function changeMypageBusiness(businessId, select) {
+    const previous = mypageBusinessContext.selectedBusiness;
+    const next = mypageBusinessContext.businesses.find(item => String(item.businessId) === String(businessId));
+    if (!next || String(next.businessId) === String(previous?.businessId || "")) return;
+    select.disabled = true;
+    try {
+        const response = await window.HunterFrontAPI.member.selectBusiness(next.businessId);
+        const normalized = normalizeMypageBusinesses(response);
+        mypageBusinessContext.businesses = normalized.businesses.length
+            ? normalized.businesses
+            : mypageBusinessContext.businesses;
+        mypageBusinessContext.selectedBusiness = normalized.selectedBusiness || next;
+        storeMypageBusiness(mypageBusinessContext.selectedBusiness);
+        renderMypageBusinessContext();
+        notifyMypageBusinessChanged(false);
+    } catch (error) {
+        mypageBusinessContext.selectedBusiness = previous;
+        renderMypageBusinessContext();
+        const message = error?.message || "기업/사업체 변경에 실패했습니다.";
+        if (window.HunterAlert?.alert) window.HunterAlert.alert(message);
+        else console.error(message, error);
+    }
+}
+
+async function initMypageBusinessContext(force = false) {
+    if (!document.querySelector(".sub-mypage-sidebar") || !window.HunterFrontAPI?.member) return;
+    if (mypageBusinessContext.request && !force) return mypageBusinessContext.request;
+    mypageBusinessContext.request = window.HunterFrontAPI.member.getBusinesses(false)
+        .then(response => {
+            const normalized = normalizeMypageBusinesses(response);
+            mypageBusinessContext.businesses = normalized.businesses;
+            mypageBusinessContext.selectedBusiness = normalized.selectedBusiness;
+            storeMypageBusiness(normalized.selectedBusiness);
+            renderMypageBusinessContext();
+            notifyMypageBusinessChanged(true);
+        })
+        .catch(error => {
+            if (error?.status === 401) window.HunterFrontAPI.auth?.redirectToLogin?.();
+            else console.error("기업/사업체 정보를 불러오지 못했습니다.", error);
+        })
+        .finally(() => { mypageBusinessContext.request = null; });
+    return mypageBusinessContext.request;
+}
 
 function initMypageSidebar() {
     document.querySelectorAll(".sub-mypage-sidebar").forEach(sidebar => {
@@ -90,13 +206,7 @@ function initMypageCompanySelect() {
             const optionButton = event.target.closest("[data-company-option]:not(:disabled)");
             if (!optionButton) return;
             select.selectedIndex = Number(optionButton.dataset.companyOption);
-            const selected = select.options[select.selectedIndex];
-            localStorage.setItem("hunter.selectedBusinessId", selected?.value || "");
-            localStorage.setItem("hunter.selectedBusinessName", selected?.textContent || "");
             select.dispatchEvent(new Event("change", { bubbles: true }));
-            window.dispatchEvent(new CustomEvent("hunterBusinessChanged", {
-                detail: { businessId: selected?.value || "" }
-            }));
             render();
             close();
             trigger.focus();
@@ -276,7 +386,10 @@ window.addEventListener("includeLoaded", () => {
     initMypageCompanySelect();
     initMypageAccordion();
     initMypageMobileMenu();
+    initMypageBusinessContext();
 });
+
+window.addEventListener("hunterBusinessesUpdated", () => initMypageBusinessContext(true));
 
 function initMypageAccordion() {
     const groups = [...document.querySelectorAll("[data-mypage-accordion]")];

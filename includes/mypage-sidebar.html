@@ -1,15 +1,13 @@
 <aside class="sub-mypage-sidebar" aria-label="마이페이지 메뉴">
-    <div class="sub-mypage-user-card has-company-select">
+    <div class="sub-mypage-user-card">
         <p>안녕하세요</p>
         <div class="sub-mypage-user-row">
             <strong>회원님</strong>
             <a href="/logout.html">로그아웃</a>
         </div>
-        <div class="sub-mypage-company-select-wrap">
-            <select class="sub-mypage-company-select" aria-label="기업/사업체 선택">
-                <option value="ganada-tire" selected>가나다 타이어전문점</option>
-                <option value="hunter-service">헌터 서비스센터</option>
-                <option value="sample-motors">샘플 모터스</option>
+        <div class="sub-mypage-company-select-wrap" hidden>
+            <select class="sub-mypage-company-select" aria-label="기업/사업체 선택" disabled>
+                <option value="">기업/사업체 선택</option>
             </select>
         </div>
     </div>

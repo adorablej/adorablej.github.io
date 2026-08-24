@@ -34,6 +34,7 @@
             checkAll.checked = false;
             try {
                 const response = await api.parts.getList({
+                    businessId: localStorage.getItem("hunter.selectedBusinessId") || "",
                     keyword: keyword.value.trim(),
                     categoryId: category.value,
                     page: currentPage,
@@ -175,6 +176,7 @@
         document.addEventListener("keydown", event => {
             if (event.key === "Escape" && modal?.classList.contains("is-open")) closePartModal();
         });
+        window.addEventListener("hunterBusinessChanged", () => loadParts(true));
 
         async function addSelectedParts() {
             const selectedRows = [...list.querySelectorAll(".sub-mypage-part-row")].filter(row => row.querySelector(".sub-mypage-part-check")?.checked);
