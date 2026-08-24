@@ -155,7 +155,7 @@
                     ${escapeHtml(item.businessName)}
                 </option>`).join("");
             wrap.hidden = false;
-            select.disabled = businesses.length <= 1;
+            select.disabled = false;
             if (select.dataset.businessChangeBound === "true") return;
             select.dataset.businessChangeBound = "true";
             select.addEventListener("change", async () => {

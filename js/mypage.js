@@ -74,7 +74,7 @@ function initMypageCompanySelect() {
             options.innerHTML = items.map((option, index) =>
                 `<button type="button" role="option" data-company-option="${index}" aria-selected="${String(option === selected)}"${option.disabled ? " disabled" : ""}>${escapeOption(option.textContent)}</button>`
             ).join("");
-            trigger.disabled = select.disabled || items.length < 2;
+            trigger.disabled = select.disabled || items.length === 0;
         };
 
         trigger.addEventListener("click", () => {
