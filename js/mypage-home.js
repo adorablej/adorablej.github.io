@@ -15,27 +15,51 @@
         bindLogout();
         renderCachedMember();
 
-        const results = await Promise.allSettled([
-            api.getMe(),
-            api.getProducts({ page: 1, size: 4 }),
-            api.getOrders({ page: 1, size: 1 }),
-            api.getTrainingApplications({ page: 1, size: 3 })
-        ]);
-
-        const unauthorized = results.find(result => result.status === "rejected" && result.reason?.status === 401);
-        if (unauthorized) {
+        let memberResponse;
+        try {
+            memberResponse = await api.getMe();
+            renderMember(memberResponse);
+        } catch (error) {
+            if (error?.status !== 401) throw error;
             window.HunterAPI.auth.clearTokens();
             window.location.replace("/account/login.html");
             return;
         }
 
-        if (results[0].status === "fulfilled") renderMember(results[0].value);
-        if (results[1].status === "fulfilled") renderProducts(getList(results[1].value));
+        const businessId = window.localStorage.getItem("hunter.selectedBusinessId") || "";
+        const results = await loadHomeLists(businessId);
+        if (results[0].status === "fulfilled") renderProducts(getList(results[0].value));
         else renderProducts([]);
-        if (results[2].status === "fulfilled") renderOrders(getList(results[2].value));
+        if (results[1].status === "fulfilled") renderOrders(getList(results[1].value));
         else renderOrders([]);
-        if (results[3].status === "fulfilled") renderTraining(getList(results[3].value));
+        if (results[2].status === "fulfilled") renderTraining(getList(results[2].value));
         else renderTraining([]);
+    }
+
+    function loadHomeLists(businessId) {
+        const api = window.HunterFrontAPI.member;
+        const businessQuery = businessId ? { businessId } : {};
+        return Promise.allSettled([
+            api.getProducts({ ...businessQuery, page: 1, size: 4 }),
+            api.getOrders({ ...businessQuery, page: 1, size: 1 }),
+            api.getTrainingApplications({ page: 1, size: 3 })
+        ]);
+    }
+
+    async function reloadBusinessLists(businessId) {
+        const api = window.HunterFrontAPI.member;
+        try {
+            if (businessId) await api.selectBusiness(businessId);
+            const businessQuery = businessId ? { businessId } : {};
+            const results = await Promise.allSettled([
+                api.getProducts({ ...businessQuery, page: 1, size: 4 }),
+                api.getOrders({ ...businessQuery, page: 1, size: 1 })
+            ]);
+            renderProducts(results[0].status === "fulfilled" ? getList(results[0].value) : []);
+            renderOrders(results[1].status === "fulfilled" ? getList(results[1].value) : []);
+        } catch (error) {
+            console.error("사업체별 마이페이지 정보를 불러오지 못했습니다.", error);
+        }
     }
 
     function renderCachedMember() {
@@ -62,6 +86,7 @@
         if (Array.isArray(response)) return response;
         if (Array.isArray(response?.data)) return response.data;
         if (Array.isArray(response?.content)) return response.content;
+        if (Array.isArray(response?.items)) return response.items;
         return [];
     }
 
@@ -117,11 +142,14 @@
                     ${escapeHtml(item.businessName)}
                 </option>`).join("");
             wrap.hidden = businesses.length <= 1;
-            select.addEventListener("change", () => {
+            if (select.dataset.businessChangeBound === "true") return;
+            select.dataset.businessChangeBound = "true";
+            select.addEventListener("change", async () => {
                 const business = businesses.find(item => String(item.businessId) === select.value);
                 renderBusiness(business);
                 window.localStorage.setItem("hunter.selectedBusinessId", String(business?.businessId || ""));
                 window.localStorage.setItem("hunter.selectedBusinessName", business?.businessName || "");
+                await reloadBusinessLists(business?.businessId || "");
                 window.dispatchEvent(new CustomEvent("hunterBusinessChanged", {
                     detail: { businessId: business?.businessId || "" }
                 }));
