@@ -1,5 +1,13 @@
 /* products-HunterPride-Map.html , Store API. */
 
+const decodeStoreText = (value = "") => {
+    const textarea = document.createElement("textarea");
+    textarea.innerHTML = String(value);
+    return textarea.value;
+};
+
+const isInternalStore = store => /^Z_/i.test(store.name) || /폐업/.test(store.name);
+
 window.StoreAPI = {
     // 실제 API를 우선 사용하고, 개발 서버 연결 실패 시에만 퍼블리싱용 데이터를 표시합니다.
     useMock: false,
@@ -16,6 +24,7 @@ window.StoreAPI = {
             const items = Array.isArray(data) ? data : (data?.content || data?.items || []);
             const stores = items
                 .map(this.normalizeStore)
+                .filter(store => !isInternalStore(store))
                 .filter(store => !params.region || store.region === params.region)
                 .filter(store => !params.city || store.city === params.city)
                 .filter(store => !params.mainOnly || store.mainExposed)
@@ -42,24 +51,24 @@ window.StoreAPI = {
     },
 
     normalizeStore(store) {
-        const address = store.address || "";
-        const detailAddress = store.detailAddress || "";
+        const address = decodeStoreText(store.address);
+        const detailAddress = decodeStoreText(store.detailAddress);
         const addressParts = address.trim().split(/\s+/);
         return {
             id: store.prideStoreId,
             region: addressParts[0] || "",
             city: addressParts[1] || "",
-            name: store.displayName || store.storeName || "",
+            name: decodeStoreText(store.displayName || store.storeName),
             address,
             detailAddress,
-            phone: store.phoneNumber || "",
+            phone: decodeStoreText(store.phoneNumber),
             latitude: store.latitude,
             longitude: store.longitude,
             image: store.imageUrl || "",
-            businessHours: store.businessHours || "",
+            businessHours: decodeStoreText(store.businessHours),
             products: (store.products || []).map(product => ({
-                category: product.categoryName || product.category || "",
-                name: product.productName || product.name || ""
+                category: decodeStoreText(product.categoryName || product.category),
+                name: decodeStoreText(product.productName || product.name)
             })),
             mainExposed: store.mainExposed !== false,
             mapExposed: store.mapExposed !== false,
@@ -78,7 +87,8 @@ window.StoreAPI = {
                 store.address, store.detailAddress
             ].join(" ").toLowerCase();
 
-            return (!keyword || keywordTarget.includes(keyword))
+            return !isInternalStore(store)
+                && (!keyword || keywordTarget.includes(keyword))
                 && (!region || store.region === region)
                 && (!city || store.city === city)
                 && (!params.mainOnly || store.mainExposed !== false)
