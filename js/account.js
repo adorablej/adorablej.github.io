@@ -470,7 +470,6 @@
         var representativeName = document.getElementById('representative-name');
         var businessName = document.getElementById('business-name');
         var corporationNumber = document.getElementById('corporation-number');
-        var businessAddress = document.getElementById('business-address');
         var serviceKey = 'c43099117f7a32bacb563e8aad7893df567f7d7a426d94b4ef94bd3f97e7a711';
         var apiBaseUrl = 'https://api.odcloud.kr/api/nts-businessman/v1';
 
@@ -580,7 +579,7 @@
             businessNumber.addEventListener('input', function () {
                 resetBusinessAuthentication();
             });
-            [openingDate, representativeName, businessName, corporationNumber, businessAddress].forEach(function (field) {
+            [openingDate, representativeName, businessName, corporationNumber].forEach(function (field) {
                 field.addEventListener('input', resetBusinessAuthentication);
                 field.addEventListener('change', resetBusinessAuthentication);
             });
