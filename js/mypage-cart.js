@@ -158,11 +158,17 @@
                 await showAlert("주문할 부품을 선택해 주세요.");
                 return;
             }
+            const businessId = localStorage.getItem("hunter.selectedBusinessId") || "";
+            if (!businessId) {
+                await showAlert("마이페이지에서 사용할 사업체를 먼저 선택해 주세요.");
+                return;
+            }
             const confirmed = await showConfirm("선택하신 부품들을 주문하시겠습니까?");
             if (!confirmed) return;
             orderButton.disabled = true;
             try {
                 await api.createOrder({
+                    businessId: Number(businessId),
                     cartItemIds: rows.map(row => Number(row.dataset.cartItemId)),
                     deliveryAddress: cart.deliveryAddress || {},
                     memo: ""
