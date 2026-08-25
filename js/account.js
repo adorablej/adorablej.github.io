@@ -535,8 +535,7 @@
                         b_nm: businessName.value.trim(),
                         corp_no: isCorporation ? corporationDigits : '',
                         b_sector: '',
-                        b_type: '',
-                        b_adr: businessAddress.value.trim()
+                        b_type: ''
                     }]
                 };
                 var requestOptions = {

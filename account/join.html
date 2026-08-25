@@ -152,6 +152,9 @@
                         <div class="sub-form-group sub-account-field sub-account-representative-field">
                             <label class="sub-account-label sub-account-required" for="representative-name">대표자명</label>
                             <input class="sub-form-input sub-account-input" id="representative-name" name="representativeName" type="text" placeholder="대표자명을 입력해 주세요." data-required data-message="대표자명을 입력해 주세요." />
+                            <button class="sub-account-line-button sub-account-line-button-under" id="business-auth-button" type="button">사업자 인증</button>
+                            <input id="business-authenticated" type="hidden" value="" data-required data-message="사업자 인증을 진행해 주세요." />
+                            <p class="sub-account-code-status" id="business-auth-status" hidden aria-live="polite"></p>
                             <p class="sub-form-message sub-account-error" aria-live="polite"></p>
                         </div>
 
@@ -164,9 +167,6 @@
                             <input class="sub-form-input sub-account-input" id="business-address" name="businessAddress" type="text" placeholder="" readonly data-required data-message="" />
                             <input id="postal-code" name="postalCode" type="hidden" data-required data-message="우편번호를 검색해 주세요." />
                             <input class="sub-form-input sub-account-input sub-account-input-gap" id="business-address-detail" name="businessAddressDetail" type="text" placeholder="상세 주소를 입력해 주세요." data-required data-message="상세 주소를 입력해 주세요." />
-                            <button class="sub-account-line-button sub-account-line-button-under" id="business-auth-button" type="button">사업자 인증</button>
-                            <input id="business-authenticated" type="hidden" value="" data-required data-message="사업자 인증을 진행해 주세요." />
-                            <p class="sub-account-code-status" id="business-auth-status" hidden aria-live="polite"></p>
                             <p class="sub-form-message sub-account-error" aria-live="polite"></p>
                         </div>
 
@@ -215,7 +215,7 @@
     <script src="/js/api/front-api.js?v=20260821"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/js/form.js?v=20260821"></script>
-    <script src="/js/account.js?v=20260825"></script>
+    <script src="/js/account.js?v=20260825-1"></script>
     <script src="/js/policy-data.js?v=20260814"></script>
     <script src="/js/policy.js?v=20260814-1"></script>
 </body>
