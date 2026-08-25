@@ -299,7 +299,7 @@ function initCsProductFields() {
         function renderProducts(categoryCode) {
             const filtered = products.filter(item => item.productCategoryCode === categoryCode);
             productSelect.querySelector(".sub-form-select-options").innerHTML = filtered.map(item =>
-                `<li><button type="button" class="sub-form-select-option" data-value="${escapeFormHtml(item.ownedProductId)}">${escapeFormHtml(item.serialNumber || "시리얼번호 없음")} · ${escapeFormHtml(item.productName || "-")}</button></li>`
+                `<li><button type="button" class="sub-form-select-option sub-form-select-option-product" data-value="${escapeFormHtml(item.ownedProductId)}" data-serial="${escapeFormHtml(item.serialNumber || "시리얼번호 없음")}" data-product-name="${escapeFormHtml(item.productName || "-")}"><span class="sub-form-product-serial">${escapeFormHtml(item.serialNumber || "시리얼번호 없음")}</span><span class="sub-form-product-name">${escapeFormHtml(item.productName || "-")}</span></button></li>`
             ).join("");
             resetSelect(productSelect, filtered.length ? "제품 시리얼번호를 선택해 주세요." : "등록된 제품이 없습니다.");
             initCustomSelect();
@@ -695,7 +695,17 @@ function selectOption(select, option, shouldFocus = true) {
         item.classList.toggle("is-selected", item === option);
     });
 
-    value.textContent = option.textContent.trim();
+    if (option.dataset.serial !== undefined) {
+        const serial = document.createElement("span");
+        const productName = document.createElement("span");
+        serial.className = "sub-form-product-serial";
+        productName.className = "sub-form-product-name";
+        serial.textContent = option.dataset.serial;
+        productName.textContent = option.dataset.productName || "-";
+        value.replaceChildren(serial, productName);
+    } else {
+        value.textContent = option.textContent.trim();
+    }
     value.classList.toggle("is-placeholder", selectedValue === "");
     hidden.value = selectedValue;
     hidden.dispatchEvent(new Event("change", { bubbles: true }));
