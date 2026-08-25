@@ -293,7 +293,7 @@
             var businessType = form.querySelector('input[name="businessType"]:checked').value;
             var payload = new FormData();
             payload.append('memberName', form.elements.name.value.trim());
-            payload.append('phoneNumber', form.elements.phone.value.trim());
+            payload.append('phoneNumber', form.elements.phone.value.replace(/\D/g, ''));
             payload.append('verificationToken', document.getElementById('phone-authenticated').value);
             payload.append('agreeTerms', String(form.elements.agreeTerms.checked));
             payload.append('agreePrivacy', String(form.elements.agreePrivacy.checked));
@@ -675,7 +675,7 @@
             requestButton.disabled = true;
             resend.disabled = true;
             try {
-                var response = await authApi.requestPhoneVerification(phone.value.trim());
+                var response = await authApi.requestPhoneVerification(numbers, 'SIGNUP');
                 verificationId = String(response && response.verificationId || '');
                 if (!verificationId) throw new Error('인증 요청 정보를 확인할 수 없습니다.');
                 requestedPhone = numbers;
