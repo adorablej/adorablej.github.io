@@ -372,7 +372,7 @@ CS Request Category / Selected Product
 ======================================== */
 
 function initCsRequestContext() {
-    const form = document.querySelector(".sub-mypage-cs-form");
+    const form = document.querySelector(".sub-mypage-cs-form, #contact-form");
     if (!form) return;
 
     fillCsRequester(form);
@@ -408,11 +408,13 @@ function initCsRequestContext() {
 }
 
 async function fillCsRequester(form) {
-    const companyInput = form.elements.company;
-    const nameInput = form.elements.name;
-    const phoneInput = form.elements.phone;
+    const companyInput = form.elements.company || form.elements.company_name;
+    const nameInput = form.elements.name || form.elements.user_name;
+    const phoneInput = form.elements.phone || form.elements.user_phone;
     const storedMember = readStoredCsMember();
+    const isAuthenticated = Boolean(window.HunterAPI?.auth?.getAccessToken?.());
 
+    if (!isAuthenticated) return;
     applyCsRequesterValues(storedMember);
 
     try {
@@ -420,11 +422,13 @@ async function fillCsRequester(form) {
         if (!member) return;
         applyCsRequesterValues(member.member || member.data?.member || member.data || member);
     } catch (error) {
-        if (error?.status === 401) window.location.replace("/account/login.html");
+        if (error?.status !== 401) console.error("CS 문의자 정보를 불러오지 못했습니다.", error);
     }
 
     function applyCsRequesterValues(member) {
-        if (companyInput) companyInput.value = window.localStorage.getItem("hunter.selectedBusinessName") || "";
+        const selectedBusinessName = window.localStorage.getItem("hunter.selectedBusinessName");
+
+        if (companyInput) companyInput.value = selectedBusinessName || member?.businessName || member?.companyName || "";
         if (nameInput) nameInput.value = member?.memberName || "";
         if (phoneInput) phoneInput.value = member?.phoneNumber || "";
         applyCsSidebarMember(member);
