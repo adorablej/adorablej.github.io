@@ -799,7 +799,7 @@ function initMypageBusinessAddModal() {
             ? `${value.slice(0, 6)}-${value.slice(6)}`
             : value;
         const request = {
-            businessTypeCode: form.elements.businessType.value === "corporation" ? "CORPORATION" : "INDIVIDUAL",
+            businessTypeCode: form.elements.businessType.value === "corporation" ? "CORPORATION" : "SOLE_PROPRIETOR",
             businessNumber: formatBusinessNumber(businessNumber),
             corporationNumber: formatCorporationNumber(corporationNumber),
             businessName: form.elements.businessName.value.trim(),
