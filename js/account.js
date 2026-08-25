@@ -1,6 +1,8 @@
 (function () {
     'use strict';
 
+    var PHONE_VERIFICATION_TIMEOUT_SECONDS = 180;
+
     document.addEventListener('DOMContentLoaded', function () {
         initLoginForm();
         initJoinSubmit();
@@ -41,7 +43,7 @@
         var keepPhone = document.getElementById('login-keep');
         var keepCode = document.getElementById('login-keep-code');
         var timerId = null;
-        var remainingSeconds = 599;
+        var remainingSeconds = PHONE_VERIFICATION_TIMEOUT_SECONDS;
         var verificationId = '';
         var requesting = false;
         var loggingIn = false;
@@ -115,9 +117,9 @@
             timer.textContent = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
         }
 
-        function startTimer(seconds) {
+        function startTimer() {
             window.clearInterval(timerId);
-            remainingSeconds = Number(seconds) || 599;
+            remainingSeconds = PHONE_VERIFICATION_TIMEOUT_SECONDS;
             renderTimer();
             timerId = window.setInterval(function () {
                 remainingSeconds -= 1;
@@ -195,7 +197,7 @@
                 codeGroup.classList.remove('is-error', 'is-verified');
                 submitButton.disabled = true;
                 showStep('code');
-                startTimer(response.expiresIn);
+                startTimer();
 
                 if (isDevelopmentApi() && authApi.getPhoneVerificationCode) {
                     try {
@@ -602,7 +604,7 @@
         var resend = document.getElementById('join-phone-resend');
         var authenticated = document.getElementById('phone-authenticated');
         var intervalId = null;
-        var remainingSeconds = 599;
+        var remainingSeconds = PHONE_VERIFICATION_TIMEOUT_SECONDS;
         var requestedPhone = '';
         var verificationId = '';
         var authApi = window.HunterFrontAPI && window.HunterFrontAPI.auth;
@@ -641,9 +643,9 @@
             setStatus('', '');
         }
 
-        function startTimer(seconds) {
+        function startTimer() {
             stopTimer();
-            remainingSeconds = Number(seconds) || 599;
+            remainingSeconds = PHONE_VERIFICATION_TIMEOUT_SECONDS;
             renderTimer();
             intervalId = window.setInterval(function () {
                 remainingSeconds -= 1;
@@ -688,7 +690,7 @@
                 resend.hidden = false;
                 group.classList.remove('is-verified');
                 setStatus('', '');
-                startTimer(response.expiresIn || response.expiresInSeconds);
+                startTimer();
                 code.focus();
             } catch (error) {
                 setStatus('error', error && error.message ? error.message : '인증번호 발송에 실패했습니다.');
