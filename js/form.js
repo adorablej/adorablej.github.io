@@ -431,6 +431,9 @@ async function fillCsRequester(form) {
         if (companyInput) companyInput.value = selectedBusinessName || member?.businessName || member?.companyName || "";
         if (nameInput) nameInput.value = member?.memberName || "";
         if (phoneInput) phoneInput.value = member?.phoneNumber || "";
+        [companyInput, nameInput, phoneInput].forEach(input => {
+            if (input) input.disabled = true;
+        });
         applyCsSidebarMember(member);
         [companyInput, nameInput, phoneInput].forEach(input => {
             input?.closest(".sub-form-group")?.classList.toggle("is-filled", Boolean(input.value));
