@@ -156,18 +156,38 @@ function initContactFormSubmission() {
     if (!form || !submitButton) return;
 
     form.addEventListener("submit", async event => {
-        if (event.defaultPrevented) return;
-        event.preventDefault();
-
+        const companyName = form.elements.company_name.value.trim();
+        const requesterName = form.elements.user_name.value.trim();
         const emailId = form.elements.email_id.value.trim();
         const emailDomain = form.elements.email_domain.value.trim();
+        const emailIdPattern = /^[^@\s]+$/;
+        const emailDomainPattern = /^[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+        const hasInvalidEmail = Boolean(emailId || emailDomain)
+            && (!emailId || !emailDomain || !emailIdPattern.test(emailId) || !emailDomainPattern.test(emailDomain));
 
-        if ((emailId && !emailDomain) || (!emailId && emailDomain)) {
-            const emailGroup = form.elements.email_id.closest(".sub-form-group");
-            setFieldError(emailGroup, "이메일 주소를 확인해주세요.");
-            (emailId ? form.elements.email_domain : form.elements.email_id).focus();
+        if (companyName && !requesterName) {
+            event.preventDefault();
+            const nameGroup = form.elements.user_name.closest(".sub-form-group");
+            setFieldError(nameGroup, "성함을 입력해주세요.");
+            form.elements.user_name.focus();
             return;
         }
+
+        if (hasInvalidEmail) {
+            const wasPrevented = event.defaultPrevented;
+            event.preventDefault();
+            const emailGroup = form.elements.email_id.closest(".sub-form-group");
+            setFieldError(emailGroup, "이메일 주소를 확인해주세요.");
+            if (!wasPrevented) {
+                (!emailId || !emailIdPattern.test(emailId)
+                    ? form.elements.email_id
+                    : form.elements.email_domain).focus();
+            }
+            return;
+        }
+
+        if (event.defaultPrevented) return;
+        event.preventDefault();
 
         if (!api?.create) {
             await showContactAlert("문의 접수 기능을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.");
@@ -175,8 +195,8 @@ function initContactFormSubmission() {
         }
 
         const payload = {
-            companyName: form.elements.company_name.value.trim(),
-            requesterName: form.elements.user_name.value.trim(),
+            companyName,
+            requesterName,
             phoneNumber: form.elements.user_phone.value.trim(),
             csTypeCode: form.elements.inquiry_category.value,
             title: form.elements.inquiry_title.value.trim(),
@@ -546,6 +566,9 @@ function initTextareaCount() {
         if (!count) return;
 
         const update = () => {
+            if (textarea.maxLength > -1 && textarea.value.length > textarea.maxLength) {
+                textarea.value = textarea.value.slice(0, textarea.maxLength);
+            }
             count.textContent = textarea.value.length;
         };
 
