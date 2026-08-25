@@ -114,7 +114,13 @@ function initCompletionAlerts() {
             const emailDomain = form.elements.email_domain.value.trim();
             const category = String(form.elements.category.value || "").toUpperCase();
             const typeMap = { PURCHASE: "PURCHASE", AS: "AS", TRANSFER: "TRANSFER", BUSINESS: "BUSINESS", TRAINING: "TRAINING" };
+            const businessId = localStorage.getItem("hunter.selectedBusinessId") || "";
+            if (!businessId) {
+                await showContactAlert("선택된 사업체 정보를 불러오지 못했습니다. 페이지를 새로고침한 후 다시 시도해주세요.");
+                return;
+            }
             const payload = {
+                businessId: Number(businessId),
                 companyName: form.elements.company.value.trim(),
                 requesterName: form.elements.name.value.trim(),
                 phoneNumber: form.elements.phone.value.trim(),
@@ -194,6 +200,13 @@ function initContactFormSubmission() {
             return;
         }
 
+        const businessId = localStorage.getItem("hunter.selectedBusinessId") || "";
+        const isAuthenticated = Boolean(window.HunterAPI?.auth?.getAccessToken?.());
+        if (isAuthenticated && !businessId) {
+            await showContactAlert("선택된 사업체 정보를 불러오지 못했습니다. 페이지를 새로고침한 후 다시 시도해주세요.");
+            return;
+        }
+
         const payload = {
             companyName,
             requesterName,
@@ -203,6 +216,7 @@ function initContactFormSubmission() {
             content: form.elements.message.value.trim(),
             privacyAgreed: form.elements.agree.checked
         };
+        if (businessId) payload.businessId = Number(businessId);
 
         if (emailId && emailDomain) {
             payload.email = `${emailId}@${emailDomain}`;
@@ -418,17 +432,37 @@ async function fillCsRequester(form) {
     applyCsRequesterValues(storedMember);
 
     try {
-        const member = await window.HunterFrontAPI?.member?.getMe?.();
+        const memberApi = window.HunterFrontAPI?.member;
+        const [member, businessResponse] = await Promise.all([
+            memberApi?.getMe?.(),
+            memberApi?.getBusinesses?.(false)
+        ]);
         if (!member) return;
-        applyCsRequesterValues(member.member || member.data?.member || member.data || member);
+        const businessData = businessResponse?.data || businessResponse || {};
+        const businesses = Array.isArray(businessData)
+            ? businessData
+            : (Array.isArray(businessData.businesses) ? businessData.businesses : []);
+        const storedBusinessId = localStorage.getItem("hunter.selectedBusinessId") || "";
+        const responseSelectedId = businessData.selectedBusiness?.businessId;
+        const selectedBusiness = businesses.find(item => responseSelectedId && String(item.businessId) === String(responseSelectedId))
+            || businesses.find(item => item.selected === true || item.isSelected === true)
+            || businesses.find(item => String(item.businessId) === String(storedBusinessId))
+            || businesses.find(item => String(item.approvalStatusCode || "").toUpperCase() === "APPROVED")
+            || businesses[0]
+            || null;
+        if (selectedBusiness?.businessId) {
+            localStorage.setItem("hunter.selectedBusinessId", String(selectedBusiness.businessId));
+            localStorage.setItem("hunter.selectedBusinessName", selectedBusiness.businessName || "");
+        }
+        applyCsRequesterValues(member.member || member.data?.member || member.data || member, selectedBusiness);
     } catch (error) {
         if (error?.status !== 401) console.error("CS 문의자 정보를 불러오지 못했습니다.", error);
     }
 
-    function applyCsRequesterValues(member) {
+    function applyCsRequesterValues(member, selectedBusiness) {
         const selectedBusinessName = window.localStorage.getItem("hunter.selectedBusinessName");
 
-        if (companyInput) companyInput.value = selectedBusinessName || member?.businessName || member?.companyName || "";
+        if (companyInput) companyInput.value = selectedBusiness?.businessName || selectedBusinessName || member?.businessName || member?.companyName || "";
         if (nameInput) nameInput.value = member?.memberName || "";
         if (phoneInput) phoneInput.value = member?.phoneNumber || "";
         [companyInput, nameInput, phoneInput].forEach(input => {
