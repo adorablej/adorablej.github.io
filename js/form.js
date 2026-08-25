@@ -105,7 +105,12 @@ function initVehicleSpecificationRequest() {
 
 function initCompletionAlerts() {
     document.querySelectorAll(".sub-mypage-cs-form").forEach(form => {
+        let isSubmitted = false;
         form.addEventListener("submit", async event => {
+            if (isSubmitted) {
+                event.preventDefault();
+                return;
+            }
             if (event.defaultPrevented) return;
             event.preventDefault();
             const api = window.HunterFrontAPI?.csRequests;
@@ -132,14 +137,18 @@ function initCompletionAlerts() {
             if (emailId && emailDomain) payload.email = `${emailId}@${emailDomain}`;
             if (["AS", "TRANSFER"].includes(payload.csTypeCode)) payload.ownedProductId = Number(form.elements.owned_product_id.value);
             const submit = form.querySelector('[type="submit"]');
+            isSubmitted = true;
             submit.disabled = true;
             try {
                 await api.create(payload);
                 await showContactAlert("CS문의접수가 완료되었습니다.\n입력하신 연락처로 회신드리겠습니다.\n감사합니다.");
+                form.reset();
+                window.location.reload();
             } catch (error) {
+                isSubmitted = false;
                 await showContactAlert(error?.message || "CS 문의를 접수하지 못했습니다.");
             } finally {
-                submit.disabled = false;
+                submit.disabled = isSubmitted;
             }
         });
     });
@@ -158,10 +167,15 @@ function initContactFormSubmission() {
     const form = document.querySelector("#contact-form");
     const submitButton = form?.querySelector('[type="submit"]');
     const api = window.HunterFrontAPI?.csRequests;
+    let isSubmitted = false;
 
     if (!form || !submitButton) return;
 
     form.addEventListener("submit", async event => {
+        if (isSubmitted) {
+            event.preventDefault();
+            return;
+        }
         const companyName = form.elements.company_name.value.trim();
         const requesterName = form.elements.user_name.value.trim();
         const emailId = form.elements.email_id.value.trim();
@@ -225,6 +239,7 @@ function initContactFormSubmission() {
             payload.ownedProductId = Number(form.elements.owned_product_id.value);
         }
 
+        isSubmitted = true;
         submitButton.disabled = true;
         submitButton.setAttribute("aria-busy", "true");
 
@@ -233,10 +248,13 @@ function initContactFormSubmission() {
             await showContactAlert(
                 "CS 문의접수가 완료되었습니다.\n입력하신 연락처로 회신드리겠습니다.\n감사합니다."
             );
+            form.reset();
+            window.location.reload();
         } catch (error) {
+            isSubmitted = false;
             await showContactAlert(error?.message || "문의 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
         } finally {
-            submitButton.disabled = false;
+            submitButton.disabled = isSubmitted;
             submitButton.removeAttribute("aria-busy");
         }
     });
