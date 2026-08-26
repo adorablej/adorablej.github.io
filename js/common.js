@@ -184,6 +184,7 @@
         const currentPath = normalizePath(
             window.location.pathname
         );
+        const currentSection = getPathSection(currentPath);
 
         menuLinks.forEach((link) => {
             const linkUrl = new URL(
@@ -194,12 +195,25 @@
             const linkPath = normalizePath(
                 linkUrl.pathname
             );
+            const linkSection = getPathSection(linkPath);
+            const isActive = linkPath === currentPath ||
+                (currentSection && linkSection === currentSection);
 
-            link.classList.toggle(
-                "is-active",
-                linkPath === currentPath
-            );
+            link.classList.toggle("is-active", isActive);
+
+            if (isActive) {
+                link.setAttribute("aria-current", "page");
+            } else {
+                link.removeAttribute("aria-current");
+            }
         });
+    }
+
+    function getPathSection(pathname) {
+        return pathname
+            .split("/")
+            .filter(Boolean)[0]
+            ?.toLowerCase() || "";
     }
 
     /**
@@ -732,6 +746,26 @@ function initDragCursor() {
                 if (depth) {
                     depth.style.height = "0px";
                 }
+
+                closeSubDepths(item);
+            });
+        }
+
+        function closeSubDepths(item) {
+            item.querySelectorAll(".all-menu-subitem").forEach((subitem) => {
+                const button = subitem.querySelector(".all-menu-subtoggle");
+                const subdepth = subitem.querySelector(".all-menu-subdepth");
+
+                subitem.classList.remove("is-open");
+
+                if (button) {
+                    button.setAttribute("aria-expanded", "false");
+                    button.setAttribute("aria-label", "HUNTER USA 하위 메뉴 펼치기");
+                }
+
+                if (subdepth) {
+                    subdepth.style.height = "0px";
+                }
             });
         }
 
@@ -795,6 +829,7 @@ function initDragCursor() {
                 button.setAttribute("aria-expanded", "false");
                 button.setAttribute("aria-label", `${title} 하위 메뉴 펼치기`);
                 depth.style.height = "0px";
+                closeSubDepths(item);
             }
         }
 
