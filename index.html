@@ -11,7 +11,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link href="/css/common.css?v=20260819-2" rel="stylesheet" />
     <link href="/css/layout.css?v=20260820-4" rel="stylesheet" />
-    <link href="/css/main.css?v=20260820-3" rel="stylesheet" />
+    <link href="/css/main.css?v=20260827-1" rel="stylesheet" />
     <link href="/css/products.css?v=20260814" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +32,11 @@
         <section class="modal-box main-popup-dialog" role="dialog" aria-modal="true" aria-label="메인 팝업" tabindex="-1">
             <button type="button" class="modal-close-button main-popup-close" data-main-popup-close aria-label="팝업 닫기"></button>
             <div class="main-popup-content" data-main-popup-content></div>
+            <label class="main-popup-snooze">
+                <input type="checkbox" data-main-popup-snooze>
+                <span class="main-popup-snooze-check" aria-hidden="true"></span>
+                <span>7일 동안 보지 않기</span>
+            </label>
         </section>
     </div>
 
@@ -390,7 +395,7 @@ Specification
     </script>
     <script src="/js/common.js?v=20260821">
     </script>
-    <script src="/js/main.js?v=20260821">
+    <script src="/js/main.js?v=20260827-1">
     </script>
     <script src="/js/products.js?v=20260814"></script>
     <script src="/js/api/config.js?v=20260820"></script>

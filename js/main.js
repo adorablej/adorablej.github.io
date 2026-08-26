@@ -26,12 +26,48 @@
         const closeButtons = popup.querySelectorAll("[data-main-popup-close]");
         const content = popup.querySelector("[data-main-popup-content]");
         const dialog = popup.querySelector(".main-popup-dialog");
+        const snooze = popup.querySelector("[data-main-popup-snooze]");
+        const snoozeDuration = 7 * 24 * 60 * 60 * 1000;
+        let activePopupStorageKey = "";
 
-        function closePopup() {
+        function closePopup(rememberChoice) {
+            if (rememberChoice && snooze?.checked && activePopupStorageKey) {
+                try {
+                    window.localStorage.setItem(activePopupStorageKey, String(Date.now() + snoozeDuration));
+                } catch (error) {
+                    console.warn("팝업 재노출 설정을 저장하지 못했습니다.", error);
+                }
+            }
             popup.classList.remove("is-open");
             popup.setAttribute("aria-hidden", "true");
             document.body.classList.remove("is-main-popup-open");
             window.setTimeout(() => { popup.hidden = true; }, 200);
+        }
+
+        function getPopupStorageKey(data) {
+            const identity = String(
+                data.popupId
+                ?? data.id
+                ?? data.popupNo
+                ?? [data.title, data.imageUrl, data.exposureStartAt].filter(Boolean).join("|")
+                ?? "main"
+            );
+            let hash = 0;
+            for (let index = 0; index < identity.length; index += 1) {
+                hash = ((hash << 5) - hash + identity.charCodeAt(index)) | 0;
+            }
+            return `hunter.mainPopup.hiddenUntil.${Math.abs(hash)}`;
+        }
+
+        function isSnoozed(storageKey) {
+            try {
+                const hiddenUntil = Number(window.localStorage.getItem(storageKey));
+                if (hiddenUntil > Date.now()) return true;
+                if (hiddenUntil) window.localStorage.removeItem(storageKey);
+            } catch (error) {
+                console.warn("팝업 재노출 설정을 확인하지 못했습니다.", error);
+            }
+            return false;
         }
 
         function isAvailable(data) {
@@ -64,11 +100,18 @@
 
         function showPopup(data) {
             if (!content || !isAvailable(data)) {
-                closePopup();
+                closePopup(false);
+                return false;
+            }
+
+            activePopupStorageKey = getPopupStorageKey(data);
+            if (isSnoozed(activePopupStorageKey)) {
+                closePopup(false);
                 return false;
             }
 
             content.innerHTML = "";
+            if (snooze) snooze.checked = false;
             if (data.imageUrl) {
                 const image = document.createElement("img");
                 image.src = data.imageUrl;
@@ -102,15 +145,15 @@
             return true;
         }
 
-        window.HunterMainPopup = Object.freeze({ show: showPopup, close: closePopup });
+        window.HunterMainPopup = Object.freeze({ show: showPopup, close: () => closePopup(false) });
 
         closeButtons.forEach(function (button) {
-            button.addEventListener("click", closePopup);
+            button.addEventListener("click", () => closePopup(true));
         });
 
         document.addEventListener("keydown", function (event) {
             if (event.key === "Escape" && popup.classList.contains("is-open")) {
-                closePopup();
+                closePopup(true);
             }
         });
 
@@ -125,7 +168,7 @@
             if (popupData) showPopup(popupData);
         } catch (error) {
             console.error("메인 팝업 조회에 실패했습니다.", error);
-            closePopup();
+            closePopup(false);
         }
     }
 
