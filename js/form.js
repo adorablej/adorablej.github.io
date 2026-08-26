@@ -135,7 +135,9 @@ function initCompletionAlerts() {
                 privacyAgreed: form.elements.privacy_agree.checked
             };
             if (emailId && emailDomain) payload.email = `${emailId}@${emailDomain}`;
-            if (["AS", "TRANSFER"].includes(payload.csTypeCode)) payload.ownedProductId = Number(form.elements.owned_product_id.value);
+            if (["PURCHASE", "AS", "TRANSFER"].includes(payload.csTypeCode) && form.elements.owned_product_id.value) {
+                payload.ownedProductId = Number(form.elements.owned_product_id.value);
+            }
             const submit = form.querySelector('[type="submit"]');
             isSubmitted = true;
             submit.disabled = true;
@@ -235,7 +237,7 @@ function initContactFormSubmission() {
         if (emailId && emailDomain) {
             payload.email = `${emailId}@${emailDomain}`;
         }
-        if (["AS", "TRANSFER"].includes(payload.csTypeCode)) {
+        if (["PURCHASE", "AS", "TRANSFER"].includes(payload.csTypeCode) && form.elements.owned_product_id.value) {
             payload.ownedProductId = Number(form.elements.owned_product_id.value);
         }
 
@@ -290,7 +292,7 @@ function initCsProductFields() {
         const productSelect = productInput.closest(".sub-form-select");
 
         function needsProduct() {
-            return ["AS", "TRANSFER"].includes(String(inquiryInput.value || "").toUpperCase());
+            return ["PURCHASE", "AS", "TRANSFER"].includes(String(inquiryInput.value || "").toUpperCase());
         }
 
         async function ensureProducts() {
