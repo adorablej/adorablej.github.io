@@ -253,7 +253,7 @@ async function initOperationGuide() {
                             </button>
                         `).join("")}
                     </div>
-                    ${visibleVideoCount < videos.length ? '<button type="button" class="sub-guide-more"><span>more</span></button>' : ''}
+                    ${visibleVideoCount < videos.length ? '<button type="button" class="sub-guide-more sub-button-more">more</button>' : ''}
                 </div>
             </section>
         `;

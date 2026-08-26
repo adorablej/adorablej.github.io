@@ -2897,26 +2897,8 @@ products-HunterPride-Interview.html
 }
 
 .sub-pride-more-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: calc(142 * var(--vw));
-    height: calc(54 * var(--vw));
     margin: calc(70 * var(--vw)) auto 0;
-    padding: 0 calc(28 * var(--vw));
-    border: 1px solid var(--red);
-    border-radius: 999px;
-    background: transparent;
-    color: var(--red);
     cursor: pointer;
-    font-family: "Russo One", sans-serif;
-    font-size: calc(15 * var(--vw));
-    text-transform: lowercase;
-}
-
-.sub-pride-more-button:hover {
-    background: var(--red);
-    color: #fff;
 }
 
 .sub-pride-more-button.is-hidden {
@@ -4572,14 +4554,7 @@ Mobile (720px and below)
     }
 
     .sub-pride-more-button {
-        min-width: 124px;
-        height: 48px;
         margin-top: 40px;
-        padding: 0 24px;
-        border: 0;
-        background: var(--red);
-        color: #fff;
-        font-size: 14px;
     }
 
     .sub-pride-interview-modal {
