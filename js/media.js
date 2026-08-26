@@ -42,7 +42,7 @@
             return `
                 <a href="${url}" class="media-archive-card">
                     <div class="media-archive-image">
-                        <img src="${thumbnail}" alt="${escapeHtml(item.title)}" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
+                        <img src="${thumbnail}" alt="${escapeHtml(item.title)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
                     </div>
                     <div class="media-archive-content">
                         <span class="media-archive-category">${escapeHtml(item.category)}</span>
@@ -70,7 +70,7 @@
             return `
                 <a href="${url}" class="media-news-item">
                     <div class="media-news-image">
-                        <img src="${thumbnail}" alt="${escapeHtml(item.title)}" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
+                        <img src="${thumbnail}" alt="${escapeHtml(item.title)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
                     </div>
                     <div class="media-news-content">
                         <span class="media-news-category">${escapeHtml(item.category)}</span>
@@ -149,6 +149,8 @@
                     <img
                         src="${item.thumbnail || PLACEHOLDER}"
                         alt="${escapeHtml(item.title)}"
+                        loading="lazy"
+                        decoding="async"
                         onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
                 </div>
                 <span class="media-card-category">${escapeHtml(item.category)}</span>
@@ -163,7 +165,7 @@
                     ${items.map(item => `
                         <a href="${getViewUrl("promotion", item.id)}" class="media-item swiper-slide">
                             <div class="media-item-image">
-                                <img src="${item.thumbnail || PLACEHOLDER}" alt="${escapeHtml(item.title)}" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
+                                <img src="${item.thumbnail || PLACEHOLDER}" alt="${escapeHtml(item.title)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
                             </div>
                             <span class="media-card-category">${escapeHtml(item.category)}</span>
                             <h3 class="media-card-title">${escapeHtml(item.title)}</h3>
