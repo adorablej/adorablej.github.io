@@ -30,7 +30,7 @@
 
         const showEmptyRecommendations = (visible) => {
             if (recommendSection) recommendSection.hidden = !visible;
-            if (productSection) productSection.hidden = !visible || !recommendedProducts.length;
+            if (productSection) productSection.hidden = !recommendedProducts.length;
         };
 
         function updateUrl() {
@@ -63,8 +63,15 @@
         async function loadRecommendations() {
             if (!api?.getRecommendations) return;
             try {
-                const response = await api.getRecommendations();
-                applyRecommendations(response);
+                const [response, fallbackResponse] = await Promise.all([
+                    api.getRecommendations(),
+                    api.getResults({ page: 1, size: 1 })
+                ]);
+                const fallbackRecommendations = fallbackResponse?.data?.recommendations || {};
+                applyRecommendations({
+                    keywords: response?.keywords || fallbackRecommendations.keywords,
+                    products: response?.products?.length ? response.products : fallbackRecommendations.products
+                });
             } catch (error) {
                 console.error("추천 검색어 조회에 실패했습니다.", error);
             }
