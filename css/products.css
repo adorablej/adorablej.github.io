@@ -2897,6 +2897,7 @@ products-HunterPride-Interview.html
 }
 
 .sub-pride-more-button {
+    display: flex;
     margin: calc(70 * var(--vw)) auto 0;
     cursor: pointer;
 }

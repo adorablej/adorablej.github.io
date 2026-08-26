@@ -238,8 +238,9 @@ Equipment Operation Guide : Video
 .sub-guide-video-featured-content p {
     display: -webkit-box;
     overflow: hidden;
+    max-height: calc(52 * var(--vw));
     margin: 0;
-    padding: 0 calc(50 * var(--vw)) calc(50 * var(--vw));
+    padding: 0 calc(50 * var(--vw));
     color: #666;
     font-size: calc(18 * var(--vw));
     line-height: calc(26 * var(--vw));
@@ -337,6 +338,7 @@ Equipment Operation Guide : Video
 }
 
 .sub-guide-more {
+    display: flex;
     margin: calc(70 * var(--vw)) auto 0;
     cursor: pointer;
 }
@@ -3284,10 +3286,10 @@ Mobile (720px and below)
 
     .sub-guide-video-featured-content p {
         max-width: 310px;
+        max-height: 44px;
         margin-right: auto;
         margin-left: auto;
         padding-right: 25px;
-        padding-bottom: 30px;
         padding-left: 25px;
     }
 
