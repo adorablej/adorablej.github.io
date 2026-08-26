@@ -66,8 +66,10 @@
             getProducts: function (params, raw) {
                 return client.get('/api/v1/me/products', { query: params || {}, raw: Boolean(raw) });
             },
-            getProduct: function (ownedProductId) {
-                return client.get('/api/v1/me/products/' + encodeURIComponent(ownedProductId));
+            getProduct: function (ownedProductId, params) {
+                return client.get('/api/v1/me/products/' + encodeURIComponent(ownedProductId), {
+                    query: params || {}
+                });
             },
             getProductParts: function (ownedProductId, params) {
                 return client.get('/api/v1/me/products/' + encodeURIComponent(ownedProductId) + '/parts', {

@@ -32,7 +32,8 @@
         const addCartButton = root.querySelector("[data-add-cart]");
 
         try {
-            product = await api.getProduct(ownedProductId);
+            const businessId = localStorage.getItem("hunter.selectedBusinessId") || "";
+            product = await api.getProduct(ownedProductId, { businessId });
             renderProduct(product || {});
             await loadParts(false);
         } catch (error) {

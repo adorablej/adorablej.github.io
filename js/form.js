@@ -305,7 +305,7 @@ function initCsProductFields() {
                 products = Array.isArray(response) ? response : Array.isArray(response?.data) ? response.data : [];
                 if (requestedProductId && !products.some(item => String(item.ownedProductId) === requestedProductId)) {
                     try {
-                        const detail = await memberApi.getProduct(requestedProductId);
+                        const detail = await memberApi.getProduct(requestedProductId, { businessId });
                         if (detail) products.push(detail);
                     } catch (error) {
                         // 선택 사업체 소유가 아닌 제품은 목록에 추가하지 않습니다.
