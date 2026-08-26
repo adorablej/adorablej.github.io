@@ -39,6 +39,7 @@ async function initOperationGuide() {
     const searchParams = new URLSearchParams(window.location.search);
     const requestedCategory = searchParams.get("category") || "alignment";
     const requestedType = searchParams.get("type") === "video" ? "video" : "manual";
+    const requestedProduct = searchParams.get("product") || "";
     let categoryInfo = null;
     try {
         categoryInfo = await window.HunterFrontAPI.eog.getCategory(requestedCategory);
@@ -89,7 +90,7 @@ async function initOperationGuide() {
             return;
         }
         guideContent.innerHTML = currentGuide.manual.map(group => `
-            <section class="sub-guide-group">
+            <section class="sub-guide-group${isRequestedProduct(group.title) ? " is-requested-product" : ""}">
                 <h4 class="sub-guide-group-title">${group.title}</h4>
                 <ul class="sub-guide-list">
                     ${group.items.map(item => `
@@ -101,6 +102,29 @@ async function initOperationGuide() {
                 </ul>
             </section>
         `).join("");
+        scrollToRequestedProduct();
+    }
+
+    function normalizeProductName(value) {
+        return String(value || "")
+            .replace(/[®Ⓡ™]/g, "")
+            .normalize("NFKC")
+            .toLowerCase()
+            .replace(/[^a-z0-9가-힣]/g, "");
+    }
+
+    function isRequestedProduct(productName) {
+        if (!requestedProduct) return false;
+        return normalizeProductName(productName) === normalizeProductName(requestedProduct);
+    }
+
+    function scrollToRequestedProduct() {
+        if (!requestedProduct) return;
+        const target = guideContent.querySelector(".sub-guide-group.is-requested-product");
+        if (!target) return;
+        window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(() => target.scrollIntoView({ block: "start" }));
+        });
     }
 
     function initFeaturedVideo() {

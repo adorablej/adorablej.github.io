@@ -30,6 +30,10 @@ Equipment Operation Guide
     margin-top: calc(80 * var(--vw));
 }
 
+.sub-guide-group.is-requested-product {
+    scroll-margin-top: calc(120 * var(--vw));
+}
+
 .sub-guide-group:last-child {
     margin-bottom: calc(110 * var(--vw));
 }

@@ -106,9 +106,13 @@ initTcmwSpecSelector();
     if (!category) return;
 
     const guideUrl = "/Support/equipment-operation-guide-detail.html";
+    const productName = document.querySelector(".page-title")?.textContent.replace(/\s+/g, " ").trim() || "";
     document.querySelectorAll(".detail-spec-button").forEach(button => {
         const isVideo = button.querySelector(".detail-spec-icon-video");
-        button.href = `${guideUrl}?category=${category}${isVideo ? "&type=video" : ""}`;
+        const params = new URLSearchParams({ category });
+        if (isVideo) params.set("type", "video");
+        else if (productName) params.set("product", productName);
+        button.href = `${guideUrl}?${params.toString()}`;
     });
 })();
 
