@@ -8,6 +8,7 @@
         id: item.scheduleId,
         courseName: item.courseTitle || item.courseName || item.scheduleName,
         description: item.detailDescription || item.courseDescription || item.description || "",
+        locationName: item.locationName || item.location || "",
         price: item.price ?? item.fee ?? 0,
         date: item.startAt?.slice(0, 10) || "",
         startTime: item.startAt?.slice(11, 16) || "",
