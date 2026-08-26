@@ -464,6 +464,12 @@
         return /^(현대|기아|제네시스|쉐보레|한국GM|대우|르노|르노코리아|르노삼성|삼성|쌍용|KG모빌리티|KGM)/i.test(manufacturer.manufacturerName || "");
     }
 
+    function getManufacturerLogo(manufacturer) {
+        const englishName = String(manufacturer.manufacturerNameEn || "").trim();
+        if (!englishName) return manufacturer.logoUrl || "";
+        return `/images/standard/${encodeURIComponent(englishName)}.png`;
+    }
+
     function mapCatalog(response) {
         const manufacturers = Array.isArray(response?.manufacturers) ? response.manufacturers : [];
         manufacturers.forEach((manufacturer) => {
@@ -476,7 +482,7 @@
                 name: brandName,
                 nameKo: manufacturer.manufacturerName || brandName,
                 logoText: manufacturer.manufacturerNameEn || brandName,
-                logo: manufacturer.logoUrl || "",
+                logo: getManufacturerLogo(manufacturer),
                 type: isDomesticManufacturer(manufacturer) ? "domestic" : "import",
                 keywords: [manufacturer.manufacturerNameEn]
             });
