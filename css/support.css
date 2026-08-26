@@ -3045,8 +3045,12 @@ Mobile (720px and below)
     }
 
     .sub-training-modal-datetime {
-        font-size: 18px;
-        line-height: 24px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .sub-training-modal-close {
+        display: none !important;
     }
 
     .sub-training-modal-course-row {
