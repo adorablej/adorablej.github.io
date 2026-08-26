@@ -3049,10 +3049,6 @@ Mobile (720px and below)
         line-height: 20px;
     }
 
-    .sub-training-modal-close {
-        display: none !important;
-    }
-
     .sub-training-modal-course-row {
         display: block;
     }
