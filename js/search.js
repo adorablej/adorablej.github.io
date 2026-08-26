@@ -45,26 +45,29 @@
             window.history.replaceState({}, "", url);
         }
 
+        function applyRecommendations(recommendations) {
+            const keywords = Array.isArray(recommendations?.keywords)
+                ? recommendations.keywords.slice().sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0))
+                : [];
+            if (recommendList) {
+                recommendList.innerHTML = keywords.map((item) => `
+                    <a href="${escapeHtml(safeUrl(item.targetUrl))}">${escapeHtml(item.keyword)}</a>
+                `).join("");
+            }
+            recommendedProducts = Array.isArray(recommendations?.products)
+                ? recommendations.products.slice().sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0))
+                : [];
+            renderProducts(recommendedProducts);
+        }
+
         async function loadRecommendations() {
             if (!api?.getRecommendations) return;
             try {
                 const response = await api.getRecommendations();
-                const keywords = Array.isArray(response?.keywords) ? response.keywords : [];
-                keywords.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
-                if (recommendList) {
-                    recommendList.innerHTML = keywords.map((item) => `
-                        <a href="${escapeHtml(safeUrl(item.targetUrl))}">${escapeHtml(item.keyword)}</a>
-                    `).join("");
-                }
-                if (Array.isArray(response?.products)) {
-                    recommendedProducts = response.products
-                        .slice()
-                        .sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
-                }
+                applyRecommendations(response);
             } catch (error) {
                 console.error("추천 검색어 조회에 실패했습니다.", error);
             }
-            renderProducts(recommendedProducts);
             if (productSection && !recommendedProducts.length) productSection.hidden = true;
         }
 
@@ -83,14 +86,17 @@
             resultArea.setAttribute("aria-busy", "true");
             resultArea.innerHTML = '<div class="sub-search-empty"><strong>검색 중입니다.</strong></div>';
             try {
-                const query = { q: keyword, page: currentPage, size: pageSize };
-                if (activeCategory !== "all") query.type = activeCategory.toUpperCase();
+                const query = { keyword, page: currentPage, size: pageSize };
+                if (activeCategory !== "all") query.category = activeCategory.toUpperCase();
                 const response = await api.getResults(query);
                 if (sequence !== requestSequence) return;
-                const results = Array.isArray(response?.data?.results) ? response.data.results : [];
+                const results = Array.isArray(response?.data?.items) ? response.data.items : [];
                 const meta = response?.meta || {};
-                const totalElements = Number(meta.totalElements) || 0;
+                const totalElements = Number(response?.data?.totalCount ?? meta.totalElements) || 0;
                 const totalPages = Number(meta.totalPages) || 0;
+                if (!results.length && response?.data?.recommendations) {
+                    applyRecommendations(response.data.recommendations);
+                }
                 showEmptyRecommendations(results.length === 0);
                 if (!results.length) renderEmpty();
                 else renderResults(results, totalElements, totalPages);
