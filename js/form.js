@@ -131,7 +131,7 @@ function initCompletionAlerts() {
                 phoneNumber: form.elements.phone.value.trim(),
                 csTypeCode: typeMap[category] || category,
                 title: form.elements.title.value.trim(),
-                content: form.elements.message.value.trim(),
+                content: escapeFormHtml(form.elements.message.value.trim()),
                 privacyAgreed: form.elements.privacy_agree.checked
             };
             if (emailId && emailDomain) payload.email = `${emailId}@${emailDomain}`;
@@ -229,7 +229,7 @@ function initContactFormSubmission() {
             phoneNumber: form.elements.user_phone.value.trim(),
             csTypeCode: form.elements.inquiry_category.value,
             title: form.elements.inquiry_title.value.trim(),
-            content: form.elements.message.value.trim(),
+            content: escapeFormHtml(form.elements.message.value.trim()),
             privacyAgreed: form.elements.agree.checked
         };
         if (businessId) payload.businessId = Number(businessId);
