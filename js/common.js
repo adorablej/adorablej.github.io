@@ -57,6 +57,12 @@
         return options.raw ? payload : payload?.data;
     }
 
+    function getHeaderNotificationItems(response) {
+        if (Array.isArray(response?.data)) return response.data;
+        if (Array.isArray(response?.data?.items)) return response.data.items;
+        return [];
+    }
+
     /** 저장된 액세스 토큰을 기준으로 공통 헤더 로그인 상태를 표시합니다. */
     async function initAuthState() {
         const params = new URLSearchParams(window.location.search);
@@ -89,7 +95,8 @@
                 const storage = window.localStorage.getItem("hunter.accessToken") ? window.localStorage : window.sessionStorage;
                 storage.setItem("hunter.member", JSON.stringify(memberData));
                 renderHeaderNotifications(notifications);
-                hasAlarm = Array.isArray(notifications?.data) && notifications.data.some((item) => !item.read);
+                hasAlarm = Number(notifications?.data?.unreadCount || 0) > 0
+                    || getHeaderNotificationItems(notifications).some((item) => !item.read);
             } catch (error) {
                 if (error.status === 401) {
                     clearStoredAuth();
@@ -134,7 +141,7 @@
         const list = document.querySelector(".header-alarm-list");
         const alarm = document.querySelector(".header-alarm");
         if (!list || !alarm) return;
-        const notifications = Array.isArray(response?.data) ? response.data : [];
+        const notifications = getHeaderNotificationItems(response);
         if (!append) list.innerHTML = "";
         notifications.forEach((notification) => {
             const article = document.createElement("article");
