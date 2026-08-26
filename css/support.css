@@ -707,45 +707,67 @@ Training Registration
 }
 
 .sub-training-modal-summary {
-    padding-bottom: calc(34 * var(--vw));
+    padding-bottom: calc(22 * var(--vw));
     border-bottom: 1px solid #e3e3e3;
 }
 
 .sub-training-modal-datetime {
     display: block;
     color: #000;
-    font-size: calc(28 * var(--vw));
-    font-weight: 600;
-    line-height: 1.25;
+    font-size: calc(18 * var(--vw));
+    font-weight: 700;
+    line-height: calc(24 * var(--vw));
 }
 
 .sub-training-modal-course {
     display: flex;
     align-items: center;
-    gap: calc(14 * var(--vw));
-    margin-top: calc(20 * var(--vw));
+    gap: calc(10 * var(--vw));
+    margin-top: calc(8 * var(--vw));
     color: #555;
-    font-size: calc(22 * var(--vw));
-    font-weight: 600;
+    font-size: calc(16 * var(--vw));
+    font-weight: 500;
+    line-height: calc(22 * var(--vw));
 }
 
 .sub-training-modal-course-dot {
     flex: 0 0 auto;
-    width: calc(20 * var(--vw));
-    height: calc(20 * var(--vw));
+    width: calc(14 * var(--vw));
+    height: calc(14 * var(--vw));
     border-radius: 50%;
     background: var(--training-color);
 }
 
 .sub-training-modal-course-row {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+    display: block;
 }
 
 .sub-training-modal-info {
+    display: flex;
+    align-items: center;
+    gap: calc(14 * var(--vw));
+    margin-top: calc(18 * var(--vw));
     color: #888;
-    font-size: calc(18 * var(--vw));
+    font-size: calc(14 * var(--vw));
+    line-height: calc(22 * var(--vw));
+}
+
+.sub-training-modal-info-separator {
+    width: 1px;
+    height: calc(14 * var(--vw));
+    background: #ddd;
+}
+
+.sub-training-modal-description {
+    margin: calc(18 * var(--vw)) 0 0;
+    padding-top: calc(18 * var(--vw));
+    border-top: 1px solid #e3e3e3;
+    color: #555;
+    font-size: calc(14 * var(--vw));
+    font-weight: 400;
+    line-height: calc(22 * var(--vw));
+    white-space: pre-line;
+    word-break: keep-all;
 }
 
 .sub-training-modal-agree {
@@ -808,22 +830,22 @@ Training Registration
 .sub-training-modal-actions {
     display: flex;
     justify-content: center;
-    gap: calc(16 * var(--vw));
-    margin-top: calc(54 * var(--vw));
+    gap: calc(12 * var(--vw));
+    margin-top: calc(32 * var(--vw));
 }
 
 .sub-training-modal-cancel,
 .sub-training-modal-submit {
     display: inline-flex;
-    flex: 1 1 calc(260 * var(--vw));
+    flex: 0 1 calc(200 * var(--vw));
     align-items: center;
     justify-content: center;
     min-width: 0;
-    max-width: calc(260 * var(--vw));
-    height: calc(76 * var(--vw));
-    padding: 0 calc(36 * var(--vw));
+    max-width: calc(200 * var(--vw));
+    height: calc(60 * var(--vw));
+    padding: 0 calc(30 * var(--vw));
     border-radius: 999px;
-    font-size: calc(22 * var(--vw));
+    font-size: calc(16 * var(--vw));
     font-weight: 500;
     line-height: 1;
     cursor: pointer;
@@ -853,7 +875,14 @@ body.is-training-modal-open {
 }
 
 .sub-training-modal-body .sub-form-checkbox {
-    margin-top: calc(25 * var(--vw));
+    align-items: flex-start;
+    gap: calc(10 * var(--vw));
+    margin-top: calc(18 * var(--vw));
+}
+
+.sub-training-modal-body .sub-form-checkbox-icon {
+    width: calc(20 * var(--vw));
+    height: calc(20 * var(--vw));
 }
 
 .sub-training-modal-body {
@@ -862,8 +891,9 @@ body.is-training-modal-open {
 
 .sub-training-modal-body .sub-form-checkbox-text {
     color: #555;
-    font-size: calc(17 * var(--vw));
+    font-size: calc(14 * var(--vw));
     font-weight: 400;
+    line-height: calc(22 * var(--vw));
     letter-spacing: -.02em;
 }
 
@@ -3036,13 +3066,31 @@ Mobile (720px and below)
     }
 
     .sub-training-modal-info {
-        margin-top: 2px;
-        padding-left: 20px;
+        display: block;
+        margin-top: 14px;
+        padding-left: 0;
         font-size: 14px;
-        line-height: 20px;
+        line-height: 24px;
+    }
+
+    .sub-training-modal-info-separator {
+        display: none;
+    }
+
+    .sub-training-modal-location,
+    .sub-training-modal-instructor-fee {
+        display: block;
+    }
+
+    .sub-training-modal-description {
+        margin-top: 14px;
+        padding-top: 14px;
+        font-size: 14px;
+        line-height: 22px;
     }
 
     .sub-training-modal-body .sub-form-checkbox {
+        gap: 8px;
         margin-top: 20px;
     }
 
@@ -3057,7 +3105,7 @@ Mobile (720px and below)
 
     .sub-training-modal-actions {
         gap: 10px;
-        margin-top: 20px;
+        margin-top: 24px;
     }
 
     .sub-training-modal-cancel,

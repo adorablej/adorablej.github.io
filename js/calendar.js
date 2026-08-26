@@ -6,7 +6,9 @@
     const mapTraining = (item) => ({
         ...item,
         id: item.scheduleId,
-        courseName: item.courseTitle || item.scheduleName,
+        courseName: item.courseTitle || item.courseName || item.scheduleName,
+        description: item.detailDescription || item.courseDescription || item.description || "",
+        price: item.price ?? item.fee ?? 0,
         date: item.startAt?.slice(0, 10) || "",
         startTime: item.startAt?.slice(11, 16) || "",
         endTime: item.endAt?.slice(11, 16) || "",
@@ -310,8 +312,12 @@ function parseDate(dateString) {
                         </div>
 
                         <div class="sub-training-modal-info">
-                            <span class="sub-training-modal-instructor">강사이름 : ${training.instructorName || "-"} / </span>
-                            <span class="sub-training-modal-fee">${fee}</span>
+                            <span class="sub-training-modal-location">강의장소 : ${training.locationName || "-"}</span>
+                            <span class="sub-training-modal-info-separator" aria-hidden="true"></span>
+                            <span class="sub-training-modal-instructor-fee">
+                                <span class="sub-training-modal-instructor">강사이름 : ${training.instructorName || "-"} / </span>
+                                <span class="sub-training-modal-fee">${fee}</span>
+                            </span>
                         </div>
                     </div>
                     ${training.description ? `<p class="sub-training-modal-description">${training.description}</p>` : ""}
