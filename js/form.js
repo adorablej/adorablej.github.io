@@ -404,7 +404,7 @@ CS Request Category / Selected Product
 ======================================== */
 
 function initCsRequestContext() {
-    const form = document.querySelector(".sub-mypage-cs-form, #contact-form");
+    const form = document.querySelector(".sub-mypage-cs-form, #contact-form, #vehicle-specification-form");
     if (!form) return;
 
     fillCsRequester(form);
@@ -441,8 +441,8 @@ function initCsRequestContext() {
 
 async function fillCsRequester(form) {
     const companyInput = form.elements.company || form.elements.company_name;
-    const nameInput = form.elements.name || form.elements.user_name;
-    const phoneInput = form.elements.phone || form.elements.user_phone;
+    const nameInput = form.elements.name || form.elements.user_name || form.elements.requester_name;
+    const phoneInput = form.elements.phone || form.elements.user_phone || form.elements.phone_number;
     const storedMember = readStoredCsMember();
     const isAuthenticated = Boolean(window.HunterAPI?.auth?.getAccessToken?.());
 
@@ -484,7 +484,10 @@ async function fillCsRequester(form) {
         if (nameInput) nameInput.value = member?.memberName || "";
         if (phoneInput) phoneInput.value = member?.phoneNumber || "";
         [companyInput, nameInput, phoneInput].forEach(input => {
-            if (input) input.disabled = true;
+            if (input) {
+                input.disabled = true;
+                input.dispatchEvent(new Event("input", { bubbles: true }));
+            }
         });
         applyCsSidebarMember(member);
         [companyInput, nameInput, phoneInput].forEach(input => {
