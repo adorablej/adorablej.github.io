@@ -183,8 +183,8 @@ async function initOperationGuide() {
                 }
             },
             navigation: {
-                prevEl: prev,
-                nextEl: next
+                prevEl: next,
+                nextEl: prev
             },
             on: {
                 init: setActiveCard,
