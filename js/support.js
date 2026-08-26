@@ -57,8 +57,16 @@ async function initOperationGuide() {
             items: (Array.isArray(product.manuals) ? product.manuals : [])
                 .filter(item => item.isExposed !== false)
                 .sort((a, b) => Number(a.displayOrder) - Number(b.displayOrder))
-                .map(item => ({ title: item.title || "", url: item.fileUrl || "" }))
-                .filter(item => item.url)
+                .map(item => {
+                    const downloadSetting = item.downloadAllowed ?? item.isDownloadAllowed ?? item.downloadYn;
+                    const downloadAllowed = downloadSetting !== false && String(downloadSetting || "Y").toUpperCase() !== "N";
+                    return {
+                        title: item.title || "",
+                        url: downloadAllowed ? (item.fileUrl || "") : "",
+                        downloadAllowed
+                    };
+                })
+                .filter(item => item.title && (!item.downloadAllowed || item.url))
         }))
         .filter(group => group.items.length);
     const videos = (Array.isArray(categoryInfo?.videos) ? categoryInfo.videos : [])
@@ -95,8 +103,12 @@ async function initOperationGuide() {
                 <ul class="sub-guide-list">
                     ${group.items.map(item => `
                         <li class="sub-guide-item">
-                            <a class="sub-guide-item-title" href="${item.url}" target="_blank" rel="noopener noreferrer">${item.title}</a>
-                            <a class="sub-guide-view" href="${item.url}" target="_blank" rel="noopener noreferrer" aria-label="View ${item.title}"><span>view</span></a>
+                            ${item.downloadAllowed
+                                ? `<a class="sub-guide-item-title" href="${item.url}" target="_blank" rel="noopener noreferrer">${item.title}</a>`
+                                : `<span class="sub-guide-item-title">${item.title}</span>`}
+                            ${item.downloadAllowed
+                                ? `<a class="sub-guide-view" href="${item.url}" target="_blank" rel="noopener noreferrer" aria-label="View ${item.title}"><span>view</span></a>`
+                                : ""}
                         </li>
                     `).join("")}
                 </ul>
