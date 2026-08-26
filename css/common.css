@@ -1,3 +1,7 @@
+:root {
+    --vw: min(calc(100vw / 1920), 1px);
+}
+
 @font-face {
     font-family: 'Pretendard';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2');
