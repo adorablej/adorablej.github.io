@@ -897,6 +897,17 @@ body.is-training-modal-open {
     letter-spacing: -.02em;
 }
 
+#training-history-modal .sub-training-modal-visual {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+#training-history-modal .sub-training-modal-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 /* ========================================
 Equipment Operation Guide : Youtube Modal
 ======================================== */
