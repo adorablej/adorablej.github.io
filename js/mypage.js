@@ -839,7 +839,9 @@ function initMypageBusinessAddModal() {
         };
         if (isCorporation) request.corporationNumber = corporationNumber;
         const formData = new FormData();
-        formData.append("request", new Blob([JSON.stringify(request)], { type: "application/json" }));
+        Object.entries(request).forEach(([key, value]) => {
+            formData.append(key, value);
+        });
         formData.append("businessLicenseFile", fileInput.files[0]);
 
         if (submitButton) submitButton.disabled = true;
