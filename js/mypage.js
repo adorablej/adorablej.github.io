@@ -826,10 +826,10 @@ function initMypageBusinessAddModal() {
         const addressMatch = addressValue.match(/^\((\d{5})\)\s*(.*)$/);
         const businessNumber = form.elements.businessNumber.value.replace(/\D/g, "");
         const corporationNumber = form.elements.corporationNumber?.value.replace(/\D/g, "") || "";
+        const isCorporation = form.elements.businessType.value === "corporation";
         const request = {
-            businessTypeCode: form.elements.businessType.value === "corporation" ? "CORPORATION" : "INDIVIDUAL",
+            businessTypeCode: isCorporation ? "CORPORATION" : "INDIVIDUAL",
             businessNumber,
-            corporationNumber,
             businessName: form.elements.businessName.value.trim(),
             openingDate: form.elements.openingDate.value,
             representativeName: form.elements.representativeName.value.trim(),
@@ -837,6 +837,7 @@ function initMypageBusinessAddModal() {
             address1: addressMatch?.[2] || addressValue,
             address2: form.elements.businessAddressDetail.value.trim()
         };
+        if (isCorporation) request.corporationNumber = corporationNumber;
         const formData = new FormData();
         formData.append("request", new Blob([JSON.stringify(request)], { type: "application/json" }));
         formData.append("businessLicenseFile", fileInput.files[0]);
