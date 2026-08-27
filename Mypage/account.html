@@ -151,6 +151,9 @@
                     <div class="sub-form-group sub-account-field sub-account-representative-field">
                         <label class="sub-account-label sub-account-required" for="mypage-representative-name">대표자명</label>
                         <input class="sub-form-input sub-account-input" id="mypage-representative-name" name="representativeName" type="text" placeholder="대표자명을 입력해 주세요." data-required data-message="대표자명을 입력해 주세요." />
+                        <button class="sub-account-line-button sub-account-line-button-under" type="button" data-business-auth>사업자 인증</button>
+                        <input type="hidden" value="" data-business-authenticated data-required data-message="사업자 인증을 진행해 주세요." />
+                        <p class="sub-account-code-status" data-business-auth-status hidden aria-live="polite"></p>
                         <p class="sub-form-message sub-account-error" aria-live="polite"></p>
                     </div>
 
@@ -159,9 +162,6 @@
                         <input class="sub-form-input sub-account-input" id="mypage-business-address" name="businessAddress" type="text" readonly data-required data-message="주소를 입력해 주세요." />
                         <input name="postalCode" type="hidden" data-business-postal-code data-required data-message="우편번호를 검색해 주세요." />
                         <input class="sub-form-input sub-account-input sub-account-input-gap" id="mypage-business-address-detail" name="businessAddressDetail" type="text" placeholder="상세 주소를 입력해 주세요." data-required data-message="상세 주소를 입력해 주세요." />
-                        <button class="sub-account-line-button sub-account-line-button-under" type="button" data-business-auth>사업자 인증</button>
-                        <input type="hidden" value="" data-business-authenticated data-required data-message="사업자 인증을 진행해 주세요." />
-                        <p class="sub-account-code-status" data-business-auth-status hidden aria-live="polite"></p>
                         <p class="sub-form-message sub-account-error" aria-live="polite"></p>
                     </div>
 
