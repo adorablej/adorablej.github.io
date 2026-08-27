@@ -200,6 +200,12 @@
         state.brandId = brandId;
         state.modelId = "";
         renderStep();
+
+        if (brandId) {
+            requestAnimationFrame(() => {
+                elements.modelPanel.scrollIntoView({ behavior: "auto", block: "start" });
+            });
+        }
     }
 
     async function selectModel(modelId) {
