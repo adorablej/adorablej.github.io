@@ -203,7 +203,7 @@
 
         if (brandId) {
             requestAnimationFrame(() => {
-                elements.modelPanel.scrollIntoView({ behavior: "auto", block: "start" });
+                elements.selectedList.scrollIntoView({ behavior: "auto", block: "start" });
             });
         }
     }
