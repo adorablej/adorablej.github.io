@@ -827,7 +827,7 @@ function initMypageBusinessAddModal() {
         const businessNumber = form.elements.businessNumber.value.replace(/\D/g, "");
         const corporationNumber = form.elements.corporationNumber?.value.replace(/\D/g, "") || "";
         const request = {
-            businessTypeCode: form.elements.businessType.value === "corporation" ? "CORPORATION" : "SOLE_PROPRIETOR",
+            businessTypeCode: form.elements.businessType.value === "corporation" ? "CORPORATION" : "INDIVIDUAL",
             businessNumber,
             corporationNumber,
             businessName: form.elements.businessName.value.trim(),
