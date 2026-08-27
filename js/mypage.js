@@ -824,18 +824,12 @@ function initMypageBusinessAddModal() {
         const submitButton = form.querySelector('button[type="submit"]');
         const addressValue = form.elements.businessAddress.value.trim();
         const addressMatch = addressValue.match(/^\((\d{5})\)\s*(.*)$/);
-        const businessNumber = form.elements.businessNumber.value.trim();
-        const corporationNumber = form.elements.corporationNumber?.value.trim() || "";
-        const formatBusinessNumber = value => value.length === 10
-            ? `${value.slice(0, 3)}-${value.slice(3, 5)}-${value.slice(5)}`
-            : value;
-        const formatCorporationNumber = value => value.length === 13
-            ? `${value.slice(0, 6)}-${value.slice(6)}`
-            : value;
+        const businessNumber = form.elements.businessNumber.value.replace(/\D/g, "");
+        const corporationNumber = form.elements.corporationNumber?.value.replace(/\D/g, "") || "";
         const request = {
             businessTypeCode: form.elements.businessType.value === "corporation" ? "CORPORATION" : "SOLE_PROPRIETOR",
-            businessNumber: formatBusinessNumber(businessNumber),
-            corporationNumber: formatCorporationNumber(corporationNumber),
+            businessNumber,
+            corporationNumber,
             businessName: form.elements.businessName.value.trim(),
             openingDate: form.elements.openingDate.value,
             representativeName: form.elements.representativeName.value.trim(),
