@@ -42,14 +42,11 @@
             || business.businessType
             || business.typeCode
         );
-        const corporate = document.getElementById("mypageAccountBusinessCorporate");
-        const individual = document.getElementById("mypageAccountBusinessIndividual");
         const isCorporate = ["CORPORATION", "CORPORATE"].includes(type)
             || (!type && Boolean(business.corporationNumber));
         const isIndividual = ["SOLE_PROPRIETOR", "INDIVIDUAL"].includes(type)
             || (!type && Boolean(business.businessId) && !business.corporationNumber);
-        if (corporate) corporate.checked = isCorporate;
-        if (individual) individual.checked = isIndividual;
+        setText("mypageAccountBusinessType", isCorporate ? "법인" : isIndividual ? "개인" : "-");
 
         setText("mypageAccountBusinessNumber", business.businessNumber);
         setText("mypageAccountCorporationNumber", business.corporationNumber);
