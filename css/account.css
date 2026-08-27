@@ -115,12 +115,25 @@
     position: relative;
     padding-right: calc(58 * var(--vw));
     background: #fff url("/images/icon/icon-calendar.svg") no-repeat right calc(20 * var(--vw)) center / calc(25 * var(--vw)) calc(25 * var(--vw));
-    color: #999;
+    color: #222;
     cursor: text;
 }
 
 .sub-account-date-wrap {
     position: relative;
+}
+
+.sub-account-date-picker {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(58 * var(--vw));
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    cursor: pointer;
 }
 
 .sub-account-date-placeholder {

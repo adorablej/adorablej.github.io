@@ -15,7 +15,7 @@
     <link href="/css/main.css?v=20260820-1" rel="stylesheet"/>
     <link href="/css/mypage.css?v=20260824-4" rel="stylesheet"/>
     <link href="/css/common-form.css?v=20260814" rel="stylesheet"/>
-    <link href="/css/account.css?v=20260827-1" rel="stylesheet"/>
+    <link href="/css/account.css?v=20260827-2" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -142,8 +142,8 @@
                     <div class="sub-form-group sub-account-field sub-account-opening-date-field">
                         <label class="sub-account-label sub-account-required" for="mypage-opening-date">개업년월</label>
                         <div class="sub-account-date-wrap">
-                            <input class="sub-form-input sub-account-input sub-account-date-input" id="mypage-opening-date" name="openingDate" type="date" required data-required data-message="일자를 선택해주세요." />
-                            <span class="sub-account-date-placeholder" aria-hidden="true">연도. 월. 일</span>
+                            <input class="sub-form-input sub-account-input sub-account-date-input" id="mypage-opening-date" name="openingDate" type="text" inputmode="numeric" maxlength="10" placeholder="연도. 월. 일" required data-required data-message="일자를 입력해주세요." />
+                            <input class="sub-account-date-picker" type="date" data-opening-date-picker aria-label="달력에서 개업일 선택" tabindex="-1" />
                         </div>
                         <p class="sub-form-message sub-account-error" aria-live="polite"></p>
                     </div>
@@ -233,7 +233,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/include.js?v=20260814"></script>
 <script src="/js/common.js?v=20260827-1"></script>
-<script src="/js/mypage.js?v=20260825-1"></script>
+<script src="/js/mypage.js?v=20260827-1"></script>
 <script src="/js/api/config.js?v=20260820"></script>
 <script src="/js/api/client.js?v=20260820"></script>
 <script src="/js/api/front-api.js?v=20260822-1"></script>

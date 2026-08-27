@@ -636,6 +636,35 @@ function initMypageBusinessAddModal() {
 
     businessTypeInputs.forEach(input => input.addEventListener("change", syncBusinessType));
 
+    const openingDateInput = form.elements.openingDate;
+    const openingDatePicker = form.querySelector("[data-opening-date-picker]");
+    const formatOpeningDate = value => {
+        const digits = String(value || "").replace(/\D/g, "").slice(0, 8);
+        if (digits.length <= 4) return digits;
+        if (digits.length <= 6) return `${digits.slice(0, 4)}-${digits.slice(4)}`;
+        return `${digits.slice(0, 4)}-${digits.slice(4, 6)}-${digits.slice(6)}`;
+    };
+    const isValidOpeningDate = value => {
+        const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+        if (!match) return false;
+        const date = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])));
+        return date.getUTCFullYear() === Number(match[1])
+            && date.getUTCMonth() === Number(match[2]) - 1
+            && date.getUTCDate() === Number(match[3]);
+    };
+    openingDateInput?.addEventListener("input", () => {
+        openingDateInput.value = formatOpeningDate(openingDateInput.value);
+        if (openingDatePicker && isValidOpeningDate(openingDateInput.value)) {
+            openingDatePicker.value = openingDateInput.value;
+        }
+    });
+    openingDatePicker?.addEventListener("change", () => {
+        if (!openingDatePicker.value || !openingDateInput) return;
+        openingDateInput.value = openingDatePicker.value;
+        openingDateInput.dispatchEvent(new Event("input", { bubbles: true }));
+        openingDateInput.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+
     fileOpenButtons.forEach(button => button.addEventListener("click", () => fileInput?.click()));
     fileInput?.addEventListener("change", () => {
         const file = fileInput.files?.[0];
@@ -698,7 +727,7 @@ function initMypageBusinessAddModal() {
     };
 
     [form.elements.businessNumber, form.elements.openingDate, form.elements.representativeName,
-        form.elements.businessName, form.elements.corporationNumber, form.elements.businessAddress]
+        form.elements.businessName, form.elements.corporationNumber]
         .filter(Boolean)
         .forEach(field => {
             field.addEventListener("input", resetBusinessAuthentication);
@@ -723,6 +752,12 @@ function initMypageBusinessAddModal() {
             return;
         }
 
+        if (!isValidOpeningDate(form.elements.openingDate.value)) {
+            setFieldError(form.elements.openingDate, "개업일을 연도-월-일 형식으로 입력해 주세요.");
+            form.elements.openingDate.focus();
+            return;
+        }
+
         if (isCorporation && corporationDigits.length !== 13) {
             setFieldError(form.elements.corporationNumber, "13자리 법인등록번호를 입력해 주세요.");
             form.elements.corporationNumber.focus();
@@ -742,8 +777,7 @@ function initMypageBusinessAddModal() {
                 b_nm: form.elements.businessName.value.trim(),
                 corp_no: isCorporation ? corporationDigits : "",
                 b_sector: "",
-                b_type: "",
-                b_adr: form.elements.businessAddress.value.trim()
+                b_type: ""
             }]
         };
 

@@ -467,11 +467,45 @@
         var businessAuth = document.getElementById('business-authenticated');
         var businessStatus = document.getElementById('business-auth-status');
         var openingDate = document.getElementById('opening-date');
+        var openingDatePicker = document.getElementById('opening-date-picker');
         var representativeName = document.getElementById('representative-name');
         var businessName = document.getElementById('business-name');
         var corporationNumber = document.getElementById('corporation-number');
         var serviceKey = 'c43099117f7a32bacb563e8aad7893df567f7d7a426d94b4ef94bd3f97e7a711';
         var apiBaseUrl = 'https://api.odcloud.kr/api/nts-businessman/v1';
+
+        function formatOpeningDate(value) {
+            var digits = String(value || '').replace(/\D/g, '').slice(0, 8);
+            if (digits.length <= 4) return digits;
+            if (digits.length <= 6) return digits.slice(0, 4) + '-' + digits.slice(4);
+            return digits.slice(0, 4) + '-' + digits.slice(4, 6) + '-' + digits.slice(6);
+        }
+
+        function isValidOpeningDate(value) {
+            var match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+            if (!match) return false;
+            var date = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])));
+            return date.getUTCFullYear() === Number(match[1])
+                && date.getUTCMonth() === Number(match[2]) - 1
+                && date.getUTCDate() === Number(match[3]);
+        }
+
+        if (openingDate) {
+            openingDate.addEventListener('input', function () {
+                openingDate.value = formatOpeningDate(openingDate.value);
+                if (openingDatePicker && isValidOpeningDate(openingDate.value)) {
+                    openingDatePicker.value = openingDate.value;
+                }
+            });
+        }
+        if (openingDatePicker && openingDate) {
+            openingDatePicker.addEventListener('change', function () {
+                if (!openingDatePicker.value) return;
+                openingDate.value = openingDatePicker.value;
+                openingDate.dispatchEvent(new Event('input', { bubbles: true }));
+                openingDate.dispatchEvent(new Event('change', { bubbles: true }));
+            });
+        }
 
         if (businessButton && businessNumber && businessAuth) {
             businessButton.addEventListener('businessInfoMismatch', function () {
@@ -514,6 +548,12 @@
                 if (!openingDate.value || !representativeName.value.trim() || !businessName.value.trim()) {
                     await showAccountAlert('개업일, 기업/사업체명, 대표자명을 먼저 입력해 주세요.');
                     (!businessName.value.trim() ? businessName : !openingDate.value ? openingDate : representativeName).focus();
+                    return;
+                }
+
+                if (!isValidOpeningDate(openingDate.value)) {
+                    setFieldError(openingDate.closest('.sub-form-group'), '개업일을 연도-월-일 형식으로 입력해 주세요.');
+                    openingDate.focus();
                     return;
                 }
 
