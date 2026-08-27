@@ -3,6 +3,17 @@
 
     const PENDING_APPLICATION_KEY = "hunter.pendingTrainingApplication";
     let trainingData = [];
+    const getTrainingStatus = (item) => {
+        const status = String(item.statusCode || "").toUpperCase();
+        const endAt = new Date(item.endAt || "");
+        const capacity = Number(item.capacity) || 0;
+        const applicationCount = Number(item.applicationCount) || 0;
+
+        if (["CANCELED", "CANCELLED"].includes(status)) return "CANCELED";
+        if (!Number.isNaN(endAt.getTime()) && endAt.getTime() < Date.now()) return "COMPLETED";
+        if (status === "OPEN" && capacity > 0 && applicationCount >= capacity) return "CLOSED";
+        return status === "OPEN" ? "RECRUITING" : status;
+    };
     const mapTraining = (item) => ({
         ...item,
         id: item.scheduleId,
@@ -14,7 +25,7 @@
         startTime: item.startAt?.slice(11, 16) || "",
         endTime: item.endAt?.slice(11, 16) || "",
         currentApplicants: item.applicationCount || 0,
-        status: item.statusCode === "OPEN" ? "RECRUITING" : item.statusCode,
+        status: getTrainingStatus(item),
         feeType: String(item.feeType || "FREE").toLowerCase()
     });
     const appliedTrainingIds = new Set();
